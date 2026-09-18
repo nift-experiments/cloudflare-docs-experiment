@@ -1,13 +1,34 @@
-(()=>{const K='ui-mode',m=matchMedia('(prefers-color-scheme: dark)'),read=()=>{try{let v=localStorage.getItem(K);return /^(light|dark|auto)$/.test(v||'')?v:'auto'}catch{return'auto'}},apply=()=>{let p=read(),v=p==='auto'?(m.matches?'dark':'light'):p,r=document.documentElement;if(v==='dark')r.setAttribute('data-mode','dark');else r.removeAttribute('data-mode');r.dataset.theme=v;r.dataset.nbPref=p;r.dataset.nbState=v;r.style.colorScheme=v};window.__nbApplyTheme=apply;apply();m.addEventListener('change',()=>{if(read()==='auto')apply()});addEventListener('storage',e=>{if(e.key===K)apply()});addEventListener('DOMContentLoaded',()=>{document.querySelector('[data-theme-toggle]')?.addEventListener('click',()=>{let p=read();localStorage.setItem(K,p==='auto'?'light':p==='light'?'dark':'auto');apply()});let d=document.querySelector('[data-mobile-sidebar]');document.querySelector('[data-menu-btn]')?.addEventListener('click',()=>d?.showModal());document.querySelector('[data-close-sidebar]')?.addEventListener('click',()=>d?.close())})})();
-
-// CP5 delegated compatibility behaviours.
-document.addEventListener('click', (event) => {
-  const tab = event.target.closest('[role="tab"][data-tab-target]');
-  if (tab) {
-    const root = tab.closest('.nb-tabs');
-    root.querySelectorAll('[role="tab"]').forEach(x => x.setAttribute('aria-selected', x === tab ? 'true' : 'false'));
-    root.querySelectorAll('.nb-tab-panel').forEach(x => x.hidden = x.id !== tab.dataset.tabTarget);
+/* CP2 theme contract shell JS for the Cloudflare Docs -> Nift port.
+   Mirrors upstream BaseLayout.astro pre-paint preference handling:
+   key ui-mode, values light|dark|auto, data-mode/data-theme attrs. */
+(function () {
+  var KEY = "ui-mode";
+  function apply(mode) {
+    var el = document.documentElement;
+    var resolved = mode === "auto"
+      ? (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+      : mode;
+    el.setAttribute("data-mode", mode);
+    el.setAttribute("data-theme", resolved);
+    el.setAttribute("data-nb-pref", mode);
+    el.setAttribute("data-nb-state", resolved);
   }
-  const feedback = event.target.closest('[data-feedback]');
-  if (feedback) { feedback.textContent = 'Thanks for the feedback'; feedback.disabled = true; }
-});
+  var stored = null;
+  try { stored = localStorage.getItem(KEY); } catch (e) {}
+  apply(stored || "auto");
+  document.addEventListener("click", function (ev) {
+    var btn = ev.target.closest && ev.target.closest("[data-theme-toggle]");
+    if (!btn) return;
+    var order = ["auto", "light", "dark"];
+    var cur = document.documentElement.getAttribute("data-mode") || "auto";
+    var next = order[(order.indexOf(cur) + 1) % order.length];
+    try { localStorage.setItem(KEY, next); } catch (e) {}
+    apply(next);
+  });
+  if (window.matchMedia) {
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () {
+      var cur = document.documentElement.getAttribute("data-mode") || "auto";
+      if (cur === "auto") apply("auto");
+    });
+  }
+})();
