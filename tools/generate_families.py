@@ -390,8 +390,95 @@ def main():
     add_tracked(tracked, 'llms.txt/', 'llms.txt', 'templates/docs.html')
     families['llms'] = {'routes': 1}
 
+    # ---- Videos: /videos/<url>/ from src/content/stream/*.yaml ----
+    video_files = sorted((up / 'src/content/stream').rglob('*.yaml'))
+    vbase = content / 'videos'
+    for vf in video_files:
+        v = load_yaml(vf)
+        vurl = v.get('url') or vf.stem
+        title = v.get('title') or vf.stem
+        vdir = vbase / vurl
+        vdir.mkdir(parents=True, exist_ok=True)
+        vbody = [f'# {title}', '']
+        if v.get('description'):
+            vbody.append(v['description'])
+            vbody.append('')
+        if v.get('url'):
+            vbody.append(f'<p><strong>Video:</strong> <a href="/videos/{vurl}/">/videos/{vurl}/</a></p>')
+            vbody.append('')
+        (vdir / 'index.md').write_text(rewrite_assets('\n'.join(vbody)) + '\n')
+        add_tracked(tracked, f'videos/{vurl}/', title, 'templates/docs.html')
+    families['videos'] = {'source_files': len(video_files), 'routes': len(video_files)}
+
+    # ---- Agent setup generated routes: /agent-setup/ ----
+    as_files = sorted((up / 'src/content/agent-setup').rglob('*.md'))
+    asbase = content / 'agent-setup'
+    asbase.mkdir(parents=True, exist_ok=True)
+    as_pages = 0
+    for asf in as_files:
+        raw = asf.read_text(errors='replace')
+        mm = re.match(r'^---\n(.*?)\n---\n?', raw, re.S)
+        body = raw
+        if mm:
+            body = raw[mm.end():]
+        # route: /agent-setup/<stem>/ (prompt.md and tracing.md)
+        stem = asf.stem
+        adir = asbase / stem
+        adir.mkdir(parents=True, exist_ok=True)
+        (adir / 'index.md').write_text(rewrite_assets(body.strip()) + '\n')
+        add_tracked(tracked, f'agent-setup/{stem}/', stem.replace('-', ' ').title(),
+                    'templates/docs.html')
+        as_pages += 1
+    if as_files:
+        (asbase / 'index.md').write_text('# Agent setup\n')
+        add_tracked(tracked, 'agent-setup/', 'Agent setup', 'templates/docs.html')
+        as_pages += 1
+    families['agent-setup'] = {'source_files': len(as_files), 'routes': as_pages}
+
+    # ---- WARP releases: synthesize changelog entries under cloudflare-one-client ----
+    wr_files = sorted((up / 'src/content/warp-releases').rglob('*.yaml'))
+    wrbase = content / 'changelog'
+    wr_added = 0
+    for wr in wr_files:
+        rel = wr.relative_to(up / 'src/content/warp-releases')
+        parts = rel.parts
+        if len(parts) < 3:
+            continue
+        platform, track = parts[0], parts[1]
+        if platform == 'linux' and track == 'beta':
+            continue
+        data = load_yaml(wr)
+        version = data.get('version', '')
+        release_date = data.get('releaseDate', '')
+        platform_name = data.get('platformName', platform)
+        if isinstance(release_date, str):
+            date_part = release_date[:10]
+        else:
+            date_part = str(release_date)[:10]
+        # only keep releases within the last year (mirrors upstream getWARPReleases)
+        note_id = f'{date_part}-warp-{platform}-{track}'
+        title = f'WARP client for {platform_name} (version {version})'
+        wdir = wrbase / 'post' / note_id
+        wdir.mkdir(parents=True, exist_ok=True)
+        wbody = [f'# {title}', '', f'**Released:** {date_part}', '']
+        wbody.append((data.get('releaseNotes') or '').strip())
+        wbody.append('')
+        (wdir / 'index.md').write_text(rewrite_assets('\n'.join(wbody)) + '\n')
+        add_tracked(tracked, f'changelog/post/{note_id}/', title, 'templates/docs.html')
+        wr_added += 1
+    families['warp-releases'] = {'source_files': len(wr_files), 'synthesized': wr_added}
+
     print(json.dumps({'upstream_sha': git_sha(up), 'families': families,
                       'total_tracked': len(tracked)}, indent=2))
+    # Deduplicate tracked names (e.g. WARP releases also appear as real
+    # changelog posts in src/content/changelog).
+    seen = set()
+    deduped = []
+    for x in tracked:
+        if x['name'] not in seen:
+            seen.add(x['name'])
+            deduped.append(x)
+    tracked = deduped
     # Merge into .nift/tracked.json, preserving existing entries (home + docs).
     tpath = ROOT / '.nift/tracked.json'
     if tpath.exists():
@@ -399,8 +486,15 @@ def main():
         existing_names = {x['name'] for x in existing}
         new_entries = [x for x in tracked if x['name'] not in existing_names]
         merged = existing + new_entries
-        tpath.write_text(json.dumps({'tracked': merged}, indent=2) + '\n')
-        print(f'merged tracked: {len(merged)} (added {len(new_entries)})')
+        # final dedup by name (drop any stale duplicates)
+        seen = set()
+        final = []
+        for x in merged:
+            if x['name'] not in seen:
+                seen.add(x['name'])
+                final.append(x)
+        tpath.write_text(json.dumps({'tracked': final}, indent=2) + '\n')
+        print(f'merged tracked: {len(final)} (added {len(new_entries)})')
     return 0
 
 
