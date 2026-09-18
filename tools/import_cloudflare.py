@@ -356,6 +356,14 @@ def convert(text, path='<memory>'):
     # Source-style '~/assets/...' references resolve to the staged upstream
     # asset tree at /assets/upstream/ in the generated site.
     text = text.replace('~/assets/', '/assets/upstream/')
+    # 'src/assets/...' references (upstream source-tree paths) resolve to the
+    # same staged /assets/upstream/ tree.
+    text = text.replace('src/assets/', '/assets/upstream/')
+    # 'public/images/...' and other 'public/...' references in Markdown are
+    # root-relative to the upstream public/ static tree, so map them to '/...'
+    # only inside Markdown link/image destinations and quoted attrs.
+    text = re.sub(r'\(public/', '(/', text)
+    text = re.sub(r'"(public/)', '"/', text)
     # A bare '---' horizontal rule left at the start of the body would be
     # misread by Nift as an unterminated front-matter block. Drop a leading
     # standalone '---' line (it was an HR after the stripped import block).
