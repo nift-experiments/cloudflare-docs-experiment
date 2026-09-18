@@ -1,0 +1,18 @@
+{
+  "bodies_total": 9382,
+  "bodies_with_unbalanced_brace": 2,
+  "bodies_with_at_sigil": 816,
+  "bodies_with_dollar_sigil": 0,
+  "bodies_with_quote_issues": 0,
+  "examples_unbalanced_brace": [
+    "cache/how-to/cache-rules/settings.mdx <Details>: '\\n\\nAPI configuration property name: `\"additional_cacheable_po'",
+    "ddos-protection/advanced-ddos-systems/overview/programmable-flow-protection.mdx <Steps>: '\\n1. Include the Cloudflare eBPF header files and define the '"
+  ],
+  "examples_at_sigil": [
+    "agent-memory/get-started.mdx <TypeScriptExample>: '\\n\\n```ts\\nexport class ChatAgent extends Agent<Env, ChatAgentS'",
+    "agent-setup/claude-code.mdx <Steps>: '\\n\\t1. **Install Claude Code**\\n\\n\\t\\tInstall the Claude Code CLI.'",
+    "agent-setup/codex.mdx <Steps>: '\\n\\t\\t\\t1. **Install Codex**\\n\\n\\t\\t\\t\\tInstall the Codex CLI. macOS a'",
+    "agent-setup/codex.mdx <TabItem>: '\\n\\t\\t<Steps>\\n\\t\\t\\t1. **Install Codex**\\n\\n\\t\\t\\t\\tInstall the Codex CL'",
+    "agent-setup/codex.mdx <Tabs>: '\\n\\t<TabItem label=\"Terminal\">\\n\\t\\t<Steps>\\n\\t\\t\\t1. **Install Codex'"
+  ]
+}

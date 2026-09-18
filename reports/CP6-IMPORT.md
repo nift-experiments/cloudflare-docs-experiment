@@ -44,15 +44,22 @@ dropped component closing tags), and auto-closes unclosed directives. Conversion
 **all 6,882 docs remains zero-failure**. `tools/leak_scan.py` post-build checks confirm:
 literal `:::` directives reduced 1,195 → 0; leaked imports/escaped-HTML resolved.
 
-**Known rendering limitation (tracked, not deferred silently):** Markdown inside
-component HTML containers (`<aside>`, `<section>`, `<div class="nb-*">`) is rendered by
-the Nift `@markup("md")` pass only where CommonMark permits (HTML blocks swallow inner
-Markdown). `tools/leak_scan.py` reports ~3,600 `**bold**`/`` `code` `` instances in
-rendered HTML that remain literal inside component bodies, plus ~365 JSX-looking prose
-placeholders (`<CF_AIG_TOKEN>`, type tokens) that are legitimate text. An importer-side
-body renderer was prototyped but produced malformed HTML in nested list+fence cases and
-was reverted; this is the primary CP6B rendering work remaining, tracked as a
-correctness defect (not visual parity).
+**Rendering correctness — residual defect (open):** Markdown inside component HTML
+containers (`<aside>`, `<section>`, `<div class="nb-*">`) is not parsed by the single
+CommonMark pass (HTML-block rule). The refined leak scan
+(`tools/leak_scan.py`, output `reports/cp6/leak-scan-classified.json`) separates REAL
+leakage from INTENTIONAL code/prose: ~97 REAL instances (fenced/inline code and
+imports inside component bodies) plus ~3,500 intentional `**bold**`/backtick text
+inside component bodies remain. This is a correctness defect, not visual parity.
+
+**Architecture decision in progress:** `reports/CP6B-RENDERING-ARCHITECTURE.md`
+analyses four options and recommends Option A: the importer emits Nift `@markup("md"){...}`
+boundaries around component/directive bodies. Verified working against Nift v4.3.0:
+content files are parsed as templates, so per-body `@markup` renders Markdown
+correctly (including fenced code, nested components, directives, and lists) without
+the malformed-HTML failure of the reverted cmarkgfm experiment. Corpus matrix and
+escaping-risk evidence are committed (`reports/cp6/markdown-component-corpus-matrix.json`,
+`reports/cp6/atmarkup-body-risk.json`). Implementation awaits review.
 
 ## Generated/data-driven families (G6 findings)
 
@@ -87,19 +94,22 @@ routes. Each is recorded below with its data source and route contract.
 ### Verifier status for generated families
 
 The route verifier (`tools/verify_routes.py`) reports **0 missing ordinary-doc routes**.
-The remaining "broken" local references (1,806) are **all** links from ordinary docs to
-the generated families above, categorised in `reports/cp6/generated-family-links.json`:
+The remaining "broken" local references (1,999 after generated-family expansion,
+`reports/cp6/generated-family-links.json`) are links from ordinary docs and generated
+pages to still-missing generated families and to the external `/api/` sibling app:
 
-- `/api/resources/...` + `/api/*`: 1,395
+- `/api/resources/...` + `/api/*`: ~1,600 (external sibling application)
+- `/logs/logpush/...`: ~133 (logpush datasets, fetched at build)
+- `/workers-ai/models/uform-*`: 21 (live/proxied model data, not in frozen tree)
 - `/ruleset-engine/rules-language/fields/reference/...`: 166 (fields catalog)
-- `/logs/logpush/...`: 105 (logpush datasets, fetched at build)
-- `/workers-ai/models/...`: 36
-- `/changelog/...`: 19
-- `/llms.txt`, `/llms-full.txt`: 11
-- `/agent-setup/`, `/directory/`, `/learning-paths/`, `/videos/`, `/resources/`,
-  `/realtime/realtimekit/...`, `/tutorials/`: small counts
-- Relative/other: 14 (including 7 `public/images/...` refs and 1 `src/assets/...` ref
-  that are asset-path artifacts)
+- `/llms.txt`/`/llms-full.txt` + per-product llms.txt: ~30
+- `/agent-setup/`, `/learning-paths/`, `/realtime/realtimekit/`, `/changelog/` area
+  links (upstream permalink mismatch), `/workers/runtime-apis/...`: small counts
+- Relative asset refs (`public/images`, `src/assets`): a few (asset-path artifacts)
+
+Each remaining family is classified (frozen-committed data / pinned external /
+live-fetched / external-sibling / upstream-stale) in the family table above; the
+verifier is not made green by excluding known generated families.
 
 ### G6 decision
 
