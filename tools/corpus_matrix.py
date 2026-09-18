@@ -139,12 +139,17 @@ def main():
     list_counts = {}
     directive_counts = {}
     nested_counts = {}   # (outer, inner) -> docs
+    docs_with_md_inside = 0
     for p in files:
         raw = p.read_text(errors='replace')
         res = scan(raw)
+        doc_has_md_inside = False
         for name, has in res['md_in'].items():
             if has:
                 md_counts[name] = md_counts.get(name, 0) + 1
+                doc_has_md_inside = True
+        if doc_has_md_inside:
+            docs_with_md_inside += 1
         for name, has in res['code_in'].items():
             if has:
                 code_counts[name] = code_counts.get(name, 0) + 1
@@ -166,7 +171,7 @@ def main():
         'directive_inside_component_by_component': dict(sorted(directive_counts.items(), key=lambda x: -x[1])),
         'nested_component_pairs': {f'{a}->{b}': v for (a, b), v in
                                    sorted(nested_counts.items(), key=lambda x: -x[1])},
-        'total_docs_with_markdown_inside_component': sum(1 for v in md_counts.values() if v),
+        'total_docs_with_markdown_inside_component': docs_with_md_inside,
     }
     print(json.dumps(report, indent=2))
 
