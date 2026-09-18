@@ -692,3 +692,9 @@ CP3's strict content-model contract is committed. See `reports/CP3-CONTENT-MODEL
 CP0–CP5 are implemented. CP4 establishes the reusable Nift docs architecture in `templates/docs.html` and its component inputs. CP5 establishes the strict MDX compatibility/import boundary in `tools/import_cloudflare.py`, backed by `compatibility/content-model.json` and fixtures/tests.
 
 Do not weaken the parity contract during CP6. Unknown MDX constructs are fatal. `data-cf-component` placeholders preserve identity for complex data/interactive components but are **not** evidence of visual/functional completion; each must be implemented and parity-tested before final certification. The full-corpus CP3/CP5 scan must run against frozen upstream SHA `bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf` once a local checkout is available.
+
+### CP6 implementation note — 2026-09-18
+
+CP6's full-corpus import/verification machinery is committed; see `reports/CP6-IMPORT.md`, `tools/import_corpus.py`, and `tools/verify_routes.py`. The orchestrator is SHA-pinned, strict on CP5 conversion failures, generates deterministic Nift tracking/routes, stages upstream public/source assets, emits an expected-route manifest, and provides a post-build route/link/asset gate.
+
+**Do not claim CP6's 100% corpus gate has passed yet.** This runner still lacks a physical checkout of frozen upstream `bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf`. On the controlled Linode, run the CP3 census first (`unknown=0` required), then the CP6 importer, a Nift full build, and the verifier. Reconcile generated/data-driven families and redirects before marking CP6 certified. CP7 may be developed independently, but CP8 full parity must not begin from an uncertified corpus.
