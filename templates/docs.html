@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head>@input("templates/head.html")</head><body>
+<a class="skip" href="#main-content">Skip to content</a>
+@input("templates/header.html")
+<div class="page-row">
+@input("templates/sidebar.html")
+<div class="body-column"><div class="content-row">
+<main id="main-content" class="main"><div class="article-wrap">
+@input("templates/breadcrumbs.html")
+@input("templates/article-header.html")
+<article class="docs-content">@content</article>
+@input("templates/pagination.html")
+@input("templates/page-actions.html")
+</div></main>
+@input("templates/toc.html")
+</div>@input("templates/footer.html")</div></div>
+@input("templates/mobile-sidebar.html")
+</body></html>

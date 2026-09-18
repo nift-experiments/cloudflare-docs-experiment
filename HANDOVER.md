@@ -686,3 +686,9 @@ CP2 source extraction and Nift shell implementation are committed. See `reports/
 CP3's strict content-model contract is committed. See `reports/CP3-CONTENT-MODEL.md`, `compatibility/content-model.json`, `compatibility/route-link-asset-rules.md`, and `tools/content_model.py`. The known component/frontmatter API from the frozen upstream source is classified, deterministic route/link/asset rules are fixed, and the exhaustive scanner fails on unknown constructs rather than degrading them. Because this runner still lacks the 1.4 GB upstream checkout, do not invent corpus occurrence counts: run the census against pinned SHA `bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf` on the controlled Linode and require `unknown=0` before CP6. CP4/CP5 implementation must preserve that strict gate.
 
 **Next: CP4 page/template architecture**, followed by CP5 implementation of the complete construct matrix. Keep static rendering, data-generated content and browser-interactive behaviour separate so later parity failures are diagnosable.
+
+## Cloudflare experiment checkpoint status
+
+CP0–CP5 are implemented. CP4 establishes the reusable Nift docs architecture in `templates/docs.html` and its component inputs. CP5 establishes the strict MDX compatibility/import boundary in `tools/import_cloudflare.py`, backed by `compatibility/content-model.json` and fixtures/tests.
+
+Do not weaken the parity contract during CP6. Unknown MDX constructs are fatal. `data-cf-component` placeholders preserve identity for complex data/interactive components but are **not** evidence of visual/functional completion; each must be implemented and parity-tested before final certification. The full-corpus CP3/CP5 scan must run against frozen upstream SHA `bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf` once a local checkout is available.
