@@ -1,0 +1,16 @@
+# Linode machine and toolchain spec (cf-nift-experiment)
+- Linode plan: g6-standard-6 (Linode 16GB)
+- vCPU: 6 (AMD EPYC 7542 32-Core Processor @ 2.0GHz), 1 thread/core, 1 socket
+- RAM: 16376336 kB (~16 GiB)
+- Disk: /dev/sda 319.5G ext4 (315G usable), swap 496M
+- Region: us-central (Dallas)
+- OS: Ubuntu 24.04.4 LTS
+- Kernel: 6.8.0-134-generic
+- Node: v24.21.0
+- npm: 11.19.0
+- pnpm: 12.4.2
+- Python: 3.12.3
+- gcc: 13.3.0
+- make: GNU Make 4.3
+- git: 2.43.0
+- nift: Nift v4.3.0
