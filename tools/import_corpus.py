@@ -7,10 +7,13 @@ reports unresolved dynamic/data families. It never silently skips a docs page.
 from __future__ import annotations
 import argparse, hashlib, json, shutil, subprocess, sys
 from pathlib import Path
+import import_cloudflare as ic
 from import_cloudflare import convert
 
 PIN='bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf'
 ROOT=Path(__file__).resolve().parents[1]
+ic._BODY_DIR = ROOT / 'content/.markup/bodies'
+ic._BODY_NEXT = 0
 
 def git_sha(p):
     return subprocess.check_output(['git','-C',str(p),'rev-parse','HEAD'],text=True).strip()

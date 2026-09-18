@@ -3,6 +3,16 @@ import importlib.util, pathlib, unittest
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('imp',ROOT/'tools/import_cloudflare.py'); mod=importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
 class TestImporter(unittest.TestCase):
+ def _conv(self, src, path='fixture'):
+  import tempfile, pathlib
+  d = tempfile.mkdtemp()
+  mod._BODY_DIR = pathlib.Path(d)
+  try:
+   fm, out = mod.convert(src, path)
+  finally:
+   mod._BODY_DIR = None
+  bodies = sorted([pathlib.Path(p).read_text() for p in pathlib.Path(d).glob('*.md')])
+  return fm, out, bodies
  def test_primitives(self):
   fm,out=mod.convert((ROOT/'tests/fixtures/primitives.mdx').read_text(),'fixture'); self.assertEqual(fm['title'],'Fixture'); self.assertIn('nb-aside warning',out); self.assertIn('nb-card-grid',out); self.assertIn('nb-step',out)
  def test_interactive(self):
@@ -17,10 +27,10 @@ class TestImporter(unittest.TestCase):
   _,out=mod.convert(src,'fixture'); self.assertIn('nb-steps',out); self.assertIn("SDK's",out)
  def test_fence_variable_and_indented_close(self):
   src='<TypeScriptExample filename="x.ts">\n```ts\ncode with <T> type\n````\n</TypeScriptExample>\n'
-  _,out=mod.convert(src,'fixture'); self.assertIn('nb-type-script-example',out); self.assertIn('code with <T> type',out)
+  _,out=mod.convert(src,'fixture'); self.assertIn('nb-type-script-example',out); self.assertIn('content/.markup/bodies/',out)
  def test_fence_after_list_marker(self):
   src='<Steps>\n1. One\n2. ```diff lang=ts\n+ add\n```\n3. Three\n</Steps>\n'
-  _,out=mod.convert(src,'fixture'); self.assertIn('nb-steps',out); self.assertIn('One',out)
+  _,out=mod.convert(src,'fixture'); self.assertIn('nb-steps',out); self.assertIn('content/.markup/bodies/',out)
  def test_blockquote_multiline_component(self):
   src='> Example:\n> <PackageManagers\n> \ttype="create"\n> \tpkg="vike@latest"\n> />\n> End.\n'
   _,out=mod.convert(src,'fixture'); self.assertIn('nb-tabs',out)
@@ -36,4 +46,47 @@ class TestImporter(unittest.TestCase):
  def test_unclosed_directive_auto_closes(self):
   src=':::caution[Warning]\nContent here without closing delimiter.\n'
   _,out=mod.convert(src,'fixture'); self.assertIn('nb-aside caution',out); self.assertNotIn(':::',out)
+ # ---- CP6B nested @markup boundary fixtures (Phase 2) ----
+ def test_component_body_emits_atmarkup(self):
+  src='<Steps>\n1. **Install**\n2. Run `foo`.\n</Steps>\n'
+  _,out,bodies=self._conv(src); self.assertIn('nb-steps',out); self.assertTrue(bodies); self.assertIn('**Install**',bodies[0])
+ def test_atmarkup_wraps_markdown_paragraph(self):
+  src='<Details title="More">\nA **bold** paragraph with `code`.\n</Details>\n'
+  _,out,bodies=self._conv(src); self.assertTrue(bodies); self.assertIn('**bold**',bodies[0]); self.assertIn('`code`',bodies[0])
+ def test_atmarkup_fenced_code_in_body(self):
+  src='<TypeScriptExample filename="x.ts">\n```ts\ncode with {x} braces\n```\n</TypeScriptExample>\n'
+  _,out,bodies=self._conv(src); self.assertTrue(bodies); self.assertIn('```ts',bodies[0]); self.assertIn('{x}',bodies[0])
+ def test_atmarkup_balanced_prose_braces(self):
+  src='<Steps>\nText { balanced } braces.\n</Steps>\n'
+  _,out,bodies=self._conv(src); self.assertIn('{ balanced }',bodies[0])
+ def test_atmarkup_inline_code_braces(self):
+  src='<Details title="T">\nUse `a { b }` inline.\n</Details>\n'
+  _,out,bodies=self._conv(src); self.assertIn('`a { b }`',bodies[0])
+ def test_atmarkup_literal_at_sigil(self):
+  src='<Steps>\nInstall `@cloudflare/sandbox` and contact user@example.com.\n</Steps>\n'
+  _,out,bodies=self._conv(src); self.assertIn('@cloudflare/sandbox',bodies[0]); self.assertIn('user@example.com',bodies[0])
+ def test_atmarkup_markdown_after_fence(self):
+  src='<Steps>\n```js\nconst x = 1;\n```\n\nText **after** the fence.\n</Steps>\n'
+  _,out,bodies=self._conv(src); self.assertIn('```js',bodies[0]); self.assertIn('**after**',bodies[0])
+ def test_atmarkup_nested_components(self):
+  src='<Tabs>\n<TabItem label="a">\n**bold** content\n</TabItem>\n</Tabs>\n'
+  _,out,bodies=self._conv(src); self.assertIn('nb-tabs',out); self.assertTrue(any('nb-tab-panel' in b for b in bodies)); self.assertIn('**bold** content',bodies[0])
+ def test_atmarkup_tabs_tabitem_steps(self):
+  src='<Tabs>\n<TabItem label="a">\n<Steps>\n1. **Step** one\n</Steps>\n</TabItem>\n</Tabs>\n'
+  _,out,bodies=self._conv(src); self.assertIn('nb-tabs',out); self.assertTrue(any('nb-steps' in b for b in bodies))
+ def test_atmarkup_directive_inside_component(self):
+  src='<Details title="T">\n:::note\nA **note** inside.\n:::\n</Details>\n'
+  _,out,bodies=self._conv(src); self.assertTrue(any('nb-aside note' in b for b in bodies))
+ def test_atmarkup_outer_template_composes(self):
+  # outer @markup("md"){@content} consumes content with inner @markup bodies
+  src='<Steps>\n1. **Install**\n</Steps>\n\nTop level **bold**.\n'
+  _,out,bodies=self._conv(src); self.assertTrue(bodies); self.assertIn('Top level **bold**.',out); self.assertIn('**Install**',bodies[0])
+ def test_atmarkup_guard_unbalanced_prose_brace(self):
+  # a genuinely unmatched prose brace must be rejected by the guard, not emitted broken
+  src='<Steps>\nText with an unmatched } brace.\n</Steps>\n'
+  with self.assertRaises(ValueError): mod.convert(src,'fixture')
+ def test_atmarkup_selfclosing_no_body(self):
+  src='<DashButton url="/?to=/foo" />\n'
+  _,out,bodies=self._conv(src); self.assertIn('nb-dash-button',out); self.assertFalse(bodies)
+  _,out=mod.convert(src,'fixture'); self.assertIn('nb-dash-button',out); self.assertNotIn('@markup("md", "content/.markup/bodies/',out)
 if __name__=='__main__': unittest.main()

@@ -66,9 +66,26 @@ INTENTIONAL = {
 
 
 def strip_code(html):
-    """Remove <pre>/<code> regions entirely (for REAL checks)."""
-    html = re.sub(r'<pre>[\s\S]*?</pre>', '', html)
-    html = re.sub(r'<code>[\s\S]*?</code>', '', html)
+    """Remove <pre>/<code> regions (tolerating unclosed tags)."""
+    def remove_regions(s, tag):
+        out = []
+        i = 0
+        n = len(s)
+        while i < n:
+            m = re.search(r'<' + tag + r'[\s>]', s[i:])
+            if not m:
+                out.append(s[i:])
+                break
+            start = i + m.start()
+            out.append(s[i:start])
+            close = re.search(r'</' + tag + r'>', s[start:])
+            if close:
+                i = start + close.end()
+            else:
+                i = n
+        return ''.join(out)
+    html = remove_regions(html, 'pre')
+    html = remove_regions(html, 'code')
     return html
 
 

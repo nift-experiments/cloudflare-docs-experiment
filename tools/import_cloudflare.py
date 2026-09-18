@@ -202,38 +202,152 @@ def attrs(s):
     return out
 
 
+# Backtick-delimited spans (inline code and whole fenced blocks) are opaque to
+# Nift's find_balanced, so braces inside them never affect an @markup boundary.
+# This masks them for the deterministic pre-emission brace-balance guard.
+_BT_SPAN = re.compile(r'`[^`\n]*`|^[ \t]*`{3,}[^\n]*\n.*?^[ \t]*`{3,}', re.M | re.S)
+
+
+def _guard_balanced_braces(body, what):
+    """Raise ValueError if the non-code portion of a body is brace- or
+    quote-unbalanced.
+
+    Mirrors Nift's find_balanced rule (backtick spans and comments opaque) so an
+    @markup boundary can be emitted safely. Deterministic; no per-page
+    special-casing. A stray double-quote would also break the boundary, so it is
+    guarded here."""
+    masked = _BT_SPAN.sub('', body)
+    masked = re.sub(r'<!--[\s\S]*?-->', '', masked)
+    masked = re.sub(r'@/\*[\s\S]*?\*/', '', masked)
+    depth = 0
+    quote = None
+    for ch in masked:
+        if quote:
+            if ch == '\\':
+                continue
+            if ch == quote:
+                quote = None
+            continue
+        if ch == '"':
+            quote = '"'
+            continue
+        if ch == '{':
+            depth += 1
+        elif ch == '}':
+            depth -= 1
+            if depth < 0:
+                raise ValueError(f'{what}: unbalanced prose "}}" would break an @markup boundary')
+    if depth != 0:
+        raise ValueError(f'{what}: unbalanced prose braces would break an @markup boundary')
+    if quote is not None:
+        raise ValueError(f'{what}: unbalanced double-quote would break an @markup boundary')
+
+
+
+
+_BODY_REGISTRY = []  # list of (idx, body_with_placeholders)
+_BODY_NEXT = 0       # global monotonically increasing body id
+_BODY_DIR = None      # set by import_corpus to content/.markup/bodies
+
+
+def _dedent_component_html(body):
+    """Remove leading whitespace from lines that are pure component HTML
+    (nb-* divs, asides, sections) so CommonMark does not treat tab-indented
+    component output inside list items as indented code blocks."""
+    out = []
+    for ln in body.split('\n'):
+        stripped = ln.strip()
+        if re.match(r'^<(?:div|aside|section|details|span|pre) class="nb-', stripped) or \
+           re.match(r'^</(?:div|aside|section|details|span|pre)>$', stripped):
+            out.append(stripped)
+        else:
+            out.append(ln)
+    return '\n'.join(out)
+
+
+def _materialize_bodies(text, placeholders):
+    """Replace \x01BODY{idx}\x02 markers with @markup("md", path) references and
+    write each body to a Markdown file (with code restored). Nested bodies are
+    resolved so a body file may itself reference another body file."""
+    refs = {}
+    for idx, body in _BODY_REGISTRY:
+        restored = restore_code(body, placeholders)
+        restored = _dedent_component_html(restored)
+        refs[idx] = restored
+    # resolve nested markers recursively
+    def resolve(body):
+        if '\x01BODY' not in body:
+            return body
+        for ridx, _ in _BODY_REGISTRY:
+            marker = f'\x01BODY{ridx}\x02'
+            body = body.replace(marker, f'@markup("md", "content/.markup/bodies/{ridx}.md")')
+        return body
+    for idx, body in _BODY_REGISTRY:
+        refs[idx] = resolve(refs[idx])
+        if _BODY_DIR is not None:
+            p = _BODY_DIR / f'{idx}.md'
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text(refs[idx])
+        text = text.replace(f'\x01BODY{idx}\x02', f'@markup("md", "content/.markup/bodies/{idx}.md")')
+    _BODY_REGISTRY.clear()
+    return text
+
+
+def _wrap_markup(body, what):
+    """Emit the body through an explicit Nift Markdown boundary as a file-based
+    @markup("md", path) reference.
+
+    The component HTML shell is preserved while the body is rendered by Nift from
+    a generated Markdown file. Using the file form avoids Nift's find_balanced
+    parsing of arbitrary Markdown bodies (apostrophes, stray backticks, irregular
+    fences), which the inline form cannot handle deterministically across the
+    corpus."""
+    if not body.strip():
+        return body
+    _guard_balanced_braces(body, what)
+    global _BODY_NEXT
+    idx = _BODY_NEXT
+    _BODY_NEXT += 1
+    _BODY_REGISTRY.append((idx, body))
+    return f'\x01BODY{idx}\x02'
+
+
 def render(name, a, body=''):
     at = attrs(a)
     title = html.escape(at.get('title') or at.get('text') or name)
+    # Block components carry Markdown bodies; wrap them in an explicit Nift
+    # Markdown boundary so Nift renders the body (fences, lists, bold) instead
+    # of leaving it literal inside the component HTML block.
+    wrapped = _wrap_markup(body, f'<{name}>')
     if name == 'Aside':
-        return f'<aside class="nb-aside {html.escape(at.get("type", "note"))}">{body}</aside>'
+        return f'<aside class="nb-aside {html.escape(at.get("type", "note"))}">{wrapped}</aside>'
     if name == 'Badge' or name == 'InlineBadge':
         return f'<span class="nb-badge">{html.escape(at.get("text", body or name))}</span>'
     if name in {'Card', 'LinkCard', 'LinkTitleCard', 'ListCard'}:
         href = html.escape(at.get('href', '#'), quote=True)
-        return f'<a class="nb-card nb-link-card" href="{href}"><strong>{title}</strong>{body}</a>'
+        return f'<a class="nb-card nb-link-card" href="{href}"><strong>{title}</strong>{wrapped}</a>'
     if name in {'CardGrid', 'FourCardGrid'}:
-        return f'<div class="nb-card-grid">{body}</div>'
+        return f'<div class="nb-card-grid">{wrapped}</div>'
     if name == 'Steps':
-        return f'<div class="nb-steps">{body}</div>'
+        return f'<div class="nb-steps">{wrapped}</div>'
     if name == 'Step':
-        return f'<section class="nb-step">{body}</section>'
+        return f'<section class="nb-step">{wrapped}</section>'
     if name == 'Details':
-        return f'<details class="nb-details"><summary>{title}</summary>{body}</details>'
+        return f'<details class="nb-details"><summary>{title}</summary>{wrapped}</details>'
     if name == 'FileTree':
-        return f'<pre class="nb-file-tree">{body}</pre>'
+        return f'<pre class="nb-file-tree">{wrapped}</pre>'
     if name in {'Tabs', 'PackageManagers'}:
-        return f'<div class="nb-tabs" data-nb-tabs>{body}</div>'
+        return f'<div class="nb-tabs" data-nb-tabs>{wrapped}</div>'
     if name == 'TabItem':
         label = html.escape(at.get('label', at.get('value', 'Tab')))
         ident = 'tab-' + re.sub(r'[^a-z0-9]+', '-', label.lower()).strip('-')
-        return f'<section class="nb-tab-panel" id="{ident}" data-tab-label="{label}">{body}</section>'
+        return f'<section class="nb-tab-panel" id="{ident}" data-tab-label="{label}">{wrapped}</section>'
     cls = MODEL['components'][name]
     if cls == 'browser-interactive':
-        return f'<div class="nb-interactive-component" data-cf-component="{name}">{body}</div>'
+        return f'<div class="nb-interactive-component" data-cf-component="{name}">{wrapped}</div>'
     if cls == 'data-generated':
-        return f'<div class="nb-data-component" data-cf-component="{name}">{body}</div>'
-    return f'<div class="nb-{re.sub(r"(?<!^)(?=[A-Z])", "-", name).lower()}">{body}</div>'
+        return f'<div class="nb-data-component" data-cf-component="{name}">{wrapped}</div>'
+    return f'<div class="nb-{re.sub(r"(?<!^)(?=[A-Z])", "-", name).lower()}">{wrapped}</div>'
 
 
 def imported_component_names(text):
@@ -293,6 +407,14 @@ def restore_code(text, placeholders):
     return text
 
 
+def _render_title_inline_code(title, placeholders=None):
+    """Render a directive title, restoring inline code placeholders and keeping
+    the upstream's raw HTML (e.g. <code>traceroute</code>) intact."""
+    if placeholders:
+        title = re.sub(r'\x00CODE(\d+)\x00', lambda m: placeholders.get(f'\x00CODE{m.group(1)}\x00', ''), title)
+    return title
+
+
 def convert_directives(text, placeholders=None):
     """Convert ::: directives to aside blocks (line-count preserving, nested-safe).
 
@@ -330,9 +452,11 @@ def convert_directives(text, placeholders=None):
     spans.sort(key=lambda s: s[1], reverse=True)
     for oi, ci, name, title in spans:
         inner = convert_directives('\n'.join(lines[oi + 1:ci]), placeholders)
+        inner = reduce_components(inner, 0, placeholders)
         cls = name or 'note'
-        head = f'<h3 class="nb-aside-title">{html.escape(title)}</h3>\n' if title else ''
-        block = f'<aside class="nb-aside {html.escape(cls)}">\n{head}{inner}\n</aside>'
+        head = f'<h3 class="nb-aside-title">{_render_title_inline_code(title, placeholders)}</h3>\n' if title else ''
+        inner_markup = _wrap_markup(inner, f':::{cls}')
+        block = f'<aside class="nb-aside {html.escape(cls)}">\n{head}{inner_markup}\n</aside>'
         lines = lines[:oi] + block.split('\n') + lines[ci + 1:]
     return '\n'.join(lines)
 
@@ -370,6 +494,8 @@ def render_markdown(text, blocks=True):
 
 
 def convert(text, path='<memory>'):
+    global _BODY_REGISTRY
+    _BODY_REGISTRY = []
     fm = {}
     m = FRONT.match(text)
     if m:
@@ -404,6 +530,10 @@ def convert(text, path='<memory>'):
     if unresolved:
         raise ValueError(f'{path}: unresolved MDX components: {", ".join(unresolved)}')
     text = restore_code(text, placeholders)
+    # Materialize @markup body references: write each component/directive body to
+    # a Markdown file under content/.markup/bodies/ and reference it via the
+    # file-based @markup("md", path) form (avoids find_balanced fragility).
+    text = _materialize_bodies(text, placeholders)
     # Source-style '~/assets/...' references resolve to the staged upstream
     # asset tree at /assets/upstream/ in the generated site.
     text = text.replace('~/assets/', '/assets/upstream/')
