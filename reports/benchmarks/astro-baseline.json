@@ -1,0 +1,69 @@
+{
+  "experiment": "cloudflare-docs-fidelity",
+  "benchmark": "astro-baseline-clean-build",
+  "date": "2026-09-18T12:10:14Z",
+  "host": "linode-cf-nift-experiment",
+  "host_os": "ubuntu24.04",
+  "host_hardware": {
+    "cpu_cores": 6,
+    "memory_gb": 15,
+    "disk_gb": 315,
+    "provider": "Linode",
+    "instance_type": "g6-standard-6"
+  },
+  "runtime": {
+    "node": "v24.21.0",
+    "pnpm": "12.4.2"
+  },
+  "upstream": {
+    "repo": "nift-experiments/cloudflare-docs-upstream",
+    "sha": "bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf",
+    "build_command": "pnpm build",
+    "prebuild": "pnpm run fetch:assets"
+  },
+  "runs": [
+    {
+      "run": 1,
+      "label": "clean full build",
+      "elapsed_wall_clock": "7:13.46",
+      "elapsed_seconds": 433.46,
+      "user_time_seconds": 576.53,
+      "system_time_seconds": 33.45,
+      "peak_rss_kbytes": 8354548,
+      "peak_rss_gb": 8.354548,
+      "cpu_percent": 140,
+      "pages_built": 9025,
+      "exit_status": 0,
+      "log": "/root/astro-build.log",
+      "timefile": "/root/astro-time.txt"
+    },
+    {
+      "run": 2,
+      "label": "no-op rebuild (no source change)",
+      "elapsed_wall_clock": "6:51.08",
+      "elapsed_seconds": 411.08,
+      "user_time_seconds": 542.15,
+      "system_time_seconds": 27.45,
+      "peak_rss_kbytes": 8129288,
+      "peak_rss_gb": 8.129288,
+      "cpu_percent": null,
+      "pages_built": 9025,
+      "exit_status": 0,
+      "log": "/root/astro-build2.log",
+      "timefile": "/root/astro-time2.txt"
+    }
+  ],
+  "output": {
+    "dist_bytes": 2147483648,
+    "dist_gb": 2.0,
+    "dist_file_count": 12450,
+    "note": "dist size and file count identical across both runs"
+  },
+  "notes": [
+    "NODE_OPTIONS=--max-old-space-size=8192 used for both runs (default heap would limit the 6-core/15GB box).",
+    "Standard pnpm build is a full output build; INCREMENTAL_BUILD=true is the upstream incremental path and was not benchmarked here.",
+    "prebuild fetch:assets downloads live skills/openapi/logpush datasets from middlecache.ced.cloudflare.com; it ran before each build.",
+    "Raw time(1) -v files and build logs are preserved on the Linode (/root/astro-time.txt, /root/astro-time2.txt, /root/astro-build.log, /root/astro-build2.log).",
+    "No Nift comparison was run; this is the Astro baseline only, per campaign priorities."
+  ]
+}
