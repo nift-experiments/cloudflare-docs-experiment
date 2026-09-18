@@ -181,11 +181,7 @@ def reduce_components(text, depth=0, placeholders=None):
                     inner, next_i = match_pair(text, end, name)
                     if inner is not None:
                         if name in KNOWN:
-                            reduced = reduce_components(inner, depth + 1, placeholders)
-                            if placeholders:
-                                reduced = restore_code(reduced, placeholders)
-                            reduced = render_markdown(reduced)
-                            out.append(render(name, attrs, reduced))
+                            out.append(render(name, attrs, reduce_components(inner, depth + 1, placeholders)))
                         else:
                             out.append(text[i:next_i])
                         i = next_i
@@ -419,9 +415,6 @@ def convert(text, path='<memory>'):
     # only inside Markdown link/image destinations and quoted attrs.
     text = re.sub(r'\(public/', '(/', text)
     text = re.sub(r'"(public/)', '"/', text)
-    # Render top-level Markdown to HTML; component/directive bodies were already
-    # rendered during expansion.
-    text = render_markdown(text, blocks=False)
     # A bare '---' horizontal rule left at the start of the body would be
     # misread by Nift as an unterminated front-matter block. Drop a leading
     # standalone '---' line (it was an HR after the stripped import block).

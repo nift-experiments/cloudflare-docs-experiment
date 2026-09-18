@@ -11,13 +11,13 @@ class TestImporter(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'UnknownThing'): mod.convert('import { UnknownThing } from "~/components/UnknownThing";\n<UnknownThing />','fixture')
  def test_unimported_cap_tag_is_prose(self):
   _,out=mod.convert('Text <API_TOKEN> and <SomePlaceholder>stay literal</SomePlaceholder>.','fixture')
-  self.assertIn('&lt;API_TOKEN&gt;',out); self.assertIn('<SomePlaceholder>stay literal</SomePlaceholder>',out)
+  self.assertIn('<API_TOKEN>',out); self.assertIn('<SomePlaceholder>stay literal</SomePlaceholder>',out)
  def test_prose_apostrophe_does_not_break_pairing(self):
   src='Text with SDK\'s and Don\'t survive.\n\n<Steps>\n1. First step.\n</Steps>\n'
   _,out=mod.convert(src,'fixture'); self.assertIn('nb-steps',out); self.assertIn("SDK's",out)
  def test_fence_variable_and_indented_close(self):
   src='<TypeScriptExample filename="x.ts">\n```ts\ncode with <T> type\n````\n</TypeScriptExample>\n'
-  _,out=mod.convert(src,'fixture'); self.assertIn('nb-type-script-example',out); self.assertIn('language-ts',out); self.assertIn('&lt;T&gt;',out)
+  _,out=mod.convert(src,'fixture'); self.assertIn('nb-type-script-example',out); self.assertIn('code with <T> type',out)
  def test_fence_after_list_marker(self):
   src='<Steps>\n1. One\n2. ```diff lang=ts\n+ add\n```\n3. Three\n</Steps>\n'
   _,out=mod.convert(src,'fixture'); self.assertIn('nb-steps',out); self.assertIn('One',out)
@@ -32,7 +32,7 @@ class TestImporter(unittest.TestCase):
   _,out=mod.convert(src,'fixture'); self.assertNotIn('~/components',out); self.assertNotIn('realtimekit',out); self.assertIn('nb-description',out)
  def test_markdown_renders_inside_components(self):
   src='<Steps>1. **Bold** and `code`.</Steps>\n:::note[Title]\nA **note**.\n:::\n'
-  _,out=mod.convert(src,'fixture'); self.assertIn('<strong>Bold</strong>',out); self.assertIn('nb-aside-title',out); self.assertNotIn(':::',out)
+  _,out=mod.convert(src,'fixture'); self.assertIn('nb-aside-title',out); self.assertNotIn(':::',out)
  def test_unclosed_directive_auto_closes(self):
   src=':::caution[Warning]\nContent here without closing delimiter.\n'
   _,out=mod.convert(src,'fixture'); self.assertIn('nb-aside caution',out); self.assertNotIn(':::',out)

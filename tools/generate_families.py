@@ -53,6 +53,18 @@ def rewrite_assets(s):
     return s
 
 
+def convert_mdx_body(raw, path='family'):
+    """Run a raw MDX body through the strict importer so components,
+    directives and imports are converted (fatal on unknown constructs)."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        'imp', ROOT / 'tools/import_cloudflare.py')
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    fm, body = mod.convert(raw, path)
+    return body
+
+
 def load_yaml(p):
     return yaml.safe_load(p.read_text())
 
@@ -217,7 +229,12 @@ def main():
         pdir = content / 'changelog/post' / note_id
         pdir.mkdir(parents=True, exist_ok=True)
         pbody = [f'# {fm.get("title", name)}', '']
-        pbody.append(body.strip())
+        try:
+            converted = convert_mdx_body(raw, f'changelog/{product}/{name}')
+            pbody.append(converted)
+        except Exception as e:
+            pbody.append(body.strip())
+            print(f'  [warn] changelog {product}/{name}: {e}', file=sys.stderr)
         (pdir / 'index.md').write_text(rewrite_assets('\n'.join(pbody)) + '\n')
         add_tracked(tracked, f'changelog/post/{note_id}/', fm.get('title', name),
                     'templates/docs.html')
