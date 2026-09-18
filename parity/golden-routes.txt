@@ -1,0 +1,16 @@
+/
+/fundamentals/
+/dns/
+/dns/manage-dns-records/how-to/create-dns-records/
+/workers/
+/workers/get-started/guide/
+/workers/runtime-apis/
+/r2/
+/pages/
+/cloudflare-one/
+/waf/
+/ssl/
+/cache/
+/learning-paths/
+/changelog/
+/style-guide/

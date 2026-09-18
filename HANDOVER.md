@@ -666,3 +666,11 @@ Begin with **CP0 only**: acquire/inspect the frozen upstream snapshot, pin its
 commit, inventory the entire source/content/component/asset/runtime surface and
 commit that evidence. Do not begin hand-porting the homepage before the corpus
 and component model are understood.
+
+## Campaign status — 2026-09-18
+
+- **CP0 complete:** frozen upstream `bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf`; repository inventory in `reports/CP0-INVENTORY.md`; local deep scanner in `tools/inventory_upstream.py`.
+- **CP1 complete:** normalized-DOM/diff/Chromium-screenshot harness in `tools/parity.py`; representative routes in `parity/golden-routes.txt`; final-gate extensions in `reports/CP1-PARITY-HARNESS.md`.
+- **Next: CP2 design-system extraction.** Do not approximate Cloudflare visually: extract the actual rendered fonts, CSS tokens, dimensions, breakpoints, icons and assets against the frozen baseline.
+
+The attached Nift source was consulted and successfully compiled in this environment using an unoptimised development build (the normal `-O2` compile exceeded the runner's per-command time limit). The current barebones project structure matches the documented Nift model: `.nift/config.json`, `.nift/tracked.json`, `content/`, reusable templates and generated `public/` output. The current Nift site itself remains intentionally barebones through CP1; CP0–CP1 establish evidence and tooling before visual implementation begins.
