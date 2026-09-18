@@ -1,42 +1,214 @@
 {
-  "total": 1806,
+  "total": 1999,
   "by_family": {
-    "/api/resources": 1368,
-    "/ruleset-engine/rules-language": 166,
-    "/logs/logpush": 105,
-    "/workers-ai/models": 36,
-    "/api": 20,
+    "/api/resources": 1523,
+    "/logs/logpush": 135,
+    "/api": 24,
+    "/workers-ai/models": 21,
     "/workers/runtime-apis": 16,
-    "/changelog": 11,
-    "/llms.txt": 9,
-    "(rel)": 7,
-    "/agent-setup": 5,
+    "/agent-setup": 8,
+    "/changelog/2025-02-03-terraform-v5-provider": 7,
+    "/learning-paths": 5,
     "/api/python": 5,
-    "/directory": 5,
-    "/learning-paths": 4,
-    "/realtime/realtimekit": 4,
+    "/realtime/realtimekit": 5,
+    "/cloudflare-one/access-controls": 4,
+    "/cloudflare-one/integrations": 4,
+    "/cloudflare-one/networks": 4,
+    "/cloudflare-one/insights": 4,
+    "/fundamentals/api": 4,
+    "(rel)": 4,
+    "/cache/how-to": 3,
+    "/waf/detections": 3,
+    "/cloudflare-one/traffic-policies": 3,
+    "/waf/managed-rules": 3,
+    "/workers/llms.txt": 2,
     "/api/node": 2,
     "/api/go": 2,
+    "/ssl/edge-certificates": 2,
+    "/cloudflare-one/team-and-resources": 2,
+    "/fundamentals/account": 2,
+    "/workers/configuration": 2,
     "/logs/r2-log-retrieval": 2,
     "/containers/platform-details": 2,
     "/changelog/sandbox": 2,
     "/changelog/2025-10-30-tcp-rtt-and-tcp-fields": 2,
     "/api/operations": 2,
+    "/changelog/cloudflare-one-client": 2,
     "/images/storage": 2,
     "/cloudflare-one/policies": 2,
     "/llms-full.txt": 1,
-    "/workers/llms.txt": 1,
     "/workers/llms-full.txt": 1,
     "/tutorials": 1,
+    "/argo-smart-routing/llms.txt": 1,
+    "/automatic-platform-optimization/llms.txt": 1,
+    "/cache/advanced-configuration": 1,
+    "/cache/llms.txt": 1,
+    "/china-network/llms.txt": 1,
+    "/rules/cloud-connector": 1,
+    "/cloudflare-for-platforms/cloudflare-for-saas": 1,
+    "/rules/compression-rules": 1,
+    "/rules/configuration-rules": 1,
+    "/dns/dns-firewall": 1,
+    "/dns/llms.txt": 1,
+    "/google-tag-gateway/llms.txt": 1,
+    "/health-checks/llms.txt": 1,
+    "/dns/internal-dns": 1,
+    "/ssl/keyless-ssl": 1,
+    "/load-balancing/llms.txt": 1,
+    "/rules/origin-rules": 1,
+    "/dns/private-origins": 1,
+    "/rules/url-forwarding": 1,
+    "/smart-shield/llms.txt": 1,
+    "/rules/snippets": 1,
+    "/spectrum/llms.txt": 1,
+    "/speed/llms.txt": 1,
+    "/ssl/llms.txt": 1,
+    "/rules/transform": 1,
+    "/waiting-room/llms.txt": 1,
+    "/web-analytics/llms.txt": 1,
+    "/web3/llms.txt": 1,
+    "/api-shield/llms.txt": 1,
+    "/bots/llms.txt": 1,
+    "/client-side-security/llms.txt": 1,
+    "/cloudflare-challenges/llms.txt": 1,
+    "/ddos-protection/llms.txt": 1,
+    "/dmarc-management/llms.txt": 1,
+    "/firewall/llms.txt": 1,
+    "/bots/additional-configurations": 1,
+    "/key-transparency/llms.txt": 1,
+    "/waf/rate-limiting-rules": 1,
+    "/secrets-store/llms.txt": 1,
+    "/security-center/llms.txt": 1,
+    "/security/overview": 1,
+    "/turnstile/llms.txt": 1,
+    "/waf/llms.txt": 1,
+    "/cloudflare-one/remote-browser-isolation": 1,
+    "/cloudflare-network-firewall/llms.txt": 1,
+    "/cloudflare-wan/configuration": 1,
+    "/cloudflare-one/llms.txt": 1,
+    "/cloudflare-wan/llms.txt": 1,
+    "/data-localization/llms.txt": 1,
+    "/cloudflare-one/data-loss-prevention": 1,
+    "/cloudflare-one/email-security": 1,
+    "/email-security/llms.txt": 1,
+    "/mesh/llms.txt": 1,
+    "/multi-cloud-networking/llms.txt": 1,
+    "/cloudflare-one/reusable-components": 1,
+    "/1.1.1.1/llms.txt": 1,
+    "/radar/llms.txt": 1,
+    "/warp-client/llms.txt": 1,
+    "/ai-crawl-control/llms.txt": 1,
+    "/analytics/llms.txt": 1,
+    "/api/llms.txt": 1,
+    "/billing/llms.txt": 1,
+    "/fundamentals/llms.txt": 1,
+    "/analytics/graphql-api": 1,
+    "/log-explorer/llms.txt": 1,
+    "/logs/llms.txt": 1,
+    "/network/llms.txt": 1,
+    "/notifications/llms.txt": 1,
+    "/fundamentals/oauth": 1,
+    "/fundamentals/organizations": 1,
+    "/pulumi/llms.txt": 1,
+    "/randomness-beacon/llms.txt": 1,
+    "/reference-architecture/llms.txt": 1,
+    "/registrar/llms.txt": 1,
+    "/resource-tagging/llms.txt": 1,
+    "/rules/llms.txt": 1,
+    "/ruleset-engine/llms.txt": 1,
+    "/support/llms.txt": 1,
+    "/tenant/llms.txt": 1,
+    "/terraform/llms.txt": 1,
+    "/time-services/llms.txt": 1,
+    "/tunnel/llms.txt": 1,
+    "/version-management/llms.txt": 1,
+    "/agent-lee/llms.txt": 1,
+    "/agent-memory/llms.txt": 1,
+    "/agents/llms.txt": 1,
+    "/ai-gateway/llms.txt": 1,
+    "/ai-search/llms.txt": 1,
+    "/ai/llms.txt": 1,
+    "/artifacts/llms.txt": 1,
+    "/browser-run/llms.txt": 1,
+    "/cloudflare-for-platforms/llms.txt": 1,
+    "/constellation/llms.txt": 1,
+    "/containers/llms.txt": 1,
+    "/d1/llms.txt": 1,
+    "/durable-objects/llms.txt": 1,
+    "/dynamic-workers/llms.txt": 1,
+    "/email-service/llms.txt": 1,
+    "/flagship/llms.txt": 1,
+    "/hyperdrive/llms.txt": 1,
+    "/images/llms.txt": 1,
+    "/kv/llms.txt": 1,
+    "/moq/llms.txt": 1,
+    "/pages/llms.txt": 1,
+    "/pipelines/llms.txt": 1,
+    "/privacy-gateway/llms.txt": 1,
+    "/privacy-pass/llms.txt": 1,
+    "/privacy-proxy/llms.txt": 1,
+    "/queues/llms.txt": 1,
+    "/r2-data-catalog/llms.txt": 1,
+    "/r2-sql/llms.txt": 1,
+    "/r2/llms.txt": 1,
+    "/realtime/sfu": 1,
+    "/realtime/turn": 1,
+    "/realtime/llms.txt": 1,
+    "/sandbox/llms.txt": 1,
+    "/stream/llms.txt": 1,
+    "/vectorize/llms.txt": 1,
+    "/wallets/llms.txt": 1,
+    "/workers-ai/llms.txt": 1,
+    "/analytics/analytics-engine": 1,
+    "/cloudflare-for-platforms/workers-for-platforms": 1,
+    "/workers-vpc/llms.txt": 1,
+    "/workflows/llms.txt": 1,
+    "/zaraz/llms.txt": 1,
+    "/learning-paths/llms.txt": 1,
+    "/byoip/llms.txt": 1,
+    "/magic-transit/llms.txt": 1,
+    "/network-error-logging/llms.txt": 1,
+    "/network-flow/llms.txt": 1,
+    "/network-interconnect/llms.txt": 1,
+    "/agent-setup/llms.txt": 1,
+    "/ai-crawl-control/features": 1,
+    "/speed/optimization": 1,
+    "/client-ip-geolocation/llms.txt": 1,
+    "/smart-shield/configuration": 1,
+    "/docs-for-agents/llms.txt": 1,
+    "/security-center/infrastructure": 1,
+    "/load-balancing/reference": 1,
+    "/migration-guides/llms.txt": 1,
+    "/rules/page-rules": 1,
+    "/security/llms.txt": 1,
+    "/speed/observatory": 1,
+    "/stream/webrtc-beta": 1,
+    "/style-guide/llms.txt": 1,
+    "/rules/trace-request": 1,
+    "/use-cases/llms.txt": 1,
+    "/workers/ci-cd": 1,
     "/changelog/product-group": 1,
-    "/changelog/2026-08-26-sentinel-functions-connector-deprecation": 1,
     "/reference-architecture/diagrams": 1,
-    "/changelog/post": 1,
+    "/changelog/2025-07-23-workers-preview-urls": 1,
+    "/changelog/2025-09-17-update-preview-url-setting": 1,
+    "/changelog/2025-10-03-one-click-access-for-workers": 1,
+    "/changelog/2025-08-04-builds-increased-disk-size": 1,
+    "/changelog/2025-06-18-remote-bindings-beta": 1,
+    "/changelog/2026-01-13-warp-linux-ga": 1,
+    "/changelog/access": 1,
+    "/changelog/2025-03-13-wrangler-v4": 1,
+    "/changelog/2025-02-25-workflows-concurrency-increased": 1,
+    "/changelog/2025-03-25-higher-cpu-limits": 1,
+    "/changelog/2025-12-16-wrangler-autoconfig": 1,
+    "/changelog/2025-03-27-automatic-audit-logs-beta-release": 1,
+    "/changelog/2025-07-29-audit-logs-v2-ui-beta": 1,
+    "/changelog/2025-12-05-rcs-vuln": 1,
+    "/changelog/2025-12-05-waf-max-payload-size-change": 1,
+    "/d1/rest-api": 1,
     "/changelog/2025-06-23-user-groups-ga": 1,
     "/changelog/2025-06-02-user-groups-beta": 1,
     "/logs/reference": 1,
     "/changelog/2025-02-20-builds-name-conflict": 1,
-    "/workers/configuration": 1,
     "/style-guide/build-the-page": 1,
     "/changelog/rss": 1,
     "/docs-for-agents/index.md": 1,
@@ -47,19 +219,12 @@
     "/videos/the-online-address-book": 1,
     "/videos/set-up-access-policies": 1,
     "/videos/set-up-cf-tunnel": 1,
-    "/cloudflare-one/traffic-policies": 1,
-    "/changelog/2025-07-15-udp-improvements": 1,
-    "/cloudflare-one/networks": 1,
-    "/changelog/cloudflare-one-client": 1
+    "/changelog/2025-07-15-udp-improvements": 1
   },
   "sample": [
     [
       "docs-for-agents/index.html",
       "/agent-setup/"
-    ],
-    [
-      "docs-for-agents/index.html",
-      "/llms.txt"
     ],
     [
       "docs-for-agents/index.html",
@@ -75,15 +240,19 @@
     ],
     [
       "docs-for-agents/index.html",
-      "/llms.txt"
-    ],
-    [
-      "docs-for-agents/index.html",
       "/api/"
     ],
     [
-      "moq/index.html",
-      "/api/resources/moq"
+      "directory/index.html",
+      "/agent-setup/"
+    ],
+    [
+      "directory/index.html",
+      "/api/"
+    ],
+    [
+      "directory/index.html",
+      "/learning-paths/"
     ],
     [
       "moq/index.html",
@@ -138,80 +307,80 @@
       "/tutorials/"
     ],
     [
-      "stream/get-started/index.html",
-      "/api/resources/stream/"
+      "llms.txt/index.html",
+      "/argo-smart-routing/llms.txt"
     ],
     [
-      "stream/get-started/index.html",
-      "/api/resources/stream/"
+      "llms.txt/index.html",
+      "/automatic-platform-optimization/llms.txt"
     ],
     [
-      "stream/webrtc-beta/index.html",
-      "/api/resources/stream/subresources/live_inputs/methods/create/"
+      "llms.txt/index.html",
+      "/cache/advanced-configuration/cache-reserve/llms.txt"
     ],
     [
-      "stream/manage-video-library/creator-id/index.html",
-      "/api/resources/stream/"
+      "llms.txt/index.html",
+      "/cache/how-to/cache-rules/llms.txt"
     ],
     [
-      "stream/manage-video-library/creator-id/index.html",
-      "/api/resources/stream/"
+      "llms.txt/index.html",
+      "/cache/llms.txt"
     ],
     [
-      "stream/manage-video-library/creator-id/index.html",
-      "/api/resources/stream/"
+      "llms.txt/index.html",
+      "/china-network/llms.txt"
     ],
     [
-      "stream/manage-video-library/creator-id/index.html",
-      "/api/resources/stream/"
+      "llms.txt/index.html",
+      "/rules/cloud-connector/llms.txt"
     ],
     [
-      "stream/manage-video-library/creator-id/index.html",
-      "/api/resources/stream/"
+      "llms.txt/index.html",
+      "/cloudflare-for-platforms/cloudflare-for-saas/llms.txt"
     ],
     [
-      "stream/manage-video-library/searching/index.html",
-      "/api/resources/stream/methods/list/"
+      "llms.txt/index.html",
+      "/rules/compression-rules/llms.txt"
     ],
     [
-      "stream/edit-videos/adding-captions/index.html",
-      "/api/resources/stream/"
+      "llms.txt/index.html",
+      "/rules/configuration-rules/llms.txt"
     ],
     [
-      "stream/edit-videos/adding-captions/index.html",
-      "/api/resources/stream/"
+      "llms.txt/index.html",
+      "/dns/dns-firewall/llms.txt"
     ],
     [
-      "stream/edit-videos/adding-captions/index.html",
-      "/api/resources/stream/"
+      "llms.txt/index.html",
+      "/dns/llms.txt"
     ],
     [
-      "stream/edit-videos/adding-captions/index.html",
-      "/api/resources/stream/"
+      "llms.txt/index.html",
+      "/google-tag-gateway/llms.txt"
     ],
     [
-      "stream/edit-videos/applying-watermarks/index.html",
-      "/api/resources/stream/"
+      "llms.txt/index.html",
+      "/health-checks/llms.txt"
     ],
     [
-      "stream/edit-videos/applying-watermarks/index.html",
-      "/api/resources/stream/"
+      "llms.txt/index.html",
+      "/dns/internal-dns/llms.txt"
     ],
     [
-      "stream/edit-videos/applying-watermarks/index.html",
-      "/api/resources/stream/"
+      "llms.txt/index.html",
+      "/ssl/keyless-ssl/llms.txt"
     ],
     [
-      "stream/edit-videos/applying-watermarks/index.html",
-      "/api/resources/stream/"
+      "llms.txt/index.html",
+      "/load-balancing/llms.txt"
     ],
     [
-      "stream/edit-videos/applying-watermarks/index.html",
-      "/api/resources/stream/"
+      "llms.txt/index.html",
+      "/rules/origin-rules/llms.txt"
     ],
     [
-      "stream/edit-videos/applying-watermarks/index.html",
-      "/api/resources/stream/"
+      "llms.txt/index.html",
+      "/dns/private-origins/llms.txt"
     ]
   ]
 }
