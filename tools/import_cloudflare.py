@@ -27,21 +27,53 @@ ROOT = Path(__file__).resolve().parents[1]
 MODEL = json.loads((ROOT / 'compatibility/content-model.json').read_text())
 KNOWN = set(MODEL['components'])
 
-FENCE = re.compile(r'^```[^\n]*\n.*?^```', re.M | re.S)
-TILDE = re.compile(r'^~~~[^\n]*\n.*?^~~~', re.M | re.S)
-INLINE = re.compile(r'`[^`]*`')
+FENCE = re.compile(r'^[ \t]*`{3,}[^\n]*\n.*?^[ \t]*`{3,}', re.M | re.S)
+TILDE = re.compile(r'^[ \t]*~{3,}[^\n]*\n.*?^[ \t]*~{3,}', re.M | re.S)
+INLINE = re.compile(r'`[^`\n]*`')
 MDX_COMMENT = re.compile(r'\{/\*[\s\S]*?\*/\}')
 IMPORT_RE = re.compile(r'^\s*import\s+[^\n]*;?\s*$', re.M)
 EXPORT_RE = re.compile(r'^\s*export\s+[^\n]*;?\s*$', re.M)
 FRONT = re.compile(r'^---\n([\s\S]*?)\n---\n?')
-TAG = re.compile(r'<([A-Z][A-Za-z0-9_.:-]*)\b')
+ESCAPED_LT = re.compile(r'\\<')
 COMPONENT_SRC = re.compile(r'^~/components|^@cloudflare/realtimekit')
 IMPORT_STATEMENT = re.compile(r'^\s*import\s+([^;\n]+?)\s+from\s+["\']([^"\']+)["\']', re.M)
 SELF_CLOSING = None  # replaced by balanced scanner (see reduce_components)
 PAIR = None
 TAG_START = re.compile(r'<([A-Z][A-Za-z0-9_.]*)\b')
-TAG_CLOSE = re.compile(r'</([A-Z][A-Za-z0-9_.]*)\s*>')
+TAG_CLOSE = re.compile(r'</\s*([A-Z][A-Za-z0-9_.]*)\s*>')
 DIRECTIVE_LINE = re.compile(r'^[ \t]*:::[ \t]*([a-zA-Z][\w-]*)?[ \t]*$')
+
+
+def _line_blockquote(text, i):
+    """Number of leading '>' blockquote markers on the line containing text[i].
+    Returns 0 when the line does not begin with a '>' marker."""
+    j = i
+    while j > 0 and text[j - 1] != '\n':
+        j -= 1
+    k = j
+    depth = 0
+    while k < len(text):
+        if text[k] != '>':
+            break
+        depth += 1
+        if k + 1 < len(text) and text[k + 1] in (' ', '\t'):
+            k += 2
+        else:
+            k += 1
+    return depth if k > j else 0
+
+
+def _is_blockquote_marker(text, j):
+    """True when text[j] == '>' is a blockquote marker: the first non-whitespace
+    character of its line, followed by space/tab/newline/end. Only used to
+    tolerate multi-line component tags written inside Markdown blockquotes."""
+    k = j
+    while k > 0 and text[k - 1] != '\n':
+        if text[k - 1] not in ' \t':
+            return False
+        k -= 1
+    nxt = text[j + 1] if j + 1 < len(text) else ''
+    return nxt in ('', ' ', '\t', '\n')
 
 
 def scan_tag(text, i):
@@ -55,6 +87,9 @@ def scan_tag(text, i):
     j = m.end()
     brace = 0
     quote = None
+    # Only tolerate '>' blockquote markers when the tag itself opens on a line
+    # that is blockquote-prefixed (e.g. '> <PackageManagers ...').
+    in_bq = _line_blockquote(text, i) > 0
     while j < len(text):
         c = text[j]
         if quote:
@@ -68,6 +103,9 @@ def scan_tag(text, i):
             if brace:
                 brace -= 1
         elif c == '>' and brace == 0:
+            if in_bq and _is_blockquote_marker(text, j):
+                j += 1
+                continue
             attrs = text[m.end():j]
             self_close = bool(re.search(r'/\s*$', attrs))
             return attrs, j + 1, self_close
@@ -77,50 +115,35 @@ def scan_tag(text, i):
 
 def match_pair(text, start, name):
     """Find the balanced closing </name> for a tag whose content starts at `start`.
-    Returns (inner_text, index_after_close) or (None, None) when unbalanced."""
-    brace = 0
-    quote = None
+    Returns (inner_text, index_after_close) or (None, None) when unbalanced.
+
+    Body text between tags is scanned only for '<'; quote and {..} tracking
+    applies strictly inside a tag (between '<' and its '>'), so prose
+    apostrophes such as "SDK's" or "Don't" never enter quote mode."""
     i = start
     depth = 0
     n = len(text)
     while i < n:
-        c = text[i]
-        if quote:
-            if c == quote:
-                quote = None
+        if text[i] != '<':
             i += 1
             continue
-        if c in ('"', "'"):
-            quote = c
-            i += 1
-            continue
-        if c == '{':
-            brace += 1
-            i += 1
-            continue
-        if c == '}':
-            if brace:
-                brace -= 1
-            i += 1
-            continue
-        if c == '<' and brace == 0:
-            if i + 1 < n and text[i + 1] == '/':
-                cm = TAG_CLOSE.match(text, i)
-                if cm:
-                    if cm.group(1) == name and depth == 0:
-                        return text[start:i], cm.end()
-                    depth = max(0, depth - 1)
-                    i = cm.end()
-                    continue
-            m = TAG_START.match(text, i)
-            if m:
-                t = scan_tag(text, i)
-                if t:
-                    _, end, sc = t
-                    if not sc:
-                        depth += 1
-                    i = end
-                    continue
+        if i + 1 < n and text[i + 1] == '/':
+            cm = TAG_CLOSE.match(text, i)
+            if cm:
+                if cm.group(1) == name and depth == 0:
+                    return text[start:i], cm.end()
+                depth = max(0, depth - 1)
+                i = cm.end()
+                continue
+        m = TAG_START.match(text, i)
+        if m:
+            t = scan_tag(text, i)
+            if t:
+                _, end, sc = t
+                if not sc:
+                    depth += 1
+                i = end
+                continue
         i += 1
     return None, None
 
@@ -214,17 +237,44 @@ def imported_component_names(text):
 
 
 def protect_code(text):
-    """Replace fenced and inline code with single-line placeholders."""
+    """Replace fenced and inline code with single-line placeholders.
+
+    Fences are paired sequentially: each opening fence is closed by the very
+    next line that is a run of 3+ backticks (or tildes), regardless of its
+    length, so adjacent/indented fences never merge across content."""
     placeholders = {}
 
     def stash(m):
         key = f'\x00CODE{len(placeholders)}\x00'
-        placeholders[key] = m.group(0)
+        val = m.group(0) if hasattr(m, 'group') else m
+        placeholders[key] = val
         return key
 
-    text = FENCE.sub(stash, text)
-    text = TILDE.sub(stash, text)
+    lines = text.split('\n')
+    out = []
+    i = 0
+    n = len(lines)
+    FENCE_OPEN = re.compile(r'^[ \t]*(?:[0-9]+[.)][ \t]+)?(`{3,}|~{3,})')
+    while i < n:
+        ln = lines[i]
+        m = FENCE_OPEN.match(ln)
+        if m:
+            start = i
+            marker = m.group(1)[0]
+            i += 1
+            while i < n:
+                cm = re.match(r'^[ \t]*' + re.escape(marker) + r'{3,}', lines[i])
+                if cm:
+                    i += 1
+                    break
+                i += 1
+            out.append(stash('\n'.join(lines[start:i])))
+            continue
+        out.append(ln)
+        i += 1
+    text = '\n'.join(out)
     text = INLINE.sub(stash, text)
+    text = ESCAPED_LT.sub(stash, text)
     return text, placeholders
 
 

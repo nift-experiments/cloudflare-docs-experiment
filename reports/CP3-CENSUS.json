@@ -84,27 +84,27 @@
       ],
       [
         "TabItem",
-        2512
+        2534
       ],
       [
         "TypeScriptExample",
-        1364
+        1381
       ],
       [
         "Type",
-        1266
+        1271
       ],
       [
         "DashButton",
-        1208
+        1211
       ],
       [
         "Tabs",
-        1115
+        1121
       ],
       [
         "RTKCodeSnippet",
-        884
+        896
       ],
       [
         "Details",
@@ -112,31 +112,31 @@
       ],
       [
         "Steps",
-        699
+        700
       ],
       [
         "MetaInfo",
-        616
+        621
       ],
       [
         "APIRequest",
-        612
+        614
       ],
       [
         "DirectoryListing",
-        606
+        607
       ],
       [
         "WranglerConfig",
-        602
+        605
       ],
       [
         "GlossaryTooltip",
-        597
+        598
       ],
       [
         "PackageManagers",
-        452
+        454
       ],
       [
         "LinkCard",
@@ -156,7 +156,7 @@
       ],
       [
         "Example",
-        189
+        190
       ],
       [
         "RuleID",
@@ -263,11 +263,11 @@
         21
       ],
       [
-        "ListTutorials",
-        16
+        "String",
+        17
       ],
       [
-        "Response",
+        "ListTutorials",
         16
       ],
       [
@@ -279,15 +279,15 @@
         16
       ],
       [
-        "String",
-        16
-      ],
-      [
-        "InlineBadge",
-        11
+        "Response",
+        14
       ],
       [
         "DOMAIN_NAME",
+        12
+      ],
+      [
+        "InlineBadge",
         11
       ],
       [
@@ -355,11 +355,19 @@
         9
       ],
       [
+        "POLICY_DESCRIPTION",
+        8
+      ],
+      [
         "LAN_ID",
         8
       ],
       [
         "LAN_NAME",
+        8
+      ],
+      [
+        "POLICY_NAME",
         8
       ],
       [
@@ -383,16 +391,8 @@
         8
       ],
       [
-        "T",
-        8
-      ],
-      [
         "BUCKET_PATH",
         8
-      ],
-      [
-        "ACCOUNT_ID",
-        7
       ],
       [
         "RSSButton",
@@ -415,19 +415,11 @@
         5
       ],
       [
-        "YOUR_SUBDOMAIN",
-        4
+        "T",
+        5
       ],
       [
         "MANAGED_APP_ID",
-        4
-      ],
-      [
-        "POLICY_DESCRIPTION",
-        4
-      ],
-      [
-        "POLICY_NAME",
         4
       ],
       [
@@ -436,6 +428,10 @@
       ],
       [
         "DESCRIBE_ALERT",
+        4
+      ],
+      [
+        "YOUR_EMAIL",
         4
       ],
       [
@@ -495,6 +491,10 @@
         3
       ],
       [
+        "ACCOUNT_ID",
+        3
+      ],
+      [
         "URL",
         3
       ],
@@ -519,10 +519,6 @@
         3
       ],
       [
-        "KV_NAMESPACE_ID",
-        3
-      ],
-      [
         "DOMAIN_BLOCKLIST_UUID",
         3
       ],
@@ -536,10 +532,6 @@
       ],
       [
         "RATE_LIMITING_RULESET_ID",
-        3
-      ],
-      [
-        "YOUR_WORKER",
         3
       ],
       [
@@ -639,10 +631,6 @@
         2
       ],
       [
-        "ENTER_WORKER_NAME",
-        2
-      ],
-      [
         "ALLOWED_REMEDIATION_DOMAINS_LIST_UUID",
         2
       ],
@@ -688,6 +676,10 @@
       ],
       [
         "ENCODED_VALUE",
+        2
+      ],
+      [
+        "DATADOG_ENDPOINT_URL",
         2
       ],
       [
@@ -927,6 +919,10 @@
         1
       ],
       [
+        "YOUR_SUBDOMAIN",
+        1
+      ],
+      [
         "CODE_CHALLENGE",
         1
       ],
@@ -1099,18 +1095,6 @@
         1
       ],
       [
-        "State",
-        1
-      ],
-      [
-        "Schedule",
-        1
-      ],
-      [
-        "DurableObjectStub",
-        1
-      ],
-      [
         "NS_DOMAIN",
         1
       ],
@@ -1123,7 +1107,7 @@
         1
       ],
       [
-        "YOUR_BINDING_ID",
+        "Map",
         1
       ],
       [
@@ -1191,11 +1175,19 @@
         1
       ],
       [
-        "DATADOG_ENDPOINT_URL",
+        "DATADOG_API_KEY",
         1
       ],
       [
-        "DATADOG_API_KEY",
+        "SERVICE",
+        1
+      ],
+      [
+        "HOST",
+        1
+      ],
+      [
+        "TAGS",
         1
       ],
       [
@@ -1472,10 +1464,6 @@
       ],
       [
         "DurableObjectId",
-        1
-      ],
-      [
-        "Enter",
         1
       ],
       [
@@ -3646,11 +3634,11 @@
     "directives": [
       [
         "note",
-        3515
+        3523
       ],
       [
         "caution",
-        875
+        881
       ],
       [
         "tip",
@@ -3672,11 +3660,11 @@
       ],
       [
         "br",
-        2175
+        2218
       ],
       [
         "code",
-        1337
+        1353
       ],
       [
         "tr",
@@ -3688,7 +3676,7 @@
       ],
       [
         "a",
-        588
+        604
       ],
       [
         "p",
@@ -3740,7 +3728,7 @@
       ],
       [
         "void",
-        36
+        29
       ],
       [
         "details",
@@ -3756,11 +3744,7 @@
       ],
       [
         "string",
-        18
-      ],
-      [
-        "name",
-        12
+        19
       ],
       [
         "https",
@@ -3775,10 +3759,6 @@
         9
       ],
       [
-        "your-zone",
-        9
-      ],
-      [
         "ol",
         8
       ],
@@ -3787,11 +3767,11 @@
         8
       ],
       [
-        "label",
-        8
+        "hostname",
+        7
       ],
       [
-        "hostname",
+        "label",
         7
       ],
       [
@@ -3827,19 +3807,11 @@
         4
       ],
       [
-        "sandbox-id",
-        4
-      ],
-      [
         "your-",
         3
       ],
       [
         "token",
-        2
-      ],
-      [
-        "path",
         2
       ],
       [
@@ -3855,27 +3827,11 @@
         2
       ],
       [
-        "auth-token",
-        2
-      ],
-      [
         "html",
         2
       ],
       [
         "body",
-        2
-      ],
-      [
-        "random",
-        2
-      ],
-      [
-        "zone",
-        2
-      ],
-      [
-        "tunnel-id",
         2
       ],
       [
@@ -3919,14 +3875,6 @@
         1
       ],
       [
-        "number",
-        1
-      ],
-      [
-        "new-team-name",
-        1
-      ],
-      [
         "any",
         1
       ],
@@ -3959,6 +3907,10 @@
         1
       ],
       [
+        "s",
+        1
+      ],
+      [
         "source",
         1
       ]
@@ -3973,7 +3925,7 @@
     "features": [
       [
         "jsx-expression",
-        4139
+        4138
       ],
       [
         "mdx-export",
@@ -4112,6 +4064,7 @@
       "POLICY_NAME": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/network-segmentation.mdx",
       "DESCRIBE_POLICY": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/common-settings/configure-tunnel-health-alerts.mdx",
       "DESCRIBE_ALERT": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/common-settings/configure-tunnel-health-alerts.mdx",
+      "YOUR_EMAIL": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/common-settings/configure-tunnel-health-alerts.mdx",
       "IP_NEXT_HOP": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-routes.mdx",
       "YOUR_IP_PREFIX": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-routes.mdx",
       "ROUTE_DESCRIPTION": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-routes.mdx",
@@ -4160,22 +4113,16 @@
       "SERVICE_ACCOUNT_EMAIL": "src/content/docs/containers/guides/image-management.mdx",
       "IMAGE": "src/content/docs/containers/guides/image-management.mdx",
       "TAG": "src/content/docs/containers/guides/image-management.mdx",
-      "Response": "src/content/docs/containers/reference/container-class.mdx",
-      "State": "src/content/docs/containers/reference/container-class.mdx",
-      "Schedule": "src/content/docs/containers/reference/container-class.mdx",
-      "T": "src/content/docs/containers/reference/container-class.mdx",
-      "DurableObjectStub": "src/content/docs/containers/reference/container-class.mdx",
       "RuleID": "src/content/docs/ddos-protection/best-practices/third-party.mdx",
       "RSSButton": "src/content/docs/ddos-protection/change-log/http/index.mdx",
       "ZONE_NAME": "src/content/docs/dns/dnssec/dnssec-active-migration.mdx",
       "PUBLIC_KEY": "src/content/docs/dns/dnssec/dnssec-active-migration.mdx",
       "NS_DOMAIN": "src/content/docs/dns/dnssec/multi-signer-dnssec/setup.mdx",
       "YOUR_ACCOUNT_ID": "src/content/docs/dns/zone-setups/full-setup/setup.mdx",
+      "Response": "src/content/docs/durable-objects/api/base.mdx",
       "WorkerCode": "src/content/docs/dynamic-workers/api-reference.mdx",
       "AvailableChangelogFeeds": "src/content/docs/fundamentals/new-features/available-rss-feeds.mdx",
-      "ENTER_WORKER_NAME": "src/content/docs/kv/index.mdx",
-      "YOUR_BINDING_ID": "src/content/docs/kv/index.mdx",
-      "KV_NAMESPACE_ID": "src/content/docs/kv/index.mdx",
+      "Map": "src/content/docs/kv/api/read-key-value-pairs.mdx",
       "PublicStats": "src/content/docs/learning-paths/data-center-protection/concepts/benefits-magic-transit.mdx",
       "CORPORATE_DOMAINS_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-dns-policies/create-list.mdx",
       "KNOWN_DOMAINS_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-dns-policies/recommended-dns-policies.mdx",
@@ -4212,6 +4159,9 @@
       "ENCODED_VALUE": "src/content/docs/logs/logpush/logpush-job/enable-destinations/bigquery.mdx",
       "DATADOG_ENDPOINT_URL": "src/content/docs/logs/logpush/logpush-job/enable-destinations/datadog.mdx",
       "DATADOG_API_KEY": "src/content/docs/logs/logpush/logpush-job/enable-destinations/datadog.mdx",
+      "SERVICE": "src/content/docs/logs/logpush/logpush-job/enable-destinations/datadog.mdx",
+      "HOST": "src/content/docs/logs/logpush/logpush-job/enable-destinations/datadog.mdx",
+      "TAGS": "src/content/docs/logs/logpush/logpush-job/enable-destinations/datadog.mdx",
       "YOUR_EGRESS_POOL_ID": "src/content/docs/logs/logpush/logpush-job/enable-destinations/egress-ip.mdx",
       "PUBLIC_DOMAIN": "src/content/docs/logs/logpush/logpush-job/enable-destinations/elastic.mdx",
       "PUBLIC_PORT": "src/content/docs/logs/logpush/logpush-job/enable-destinations/elastic.mdx",
@@ -4254,6 +4204,7 @@
       "R2Objects": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
       "R2MultipartUpload": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
       "ArrayBuffer": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
+      "T": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
       "Blob": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
       "R2UploadedPart": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
       "R2LocalUploadsDiagram": "src/content/docs/r2/buckets/local-uploads.mdx",
@@ -4330,8 +4281,6 @@
       "DurableObjectId": "src/content/docs/workers/testing/vitest-integration/test-apis.mdx",
       "WorkflowInstanceIntrospector": "src/content/docs/workers/testing/vitest-integration/test-apis.mdx",
       "WorkflowIntrospector": "src/content/docs/workers/testing/vitest-integration/test-apis.mdx",
-      "Enter": "src/content/docs/workers/tutorials/connect-to-turso-using-workers.mdx",
-      "YOUR_WORKER": "src/content/docs/workers/tutorials/openai-function-calls-workers.mdx",
       "AuxiliaryWorkerConfig": "src/content/docs/workers/vite-plugin/reference/api.mdx",
       "Env": "src/content/docs/workers/wrangler/api.mdx",
       "Service": "src/content/docs/workers/wrangler/api.mdx",
@@ -4469,6 +4418,7 @@
       "POLICY_NAME": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/network-segmentation.mdx",
       "DESCRIBE_POLICY": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/common-settings/configure-tunnel-health-alerts.mdx",
       "DESCRIBE_ALERT": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/common-settings/configure-tunnel-health-alerts.mdx",
+      "YOUR_EMAIL": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/common-settings/configure-tunnel-health-alerts.mdx",
       "IP_NEXT_HOP": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-routes.mdx",
       "YOUR_IP_PREFIX": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-routes.mdx",
       "ROUTE_DESCRIPTION": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-routes.mdx",
@@ -4506,19 +4456,13 @@
       "SERVICE_ACCOUNT_EMAIL": "src/content/docs/containers/guides/image-management.mdx",
       "IMAGE": "src/content/docs/containers/guides/image-management.mdx",
       "TAG": "src/content/docs/containers/guides/image-management.mdx",
-      "Response": "src/content/docs/containers/reference/container-class.mdx",
-      "State": "src/content/docs/containers/reference/container-class.mdx",
-      "Schedule": "src/content/docs/containers/reference/container-class.mdx",
-      "T": "src/content/docs/containers/reference/container-class.mdx",
-      "DurableObjectStub": "src/content/docs/containers/reference/container-class.mdx",
       "ZONE_NAME": "src/content/docs/dns/dnssec/dnssec-active-migration.mdx",
       "PUBLIC_KEY": "src/content/docs/dns/dnssec/dnssec-active-migration.mdx",
       "NS_DOMAIN": "src/content/docs/dns/dnssec/multi-signer-dnssec/setup.mdx",
       "YOUR_ACCOUNT_ID": "src/content/docs/dns/zone-setups/full-setup/setup.mdx",
+      "Response": "src/content/docs/durable-objects/api/base.mdx",
       "WorkerCode": "src/content/docs/dynamic-workers/api-reference.mdx",
-      "ENTER_WORKER_NAME": "src/content/docs/kv/index.mdx",
-      "YOUR_BINDING_ID": "src/content/docs/kv/index.mdx",
-      "KV_NAMESPACE_ID": "src/content/docs/kv/index.mdx",
+      "Map": "src/content/docs/kv/api/read-key-value-pairs.mdx",
       "CORPORATE_DOMAINS_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-dns-policies/create-list.mdx",
       "KNOWN_DOMAINS_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-dns-policies/recommended-dns-policies.mdx",
       "ALLOWED_REMEDIATION_DOMAINS_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-dns-policies/recommended-dns-policies.mdx",
@@ -4553,6 +4497,9 @@
       "ENCODED_VALUE": "src/content/docs/logs/logpush/logpush-job/enable-destinations/bigquery.mdx",
       "DATADOG_ENDPOINT_URL": "src/content/docs/logs/logpush/logpush-job/enable-destinations/datadog.mdx",
       "DATADOG_API_KEY": "src/content/docs/logs/logpush/logpush-job/enable-destinations/datadog.mdx",
+      "SERVICE": "src/content/docs/logs/logpush/logpush-job/enable-destinations/datadog.mdx",
+      "HOST": "src/content/docs/logs/logpush/logpush-job/enable-destinations/datadog.mdx",
+      "TAGS": "src/content/docs/logs/logpush/logpush-job/enable-destinations/datadog.mdx",
       "YOUR_EGRESS_POOL_ID": "src/content/docs/logs/logpush/logpush-job/enable-destinations/egress-ip.mdx",
       "PUBLIC_DOMAIN": "src/content/docs/logs/logpush/logpush-job/enable-destinations/elastic.mdx",
       "PUBLIC_PORT": "src/content/docs/logs/logpush/logpush-job/enable-destinations/elastic.mdx",
@@ -4590,6 +4537,7 @@
       "R2Objects": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
       "R2MultipartUpload": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
       "ArrayBuffer": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
+      "T": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
       "Blob": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
       "R2UploadedPart": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
       "MANAGED_RULESET_ID_1": "src/content/docs/ruleset-engine/basic-operations/add-rule-phase-rulesets.mdx",
@@ -4652,8 +4600,6 @@
       "DurableObjectId": "src/content/docs/workers/testing/vitest-integration/test-apis.mdx",
       "WorkflowInstanceIntrospector": "src/content/docs/workers/testing/vitest-integration/test-apis.mdx",
       "WorkflowIntrospector": "src/content/docs/workers/testing/vitest-integration/test-apis.mdx",
-      "Enter": "src/content/docs/workers/tutorials/connect-to-turso-using-workers.mdx",
-      "YOUR_WORKER": "src/content/docs/workers/tutorials/openai-function-calls-workers.mdx",
       "AuxiliaryWorkerConfig": "src/content/docs/workers/vite-plugin/reference/api.mdx",
       "Env": "src/content/docs/workers/wrangler/api.mdx",
       "Service": "src/content/docs/workers/wrangler/api.mdx",
@@ -4666,20 +4612,20 @@
   },
   "unmatched_tags": [
     [
-      "Response",
-      16
+      "String",
+      17
     ],
     [
       "MANAGED_RULESET_ID",
       16
     ],
     [
-      "String",
-      16
+      "Response",
+      14
     ],
     [
       "DOMAIN_NAME",
-      11
+      12
     ],
     [
       "IP_ADDRESS",
@@ -4706,11 +4652,19 @@
       9
     ],
     [
+      "POLICY_DESCRIPTION",
+      8
+    ],
+    [
       "LAN_ID",
       8
     ],
     [
       "LAN_NAME",
+      8
+    ],
+    [
+      "POLICY_NAME",
       8
     ],
     [
@@ -4734,16 +4688,8 @@
       8
     ],
     [
-      "T",
-      8
-    ],
-    [
       "BUCKET_PATH",
       8
-    ],
-    [
-      "ACCOUNT_ID",
-      7
     ],
     [
       "DESTINATION_CONF",
@@ -4754,19 +4700,11 @@
       5
     ],
     [
-      "YOUR_SUBDOMAIN",
-      4
+      "T",
+      5
     ],
     [
       "MANAGED_APP_ID",
-      4
-    ],
-    [
-      "POLICY_DESCRIPTION",
-      4
-    ],
-    [
-      "POLICY_NAME",
       4
     ],
     [
@@ -4775,6 +4713,10 @@
     ],
     [
       "DESCRIBE_ALERT",
+      4
+    ],
+    [
+      "YOUR_EMAIL",
       4
     ],
     [
@@ -4830,6 +4772,10 @@
       3
     ],
     [
+      "ACCOUNT_ID",
+      3
+    ],
+    [
       "URL",
       3
     ],
@@ -4850,10 +4796,6 @@
       3
     ],
     [
-      "KV_NAMESPACE_ID",
-      3
-    ],
-    [
       "DOMAIN_BLOCKLIST_UUID",
       3
     ],
@@ -4867,10 +4809,6 @@
     ],
     [
       "RATE_LIMITING_RULESET_ID",
-      3
-    ],
-    [
-      "YOUR_WORKER",
       3
     ],
     [
@@ -4954,10 +4892,6 @@
       2
     ],
     [
-      "ENTER_WORKER_NAME",
-      2
-    ],
-    [
       "ALLOWED_REMEDIATION_DOMAINS_LIST_UUID",
       2
     ],
@@ -4999,6 +4933,10 @@
     ],
     [
       "ENCODED_VALUE",
+      2
+    ],
+    [
+      "DATADOG_ENDPOINT_URL",
       2
     ],
     [
@@ -5186,6 +5124,10 @@
       1
     ],
     [
+      "YOUR_SUBDOMAIN",
+      1
+    ],
+    [
       "CODE_CHALLENGE",
       1
     ],
@@ -5330,18 +5272,6 @@
       1
     ],
     [
-      "State",
-      1
-    ],
-    [
-      "Schedule",
-      1
-    ],
-    [
-      "DurableObjectStub",
-      1
-    ],
-    [
       "NS_DOMAIN",
       1
     ],
@@ -5350,7 +5280,7 @@
       1
     ],
     [
-      "YOUR_BINDING_ID",
+      "Map",
       1
     ],
     [
@@ -5418,11 +5348,19 @@
       1
     ],
     [
-      "DATADOG_ENDPOINT_URL",
+      "DATADOG_API_KEY",
       1
     ],
     [
-      "DATADOG_API_KEY",
+      "SERVICE",
+      1
+    ],
+    [
+      "HOST",
+      1
+    ],
+    [
+      "TAGS",
       1
     ],
     [
@@ -5658,10 +5596,6 @@
       1
     ],
     [
-      "Enter",
-      1
-    ],
-    [
       "AuxiliaryWorkerConfig",
       1
     ],
@@ -5694,7 +5628,7 @@
       1
     ]
   ],
-  "unmatched_tags_total": 579,
+  "unmatched_tags_total": 573,
   "unknown_count": 0,
   "unknown": []
 }

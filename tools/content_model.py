@@ -30,9 +30,9 @@ IMPORT_RE = re.compile(r'^\s*import\s+([^;\n]+?)\s+from\s+["\']([^"\']+)["\'];?'
 COMPONENT_SRC = re.compile(r'^~/components|^@cloudflare/realtimekit')
 FRONT = re.compile(r'^---\s*\n(.*?)\n---(?:\n|$)', re.S)
 KEY = re.compile(r'^([A-Za-z_][\w-]*):(?:\s|$)', re.M)
-FENCE = re.compile(r'^```[^\n]*\n.*?^```', re.M | re.S)
-TILDE = re.compile(r'^~~~[^\n]*\n.*?^~~~', re.M | re.S)
-INLINE = re.compile(r'`[^`]*`')
+FENCE = re.compile(r'^[ \t]*`{3,}[^\n]*\n.*?^[ \t]*`{3,}', re.M | re.S)
+TILDE = re.compile(r'^[ \t]*~{3,}[^\n]*\n.*?^[ \t]*~{3,}', re.M | re.S)
+INLINE = re.compile(r'`[^`\n]*`')
 DIRECTIVE = re.compile(r'(^|\n)\s*:::([a-zA-Z][\w-]*)')
 BARE_DIRECTIVE = re.compile(r'(^|\n)\s*:::\s*$')
 MDX_BARREL = re.compile(r'^\s*export\s+(?:const|let)\s+components\b', re.M)
@@ -70,8 +70,26 @@ def imported_components(s: str):
     return names
 
 def strip_code(s: str):
-    s = FENCE.sub('', s)
-    s = TILDE.sub('', s)
+    lines = s.split('\n')
+    out = []
+    i = 0
+    n = len(lines)
+    fence_open = re.compile(r'^[ \t]*(?:[0-9]+[.)][ \t]+)?(`{3,}|~{3,})')
+    while i < n:
+        ln = lines[i]
+        m = fence_open.match(ln)
+        if m:
+            marker = m.group(1)[0]
+            i += 1
+            while i < n:
+                if re.match(r'^[ \t]*' + re.escape(marker) + r'{3,}', lines[i]):
+                    i += 1
+                    break
+                i += 1
+            continue
+        out.append(ln)
+        i += 1
+    s = '\n'.join(out)
     s = INLINE.sub('', s)
     return s
 
