@@ -674,3 +674,9 @@ and component model are understood.
 - **Next: CP2 design-system extraction.** Do not approximate Cloudflare visually: extract the actual rendered fonts, CSS tokens, dimensions, breakpoints, icons and assets against the frozen baseline.
 
 The attached Nift source was consulted and successfully compiled in this environment using an unoptimised development build (the normal `-O2` compile exceeded the runner's per-command time limit). The current barebones project structure matches the documented Nift model: `.nift/config.json`, `.nift/tracked.json`, `content/`, reusable templates and generated `public/` output. The current Nift site itself remains intentionally barebones through CP1; CP0–CP1 establish evidence and tooling before visual implementation begins.
+
+### CP2 completion note — 2026-09-18
+
+CP2 source extraction and Nift shell implementation are committed. See `reports/CP2-DESIGN-SYSTEM.md` for the exact sources, tokens, font versions, geometry and remaining verification boundary. The shell is source-derived from frozen upstream `bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf`; do not replace its values with visually guessed equivalents. Screenshot/pixel certification is deferred until both frozen sites can be built together on the controlled Linode environment.
+
+**Next: CP3 content-model inventory.** Enumerate every frontmatter field and every MD/MDX component/directive across the frozen corpus, classify every construct, define deterministic route/link/asset rules, and fail conversion on unknown constructs.

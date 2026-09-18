@@ -1,6 +1,6 @@
 {
   "name": "/",
-  "title": "index",
+  "title": "Cloudflare Developer Docs",
   "template": "templates/template.html",
   "content": "content/index.html",
   "output": "public/index.html",
@@ -15,8 +15,16 @@
   "hierarchy-fingerprint": "",
   "dependencies": [
     "content/index.html",
+    "templates/footer.html",
     "templates/head.html",
-    "templates/template.html"
+    "templates/header.html",
+    "templates/sidebar.html",
+    "templates/template.html",
+    "templates/toc.html"
   ],
-  "reqs": []
+  "reqs": [
+    "public/assets/cf-design.css",
+    "public/assets/cf-shell.js",
+    "public/assets/cloudflare-logo.svg"
+  ]
 }

@@ -1,9 +1,1 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		@input("templates/head.html")
-	</head>
-	<body>
-		@content
-	</body>
-</html>
+<!doctype html><html lang="en"><head>@input("templates/head.html")</head><body><a class="skip" href="#main-content">Skip to content</a>@input("templates/header.html")<div class="page-row">@input("templates/sidebar.html")<div class="body-column"><div class="content-row"><main id="main-content" class="main"><div class="article-wrap">@content</div></main>@input("templates/toc.html")</div>@input("templates/footer.html")</div></div><dialog class="mobile-dialog" data-mobile-sidebar><header><a class="brand" href="/"><img src="@path('public/assets/cloudflare-logo.svg')" alt=""><b>CLOUDFLARE</b><span>Docs</span></a><button class="icon-btn" data-close-sidebar>×</button></header>@input("templates/sidebar.html")</dialog></body></html>
