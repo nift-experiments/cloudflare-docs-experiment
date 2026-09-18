@@ -27,4 +27,7 @@ class TestImporter(unittest.TestCase):
  def test_space_in_closing_tag(self):
   src='<GlossaryTooltip term="CAA record">CAA records</ GlossaryTooltip> end.\n'
   _,out=mod.convert(src,'fixture'); self.assertIn('data-cf-component="GlossaryTooltip"',out)
+ def test_multiline_import_stripped(self):
+  src='import {\n\tCardGrid,\n\tDescription,\n} from "~/components";\nimport { Foo } from "@cloudflare/realtimekit";\n\n<div class="nb-description">Body.</div>\n'
+  _,out=mod.convert(src,'fixture'); self.assertNotIn('~/components',out); self.assertNotIn('realtimekit',out); self.assertIn('nb-description',out)
 if __name__=='__main__': unittest.main()

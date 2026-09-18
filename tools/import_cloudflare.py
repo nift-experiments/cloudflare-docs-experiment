@@ -33,6 +33,15 @@ INLINE = re.compile(r'`[^`\n]*`')
 MDX_COMMENT = re.compile(r'\{/\*[\s\S]*?\*/\}')
 IMPORT_RE = re.compile(r'^\s*import\s+[^\n]*;?\s*$', re.M)
 EXPORT_RE = re.compile(r'^\s*export\s+[^\n]*;?\s*$', re.M)
+# Multi-line ES module statements: 'import {\n  A,\n  B\n} from "~/components";'
+# and 'export { ... } from ...' forms are build-time only and must not leak into
+# generated content. Scoped to component-module sources we own.
+MULTILINE_IMPORT = re.compile(
+    r'^\s*(?:import|export)\s*\{[^}]*\}\s*from\s*["\'][^"\']+["\'];?',
+    re.M | re.S)
+MULTILINE_IMPORT2 = re.compile(
+    r'^\s*import\s+[A-Za-z0-9_$]+\s*,\s*\{[^}]*\}\s*from\s*["\'][^"\']+["\'];?',
+    re.M | re.S)
 FRONT = re.compile(r'^---\n([\s\S]*?)\n---\n?')
 ESCAPED_LT = re.compile(r'\\<')
 COMPONENT_SRC = re.compile(r'^~/components|^@cloudflare/realtimekit')
@@ -326,6 +335,8 @@ def convert(text, path='<memory>'):
     imported = imported_component_names(raw)
     text, placeholders = protect_code(text)
     text = MDX_COMMENT.sub('', text)
+    text = MULTILINE_IMPORT.sub('', text)
+    text = MULTILINE_IMPORT2.sub('', text)
     text = IMPORT_RE.sub('', text)
     text = EXPORT_RE.sub('', text)
     text = convert_directives(text)
