@@ -50,7 +50,7 @@ SELF_CLOSING = None  # replaced by balanced scanner (see reduce_components)
 PAIR = None
 TAG_START = re.compile(r'<([A-Z][A-Za-z0-9_.]*)\b')
 TAG_CLOSE = re.compile(r'</\s*([A-Z][A-Za-z0-9_.]*)\s*>')
-DIRECTIVE_LINE = re.compile(r'^[ \t]*:::[ \t]*([a-zA-Z][\w-]*)?[ \t]*$')
+DIRECTIVE_LINE = re.compile(r'^[ \t]*:::([a-zA-Z][\w-]*)?(?:\[[^\]]*\])?[ \t]*$')
 
 
 def _line_blockquote(text, i):
@@ -157,7 +157,7 @@ def match_pair(text, start, name):
     return None, None
 
 
-def reduce_components(text, depth=0):
+def reduce_components(text, depth=0, placeholders=None):
     if depth > 200:
         return text
     out = []
@@ -181,7 +181,11 @@ def reduce_components(text, depth=0):
                     inner, next_i = match_pair(text, end, name)
                     if inner is not None:
                         if name in KNOWN:
-                            out.append(render(name, attrs, reduce_components(inner, depth + 1)))
+                            reduced = reduce_components(inner, depth + 1, placeholders)
+                            if placeholders:
+                                reduced = restore_code(reduced, placeholders)
+                            reduced = render_markdown(reduced)
+                            out.append(render(name, attrs, reduced))
                         else:
                             out.append(text[i:next_i])
                         i = next_i
@@ -293,34 +297,80 @@ def restore_code(text, placeholders):
     return text
 
 
-def convert_directives(text):
-    """Convert ::: directives to aside blocks (line-count preserving, nested-safe)."""
+def convert_directives(text, placeholders=None):
+    """Convert ::: directives to aside blocks (line-count preserving, nested-safe).
+
+    Handles both bare ':::note' / ':::' and titled ':::note[Title]' forms."""
     lines = text.split('\n')
     delims = []
     for i, ln in enumerate(lines):
         m = DIRECTIVE_LINE.match(ln)
         if m:
-            delims.append((i, m.group(1)))
+            name = m.group(1)
+            title = ''
+            tm = re.match(r'^[ \t]*:::[a-zA-Z][\w-]*(\[[^\]]*\])?', ln)
+            if tm and tm.group(1):
+                title = tm.group(1)[1:-1]
+            delims.append((i, name, title))
     stack = []
     spans = []
-    for i, name in delims:
+    for i, name, title in delims:
         if name:
-            stack.append((i, name))
+            stack.append((i, name, title))
         else:
             if stack:
-                oi, oname = stack.pop()
-                spans.append((oi, i, oname))
+                oi, oname, otitle = stack.pop()
+                spans.append((oi, i, oname, otitle))
             else:
-                stack.append((i, None))
+                stack.append((i, None, None))
+    # Unclosed directives (upstream corpus occasionally omits the closing ':::')
+    # are closed at end-of-text rather than left as literal source.
+    for oi, oname, otitle in stack:
+        spans.append((oi, len(lines), oname, otitle))
     if not spans:
         return text
-    spans.sort(key=lambda s: s[1] - s[0], reverse=True)
-    for oi, ci, name in spans:
-        inner = convert_directives('\n'.join(lines[oi + 1:ci]))
+    # Process spans from the highest closing index downward so earlier index
+    # replacements never shift the positions of still-pending spans.
+    spans.sort(key=lambda s: s[1], reverse=True)
+    for oi, ci, name, title in spans:
+        inner = convert_directives('\n'.join(lines[oi + 1:ci]), placeholders)
         cls = name or 'note'
-        block = f'<aside class="nb-aside {html.escape(cls)}">\n{inner}\n</aside>'
+        head = f'<h3 class="nb-aside-title">{html.escape(title)}</h3>\n' if title else ''
+        block = f'<aside class="nb-aside {html.escape(cls)}">\n{head}{inner}\n</aside>'
         lines = lines[:oi] + block.split('\n') + lines[ci + 1:]
     return '\n'.join(lines)
+
+
+def render_markdown(text, blocks=True):
+    """Render Markdown to HTML with a CommonMark engine, preserving raw HTML.
+
+    When blocks=True, inserts blank lines around block HTML tags so CommonMark
+    treats content inside component/directive HTML blocks as renderable Markdown.
+    When blocks=False, renders top-level Markdown only (component bodies have
+    already been rendered). Falls back to passthrough if no engine is available."""
+    try:
+        import cmarkgfm
+    except ImportError:
+        return text
+    if blocks:
+        BLOCK = r'(?:div|section|aside|details|pre|table|ul|ol|dl|blockquote|h[1-6])'
+        text = re.sub(r'(<' + BLOCK + r'[^>]*>)(?=[^\s<])', r'\1\n', text)
+        text = re.sub(r'(?<=[^\s>])(</' + BLOCK + r'>)', r'\n\1', text)
+        lines = []
+        for ln in text.split('\n'):
+            stripped = ln.strip()
+            if re.match(r'^<' + BLOCK + r'[^>]*>\s*$', stripped):
+                lines.append(ln)
+                lines.append('')
+            elif re.match(r'^\s*</' + BLOCK + r'>$', stripped):
+                lines.append('')
+                lines.append(ln)
+            else:
+                lines.append(ln)
+        text = '\n'.join(lines)
+    opts = getattr(cmarkgfm, 'Options', None)
+    flag = getattr(opts, 'CMARK_OPT_UNSAFE', 0) if opts else 0
+    return cmarkgfm.markdown_to_html(text, options=flag)
 
 
 def convert(text, path='<memory>'):
@@ -339,14 +389,19 @@ def convert(text, path='<memory>'):
     text = MULTILINE_IMPORT2.sub('', text)
     text = IMPORT_RE.sub('', text)
     text = EXPORT_RE.sub('', text)
-    text = convert_directives(text)
+    text = convert_directives(text, placeholders)
     # Unknown-component gate on non-code content, import-aware.
     names = set(re.findall(r'</?([A-Z][A-Za-z0-9_.]*)\b', text))
     unknown = sorted((names - KNOWN) & imported)
     if unknown:
         raise ValueError(f'{path}: unknown MDX components: {", ".join(unknown)}')
-    text = reduce_components(text)
-    remain = re.findall(r'</?([A-Z][A-Za-z0-9_.]*)\b', text)
+    text = reduce_components(text, 0, placeholders)
+    # The unresolved check must ignore component-looking tags that live inside
+    # code (restored into bodies and rendered as <pre>/<code>). Strip code
+    # blocks from the check text.
+    check_text = re.sub(r'<pre>[\s\S]*?</pre>', '', text)
+    check_text = re.sub(r'<code>[\s\S]*?</code>', '', check_text)
+    remain = re.findall(r'</?([A-Z][A-Za-z0-9_.]*)\b', check_text)
     # Only matrix components that fail to reduce are fatal; unmatched prose tags
     # (placeholders, TS types, attribute text) are preserved verbatim.
     unresolved = sorted({c for c in remain if c in KNOWN})
@@ -364,6 +419,9 @@ def convert(text, path='<memory>'):
     # only inside Markdown link/image destinations and quoted attrs.
     text = re.sub(r'\(public/', '(/', text)
     text = re.sub(r'"(public/)', '"/', text)
+    # Render top-level Markdown to HTML; component/directive bodies were already
+    # rendered during expansion.
+    text = render_markdown(text, blocks=False)
     # A bare '---' horizontal rule left at the start of the body would be
     # misread by Nift as an unterminated front-matter block. Drop a leading
     # standalone '---' line (it was an HR after the stripped import block).
