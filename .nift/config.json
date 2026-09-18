@@ -1,7 +1,7 @@
 {
   "config": {
     "content-dir": "content/",
-    "content-ext": ".html",
+    "content-ext": ".md",
     "output-dir": "public/",
     "output-ext": ".html",
     "default-template": "templates/template.html",

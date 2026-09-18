@@ -353,7 +353,18 @@ def convert(text, path='<memory>'):
     if unresolved:
         raise ValueError(f'{path}: unresolved MDX components: {", ".join(unresolved)}')
     text = restore_code(text, placeholders)
-    return fm, text.strip() + '\n'
+    # Source-style '~/assets/...' references resolve to the staged upstream
+    # asset tree at /assets/upstream/ in the generated site.
+    text = text.replace('~/assets/', '/assets/upstream/')
+    # A bare '---' horizontal rule left at the start of the body would be
+    # misread by Nift as an unterminated front-matter block. Drop a leading
+    # standalone '---' line (it was an HR after the stripped import block).
+    body = text.strip() + '\n'
+    if body.startswith('---\n'):
+        body = body[4:].lstrip('\n')
+        if not body:
+            body = '\n'
+    return fm, body
 
 
 def main():

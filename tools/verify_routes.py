@@ -7,11 +7,11 @@ HREF=re.compile(r'''(?:href|src)=["']([^"'#?]+)''',re.I)
 def main():
  ap=argparse.ArgumentParser(); ap.add_argument('--public',default=str(ROOT/'public')); a=ap.parse_args(); pub=Path(a.public)
  m=json.loads((ROOT/'reports/cp6/expected-routes.json').read_text()); exp=set(m['routes'])|{'/'}
- actual={'/'+p.parent.relative_to(pub).as_posix().strip('/')+'/' for p in pub.rglob('index.html')}; actual={'/' if x=='//' else x for x in actual}
+ actual={'/'+p.parent.relative_to(pub).as_posix().strip('/')+'/' for p in pub.rglob('index.html')}; actual={'/' if x=='//' or x=='/./' else x for x in actual}
  missing=sorted(exp-actual); broken=[]
  for f in pub.rglob('*.html'):
   for u in HREF.findall(f.read_text(errors='ignore')):
-   if u.startswith(('http:','https:','mailto:','tel:','data:','//')): continue
+   if u.startswith(('http:','https:','mailto:','tel:','data:','//','chrome:','blob:','ws:','wss:')): continue
    target=(pub/u.lstrip('/')) if u.startswith('/') else (f.parent/u)
    if u.endswith('/') or target.is_dir(): target=target/'index.html'
    if not target.exists(): broken.append((str(f.relative_to(pub)),u))

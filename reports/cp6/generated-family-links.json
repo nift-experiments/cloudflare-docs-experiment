@@ -1,0 +1,217 @@
+{
+  "total": 1806,
+  "by_family": {
+    "/api/resources": 1368,
+    "/ruleset-engine/rules-language": 166,
+    "/logs/logpush": 105,
+    "/workers-ai/models": 36,
+    "/api": 20,
+    "/workers/runtime-apis": 16,
+    "/changelog": 11,
+    "/llms.txt": 9,
+    "(rel)": 7,
+    "/agent-setup": 5,
+    "/api/python": 5,
+    "/directory": 5,
+    "/learning-paths": 4,
+    "/realtime/realtimekit": 4,
+    "/api/node": 2,
+    "/api/go": 2,
+    "/logs/r2-log-retrieval": 2,
+    "/containers/platform-details": 2,
+    "/changelog/sandbox": 2,
+    "/changelog/2025-10-30-tcp-rtt-and-tcp-fields": 2,
+    "/api/operations": 2,
+    "/images/storage": 2,
+    "/cloudflare-one/policies": 2,
+    "/llms-full.txt": 1,
+    "/workers/llms.txt": 1,
+    "/workers/llms-full.txt": 1,
+    "/tutorials": 1,
+    "/changelog/product-group": 1,
+    "/changelog/2026-08-26-sentinel-functions-connector-deprecation": 1,
+    "/reference-architecture/diagrams": 1,
+    "/changelog/post": 1,
+    "/changelog/2025-06-23-user-groups-ga": 1,
+    "/changelog/2025-06-02-user-groups-beta": 1,
+    "/logs/reference": 1,
+    "/changelog/2025-02-20-builds-name-conflict": 1,
+    "/workers/configuration": 1,
+    "/style-guide/build-the-page": 1,
+    "/changelog/rss": 1,
+    "/docs-for-agents/index.md": 1,
+    "/learning-paths/optimize-site-speed": 1,
+    "/learning-paths/application-security": 1,
+    "/style-guide/documentation-content-strategy": 1,
+    "/videos/what-is-cf-tunnel": 1,
+    "/videos/the-online-address-book": 1,
+    "/videos/set-up-access-policies": 1,
+    "/videos/set-up-cf-tunnel": 1,
+    "/cloudflare-one/traffic-policies": 1,
+    "/changelog/2025-07-15-udp-improvements": 1,
+    "/cloudflare-one/networks": 1,
+    "/changelog/cloudflare-one-client": 1
+  },
+  "sample": [
+    [
+      "docs-for-agents/index.html",
+      "/agent-setup/"
+    ],
+    [
+      "docs-for-agents/index.html",
+      "/llms.txt"
+    ],
+    [
+      "docs-for-agents/index.html",
+      "/llms-full.txt"
+    ],
+    [
+      "docs-for-agents/index.html",
+      "/workers/llms.txt"
+    ],
+    [
+      "docs-for-agents/index.html",
+      "/workers/llms-full.txt"
+    ],
+    [
+      "docs-for-agents/index.html",
+      "/llms.txt"
+    ],
+    [
+      "docs-for-agents/index.html",
+      "/api/"
+    ],
+    [
+      "moq/index.html",
+      "/api/resources/moq"
+    ],
+    [
+      "moq/index.html",
+      "/api/resources/moq"
+    ],
+    [
+      "sandbox/index.html",
+      "/agent-setup/"
+    ],
+    [
+      "kv/index.html",
+      "/api/resources/kv/"
+    ],
+    [
+      "email-service/index.html",
+      "/api/node/"
+    ],
+    [
+      "email-service/index.html",
+      "/api/python/"
+    ],
+    [
+      "email-service/index.html",
+      "/api/go/"
+    ],
+    [
+      "reference-architecture/index.html",
+      "/learning-paths/"
+    ],
+    [
+      "workers-ai/index.html",
+      "/api/resources/ai/methods/run/"
+    ],
+    [
+      "load-balancing/index.html",
+      "/learning-paths/"
+    ],
+    [
+      "radar/index.html",
+      "/api/resources/radar/"
+    ],
+    [
+      "migration-guides/index.html",
+      "/learning-paths/"
+    ],
+    [
+      "use-cases/index.html",
+      "/learning-paths/"
+    ],
+    [
+      "use-cases/index.html",
+      "/tutorials/"
+    ],
+    [
+      "stream/get-started/index.html",
+      "/api/resources/stream/"
+    ],
+    [
+      "stream/get-started/index.html",
+      "/api/resources/stream/"
+    ],
+    [
+      "stream/webrtc-beta/index.html",
+      "/api/resources/stream/subresources/live_inputs/methods/create/"
+    ],
+    [
+      "stream/manage-video-library/creator-id/index.html",
+      "/api/resources/stream/"
+    ],
+    [
+      "stream/manage-video-library/creator-id/index.html",
+      "/api/resources/stream/"
+    ],
+    [
+      "stream/manage-video-library/creator-id/index.html",
+      "/api/resources/stream/"
+    ],
+    [
+      "stream/manage-video-library/creator-id/index.html",
+      "/api/resources/stream/"
+    ],
+    [
+      "stream/manage-video-library/creator-id/index.html",
+      "/api/resources/stream/"
+    ],
+    [
+      "stream/manage-video-library/searching/index.html",
+      "/api/resources/stream/methods/list/"
+    ],
+    [
+      "stream/edit-videos/adding-captions/index.html",
+      "/api/resources/stream/"
+    ],
+    [
+      "stream/edit-videos/adding-captions/index.html",
+      "/api/resources/stream/"
+    ],
+    [
+      "stream/edit-videos/adding-captions/index.html",
+      "/api/resources/stream/"
+    ],
+    [
+      "stream/edit-videos/adding-captions/index.html",
+      "/api/resources/stream/"
+    ],
+    [
+      "stream/edit-videos/applying-watermarks/index.html",
+      "/api/resources/stream/"
+    ],
+    [
+      "stream/edit-videos/applying-watermarks/index.html",
+      "/api/resources/stream/"
+    ],
+    [
+      "stream/edit-videos/applying-watermarks/index.html",
+      "/api/resources/stream/"
+    ],
+    [
+      "stream/edit-videos/applying-watermarks/index.html",
+      "/api/resources/stream/"
+    ],
+    [
+      "stream/edit-videos/applying-watermarks/index.html",
+      "/api/resources/stream/"
+    ],
+    [
+      "stream/edit-videos/applying-watermarks/index.html",
+      "/api/resources/stream/"
+    ]
+  ]
+}

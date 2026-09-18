@@ -1,0 +1,49 @@
+{
+  "experiment": "cloudflare-docs-fidelity",
+  "benchmark": "nift-development-build-cheap-vps",
+  "date": "2026-09-18",
+  "host": "linode-cf-nift-dev",
+  "host_plan": "g6-standard-1",
+  "host_price_monthly_usd": 12.0,
+  "host_os": "ubuntu24.04",
+  "host_hardware": {
+    "cpu_cores": 1,
+    "memory_gb": 2,
+    "disk_gb": 50
+  },
+  "nift_version": "4.3.0",
+  "upstream": {
+    "repo": "nift-experiments/cloudflare-docs-upstream",
+    "sha": "bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf"
+  },
+  "label": "DEVELOPMENT measurements, NOT comparable to the frozen Astro benchmark on g6-standard-6 (6 vCPU / 16 GB). The controlled Astro-vs-Nift comparison must run on equivalent identical hardware.",
+  "builds": [
+    {
+      "label": "full corpus build (after import)",
+      "elapsed_wall_clock": "0:14.84",
+      "elapsed_seconds": 14.84,
+      "peak_rss_kbytes": null,
+      "pages_built": 6883,
+      "note": "earlier full builds: 16.3s and 13.2s; 6882-of-6883 then home page built separately"
+    },
+    {
+      "label": "no-op rebuild",
+      "elapsed_wall_clock": "0:02.57",
+      "elapsed_seconds": 2.57,
+      "peak_rss_kbytes": 10512,
+      "pages_built": 0
+    }
+  ],
+  "output": {
+    "public_gb": 0.625,
+    "public_file_count": 8977,
+    "index_html_count": 6883,
+    "content_gb": 0.073,
+    "content_file_count": 6883
+  },
+  "notes": [
+    "Nift built the entire 6,883-page corpus comfortably on a 1 vCPU / 2 GB VPS with ~10-22 MB peak RSS.",
+    "This contrasts with the Astro build which required 8+ GB RSS on a 6 vCPU / 16 GB instance, but the machines are not equivalent; treat only as operational evidence.",
+    "Full clean-build wall time on this VPS is ~15-16 s; no-op rebuild ~2.5 s."
+  ]
+}

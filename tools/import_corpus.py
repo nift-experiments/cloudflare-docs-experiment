@@ -19,7 +19,7 @@ def route_for(rel):
     if s.endswith('/index'): s=s[:-6]
     if s=='index': return '/'
     return '/'+s.strip('/')+'/'
-def name_for(route): return '/' if route=='/' else route.strip('/')
+def name_for(route): return '/' if route=='/' else route.strip('/')+'/'
 def output_for(route): return 'index.html' if route=='/' else route.strip('/')+'/index.html'
 def copy_tree(src,dst):
     if not src.exists(): return 0
@@ -53,8 +53,9 @@ def main():
     content=ROOT/'content/docs'; shutil.rmtree(content,ignore_errors=True)
     tracked=[]
     for p,rel,route,fm,body in pages:
-        q=content/rel.with_suffix('.md'); q.parent.mkdir(parents=True,exist_ok=True); q.write_text(body)
-        tracked.append({'name':name_for(route),'title':fm.get('title') or rel.stem.replace('-',' ').title(),'template':'templates/docs.html','content':str(q.relative_to(ROOT)),'output':output_for(route)})
+        name=name_for(route)
+        q=ROOT/'content'/Path(name.strip('/')+'/index.md'); q.parent.mkdir(parents=True,exist_ok=True); q.write_text(body)
+        tracked.append({'name':name,'title':fm.get('title') or rel.stem.replace('-',' ').title(),'template':'templates/docs.html','output':output_for(route)})
     # Preserve the bespoke Nift landing page at /; upstream docs/index is not the landing route.
     base=json.loads((ROOT/'.nift/tracked.json').read_text()); home=[x for x in base.get('tracked',[]) if x.get('name')=='/']
     tracked=[x for x in tracked if x['name']!='/']
