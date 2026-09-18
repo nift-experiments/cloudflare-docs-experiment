@@ -699,4 +699,19 @@ Do not weaken the parity contract during CP6. Unknown MDX constructs are fatal. 
 
 CP6's full-corpus import/verification machinery is committed; see `reports/CP6-IMPORT.md`, `tools/import_corpus.py`, and `tools/verify_routes.py`. The orchestrator is SHA-pinned, strict on CP5 conversion failures, generates deterministic Nift tracking/routes, stages upstream public/source assets, emits an expected-route manifest, and provides a post-build route/link/asset gate.
 
-**Do not claim CP6's 100% corpus gate has passed yet.** This runner still lacks a physical checkout of frozen upstream `bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf`. On the controlled Linode, run the CP3 census first (`unknown=0` required), then the CP6 importer, a Nift full build, and the verifier. Reconcile generated/data-driven families and redirects before marking CP6 certified. CP7 may be developed independently, but CP8 full parity must not begin from an uncertified corpus.
+**CP6 status as of migration (2026-09-18):** the CP3 real-corpus census has passed on the physical frozen upstream (`unknown=0`, 6,882 docs → 6,882 routes; deterministic, evidence committed). CP6's full-corpus import, Nift build and route/link verification had **not** yet been executed as of the migration; they are the next checkpoint to run on the cheap development VPS. Reconcile generated/data-driven families and redirects before marking CP6 certified. CP7 may be developed independently, but CP8 full parity must not begin from an uncertified corpus.
+
+### Infrastructure strategy and frozen baseline — 2026-09-18
+
+The reference upstream is **pinned** at `bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf` and must never be rebased for this experiment.
+
+The original Astro baseline was captured on a Linode **g6-standard-6** (6 vCPU / 16 GB) and is recorded in `reports/benchmarks/`:
+
+- **9,025 generated pages**; `dist` ≈ 2.0 GB, 12,450 files; `node_modules` ≈ 1.3 GB.
+- Clean build (run 1): **7m06s**, peak RSS **8.35 GB** (wall 7:13.46, user 576.53s).
+- No-op rebuild (run 2): 6m46s, peak RSS 8.13 GB.
+- The committed raw `time(1)` files, full build logs, machine spec, and `astro-baseline.json` are authoritative; prefer them over the rounded summary figures above.
+
+**Development machine policy.** The cheap VPS is a development box, not a benchmark machine. Its timing/RSS measurements are development observations only and are **not comparable** to the g6-standard-6 Astro baseline. The controlled Astro-vs-Nift performance campaign must later be rerun on equivalent identical hardware with both implementations, evidence preserved, machine destroyed.
+
+**Security note.** No long-lived personal SSH key was ever placed on any Linode. Temporary keys are generated on the instance and destroyed with it; the experiment remote uses GitHub as the persistence layer.
