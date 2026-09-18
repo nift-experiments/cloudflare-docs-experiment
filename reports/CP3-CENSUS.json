@@ -1,0 +1,5700 @@
+{
+  "schema": 2,
+  "pinned_upstream": "bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf",
+  "docs": 6882,
+  "routes": 6882,
+  "route_sample": {
+    "/1.1.1.1/": "src/content/docs/1.1.1.1/index.mdx",
+    "/1.1.1.1/additional-options/": "src/content/docs/1.1.1.1/additional-options/index.mdx",
+    "/1.1.1.1/additional-options/dns-in-google-sheets/": "src/content/docs/1.1.1.1/additional-options/dns-in-google-sheets.mdx",
+    "/1.1.1.1/additional-options/dns-over-discord/": "src/content/docs/1.1.1.1/additional-options/dns-over-discord.mdx",
+    "/1.1.1.1/additional-options/dns-over-tor/": "src/content/docs/1.1.1.1/additional-options/dns-over-tor.mdx",
+    "/1.1.1.1/changelog/": "src/content/docs/1.1.1.1/changelog.mdx",
+    "/1.1.1.1/check/": "src/content/docs/1.1.1.1/check.mdx",
+    "/1.1.1.1/encryption/": "src/content/docs/1.1.1.1/encryption/index.mdx",
+    "/1.1.1.1/encryption/dns-over-https/": "src/content/docs/1.1.1.1/encryption/dns-over-https/index.mdx",
+    "/1.1.1.1/encryption/dns-over-https/dns-over-https-client/": "src/content/docs/1.1.1.1/encryption/dns-over-https/dns-over-https-client.mdx",
+    "/1.1.1.1/encryption/dns-over-https/encrypted-dns-browsers/": "src/content/docs/1.1.1.1/encryption/dns-over-https/encrypted-dns-browsers.mdx",
+    "/1.1.1.1/encryption/dns-over-https/make-api-requests/": "src/content/docs/1.1.1.1/encryption/dns-over-https/make-api-requests/index.mdx",
+    "/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json/": "src/content/docs/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-json.mdx",
+    "/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-wireformat/": "src/content/docs/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-wireformat.mdx",
+    "/1.1.1.1/encryption/dns-over-tls/": "src/content/docs/1.1.1.1/encryption/dns-over-tls.mdx",
+    "/1.1.1.1/encryption/dnskey/": "src/content/docs/1.1.1.1/encryption/dnskey.mdx",
+    "/1.1.1.1/encryption/oblivious-dns-over-https/": "src/content/docs/1.1.1.1/encryption/oblivious-dns-over-https.mdx",
+    "/1.1.1.1/faq/": "src/content/docs/1.1.1.1/faq.mdx",
+    "/1.1.1.1/infrastructure/": "src/content/docs/1.1.1.1/infrastructure/index.mdx",
+    "/1.1.1.1/infrastructure/extended-dns-error-codes/": "src/content/docs/1.1.1.1/infrastructure/extended-dns-error-codes.mdx"
+  },
+  "global_components_from_mdx_components_ts": [
+    "APIRequest",
+    "AnchorHeading",
+    "Aside",
+    "AvailableNotifications",
+    "Badge",
+    "CURL",
+    "Card",
+    "CardGrid",
+    "Code",
+    "DashButton",
+    "Description",
+    "Details",
+    "DirectoryListing",
+    "Example",
+    "Feature",
+    "FileTree",
+    "Glossary",
+    "GlossaryDefinition",
+    "GlossaryTooltip",
+    "InlineBadge",
+    "LinkButton",
+    "LinkCard",
+    "ListTutorials",
+    "Markdown",
+    "MetaInfo",
+    "PackageManagers",
+    "PagesBuildPreset",
+    "Plan",
+    "ProductChangelog",
+    "ProductReleaseNotes",
+    "PublicStats",
+    "RSSButton",
+    "RelatedProduct",
+    "Render",
+    "ResourcesBySelector",
+    "RuleID",
+    "Step",
+    "Steps",
+    "Stream",
+    "TabItem",
+    "Tabs",
+    "Type",
+    "TypeScriptExample",
+    "Width",
+    "WranglerCommand",
+    "WranglerConfig",
+    "WranglerNamespace",
+    "YouTube"
+  ],
+  "global_components_missing_from_matrix": [],
+  "counts": {
+    "components": [
+      [
+        "Render",
+        3607
+      ],
+      [
+        "TabItem",
+        2512
+      ],
+      [
+        "TypeScriptExample",
+        1364
+      ],
+      [
+        "Type",
+        1266
+      ],
+      [
+        "DashButton",
+        1208
+      ],
+      [
+        "Tabs",
+        1115
+      ],
+      [
+        "RTKCodeSnippet",
+        884
+      ],
+      [
+        "Details",
+        865
+      ],
+      [
+        "Steps",
+        699
+      ],
+      [
+        "MetaInfo",
+        616
+      ],
+      [
+        "APIRequest",
+        612
+      ],
+      [
+        "DirectoryListing",
+        606
+      ],
+      [
+        "WranglerConfig",
+        602
+      ],
+      [
+        "GlossaryTooltip",
+        597
+      ],
+      [
+        "PackageManagers",
+        452
+      ],
+      [
+        "LinkCard",
+        434
+      ],
+      [
+        "LinkTitleCard",
+        333
+      ],
+      [
+        "Feature",
+        251
+      ],
+      [
+        "RelatedProduct",
+        228
+      ],
+      [
+        "Example",
+        189
+      ],
+      [
+        "RuleID",
+        158
+      ],
+      [
+        "LinkButton",
+        119
+      ],
+      [
+        "CardGrid",
+        119
+      ],
+      [
+        "Description",
+        106
+      ],
+      [
+        "Badge",
+        79
+      ],
+      [
+        "Plan",
+        74
+      ],
+      [
+        "CURL",
+        72
+      ],
+      [
+        "AnchorHeading",
+        64
+      ],
+      [
+        "Aside",
+        61
+      ],
+      [
+        "Stream",
+        45
+      ],
+      [
+        "WranglerCommand",
+        44
+      ],
+      [
+        "ProductReleaseNotes",
+        40
+      ],
+      [
+        "Code",
+        40
+      ],
+      [
+        "FAQItem",
+        37
+      ],
+      [
+        "AvailableNotifications",
+        37
+      ],
+      [
+        "ResourcesBySelector",
+        36
+      ],
+      [
+        "YouTube",
+        36
+      ],
+      [
+        "ProductChangelog",
+        34
+      ],
+      [
+        "Card",
+        33
+      ],
+      [
+        "GlossaryDefinition",
+        33
+      ],
+      [
+        "RTKSDKSelector",
+        32
+      ],
+      [
+        "FileTree",
+        31
+      ],
+      [
+        "TroubleshootingItem",
+        27
+      ],
+      [
+        "Glossary",
+        25
+      ],
+      [
+        "WranglerNamespace",
+        21
+      ],
+      [
+        "PagesBuildPreset",
+        21
+      ],
+      [
+        "ListTutorials",
+        16
+      ],
+      [
+        "Response",
+        16
+      ],
+      [
+        "PublicStats",
+        16
+      ],
+      [
+        "MANAGED_RULESET_ID",
+        16
+      ],
+      [
+        "String",
+        16
+      ],
+      [
+        "InlineBadge",
+        11
+      ],
+      [
+        "DOMAIN_NAME",
+        11
+      ],
+      [
+        "IP_ADDRESS",
+        10
+      ],
+      [
+        "CLOUDFLARE_ENDPOINT",
+        10
+      ],
+      [
+        "INTERFACE_ADDRESS",
+        10
+      ],
+      [
+        "CUSTOMER_ENDPOINT",
+        10
+      ],
+      [
+        "ArrayBuffer",
+        10
+      ],
+      [
+        "AutoconfigDiagram",
+        10
+      ],
+      [
+        "AgentHeader",
+        9
+      ],
+      [
+        "RandomPrompt",
+        9
+      ],
+      [
+        "PlatformAccess",
+        9
+      ],
+      [
+        "ExamplePromptsList",
+        9
+      ],
+      [
+        "TipsList",
+        9
+      ],
+      [
+        "FAQList",
+        9
+      ],
+      [
+        "TroubleshootingList",
+        9
+      ],
+      [
+        "BuildAgentsCallout",
+        9
+      ],
+      [
+        "OtherAgents",
+        9
+      ],
+      [
+        "Image",
+        9
+      ],
+      [
+        "LAN_ID",
+        8
+      ],
+      [
+        "LAN_NAME",
+        8
+      ],
+      [
+        "IP_NEXT_HOP",
+        8
+      ],
+      [
+        "YOUR_IP_PREFIX",
+        8
+      ],
+      [
+        "ROUTE_DESCRIPTION",
+        8
+      ],
+      [
+        "TUNNEL_NAME",
+        8
+      ],
+      [
+        "TUNNEL_DESCRIPTION",
+        8
+      ],
+      [
+        "T",
+        8
+      ],
+      [
+        "BUCKET_PATH",
+        8
+      ],
+      [
+        "ACCOUNT_ID",
+        7
+      ],
+      [
+        "RSSButton",
+        6
+      ],
+      [
+        "DESTINATION_CONF",
+        5
+      ],
+      [
+        "Markdown",
+        5
+      ],
+      [
+        "WARPReleases",
+        5
+      ],
+      [
+        "SECRET_VALUE",
+        5
+      ],
+      [
+        "YOUR_SUBDOMAIN",
+        4
+      ],
+      [
+        "MANAGED_APP_ID",
+        4
+      ],
+      [
+        "POLICY_DESCRIPTION",
+        4
+      ],
+      [
+        "POLICY_NAME",
+        4
+      ],
+      [
+        "DESCRIBE_POLICY",
+        4
+      ],
+      [
+        "DESCRIBE_ALERT",
+        4
+      ],
+      [
+        "PSK_VALUE",
+        4
+      ],
+      [
+        "Width",
+        4
+      ],
+      [
+        "LIST_UUID",
+        4
+      ],
+      [
+        "PROXY_ENDPOINT_ID",
+        4
+      ],
+      [
+        "ZONE_NAME",
+        4
+      ],
+      [
+        "KNOWN_DOMAINS_LIST_UUID",
+        4
+      ],
+      [
+        "SOURCE_TYPE",
+        4
+      ],
+      [
+        "R2Object",
+        4
+      ],
+      [
+        "CUSTOM_RULESET_ID",
+        4
+      ],
+      [
+        "RULE_ID",
+        4
+      ],
+      [
+        "NUMBER",
+        4
+      ],
+      [
+        "CryptoKey",
+        4
+      ],
+      [
+        "AgentMemoryMemory",
+        3
+      ],
+      [
+        "ArtifactsCreateRepoResult",
+        3
+      ],
+      [
+        "URL",
+        3
+      ],
+      [
+        "CLIENT_ID",
+        3
+      ],
+      [
+        "OKTA_IDP_ID",
+        3
+      ],
+      [
+        "GATEWAY_CHECK_ID",
+        3
+      ],
+      [
+        "SubtractIPCalculator",
+        3
+      ],
+      [
+        "REGION",
+        3
+      ],
+      [
+        "KV_NAMESPACE_ID",
+        3
+      ],
+      [
+        "DOMAIN_BLOCKLIST_UUID",
+        3
+      ],
+      [
+        "HOST_BLOCKLIST_UUID",
+        3
+      ],
+      [
+        "NAME",
+        3
+      ],
+      [
+        "RATE_LIMITING_RULESET_ID",
+        3
+      ],
+      [
+        "YOUR_WORKER",
+        3
+      ],
+      [
+        "CodeSnippets",
+        2
+      ],
+      [
+        "AiSearchNamespacesDiagram",
+        2
+      ],
+      [
+        "YOUR_DOMAIN",
+        2
+      ],
+      [
+        "ZONE_ID",
+        2
+      ],
+      [
+        "CUSTOM_HOSTNAME",
+        2
+      ],
+      [
+        "TEAM_NAME",
+        2
+      ],
+      [
+        "SOURCE_ACCOUNT_ID",
+        2
+      ],
+      [
+        "GRANT_ID",
+        2
+      ],
+      [
+        "TunnelCalculator",
+        2
+      ],
+      [
+        "APP_ID",
+        2
+      ],
+      [
+        "APP_NAME",
+        2
+      ],
+      [
+        "APP_TYPE",
+        2
+      ],
+      [
+        "HARDWARE_MAC_ADDRESS",
+        2
+      ],
+      [
+        "HARDWARE_MAC_ADDRESS_2",
+        2
+      ],
+      [
+        "PSK",
+        2
+      ],
+      [
+        "GranularControlApplicationsList",
+        2
+      ],
+      [
+        "TUNNEL_UUID",
+        2
+      ],
+      [
+        "VNET_AMER_UUID",
+        2
+      ],
+      [
+        "DEDICATED_IPV4_ADDRESS",
+        2
+      ],
+      [
+        "SECONDARY_DEDICATED_IPV6_ADDRESS",
+        2
+      ],
+      [
+        "DEDICATED_IPV6_ADDRESS",
+        2
+      ],
+      [
+        "TAG",
+        2
+      ],
+      [
+        "PUBLIC_KEY",
+        2
+      ],
+      [
+        "WorkerCode",
+        2
+      ],
+      [
+        "ENTER_WORKER_NAME",
+        2
+      ],
+      [
+        "ALLOWED_REMEDIATION_DOMAINS_LIST_UUID",
+        2
+      ],
+      [
+        "IP_BLOCKLIST_UUID",
+        2
+      ],
+      [
+        "IP_ALLOWLIST_UUID",
+        2
+      ],
+      [
+        "HOST_ALLOWLIST_UUID",
+        2
+      ],
+      [
+        "DOMAIN_ALLOWLIST_UUID",
+        2
+      ],
+      [
+        "INTERNAL_NETWORK_IP_LIST_UUID",
+        2
+      ],
+      [
+        "WorkersArchitectureDiagram",
+        2
+      ],
+      [
+        "OWNERSHIP_CHALLENGE_TOKEN",
+        2
+      ],
+      [
+        "PROJECT_ID",
+        2
+      ],
+      [
+        "DATASET_ID",
+        2
+      ],
+      [
+        "TABLE_ID",
+        2
+      ],
+      [
+        "ENCODED_VALUE",
+        2
+      ],
+      [
+        "PUBLIC_DOMAIN",
+        2
+      ],
+      [
+        "QRADAR_URL",
+        2
+      ],
+      [
+        "LOG_SOURCE_PORT",
+        2
+      ],
+      [
+        "NR_LICENSE_KEY",
+        2
+      ],
+      [
+        "SENTINELONE_ENDPOINT_URL",
+        2
+      ],
+      [
+        "SENTINELONE_AUTH_TOKEN",
+        2
+      ],
+      [
+        "SPLUNK_ENDPOINT_URL",
+        2
+      ],
+      [
+        "SPLUNK_CHANNEL_ID",
+        2
+      ],
+      [
+        "INSECURE_SKIP_VERIFY",
+        2
+      ],
+      [
+        "SPLUNK_AUTH_TOKEN",
+        2
+      ],
+      [
+        "PagesBuildPresetsTable",
+        2
+      ],
+      [
+        "DIRECTORY",
+        2
+      ],
+      [
+        "RTKPill",
+        2
+      ],
+      [
+        "ProductAvailabilityText",
+        2
+      ],
+      [
+        "EXISTING_PHASE_RULE_ID_1",
+        2
+      ],
+      [
+        "RULE_ID_1",
+        2
+      ],
+      [
+        "RULE_ID_2",
+        2
+      ],
+      [
+        "Boolean",
+        2
+      ],
+      [
+        "Rule",
+        2
+      ],
+      [
+        "MY_SECRET_NAME",
+        2
+      ],
+      [
+        "MY_SECRET_NAME_2",
+        2
+      ],
+      [
+        "PRIVATE_KEY",
+        2
+      ],
+      [
+        "CERT_ID",
+        2
+      ],
+      [
+        "CompatibilityFlags",
+        2
+      ],
+      [
+        "KEY",
+        2
+      ],
+      [
+        "BINDING",
+        2
+      ],
+      [
+        "DATABASE_NAME",
+        2
+      ],
+      [
+        "FormData",
+        2
+      ],
+      [
+        "ReadableStreamBYOBReadResult",
+        2
+      ],
+      [
+        "R",
+        2
+      ],
+      [
+        "WorkflowInstanceIntrospector",
+        2
+      ],
+      [
+        "WorkflowIntrospector",
+        2
+      ],
+      [
+        "AgentMemoryProfile",
+        1
+      ],
+      [
+        "AgentMemoryMessage",
+        1
+      ],
+      [
+        "AgentMemoryRecallResult",
+        1
+      ],
+      [
+        "AgentMemoryListMemoriesResult",
+        1
+      ],
+      [
+        "AgentMemoryGetSummaryResponse",
+        1
+      ],
+      [
+        "AgentsPlatformDiagram",
+        1
+      ],
+      [
+        "AIModelCatalog",
+        1
+      ],
+      [
+        "AiSearchIndexingDiagram",
+        1
+      ],
+      [
+        "AiSearchQueryingDiagram",
+        1
+      ],
+      [
+        "AiSearchVoiceDiagram",
+        1
+      ],
+      [
+        "AiSearchOverviewDiagram",
+        1
+      ],
+      [
+        "SOURCE",
+        1
+      ],
+      [
+        "ArtifactsRepo",
+        1
+      ],
+      [
+        "ArtifactsRepoListResult",
+        1
+      ],
+      [
+        "ArtifactsCreateTokenResult",
+        1
+      ],
+      [
+        "ArtifactsTokenListResult",
+        1
+      ],
+      [
+        "ArtifactsLogResult",
+        1
+      ],
+      [
+        "ArtifactsCommit",
+        1
+      ],
+      [
+        "ArtifactsTree",
+        1
+      ],
+      [
+        "ArtifactsCIWorkflowDiagram",
+        1
+      ],
+      [
+        "ArtifactsCIPipelineDiagram",
+        1
+      ],
+      [
+        "ArtifactsPlatformSharedCIDiagram",
+        1
+      ],
+      [
+        "IP_PREFIX_TO_DELEGATE",
+        1
+      ],
+      [
+        "DEFAULT_SERVICE",
+        1
+      ],
+      [
+        "SERVICE_ID",
+        1
+      ],
+      [
+        "CERTIFICATE_STRING",
+        1
+      ],
+      [
+        "CERTIFICATE_PRIVATE_KEY",
+        1
+      ],
+      [
+        "CODE_CHALLENGE",
+        1
+      ],
+      [
+        "URL-encoded",
+        1
+      ],
+      [
+        "AUTH_CODE",
+        1
+      ],
+      [
+        "CODE_VERIFIER",
+        1
+      ],
+      [
+        "REFRESH_TOKEN",
+        1
+      ],
+      [
+        "APPROVED_COUNTRIES_GROUP_ID",
+        1
+      ],
+      [
+        "OS_VERSION_CHECK_ID",
+        1
+      ],
+      [
+        "OTP_IDENTITY_PROVIDER_ID",
+        1
+      ],
+      [
+        "CORPORATE_IP_ALLOWLIST_ID",
+        1
+      ],
+      [
+        "SERVICE_TOKEN_ID",
+        1
+      ],
+      [
+        "WINDOWS_VERSION_CHECK_ID",
+        1
+      ],
+      [
+        "TOKEN_NAME",
+        1
+      ],
+      [
+        "AZURE_DIRECTORY_ID",
+        1
+      ],
+      [
+        "IDP_UUID",
+        1
+      ],
+      [
+        "RECIPIENT_ACCOUNT_ID",
+        1
+      ],
+      [
+        "ORGANIZATION_ID",
+        1
+      ],
+      [
+        "IP",
+        1
+      ],
+      [
+        "UUID",
+        1
+      ],
+      [
+        "TunnelHostnameRoutingDiagram",
+        1
+      ],
+      [
+        "SUBDOMAIN",
+        1
+      ],
+      [
+        "ACCESS_POLICY_ID",
+        1
+      ],
+      [
+        "PUBLIC_IP",
+        1
+      ],
+      [
+        "PUBLIC_IP2",
+        1
+      ],
+      [
+        "PUBLIC_IP3",
+        1
+      ],
+      [
+        "POLICY_UUID_1",
+        1
+      ],
+      [
+        "POLICY_UUID_2",
+        1
+      ],
+      [
+        "HostSelectorEgressDiagram",
+        1
+      ],
+      [
+        "POSTURE_CHECK_UUID",
+        1
+      ],
+      [
+        "POSTURE_CHECK_1_UUID",
+        1
+      ],
+      [
+        "POSTURE_CHECK_2_UUID",
+        1
+      ],
+      [
+        "NEW_HOSTNAME_LIST",
+        1
+      ],
+      [
+        "VNET_EMEA_UUID",
+        1
+      ],
+      [
+        "ContainerIsolation",
+        1
+      ],
+      [
+        "ContainerRequestPath",
+        1
+      ],
+      [
+        "ContainerLifecycle",
+        1
+      ],
+      [
+        "ContainerPlacement",
+        1
+      ],
+      [
+        "ContainerConnectivity",
+        1
+      ],
+      [
+        "YOUR_DOCKERHUB_USERNAME",
+        1
+      ],
+      [
+        "AWS_ACCOUNT_ID",
+        1
+      ],
+      [
+        "AWS_REGION",
+        1
+      ],
+      [
+        "AWS_ACCESS_KEY_ID",
+        1
+      ],
+      [
+        "SERVICE_ACCOUNT_EMAIL",
+        1
+      ],
+      [
+        "IMAGE",
+        1
+      ],
+      [
+        "State",
+        1
+      ],
+      [
+        "Schedule",
+        1
+      ],
+      [
+        "DurableObjectStub",
+        1
+      ],
+      [
+        "NS_DOMAIN",
+        1
+      ],
+      [
+        "YOUR_ACCOUNT_ID",
+        1
+      ],
+      [
+        "AvailableChangelogFeeds",
+        1
+      ],
+      [
+        "YOUR_BINDING_ID",
+        1
+      ],
+      [
+        "CORPORATE_DOMAINS_LIST_UUID",
+        1
+      ],
+      [
+        "SHADOW_IT_LIST_UUID",
+        1
+      ],
+      [
+        "TRUSTED_DOMAINS_LIST_UUID",
+        1
+      ],
+      [
+        "CREDENTIALS_DLP_PROFILE_UUID",
+        1
+      ],
+      [
+        "AWS_DLP_PROFILE_UUID",
+        1
+      ],
+      [
+        "SKU_DLP_PROFILE_UUID",
+        1
+      ],
+      [
+        "FINANCIAL_INFO_DLP_PROFILE_UUID",
+        1
+      ],
+      [
+        "ANDROID_VERSION_POSTURE_CHECK_UUID",
+        1
+      ],
+      [
+        "DOMAIN_INSPECTION_BYPASS_LIST_UUID",
+        1
+      ],
+      [
+        "QUARANTINED_USERS_IP_ALLOWLIST_UUID",
+        1
+      ],
+      [
+        "DOMAIN_ISOLATE_LIST_UUID",
+        1
+      ],
+      [
+        "SERIAL_NUMBER_LIST_UUID",
+        1
+      ],
+      [
+        "DEVICE_POSTURE_CHECK_UUID",
+        1
+      ],
+      [
+        "FINANCE_SERVERS_LIST_UUID",
+        1
+      ],
+      [
+        "SSH_IP_ALLOWLIST_UUID",
+        1
+      ],
+      [
+        "SSH_FQDN_ALLOWLIST_UUID",
+        1
+      ],
+      [
+        "DATADOG_ENDPOINT_URL",
+        1
+      ],
+      [
+        "DATADOG_API_KEY",
+        1
+      ],
+      [
+        "YOUR_EGRESS_POOL_ID",
+        1
+      ],
+      [
+        "PUBLIC_PORT",
+        1
+      ],
+      [
+        "SECRET_HEADER",
+        1
+      ],
+      [
+        "INSTANCE_ID",
+        1
+      ],
+      [
+        "IBM_API_KEY",
+        1
+      ],
+      [
+        "NR_ENDPOINT_URL",
+        1
+      ],
+      [
+        "R2_ACCESS_KEY_ID",
+        1
+      ],
+      [
+        "R2_SECRET_ACCESS_KEY",
+        1
+      ],
+      [
+        "BUCKET_NAME",
+        1
+      ],
+      [
+        "ACCESS_KEY_ID",
+        1
+      ],
+      [
+        "SECRET_ACCESS_KEY",
+        1
+      ],
+      [
+        "ENDPOINT_URL",
+        1
+      ],
+      [
+        "PagesBuildEnvironmentLanguages",
+        1
+      ],
+      [
+        "PagesBuildEnvironmentTools",
+        1
+      ],
+      [
+        "PagesBuildEnvironment",
+        1
+      ],
+      [
+        "P",
+        1
+      ],
+      [
+        "NESTED",
+        1
+      ],
+      [
+        "QueueSendResult",
+        1
+      ],
+      [
+        "QueueSendBatchResult",
+        1
+      ],
+      [
+        "QueueMetrics",
+        1
+      ],
+      [
+        "R2ObjectBody",
+        1
+      ],
+      [
+        "R2Objects",
+        1
+      ],
+      [
+        "R2MultipartUpload",
+        1
+      ],
+      [
+        "Blob",
+        1
+      ],
+      [
+        "R2UploadedPart",
+        1
+      ],
+      [
+        "R2LocalUploadsDiagram",
+        1
+      ],
+      [
+        "RealtimeKitArchitecture",
+        1
+      ],
+      [
+        "RTKUIComponentGrid",
+        1
+      ],
+      [
+        "MANAGED_RULESET_ID_1",
+        1
+      ],
+      [
+        "MANAGED_RULESET_ID_2",
+        1
+      ],
+      [
+        "CUSTOM_RULE_ID_2",
+        1
+      ],
+      [
+        "CUSTOM_RULE_ID_1",
+        1
+      ],
+      [
+        "EXISTING_PHASE_RULE_ID_2",
+        1
+      ],
+      [
+        "HTTP_DDOS_RULESET_ID",
+        1
+      ],
+      [
+        "FieldCatalogPage",
+        1
+      ],
+      [
+        "RULE_ID_3",
+        1
+      ],
+      [
+        "EGRESS_POOL_ID",
+        1
+      ],
+      [
+        "UPDATED_HOSTNAME_ASSOCIATIONS",
+        1
+      ],
+      [
+        "YOUR_HOSTNAME",
+        1
+      ],
+      [
+        "HOSTNAME",
+        1
+      ],
+      [
+        "AvailableDashRoutes",
+        1
+      ],
+      [
+        "Environment",
+        1
+      ],
+      [
+        "ComponentsUsage",
+        1
+      ],
+      [
+        "BaseSchemaProperties",
+        1
+      ],
+      [
+        "TUNNEL_ID",
+        1
+      ],
+      [
+        "Number",
+        1
+      ],
+      [
+        "Integer",
+        1
+      ],
+      [
+        "SCOPE",
+        1
+      ],
+      [
+        "TOTAL",
+        1
+      ],
+      [
+        "VALUE",
+        1
+      ],
+      [
+        "FILENAME.json",
+        1
+      ],
+      [
+        "BUCKET",
+        1
+      ],
+      [
+        "PATH_TO_FILE",
+        1
+      ],
+      [
+        "SQL_QUERY",
+        1
+      ],
+      [
+        "Scheduled",
+        1
+      ],
+      [
+        "Email",
+        1
+      ],
+      [
+        "Method",
+        1
+      ],
+      [
+        "Queue",
+        1
+      ],
+      [
+        "UNIX-cron",
+        1
+      ],
+      [
+        "RPC",
+        1
+      ],
+      [
+        "WebSocket",
+        1
+      ],
+      [
+        "WorkersIsolateDiagram",
+        1
+      ],
+      [
+        "Object",
+        1
+      ],
+      [
+        "JSON",
+        1
+      ],
+      [
+        "USVString",
+        1
+      ],
+      [
+        "CryptoKeyPair",
+        1
+      ],
+      [
+        "FetcherQueueResult",
+        1
+      ],
+      [
+        "O",
+        1
+      ],
+      [
+        "DurableObjectId",
+        1
+      ],
+      [
+        "Enter",
+        1
+      ],
+      [
+        "AuxiliaryWorkerConfig",
+        1
+      ],
+      [
+        "Env",
+        1
+      ],
+      [
+        "Service",
+        1
+      ],
+      [
+        "Module",
+        1
+      ],
+      [
+        "DurableObjectStorageHandle",
+        1
+      ],
+      [
+        "COMMAND",
+        1
+      ],
+      [
+        "SUBCOMMAND",
+        1
+      ],
+      [
+        "ConversionResult",
+        1
+      ],
+      [
+        "WorkersAIModelCatalog",
+        1
+      ],
+      [
+        "WorkersVPCOverviewDiagram",
+        1
+      ],
+      [
+        "Flex",
+        1
+      ],
+      [
+        "AnimatedWorkflowDiagram",
+        1
+      ]
+    ],
+    "frontmatter": [
+      [
+        "title",
+        6882
+      ],
+      [
+        "description",
+        6824
+      ],
+      [
+        "products",
+        6788
+      ],
+      [
+        "pcx_content_type",
+        6755
+      ],
+      [
+        "sidebar",
+        5162
+      ],
+      [
+        "tags",
+        1272
+      ],
+      [
+        "head",
+        1182
+      ],
+      [
+        "reviewed",
+        404
+      ],
+      [
+        "external_link",
+        239
+      ],
+      [
+        "summary",
+        234
+      ],
+      [
+        "difficulty",
+        195
+      ],
+      [
+        "source",
+        171
+      ],
+      [
+        "slug",
+        71
+      ],
+      [
+        "tableOfContents",
+        47
+      ],
+      [
+        "release_notes_file_name",
+        43
+      ],
+      [
+        "styleGuide",
+        42
+      ],
+      [
+        "rss",
+        40
+      ],
+      [
+        "hideChildren",
+        39
+      ],
+      [
+        "order",
+        29
+      ],
+      [
+        "meta",
+        28
+      ],
+      [
+        "learning_center",
+        26
+      ],
+      [
+        "weight",
+        25
+      ],
+      [
+        "structured_data",
+        24
+      ],
+      [
+        "category",
+        23
+      ],
+      [
+        "sidebar_position",
+        23
+      ],
+      [
+        "canonical",
+        16
+      ],
+      [
+        "hidden",
+        13
+      ],
+      [
+        "preview",
+        13
+      ],
+      [
+        "next",
+        12
+      ],
+      [
+        "template",
+        9
+      ],
+      [
+        "prev",
+        9
+      ],
+      [
+        "updated",
+        5
+      ],
+      [
+        "wide",
+        3
+      ],
+      [
+        "content_type",
+        3
+      ],
+      [
+        "release_notes_name",
+        3
+      ],
+      [
+        "demo",
+        3
+      ],
+      [
+        "languages",
+        2
+      ],
+      [
+        "sidebar_toc",
+        2
+      ],
+      [
+        "banner",
+        2
+      ],
+      [
+        "type",
+        2
+      ],
+      [
+        "redirect",
+        1
+      ],
+      [
+        "column_text",
+        1
+      ],
+      [
+        "column_param",
+        1
+      ],
+      [
+        "lastUpdated",
+        1
+      ],
+      [
+        "Weight",
+        1
+      ],
+      [
+        "product",
+        1
+      ],
+      [
+        "noindex",
+        1
+      ],
+      [
+        "playground-link",
+        1
+      ],
+      [
+        "chatbot_deprioritize",
+        1
+      ]
+    ],
+    "imports": [
+      [
+        "~/components",
+        3926
+      ],
+      [
+        "@cloudflare/realtimekit-react-ui",
+        282
+      ],
+      [
+        "cloudflare:workers",
+        186
+      ],
+      [
+        "@cloudflare/realtimekit-react-native-ui",
+        142
+      ],
+      [
+        "agents",
+        119
+      ],
+      [
+        "@cloudflare/sandbox",
+        96
+      ],
+      [
+        "hono",
+        76
+      ],
+      [
+        "react",
+        67
+      ],
+      [
+        "ai",
+        55
+      ],
+      [
+        "@cloudflare/containers",
+        50
+      ],
+      [
+        "zod",
+        39
+      ],
+      [
+        "~/components/realtimekit/RTKSDKSelector/RTKSDKSelector.astro",
+        33
+      ],
+      [
+        "~/components/realtimekit/RTKCodeSnippet/RTKCodeSnippet.astro",
+        33
+      ],
+      [
+        "@cloudflare/realtimekit-react",
+        30
+      ],
+      [
+        "workers-ai-provider",
+        29
+      ],
+      [
+        "vitest",
+        29
+      ],
+      [
+        "agents/react",
+        27
+      ],
+      [
+        "@cloudflare/think",
+        27
+      ],
+      [
+        "@cloudflare/ai-chat",
+        25
+      ],
+      [
+        "openai",
+        25
+      ],
+      [
+        "vite",
+        23
+      ],
+      [
+        "@cloudflare/vite-plugin",
+        22
+      ],
+      [
+        "wrangler",
+        19
+      ],
+      [
+        "@cloudflare/puppeteer",
+        18
+      ],
+      [
+        "miniflare",
+        18
+      ],
+      [
+        "cloudflare:test",
+        17
+      ],
+      [
+        "cloudflare",
+        16
+      ],
+      [
+        "@angular/core",
+        16
+      ],
+      [
+        "agents/workflows",
+        15
+      ],
+      [
+        "vitest/config",
+        15
+      ],
+      [
+        "@cloudflare/realtimekit-react-native",
+        15
+      ],
+      [
+        "agents/mcp",
+        14
+      ],
+      [
+        "@cloudflare/vitest-plugin",
+        14
+      ],
+      [
+        "@aws-sdk/client-s3",
+        14
+      ],
+      [
+        "@ai-sdk/openai",
+        13
+      ],
+      [
+        "@modelcontextprotocol/sdk/server/mcp.js",
+        12
+      ],
+      [
+        "agents/experimental/memory/session",
+        11
+      ],
+      [
+        "pg",
+        11
+      ],
+      [
+        "@cloudflare/ai-chat/react",
+        10
+      ],
+      [
+        "@anthropic-ai/sdk",
+        10
+      ],
+      [
+        "react-native",
+        10
+      ],
+      [
+        "../types",
+        10
+      ],
+      [
+        "node:http",
+        10
+      ],
+      [
+        "~/components/agent-setup/AgentHeader.astro",
+        9
+      ],
+      [
+        "~/components/agent-setup/PlatformAccessSection.astro",
+        9
+      ],
+      [
+        "~/components/agent-setup/ExamplePromptsList.astro",
+        9
+      ],
+      [
+        "~/components/agent-setup/RandomPrompt.astro",
+        9
+      ],
+      [
+        "~/components/agent-setup/TipsList.astro",
+        9
+      ],
+      [
+        "~/components/agent-setup/FAQList.astro",
+        9
+      ],
+      [
+        "~/components/agent-setup/FAQItem.astro",
+        9
+      ],
+      [
+        "~/components/agent-setup/TroubleshootingList.astro",
+        9
+      ],
+      [
+        "~/components/agent-setup/TroubleshootingItem.astro",
+        9
+      ],
+      [
+        "~/components/agent-setup/BuildAgentsCallout.astro",
+        9
+      ],
+      [
+        "~/components/agent-setup/OtherAgents.astro",
+        9
+      ],
+      [
+        "@cloudflare/playwright",
+        9
+      ],
+      [
+        "cloudflare:node",
+        9
+      ],
+      [
+        "agents/client",
+        8
+      ],
+      [
+        "@modelcontextprotocol/server",
+        8
+      ],
+      [
+        "@cloudflare/codemode",
+        8
+      ],
+      [
+        "node:fs",
+        8
+      ],
+      [
+        "node:buffer",
+        8
+      ],
+      [
+        "node:assert",
+        8
+      ],
+      [
+        "node:async_hooks",
+        8
+      ],
+      [
+        "postal-mime",
+        7
+      ],
+      [
+        "agents/mcp/server",
+        7
+      ],
+      [
+        "cloudflare:email",
+        7
+      ],
+      [
+        "mimetext",
+        7
+      ],
+      [
+        "@cloudflare/realtimekit",
+        7
+      ],
+      [
+        "agents/email",
+        6
+      ],
+      [
+        "@vitejs/plugin-react",
+        6
+      ],
+      [
+        "../src",
+        6
+      ],
+      [
+        "aws4fetch",
+        6
+      ],
+      [
+        "@cloudflare/flagship/server",
+        6
+      ],
+      [
+        "@cloudflare/realtimekit-angular",
+        6
+      ],
+      [
+        "https://cdn.jsdelivr.net/npm/@cloudflare/realtimekit@latest/dist/index.es.js",
+        6
+      ],
+      [
+        "node:process",
+        6
+      ],
+      [
+        "../utils/slack",
+        6
+      ],
+      [
+        "agents/observability",
+        5
+      ],
+      [
+        "@cloudflare/voice/react",
+        5
+      ],
+      [
+        "agents/browser/ai",
+        5
+      ],
+      [
+        "agents/vite",
+        5
+      ],
+      [
+        "@cloudflare/codemode/ai",
+        5
+      ],
+      [
+        "ws",
+        5
+      ],
+      [
+        "@openfeature/server-sdk",
+        5
+      ],
+      [
+        "@cloudflare/pages-plugin-sentry",
+        5
+      ],
+      [
+        "@angular/platform-browser",
+        5
+      ],
+      [
+        "./app.component",
+        5
+      ],
+      [
+        "@cloudflare/sandbox/xterm",
+        5
+      ],
+      [
+        "hono/html",
+        5
+      ],
+      [
+        "node:https",
+        5
+      ],
+      [
+        "node:test",
+        5
+      ],
+      [
+        "./model",
+        4
+      ],
+      [
+        "react-dom/client",
+        4
+      ],
+      [
+        "agents/mcp/client",
+        4
+      ],
+      [
+        "viem/accounts",
+        4
+      ],
+      [
+        "jose",
+        4
+      ],
+      [
+        "@cloudflare/worker-bundler",
+        4
+      ],
+      [
+        "astro:assets",
+        4
+      ],
+      [
+        "postgres",
+        4
+      ],
+      [
+        "@cloudflare/pages-plugin-cloudflare-access",
+        4
+      ],
+      [
+        "@nuxtjs/sanity",
+        4
+      ],
+      [
+        "resend",
+        4
+      ],
+      [
+        "@aws-sdk/s3-request-presigner",
+        4
+      ],
+      [
+        "@react-native-documents/picker",
+        4
+      ],
+      [
+        "https://cdn.jsdelivr.net/npm/@cloudflare/realtimekit-ui@latest/loader/index.es2017.js",
+        4
+      ],
+      [
+        "@cloudflare/kv-asset-handler",
+        4
+      ],
+      [
+        "@streamparser/json-whatwg",
+        4
+      ],
+      [
+        "node:path",
+        4
+      ],
+      [
+        "node:util",
+        4
+      ],
+      [
+        "cloudflare:sockets",
+        4
+      ],
+      [
+        "../utils/github",
+        4
+      ],
+      [
+        "@cloudflare/ai-utils",
+        4
+      ],
+      [
+        "./server",
+        3
+      ],
+      [
+        "@cloudflare/shell",
+        3
+      ],
+      [
+        "@cloudflare/think/workflows",
+        3
+      ],
+      [
+        "./tools",
+        3
+      ],
+      [
+        "@google/genai",
+        3
+      ],
+      [
+        "cookie",
+        3
+      ],
+      [
+        "@cloudflare/constellation",
+        3
+      ],
+      [
+        "hono/cors",
+        3
+      ],
+      [
+        "honox/factory",
+        3
+      ],
+      [
+        "crypto",
+        3
+      ],
+      [
+        "hono/cookie",
+        3
+      ],
+      [
+        "mysql2/promise",
+        3
+      ],
+      [
+        "@cloudflare/pages-plugin-cloudflare-access/api",
+        3
+      ],
+      [
+        "@cloudflare/pages-plugin-honeycomb",
+        3
+      ],
+      [
+        "react-router-dom",
+        3
+      ],
+      [
+        "@pulumi/pulumi",
+        3
+      ],
+      [
+        "@pulumi/cloudflare",
+        3
+      ],
+      [
+        "aws-sdk/clients/s3.js",
+        3
+      ],
+      [
+        "node:fs/promises",
+        3
+      ],
+      [
+        "@cloudflare/realtimekit-virtual-background",
+        3
+      ],
+      [
+        "@cloudflare/realtimekit-ui",
+        3
+      ],
+      [
+        "@cloudflare/sandbox/interpreter",
+        3
+      ],
+      [
+        "@xterm/xterm",
+        3
+      ],
+      [
+        "~/content/glossary/style-guide.yaml?raw",
+        3
+      ],
+      [
+        "@tanstack/react-start",
+        3
+      ],
+      [
+        "msw",
+        3
+      ],
+      [
+        "./index.mjs",
+        3
+      ],
+      [
+        "agents/chat/transport",
+        2
+      ],
+      [
+        "@ai-sdk/anthropic",
+        2
+      ],
+      [
+        "@cloudflare/voice",
+        2
+      ],
+      [
+        "@cloudflare/voice-elevenlabs",
+        2
+      ],
+      [
+        "@cloudflare/voice-deepgram",
+        2
+      ],
+      [
+        "agents/experimental/memory/utils/compaction-helpers",
+        2
+      ],
+      [
+        "@tanstack/ai",
+        2
+      ],
+      [
+        "@chat-adapter/telegram",
+        2
+      ],
+      [
+        "@cloudflare/think/tools/execute",
+        2
+      ],
+      [
+        "@cloudflare/think/tools/workspace",
+        2
+      ],
+      [
+        "@cloudflare/workers-oauth-provider",
+        2
+      ],
+      [
+        "@cloudflare/codemode/mcp",
+        2
+      ],
+      [
+        "agents/chat-sdk",
+        2
+      ],
+      [
+        "agents/agent-tools",
+        2
+      ],
+      [
+        "./agent",
+        2
+      ],
+      [
+        "node:diagnostics_channel",
+        2
+      ],
+      [
+        "agents/observability/ai",
+        2
+      ],
+      [
+        "mppx/client",
+        2
+      ],
+      [
+        "./payments",
+        2
+      ],
+      [
+        "agents/x402",
+        2
+      ],
+      [
+        "@opencode-ai/plugin",
+        2
+      ],
+      [
+        "@x402/fetch",
+        2
+      ],
+      [
+        "@x402/evm/exact/client",
+        2
+      ],
+      [
+        "~/components/ai-gateway/code-examples.astro",
+        2
+      ],
+      [
+        "playwright-core",
+        2
+      ],
+      [
+        "path",
+        2
+      ],
+      [
+        "fs",
+        2
+      ],
+      [
+        "./3rdparty.txt?raw",
+        2
+      ],
+      [
+        "@remix-run/cloudflare",
+        2
+      ],
+      [
+        "../db",
+        2
+      ],
+      [
+        "../../db",
+        2
+      ],
+      [
+        "@faker-js/faker",
+        2
+      ],
+      [
+        "./db/schema",
+        2
+      ],
+      [
+        "drizzle-kit",
+        2
+      ],
+      [
+        "next/image",
+        2
+      ],
+      [
+        "mime",
+        2
+      ],
+      [
+        "accept-language-parser",
+        2
+      ],
+      [
+        "./ContactForm",
+        2
+      ],
+      [
+        "robots-parser",
+        2
+      ],
+      [
+        "@smithy/core/protocols",
+        2
+      ],
+      [
+        "s3mini",
+        2
+      ],
+      [
+        "@aws-sdk/lib-storage",
+        2
+      ],
+      [
+        "~/components/realtimekit/RTKPill/RTKPill.astro",
+        2
+      ],
+      [
+        "@cloudflare/react-native-webrtc",
+        2
+      ],
+      [
+        "@cloudflare/realtimekit-ui-addons/camera-host-control",
+        2
+      ],
+      [
+        "@cloudflare/realtimekit-ui-addons/mic-host-control",
+        2
+      ],
+      [
+        "@cloudflare/realtimekit-ui-addons/chat-host-control",
+        2
+      ],
+      [
+        "@cloudflare/realtimekit-ui-addons/hand-raise",
+        2
+      ],
+      [
+        "@cloudflare/realtimekit-ui-addons/reactions-manager",
+        2
+      ],
+      [
+        "@cloudflare/realtimekit-ui-addons/participant-tile-menu",
+        2
+      ],
+      [
+        "@cloudflare/realtimekit-ui-addons/participant-menu-item",
+        2
+      ],
+      [
+        "@cloudflare/realtimekit-ui-addons/participants-tab-action",
+        2
+      ],
+      [
+        "@cloudflare/realtimekit-ui-addons/participants-tab-toggle",
+        2
+      ],
+      [
+        "@cloudflare/realtimekit-ui-addons/video-background",
+        2
+      ],
+      [
+        "@cloudflare/realtimekit-ui-addons/custom-controlbar-button",
+        2
+      ],
+      [
+        "@cloudflare/realtimekit-angular-ui",
+        2
+      ],
+      [
+        "./meeting.component",
+        2
+      ],
+      [
+        "@xterm/addon-fit",
+        2
+      ],
+      [
+        "~/components/BaseSchemaProperties.astro",
+        2
+      ],
+      [
+        "express",
+        2
+      ],
+      [
+        "__STATIC_CONTENT_MANIFEST",
+        2
+      ],
+      [
+        "@libsql/client/web",
+        2
+      ],
+      [
+        "chess.js",
+        2
+      ],
+      [
+        "hono/proxy",
+        2
+      ],
+      [
+        "rwsdk/worker",
+        2
+      ],
+      [
+        "rwsdk/router",
+        2
+      ],
+      [
+        "@tanstack/react-start/plugin/vite",
+        2
+      ],
+      [
+        "./mywasmlib_bg.wasm",
+        2
+      ],
+      [
+        "node:crypto",
+        2
+      ],
+      [
+        "node:url",
+        2
+      ],
+      [
+        "msw/node",
+        2
+      ],
+      [
+        "./network",
+        2
+      ],
+      [
+        "./example.txt",
+        2
+      ],
+      [
+        "./example.wasm",
+        2
+      ],
+      [
+        "./env",
+        2
+      ],
+      [
+        "cloudflare:workflows",
+        2
+      ],
+      [
+        "@ai-sdk/vue",
+        1
+      ],
+      [
+        "@ai-sdk/provider",
+        1
+      ],
+      [
+        "./agents/my-agent",
+        1
+      ],
+      [
+        "@cloudflare/voice/client",
+        1
+      ],
+      [
+        "@cloudflare/voice-telnyx/stt",
+        1
+      ],
+      [
+        "@cloudflare/voice-telnyx/tts",
+        1
+      ],
+      [
+        "web-push",
+        1
+      ],
+      [
+        "agents/experimental/memory/utils",
+        1
+      ],
+      [
+        "agents/browser/tanstack-ai",
+        1
+      ],
+      [
+        "./slack",
+        1
+      ],
+      [
+        "@cloudflare/ai",
+        1
+      ],
+      [
+        "hono-agents",
+        1
+      ],
+      [
+        "./agents/counter",
+        1
+      ],
+      [
+        "@tailwindcss/vite",
+        1
+      ],
+      [
+        "@cloudflare/think/messengers/telegram",
+        1
+      ],
+      [
+        "@cloudflare/think/tools/browser",
+        1
+      ],
+      [
+        "@cloudflare/think/tools/extensions",
+        1
+      ],
+      [
+        "@modelcontextprotocol/sdk/server/index.js",
+        1
+      ],
+      [
+        "./github-handler",
+        1
+      ],
+      [
+        "./mcp",
+        1
+      ],
+      [
+        "./auth-handler",
+        1
+      ],
+      [
+        "chat",
+        1
+      ],
+      [
+        "agents:skills",
+        1
+      ],
+      [
+        "./src/agents/counter",
+        1
+      ],
+      [
+        "./src/agents/chat",
+        1
+      ],
+      [
+        "@flue/runtime",
+        1
+      ],
+      [
+        "@flue/runtime/cloudflare",
+        1
+      ],
+      [
+        "agents/browser",
+        1
+      ],
+      [
+        "@cloudflare/shell/workers",
+        1
+      ],
+      [
+        "@cloudflare/codemode/browser",
+        1
+      ],
+      [
+        "./browser-tools",
+        1
+      ],
+      [
+        "./codemode-tool",
+        1
+      ],
+      [
+        "@cloudflare/codemode/vite",
+        1
+      ],
+      [
+        "./notes-connector",
+        1
+      ],
+      [
+        "./github-connector",
+        1
+      ],
+      [
+        "./orders-openapi",
+        1
+      ],
+      [
+        "./orders-connector",
+        1
+      ],
+      [
+        "@tanstack/ai-openai",
+        1
+      ],
+      [
+        "mppx/hono",
+        1
+      ],
+      [
+        "mppx/server",
+        1
+      ],
+      [
+        "mppx/mcp/client",
+        1
+      ],
+      [
+        "x402-hono",
+        1
+      ],
+      [
+        "~/components/models/AIModelCatalog.astro",
+        1
+      ],
+      [
+        "@deepgram/sdk",
+        1
+      ],
+      [
+        "@fal-ai/client",
+        1
+      ],
+      [
+        "groq-sdk",
+        1
+      ],
+      [
+        "@huggingface/inference",
+        1
+      ],
+      [
+        "@mistralai/mistralai",
+        1
+      ],
+      [
+        "mic",
+        1
+      ],
+      [
+        "readline",
+        1
+      ],
+      [
+        "speaker",
+        1
+      ],
+      [
+        "ai-search-provider",
+        1
+      ],
+      [
+        "./ai-search-connector",
+        1
+      ],
+      [
+        "https://ask.example.com/nlweb-dropdown-chat.js",
+        1
+      ],
+      [
+        "isomorphic-git",
+        1
+      ],
+      [
+        "isomorphic-git/http/web",
+        1
+      ],
+      [
+        "./memory-fs",
+        1
+      ],
+      [
+        "~/components/ArtifactsCIPipelineDiagram.astro",
+        1
+      ],
+      [
+        "~/components/ArtifactsCIWorkflowDiagram.astro",
+        1
+      ],
+      [
+        "~/components/ArtifactsPlatformSharedCIDiagram.astro",
+        1
+      ],
+      [
+        "./src/pipeline",
+        1
+      ],
+      [
+        "puppeteer-core",
+        1
+      ],
+      [
+        "@cloudflare/playwright/test",
+        1
+      ],
+      [
+        "@cloudflare/playwright-mcp",
+        1
+      ],
+      [
+        "@browserbasehq/stagehand",
+        1
+      ],
+      [
+        "./workersAIClient",
+        1
+      ],
+      [
+        "~/components/SubtractIPCalculator.tsx",
+        1
+      ],
+      [
+        "~/components/cf/HostSelectorEgressDiagram.astro",
+        1
+      ],
+      [
+        "./types",
+        1
+      ],
+      [
+        "@cloudflare/actors",
+        1
+      ],
+      [
+        "hono/cloudflare-pages",
+        1
+      ],
+      [
+        "@remix-run/react",
+        1
+      ],
+      [
+        "@sveltejs/kit",
+        1
+      ],
+      [
+        "@sveltejs/adapter-cloudflare",
+        1
+      ],
+      [
+        "@hono/vite-dev-server/cloudflare",
+        1
+      ],
+      [
+        "hono/jsx-renderer",
+        1
+      ],
+      [
+        "honox/server",
+        1
+      ],
+      [
+        "hono/css",
+        1
+      ],
+      [
+        "../islands/counter",
+        1
+      ],
+      [
+        "hono/jsx",
+        1
+      ],
+      [
+        "../../utils/formData",
+        1
+      ],
+      [
+        "hono/bearer-auth",
+        1
+      ],
+      [
+        "hono/logger",
+        1
+      ],
+      [
+        "hono/pretty-json",
+        1
+      ],
+      [
+        "./generated/prisma/",
+        1
+      ],
+      [
+        "@prisma/adapter-d1",
+        1
+      ],
+      [
+        "./retry",
+        1
+      ],
+      [
+        "~/components/",
+        1
+      ],
+      [
+        "nodemailer",
+        1
+      ],
+      [
+        "@openfeature/web-sdk",
+        1
+      ],
+      [
+        "@cloudflare/flagship/web",
+        1
+      ],
+      [
+        "~/components/AvailableChangelogFeeds.astro",
+        1
+      ],
+      [
+        "drizzle-orm/mysql-core",
+        1
+      ],
+      [
+        "drizzle-orm/mysql2",
+        1
+      ],
+      [
+        "drizzle-orm/pg-core",
+        1
+      ],
+      [
+        "drizzle-orm/node-postgres",
+        1
+      ],
+      [
+        "@prisma/adapter-pg",
+        1
+      ],
+      [
+        "@prisma/client",
+        1
+      ],
+      [
+        "~/assets/images/images/examples/composite/over.png",
+        1
+      ],
+      [
+        "~/assets/images/images/examples/composite/in.png",
+        1
+      ],
+      [
+        "~/assets/images/images/examples/composite/atop.png",
+        1
+      ],
+      [
+        "~/assets/images/images/examples/composite/out.png",
+        1
+      ],
+      [
+        "~/assets/images/images/examples/composite/xor.png",
+        1
+      ],
+      [
+        "~/assets/images/images/examples/composite/lighter.png",
+        1
+      ],
+      [
+        "~/assets/images/images/examples/dpr-1.jpg",
+        1
+      ],
+      [
+        "~/assets/images/images/examples/dpr-2.jpg",
+        1
+      ],
+      [
+        "~/assets/images/magic-transit/mtu-mss/dsr.png",
+        1
+      ],
+      [
+        "~/assets/images/magic-transit/mtu-mss/tcp-mss.png",
+        1
+      ],
+      [
+        "~/assets/images/magic-transit/mtu-mss/ipsec-mss.png",
+        1
+      ],
+      [
+        "@solidjs/start/config",
+        1
+      ],
+      [
+        "./$types",
+        1
+      ],
+      [
+        "astro/config",
+        1
+      ],
+      [
+        "@astrojs/cloudflare",
+        1
+      ],
+      [
+        "astro",
+        1
+      ],
+      [
+        "../src/greeting.ts",
+        1
+      ],
+      [
+        "add.wasm",
+        1
+      ],
+      [
+        "../index.html",
+        1
+      ],
+      [
+        "../my-data.bin",
+        1
+      ],
+      [
+        "@cloudflare/pages-plugin-google-chat",
+        1
+      ],
+      [
+        "@cloudflare/pages-plugin-google-chat/api",
+        1
+      ],
+      [
+        "@cloudflare/pages-plugin-graphql",
+        1
+      ],
+      [
+        "@cloudflare/pages-plugin-hcaptcha",
+        1
+      ],
+      [
+        "@cloudflare/static-form-interceptor",
+        1
+      ],
+      [
+        "@cloudflare/a-fictional-admin-plugin",
+        1
+      ],
+      [
+        "@cloudflare/pages-plugin-static-forms",
+        1
+      ],
+      [
+        "@cloudflare/pages-plugin-stytch",
+        1
+      ],
+      [
+        "@cloudflare/pages-plugin-stytch/api",
+        1
+      ],
+      [
+        "@cloudflare/pages-plugin-turnstile",
+        1
+      ],
+      [
+        "@cloudflare/pages-plugin-vercel-og",
+        1
+      ],
+      [
+        "@cloudflare/pages-plugin-vercel-og/api",
+        1
+      ],
+      [
+        "@formspree/react",
+        1
+      ],
+      [
+        "./logo.svg",
+        1
+      ],
+      [
+        "vue",
+        1
+      ],
+      [
+        "sanity-blocks-vue-component",
+        1
+      ],
+      [
+        "./components/posts",
+        1
+      ],
+      [
+        "./components/post",
+        1
+      ],
+      [
+        "./post/data",
+        1
+      ],
+      [
+        "./data",
+        1
+      ],
+      [
+        "cloudflare:pipelines",
+        1
+      ],
+      [
+        "./pub_verif.example.js",
+        1
+      ],
+      [
+        "@cloudflare/privacypass-ts",
+        1
+      ],
+      [
+        "./temp-credentials",
+        1
+      ],
+      [
+        "unpdf",
+        1
+      ],
+      [
+        "./counter-plugin.component",
+        1
+      ],
+      [
+        "~/components/realtimekit/RealtimeKitArchitecture/RealtimeKitArchitecture.astro",
+        1
+      ],
+      [
+        "@cloudflare/realtimekit-recording-sdk",
+        1
+      ],
+      [
+        "https://cdn.jsdelivr.net/npm/@cloudflare/realtimekit-ui@latest/dist/index.es.js",
+        1
+      ],
+      [
+        "https://cdn.jsdelivr.net/npm/@cloudflare/realtimekit-ui-addons@latest/camera-host-control/index.js",
+        1
+      ],
+      [
+        "https://cdn.jsdelivr.net/npm/@cloudflare/realtimekit-ui-addons@latest/mic-host-control/index.js",
+        1
+      ],
+      [
+        "https://cdn.jsdelivr.net/npm/@cloudflare/realtimekit-ui-addons@latest/chat-host-control/index.js",
+        1
+      ],
+      [
+        "https://cdn.jsdelivr.net/npm/@cloudflare/realtimekit-ui-addons@latest/hand-raise/index.js",
+        1
+      ],
+      [
+        "https://cdn.jsdelivr.net/npm/@cloudflare/realtimekit-ui-addons@latest/reactions-manager/index.js",
+        1
+      ],
+      [
+        "https://cdn.jsdelivr.net/npm/@cloudflare/realtimekit-ui-addons@latest/participant-tile-menu/index.js",
+        1
+      ],
+      [
+        "https://cdn.jsdelivr.net/npm/@cloudflare/realtimekit-ui-addons@latest/participant-menu-item/index.js",
+        1
+      ],
+      [
+        "https://cdn.jsdelivr.net/npm/@cloudflare/realtimekit-ui-addons@latest/participants-tab-action/index.js",
+        1
+      ],
+      [
+        "https://cdn.jsdelivr.net/npm/@cloudflare/realtimekit-ui-addons@latest/participants-tab-toggle/index.js",
+        1
+      ],
+      [
+        "https://cdn.jsdelivr.net/npm/@cloudflare/realtimekit-ui-addons@latest/video-background/index.js",
+        1
+      ],
+      [
+        "https://cdn.jsdelivr.net/npm/@cloudflare/realtimekit-ui-addons@latest/custom-controlbar-button/index.js",
+        1
+      ],
+      [
+        "./icons",
+        1
+      ],
+      [
+        "https://cdn.jsdelivr.net/npm/@cloudflare/realtimekit-ui@latest/dist/index.js",
+        1
+      ],
+      [
+        "@angular/forms",
+        1
+      ],
+      [
+        "./components/custom-rtk-meeting.component",
+        1
+      ],
+      [
+        "./components/setup-screen.component",
+        1
+      ],
+      [
+        "./components/in-meeting.component",
+        1
+      ],
+      [
+        "./components/meeting-header.component",
+        1
+      ],
+      [
+        "./components/meeting-control-bar.component",
+        1
+      ],
+      [
+        "./components/meeting-sidebar.component",
+        1
+      ],
+      [
+        "./components/media-preview-modal.component",
+        1
+      ],
+      [
+        "./components/audio-preview.component",
+        1
+      ],
+      [
+        "./components/video-preview.component",
+        1
+      ],
+      [
+        "@angular/common",
+        1
+      ],
+      [
+        "./services/states.service",
+        1
+      ],
+      [
+        "rxjs",
+        1
+      ],
+      [
+        "../services/states.service",
+        1
+      ],
+      [
+        "~/components/realtimekit/RTKUIComponent/RTKUIComponent.astro",
+        1
+      ],
+      [
+        "~/components/realtimekit/RTKUIComponentGrid/RTKUIComponentGrid.astro",
+        1
+      ],
+      [
+        "./custom-controlbar.component",
+        1
+      ],
+      [
+        "./custom-header.component",
+        1
+      ],
+      [
+        "./CustomHeader",
+        1
+      ],
+      [
+        "./MyMeetingUI.tsx",
+        1
+      ],
+      [
+        "~/components/fields/FieldCatalogPage.astro",
+        1
+      ],
+      [
+        "@octokit/rest",
+        1
+      ],
+      [
+        "~/content/notifications/index.yaml?raw",
+        1
+      ],
+      [
+        "~/components/AvailableDashRoutes.astro",
+        1
+      ],
+      [
+        "~/content/partials/style-guide/simple-props.mdx?raw",
+        1
+      ],
+      [
+        "~/content/partials/style-guide/strong-in-props.mdx?raw",
+        1
+      ],
+      [
+        "~/content/partials/style-guide/link-in-props.mdx?raw",
+        1
+      ],
+      [
+        "~/content/partials/style-guide/image-in-props.mdx?raw",
+        1
+      ],
+      [
+        "~/content/partials/style-guide/code-in-props.mdx?raw",
+        1
+      ],
+      [
+        "fs/promises",
+        1
+      ],
+      [
+        "firebase/app",
+        1
+      ],
+      [
+        "firebase/app-check",
+        1
+      ],
+      [
+        "firebase-admin/app",
+        1
+      ],
+      [
+        "firebase-admin/app-check",
+        1
+      ],
+      [
+        "react-native-webview",
+        1
+      ],
+      [
+        "~/assets/images/waf/managed-rulesets/ruleset-config-cloudflare-managed-ruleset.png",
+        1
+      ],
+      [
+        "~/assets/images/waf/managed-rulesets/ruleset-config-owasp-core-ruleset.png",
+        1
+      ],
+      [
+        "~/assets/images/waf/managed-rulesets/tags-config-owasp-core-ruleset.png",
+        1
+      ],
+      [
+        "~/assets/images/waf/managed-rulesets/tags-config-sdd-ruleset.png",
+        1
+      ],
+      [
+        "../app-worker/src/index",
+        1
+      ],
+      [
+        "@neondatabase/serverless",
+        1
+      ],
+      [
+        "@planetscale/database",
+        1
+      ],
+      [
+        "@supabase/supabase-js",
+        1
+      ],
+      [
+        "@upstash/redis/cloudflare",
+        1
+      ],
+      [
+        "vite-plugin-singlefile",
+        1
+      ],
+      [
+        "react-chessboard",
+        1
+      ],
+      [
+        "./chess",
+        1
+      ],
+      [
+        "hono/basic-auth",
+        1
+      ],
+      [
+        "hono/cache",
+        1
+      ],
+      [
+        "hono/utils/crypto",
+        1
+      ],
+      [
+        "hono/http-exception",
+        1
+      ],
+      [
+        "hono/streaming",
+        1
+      ],
+      [
+        "hono/secure-headers",
+        1
+      ],
+      [
+        "hono/cloudflare-workers",
+        1
+      ],
+      [
+        "@opennextjs/cloudflare",
+        1
+      ],
+      [
+        "react-router",
+        1
+      ],
+      [
+        "@/app/Document",
+        1
+      ],
+      [
+        "@/app/pages/Home",
+        1
+      ],
+      [
+        "@tanstack/react-start/server-entry",
+        1
+      ],
+      [
+        "@tanstack/react-router",
+        1
+      ],
+      [
+        "vike/types",
+        1
+      ],
+      [
+        "~/content/partials/prompts/base-prompt.txt?raw",
+        1
+      ],
+      [
+        "./mywasmlib_bg.js",
+        1
+      ],
+      [
+        "path/to/mylib.js",
+        1
+      ],
+      [
+        "welcome.html",
+        1
+      ],
+      [
+        "./todos",
+        1
+      ],
+      [
+        "example-api-client",
+        1
+      ],
+      [
+        "node:events",
+        1
+      ],
+      [
+        "node:dns",
+        1
+      ],
+      [
+        "node:net",
+        1
+      ],
+      [
+        "node:stream",
+        1
+      ],
+      [
+        "node:stream/consumers",
+        1
+      ],
+      [
+        "node:stream/promises",
+        1
+      ],
+      [
+        "node:timers",
+        1
+      ],
+      [
+        "node:tls",
+        1
+      ],
+      [
+        "node:zlib",
+        1
+      ],
+      [
+        "./simple.wasm",
+        1
+      ],
+      [
+        "@playwright/test",
+        1
+      ],
+      [
+        "vitest/node",
+        1
+      ],
+      [
+        "@cloudflare/vitest-pool-workers/config",
+        1
+      ],
+      [
+        "@cloudflare/vitest-pool-workers",
+        1
+      ],
+      [
+        "@msw/cloudflare",
+        1
+      ],
+      [
+        "./index.ts",
+        1
+      ],
+      [
+        "qrcode-svg",
+        1
+      ],
+      [
+        "./api",
+        1
+      ],
+      [
+        "./routes/lookup",
+        1
+      ],
+      [
+        "./routes/webhook",
+        1
+      ],
+      [
+        "itty-router",
+        1
+      ],
+      [
+        "openai/uploads",
+        1
+      ],
+      [
+        "cheerio",
+        1
+      ],
+      [
+        "@prisma/client/edge",
+        1
+      ],
+      [
+        "@prisma/extension-accelerate",
+        1
+      ],
+      [
+        "./my-image.png",
+        1
+      ],
+      [
+        "@react-router/dev/vite",
+        1
+      ],
+      [
+        "./assets/react.svg",
+        1
+      ],
+      [
+        "/vite.svg",
+        1
+      ],
+      [
+        "node:assert/strict",
+        1
+      ],
+      [
+        "./example.md",
+        1
+      ],
+      [
+        "foo",
+        1
+      ],
+      [
+        "some-dependency.js",
+        1
+      ],
+      [
+        "./index.html",
+        1
+      ],
+      [
+        "@langchain/textsplitters",
+        1
+      ],
+      [
+        "workers-ai",
+        1
+      ],
+      [
+        "~/components/models/WorkersAIModelCatalog.astro",
+        1
+      ]
+    ],
+    "directives": [
+      [
+        "note",
+        3515
+      ],
+      [
+        "caution",
+        875
+      ],
+      [
+        "tip",
+        74
+      ],
+      [
+        "info",
+        1
+      ],
+      [
+        "warning",
+        1
+      ]
+    ],
+    "html": [
+      [
+        "td",
+        4231
+      ],
+      [
+        "br",
+        2175
+      ],
+      [
+        "code",
+        1337
+      ],
+      [
+        "tr",
+        960
+      ],
+      [
+        "th",
+        607
+      ],
+      [
+        "a",
+        588
+      ],
+      [
+        "p",
+        379
+      ],
+      [
+        "li",
+        233
+      ],
+      [
+        "strong",
+        160
+      ],
+      [
+        "table",
+        138
+      ],
+      [
+        "tbody",
+        136
+      ],
+      [
+        "thead",
+        125
+      ],
+      [
+        "div",
+        111
+      ],
+      [
+        "sup",
+        105
+      ],
+      [
+        "ul",
+        62
+      ],
+      [
+        "em",
+        59
+      ],
+      [
+        "b",
+        53
+      ],
+      [
+        "span",
+        41
+      ],
+      [
+        "void",
+        36
+      ],
+      [
+        "details",
+        28
+      ],
+      [
+        "summary",
+        28
+      ],
+      [
+        "pre",
+        19
+      ],
+      [
+        "string",
+        18
+      ],
+      [
+        "name",
+        12
+      ],
+      [
+        "https",
+        10
+      ],
+      [
+        "img",
+        10
+      ],
+      [
+        "table-wrap",
+        9
+      ],
+      [
+        "your-zone",
+        9
+      ],
+      [
+        "ol",
+        8
+      ],
+      [
+        "team",
+        8
+      ],
+      [
+        "label",
+        8
+      ],
+      [
+        "hostname",
+        7
+      ],
+      [
+        "input",
+        7
+      ],
+      [
+        "your",
+        5
+      ],
+      [
+        "iframe",
+        5
+      ],
+      [
+        "head",
+        5
+      ],
+      [
+        "title",
+        5
+      ],
+      [
+        "meta",
+        5
+      ],
+      [
+        "boolean",
+        4
+      ],
+      [
+        "h1",
+        4
+      ],
+      [
+        "sandbox-id",
+        4
+      ],
+      [
+        "your-",
+        3
+      ],
+      [
+        "token",
+        2
+      ],
+      [
+        "path",
+        2
+      ],
+      [
+        "dl",
+        2
+      ],
+      [
+        "dt",
+        2
+      ],
+      [
+        "dd",
+        2
+      ],
+      [
+        "auth-token",
+        2
+      ],
+      [
+        "html",
+        2
+      ],
+      [
+        "body",
+        2
+      ],
+      [
+        "random",
+        2
+      ],
+      [
+        "zone",
+        2
+      ],
+      [
+        "tunnel-id",
+        2
+      ],
+      [
+        "figure",
+        2
+      ],
+      [
+        "unique-",
+        2
+      ],
+      [
+        "h3",
+        2
+      ],
+      [
+        "audio",
+        2
+      ],
+      [
+        "cname-target",
+        1
+      ],
+      [
+        "client-id",
+        1
+      ],
+      [
+        "client-secret",
+        1
+      ],
+      [
+        "uuid",
+        1
+      ],
+      [
+        "as",
+        1
+      ],
+      [
+        "h2",
+        1
+      ],
+      [
+        "number",
+        1
+      ],
+      [
+        "new-team-name",
+        1
+      ],
+      [
+        "any",
+        1
+      ],
+      [
+        "n",
+        1
+      ],
+      [
+        "sub",
+        1
+      ],
+      [
+        "i",
+        1
+      ],
+      [
+        "true",
+        1
+      ],
+      [
+        "false",
+        1
+      ],
+      [
+        "your-worker",
+        1
+      ],
+      [
+        "your-subdomain",
+        1
+      ],
+      [
+        "source",
+        1
+      ]
+    ],
+    "fences": [],
+    "bare-directives": [
+      [
+        "(bare)",
+        240
+      ]
+    ],
+    "features": [
+      [
+        "jsx-expression",
+        4139
+      ],
+      [
+        "mdx-export",
+        639
+      ]
+    ]
+  },
+  "examples": {
+    "components": {
+      "Details": "src/content/docs/1.1.1.1/additional-options/dns-in-google-sheets.mdx",
+      "DirectoryListing": "src/content/docs/1.1.1.1/additional-options/index.mdx",
+      "ProductChangelog": "src/content/docs/1.1.1.1/changelog.mdx",
+      "GlossaryTooltip": "src/content/docs/1.1.1.1/faq.mdx",
+      "Description": "src/content/docs/1.1.1.1/index.mdx",
+      "Plan": "src/content/docs/1.1.1.1/index.mdx",
+      "Feature": "src/content/docs/1.1.1.1/index.mdx",
+      "RelatedProduct": "src/content/docs/1.1.1.1/index.mdx",
+      "Render": "src/content/docs/1.1.1.1/setup/android.mdx",
+      "WranglerConfig": "src/content/docs/agent-memory/api/workers-api.mdx",
+      "Type": "src/content/docs/agent-memory/api/workers-api.mdx",
+      "MetaInfo": "src/content/docs/agent-memory/api/workers-api.mdx",
+      "AgentMemoryProfile": "src/content/docs/agent-memory/api/workers-api.mdx",
+      "AgentMemoryMessage": "src/content/docs/agent-memory/api/workers-api.mdx",
+      "AgentMemoryMemory": "src/content/docs/agent-memory/api/workers-api.mdx",
+      "AgentMemoryRecallResult": "src/content/docs/agent-memory/api/workers-api.mdx",
+      "AgentMemoryListMemoriesResult": "src/content/docs/agent-memory/api/workers-api.mdx",
+      "AgentMemoryGetSummaryResponse": "src/content/docs/agent-memory/api/workers-api.mdx",
+      "LinkCard": "src/content/docs/agent-memory/api/workers-api.mdx",
+      "PackageManagers": "src/content/docs/agent-memory/get-started.mdx",
+      "TypeScriptExample": "src/content/docs/agent-memory/get-started.mdx",
+      "LinkButton": "src/content/docs/agent-memory/index.mdx",
+      "CardGrid": "src/content/docs/agent-memory/index.mdx",
+      "LinkTitleCard": "src/content/docs/agent-memory/index.mdx",
+      "AgentHeader": "src/content/docs/agent-setup/bionic.mdx",
+      "Steps": "src/content/docs/agent-setup/bionic.mdx",
+      "RandomPrompt": "src/content/docs/agent-setup/bionic.mdx",
+      "PlatformAccess": "src/content/docs/agent-setup/bionic.mdx",
+      "ExamplePromptsList": "src/content/docs/agent-setup/bionic.mdx",
+      "TipsList": "src/content/docs/agent-setup/bionic.mdx",
+      "FAQList": "src/content/docs/agent-setup/bionic.mdx",
+      "FAQItem": "src/content/docs/agent-setup/bionic.mdx",
+      "TroubleshootingList": "src/content/docs/agent-setup/bionic.mdx",
+      "TroubleshootingItem": "src/content/docs/agent-setup/bionic.mdx",
+      "BuildAgentsCallout": "src/content/docs/agent-setup/bionic.mdx",
+      "OtherAgents": "src/content/docs/agent-setup/bionic.mdx",
+      "Tabs": "src/content/docs/agent-setup/codex.mdx",
+      "TabItem": "src/content/docs/agent-setup/codex.mdx",
+      "InlineBadge": "src/content/docs/agents/communication-channels/voice.mdx",
+      "AgentsPlatformDiagram": "src/content/docs/agents/index.mdx",
+      "FileTree": "src/content/docs/agents/runtime/operations/configuration.mdx",
+      "DashButton": "src/content/docs/agents/runtime/operations/configuration.mdx",
+      "AIModelCatalog": "src/content/docs/ai/models/index.mdx",
+      "Example": "src/content/docs/ai-crawl-control/configuration/ai-crawl-control-with-transform-rules.mdx",
+      "Stream": "src/content/docs/ai-crawl-control/index.mdx",
+      "Card": "src/content/docs/ai-crawl-control/index.mdx",
+      "Glossary": "src/content/docs/ai-crawl-control/reference/glossary.mdx",
+      "CURL": "src/content/docs/ai-gateway/configuration/custom-domains.mdx",
+      "ResourcesBySelector": "src/content/docs/ai-gateway/demos.mdx",
+      "APIRequest": "src/content/docs/ai-gateway/evaluations/add-human-feedback-api.mdx",
+      "Aside": "src/content/docs/ai-gateway/evaluations/index.mdx",
+      "YouTube": "src/content/docs/ai-gateway/features/guardrails/index.mdx",
+      "CodeSnippets": "src/content/docs/ai-gateway/integrations/vercel-ai-sdk.mdx",
+      "ListTutorials": "src/content/docs/ai-gateway/tutorials/index.mdx",
+      "Badge": "src/content/docs/ai-gateway/usage/universal.mdx",
+      "AiSearchIndexingDiagram": "src/content/docs/ai-search/concepts/how-ai-search-works.mdx",
+      "AiSearchQueryingDiagram": "src/content/docs/ai-search/concepts/how-ai-search-works.mdx",
+      "AiSearchNamespacesDiagram": "src/content/docs/ai-search/concepts/namespaces.mdx",
+      "YOUR_DOMAIN": "src/content/docs/ai-search/how-to/add-search-to-your-website.mdx",
+      "AiSearchVoiceDiagram": "src/content/docs/ai-search/how-to/talk-to-your-knowledge-base.mdx",
+      "AiSearchOverviewDiagram": "src/content/docs/ai-search/index.mdx",
+      "ProductReleaseNotes": "src/content/docs/ai-search/platform/release-note.mdx",
+      "WranglerNamespace": "src/content/docs/ai-search/wrangler-commands.mdx",
+      "GlossaryDefinition": "src/content/docs/api-shield/security/mtls/index.mdx",
+      "SOURCE": "src/content/docs/api-shield/security/schema-validation/api.mdx",
+      "ArtifactsCreateRepoResult": "src/content/docs/artifacts/api/workers-binding.mdx",
+      "ArtifactsRepo": "src/content/docs/artifacts/api/workers-binding.mdx",
+      "ArtifactsRepoListResult": "src/content/docs/artifacts/api/workers-binding.mdx",
+      "ArtifactsCreateTokenResult": "src/content/docs/artifacts/api/workers-binding.mdx",
+      "ArtifactsTokenListResult": "src/content/docs/artifacts/api/workers-binding.mdx",
+      "ArtifactsLogResult": "src/content/docs/artifacts/api/workers-binding.mdx",
+      "ArtifactsCommit": "src/content/docs/artifacts/api/workers-binding.mdx",
+      "ArtifactsTree": "src/content/docs/artifacts/api/workers-binding.mdx",
+      "ArtifactsCIWorkflowDiagram": "src/content/docs/artifacts/guides/build-and-deploy-on-push.mdx",
+      "ArtifactsCIPipelineDiagram": "src/content/docs/artifacts/guides/build-and-deploy-on-push.mdx",
+      "ArtifactsPlatformSharedCIDiagram": "src/content/docs/artifacts/guides/build-and-deploy-on-push.mdx",
+      "AvailableNotifications": "src/content/docs/bots/reference/alerts.mdx",
+      "ZONE_ID": "src/content/docs/byoip/address-maps/setup.mdx",
+      "IP_PREFIX_TO_DELEGATE": "src/content/docs/byoip/get-started.mdx",
+      "ACCOUNT_ID": "src/content/docs/byoip/get-started.mdx",
+      "DEFAULT_SERVICE": "src/content/docs/byoip/get-started.mdx",
+      "SERVICE_ID": "src/content/docs/byoip/get-started.mdx",
+      "CUSTOM_HOSTNAME": "src/content/docs/cloudflare-for-platforms/cloudflare-for-saas/performance/early-hints-for-saas.mdx",
+      "CERTIFICATE_STRING": "src/content/docs/cloudflare-for-platforms/cloudflare-for-saas/security/certificate-management/enforce-mtls.mdx",
+      "CERTIFICATE_PRIVATE_KEY": "src/content/docs/cloudflare-for-platforms/cloudflare-for-saas/security/certificate-management/enforce-mtls.mdx",
+      "YOUR_SUBDOMAIN": "src/content/docs/cloudflare-one/access-controls/ai-controls/secure-mcp-servers.mdx",
+      "URL": "src/content/docs/cloudflare-one/access-controls/authenticate-agents.mdx",
+      "CODE_CHALLENGE": "src/content/docs/cloudflare-one/access-controls/authenticate-agents.mdx",
+      "URL-encoded": "src/content/docs/cloudflare-one/access-controls/authenticate-agents.mdx",
+      "AUTH_CODE": "src/content/docs/cloudflare-one/access-controls/authenticate-agents.mdx",
+      "CLIENT_ID": "src/content/docs/cloudflare-one/access-controls/authenticate-agents.mdx",
+      "CODE_VERIFIER": "src/content/docs/cloudflare-one/access-controls/authenticate-agents.mdx",
+      "REFRESH_TOKEN": "src/content/docs/cloudflare-one/access-controls/authenticate-agents.mdx",
+      "APPROVED_COUNTRIES_GROUP_ID": "src/content/docs/cloudflare-one/access-controls/policies/common-policies.mdx",
+      "OKTA_IDP_ID": "src/content/docs/cloudflare-one/access-controls/policies/common-policies.mdx",
+      "GATEWAY_CHECK_ID": "src/content/docs/cloudflare-one/access-controls/policies/common-policies.mdx",
+      "OS_VERSION_CHECK_ID": "src/content/docs/cloudflare-one/access-controls/policies/common-policies.mdx",
+      "OTP_IDENTITY_PROVIDER_ID": "src/content/docs/cloudflare-one/access-controls/policies/common-policies.mdx",
+      "CORPORATE_IP_ALLOWLIST_ID": "src/content/docs/cloudflare-one/access-controls/policies/common-policies.mdx",
+      "SERVICE_TOKEN_ID": "src/content/docs/cloudflare-one/access-controls/policies/common-policies.mdx",
+      "WINDOWS_VERSION_CHECK_ID": "src/content/docs/cloudflare-one/access-controls/policies/common-policies.mdx",
+      "TOKEN_NAME": "src/content/docs/cloudflare-one/access-controls/service-credentials/service-tokens.mdx",
+      "DESTINATION_CONF": "src/content/docs/cloudflare-one/insights/logs/logpush/network-firewall-log-filters.mdx",
+      "AZURE_DIRECTORY_ID": "src/content/docs/cloudflare-one/integrations/identity-providers/entra-id.mdx",
+      "TEAM_NAME": "src/content/docs/cloudflare-one/integrations/identity-providers/entra-id.mdx",
+      "IDP_UUID": "src/content/docs/cloudflare-one/integrations/identity-providers/idp-federation.mdx",
+      "RECIPIENT_ACCOUNT_ID": "src/content/docs/cloudflare-one/integrations/identity-providers/idp-federation.mdx",
+      "SOURCE_ACCOUNT_ID": "src/content/docs/cloudflare-one/integrations/identity-providers/idp-federation.mdx",
+      "GRANT_ID": "src/content/docs/cloudflare-one/integrations/identity-providers/idp-federation.mdx",
+      "ORGANIZATION_ID": "src/content/docs/cloudflare-one/integrations/identity-providers/idp-federation.mdx",
+      "TunnelCalculator": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-tunnel/configure-tunnels/tunnel-availability/system-requirements.mdx",
+      "Code": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/local-management/configuration-file.mdx",
+      "IP": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/local-management/create-local-tunnel.mdx",
+      "UUID": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/local-management/create-local-tunnel.mdx",
+      "TunnelHostnameRoutingDiagram": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-tunnel/private-net/cloudflared/connect-private-hostname.mdx",
+      "AnchorHeading": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/analytics/index.mdx",
+      "APP_ID": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/application-based-policies/breakout-traffic.mdx",
+      "APP_NAME": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/application-based-policies/breakout-traffic.mdx",
+      "APP_TYPE": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/application-based-policies/breakout-traffic.mdx",
+      "MANAGED_APP_ID": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/application-based-policies/breakout-traffic.mdx",
+      "IP_ADDRESS": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/dhcp/dhcp-server.mdx",
+      "HARDWARE_MAC_ADDRESS": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/dhcp/dhcp-static-address-reservation.mdx",
+      "HARDWARE_MAC_ADDRESS_2": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/dhcp/dhcp-static-address-reservation.mdx",
+      "POLICY_DESCRIPTION": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/network-segmentation.mdx",
+      "LAN_ID": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/network-segmentation.mdx",
+      "LAN_NAME": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/network-segmentation.mdx",
+      "POLICY_NAME": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/network-segmentation.mdx",
+      "DESCRIBE_POLICY": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/common-settings/configure-tunnel-health-alerts.mdx",
+      "DESCRIBE_ALERT": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/common-settings/configure-tunnel-health-alerts.mdx",
+      "IP_NEXT_HOP": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-routes.mdx",
+      "YOUR_IP_PREFIX": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-routes.mdx",
+      "ROUTE_DESCRIPTION": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-routes.mdx",
+      "CLOUDFLARE_ENDPOINT": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-routes.mdx",
+      "INTERFACE_ADDRESS": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-routes.mdx",
+      "CUSTOMER_ENDPOINT": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-routes.mdx",
+      "PSK": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-routes.mdx",
+      "TUNNEL_NAME": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-tunnel-endpoints.mdx",
+      "TUNNEL_DESCRIPTION": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-tunnel-endpoints.mdx",
+      "PSK_VALUE": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-tunnel-endpoints.mdx",
+      "Markdown": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/legal/3rdparty.mdx",
+      "SUBDOMAIN": "src/content/docs/cloudflare-one/networks/resolvers-and-proxies/proxy-endpoints/index.mdx",
+      "ACCESS_POLICY_ID": "src/content/docs/cloudflare-one/networks/resolvers-and-proxies/proxy-endpoints/index.mdx",
+      "PUBLIC_IP": "src/content/docs/cloudflare-one/networks/resolvers-and-proxies/proxy-endpoints/index.mdx",
+      "PUBLIC_IP2": "src/content/docs/cloudflare-one/networks/resolvers-and-proxies/proxy-endpoints/index.mdx",
+      "PUBLIC_IP3": "src/content/docs/cloudflare-one/networks/resolvers-and-proxies/proxy-endpoints/index.mdx",
+      "SubtractIPCalculator": "src/content/docs/cloudflare-one/networks/routes/reserved-ips.mdx",
+      "Width": "src/content/docs/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/modes/device-information-only.mdx",
+      "POLICY_UUID_1": "src/content/docs/cloudflare-one/team-and-resources/devices/cloudflare-one-client/deployment/mdm-deployment/client-version-assignments.mdx",
+      "POLICY_UUID_2": "src/content/docs/cloudflare-one/team-and-resources/devices/cloudflare-one-client/deployment/mdm-deployment/client-version-assignments.mdx",
+      "WARPReleases": "src/content/docs/cloudflare-one/team-and-resources/devices/cloudflare-one-client/download/beta-releases.mdx",
+      "GranularControlApplicationsList": "src/content/docs/cloudflare-one/traffic-policies/application-app-types.mdx",
+      "LIST_UUID": "src/content/docs/cloudflare-one/traffic-policies/dns-policies/common-policies.mdx",
+      "HostSelectorEgressDiagram": "src/content/docs/cloudflare-one/traffic-policies/egress-policies/host-selectors.mdx",
+      "POSTURE_CHECK_UUID": "src/content/docs/cloudflare-one/traffic-policies/http-policies/common-policies.mdx",
+      "POSTURE_CHECK_1_UUID": "src/content/docs/cloudflare-one/traffic-policies/http-policies/common-policies.mdx",
+      "POSTURE_CHECK_2_UUID": "src/content/docs/cloudflare-one/traffic-policies/http-policies/common-policies.mdx",
+      "PROXY_ENDPOINT_ID": "src/content/docs/cloudflare-one/traffic-policies/network-policies/common-policies.mdx",
+      "NEW_HOSTNAME_LIST": "src/content/docs/cloudflare-one/tutorials/integrate-microsoft-mcas-teams.mdx",
+      "TUNNEL_UUID": "src/content/docs/cloudflare-one/tutorials/user-selectable-egress-ips.mdx",
+      "VNET_AMER_UUID": "src/content/docs/cloudflare-one/tutorials/user-selectable-egress-ips.mdx",
+      "VNET_EMEA_UUID": "src/content/docs/cloudflare-one/tutorials/user-selectable-egress-ips.mdx",
+      "DEDICATED_IPV4_ADDRESS": "src/content/docs/cloudflare-one/tutorials/user-selectable-egress-ips.mdx",
+      "SECONDARY_DEDICATED_IPV6_ADDRESS": "src/content/docs/cloudflare-one/tutorials/user-selectable-egress-ips.mdx",
+      "DEDICATED_IPV6_ADDRESS": "src/content/docs/cloudflare-one/tutorials/user-selectable-egress-ips.mdx",
+      "ContainerIsolation": "src/content/docs/containers/concepts/index.mdx",
+      "ContainerRequestPath": "src/content/docs/containers/concepts/index.mdx",
+      "ContainerLifecycle": "src/content/docs/containers/concepts/index.mdx",
+      "ContainerPlacement": "src/content/docs/containers/concepts/index.mdx",
+      "ContainerConnectivity": "src/content/docs/containers/concepts/index.mdx",
+      "YOUR_DOCKERHUB_USERNAME": "src/content/docs/containers/guides/image-management.mdx",
+      "AWS_ACCOUNT_ID": "src/content/docs/containers/guides/image-management.mdx",
+      "AWS_REGION": "src/content/docs/containers/guides/image-management.mdx",
+      "AWS_ACCESS_KEY_ID": "src/content/docs/containers/guides/image-management.mdx",
+      "REGION": "src/content/docs/containers/guides/image-management.mdx",
+      "SERVICE_ACCOUNT_EMAIL": "src/content/docs/containers/guides/image-management.mdx",
+      "IMAGE": "src/content/docs/containers/guides/image-management.mdx",
+      "TAG": "src/content/docs/containers/guides/image-management.mdx",
+      "Response": "src/content/docs/containers/reference/container-class.mdx",
+      "State": "src/content/docs/containers/reference/container-class.mdx",
+      "Schedule": "src/content/docs/containers/reference/container-class.mdx",
+      "T": "src/content/docs/containers/reference/container-class.mdx",
+      "DurableObjectStub": "src/content/docs/containers/reference/container-class.mdx",
+      "RuleID": "src/content/docs/ddos-protection/best-practices/third-party.mdx",
+      "RSSButton": "src/content/docs/ddos-protection/change-log/http/index.mdx",
+      "ZONE_NAME": "src/content/docs/dns/dnssec/dnssec-active-migration.mdx",
+      "PUBLIC_KEY": "src/content/docs/dns/dnssec/dnssec-active-migration.mdx",
+      "NS_DOMAIN": "src/content/docs/dns/dnssec/multi-signer-dnssec/setup.mdx",
+      "YOUR_ACCOUNT_ID": "src/content/docs/dns/zone-setups/full-setup/setup.mdx",
+      "WorkerCode": "src/content/docs/dynamic-workers/api-reference.mdx",
+      "AvailableChangelogFeeds": "src/content/docs/fundamentals/new-features/available-rss-feeds.mdx",
+      "ENTER_WORKER_NAME": "src/content/docs/kv/index.mdx",
+      "YOUR_BINDING_ID": "src/content/docs/kv/index.mdx",
+      "KV_NAMESPACE_ID": "src/content/docs/kv/index.mdx",
+      "PublicStats": "src/content/docs/learning-paths/data-center-protection/concepts/benefits-magic-transit.mdx",
+      "CORPORATE_DOMAINS_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-dns-policies/create-list.mdx",
+      "KNOWN_DOMAINS_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-dns-policies/recommended-dns-policies.mdx",
+      "ALLOWED_REMEDIATION_DOMAINS_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-dns-policies/recommended-dns-policies.mdx",
+      "IP_BLOCKLIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-dns-policies/recommended-dns-policies.mdx",
+      "DOMAIN_BLOCKLIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-dns-policies/recommended-dns-policies.mdx",
+      "HOST_BLOCKLIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-dns-policies/recommended-dns-policies.mdx",
+      "SHADOW_IT_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-http-policies/browser-isolation.mdx",
+      "TRUSTED_DOMAINS_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-http-policies/browser-isolation.mdx",
+      "CREDENTIALS_DLP_PROFILE_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-http-policies/data-loss-prevention.mdx",
+      "AWS_DLP_PROFILE_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-http-policies/data-loss-prevention.mdx",
+      "SKU_DLP_PROFILE_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-http-policies/data-loss-prevention.mdx",
+      "FINANCIAL_INFO_DLP_PROFILE_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-http-policies/data-loss-prevention.mdx",
+      "ANDROID_VERSION_POSTURE_CHECK_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-http-policies/recommended-http-policies.mdx",
+      "DOMAIN_INSPECTION_BYPASS_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-http-policies/recommended-http-policies.mdx",
+      "QUARANTINED_USERS_IP_ALLOWLIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-http-policies/recommended-http-policies.mdx",
+      "DOMAIN_ISOLATE_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-http-policies/recommended-http-policies.mdx",
+      "SERIAL_NUMBER_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-http-policies/tls-inspection.mdx",
+      "IP_ALLOWLIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-network-policies/recommended-network-policies.mdx",
+      "HOST_ALLOWLIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-network-policies/recommended-network-policies.mdx",
+      "DOMAIN_ALLOWLIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-network-policies/recommended-network-policies.mdx",
+      "DEVICE_POSTURE_CHECK_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-network-policies/recommended-network-policies.mdx",
+      "FINANCE_SERVERS_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-network-policies/recommended-network-policies.mdx",
+      "SSH_IP_ALLOWLIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-network-policies/recommended-network-policies.mdx",
+      "SSH_FQDN_ALLOWLIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-network-policies/recommended-network-policies.mdx",
+      "INTERNAL_NETWORK_IP_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-network-policies/recommended-network-policies.mdx",
+      "WorkersArchitectureDiagram": "src/content/docs/learning-paths/workers/concepts/workers-concepts.mdx",
+      "BUCKET_PATH": "src/content/docs/logs/logpush/examples/example-logpush-curl.mdx",
+      "DOMAIN_NAME": "src/content/docs/logs/logpush/examples/example-logpush-curl.mdx",
+      "OWNERSHIP_CHALLENGE_TOKEN": "src/content/docs/logs/logpush/examples/example-logpush-curl.mdx",
+      "PROJECT_ID": "src/content/docs/logs/logpush/logpush-job/enable-destinations/bigquery.mdx",
+      "DATASET_ID": "src/content/docs/logs/logpush/logpush-job/enable-destinations/bigquery.mdx",
+      "TABLE_ID": "src/content/docs/logs/logpush/logpush-job/enable-destinations/bigquery.mdx",
+      "ENCODED_VALUE": "src/content/docs/logs/logpush/logpush-job/enable-destinations/bigquery.mdx",
+      "DATADOG_ENDPOINT_URL": "src/content/docs/logs/logpush/logpush-job/enable-destinations/datadog.mdx",
+      "DATADOG_API_KEY": "src/content/docs/logs/logpush/logpush-job/enable-destinations/datadog.mdx",
+      "YOUR_EGRESS_POOL_ID": "src/content/docs/logs/logpush/logpush-job/enable-destinations/egress-ip.mdx",
+      "PUBLIC_DOMAIN": "src/content/docs/logs/logpush/logpush-job/enable-destinations/elastic.mdx",
+      "PUBLIC_PORT": "src/content/docs/logs/logpush/logpush-job/enable-destinations/elastic.mdx",
+      "SECRET_HEADER": "src/content/docs/logs/logpush/logpush-job/enable-destinations/elastic.mdx",
+      "SECRET_VALUE": "src/content/docs/logs/logpush/logpush-job/enable-destinations/elastic.mdx",
+      "INSTANCE_ID": "src/content/docs/logs/logpush/logpush-job/enable-destinations/ibm-cloud-logs.mdx",
+      "IBM_API_KEY": "src/content/docs/logs/logpush/logpush-job/enable-destinations/ibm-cloud-logs.mdx",
+      "NAME": "src/content/docs/logs/logpush/logpush-job/enable-destinations/ibm-qradar.mdx",
+      "QRADAR_URL": "src/content/docs/logs/logpush/logpush-job/enable-destinations/ibm-qradar.mdx",
+      "LOG_SOURCE_PORT": "src/content/docs/logs/logpush/logpush-job/enable-destinations/ibm-qradar.mdx",
+      "NR_ENDPOINT_URL": "src/content/docs/logs/logpush/logpush-job/enable-destinations/new-relic.mdx",
+      "NR_LICENSE_KEY": "src/content/docs/logs/logpush/logpush-job/enable-destinations/new-relic.mdx",
+      "R2_ACCESS_KEY_ID": "src/content/docs/logs/logpush/logpush-job/enable-destinations/r2.mdx",
+      "R2_SECRET_ACCESS_KEY": "src/content/docs/logs/logpush/logpush-job/enable-destinations/r2.mdx",
+      "BUCKET_NAME": "src/content/docs/logs/logpush/logpush-job/enable-destinations/s3-compatible-endpoints.mdx",
+      "ACCESS_KEY_ID": "src/content/docs/logs/logpush/logpush-job/enable-destinations/s3-compatible-endpoints.mdx",
+      "SECRET_ACCESS_KEY": "src/content/docs/logs/logpush/logpush-job/enable-destinations/s3-compatible-endpoints.mdx",
+      "ENDPOINT_URL": "src/content/docs/logs/logpush/logpush-job/enable-destinations/s3-compatible-endpoints.mdx",
+      "SENTINELONE_ENDPOINT_URL": "src/content/docs/logs/logpush/logpush-job/enable-destinations/sentinelone.mdx",
+      "SENTINELONE_AUTH_TOKEN": "src/content/docs/logs/logpush/logpush-job/enable-destinations/sentinelone.mdx",
+      "SOURCE_TYPE": "src/content/docs/logs/logpush/logpush-job/enable-destinations/sentinelone.mdx",
+      "SPLUNK_ENDPOINT_URL": "src/content/docs/logs/logpush/logpush-job/enable-destinations/splunk.mdx",
+      "SPLUNK_CHANNEL_ID": "src/content/docs/logs/logpush/logpush-job/enable-destinations/splunk.mdx",
+      "INSECURE_SKIP_VERIFY": "src/content/docs/logs/logpush/logpush-job/enable-destinations/splunk.mdx",
+      "SPLUNK_AUTH_TOKEN": "src/content/docs/logs/logpush/logpush-job/enable-destinations/splunk.mdx",
+      "Image": "src/content/docs/magic-transit/reference/mtu-mss.mdx",
+      "PagesBuildPresetsTable": "src/content/docs/pages/configuration/build-configuration.mdx",
+      "PagesBuildEnvironmentLanguages": "src/content/docs/pages/configuration/build-image.mdx",
+      "PagesBuildEnvironmentTools": "src/content/docs/pages/configuration/build-image.mdx",
+      "PagesBuildEnvironment": "src/content/docs/pages/configuration/build-image.mdx",
+      "PagesBuildPreset": "src/content/docs/pages/framework-guides/deploy-a-brunch-site.mdx",
+      "P": "src/content/docs/pages/functions/api-reference.mdx",
+      "DIRECTORY": "src/content/docs/pages/get-started/c3.mdx",
+      "NESTED": "src/content/docs/pages/get-started/c3.mdx",
+      "QueueSendResult": "src/content/docs/queues/configuration/javascript-apis.mdx",
+      "QueueSendBatchResult": "src/content/docs/queues/configuration/javascript-apis.mdx",
+      "QueueMetrics": "src/content/docs/queues/configuration/javascript-apis.mdx",
+      "R2Object": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
+      "R2ObjectBody": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
+      "R2Objects": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
+      "R2MultipartUpload": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
+      "ArrayBuffer": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
+      "Blob": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
+      "R2UploadedPart": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
+      "R2LocalUploadsDiagram": "src/content/docs/r2/buckets/local-uploads.mdx",
+      "RTKSDKSelector": "src/content/docs/realtime/realtimekit/collaborative-stores/broadcast.mdx",
+      "RTKCodeSnippet": "src/content/docs/realtime/realtimekit/collaborative-stores/broadcast.mdx",
+      "RTKPill": "src/content/docs/realtime/realtimekit/concepts/preset.mdx",
+      "RealtimeKitArchitecture": "src/content/docs/realtime/realtimekit/index.mdx",
+      "RTKUIComponentGrid": "src/content/docs/realtime/realtimekit/ui-kit/component-library.mdx",
+      "ProductAvailabilityText": "src/content/docs/rules/cloud-connector/index.mdx",
+      "MANAGED_RULESET_ID_1": "src/content/docs/ruleset-engine/basic-operations/add-rule-phase-rulesets.mdx",
+      "MANAGED_RULESET_ID_2": "src/content/docs/ruleset-engine/basic-operations/add-rule-phase-rulesets.mdx",
+      "MANAGED_RULESET_ID": "src/content/docs/ruleset-engine/basic-operations/add-rule-phase-rulesets.mdx",
+      "CUSTOM_RULE_ID_2": "src/content/docs/ruleset-engine/custom-rulesets/add-rules-ruleset.mdx",
+      "CUSTOM_RULE_ID_1": "src/content/docs/ruleset-engine/custom-rulesets/add-rules-ruleset.mdx",
+      "CUSTOM_RULESET_ID": "src/content/docs/ruleset-engine/custom-rulesets/deploy-custom-ruleset.mdx",
+      "EXISTING_PHASE_RULE_ID_1": "src/content/docs/ruleset-engine/custom-rulesets/deploy-custom-ruleset.mdx",
+      "EXISTING_PHASE_RULE_ID_2": "src/content/docs/ruleset-engine/custom-rulesets/deploy-custom-ruleset.mdx",
+      "RULE_ID_1": "src/content/docs/ruleset-engine/managed-rulesets/override-examples/enable-selected-rules.mdx",
+      "RULE_ID_2": "src/content/docs/ruleset-engine/managed-rulesets/override-examples/enable-selected-rules.mdx",
+      "HTTP_DDOS_RULESET_ID": "src/content/docs/ruleset-engine/managed-rulesets/override-examples/override-ddos-rule-sensitivity.mdx",
+      "RULE_ID": "src/content/docs/ruleset-engine/managed-rulesets/override-examples/override-ddos-rule-sensitivity.mdx",
+      "FieldCatalogPage": "src/content/docs/ruleset-engine/rules-language/fields/reference/index.mdx",
+      "Boolean": "src/content/docs/ruleset-engine/rules-language/functions.mdx",
+      "String": "src/content/docs/ruleset-engine/rules-language/functions.mdx",
+      "Rule": "src/content/docs/ruleset-engine/rulesets-api/create.mdx",
+      "RATE_LIMITING_RULESET_ID": "src/content/docs/ruleset-engine/rulesets-api/create.mdx",
+      "RULE_ID_3": "src/content/docs/ruleset-engine/rulesets-api/update-rule.mdx",
+      "MY_SECRET_NAME": "src/content/docs/secrets-store/integrations/workers.mdx",
+      "MY_SECRET_NAME_2": "src/content/docs/secrets-store/integrations/workers.mdx",
+      "EGRESS_POOL_ID": "src/content/docs/smart-shield/configuration/dedicated-egress-ips/setup.mdx",
+      "UPDATED_HOSTNAME_ASSOCIATIONS": "src/content/docs/ssl/client-certificates/byo-ca.mdx",
+      "PRIVATE_KEY": "src/content/docs/ssl/edge-certificates/geokey-manager/setup.mdx",
+      "CERT_ID": "src/content/docs/ssl/origin-configuration/authenticated-origin-pull/aws-alb-integration.mdx",
+      "YOUR_HOSTNAME": "src/content/docs/ssl/origin-configuration/authenticated-origin-pull/aws-alb-integration.mdx",
+      "HOSTNAME": "src/content/docs/ssl/origin-configuration/authenticated-origin-pull/set-up/manage-certificates.mdx",
+      "AvailableDashRoutes": "src/content/docs/style-guide/build-the-page/components/dash-button.mdx",
+      "Environment": "src/content/docs/style-guide/build-the-page/components/typescript-example.mdx",
+      "ComponentsUsage": "src/content/docs/style-guide/build-the-page/components/usage.mdx",
+      "BaseSchemaProperties": "src/content/docs/style-guide/build-the-page/frontmatter/custom-properties.mdx",
+      "TUNNEL_ID": "src/content/docs/tunnel/get-started/index.mdx",
+      "Number": "src/content/docs/waf/detections/ai-security-for-apps/fields.mdx",
+      "Integer": "src/content/docs/waf/detections/malicious-uploads/index.mdx",
+      "NUMBER": "src/content/docs/waf/managed-rules/reference/owasp-core-ruleset/configure-dashboard.mdx",
+      "SCOPE": "src/content/docs/waf/managed-rules/reference/sensitive-data-detection.mdx",
+      "TOTAL": "src/content/docs/waf/managed-rules/waf-exceptions/define-dashboard.mdx",
+      "CompatibilityFlags": "src/content/docs/workers/configuration/compatibility-flags.mdx",
+      "AutoconfigDiagram": "src/content/docs/workers/framework-guides/web-apps/astro.mdx",
+      "KEY": "src/content/docs/workers/local-development/local-data.mdx",
+      "VALUE": "src/content/docs/workers/local-development/local-data.mdx",
+      "BINDING": "src/content/docs/workers/local-development/local-data.mdx",
+      "FILENAME.json": "src/content/docs/workers/local-development/local-data.mdx",
+      "BUCKET": "src/content/docs/workers/local-development/local-data.mdx",
+      "PATH_TO_FILE": "src/content/docs/workers/local-development/local-data.mdx",
+      "DATABASE_NAME": "src/content/docs/workers/local-development/local-data.mdx",
+      "SQL_QUERY": "src/content/docs/workers/local-development/local-data.mdx",
+      "Scheduled": "src/content/docs/workers/observability/logs/workers-logs.mdx",
+      "Email": "src/content/docs/workers/observability/logs/workers-logs.mdx",
+      "Method": "src/content/docs/workers/observability/logs/workers-logs.mdx",
+      "Queue": "src/content/docs/workers/observability/logs/workers-logs.mdx",
+      "UNIX-cron": "src/content/docs/workers/observability/logs/workers-logs.mdx",
+      "RPC": "src/content/docs/workers/observability/logs/workers-logs.mdx",
+      "WebSocket": "src/content/docs/workers/observability/logs/workers-logs.mdx",
+      "WorkersIsolateDiagram": "src/content/docs/workers/reference/how-workers-works.mdx",
+      "FormData": "src/content/docs/workers/runtime-apis/request.mdx",
+      "Object": "src/content/docs/workers/runtime-apis/request.mdx",
+      "JSON": "src/content/docs/workers/runtime-apis/response.mdx",
+      "USVString": "src/content/docs/workers/runtime-apis/response.mdx",
+      "ReadableStreamBYOBReadResult": "src/content/docs/workers/runtime-apis/streams/readablestreambyobreader.mdx",
+      "CryptoKey": "src/content/docs/workers/runtime-apis/web-crypto.mdx",
+      "CryptoKeyPair": "src/content/docs/workers/runtime-apis/web-crypto.mdx",
+      "FetcherQueueResult": "src/content/docs/workers/testing/vitest-integration/test-apis.mdx",
+      "O": "src/content/docs/workers/testing/vitest-integration/test-apis.mdx",
+      "R": "src/content/docs/workers/testing/vitest-integration/test-apis.mdx",
+      "DurableObjectId": "src/content/docs/workers/testing/vitest-integration/test-apis.mdx",
+      "WorkflowInstanceIntrospector": "src/content/docs/workers/testing/vitest-integration/test-apis.mdx",
+      "WorkflowIntrospector": "src/content/docs/workers/testing/vitest-integration/test-apis.mdx",
+      "Enter": "src/content/docs/workers/tutorials/connect-to-turso-using-workers.mdx",
+      "YOUR_WORKER": "src/content/docs/workers/tutorials/openai-function-calls-workers.mdx",
+      "AuxiliaryWorkerConfig": "src/content/docs/workers/vite-plugin/reference/api.mdx",
+      "Env": "src/content/docs/workers/wrangler/api.mdx",
+      "Service": "src/content/docs/workers/wrangler/api.mdx",
+      "Module": "src/content/docs/workers/wrangler/api.mdx",
+      "DurableObjectStorageHandle": "src/content/docs/workers/wrangler/api.mdx",
+      "WranglerCommand": "src/content/docs/workers/wrangler/commands/certificates.mdx",
+      "COMMAND": "src/content/docs/workers/wrangler/commands/index.mdx",
+      "SUBCOMMAND": "src/content/docs/workers/wrangler/commands/index.mdx",
+      "ConversionResult": "src/content/docs/workers-ai/features/markdown-conversion/usage/binding.mdx",
+      "WorkersAIModelCatalog": "src/content/docs/workers-ai/models/index.mdx",
+      "WorkersVPCOverviewDiagram": "src/content/docs/workers-vpc/index.mdx",
+      "Flex": "src/content/docs/workflows/index.mdx",
+      "AnimatedWorkflowDiagram": "src/content/docs/workflows/index.mdx"
+    },
+    "frontmatter": {
+      "pcx_content_type": "src/content/docs/1.1.1.1/additional-options/dns-in-google-sheets.mdx",
+      "difficulty": "src/content/docs/1.1.1.1/additional-options/dns-in-google-sheets.mdx",
+      "title": "src/content/docs/1.1.1.1/additional-options/dns-in-google-sheets.mdx",
+      "slug": "src/content/docs/1.1.1.1/additional-options/dns-in-google-sheets.mdx",
+      "description": "src/content/docs/1.1.1.1/additional-options/dns-in-google-sheets.mdx",
+      "products": "src/content/docs/1.1.1.1/additional-options/dns-in-google-sheets.mdx",
+      "tags": "src/content/docs/1.1.1.1/additional-options/dns-in-google-sheets.mdx",
+      "sidebar": "src/content/docs/1.1.1.1/additional-options/index.mdx",
+      "head": "src/content/docs/1.1.1.1/encryption/dns-over-https/make-api-requests/dns-wireformat.mdx",
+      "structured_data": "src/content/docs/1.1.1.1/faq.mdx",
+      "template": "src/content/docs/agent-setup/bionic.mdx",
+      "tableOfContents": "src/content/docs/agent-setup/visual-studio-code/detailed-walkthrough.mdx",
+      "external_link": "src/content/docs/agents/model-context-protocol/cloudflare/mcp-portal.mdx",
+      "reviewed": "src/content/docs/agents/model-context-protocol/guides/connect-mcp-client.mdx",
+      "hideChildren": "src/content/docs/ai/models/index.mdx",
+      "wide": "src/content/docs/ai/models/index.mdx",
+      "prev": "src/content/docs/ai/models/index.mdx",
+      "next": "src/content/docs/ai/models/index.mdx",
+      "order": "src/content/docs/ai-gateway/evaluations/index.mdx",
+      "redirect": "src/content/docs/ai-gateway/models.mdx",
+      "release_notes_file_name": "src/content/docs/ai-search/platform/release-note.mdx",
+      "source": "src/content/docs/analytics/account-and-zone-analytics/account-analytics.mdx",
+      "learning_center": "src/content/docs/bots/concepts/bot/index.mdx",
+      "hidden": "src/content/docs/bots/plans/biz-and-ent.mdx",
+      "languages": "src/content/docs/browser-run/how-to/og-images-astro.mdx",
+      "updated": "src/content/docs/browser-run/how-to/og-images-astro.mdx",
+      "summary": "src/content/docs/cache/how-to/cache-rules/examples/browser-cache-ttl.mdx",
+      "weight": "src/content/docs/china-network/concepts/global-acceleration.mdx",
+      "rss": "src/content/docs/cloudflare-one/integrations/cloud-and-saas/anthropic.mdx",
+      "category": "src/content/docs/cloudflare-one/tutorials/access-workers.mdx",
+      "column_text": "src/content/docs/cloudflare-one/tutorials/index.mdx",
+      "column_param": "src/content/docs/cloudflare-one/tutorials/index.mdx",
+      "content_type": "src/content/docs/d1/tutorials/d1-and-prisma-orm.mdx",
+      "release_notes_name": "src/content/docs/ddos-protection/change-log/general-updates.mdx",
+      "sidebar_toc": "src/content/docs/ddos-protection/change-log/http/index.mdx",
+      "banner": "src/content/docs/dns/zone-setups/zone-transfers/access-control-lists/cloudflare-ip-addresses.mdx",
+      "lastUpdated": "src/content/docs/fundamentals/api/how-to/account-owned-token-template.mdx",
+      "meta": "src/content/docs/hyperdrive/examples/connect-to-mysql/mysql-drivers-and-libraries/drizzle-orm.mdx",
+      "type": "src/content/docs/hyperdrive/examples/connect-to-postgres/postgres-database-providers/planetscale-postgres.mdx",
+      "Weight": "src/content/docs/logs/faq/index.mdx",
+      "product": "src/content/docs/r2/examples/authenticate-r2-temp-credentials.mdx",
+      "sidebar_position": "src/content/docs/realtime/realtimekit/core/api-reference/RTKAi.md",
+      "preview": "src/content/docs/rules/snippets/examples/country-code-redirect.mdx",
+      "noindex": "src/content/docs/sandbox/guides/proxy-requests.mdx",
+      "styleGuide": "src/content/docs/style-guide/build-the-page/components/anchor-heading.mdx",
+      "canonical": "src/content/docs/waf/reference/legacy/index.mdx",
+      "demo": "src/content/docs/workers/examples/respond-with-another-site.mdx",
+      "playground-link": "src/content/docs/workers/examples/return-html.mdx",
+      "chatbot_deprioritize": "src/content/docs/workers/framework-guides/web-apps/opennext.mdx"
+    },
+    "directives": {
+      "caution": "src/content/docs/1.1.1.1/additional-options/dns-over-tor.mdx",
+      "note": "src/content/docs/1.1.1.1/additional-options/dns-over-tor.mdx",
+      "tip": "src/content/docs/agents/communication-channels/chat/chat-agents.mdx",
+      "info": "src/content/docs/realtime/realtimekit/core/index.mdx",
+      "warning": "src/content/docs/security/security-insights/review-insights.mdx"
+    },
+    "unmatched-tags": {
+      "AgentMemoryProfile": "src/content/docs/agent-memory/api/workers-api.mdx",
+      "AgentMemoryMessage": "src/content/docs/agent-memory/api/workers-api.mdx",
+      "AgentMemoryMemory": "src/content/docs/agent-memory/api/workers-api.mdx",
+      "AgentMemoryRecallResult": "src/content/docs/agent-memory/api/workers-api.mdx",
+      "AgentMemoryListMemoriesResult": "src/content/docs/agent-memory/api/workers-api.mdx",
+      "AgentMemoryGetSummaryResponse": "src/content/docs/agent-memory/api/workers-api.mdx",
+      "YOUR_DOMAIN": "src/content/docs/ai-search/how-to/add-search-to-your-website.mdx",
+      "SOURCE": "src/content/docs/api-shield/security/schema-validation/api.mdx",
+      "ArtifactsCreateRepoResult": "src/content/docs/artifacts/api/workers-binding.mdx",
+      "ArtifactsRepo": "src/content/docs/artifacts/api/workers-binding.mdx",
+      "ArtifactsRepoListResult": "src/content/docs/artifacts/api/workers-binding.mdx",
+      "ArtifactsCreateTokenResult": "src/content/docs/artifacts/api/workers-binding.mdx",
+      "ArtifactsTokenListResult": "src/content/docs/artifacts/api/workers-binding.mdx",
+      "ArtifactsLogResult": "src/content/docs/artifacts/api/workers-binding.mdx",
+      "ArtifactsCommit": "src/content/docs/artifacts/api/workers-binding.mdx",
+      "ArtifactsTree": "src/content/docs/artifacts/api/workers-binding.mdx",
+      "ZONE_ID": "src/content/docs/byoip/address-maps/setup.mdx",
+      "IP_PREFIX_TO_DELEGATE": "src/content/docs/byoip/get-started.mdx",
+      "ACCOUNT_ID": "src/content/docs/byoip/get-started.mdx",
+      "DEFAULT_SERVICE": "src/content/docs/byoip/get-started.mdx",
+      "SERVICE_ID": "src/content/docs/byoip/get-started.mdx",
+      "CUSTOM_HOSTNAME": "src/content/docs/cloudflare-for-platforms/cloudflare-for-saas/performance/early-hints-for-saas.mdx",
+      "CERTIFICATE_STRING": "src/content/docs/cloudflare-for-platforms/cloudflare-for-saas/security/certificate-management/enforce-mtls.mdx",
+      "CERTIFICATE_PRIVATE_KEY": "src/content/docs/cloudflare-for-platforms/cloudflare-for-saas/security/certificate-management/enforce-mtls.mdx",
+      "YOUR_SUBDOMAIN": "src/content/docs/cloudflare-one/access-controls/ai-controls/secure-mcp-servers.mdx",
+      "URL": "src/content/docs/cloudflare-one/access-controls/authenticate-agents.mdx",
+      "CODE_CHALLENGE": "src/content/docs/cloudflare-one/access-controls/authenticate-agents.mdx",
+      "URL-encoded": "src/content/docs/cloudflare-one/access-controls/authenticate-agents.mdx",
+      "AUTH_CODE": "src/content/docs/cloudflare-one/access-controls/authenticate-agents.mdx",
+      "CLIENT_ID": "src/content/docs/cloudflare-one/access-controls/authenticate-agents.mdx",
+      "CODE_VERIFIER": "src/content/docs/cloudflare-one/access-controls/authenticate-agents.mdx",
+      "REFRESH_TOKEN": "src/content/docs/cloudflare-one/access-controls/authenticate-agents.mdx",
+      "APPROVED_COUNTRIES_GROUP_ID": "src/content/docs/cloudflare-one/access-controls/policies/common-policies.mdx",
+      "OKTA_IDP_ID": "src/content/docs/cloudflare-one/access-controls/policies/common-policies.mdx",
+      "GATEWAY_CHECK_ID": "src/content/docs/cloudflare-one/access-controls/policies/common-policies.mdx",
+      "OS_VERSION_CHECK_ID": "src/content/docs/cloudflare-one/access-controls/policies/common-policies.mdx",
+      "OTP_IDENTITY_PROVIDER_ID": "src/content/docs/cloudflare-one/access-controls/policies/common-policies.mdx",
+      "CORPORATE_IP_ALLOWLIST_ID": "src/content/docs/cloudflare-one/access-controls/policies/common-policies.mdx",
+      "SERVICE_TOKEN_ID": "src/content/docs/cloudflare-one/access-controls/policies/common-policies.mdx",
+      "WINDOWS_VERSION_CHECK_ID": "src/content/docs/cloudflare-one/access-controls/policies/common-policies.mdx",
+      "TOKEN_NAME": "src/content/docs/cloudflare-one/access-controls/service-credentials/service-tokens.mdx",
+      "DESTINATION_CONF": "src/content/docs/cloudflare-one/insights/logs/logpush/network-firewall-log-filters.mdx",
+      "AZURE_DIRECTORY_ID": "src/content/docs/cloudflare-one/integrations/identity-providers/entra-id.mdx",
+      "TEAM_NAME": "src/content/docs/cloudflare-one/integrations/identity-providers/entra-id.mdx",
+      "IDP_UUID": "src/content/docs/cloudflare-one/integrations/identity-providers/idp-federation.mdx",
+      "RECIPIENT_ACCOUNT_ID": "src/content/docs/cloudflare-one/integrations/identity-providers/idp-federation.mdx",
+      "SOURCE_ACCOUNT_ID": "src/content/docs/cloudflare-one/integrations/identity-providers/idp-federation.mdx",
+      "GRANT_ID": "src/content/docs/cloudflare-one/integrations/identity-providers/idp-federation.mdx",
+      "ORGANIZATION_ID": "src/content/docs/cloudflare-one/integrations/identity-providers/idp-federation.mdx",
+      "IP": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/local-management/create-local-tunnel.mdx",
+      "UUID": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/local-management/create-local-tunnel.mdx",
+      "APP_ID": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/application-based-policies/breakout-traffic.mdx",
+      "APP_NAME": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/application-based-policies/breakout-traffic.mdx",
+      "APP_TYPE": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/application-based-policies/breakout-traffic.mdx",
+      "MANAGED_APP_ID": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/application-based-policies/breakout-traffic.mdx",
+      "IP_ADDRESS": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/dhcp/dhcp-server.mdx",
+      "HARDWARE_MAC_ADDRESS": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/dhcp/dhcp-static-address-reservation.mdx",
+      "HARDWARE_MAC_ADDRESS_2": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/dhcp/dhcp-static-address-reservation.mdx",
+      "POLICY_DESCRIPTION": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/network-segmentation.mdx",
+      "LAN_ID": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/network-segmentation.mdx",
+      "LAN_NAME": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/network-segmentation.mdx",
+      "POLICY_NAME": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/network-segmentation.mdx",
+      "DESCRIBE_POLICY": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/common-settings/configure-tunnel-health-alerts.mdx",
+      "DESCRIBE_ALERT": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/common-settings/configure-tunnel-health-alerts.mdx",
+      "IP_NEXT_HOP": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-routes.mdx",
+      "YOUR_IP_PREFIX": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-routes.mdx",
+      "ROUTE_DESCRIPTION": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-routes.mdx",
+      "CLOUDFLARE_ENDPOINT": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-routes.mdx",
+      "INTERFACE_ADDRESS": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-routes.mdx",
+      "CUSTOMER_ENDPOINT": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-routes.mdx",
+      "PSK": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-routes.mdx",
+      "TUNNEL_NAME": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-tunnel-endpoints.mdx",
+      "TUNNEL_DESCRIPTION": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-tunnel-endpoints.mdx",
+      "PSK_VALUE": "src/content/docs/cloudflare-one/networks/connectors/cloudflare-wan/configuration/how-to/configure-tunnel-endpoints.mdx",
+      "SUBDOMAIN": "src/content/docs/cloudflare-one/networks/resolvers-and-proxies/proxy-endpoints/index.mdx",
+      "ACCESS_POLICY_ID": "src/content/docs/cloudflare-one/networks/resolvers-and-proxies/proxy-endpoints/index.mdx",
+      "PUBLIC_IP": "src/content/docs/cloudflare-one/networks/resolvers-and-proxies/proxy-endpoints/index.mdx",
+      "PUBLIC_IP2": "src/content/docs/cloudflare-one/networks/resolvers-and-proxies/proxy-endpoints/index.mdx",
+      "PUBLIC_IP3": "src/content/docs/cloudflare-one/networks/resolvers-and-proxies/proxy-endpoints/index.mdx",
+      "POLICY_UUID_1": "src/content/docs/cloudflare-one/team-and-resources/devices/cloudflare-one-client/deployment/mdm-deployment/client-version-assignments.mdx",
+      "POLICY_UUID_2": "src/content/docs/cloudflare-one/team-and-resources/devices/cloudflare-one-client/deployment/mdm-deployment/client-version-assignments.mdx",
+      "LIST_UUID": "src/content/docs/cloudflare-one/traffic-policies/dns-policies/common-policies.mdx",
+      "POSTURE_CHECK_UUID": "src/content/docs/cloudflare-one/traffic-policies/http-policies/common-policies.mdx",
+      "POSTURE_CHECK_1_UUID": "src/content/docs/cloudflare-one/traffic-policies/http-policies/common-policies.mdx",
+      "POSTURE_CHECK_2_UUID": "src/content/docs/cloudflare-one/traffic-policies/http-policies/common-policies.mdx",
+      "PROXY_ENDPOINT_ID": "src/content/docs/cloudflare-one/traffic-policies/network-policies/common-policies.mdx",
+      "NEW_HOSTNAME_LIST": "src/content/docs/cloudflare-one/tutorials/integrate-microsoft-mcas-teams.mdx",
+      "TUNNEL_UUID": "src/content/docs/cloudflare-one/tutorials/user-selectable-egress-ips.mdx",
+      "VNET_AMER_UUID": "src/content/docs/cloudflare-one/tutorials/user-selectable-egress-ips.mdx",
+      "VNET_EMEA_UUID": "src/content/docs/cloudflare-one/tutorials/user-selectable-egress-ips.mdx",
+      "DEDICATED_IPV4_ADDRESS": "src/content/docs/cloudflare-one/tutorials/user-selectable-egress-ips.mdx",
+      "SECONDARY_DEDICATED_IPV6_ADDRESS": "src/content/docs/cloudflare-one/tutorials/user-selectable-egress-ips.mdx",
+      "DEDICATED_IPV6_ADDRESS": "src/content/docs/cloudflare-one/tutorials/user-selectable-egress-ips.mdx",
+      "YOUR_DOCKERHUB_USERNAME": "src/content/docs/containers/guides/image-management.mdx",
+      "AWS_ACCOUNT_ID": "src/content/docs/containers/guides/image-management.mdx",
+      "AWS_REGION": "src/content/docs/containers/guides/image-management.mdx",
+      "AWS_ACCESS_KEY_ID": "src/content/docs/containers/guides/image-management.mdx",
+      "REGION": "src/content/docs/containers/guides/image-management.mdx",
+      "SERVICE_ACCOUNT_EMAIL": "src/content/docs/containers/guides/image-management.mdx",
+      "IMAGE": "src/content/docs/containers/guides/image-management.mdx",
+      "TAG": "src/content/docs/containers/guides/image-management.mdx",
+      "Response": "src/content/docs/containers/reference/container-class.mdx",
+      "State": "src/content/docs/containers/reference/container-class.mdx",
+      "Schedule": "src/content/docs/containers/reference/container-class.mdx",
+      "T": "src/content/docs/containers/reference/container-class.mdx",
+      "DurableObjectStub": "src/content/docs/containers/reference/container-class.mdx",
+      "ZONE_NAME": "src/content/docs/dns/dnssec/dnssec-active-migration.mdx",
+      "PUBLIC_KEY": "src/content/docs/dns/dnssec/dnssec-active-migration.mdx",
+      "NS_DOMAIN": "src/content/docs/dns/dnssec/multi-signer-dnssec/setup.mdx",
+      "YOUR_ACCOUNT_ID": "src/content/docs/dns/zone-setups/full-setup/setup.mdx",
+      "WorkerCode": "src/content/docs/dynamic-workers/api-reference.mdx",
+      "ENTER_WORKER_NAME": "src/content/docs/kv/index.mdx",
+      "YOUR_BINDING_ID": "src/content/docs/kv/index.mdx",
+      "KV_NAMESPACE_ID": "src/content/docs/kv/index.mdx",
+      "CORPORATE_DOMAINS_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-dns-policies/create-list.mdx",
+      "KNOWN_DOMAINS_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-dns-policies/recommended-dns-policies.mdx",
+      "ALLOWED_REMEDIATION_DOMAINS_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-dns-policies/recommended-dns-policies.mdx",
+      "IP_BLOCKLIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-dns-policies/recommended-dns-policies.mdx",
+      "DOMAIN_BLOCKLIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-dns-policies/recommended-dns-policies.mdx",
+      "HOST_BLOCKLIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-dns-policies/recommended-dns-policies.mdx",
+      "SHADOW_IT_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-http-policies/browser-isolation.mdx",
+      "TRUSTED_DOMAINS_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-http-policies/browser-isolation.mdx",
+      "CREDENTIALS_DLP_PROFILE_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-http-policies/data-loss-prevention.mdx",
+      "AWS_DLP_PROFILE_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-http-policies/data-loss-prevention.mdx",
+      "SKU_DLP_PROFILE_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-http-policies/data-loss-prevention.mdx",
+      "FINANCIAL_INFO_DLP_PROFILE_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-http-policies/data-loss-prevention.mdx",
+      "ANDROID_VERSION_POSTURE_CHECK_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-http-policies/recommended-http-policies.mdx",
+      "DOMAIN_INSPECTION_BYPASS_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-http-policies/recommended-http-policies.mdx",
+      "QUARANTINED_USERS_IP_ALLOWLIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-http-policies/recommended-http-policies.mdx",
+      "DOMAIN_ISOLATE_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-http-policies/recommended-http-policies.mdx",
+      "SERIAL_NUMBER_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-http-policies/tls-inspection.mdx",
+      "IP_ALLOWLIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-network-policies/recommended-network-policies.mdx",
+      "HOST_ALLOWLIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-network-policies/recommended-network-policies.mdx",
+      "DOMAIN_ALLOWLIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-network-policies/recommended-network-policies.mdx",
+      "DEVICE_POSTURE_CHECK_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-network-policies/recommended-network-policies.mdx",
+      "FINANCE_SERVERS_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-network-policies/recommended-network-policies.mdx",
+      "SSH_IP_ALLOWLIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-network-policies/recommended-network-policies.mdx",
+      "SSH_FQDN_ALLOWLIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-network-policies/recommended-network-policies.mdx",
+      "INTERNAL_NETWORK_IP_LIST_UUID": "src/content/docs/learning-paths/secure-internet-traffic/build-network-policies/recommended-network-policies.mdx",
+      "BUCKET_PATH": "src/content/docs/logs/logpush/examples/example-logpush-curl.mdx",
+      "DOMAIN_NAME": "src/content/docs/logs/logpush/examples/example-logpush-curl.mdx",
+      "OWNERSHIP_CHALLENGE_TOKEN": "src/content/docs/logs/logpush/examples/example-logpush-curl.mdx",
+      "PROJECT_ID": "src/content/docs/logs/logpush/logpush-job/enable-destinations/bigquery.mdx",
+      "DATASET_ID": "src/content/docs/logs/logpush/logpush-job/enable-destinations/bigquery.mdx",
+      "TABLE_ID": "src/content/docs/logs/logpush/logpush-job/enable-destinations/bigquery.mdx",
+      "ENCODED_VALUE": "src/content/docs/logs/logpush/logpush-job/enable-destinations/bigquery.mdx",
+      "DATADOG_ENDPOINT_URL": "src/content/docs/logs/logpush/logpush-job/enable-destinations/datadog.mdx",
+      "DATADOG_API_KEY": "src/content/docs/logs/logpush/logpush-job/enable-destinations/datadog.mdx",
+      "YOUR_EGRESS_POOL_ID": "src/content/docs/logs/logpush/logpush-job/enable-destinations/egress-ip.mdx",
+      "PUBLIC_DOMAIN": "src/content/docs/logs/logpush/logpush-job/enable-destinations/elastic.mdx",
+      "PUBLIC_PORT": "src/content/docs/logs/logpush/logpush-job/enable-destinations/elastic.mdx",
+      "SECRET_HEADER": "src/content/docs/logs/logpush/logpush-job/enable-destinations/elastic.mdx",
+      "SECRET_VALUE": "src/content/docs/logs/logpush/logpush-job/enable-destinations/elastic.mdx",
+      "INSTANCE_ID": "src/content/docs/logs/logpush/logpush-job/enable-destinations/ibm-cloud-logs.mdx",
+      "IBM_API_KEY": "src/content/docs/logs/logpush/logpush-job/enable-destinations/ibm-cloud-logs.mdx",
+      "NAME": "src/content/docs/logs/logpush/logpush-job/enable-destinations/ibm-qradar.mdx",
+      "QRADAR_URL": "src/content/docs/logs/logpush/logpush-job/enable-destinations/ibm-qradar.mdx",
+      "LOG_SOURCE_PORT": "src/content/docs/logs/logpush/logpush-job/enable-destinations/ibm-qradar.mdx",
+      "NR_ENDPOINT_URL": "src/content/docs/logs/logpush/logpush-job/enable-destinations/new-relic.mdx",
+      "NR_LICENSE_KEY": "src/content/docs/logs/logpush/logpush-job/enable-destinations/new-relic.mdx",
+      "R2_ACCESS_KEY_ID": "src/content/docs/logs/logpush/logpush-job/enable-destinations/r2.mdx",
+      "R2_SECRET_ACCESS_KEY": "src/content/docs/logs/logpush/logpush-job/enable-destinations/r2.mdx",
+      "BUCKET_NAME": "src/content/docs/logs/logpush/logpush-job/enable-destinations/s3-compatible-endpoints.mdx",
+      "ACCESS_KEY_ID": "src/content/docs/logs/logpush/logpush-job/enable-destinations/s3-compatible-endpoints.mdx",
+      "SECRET_ACCESS_KEY": "src/content/docs/logs/logpush/logpush-job/enable-destinations/s3-compatible-endpoints.mdx",
+      "ENDPOINT_URL": "src/content/docs/logs/logpush/logpush-job/enable-destinations/s3-compatible-endpoints.mdx",
+      "SENTINELONE_ENDPOINT_URL": "src/content/docs/logs/logpush/logpush-job/enable-destinations/sentinelone.mdx",
+      "SENTINELONE_AUTH_TOKEN": "src/content/docs/logs/logpush/logpush-job/enable-destinations/sentinelone.mdx",
+      "SOURCE_TYPE": "src/content/docs/logs/logpush/logpush-job/enable-destinations/sentinelone.mdx",
+      "SPLUNK_ENDPOINT_URL": "src/content/docs/logs/logpush/logpush-job/enable-destinations/splunk.mdx",
+      "SPLUNK_CHANNEL_ID": "src/content/docs/logs/logpush/logpush-job/enable-destinations/splunk.mdx",
+      "INSECURE_SKIP_VERIFY": "src/content/docs/logs/logpush/logpush-job/enable-destinations/splunk.mdx",
+      "SPLUNK_AUTH_TOKEN": "src/content/docs/logs/logpush/logpush-job/enable-destinations/splunk.mdx",
+      "Image": "src/content/docs/magic-transit/reference/mtu-mss.mdx",
+      "P": "src/content/docs/pages/functions/api-reference.mdx",
+      "DIRECTORY": "src/content/docs/pages/get-started/c3.mdx",
+      "NESTED": "src/content/docs/pages/get-started/c3.mdx",
+      "QueueSendResult": "src/content/docs/queues/configuration/javascript-apis.mdx",
+      "QueueSendBatchResult": "src/content/docs/queues/configuration/javascript-apis.mdx",
+      "QueueMetrics": "src/content/docs/queues/configuration/javascript-apis.mdx",
+      "R2Object": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
+      "R2ObjectBody": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
+      "R2Objects": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
+      "R2MultipartUpload": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
+      "ArrayBuffer": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
+      "Blob": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
+      "R2UploadedPart": "src/content/docs/r2/api/workers/workers-api-reference.mdx",
+      "MANAGED_RULESET_ID_1": "src/content/docs/ruleset-engine/basic-operations/add-rule-phase-rulesets.mdx",
+      "MANAGED_RULESET_ID_2": "src/content/docs/ruleset-engine/basic-operations/add-rule-phase-rulesets.mdx",
+      "MANAGED_RULESET_ID": "src/content/docs/ruleset-engine/basic-operations/add-rule-phase-rulesets.mdx",
+      "CUSTOM_RULE_ID_2": "src/content/docs/ruleset-engine/custom-rulesets/add-rules-ruleset.mdx",
+      "CUSTOM_RULE_ID_1": "src/content/docs/ruleset-engine/custom-rulesets/add-rules-ruleset.mdx",
+      "CUSTOM_RULESET_ID": "src/content/docs/ruleset-engine/custom-rulesets/deploy-custom-ruleset.mdx",
+      "EXISTING_PHASE_RULE_ID_1": "src/content/docs/ruleset-engine/custom-rulesets/deploy-custom-ruleset.mdx",
+      "EXISTING_PHASE_RULE_ID_2": "src/content/docs/ruleset-engine/custom-rulesets/deploy-custom-ruleset.mdx",
+      "RULE_ID_1": "src/content/docs/ruleset-engine/managed-rulesets/override-examples/enable-selected-rules.mdx",
+      "RULE_ID_2": "src/content/docs/ruleset-engine/managed-rulesets/override-examples/enable-selected-rules.mdx",
+      "HTTP_DDOS_RULESET_ID": "src/content/docs/ruleset-engine/managed-rulesets/override-examples/override-ddos-rule-sensitivity.mdx",
+      "RULE_ID": "src/content/docs/ruleset-engine/managed-rulesets/override-examples/override-ddos-rule-sensitivity.mdx",
+      "Boolean": "src/content/docs/ruleset-engine/rules-language/functions.mdx",
+      "String": "src/content/docs/ruleset-engine/rules-language/functions.mdx",
+      "Rule": "src/content/docs/ruleset-engine/rulesets-api/create.mdx",
+      "RATE_LIMITING_RULESET_ID": "src/content/docs/ruleset-engine/rulesets-api/create.mdx",
+      "RULE_ID_3": "src/content/docs/ruleset-engine/rulesets-api/update-rule.mdx",
+      "MY_SECRET_NAME": "src/content/docs/secrets-store/integrations/workers.mdx",
+      "MY_SECRET_NAME_2": "src/content/docs/secrets-store/integrations/workers.mdx",
+      "EGRESS_POOL_ID": "src/content/docs/smart-shield/configuration/dedicated-egress-ips/setup.mdx",
+      "UPDATED_HOSTNAME_ASSOCIATIONS": "src/content/docs/ssl/client-certificates/byo-ca.mdx",
+      "PRIVATE_KEY": "src/content/docs/ssl/edge-certificates/geokey-manager/setup.mdx",
+      "CERT_ID": "src/content/docs/ssl/origin-configuration/authenticated-origin-pull/aws-alb-integration.mdx",
+      "YOUR_HOSTNAME": "src/content/docs/ssl/origin-configuration/authenticated-origin-pull/aws-alb-integration.mdx",
+      "HOSTNAME": "src/content/docs/ssl/origin-configuration/authenticated-origin-pull/set-up/manage-certificates.mdx",
+      "Environment": "src/content/docs/style-guide/build-the-page/components/typescript-example.mdx",
+      "TUNNEL_ID": "src/content/docs/tunnel/get-started/index.mdx",
+      "Number": "src/content/docs/waf/detections/ai-security-for-apps/fields.mdx",
+      "Integer": "src/content/docs/waf/detections/malicious-uploads/index.mdx",
+      "NUMBER": "src/content/docs/waf/managed-rules/reference/owasp-core-ruleset/configure-dashboard.mdx",
+      "SCOPE": "src/content/docs/waf/managed-rules/reference/sensitive-data-detection.mdx",
+      "TOTAL": "src/content/docs/waf/managed-rules/waf-exceptions/define-dashboard.mdx",
+      "KEY": "src/content/docs/workers/local-development/local-data.mdx",
+      "VALUE": "src/content/docs/workers/local-development/local-data.mdx",
+      "BINDING": "src/content/docs/workers/local-development/local-data.mdx",
+      "FILENAME.json": "src/content/docs/workers/local-development/local-data.mdx",
+      "BUCKET": "src/content/docs/workers/local-development/local-data.mdx",
+      "PATH_TO_FILE": "src/content/docs/workers/local-development/local-data.mdx",
+      "DATABASE_NAME": "src/content/docs/workers/local-development/local-data.mdx",
+      "SQL_QUERY": "src/content/docs/workers/local-development/local-data.mdx",
+      "Scheduled": "src/content/docs/workers/observability/logs/workers-logs.mdx",
+      "Email": "src/content/docs/workers/observability/logs/workers-logs.mdx",
+      "Method": "src/content/docs/workers/observability/logs/workers-logs.mdx",
+      "Queue": "src/content/docs/workers/observability/logs/workers-logs.mdx",
+      "UNIX-cron": "src/content/docs/workers/observability/logs/workers-logs.mdx",
+      "RPC": "src/content/docs/workers/observability/logs/workers-logs.mdx",
+      "WebSocket": "src/content/docs/workers/observability/logs/workers-logs.mdx",
+      "FormData": "src/content/docs/workers/runtime-apis/request.mdx",
+      "Object": "src/content/docs/workers/runtime-apis/request.mdx",
+      "JSON": "src/content/docs/workers/runtime-apis/response.mdx",
+      "USVString": "src/content/docs/workers/runtime-apis/response.mdx",
+      "ReadableStreamBYOBReadResult": "src/content/docs/workers/runtime-apis/streams/readablestreambyobreader.mdx",
+      "CryptoKey": "src/content/docs/workers/runtime-apis/web-crypto.mdx",
+      "CryptoKeyPair": "src/content/docs/workers/runtime-apis/web-crypto.mdx",
+      "FetcherQueueResult": "src/content/docs/workers/testing/vitest-integration/test-apis.mdx",
+      "O": "src/content/docs/workers/testing/vitest-integration/test-apis.mdx",
+      "R": "src/content/docs/workers/testing/vitest-integration/test-apis.mdx",
+      "DurableObjectId": "src/content/docs/workers/testing/vitest-integration/test-apis.mdx",
+      "WorkflowInstanceIntrospector": "src/content/docs/workers/testing/vitest-integration/test-apis.mdx",
+      "WorkflowIntrospector": "src/content/docs/workers/testing/vitest-integration/test-apis.mdx",
+      "Enter": "src/content/docs/workers/tutorials/connect-to-turso-using-workers.mdx",
+      "YOUR_WORKER": "src/content/docs/workers/tutorials/openai-function-calls-workers.mdx",
+      "AuxiliaryWorkerConfig": "src/content/docs/workers/vite-plugin/reference/api.mdx",
+      "Env": "src/content/docs/workers/wrangler/api.mdx",
+      "Service": "src/content/docs/workers/wrangler/api.mdx",
+      "Module": "src/content/docs/workers/wrangler/api.mdx",
+      "DurableObjectStorageHandle": "src/content/docs/workers/wrangler/api.mdx",
+      "COMMAND": "src/content/docs/workers/wrangler/commands/index.mdx",
+      "SUBCOMMAND": "src/content/docs/workers/wrangler/commands/index.mdx",
+      "ConversionResult": "src/content/docs/workers-ai/features/markdown-conversion/usage/binding.mdx"
+    }
+  },
+  "unmatched_tags": [
+    [
+      "Response",
+      16
+    ],
+    [
+      "MANAGED_RULESET_ID",
+      16
+    ],
+    [
+      "String",
+      16
+    ],
+    [
+      "DOMAIN_NAME",
+      11
+    ],
+    [
+      "IP_ADDRESS",
+      10
+    ],
+    [
+      "CLOUDFLARE_ENDPOINT",
+      10
+    ],
+    [
+      "INTERFACE_ADDRESS",
+      10
+    ],
+    [
+      "CUSTOMER_ENDPOINT",
+      10
+    ],
+    [
+      "ArrayBuffer",
+      10
+    ],
+    [
+      "Image",
+      9
+    ],
+    [
+      "LAN_ID",
+      8
+    ],
+    [
+      "LAN_NAME",
+      8
+    ],
+    [
+      "IP_NEXT_HOP",
+      8
+    ],
+    [
+      "YOUR_IP_PREFIX",
+      8
+    ],
+    [
+      "ROUTE_DESCRIPTION",
+      8
+    ],
+    [
+      "TUNNEL_NAME",
+      8
+    ],
+    [
+      "TUNNEL_DESCRIPTION",
+      8
+    ],
+    [
+      "T",
+      8
+    ],
+    [
+      "BUCKET_PATH",
+      8
+    ],
+    [
+      "ACCOUNT_ID",
+      7
+    ],
+    [
+      "DESTINATION_CONF",
+      5
+    ],
+    [
+      "SECRET_VALUE",
+      5
+    ],
+    [
+      "YOUR_SUBDOMAIN",
+      4
+    ],
+    [
+      "MANAGED_APP_ID",
+      4
+    ],
+    [
+      "POLICY_DESCRIPTION",
+      4
+    ],
+    [
+      "POLICY_NAME",
+      4
+    ],
+    [
+      "DESCRIBE_POLICY",
+      4
+    ],
+    [
+      "DESCRIBE_ALERT",
+      4
+    ],
+    [
+      "PSK_VALUE",
+      4
+    ],
+    [
+      "LIST_UUID",
+      4
+    ],
+    [
+      "PROXY_ENDPOINT_ID",
+      4
+    ],
+    [
+      "ZONE_NAME",
+      4
+    ],
+    [
+      "KNOWN_DOMAINS_LIST_UUID",
+      4
+    ],
+    [
+      "SOURCE_TYPE",
+      4
+    ],
+    [
+      "R2Object",
+      4
+    ],
+    [
+      "CUSTOM_RULESET_ID",
+      4
+    ],
+    [
+      "RULE_ID",
+      4
+    ],
+    [
+      "NUMBER",
+      4
+    ],
+    [
+      "CryptoKey",
+      4
+    ],
+    [
+      "AgentMemoryMemory",
+      3
+    ],
+    [
+      "ArtifactsCreateRepoResult",
+      3
+    ],
+    [
+      "URL",
+      3
+    ],
+    [
+      "CLIENT_ID",
+      3
+    ],
+    [
+      "OKTA_IDP_ID",
+      3
+    ],
+    [
+      "GATEWAY_CHECK_ID",
+      3
+    ],
+    [
+      "REGION",
+      3
+    ],
+    [
+      "KV_NAMESPACE_ID",
+      3
+    ],
+    [
+      "DOMAIN_BLOCKLIST_UUID",
+      3
+    ],
+    [
+      "HOST_BLOCKLIST_UUID",
+      3
+    ],
+    [
+      "NAME",
+      3
+    ],
+    [
+      "RATE_LIMITING_RULESET_ID",
+      3
+    ],
+    [
+      "YOUR_WORKER",
+      3
+    ],
+    [
+      "YOUR_DOMAIN",
+      2
+    ],
+    [
+      "ZONE_ID",
+      2
+    ],
+    [
+      "CUSTOM_HOSTNAME",
+      2
+    ],
+    [
+      "TEAM_NAME",
+      2
+    ],
+    [
+      "SOURCE_ACCOUNT_ID",
+      2
+    ],
+    [
+      "GRANT_ID",
+      2
+    ],
+    [
+      "APP_ID",
+      2
+    ],
+    [
+      "APP_NAME",
+      2
+    ],
+    [
+      "APP_TYPE",
+      2
+    ],
+    [
+      "HARDWARE_MAC_ADDRESS",
+      2
+    ],
+    [
+      "HARDWARE_MAC_ADDRESS_2",
+      2
+    ],
+    [
+      "PSK",
+      2
+    ],
+    [
+      "TUNNEL_UUID",
+      2
+    ],
+    [
+      "VNET_AMER_UUID",
+      2
+    ],
+    [
+      "DEDICATED_IPV4_ADDRESS",
+      2
+    ],
+    [
+      "SECONDARY_DEDICATED_IPV6_ADDRESS",
+      2
+    ],
+    [
+      "DEDICATED_IPV6_ADDRESS",
+      2
+    ],
+    [
+      "TAG",
+      2
+    ],
+    [
+      "PUBLIC_KEY",
+      2
+    ],
+    [
+      "WorkerCode",
+      2
+    ],
+    [
+      "ENTER_WORKER_NAME",
+      2
+    ],
+    [
+      "ALLOWED_REMEDIATION_DOMAINS_LIST_UUID",
+      2
+    ],
+    [
+      "IP_BLOCKLIST_UUID",
+      2
+    ],
+    [
+      "IP_ALLOWLIST_UUID",
+      2
+    ],
+    [
+      "HOST_ALLOWLIST_UUID",
+      2
+    ],
+    [
+      "DOMAIN_ALLOWLIST_UUID",
+      2
+    ],
+    [
+      "INTERNAL_NETWORK_IP_LIST_UUID",
+      2
+    ],
+    [
+      "OWNERSHIP_CHALLENGE_TOKEN",
+      2
+    ],
+    [
+      "PROJECT_ID",
+      2
+    ],
+    [
+      "DATASET_ID",
+      2
+    ],
+    [
+      "TABLE_ID",
+      2
+    ],
+    [
+      "ENCODED_VALUE",
+      2
+    ],
+    [
+      "PUBLIC_DOMAIN",
+      2
+    ],
+    [
+      "QRADAR_URL",
+      2
+    ],
+    [
+      "LOG_SOURCE_PORT",
+      2
+    ],
+    [
+      "NR_LICENSE_KEY",
+      2
+    ],
+    [
+      "SENTINELONE_ENDPOINT_URL",
+      2
+    ],
+    [
+      "SENTINELONE_AUTH_TOKEN",
+      2
+    ],
+    [
+      "SPLUNK_ENDPOINT_URL",
+      2
+    ],
+    [
+      "SPLUNK_CHANNEL_ID",
+      2
+    ],
+    [
+      "INSECURE_SKIP_VERIFY",
+      2
+    ],
+    [
+      "SPLUNK_AUTH_TOKEN",
+      2
+    ],
+    [
+      "DIRECTORY",
+      2
+    ],
+    [
+      "EXISTING_PHASE_RULE_ID_1",
+      2
+    ],
+    [
+      "RULE_ID_1",
+      2
+    ],
+    [
+      "RULE_ID_2",
+      2
+    ],
+    [
+      "Boolean",
+      2
+    ],
+    [
+      "Rule",
+      2
+    ],
+    [
+      "MY_SECRET_NAME",
+      2
+    ],
+    [
+      "MY_SECRET_NAME_2",
+      2
+    ],
+    [
+      "PRIVATE_KEY",
+      2
+    ],
+    [
+      "CERT_ID",
+      2
+    ],
+    [
+      "KEY",
+      2
+    ],
+    [
+      "BINDING",
+      2
+    ],
+    [
+      "DATABASE_NAME",
+      2
+    ],
+    [
+      "FormData",
+      2
+    ],
+    [
+      "ReadableStreamBYOBReadResult",
+      2
+    ],
+    [
+      "R",
+      2
+    ],
+    [
+      "WorkflowInstanceIntrospector",
+      2
+    ],
+    [
+      "WorkflowIntrospector",
+      2
+    ],
+    [
+      "AgentMemoryProfile",
+      1
+    ],
+    [
+      "AgentMemoryMessage",
+      1
+    ],
+    [
+      "AgentMemoryRecallResult",
+      1
+    ],
+    [
+      "AgentMemoryListMemoriesResult",
+      1
+    ],
+    [
+      "AgentMemoryGetSummaryResponse",
+      1
+    ],
+    [
+      "SOURCE",
+      1
+    ],
+    [
+      "ArtifactsRepo",
+      1
+    ],
+    [
+      "ArtifactsRepoListResult",
+      1
+    ],
+    [
+      "ArtifactsCreateTokenResult",
+      1
+    ],
+    [
+      "ArtifactsTokenListResult",
+      1
+    ],
+    [
+      "ArtifactsLogResult",
+      1
+    ],
+    [
+      "ArtifactsCommit",
+      1
+    ],
+    [
+      "ArtifactsTree",
+      1
+    ],
+    [
+      "IP_PREFIX_TO_DELEGATE",
+      1
+    ],
+    [
+      "DEFAULT_SERVICE",
+      1
+    ],
+    [
+      "SERVICE_ID",
+      1
+    ],
+    [
+      "CERTIFICATE_STRING",
+      1
+    ],
+    [
+      "CERTIFICATE_PRIVATE_KEY",
+      1
+    ],
+    [
+      "CODE_CHALLENGE",
+      1
+    ],
+    [
+      "URL-encoded",
+      1
+    ],
+    [
+      "AUTH_CODE",
+      1
+    ],
+    [
+      "CODE_VERIFIER",
+      1
+    ],
+    [
+      "REFRESH_TOKEN",
+      1
+    ],
+    [
+      "APPROVED_COUNTRIES_GROUP_ID",
+      1
+    ],
+    [
+      "OS_VERSION_CHECK_ID",
+      1
+    ],
+    [
+      "OTP_IDENTITY_PROVIDER_ID",
+      1
+    ],
+    [
+      "CORPORATE_IP_ALLOWLIST_ID",
+      1
+    ],
+    [
+      "SERVICE_TOKEN_ID",
+      1
+    ],
+    [
+      "WINDOWS_VERSION_CHECK_ID",
+      1
+    ],
+    [
+      "TOKEN_NAME",
+      1
+    ],
+    [
+      "AZURE_DIRECTORY_ID",
+      1
+    ],
+    [
+      "IDP_UUID",
+      1
+    ],
+    [
+      "RECIPIENT_ACCOUNT_ID",
+      1
+    ],
+    [
+      "ORGANIZATION_ID",
+      1
+    ],
+    [
+      "IP",
+      1
+    ],
+    [
+      "UUID",
+      1
+    ],
+    [
+      "SUBDOMAIN",
+      1
+    ],
+    [
+      "ACCESS_POLICY_ID",
+      1
+    ],
+    [
+      "PUBLIC_IP",
+      1
+    ],
+    [
+      "PUBLIC_IP2",
+      1
+    ],
+    [
+      "PUBLIC_IP3",
+      1
+    ],
+    [
+      "POLICY_UUID_1",
+      1
+    ],
+    [
+      "POLICY_UUID_2",
+      1
+    ],
+    [
+      "POSTURE_CHECK_UUID",
+      1
+    ],
+    [
+      "POSTURE_CHECK_1_UUID",
+      1
+    ],
+    [
+      "POSTURE_CHECK_2_UUID",
+      1
+    ],
+    [
+      "NEW_HOSTNAME_LIST",
+      1
+    ],
+    [
+      "VNET_EMEA_UUID",
+      1
+    ],
+    [
+      "YOUR_DOCKERHUB_USERNAME",
+      1
+    ],
+    [
+      "AWS_ACCOUNT_ID",
+      1
+    ],
+    [
+      "AWS_REGION",
+      1
+    ],
+    [
+      "AWS_ACCESS_KEY_ID",
+      1
+    ],
+    [
+      "SERVICE_ACCOUNT_EMAIL",
+      1
+    ],
+    [
+      "IMAGE",
+      1
+    ],
+    [
+      "State",
+      1
+    ],
+    [
+      "Schedule",
+      1
+    ],
+    [
+      "DurableObjectStub",
+      1
+    ],
+    [
+      "NS_DOMAIN",
+      1
+    ],
+    [
+      "YOUR_ACCOUNT_ID",
+      1
+    ],
+    [
+      "YOUR_BINDING_ID",
+      1
+    ],
+    [
+      "CORPORATE_DOMAINS_LIST_UUID",
+      1
+    ],
+    [
+      "SHADOW_IT_LIST_UUID",
+      1
+    ],
+    [
+      "TRUSTED_DOMAINS_LIST_UUID",
+      1
+    ],
+    [
+      "CREDENTIALS_DLP_PROFILE_UUID",
+      1
+    ],
+    [
+      "AWS_DLP_PROFILE_UUID",
+      1
+    ],
+    [
+      "SKU_DLP_PROFILE_UUID",
+      1
+    ],
+    [
+      "FINANCIAL_INFO_DLP_PROFILE_UUID",
+      1
+    ],
+    [
+      "ANDROID_VERSION_POSTURE_CHECK_UUID",
+      1
+    ],
+    [
+      "DOMAIN_INSPECTION_BYPASS_LIST_UUID",
+      1
+    ],
+    [
+      "QUARANTINED_USERS_IP_ALLOWLIST_UUID",
+      1
+    ],
+    [
+      "DOMAIN_ISOLATE_LIST_UUID",
+      1
+    ],
+    [
+      "SERIAL_NUMBER_LIST_UUID",
+      1
+    ],
+    [
+      "DEVICE_POSTURE_CHECK_UUID",
+      1
+    ],
+    [
+      "FINANCE_SERVERS_LIST_UUID",
+      1
+    ],
+    [
+      "SSH_IP_ALLOWLIST_UUID",
+      1
+    ],
+    [
+      "SSH_FQDN_ALLOWLIST_UUID",
+      1
+    ],
+    [
+      "DATADOG_ENDPOINT_URL",
+      1
+    ],
+    [
+      "DATADOG_API_KEY",
+      1
+    ],
+    [
+      "YOUR_EGRESS_POOL_ID",
+      1
+    ],
+    [
+      "PUBLIC_PORT",
+      1
+    ],
+    [
+      "SECRET_HEADER",
+      1
+    ],
+    [
+      "INSTANCE_ID",
+      1
+    ],
+    [
+      "IBM_API_KEY",
+      1
+    ],
+    [
+      "NR_ENDPOINT_URL",
+      1
+    ],
+    [
+      "R2_ACCESS_KEY_ID",
+      1
+    ],
+    [
+      "R2_SECRET_ACCESS_KEY",
+      1
+    ],
+    [
+      "BUCKET_NAME",
+      1
+    ],
+    [
+      "ACCESS_KEY_ID",
+      1
+    ],
+    [
+      "SECRET_ACCESS_KEY",
+      1
+    ],
+    [
+      "ENDPOINT_URL",
+      1
+    ],
+    [
+      "P",
+      1
+    ],
+    [
+      "NESTED",
+      1
+    ],
+    [
+      "QueueSendResult",
+      1
+    ],
+    [
+      "QueueSendBatchResult",
+      1
+    ],
+    [
+      "QueueMetrics",
+      1
+    ],
+    [
+      "R2ObjectBody",
+      1
+    ],
+    [
+      "R2Objects",
+      1
+    ],
+    [
+      "R2MultipartUpload",
+      1
+    ],
+    [
+      "Blob",
+      1
+    ],
+    [
+      "R2UploadedPart",
+      1
+    ],
+    [
+      "MANAGED_RULESET_ID_1",
+      1
+    ],
+    [
+      "MANAGED_RULESET_ID_2",
+      1
+    ],
+    [
+      "CUSTOM_RULE_ID_2",
+      1
+    ],
+    [
+      "CUSTOM_RULE_ID_1",
+      1
+    ],
+    [
+      "EXISTING_PHASE_RULE_ID_2",
+      1
+    ],
+    [
+      "HTTP_DDOS_RULESET_ID",
+      1
+    ],
+    [
+      "RULE_ID_3",
+      1
+    ],
+    [
+      "EGRESS_POOL_ID",
+      1
+    ],
+    [
+      "UPDATED_HOSTNAME_ASSOCIATIONS",
+      1
+    ],
+    [
+      "YOUR_HOSTNAME",
+      1
+    ],
+    [
+      "HOSTNAME",
+      1
+    ],
+    [
+      "Environment",
+      1
+    ],
+    [
+      "TUNNEL_ID",
+      1
+    ],
+    [
+      "Number",
+      1
+    ],
+    [
+      "Integer",
+      1
+    ],
+    [
+      "SCOPE",
+      1
+    ],
+    [
+      "TOTAL",
+      1
+    ],
+    [
+      "VALUE",
+      1
+    ],
+    [
+      "FILENAME.json",
+      1
+    ],
+    [
+      "BUCKET",
+      1
+    ],
+    [
+      "PATH_TO_FILE",
+      1
+    ],
+    [
+      "SQL_QUERY",
+      1
+    ],
+    [
+      "Scheduled",
+      1
+    ],
+    [
+      "Email",
+      1
+    ],
+    [
+      "Method",
+      1
+    ],
+    [
+      "Queue",
+      1
+    ],
+    [
+      "UNIX-cron",
+      1
+    ],
+    [
+      "RPC",
+      1
+    ],
+    [
+      "WebSocket",
+      1
+    ],
+    [
+      "Object",
+      1
+    ],
+    [
+      "JSON",
+      1
+    ],
+    [
+      "USVString",
+      1
+    ],
+    [
+      "CryptoKeyPair",
+      1
+    ],
+    [
+      "FetcherQueueResult",
+      1
+    ],
+    [
+      "O",
+      1
+    ],
+    [
+      "DurableObjectId",
+      1
+    ],
+    [
+      "Enter",
+      1
+    ],
+    [
+      "AuxiliaryWorkerConfig",
+      1
+    ],
+    [
+      "Env",
+      1
+    ],
+    [
+      "Service",
+      1
+    ],
+    [
+      "Module",
+      1
+    ],
+    [
+      "DurableObjectStorageHandle",
+      1
+    ],
+    [
+      "COMMAND",
+      1
+    ],
+    [
+      "SUBCOMMAND",
+      1
+    ],
+    [
+      "ConversionResult",
+      1
+    ]
+  ],
+  "unmatched_tags_total": 579,
+  "unknown_count": 0,
+  "unknown": []
+}

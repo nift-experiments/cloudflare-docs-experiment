@@ -683,7 +683,9 @@ CP2 source extraction and Nift shell implementation are committed. See `reports/
 
 ### CP3 completion note — 2026-09-18
 
-CP3's strict content-model contract is committed. See `reports/CP3-CONTENT-MODEL.md`, `compatibility/content-model.json`, `compatibility/route-link-asset-rules.md`, and `tools/content_model.py`. The known component/frontmatter API from the frozen upstream source is classified, deterministic route/link/asset rules are fixed, and the exhaustive scanner fails on unknown constructs rather than degrading them. Because this runner still lacks the 1.4 GB upstream checkout, do not invent corpus occurrence counts: run the census against pinned SHA `bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf` on the controlled Linode and require `unknown=0` before CP6. CP4/CP5 implementation must preserve that strict gate.
+CP3's strict content-model contract is committed. See `reports/CP3-CONTENT-MODEL.md`, `compatibility/content-model.json`, `compatibility/route-link-asset-rules.md`, and `tools/content_model.py`. The known component/frontmatter API from the frozen upstream source is classified, deterministic route/link/asset rules are fixed, and the exhaustive scanner fails on unknown constructs rather than degrading them.
+
+**Real-corpus census executed on the Linode against pinned SHA `bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf`: 6,882 docs → 6,882 routes, 0 unknown constructs — CP3 gate GREEN.** The real corpus exposed 27 additional MDX components, 22 additional pass-through frontmatter keys, and 5 named directives + bare `:::`; all are now classified. The scanner was corrected to be code-aware and import-aware (details in `reports/CP3-CONTENT-MODEL.md`); the strict gate was not weakened. Full numbers in `reports/CP3-CENSUS.md` / `reports/CP3-CENSUS.json`.
 
 **Next: CP4 page/template architecture**, followed by CP5 implementation of the complete construct matrix. Keep static rendering, data-generated content and browser-interactive behaviour separate so later parity failures are diagnosable.
 
