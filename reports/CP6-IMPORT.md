@@ -86,8 +86,8 @@ routes. Each is recorded below with its data source and route contract.
 | WARP releases | `src/content/warp-releases/` | 303 | synthesized changelog posts under `/changelog/post/<date>-warp-.../` | **Generated** (292 synthesized) |
 | Release notes | `src/content/release-notes/` | 43 | `/changelog/...` | Not yet generated |
 | Dash routes | `src/content/dash-routes/` | 3 | `/api/operations/...` | Not yet generated |
-| Page build env | `src/content/pages-build-environment/` | 3 | `/pages/platform/...` | Not yet generated |
-| Pages presets | `src/content/pages-framework-presets/` | 1 | `/pages/framework-guides/...` | Not yet generated |
+| Page build env | `src/content/pages-build-environment/` | 3 | `/pages/platform/language-support-and-tools.json` | **Generated** (3 versions) |
+| Pages presets | `src/content/pages-framework-presets/` | 1 | `/pages/platform/build-configuration.json` | **Generated** (28 presets) |
 | Notifications | `src/content/notifications/` | 1 | `/notifications/...` | Not yet generated |
 | Agent setup | `src/content/agent-setup/` + `src/pages/agent-setup/` | 2 | `/agent-setup/` (prompt, tracing) | **Generated** |
 | Videos | `src/content/stream/` + `src/pages/videos/` | 30 | `/videos/<url>/` | **Generated** |
