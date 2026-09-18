@@ -1,1 +1,4 @@
 .nift/.lock
+
+__pycache__/
+*.pyc
