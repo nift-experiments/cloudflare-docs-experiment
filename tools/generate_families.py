@@ -21,7 +21,7 @@ application (src/util/sidebar.ts EXTERNAL_APP_PREFIXES), not the docs build,
 so they are documented as external rather than generated.
 """
 from __future__ import annotations
-import argparse, json, re, sys, yaml
+import argparse, html, json, re, sys, yaml
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -42,6 +42,10 @@ def add_tracked(tracked, name, title, template, output=None):
     tracked.append({'name': name, 'title': title, 'template': template,
                     'output': output or route(name.strip('/').split('/'))})
     return name
+
+
+def html_escape(s):
+    return html.escape(s, quote=False)
 
 
 def rewrite_assets(s):
@@ -467,6 +471,62 @@ def main():
         add_tracked(tracked, f'changelog/post/{note_id}/', title, 'templates/docs.html')
         wr_added += 1
     families['warp-releases'] = {'source_files': len(wr_files), 'synthesized': wr_added}
+
+    # ---- Compatibility flags: /workers/platform/compatibility-flags.json ----
+    cf_files = sorted((up / 'src/content/compatibility-flags').glob('*.md'))
+    cf_flags = []
+    for cf in cf_files:
+        raw = cf.read_text(errors='replace')
+        mm = re.match(r'^---\n(.*?)\n---\n?', raw, re.S)
+        if not mm:
+            continue
+        fm = {}
+        try:
+            fm = yaml.safe_load(mm.group(1)) or {}
+        except Exception:
+            fm = {}
+        body = raw[mm.end():].strip()
+        flag = {
+            'name': fm.get('name', ''),
+            'sort_date': fm.get('sort_date'),
+            'enable_date': fm.get('enable_date'),
+            'enable_flag': fm.get('enable_flag') or None,
+            'disable_flag': fm.get('disable_flag') or None,
+            'description': body,
+            'experimental': fm.get('experimental', False),
+        }
+        cf_flags.append(flag)
+    cf_flags.sort(key=lambda x: x.get('sort_date') or '')
+    if cf_flags:
+        cfdst = ROOT / 'public/workers/platform'
+        cfdst.mkdir(parents=True, exist_ok=True)
+        (cfdst / 'compatibility-flags.json').write_text(json.dumps(cf_flags, indent=2) + '\n')
+    families['compatibility-flags'] = {'source_files': len(cf_files), 'routes': 1}
+
+    # ---- RSS feeds: /changelog/rss/index.xml, <product>.xml, <area>.xml ----
+    rssbase = ROOT / 'public/changelog/rss'
+    rssbase.mkdir(parents=True, exist_ok=True)
+    rss_items = []
+    for product, note_id, fm in posts:
+        title = fm.get('title', note_id)
+        date = fm.get('date', '')
+        rss_items.append((title, date, f'https://developers.cloudflare.com/changelog/post/{note_id}/'))
+    rss_items.sort(key=lambda x: x[1], reverse=True)
+    xml = ['<?xml version="1.0" encoding="UTF-8"?>', '<rss version="2.0"><channel>',
+           '<title>Cloudflare changelogs</title>',
+           '<description>Updates to various Cloudflare products</description>',
+           '<link>https://developers.cloudflare.com/changelog/</link>']
+    for title, date, link in rss_items:
+        xml.append('<item>')
+        xml.append(f'<title>{html_escape(title)}</title>')
+        xml.append(f'<link>{link}</link>')
+        xml.append(f'<guid>{link}</guid>')
+        if date:
+            xml.append(f'<pubDate>{date}</pubDate>')
+        xml.append('</item>')
+    xml.append('</channel></rss>')
+    (rssbase / 'index.xml').write_text('\n'.join(xml) + '\n')
+    families['rss'] = {'routes': 1}
 
     print(json.dumps({'upstream_sha': git_sha(up), 'families': families,
                       'total_tracked': len(tracked)}, indent=2))
