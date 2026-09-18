@@ -4,7 +4,13 @@ Pinned upstream: `bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf`.
 
 ## Status
 
-**Ordinary-documentation corpus CP6 gate PASSED on the development VPS.**
+**CP6A — ordinary documentation corpus: CERTIFIED.**
+
+**CP6 — complete Cloudflare site surface: PENDING (CP6B required).**
+
+CP6 is deliberately split: CP6A covers the 6,882 ordinary docs; CP6B covers the
+generated/data-driven route families and rendering correctness needed for the
+complete frozen site. CP6A is green; CP6B is in progress.
 
 - Importer converts **all 6,882 frozen docs** with **zero unknown/unresolved constructs**.
 - Nift generates **6,883 tracked pages** (6,882 docs + bespoke `/` landing page).
@@ -64,12 +70,12 @@ the generated families above, categorised in `reports/cp6/generated-family-links
 
 ### G6 decision
 
-The ordinary-documentation corpus is fully imported, built and route-verified — this
-is the CP6 gate. The generated families above are **explicitly recorded, not silently
-omitted**: each requires its own Nift import/build support driven by its content
-collection or fetched data. Implementing them is tracked as CP6 follow-on work
-(and in several cases depends on upstream build-time fetched data such as the OpenAPI
-specification, which is not present in the frozen source tree).
+**CP6A (ordinary docs) is certified.** The 6,882-document corpus is fully imported,
+built and route-verified. **CP6B remains required** to generate the families below and
+to fix rendering-correctness defects (literal `:::` syntax, unprocessed component HTML,
+etc.), which are correctness defects, not visual work. Each generated family is being
+implemented from its committed `src/content/` collection where the data exists; the
+API-reference family depends on the upstream OpenAPI data source.
 
 ## Importer fixes made during CP6
 
