@@ -503,6 +503,37 @@ def main():
         (cfdst / 'compatibility-flags.json').write_text(json.dumps(cf_flags, indent=2) + '\n')
     families['compatibility-flags'] = {'source_files': len(cf_files), 'routes': 1}
 
+    # ---- Pages build configuration: /pages/platform/build-configuration.json ----
+    pfp = (up / 'src/content/pages-framework-presets/index.yaml')
+    if pfp.exists():
+        pfp_data = load_yaml(pfp)
+        build_configs = pfp_data.get('build_configs', {})
+        bc_dst = ROOT / 'public/pages/platform'
+        bc_dst.mkdir(parents=True, exist_ok=True)
+        (bc_dst / 'build-configuration.json').write_text(
+            json.dumps(dict(sorted(build_configs.items())), indent=2) + '\n')
+        families['pages-build-configuration'] = {'source_files': 1}
+
+    # ---- Pages language support: /pages/platform/language-support-and-tools.json ----
+    pbe_files = sorted((up / 'src/content/pages-build-environment').glob('*.yaml'))
+    pbe_data = []
+    for pbe in pbe_files:
+        d = load_yaml(pbe)
+        entry = dict(d)
+        if entry.get('enable_date'):
+            try:
+                entry['enable_date'] = str(entry['enable_date'])
+            except Exception:
+                pass
+        entry.setdefault('status', None)
+        pbe_data.append(entry)
+    if pbe_data:
+        ls_dst = ROOT / 'public/pages/platform'
+        ls_dst.mkdir(parents=True, exist_ok=True)
+        (ls_dst / 'language-support-and-tools.json').write_text(
+            json.dumps(pbe_data, indent=2) + '\n')
+        families['pages-language-support'] = {'source_files': len(pbe_files)}
+
     # ---- RSS feeds: /changelog/rss/index.xml, <product>.xml, <area>.xml ----
     rssbase = ROOT / 'public/changelog/rss'
     rssbase.mkdir(parents=True, exist_ok=True)
