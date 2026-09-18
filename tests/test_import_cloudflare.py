@@ -8,5 +8,8 @@ class TestImporter(unittest.TestCase):
  def test_interactive(self):
   _,out=mod.convert((ROOT/'tests/fixtures/interactive.mdx').read_text(),'fixture'); self.assertIn('nb-tabs',out); self.assertIn('data-cf-component="TunnelCalculator"',out); self.assertIn('data-cf-component="CompatibilityFlags"',out)
  def test_unknown_is_fatal(self):
-  with self.assertRaisesRegex(ValueError,'UnknownThing'): mod.convert('<UnknownThing />','fixture')
+  with self.assertRaisesRegex(ValueError,'UnknownThing'): mod.convert('import { UnknownThing } from "~/components/UnknownThing";\n<UnknownThing />','fixture')
+ def test_unimported_cap_tag_is_prose(self):
+  _,out=mod.convert('Text <API_TOKEN> and <SomePlaceholder>stay literal</SomePlaceholder>.','fixture')
+  self.assertIn('<API_TOKEN>',out); self.assertIn('<SomePlaceholder>stay literal</SomePlaceholder>',out)
 if __name__=='__main__': unittest.main()
