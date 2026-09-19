@@ -318,400 +318,300 @@ Prefer documented Nift behaviour and the existing project structure over guessin
 
 # Project-specific handover — Cloudflare Docs → Nift fidelity experiment
 
-## Mission
+This section is for a **fresh agent resuming this experiment with no prior
+conversation context**. Read this entire section, then the CP reports, then
+verify the baseline before changing anything. The experiment is paused at a
+certified CP6B baseline; the next checkpoint is CP7.
 
-Rebuild the public Cloudflare developer documentation site from the frozen
-`nift-experiments/cloudflare-docs-upstream` snapshot using Nift as the site
-builder.
+## 1. Mission and experiment design
 
-This is a **fidelity experiment**, not a redesign and not a representative
-sample. The finished Nift site must reproduce the upstream website across the
-entire documentation corpus (5,000+ pages) with the same content, information
-architecture, URLs, typography, colours, spacing, responsive layout, assets,
-syntax highlighting, navigation and user-facing functionality to the extent
-that functionality belongs to the docs frontend.
+Rebuild the public Cloudflare developer documentation site **from the frozen
+upstream snapshot** using **Nift** as the site builder, preserving routes,
+content, structure, visual behaviour and useful client-side functionality as
+closely as practical.
 
-The target is not “Cloudflare-like”. The target is an independently built Nift
-version whose rendered pages are visually and behaviourally indistinguishable
-from the frozen upstream site for practical use.
+- This is a **fidelity experiment**, not a redesign and not a representative
+  sample: the finished Nift site must be visually and behaviourally
+  indistinguishable from the frozen upstream site for practical use.
+- Only benchmark performance **after** fidelity is established (CP10).
+- Compare Nift against the frozen upstream Astro implementation on build time,
+  memory, dependency footprint and operational/developer complexity.
+- Use the experiment to discover **genuine Nift strengths and weaknesses** rather
+  than modifying either side merely to manufacture a benchmark win.
 
-## Repositories and source-of-truth policy
+## 2. Repositories and source-of-truth policy
 
-- Nift implementation: this repository, `cloudflare-docs-experiment`.
+- Nift implementation: `nift-experiments/cloudflare-docs-experiment` (this repo).
 - Frozen reference source: `nift-experiments/cloudflare-docs-upstream`.
-- Reference production behaviour: the corresponding Cloudflare Developers site
-  generated from that snapshot, where needed to establish rendered behaviour.
-- Never modify the upstream snapshot to make the port easier.
-- Record the exact upstream commit SHA used by the experiment before importing
-  content. Once chosen, pin it in this handover (or a dedicated manifest) so all
-  benchmark and fidelity results refer to one reproducible source tree.
-- Do not silently substitute current production content for snapshot content.
-  If production has moved on, the snapshot wins for content and the matching
-  snapshot/build wins for implementation semantics.
-
-## Non-negotiable fidelity requirements
-
-The Nift version must preserve, rather than approximate:
-
-1. every publishable documentation page in the selected upstream snapshot;
-2. page URLs/routes and meaningful redirects;
-3. page titles, descriptions, headings, prose, code, tables, callouts and other
-   authored content;
-4. global header, product navigation, sidebars, breadcrumbs, table of contents,
-   footer and mobile navigation;
-5. fonts, font weights, type scale, colours, borders, radii, shadows, spacing,
-   widths, breakpoints and other visual tokens;
-6. icons, logos, diagrams, screenshots and other static assets;
-7. light/dark/theme behaviour if present upstream;
-8. syntax highlighting and code-block affordances;
-9. search UI and behaviour, using the same service/data contract where it can
-   legitimately be reused, or a behaviourally equivalent implementation where
-   the upstream service is coupled to the original deployment;
-10. interactive documentation components, tabs, accordions/disclosures,
-    copy buttons, anchors, feedback controls and other client-side behaviours
-    that are part of the public docs experience;
-11. canonical/SEO/social metadata, sitemap/robots behaviour and other public
-    document metadata that affects the resulting site;
-12. desktop, tablet and mobile responsive behaviour.
-
-Do not “clean up”, simplify, modernise or restyle upstream behaviour during the
-port. Differences should be treated as defects unless explicitly documented as
-an unavoidable external-service/deployment difference.
-
-## Architectural rule
-
-Port the *rendered contract*, not Astro itself.
-
-Study the upstream implementation to determine what each Astro/Nimbus
-component ultimately emits and does, then reproduce that contract with the
-simplest maintainable combination of:
-
-- Nift templates, `@input`, metadata, JSON, loops/conditionals and `@path`;
-- Markup++/Markdown processing where it preserves the upstream content
-  semantics;
-- ordinary CSS and browser JavaScript for styling and runtime interaction;
-- generated intermediate data only where a deterministic conversion step is
-  genuinely necessary for upstream MDX/component constructs.
-
-Do not build a second general-purpose Astro/MDX framework inside Nift. Prefer a
-small explicit compatibility layer for the finite constructs actually present
-in the pinned Cloudflare corpus.
-
-Static assets that need no build-time transformation should remain ordinary
-static files in the configured output tree. Nift's tracked graph should contain
-pages and genuinely generated resources, not thousands of pointless asset
-copies.
-
-## Step-by-step game plan
-
-### CP0 — Freeze and inventory the reference
-
-1. Record the upstream repository URL, branch and exact commit SHA.
-2. Record tool/runtime versions required to build the frozen upstream site.
-3. Build the upstream site unmodified if feasible and save its route/output
-   manifest as reference evidence.
-4. Inventory all content roots, page extensions, layouts, components, partials,
-   stylesheets, fonts, images, public assets, data files and generated content.
-5. Count publishable pages and routes independently of the upstream build.
-6. Inventory Astro/MDX/Nimbus constructs used by content, including frequency
-   and representative files for every construct.
-7. Inventory runtime/client features and external services.
-8. Produce a machine-readable `reference-manifest` containing at minimum the
-   pinned SHA, expected routes and relevant source files/assets.
-9. Commit the inventory before beginning the port.
-
-**Gate:** we can account for the complete source corpus and know what must be
-ported; no “we will discover the other 4,000 pages later” shortcut.
-
-### CP1 — Establish reference builds and fidelity tooling
-
-1. Obtain a clean upstream production build from the pinned snapshot.
-2. Serve upstream and Nift builds locally under deterministic origins.
-3. Add a route crawler that can visit every expected route and report missing,
-   unexpected, redirected and failed pages.
-4. Add normalized HTML comparison tooling. Ignore only explicitly documented
-   nondeterminism; do not normalize away structural differences merely to make
-   tests pass.
-5. Add browser screenshot capture at fixed desktop/tablet/mobile viewports.
-6. Add image-diff reporting with both aggregate metrics and saved diff images.
-7. Add DOM/style probes for key geometry, typography and computed CSS values.
-8. Add link, asset and console-error checks.
-9. Establish a small but deliberately diverse golden-page set: landing page,
-   product overview, deeply nested article, code-heavy article, tables,
-   callouts, tabs/interactive components, images, long TOC, and mobile-heavy
-   navigation cases.
-10. Commit the harness separately from implementation changes.
-
-**Gate:** fidelity is measurable automatically rather than judged from a few
-hand-picked screenshots.
-
-### CP2 — Extract the upstream design system exactly
-
-1. Trace the actual upstream CSS/theme/font sources rather than eyeballing the
-   live site.
-2. Bring across legally/repository-available font files and preserve the exact
-   `@font-face` declarations, weights and fallbacks.
-3. Preserve upstream colour variables/tokens and theme rules.
-4. Preserve reset/base typography, spacing, breakpoints, content widths,
-   borders, shadows and radii.
-5. Bring across icons and public visual assets without lossy recreation.
-6. Reproduce the outer document shell in Nift: head metadata, header, global
-   navigation, page grid, footer and client-script entry points.
-7. Match golden-page shell screenshots before proceeding to thousands of pages.
-
-**Gate:** the empty/skeleton page geometry and global chrome match upstream at
-all target viewports.
-
-### CP3 — Map the content model before bulk conversion
-
-1. Enumerate frontmatter fields and determine their rendered/behavioural use.
-2. Enumerate every MD/MDX component/tag/directive used in the corpus.
-3. Classify each construct as:
-   - direct Markdown/Markup++;
-   - Nift template/data expression;
-   - static HTML component expansion;
-   - browser-side interactive component;
-   - generated/data-driven page;
-   - unsupported/error requiring an explicit implementation.
-4. Build a compatibility matrix with occurrence counts and test fixtures.
-5. Define deterministic route mapping from upstream source path/frontmatter to
-   Nift tracked page name and output path.
-6. Define link and asset resolution rules, including anchors and relative links.
-7. Fail conversion on unknown constructs. Never silently drop or flatten an
-   unrecognised component.
-
-**Gate:** 100% of constructs in the pinned corpus are classified before claiming
-bulk-content support.
-
-### CP4 — Build the Nift page/template architecture
-
-1. Split the shell into reusable Nift inputs/templates at sensible boundaries.
-2. Define page metadata needed for title, description, product hierarchy,
-   breadcrumbs, sidebar state, TOC and SEO.
-3. Implement deterministic navigation data rather than hard-coding individual
-   pages into templates.
-4. Implement content rendering with exactly one effective `@content` insertion
-   per tracked page.
-5. Use `@path` for Nift-managed internal page/asset relationships wherever it
-   is appropriate and preserve upstream public URLs in generated output.
-6. Implement headings/anchor IDs and heading-link behaviour exactly.
-7. Implement sidebar, breadcrumb and TOC generation from the same semantic
-   information as upstream.
-8. Verify the golden set before scaling out.
-
-**Gate:** representative pages have the correct DOM structure and navigation,
-not merely similar prose inside a generic template.
-
-### CP5 — Implement the complete MDX/component compatibility layer
-
-Implement and test every construct found in CP3. Work from highest-frequency
-constructs downward, but finish the complete matrix. This includes ordinary
-content plus Cloudflare-specific documentation components and nested/component
-composition.
-
-For each construct:
-
-1. create minimal fixtures from real upstream usages;
-2. determine exact upstream DOM and runtime behaviour;
-3. implement the Nift/conversion equivalent;
-4. compare rendered HTML and screenshots;
-5. test nesting/edge cases found in the corpus;
-6. mark it complete in the compatibility matrix only when all known usages can
-   be rendered without fallback loss.
-
-**Gate:** conversion reports zero unknown or silently degraded constructs over
-the entire corpus.
-
-### CP6 — Import all content and preserve all routes
-
-1. Convert/generate tracked-page metadata for the full upstream corpus.
-2. Preserve the upstream content hierarchy and output URLs.
-3. Import reusable content/partials/data while avoiding duplicated rendered
-   content.
-4. Copy/reference all required static assets.
-5. Implement generated/index pages and data-driven page families.
-6. Implement redirects/aliases required by the frozen site.
-7. Build all pages with Nift.
-8. Compare expected and actual route manifests.
-9. Crawl every generated route and every internal link.
-
-**Gate:** expected publishable page/route coverage is 100%, with no unexplained
-missing pages, broken internal links or missing local assets.
-
-### CP7 — Reproduce client-side functionality
-
-Match public user-facing behaviour feature by feature, including where present:
-
-- desktop/mobile navigation and sidebar state;
-- search dialog/input/results/navigation;
-- theme controls;
-- code copy and code-block controls;
-- tabs and other content switches;
-- disclosures/accordions;
-- heading anchors and deep linking;
-- responsive TOC behaviour;
-- feedback widgets where their external backend can legitimately be used;
-- any other interactive component discovered during the inventory.
-
-Prefer upstream browser code/assets when they are reusable independently of
-Astro; otherwise implement equivalent behaviour without changing the UI.
-Document external functionality that cannot be made self-contained and test the
-remaining frontend contract.
-
-**Gate:** automated interaction tests pass for every discovered public
-interaction class.
-
-### CP8 — Full-corpus visual and structural parity campaign
-
-1. Run HTML/DOM comparisons for every route where meaningful.
-2. Screenshot every route at the primary desktop viewport.
-3. Screenshot a broad/complete responsive matrix, batching it if runtime/storage
-   is large.
-4. Sort visual diffs by severity and fix shared/template differences before
-   page-specific ones.
-5. Re-run after every systemic fix.
-6. Treat font loading, wrapping, code highlighting, tables, callouts, images,
-   sticky positioning, sidebars and long-page TOCs as first-class parity work.
-7. Manually inspect outliers and pages where automated comparison is weak.
-
-**Gate:** no material unexplained visual differences remain. Any intentional or
-unavoidable difference is individually documented rather than hidden behind a
-loose global threshold.
-
-### CP9 — Metadata, accessibility and browser verification
-
-1. Compare `<head>` output, canonical links, social metadata and structured data.
-2. Compare sitemap and robots behaviour.
-3. Verify keyboard navigation, focus states and relevant ARIA semantics against
-   upstream.
-4. Check responsive behaviour at and around upstream breakpoints.
-5. Check current Chromium, Firefox and WebKit-family rendering where practical.
-6. Run HTML/link/accessibility checks and resolve port-introduced regressions.
-
-**Gate:** the Nift port has not lost important non-visual behaviour or document
-metadata.
-
-### CP10 — Performance experiment, only after fidelity
-
-Do **not** tune the Nift implementation by deleting functionality or reducing
-fidelity. Once parity gates pass, benchmark the two frozen implementations.
-
-Measure at minimum:
-
-- clean/full build wall time;
-- peak RSS;
-- output file count and total output bytes;
-- no-op rebuild;
-- single-page/content edit rebuild;
-- shared-template edit rebuild;
-- shared-data/navigation edit rebuild;
-- batches such as 10/100/1,000 changed pages where useful;
-- cold and warm runs with enough repetitions to report distributions rather
-  than one lucky number.
-
-Record hardware, OS, filesystem, tool versions, commands, cache state, upstream
-SHA, Nift SHA and methodology. Keep raw benchmark results in machine-readable
-form. Do not publish speed ratios between sites that are not demonstrably
-functionally equivalent.
-
-### CP11 — Reproducibility and final audit
-
-1. Start from clean clones/checkouts and follow the documented setup only.
-2. Build both frozen sites successfully.
-3. Re-run route/content/functionality/visual gates.
-4. Re-run benchmark suite.
-5. Verify no generated outputs or local caches are accidentally required from a
-   developer machine.
-6. Document all remaining differences explicitly.
-7. Record final upstream and experiment commit SHAs.
-8. Produce a concise final report separating fidelity evidence from performance
-   evidence.
-
-**Final gate:** another agent can reproduce the Nift site and the comparison
-without relying on undocumented local state.
-
-## Fidelity test strategy
-
-A 5,000+ page port cannot rely on manual inspection alone. Use layered evidence:
-
-- **Corpus completeness:** source/page/component inventories and route manifests.
-- **Structural parity:** normalized HTML/DOM comparison and targeted selectors.
-- **Visual parity:** deterministic screenshots and pixel/image diffs.
-- **Behavioural parity:** browser interaction tests.
-- **Navigation integrity:** crawler, internal-link and asset checks.
-- **Semantic parity:** title/headings/metadata/code/table/callout/component probes.
-- **Manual audit:** representative golden pages plus automated-diff outliers.
-
-Do not declare parity from a homepage screenshot or a dozen representative
-pages. Representative pages are an early-development tool; final confidence
-must cover the full corpus.
-
-## Working/commit discipline
-
-- Commit at the end of each checkpoint and at meaningful independently verified
-  sub-checkpoints when a checkpoint is large.
-- Keep upstream-import/conversion changes separate from fidelity fixes when
-  practical so regressions are traceable.
-- Run `nift build` frequently and `nift status` before checkpoint completion.
-- Do not commit benchmark conclusions until fidelity gates for the compared
-  builds pass.
-- Never solve a comparison failure by weakening/removing the comparison unless
-  the ignored difference is proven nondeterministic and documented.
-- Preserve failures and unexpected constructs as actionable errors; silent
-  fallback is unacceptable for this experiment.
-
-## Immediate next action
-
-Begin with **CP0 only**: acquire/inspect the frozen upstream snapshot, pin its
-commit, inventory the entire source/content/component/asset/runtime surface and
-commit that evidence. Do not begin hand-porting the homepage before the corpus
-and component model are understood.
-
-## Campaign status — 2026-09-18
-
-- **CP0 complete:** frozen upstream `bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf`; repository inventory in `reports/CP0-INVENTORY.md`; local deep scanner in `tools/inventory_upstream.py`.
-- **CP1 complete:** normalized-DOM/diff/Chromium-screenshot harness in `tools/parity.py`; representative routes in `parity/golden-routes.txt`; final-gate extensions in `reports/CP1-PARITY-HARNESS.md`.
-- **Next: CP2 design-system extraction.** Do not approximate Cloudflare visually: extract the actual rendered fonts, CSS tokens, dimensions, breakpoints, icons and assets against the frozen baseline.
-
-The attached Nift source was consulted and successfully compiled in this environment using an unoptimised development build (the normal `-O2` compile exceeded the runner's per-command time limit). The current barebones project structure matches the documented Nift model: `.nift/config.json`, `.nift/tracked.json`, `content/`, reusable templates and generated `public/` output. The current Nift site itself remains intentionally barebones through CP1; CP0–CP1 establish evidence and tooling before visual implementation begins.
-
-### CP2 completion note — 2026-09-18
-
-CP2 source extraction and Nift shell implementation are committed. See `reports/CP2-DESIGN-SYSTEM.md` for the exact sources, tokens, font versions, geometry and remaining verification boundary. The shell is source-derived from frozen upstream `bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf`; do not replace its values with visually guessed equivalents. Screenshot/pixel certification is deferred until both frozen sites can be built together on the controlled Linode environment.
-
-**Next: CP3 content-model inventory.** Enumerate every frontmatter field and every MD/MDX component/directive across the frozen corpus, classify every construct, define deterministic route/link/asset rules, and fail conversion on unknown constructs.
-
-### CP3 completion note — 2026-09-18
-
-CP3's strict content-model contract is committed. See `reports/CP3-CONTENT-MODEL.md`, `compatibility/content-model.json`, `compatibility/route-link-asset-rules.md`, and `tools/content_model.py`. The known component/frontmatter API from the frozen upstream source is classified, deterministic route/link/asset rules are fixed, and the exhaustive scanner fails on unknown constructs rather than degrading them.
-
-**Real-corpus census executed on the Linode against pinned SHA `bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf`: 6,882 docs → 6,882 routes, 0 unknown constructs — CP3 gate GREEN.** The real corpus exposed 27 additional MDX components, 22 additional pass-through frontmatter keys, and 5 named directives + bare `:::`; all are now classified. The scanner was corrected to be code-aware and import-aware (details in `reports/CP3-CONTENT-MODEL.md`); the strict gate was not weakened. Full numbers in `reports/CP3-CENSUS.md` / `reports/CP3-CENSUS.json`.
-
-**Next: CP4 page/template architecture**, followed by CP5 implementation of the complete construct matrix. Keep static rendering, data-generated content and browser-interactive behaviour separate so later parity failures are diagnosable.
-
-## Cloudflare experiment checkpoint status
-
-CP0–CP5 are implemented. CP4 establishes the reusable Nift docs architecture in `templates/docs.html` and its component inputs. CP5 establishes the strict MDX compatibility/import boundary in `tools/import_cloudflare.py`, backed by `compatibility/content-model.json` and fixtures/tests.
-
-Do not weaken the parity contract during CP6. Unknown MDX constructs are fatal. `data-cf-component` placeholders preserve identity for complex data/interactive components but are **not** evidence of visual/functional completion; each must be implemented and parity-tested before final certification. The full-corpus CP3/CP5 scan must run against frozen upstream SHA `bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf` once a local checkout is available.
-
-### CP6 implementation note — 2026-09-18
-
-CP6's full-corpus import/verification machinery is committed; see `reports/CP6-IMPORT.md`, `tools/import_corpus.py`, and `tools/verify_routes.py`. The orchestrator is SHA-pinned, strict on CP5 conversion failures, generates deterministic Nift tracking/routes, stages upstream public/source assets, emits an expected-route manifest, and provides a post-build route/link/asset gate.
-
-**CP6 status as of 2026-09-19 (development VPS):** CP6 is split into **CP6A (ordinary documentation corpus — CERTIFIED)** and **CP6B (complete frozen-site surface + rendering correctness — CERTIFIED)**. CP6A: all 6,882 frozen docs import with zero unknown/unresolved constructs; route verifier reports 0 missing routes; `~/assets`/`src/assets`/`public/` references rewritten; importer corpus robustness covered by 31 regression tests. **CP6B rendering architecture IMPLEMENTED AND CERTIFIED:** the importer emits component/directive bodies as file-based Nift `@markup("md", "content/.markup/bodies/N.md")` references (14,755 body files), renders top-level Markdown itself, and references pure-HTML container bodies via `@input` so Nift never re-converts already-rendered nested HTML (which split hostile fenced code such as Rust `r#"..."#` raw strings or JSX containing `</pre>`/`</code>` literals). The docs template is `@content`; generated families that still emit raw Markdown use `templates/docs-md.html`. **REAL rendering leakage = 0** (INTENTIONAL code-fence 187 / code-import 62 / prose-placeholder 19 / ts-type-name 2 remain classified). All **9,134 tracked pages** build with 0 Nift HTML-validation failures; **0 missing expected routes**. Generated families now include: changelog (at the upstream `/changelog/<product>/<name>/` route structure), glossary, directory, fields catalog, Workers AI + catalog models, learning paths, llms.txt + per-product llms.txt, llms-full.txt + per-product llms-full.txt, videos, agent-setup, synthesized WARP-release changelog posts, compatibility-flags.json, changelog RSS index + 75 per-product feeds, Pages build-configuration + language-support JSON, robots.txt/_headers/__redirects (static). The remaining "broken" local refs are documented exclusions (external `/api/` sibling app, fetched logpush datasets, proxied Workers AI models) and upstream's own dead/legacy links reproduced faithfully. CP6B certification checkpoints are committed and pushed (stage branch local == remote).
-
-### Infrastructure strategy and frozen baseline — 2026-09-18
-
-The reference upstream is **pinned** at `bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf` and must never be rebased for this experiment.
-
-The original Astro baseline was captured on a Linode **g6-standard-6** (6 vCPU / 16 GB) and is recorded in `reports/benchmarks/`:
-
-- **9,025 generated pages**; `dist` ≈ 2.0 GB, 12,450 files; `node_modules` ≈ 1.3 GB.
-- Clean build (run 1): **7m06s**, peak RSS **8.35 GB** (wall 7:13.46, user 576.53s).
-- No-op rebuild (run 2): 6m46s, peak RSS 8.13 GB.
-- The committed raw `time(1)` files, full build logs, machine spec, and `astro-baseline.json` are authoritative; prefer them over the rounded summary figures above.
-
-**Development machine policy.** The cheap VPS is a development box, not a benchmark machine. Its timing/RSS measurements are development observations only and are **not comparable** to the g6-standard-6 Astro baseline. The controlled Astro-vs-Nift performance campaign must later be rerun on equivalent identical hardware with both implementations, evidence preserved, machine destroyed.
-
-**Security note.** No long-lived personal SSH key was ever placed on any Linode. Temporary keys are generated on the instance and destroyed with it; the experiment remote uses GitHub as the persistence layer.
+- **Pinned upstream SHA: `bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf` — never rebase
+  or silently substitute current production content.**
+- Never modify the upstream snapshot to make the port easier. If production has
+  moved on, the snapshot wins for content and semantics.
+- GitHub is the persistence layer. The development VPS is disposable.
+
+## 3. Completed checkpoint history
+
+- **CP0 — freeze & inventory.** Pinned upstream SHA; repository inventory
+  `reports/CP0-INVENTORY.md`; `tools/inventory_upstream.py`.
+- **CP1 — parity/fidelity tooling.** Normalized-DOM/diff/Chromium-screenshot
+  harness `tools/parity.py`; golden routes `parity/golden-routes.txt`;
+  `reports/CP1-PARITY-HARNESS.md`.
+- **CP2 — design-system extraction.** Cloudflare-derived shell (fonts, tokens,
+  geometry) `reports/CP2-DESIGN-SYSTEM.md`; initial Nift shell assets in the
+  nested `public` repo.
+- **CP3 — content-model inventory.** Strict deterministic compatibility contract
+  `reports/CP3-CONTENT-MODEL.md`, `compatibility/content-model.json`,
+  `compatibility/route-link-asset-rules.md`, `tools/content_model.py`;
+  census `reports/CP3-CENSUS.md/.json`. Real corpus: 6,882 docs → 6,882 routes,
+  0 unknown constructs.
+- **CP4/CP5 — Nift page/template architecture + MDX compatibility layer.**
+  `templates/docs.html`; `tools/import_cloudflare.py` backed by
+  `compatibility/content-model.json`; fixtures/tests. Unknown MDX constructs are
+  fatal (strict gate).
+- **CP6A — ordinary documentation import (CERTIFIED).** 6,882/6,882 docs import,
+  0 unknown/unresolved; route verifier 0 missing; importer robustness tests.
+- **CP6B — generated/data-driven surface + rendering correctness (CERTIFIED).**
+  See Section 4-6 and `reports/CP6-IMPORT.md`,
+  `reports/CP6B-RENDERING-ARCHITECTURE.md`.
+
+## 4. Current certified state (exact gates)
+
+- **6,882 / 6,882** ordinary docs import (0 failures).
+- **9,134 tracked HTML pages**, all build, **0 Nift HTML-validation failures**.
+- **0 missing expected routes** (route verifier `tools/verify_routes.py`).
+- **31 / 31** importer regression tests pass.
+- **REAL rendering leakage = 0** (`tools/leak_scan.py`).
+- INTENTIONAL scanner findings (defensible, not leakage): `code-fence` 187,
+  `code-import` 62, `prose-placeholder` 19, `ts-type-name` 2.
+- Important static/data endpoints reproduced: robots.txt, _headers, __redirects,
+  shell assets, changelog RSS index + 75 per-product feeds,
+  compatibility-flags.json, Pages build-configuration.json + language-support
+  JSON, llms.txt + per-product llms.txt, llms-full.txt + per-product llms-full.txt.
+- Nift **v4.3.0** on the VPS.
+- Final CP6B commit: **`dcc8d92`** (pushed `stage`).
+
+### The route verifier still reports broken local references
+
+This is **expected and documented** — **do not** treat it as Nift conversion
+failures, and **do not** invent pages to make the number zero. Categories:
+
+- `/api/...` (~1,585): sibling/external application outside this frozen docs build.
+- `/logs/logpush/.../datasets/...` (~136): data-driven/live surfaces fetched at
+  build (Logpush API), not present as frozen ordinary docs.
+- `/workers-ai/models/...` (~21): externally/generated (proxied) model surfaces.
+- Everything else: links already stale/legacy/broken **in the frozen upstream
+  source** (e.g. `/workers/runtime-apis/bindings/mtls/`, `/changelog/<name>/`
+  links missing the product prefix, legacy `/changelog/post/` links inside
+  upstream changelog post bodies). These are reproduced faithfully.
+
+Evidence: `reports/cp6/leak-scan-classified.json`, `reports/cp6/expected-routes.json`.
+
+## 5. Rendering architecture (final)
+
+The most important technical outcome of CP6B. The architecture is **not** simply
+"wrap everything in Markdown".
+
+1. **Inline `@markup("md"){...}` was abandoned** for arbitrary corpus bodies:
+   Nift's `find_balanced` must find the balanced body boundary through hostile
+   Markdown/code (apostrophes, stray backticks, irregular fences, braces) and
+   could not do so deterministically across the corpus.
+2. **File-based `@markup("md", path)`** was introduced: component/directive
+   bodies are written to `content/.markup/bodies/N.md` and referenced by path.
+   Importer state: `_BODY_REGISTRY` (idx→body), `_BODY_NEXT` global counter
+   (reset once at import_corpus start, never per page), `_BODY_DIR`.
+3. **Nested `@markup` was found to double-render**: when a `@markup` body
+   contains nested `@markup` references, Nift resolves the nested HTML and then
+   re-runs CommonMark on the whole result, re-parsing already-rendered `<pre>`
+   HTML and splitting hostile code (Rust `r#"..."#` raw strings, JSX containing
+   `</pre>`/`</code>` literals) at nesting depth ≥ 3.
+4. **Final architecture distinguishes body kinds:**
+   - **Markdown-bearing / leaf bodies** use file-based `@markup("md", path)`;
+   - **pure composition/container bodies** (component shells + nested refs, no
+     own Markdown) use `@input(path)` so nested rendered HTML is not
+     Markdown-converted again;
+   - **top-level imported documentation** is rendered **once by the importer**
+     (cmarkgfm) and inserted by `templates/docs.html` through `@content`;
+   - **generated families** that still intentionally emit Markdown use
+     `templates/docs-md.html` (`@markup("md"){@content}`).
+5. **Other generic fixes** (each with a regression test):
+   - nested `:::` directives are converted once (recursion), never
+     double-processed with stale top-level line indices;
+   - fenced blocks are pre-rendered to `<pre><code class="language-...">` at
+     restore time so an irregular closing fence (indented deeper than the
+     opener) cannot leave a fence open and swallow following HTML;
+   - multiline lowercase HTML tags (e.g. `<a\n\thref=...>`) are joined onto one
+     line so CommonMark treats them as type-6 HTML blocks;
+   - asset refs (`~/assets/`, `src/assets/`, `public/...`) are rewritten inside
+     body files as well as page content.
+
+**Example worth preserving:** the React `<Tabs><TabItem><Steps>` chain with a JSX
+code block containing `</pre>`/`</code>` literals — nested `@markup` passes
+re-rendered the JSX three times and split it; using `@input` for the pure-HTML
+TabItem container removed the redundant CommonMark pass and fixed it without any
+page-specific exception.
+
+See `reports/CP6B-RENDERING-ARCHITECTURE.md` for the full write-up. The finding
+that this corpus is valuable adversarial evidence for Nift's `find_balanced` /
+`@markup` design is preserved for later consideration outside this experiment.
+
+## 6. Clean reproduction procedure (read before touching the VPS)
+
+The generated tree and the checked-in shell have an **unusual relationship**.
+Blindly doing `rm -rf public` destroys the checked-out shell assets
+(`assets/cf-design.css`, `assets/cf-shell.js`, `assets/cloudflare-logo.svg`,
+`index.html`, `CP6.md`), which live in a **nested git repository on the remote's
+`main` branch** (the experiment repo's `stage` branch gitlinks to it via commit
+`c1e5add`). There is **no `.gitmodules`**; treat it as a hand-managed nested
+checkout.
+
+Safe clean-from-scratch sequence on the VPS:
+
+```sh
+cd /srv/cloudflare-docs-experiment
+
+# 1. Restore/initialise the public tree (shell assets) if missing/wiped.
+#    The public dir is a checkout of the SAME repo's `main` branch at c1e5add.
+rm -rf public
+git clone -q -b main https://github.com/nift-experiments/cloudflare-docs-experiment.git public
+git -C public rev-parse HEAD        # expect c1e5add...
+
+# 2. Clear generated content (dotfiles like content/.markup survive `rm -rf content/*`).
+rm -rf content/*
+# 3. Full-corpus import (writes content/, tracked.json, expected-routes.json,
+#    and copies upstream public/ + src/assets into public/).
+python3 tools/import_corpus.py /srv/cloudflare-docs-upstream
+# 4. Generated families (changelog, glossary, llms.txt/full, RSS, JSON endpoints, ...).
+python3 tools/generate_families.py /srv/cloudflare-docs-upstream
+# 5. Restore the bespoke root landing page (it is a tracked git file; import_corpus
+#    preserves its tracked entry but `rm -rf content/*` deletes the file).
+git checkout content/index.html
+# 6. Restore any shell assets the import may have displaced, then build.
+cd public && git checkout -- . && cd ..
+nift build --all        # full clean build; expect 9,134 files
+# 7. Gates.
+python3 -m unittest discover -s tests          # 31/31
+python3 tools/verify_routes.py                 # missing = 0
+python3 tools/leak_scan.py --write-classified  # REAL = 0 (or scan all public/*.html)
+```
+
+If the VPS is gone, recreate it (see Section 10 Infrastructure) and restore the
+repo from GitHub before running this.
+
+## 7. Generated surfaces (`tools/generate_families.py`)
+
+Implemented: glossary; directory; field catalog (176); Workers AI legacy models
+(65) + catalog models (161) where reproducible; changelog posts (at upstream
+route `/changelog/<product>/<name>/`) + paginated index + product + product-group
+pages; learning paths (20); `llms.txt` + per-product `llms.txt`; `llms-full.txt`
++ per-product `llms-full.txt`; videos (30); agent-setup (13); synthesized WARP
+release changelog posts (292, under `/changelog/post/`); compatibility-flags.json
+(124); Pages build-configuration.json (28) + language-support-and-tools.json (3);
+changelog RSS index + per-product feeds (76); robots.txt/_headers/__redirects
+(copied static).
+
+**Deliberate exclusions (do not fabricate data for these):**
+- `/api/...` — sibling/external application (fetched OpenAPI), outside the build.
+- `/logs/logpush/.../datasets/...` — fetched live from the Logpush API.
+- Proxied Workers AI models (e.g. `uform-*`) — live catalog data.
+- Release notes, dash routes, notifications — collections feeding other routes or
+  sibling apps; no standalone reproducible routes.
+- Sitemap-index.xml — derived from tracked routes; low fidelity-gate value.
+- WARP posts are synthesized (supplementary), not frozen-site routes.
+
+## 8. Important lessons — things NOT to regress
+
+- Do **not** weaken REAL leakage = 0.
+- Do **not** introduce page-specific importer exceptions unless unavoidable and
+  documented.
+- Do **not** move back to arbitrary inline `@markup` bodies for corpus content.
+- Do **not** indiscriminately Markdown-render generated HTML multiple times.
+- Do **not** treat upstream broken links as missing Nift routes without checking
+  the frozen source.
+- Do **not** fabricate data for externally generated/live collections merely to
+  raise a parity number.
+- Do **not** benchmark Nift vs Astro until fidelity reaches the planned gate.
+- Do **not** change Nift itself merely to make this experiment pass, unless the
+  corpus exposed a genuinely general Nift defect worth fixing deliberately.
+- The corpus is valuable adversarial evidence for Nift's `find_balanced` /
+  `@markup` design — preserve it for later Nift work outside this experiment.
+
+## 9. Infrastructure
+
+- Experiment checkout: `/srv/cloudflare-docs-experiment` (branch `stage`).
+- Frozen upstream checkout: `/srv/cloudflare-docs-upstream`
+  (SHA `bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf`).
+- Nift source/build: `/srv/nift-src`; installed `/usr/local/bin/nift` (v4.3.0).
+- VPS: Linode `cf-nift-dev`, g6-standard-1 (1 vCPU / 2 GB / 50 GB), IP
+  `45.33.120.107`. **Cost-sensitive: the VM may no longer exist when work
+  resumes. This handover must not depend on ephemeral VPS state** — GitHub is the
+  persistence layer. No credentials/secrets belong in the repo.
+- The original 6-vCPU g6-standard-6 baseline Linode was **destroyed** after the
+  Astro baseline was captured (`reports/benchmarks/`).
+
+## 10. Pre-pause measurement snapshot
+
+See `reports/PRE-PAUSE-DEVELOPMENT-SNAPSHOT.md` for the full record. Key facts:
+
+- Nift clean build (`nift build --all`, 9,134 pages, g6-standard-1): median
+  **15.11 s** wall, median peak RSS **60,220 KB (~58.8 MiB)**; no-op 3.15 s /
+  ~11.9 MiB; Nift binary 2,729,392 bytes; **no Node / `node_modules` required**.
+- Frozen Astro source checkout (this VPS): Astro 7.3.2, working tree
+  611,154,889 B excl `.git`; **no Node, no `node_modules`, no `dist` here**;
+  dependencies were not installed for the snapshot.
+- Historical Astro baseline (destroyed g6-standard-6): clean build **433.46 s**,
+  peak RSS **~8.35 GB**, 9,025 pages, `node_modules` ~1.3 GB, `dist` ~2.0 GB.
+
+**WARNING — historical Astro and current Nift timings are NOT comparable**
+(different hardware/config). Do not advertise a "Nift is Nx faster" number. CP10
+must rerun both implementations on **identical hardware** with frozen dependency
+state before any comparative claim.
+
+## 11. Next checkpoints
+
+- **CP7 — client-side functional fidelity (next).** Inventory which behaviours
+  are currently static approximations vs which upstream interactions matter:
+  navigation/sidebar interactions; mobile navigation; tabs; details/disclosures;
+  theme behaviour; copy-code controls; search behaviour; table-of-contents
+  interaction; interactive component shells that currently render only
+  structurally; client-side routing/link behaviour where applicable. Goal is to
+  reproduce **observable behaviour**, not recreate Astro.
+- **CP8 — full-corpus visual/structural parity.** Use `tools/parity.py` +
+  golden routes, then systematic corpus sampling: DOM structure, typography,
+  spacing/layout, navigation/sidebar, code blocks, tables, cards/callouts,
+  responsive states, screenshots/pixel diffs. Fix systemic causes before
+  individual pages.
+- **CP9 — metadata/accessibility/browser verification.** Titles/meta,
+  canonical/OG metadata, headings/landmarks, keyboard behaviour, responsive
+  behaviour, accessibility, Chromium/Vantage verification where useful.
+- **CP10 — controlled same-hardware performance campaign.** Only after fidelity
+  gates. Rebuild the frozen Astro reference and the Nift site on **the same
+  VPS/hardware configuration** with their frozen dependency state; collect clean
+  build wall time, no-op/incremental time, peak RSS, CPU, output size,
+  dependency/install footprint (`node_modules` size/count for Astro; Nift
+  binary/runtime footprint), setup complexity, reproducibility. Do **not** compare
+  the current development-VPS Nift timings with the old g6-standard-6 Astro
+  measurement.
+- **CP11 — reproducibility/final audit.** Fresh-environment reproduction, final
+  reports, evidence bundle, conclusions.
+
+## 12. RESUME HERE — next session
+
+The intended resume state is:
+
+**CP0–CP6B complete and certified. Next work: CP7. Performance comparison remains
+provisional until CP10 same-hardware benchmarking.**
+
+1. Read this HANDOVER.md (especially Sections 4-10).
+2. Read `reports/CP6-IMPORT.md`, `reports/CP6B-RENDERING-ARCHITECTURE.md`,
+   `reports/PRE-PAUSE-DEVELOPMENT-SNAPSHOT.md`.
+3. Verify the frozen upstream SHA is `bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf`.
+4. Verify the experiment branch/SHA (stage, latest pushed CP6B commit `dcc8d92`
+   at time of pause; local SHA must equal remote `stage`).
+5. Recreate the environment if the VPS is gone (Section 9, 6).
+6. **Run the certified CP6B gates before changing anything:** 6,882/6,882 import;
+   9,134 tracked pages build with 0 HTML-validation failures; 0 missing routes;
+   31/31 tests; REAL leakage = 0. Expected baseline numbers above make any
+   regression immediately obvious.
+7. Investigate any regression before proceeding.
+8. Begin **CP7** only after the CP6B baseline reproduces. Do not skip ahead to
+   benchmarking.

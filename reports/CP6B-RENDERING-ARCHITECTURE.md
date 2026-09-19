@@ -84,8 +84,9 @@ and a clean-from-scratch reproduction that recreates all static/data endpoints.
 ## 5. Final gate results
 
 - **Import**: 6,882/6,882 docs, 0 failures (routes 6,882).
-- **Tracked pages**: 9,134 (8,952 previous + 107 per-entry llms.txt + 76 per-product
-  llms-full.txt, net of changelog structure and RSS additions).
+- **Tracked pages**: 9,134, all built (the generated/data families raise the
+  ordinary-doc baseline to the full frozen-site surface; llms-full.txt and
+  per-product RSS endpoints are static `public/` files, not tracked pages).
 - **Build**: 9,134/9,134 files, 0 HTML-validation failures.
 - **Routes**: 0 missing expected routes.
 - **Tests**: 31/31 pass (25 original + 6 new root-cause regression tests).
