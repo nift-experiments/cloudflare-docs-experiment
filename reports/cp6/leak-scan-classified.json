@@ -1,55 +1,12 @@
 {
-  "scanned_html": 8631,
-  "REAL_leakage": {
-    "mdx-import": 85,
-    "escaped-html": 10,
-    "component-open": 2
-  },
-  "REAL_leakage_files_affected": [
-    "component-open",
-    "escaped-html",
-    "mdx-import"
-  ],
-  "REAL_leakage_examples": {
-    "mdx-import": [
-      [
-        "ai-gateway/usage/providers/anthropic/index.html",
-        "                              import Anthropic from \""
-      ],
-      [
-        "ai-gateway/usage/providers/google-ai-studio/index.html",
-        "                              import { GoogleGenAI } from \""
-      ],
-      [
-        "ai-gateway/usage/providers/openai/index.html",
-        "                              import OpenAI from \""
-      ]
-    ],
-    "escaped-html": [
-      [
-        "cloudflare-one/networks/connectors/cloudflare-wan/network-interconnect/index.html",
-        "&lt;code"
-      ],
-      [
-        "cloudflare-one/networks/connectors/cloudflare-wan/zero-trust/cloudflare-gateway/index.html",
-        "&lt;code"
-      ],
-      [
-        "cloudflare-one/networks/connectors/cloudflare-wan/zero-trust/cloudflare-one-client/index.html",
-        "&lt;code"
-      ]
-    ],
-    "component-open": [
-      [
-        "style-guide/style-and-grammar/formatting/footnotes/index.html",
-        "<Tabs"
-      ]
-    ]
-  },
+  "scanned_html": 9134,
+  "REAL_leakage": {},
+  "REAL_leakage_files_affected": 0,
+  "REAL_leakage_examples": {},
   "INTENTIONAL_text": {
-    "code-import": 79,
-    "code-fence": 471,
-    "prose-placeholder": 114,
-    "ts-type-name": 70
+    "code-fence": 187,
+    "prose-placeholder": 19,
+    "code-import": 62,
+    "ts-type-name": 2
   }
 }

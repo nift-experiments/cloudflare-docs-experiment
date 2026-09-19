@@ -102,7 +102,7 @@ def main():
             body.append((e.get('general_definition') or '').strip())
             body.append('')
     (gdir / 'index.md').write_text('\n'.join(body) + '\n')
-    add_tracked(tracked, 'glossary/', 'Glossary', 'templates/docs.html')
+    add_tracked(tracked, 'glossary/', 'Glossary', 'templates/docs-md.html')
     families['glossary'] = {'source_files': len(glossary_files), 'routes': 1}
 
     # ---- Directory: one page at /directory/ ----
@@ -119,7 +119,7 @@ def main():
         dbody.append(f'<a class="nb-link-card" href="{url}"><strong>{title}</strong></a>')
     dbody.append('</div>')
     (ddir / 'index.md').write_text('\n'.join(dbody) + '\n')
-    add_tracked(tracked, 'directory/', 'Docs directory', 'templates/docs.html')
+    add_tracked(tracked, 'directory/', 'Docs directory', 'templates/docs-md.html')
     families['directory'] = {'source_files': len(dir_files), 'routes': 1}
 
     # ---- Fields catalog: /ruleset-engine/rules-language/fields/reference/<name>/ ----
@@ -148,7 +148,7 @@ def main():
             fbody.append('')
             (fdir / 'index.md').write_text('\n'.join(fbody) + '\n')
             add_tracked(tracked, f'{"ruleset-engine/rules-language/fields/reference"}/{name}/',
-                        name, 'templates/docs.html')
+                        name, 'templates/docs-md.html')
         families['fields'] = {'source_files': 1, 'entries': len(fields), 'routes': len(fields)}
 
     # ---- Workers AI legacy models: /workers-ai/models/<short-slug>/ ----
@@ -177,7 +177,7 @@ def main():
                     mbody.append(f'**Price:** {v.get("price", "")} {v.get("currency", "")} per {v.get("unit", "")}')
         mbody.append('')
         (mdir / 'index.md').write_text('\n'.join(mbody) + '\n')
-        add_tracked(tracked, f'workers-ai/models/{slug}/', name, 'templates/docs.html')
+        add_tracked(tracked, f'workers-ai/models/{slug}/', name, 'templates/docs-md.html')
     families['workers-ai'] = {'source_files': len(wam_files), 'routes': len(wam_files)}
 
     # ---- Catalog models: /ai/models/<slug>/ (slug = model_id) ----
@@ -196,10 +196,10 @@ def main():
             mbody.append(model['description'])
             mbody.append('')
         (mdir / 'index.md').write_text('\n'.join(mbody) + '\n')
-        add_tracked(tracked, f'ai/models/{slug}/', name, 'templates/docs.html')
+        add_tracked(tracked, f'ai/models/{slug}/', name, 'templates/docs-md.html')
     families['ai-models'] = {'source_files': len(cat_files), 'routes': len(cat_files)}
 
-    # ---- Changelog posts: /changelog/post/<id>/ ----
+    # ---- Changelog posts: /changelog/<product>/<name>/ ----
     changelog_files = sorted((up / 'src/content/changelog').rglob('*.mdx'))
     posts = []
     for cf in changelog_files:
@@ -230,7 +230,7 @@ def main():
             products = [products]
         products_csv = ','.join(str(p) for p in products)
         fm['products'] = products_csv
-        pdir = content / 'changelog/post' / note_id
+        pdir = content / 'changelog' / product / name
         pdir.mkdir(parents=True, exist_ok=True)
         pbody = [f'# {fm.get("title", name)}', '']
         try:
@@ -240,8 +240,8 @@ def main():
             pbody.append(body.strip())
             print(f'  [warn] changelog {product}/{name}: {e}', file=sys.stderr)
         (pdir / 'index.md').write_text(rewrite_assets('\n'.join(pbody)) + '\n')
-        add_tracked(tracked, f'changelog/post/{note_id}/', fm.get('title', name),
-                    'templates/docs.html')
+        add_tracked(tracked, f'changelog/{product}/{name}/', fm.get('title', name),
+                    'templates/docs-md.html')
         posts.append((product, note_id, fm))
     families['changelog-posts'] = {'source_files': len(changelog_files),
                                    'routes': len(posts)}
@@ -256,18 +256,18 @@ def main():
         chunk = posts_sorted[(pi - 1) * page_size: pi * page_size]
         cbody = ['# Changelog', '']
         for product, note_id, fm in chunk:
-            cbody.append(f'<h2><a href="/changelog/post/{note_id}/">{fm.get("title", note_id)}</a></h2>')
+            cbody.append(f'<h2><a href="/changelog/{product}/{note_id}/">{fm.get("title", note_id)}</a></h2>')
             cbody.append(f'<p><em>{fm.get("date", "")}</em></p>')
             cbody.append('')
         if pi == 1:
             (cbase / 'index.md').write_text('\n'.join(cbody) + '\n')
-            add_tracked(tracked, 'changelog/', 'Changelog', 'templates/docs.html')
+            add_tracked(tracked, 'changelog/', 'Changelog', 'templates/docs-md.html')
         else:
             pdir = cbase / str(pi)
             pdir.mkdir(parents=True, exist_ok=True)
             (pdir / 'index.md').write_text('\n'.join(cbody) + '\n')
             add_tracked(tracked, f'changelog/{pi}/', f'Changelog - page {pi}',
-                        'templates/docs.html')
+                        'templates/docs-md.html')
     families['changelog-index'] = {'posts': len(posts), 'pages': num_pages}
 
     # ---- Changelog product pages: /changelog/product/<product>/ (paginated) ----
@@ -287,7 +287,7 @@ def main():
             chunk = pid_notes[(pi - 1) * 25: pi * 25]
             body = [f'# {pid} changelog', '']
             for product, note_id, fm in chunk:
-                body.append(f'<h2><a href="/changelog/post/{note_id}/">{fm.get("title", note_id)}</a></h2>')
+                body.append(f'<h2><a href="/changelog/{product}/{note_id}/">{fm.get("title", note_id)}</a></h2>')
                 body.append(f'<p><em>{fm.get("date", "")}</em></p>')
                 body.append('')
             if pi == 1:
@@ -295,13 +295,13 @@ def main():
                 d.mkdir(parents=True, exist_ok=True)
                 (d / 'index.md').write_text(rewrite_assets('\n'.join(body)) + '\n')
                 add_tracked(tracked, f'changelog/product/{pid}/', f'{pid} changelog',
-                            'templates/docs.html')
+                            'templates/docs-md.html')
             else:
                 d = cpbase / pid / str(pi)
                 d.mkdir(parents=True, exist_ok=True)
                 (d / 'index.md').write_text(rewrite_assets('\n'.join(body)) + '\n')
                 add_tracked(tracked, f'changelog/product/{pid}/{pi}/',
-                            f'{pid} changelog - page {pi}', 'templates/docs.html')
+                            f'{pid} changelog - page {pi}', 'templates/docs-md.html')
     families['changelog-products'] = {'products': len(product_ids)}
 
     # ---- Changelog product-group pages: /changelog/product-group/<slug>/ ----
@@ -320,7 +320,7 @@ def main():
             chunk = gnotes[(pi - 1) * 25: pi * 25]
             body = [f'# {grp} changelog', '']
             for product, note_id, fm in chunk:
-                body.append(f'<h2><a href="/changelog/post/{note_id}/">{fm.get("title", note_id)}</a></h2>')
+                body.append(f'<h2><a href="/changelog/{product}/{note_id}/">{fm.get("title", note_id)}</a></h2>')
                 body.append(f'<p><em>{fm.get("date", "")}</em></p>')
                 body.append('')
             if pi == 1:
@@ -328,13 +328,13 @@ def main():
                 d.mkdir(parents=True, exist_ok=True)
                 (d / 'index.md').write_text(rewrite_assets('\n'.join(body)) + '\n')
                 add_tracked(tracked, f'changelog/product-group/{slug}/', f'{grp} changelog',
-                            'templates/docs.html')
+                            'templates/docs-md.html')
             else:
                 d = cpgbase / slug / str(pi)
                 d.mkdir(parents=True, exist_ok=True)
                 (d / 'index.md').write_text(rewrite_assets('\n'.join(body)) + '\n')
                 add_tracked(tracked, f'changelog/product-group/{slug}/{pi}/',
-                            f'{grp} changelog - page {pi}', 'templates/docs.html')
+                            f'{grp} changelog - page {pi}', 'templates/docs-md.html')
     families['changelog-groups'] = {'groups': len(group_to_products)}
 
     # ---- Learning paths: /learning-paths/<slug>/... ----
@@ -353,7 +353,7 @@ def main():
             body.append(lp.get('description', ''))
             body.append('')
             (d / 'index.md').write_text(rewrite_assets('\n'.join(body)) + '\n')
-            add_tracked(tracked, '/'.join(parts) + '/', title, 'templates/docs.html')
+            add_tracked(tracked, '/'.join(parts) + '/', title, 'templates/docs-md.html')
     families['learning-paths'] = {'source_files': len(lp_files)}
 
     # ---- llms.txt: /llms.txt (root product index) ----
@@ -391,8 +391,78 @@ def main():
     ldir = content / 'llms.txt'
     ldir.mkdir(parents=True, exist_ok=True)
     (ldir / 'index.md').write_text(rewrite_assets('\n'.join(llms)) + '\n')
-    add_tracked(tracked, 'llms.txt/', 'llms.txt', 'templates/docs.html')
-    families['llms'] = {'routes': 1}
+    add_tracked(tracked, 'llms.txt/', 'llms.txt', 'templates/docs-md.html')
+    # Per-product /<product>/llms.txt routes: list every docs page under each
+    # product root so the links emitted by the root llms.txt resolve.
+    doc_index = {}
+    doc_bodies = {}
+    for p in sorted((up / 'src/content/docs').rglob('*')):
+        if p.suffix not in ('.md', '.mdx'):
+            continue
+        rel = p.relative_to(up / 'src/content/docs')
+        route = '/' + rel.as_posix().rsplit('.', 1)[0].rstrip('/') + '/'
+        if route.endswith('/index/'):
+            route = route[:-7] + '/' if len(route) > 8 else '/'
+        raw = p.read_text(errors='replace')
+        fm = {}
+        mm = re.match(r'^---\n(.*?)\n---\n?', raw, re.S)
+        body = raw
+        if mm:
+            for line in mm.group(1).splitlines():
+                if ':' in line and not line.startswith((' ', '\t')):
+                    fm[line.split(':', 1)[0].strip()] = line.split(':', 1)[1].strip().strip('"\'')
+            body = raw[mm.end():].strip()
+        title = fm.get('title') or rel.stem.replace('-', ' ').title()
+        desc = fm.get('description') or fm.get('summary') or ''
+        prod = route.strip('/').split('/')[0] if route != '/' else ''
+        doc_index.setdefault(prod, []).append((route, title, desc))
+        doc_bodies[route] = (title, body)
+    llm_routes = 1
+    for title, url, desc in groups_llm.get('Other', []) + [
+        (t, u, d) for items in [v for k, v in sorted(groups_llm.items()) if k != 'Other'] for t, u, d in items]:
+        section = url.strip('/')
+        if not section:
+            continue
+        prefix = f'/{section}/'
+        pages = [x for x in doc_index.get(section.split('/')[0], []) if x[0] == prefix or x[0].startswith(prefix)]
+        if not pages:
+            continue
+        lines = [f'# {title}', '', f'See {url}llms.txt for the full list.', '']
+        for route, pt, pdesc in pages:
+            rel = route[len(prefix):] if route.startswith(prefix) else route
+            line = f'- [{pt}]({url}{rel})'
+            if pdesc:
+                line += f': {pdesc}'
+            lines.append(line)
+        pd = content / section / 'llms.txt'
+        pd.mkdir(parents=True, exist_ok=True)
+        (pd / 'index.md').write_text(rewrite_assets('\n'.join(lines)) + '\n')
+        add_tracked(tracked, f'{section}/llms.txt/', f'{title} llms.txt', 'templates/docs-md.html')
+        llm_routes += 1
+    families['llms'] = {'routes': llm_routes}
+
+    # ---- llms-full.txt: /llms-full.txt and /<product>/llms-full.txt ----
+    # Concatenated documentation for offline indexing, mirroring the upstream
+    # llms-full.txt routes referenced by /docs-for-agents/.
+    def llms_full_doc(route):
+        title, body = doc_bodies.get(route, (route, ''))
+        return f'# {title}\n\nSource: https://developers.cloudflare.com{route}\n\n{body}\n\n'
+    full_parts = [llms_full_doc(r) for r in sorted(doc_bodies)]
+    full_dst = ROOT / 'public/llms-full.txt'
+    full_dst.parent.mkdir(parents=True, exist_ok=True)
+    full_dst.write_text('\n'.join(full_parts) + '\n')
+    llm_full_routes = 1
+    for prod, pages in sorted(doc_index.items()):
+        if not prod:
+            continue
+        prod_parts = [llms_full_doc(r) for r, _t, _d in pages if r in doc_bodies]
+        if not prod_parts:
+            continue
+        pd = ROOT / 'public' / prod
+        pd.mkdir(parents=True, exist_ok=True)
+        (pd / 'llms-full.txt').write_text('\n'.join(prod_parts) + '\n')
+        llm_full_routes += 1
+    families['llms-full'] = {'routes': llm_full_routes}
 
     # ---- Videos: /videos/<url>/ from src/content/stream/*.yaml ----
     video_files = sorted((up / 'src/content/stream').rglob('*.yaml'))
@@ -411,7 +481,7 @@ def main():
             vbody.append(f'<p><strong>Video:</strong> <a href="/videos/{vurl}/">/videos/{vurl}/</a></p>')
             vbody.append('')
         (vdir / 'index.md').write_text(rewrite_assets('\n'.join(vbody)) + '\n')
-        add_tracked(tracked, f'videos/{vurl}/', title, 'templates/docs.html')
+        add_tracked(tracked, f'videos/{vurl}/', title, 'templates/docs-md.html')
     families['videos'] = {'source_files': len(video_files), 'routes': len(video_files)}
 
     # ---- Agent setup generated routes: /agent-setup/ ----
@@ -431,11 +501,11 @@ def main():
         adir.mkdir(parents=True, exist_ok=True)
         (adir / 'index.md').write_text(rewrite_assets(body.strip()) + '\n')
         add_tracked(tracked, f'agent-setup/{stem}/', stem.replace('-', ' ').title(),
-                    'templates/docs.html')
+                    'templates/docs-md.html')
         as_pages += 1
     if as_files:
         (asbase / 'index.md').write_text('# Agent setup\n')
-        add_tracked(tracked, 'agent-setup/', 'Agent setup', 'templates/docs.html')
+        add_tracked(tracked, 'agent-setup/', 'Agent setup', 'templates/docs-md.html')
         as_pages += 1
     families['agent-setup'] = {'source_files': len(as_files), 'routes': as_pages}
 
@@ -468,7 +538,7 @@ def main():
         wbody.append((data.get('releaseNotes') or '').strip())
         wbody.append('')
         (wdir / 'index.md').write_text(rewrite_assets('\n'.join(wbody)) + '\n')
-        add_tracked(tracked, f'changelog/post/{note_id}/', title, 'templates/docs.html')
+        add_tracked(tracked, f'changelog/post/{note_id}/', title, 'templates/docs-md.html')
         wr_added += 1
     families['warp-releases'] = {'source_files': len(wr_files), 'synthesized': wr_added}
 
@@ -541,7 +611,7 @@ def main():
     for product, note_id, fm in posts:
         title = fm.get('title', note_id)
         date = fm.get('date', '')
-        rss_items.append((title, date, f'https://developers.cloudflare.com/changelog/post/{note_id}/'))
+        rss_items.append((title, date, f'https://developers.cloudflare.com/changelog/{product}/{note_id}/'))
     rss_items.sort(key=lambda x: x[1], reverse=True)
     xml = ['<?xml version="1.0" encoding="UTF-8"?>', '<rss version="2.0"><channel>',
            '<title>Cloudflare changelogs</title>',
@@ -557,7 +627,43 @@ def main():
         xml.append('</item>')
     xml.append('</channel></rss>')
     (rssbase / 'index.xml').write_text('\n'.join(xml) + '\n')
-    families['rss'] = {'routes': 1}
+    # Per-product feeds: /changelog/rss/<product-id>.xml (skip area slugs that
+    # collide with product IDs, mirroring the upstream [product].xml.ts).
+    product_ids = sorted({p for _, _, fm in posts
+                          for p in (fm.get('products', '') or '').split(',') if p})
+    area_slugs = set()
+    for df in (up / 'src/content/directory').glob('*.yaml'):
+        entry = (load_yaml(df).get('entry') or {})
+        if entry.get('group'):
+            area_slugs.add(entry['group'].replace(' ', '-').lower())
+    rss_feeds = 1
+    for pid in product_ids:
+        if pid in area_slugs:
+            continue
+        notes = [(p, n, fm) for p, n, fm in posts
+                 if pid in (fm.get('products', '') or '').split(',')]
+        if not notes:
+            continue
+        notes.sort(key=lambda x: x[2].get('date', ''), reverse=True)
+        fx = ['<?xml version="1.0" encoding="UTF-8"?>', '<rss version="2.0"><channel>',
+              f'<title>Cloudflare {pid} changelog</title>',
+              f'<description>Changelog updates for {pid}</description>',
+              f'<link>https://developers.cloudflare.com/changelog/{pid}/</link>']
+        for p, note_id, fm in notes:
+            title = fm.get('title', note_id)
+            date = fm.get('date', '')
+            link = f'https://developers.cloudflare.com/changelog/{p}/{note_id}/'
+            fx.append('<item>')
+            fx.append(f'<title>{html_escape(title)}</title>')
+            fx.append(f'<link>{link}</link>')
+            fx.append(f'<guid>{link}</guid>')
+            if date:
+                fx.append(f'<pubDate>{date}</pubDate>')
+            fx.append('</item>')
+        fx.append('</channel></rss>')
+        (rssbase / f'{pid}.xml').write_text('\n'.join(fx) + '\n')
+        rss_feeds += 1
+    families['rss'] = {'routes': rss_feeds}
 
     print(json.dumps({'upstream_sha': git_sha(up), 'families': families,
                       'total_tracked': len(tracked)}, indent=2))

@@ -21,7 +21,7 @@ class TestImporter(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'UnknownThing'): mod.convert('import { UnknownThing } from "~/components/UnknownThing";\n<UnknownThing />','fixture')
  def test_unimported_cap_tag_is_prose(self):
   _,out=mod.convert('Text <API_TOKEN> and <SomePlaceholder>stay literal</SomePlaceholder>.','fixture')
-  self.assertIn('<API_TOKEN>',out); self.assertIn('<SomePlaceholder>stay literal</SomePlaceholder>',out)
+  self.assertIn('&lt;API_TOKEN&gt;',out); self.assertIn('<SomePlaceholder>stay literal</SomePlaceholder>',out)
  def test_prose_apostrophe_does_not_break_pairing(self):
   src='Text with SDK\'s and Don\'t survive.\n\n<Steps>\n1. First step.\n</Steps>\n'
   _,out=mod.convert(src,'fixture'); self.assertIn('nb-steps',out); self.assertIn("SDK's",out)
@@ -78,9 +78,10 @@ class TestImporter(unittest.TestCase):
   src='<Details title="T">\n:::note\nA **note** inside.\n:::\n</Details>\n'
   _,out,bodies=self._conv(src); self.assertTrue(any('nb-aside note' in b for b in bodies))
  def test_atmarkup_outer_template_composes(self):
-  # outer @markup("md"){@content} consumes content with inner @markup bodies
+  # docs template @content composes top-level (importer-rendered) markdown
+  # with file-based @markup body references for component bodies
   src='<Steps>\n1. **Install**\n</Steps>\n\nTop level **bold**.\n'
-  _,out,bodies=self._conv(src); self.assertTrue(bodies); self.assertIn('Top level **bold**.',out); self.assertIn('**Install**',bodies[0])
+  _,out,bodies=self._conv(src); self.assertTrue(bodies); self.assertIn('Top level <strong>bold</strong>.',out); self.assertIn('content/.markup/bodies/',out); self.assertIn('**Install**',bodies[0])
  def test_atmarkup_guard_unbalanced_prose_brace(self):
   # a genuinely unmatched prose brace must be rejected by the guard, not emitted broken
   src='<Steps>\nText with an unmatched } brace.\n</Steps>\n'
@@ -89,4 +90,27 @@ class TestImporter(unittest.TestCase):
   src='<DashButton url="/?to=/foo" />\n'
   _,out,bodies=self._conv(src); self.assertIn('nb-dash-button',out); self.assertFalse(bodies)
   _,out=mod.convert(src,'fixture'); self.assertIn('nb-dash-button',out); self.assertNotIn('@markup("md", "content/.markup/bodies/',out)
+ def test_nested_directive_not_double_processed(self):
+  # a :::caution inside a :::note must not be reordered by stale line indices
+  src=':::note[Outer]\nText one.\n\n:::caution\nInner caution.\n:::\n\nText two.\n:::\n'
+  _,out,bodies=self._conv(src); self.assertIn('nb-aside note',out); joined='\n'.join(bodies); self.assertIn('nb-aside caution',joined); self.assertIn('Inner caution.',joined); self.assertIn('Text two.',joined); self.assertLess(joined.find('Inner caution.'),joined.find('Text two.'),'caution must precede later prose')
+ def test_irregular_fence_closer_indented(self):
+  # closing fence indented deeper than the opener is not a CommonMark closer;
+  # it must be pre-rendered so it cannot swallow following component HTML
+  src='  ```txt ins="database_name"\n  postgres://USERNAME:PASSWORD@HOST\n   ```   \n\n<Details>\ncontent\n</Details>\n'
+  _,out,bodies=self._conv(src); self.assertIn('<pre><code class="language-txt">',out); self.assertIn('nb-details',out); self.assertIn('postgres://USERNAME',out)
+ def test_multiline_html_tag_joined(self):
+  src='<a\n\thref="https://x/"\n\ttarget="_blank"\n>\n\t<InlineBadge text="beta" />\n</a>\n'
+  _,out,bodies=self._conv(src); self.assertIn('nb-badge',out); self.assertNotIn('&lt;a',out)
+ def test_pure_container_uses_input(self):
+  # a pure-HTML composition body is referenced via @input, not @markup, so Nift
+  # does not re-convert already-rendered nested bodies
+  src='<Tabs>\n<TabItem label="One">\n```js\nconst x = 1;\n```\n</TabItem>\n</Tabs>\n'
+  _,out,bodies=self._conv(src); self.assertIn('@input("content/.markup/bodies/',out); self.assertIn('nb-tab-panel','\n'.join(bodies))
+ def test_asset_refs_rewritten_in_bodies(self):
+  src='<Details>\n![alt](~/assets/images/x.png)\n</Details>\n'
+  _,out,bodies=self._conv(src); self.assertTrue(any('/assets/upstream/images/x.png' in b for b in bodies),'~/assets must be rewritten inside body files')
+ def test_top_level_markdown_rendered_by_importer(self):
+  src='Some *prose* and `code`.\n\n## Heading\n\n- a\n- b\n'
+  _,out,bodies=self._conv(src); self.assertIn('<em>prose</em>',out); self.assertIn('<h2>Heading</h2>',out); self.assertIn('<ul>',out)
 if __name__=='__main__': unittest.main()

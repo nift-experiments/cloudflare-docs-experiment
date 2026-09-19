@@ -8,7 +8,7 @@
 <main id="main-content" class="main"><div class="article-wrap">
 @input("templates/breadcrumbs.html")
 @input("templates/article-header.html")
-<article class="docs-content">@content</article>
+<article class="docs-content">@markup("md"){@content}</article>
 @input("templates/pagination.html")
 @input("templates/page-actions.html")
 </div></main>

@@ -29,7 +29,9 @@ KNOWN = set(MODEL['components'])
 
 FENCE = re.compile(r'^[ \t]*`{3,}[^\n]*\n.*?^[ \t]*`{3,}', re.M | re.S)
 TILDE = re.compile(r'^[ \t]*~{3,}[^\n]*\n.*?^[ \t]*~{3,}', re.M | re.S)
+FENCE_OPEN = re.compile(r'^[ \t]*(?:[0-9]+[.)][ \t]+)?(`{3,}|~{3,})')
 INLINE = re.compile(r'`[^`\n]*`')
+_ML_TAG = re.compile(r'<([a-z][a-z0-9-]*)(?=[^<>]*?\n)([^<>]*?)>', re.S)
 MDX_COMMENT = re.compile(r'\{/\*[\s\S]*?\*/\}')
 IMPORT_RE = re.compile(r'^\s*import\s+[^\n]*;?\s*$', re.M)
 EXPORT_RE = re.compile(r'^\s*export\s+[^\n]*;?\s*$', re.M)
@@ -265,22 +267,53 @@ def _dedent_component_html(body):
     return '\n'.join(out)
 
 
+def _rewrite_asset_refs(text):
+    """Rewrite source-style asset/static references to the generated site.
+
+    '~/assets/...' and 'src/assets/...' resolve to the staged upstream asset tree
+    at /assets/upstream/. 'public/...' paths in Markdown link/image destinations
+    and quoted attrs map to root-relative '/...' (the upstream public/ tree)."""
+    text = text.replace('~/assets/', '/assets/upstream/')
+    text = text.replace('src/assets/', '/assets/upstream/')
+    text = re.sub(r'\(public/', '(/', text)
+    text = re.sub(r'"(public/)', '"/', text)
+    return text
+
+
 def _materialize_bodies(text, placeholders):
-    """Replace \x01BODY{idx}\x02 markers with @markup("md", path) references and
-    write each body to a Markdown file (with code restored). Nested bodies are
-    resolved so a body file may itself reference another body file."""
+    """Replace \x01BODY{idx}\x02 markers with file references and write each body
+    to a Markdown file (with code restored). Nested bodies are resolved so a body
+    file may itself reference another body file.
+
+    A body is referenced with @input (template include, no CommonMark pass) when
+    it is a pure-HTML composition of nested bodies; Nift's @markup("md", path)
+    would re-convert the already-rendered nested HTML and split hostile fenced
+    code. Leaf bodies and bodies carrying their own Markdown keep @markup so the
+    Markdown is rendered exactly once."""
     refs = {}
+    kinds = {}
     for idx, body in _BODY_REGISTRY:
         restored = restore_code(body, placeholders)
         restored = _dedent_component_html(restored)
+        restored = _rewrite_asset_refs(restored)
         refs[idx] = restored
-    # resolve nested markers recursively
+        if '\x01BODY' not in restored:
+            kinds[idx] = 'leaf'
+        elif _is_pure_html(restored):
+            kinds[idx] = 'pure'
+        else:
+            kinds[idx] = 'mixed'
+
+    def ref_for(ridx):
+        if kinds.get(ridx) == 'pure':
+            return f'@input("content/.markup/bodies/{ridx}.md")'
+        return f'@markup("md", "content/.markup/bodies/{ridx}.md")'
+
     def resolve(body):
         if '\x01BODY' not in body:
             return body
         for ridx, _ in _BODY_REGISTRY:
-            marker = f'\x01BODY{ridx}\x02'
-            body = body.replace(marker, f'@markup("md", "content/.markup/bodies/{ridx}.md")')
+            body = body.replace(f'\x01BODY{ridx}\x02', ref_for(ridx))
         return body
     for idx, body in _BODY_REGISTRY:
         refs[idx] = resolve(refs[idx])
@@ -288,9 +321,21 @@ def _materialize_bodies(text, placeholders):
             p = _BODY_DIR / f'{idx}.md'
             p.parent.mkdir(parents=True, exist_ok=True)
             p.write_text(refs[idx])
-        text = text.replace(f'\x01BODY{idx}\x02', f'@markup("md", "content/.markup/bodies/{idx}.md")')
+        text = text.replace(f'\x01BODY{idx}\x02', ref_for(idx))
     _BODY_REGISTRY.clear()
     return text
+
+
+def _is_pure_html(content):
+    """True when a body's non-marker content is only complete HTML tags (a
+    composition of component shells and nested body references, not Markdown)."""
+    for ln in content.split('\n'):
+        s = ln.strip()
+        if not s or '\x01BODY' in s:
+            continue
+        if not (s.startswith('<') and s.endswith('>')):
+            return False
+    return True
 
 
 def _wrap_markup(body, what):
@@ -309,7 +354,11 @@ def _wrap_markup(body, what):
     idx = _BODY_NEXT
     _BODY_NEXT += 1
     _BODY_REGISTRY.append((idx, body))
-    return f'\x01BODY{idx}\x02'
+    # Surround with blank lines so the outer @markup('md'){@content} CommonMark
+    # pass treats the rendered body HTML (e.g. <pre><code>) as top-level blocks
+    # rather than re-parsing it inside a component HTML block (which splits
+    # code fences such as Rust raw-string examples).
+    return f'\n\n\x01BODY{idx}\x02\n\n'
 
 
 def render(name, a, body=''):
@@ -377,7 +426,6 @@ def protect_code(text):
     out = []
     i = 0
     n = len(lines)
-    FENCE_OPEN = re.compile(r'^[ \t]*(?:[0-9]+[.)][ \t]+)?(`{3,}|~{3,})')
     while i < n:
         ln = lines[i]
         m = FENCE_OPEN.match(ln)
@@ -401,8 +449,41 @@ def protect_code(text):
     return text, placeholders
 
 
-def restore_code(text, placeholders):
+def _fence_to_html(val):
+    """Render a stashed fenced code block to <pre><code> HTML.
+
+    Deterministically closes fences that CommonMark would leave open (a closing
+    fence indented more deeply than the opening fence), matching the HTML cmark
+    produces for regular fences: language class from the info string, content
+    de-indented to the opening fence, HTML-escaped, with a trailing newline."""
+    lines = val.split('\n')
+    m = FENCE_OPEN.match(lines[0])
+    if not m:
+        return html.escape(val)
+    marker = m.group(1)[0]
+    info = lines[0][m.end():].strip()
+    lang = info.split()[0] if info else ''
+    indent = len(lines[0]) - len(lines[0].lstrip())
+    content = list(lines[1:])
+    if content and re.match(r'^[ \t]*' + re.escape(marker) + r'{3,}', content[-1]):
+        content = content[:-1]
+    stripped = []
+    for ln in content:
+        if ln[:indent].strip() == '' and len(ln) >= indent:
+            stripped.append(ln[indent:])
+        else:
+            stripped.append(ln)
+    body = '\n'.join(stripped)
+    if not body.endswith('\n'):
+        body += '\n'
+    cls = f' class="language-{html.escape(lang, quote=True)}"' if lang else ''
+    return f'<pre><code{cls}>{html.escape(body)}</code></pre>\n'
+
+
+def restore_code(text, placeholders, render_fences=False):
     for key, val in placeholders.items():
+        if render_fences and '\n' in val and FENCE_OPEN.match(val.split('\n')[0]):
+            val = _fence_to_html(val)
         text = text.replace(key, val)
     return text
 
@@ -448,9 +529,15 @@ def convert_directives(text, placeholders=None):
     if not spans:
         return text
     # Process spans from the highest closing index downward so earlier index
-    # replacements never shift the positions of still-pending spans.
+    # replacements never shift the positions of still-pending spans. Nested
+    # spans (e.g. a :::caution inside a :::note) are already converted by the
+    # recursion below; skip them here so stale line indices never double-process
+    # a sub-directive after the outer span has replaced those lines.
     spans.sort(key=lambda s: s[1], reverse=True)
+    processed = []
     for oi, ci, name, title in spans:
+        if any(lo <= oi and ci <= hi for lo, hi in processed):
+            continue
         inner = convert_directives('\n'.join(lines[oi + 1:ci]), placeholders)
         inner = reduce_components(inner, 0, placeholders)
         cls = name or 'note'
@@ -458,7 +545,20 @@ def convert_directives(text, placeholders=None):
         inner_markup = _wrap_markup(inner, f':::{cls}')
         block = f'<aside class="nb-aside {html.escape(cls)}">\n{head}{inner_markup}\n</aside>'
         lines = lines[:oi] + block.split('\n') + lines[ci + 1:]
+        processed.append((oi, ci))
     return '\n'.join(lines)
+
+
+def _join_multiline_tags(text):
+    """Collapse lowercase HTML tags that span multiple lines onto one line.
+
+    CommonMark type-6 HTML blocks require a complete tag on a single line, so an
+    upstream `<a\\n\\thref="..."\\n\\ttarget="_blank">` would otherwise render as
+    escaped text. Joining the attribute lines keeps the tag a valid HTML block."""
+    def fix(m):
+        attrs = re.sub(r'\s*\n\s*', ' ', m.group(2)).strip()
+        return f'<{m.group(1)} {attrs}>' if attrs else f'<{m.group(1)}>'
+    return _ML_TAG.sub(fix, text)
 
 
 def render_markdown(text, blocks=True):
@@ -472,6 +572,7 @@ def render_markdown(text, blocks=True):
         import cmarkgfm
     except ImportError:
         return text
+    text = _join_multiline_tags(text)
     if blocks:
         BLOCK = r'(?:div|section|aside|details|pre|table|ul|ol|dl|blockquote|h[1-6])'
         text = re.sub(r'(<' + BLOCK + r'[^>]*>)(?=[^\s<])', r'\1\n', text)
@@ -529,22 +630,21 @@ def convert(text, path='<memory>'):
     unresolved = sorted({c for c in remain if c in KNOWN})
     if unresolved:
         raise ValueError(f'{path}: unresolved MDX components: {", ".join(unresolved)}')
-    text = restore_code(text, placeholders)
+    text = restore_code(text, placeholders, render_fences=True)
+    # Render top-level Markdown to HTML with a CommonMark engine before
+    # materializing body references. Body markers (\x01BODY{n}\x02) survive the
+    # render and are replaced with @markup("md", path) afterwards, so Nift
+    # renders each body exactly once. The page is then inserted via the docs
+    # template's @content without an outer markdown pass, which would otherwise
+    # re-parse already-rendered body HTML and split hostile fenced code.
+    text = render_markdown(text, blocks=True)
     # Materialize @markup body references: write each component/directive body to
     # a Markdown file under content/.markup/bodies/ and reference it via the
     # file-based @markup("md", path) form (avoids find_balanced fragility).
     text = _materialize_bodies(text, placeholders)
     # Source-style '~/assets/...' references resolve to the staged upstream
     # asset tree at /assets/upstream/ in the generated site.
-    text = text.replace('~/assets/', '/assets/upstream/')
-    # 'src/assets/...' references (upstream source-tree paths) resolve to the
-    # same staged /assets/upstream/ tree.
-    text = text.replace('src/assets/', '/assets/upstream/')
-    # 'public/images/...' and other 'public/...' references in Markdown are
-    # root-relative to the upstream public/ static tree, so map them to '/...'
-    # only inside Markdown link/image destinations and quoted attrs.
-    text = re.sub(r'\(public/', '(/', text)
-    text = re.sub(r'"(public/)', '"/', text)
+    text = _rewrite_asset_refs(text)
     # A bare '---' horizontal rule left at the start of the body would be
     # misread by Nift as an unterminated front-matter block. Drop a leading
     # standalone '---' line (it was an HR after the stripped import block).
