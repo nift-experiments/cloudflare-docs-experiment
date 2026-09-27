@@ -321,7 +321,8 @@ Prefer documented Nift behaviour and the existing project structure over guessin
 This section is for a **fresh agent resuming this experiment with no prior
 conversation context**. Read this entire section, then the CP reports, then
 verify the baseline before changing anything. CP6C repairs and supersedes the
-original CP6B semantic certification; the next checkpoint is CP7.
+original CP6B semantic certification; CP7 adds certified client behavior; the
+next checkpoint is CP8.
 
 ## 1. Mission and experiment design
 
@@ -584,14 +585,12 @@ state before any comparative claim.
 
 ## 11. Next checkpoints
 
-- **CP7 — client-side functional fidelity (next).** Inventory which behaviours
-  are currently static approximations vs which upstream interactions matter:
-  navigation/sidebar interactions; mobile navigation; tabs; details/disclosures;
-  theme behaviour; copy-code controls; search behaviour; table-of-contents
-  interaction; interactive component shells that currently render only
-  structurally; client-side routing/link behaviour where applicable. Goal is to
-  reproduce **observable behaviour**, not recreate Astro.
-- **CP8 — full-corpus visual/structural parity.** Use `tools/parity.py` +
+- **CP7 — client-side functional fidelity (complete).** Certified deterministic
+  navigation, responsive mobile navigation, tabs/package-manager controls,
+  details, theme behavior, copy controls, generated TOC, raw Markdown endpoints,
+  and an honest hosted-search fallback. See
+  `reports/CP7-CLIENT-FUNCTIONAL-FIDELITY.md`.
+- **CP8 — full-corpus visual/structural parity (next).** Use `tools/parity.py` +
   golden routes, then systematic corpus sampling: DOM structure, typography,
   spacing/layout, navigation/sidebar, code blocks, tables, cards/callouts,
   responsive states, screenshots/pixel diffs. Fix systemic causes before
@@ -614,7 +613,7 @@ state before any comparative claim.
 
 The intended resume state is:
 
-**CP0–CP6C complete and certified. Next work: CP7. Performance comparison remains
+**CP0–CP7 complete and certified. Next work: CP8. Performance comparison remains
 provisional until CP10 same-hardware benchmarking.**
 
 1. Read this HANDOVER.md (especially Sections 4-10).
@@ -631,5 +630,5 @@ provisional until CP10 same-hardware benchmarking.**
    semantic fixture green. Expected baseline numbers above make any
    regression immediately obvious.
 7. Investigate any regression before proceeding.
-8. Begin **CP7** only after the CP6C baseline reproduces. Do not skip ahead to
-   benchmarking.
+8. Verify the CP7 gates in `reports/CP7-CLIENT-FUNCTIONAL-FIDELITY.md`, then begin
+   **CP8**. Do not skip ahead to benchmarking.

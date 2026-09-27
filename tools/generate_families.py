@@ -90,8 +90,12 @@ def main():
     static_files = {
         '/robots.txt', '/_headers', '/__redirects',
         '/assets/cf-design.css', '/assets/cf-shell.js',
-        '/assets/cloudflare-logo.svg',
+        '/assets/cloudflare-logo.svg', '/assets/navigation.json',
     }
+    static_files.update(
+        '/' + path.relative_to(ROOT / 'public').as_posix()
+        for path in sorted((ROOT / 'public/assets/navigation').glob('*.json'))
+    )
 
     # ---- Glossary: one page at /glossary/ from all glossary yaml files ----
     glossary_files = sorted((up / 'src/content/glossary').glob('*.yaml'))

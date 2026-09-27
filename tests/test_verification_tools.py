@@ -33,8 +33,10 @@ class TestRouteVerification(unittest.TestCase):
             static = public / 'data/feed.json'
             static.parent.mkdir(parents=True)
             static.write_text('{}')
+            markdown = public / 'docs/index.md'
+            markdown.write_text('# Docs\n')
             ordinary = base / 'ordinary.json'
-            ordinary.write_text(json.dumps({'routes': ['/docs/']}))
+            ordinary.write_text(json.dumps({'routes': ['/docs/'], 'markdown_endpoints': 1}))
             generated = base / 'generated.json'
             generated.write_text(json.dumps({
                 'routes': ['/generated/'],
@@ -47,8 +49,9 @@ class TestRouteVerification(unittest.TestCase):
             self.assertEqual(3, report['broken_categories']['external-api-application'])
 
             static.unlink()
+            markdown.unlink()
             report = routes.verify(public, ordinary, generated)
-            self.assertEqual(['/data/feed.json'], report['missing_static_files'])
+            self.assertEqual(['/data/feed.json', '/docs/index.md'], report['missing_static_files'])
 
 
 class TestLeakScan(unittest.TestCase):

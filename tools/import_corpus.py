@@ -9,6 +9,7 @@ import argparse, hashlib, json, shutil, subprocess, sys, tempfile
 from pathlib import Path
 import import_cloudflare as ic
 from import_cloudflare import convert
+from generate_navigation import frontmatter, generate as generate_navigation
 
 PIN='bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf'
 ROOT=Path(__file__).resolve().parents[1]
@@ -72,8 +73,18 @@ def main():
     static_count=copy_tree(up/'public',ROOT/'public')
     # Keep source assets under a deterministic public namespace; later component transforms may rewrite references.
     asset_count=copy_tree(up/'src/assets',ROOT/'public/assets/upstream')
+    markdown_count=0
+    for source,_rel,route,_fm,_body in pages:
+        if route=='/': continue
+        markdown=ROOT/'public'/route.strip('/')/'index.md'
+        markdown.parent.mkdir(parents=True,exist_ok=True)
+        markdown.write_text(frontmatter(source)[1].strip()+'\n')
+        markdown_count+=1
+    navigation=generate_navigation(up,ROOT/'public/assets/navigation.json',sha)
     manifest={'upstream_sha':sha,'docs_source_count':len(pages),'tracked_docs_count':len(tracked),'static_files_copied':static_count,'source_assets_copied':asset_count,'routes':sorted(r for r in routes if r!='/')}
+    manifest['markdown_endpoints']=markdown_count
+    manifest['navigation_products']=len(navigation['products'])
     out=ROOT/'reports/cp6'; out.mkdir(parents=True,exist_ok=True); (out/'expected-routes.json').write_text(json.dumps(manifest,indent=2)+'\n')
-    print(f'imported {len(tracked)} docs routes; copied {static_count} public files and {asset_count} source assets')
+    print(f'imported {len(tracked)} docs routes; copied {static_count} public files and {asset_count} source assets; generated {markdown_count} markdown endpoints')
     return 0
 if __name__=='__main__': raise SystemExit(main())

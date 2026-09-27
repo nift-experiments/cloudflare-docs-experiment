@@ -36,6 +36,9 @@ def verify(public, ordinary_manifest, generated_manifest):
     generated = load_manifest(generated_manifest)
     expected_routes = set(ordinary['routes']) | {'/'} | set(generated['routes'])
     expected_static = set(generated.get('static_files', []))
+    if ordinary.get('markdown_endpoints'):
+        expected_static.update(route.rstrip('/') + '/index.md'
+                               for route in ordinary['routes'])
     actual_routes = index_routes(public)
     missing_routes = sorted(expected_routes - actual_routes)
     missing_static = sorted(path for path in expected_static

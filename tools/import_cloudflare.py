@@ -204,6 +204,17 @@ def attrs(s):
     return out
 
 
+def _clean_attr(value):
+    value = str(value or '').strip()
+    if len(value) >= 2 and value[0] == value[-1] and value[0] in {'"', "'"}:
+        return value[1:-1]
+    return value
+
+
+def _has_boolean_attr(source, name):
+    return re.search(r'(?:^|\s)' + re.escape(name) + r'(?:\s|/?>|$)', source) is not None
+
+
 # Backtick-delimited spans (inline code and whole fenced blocks) are opaque to
 # Nift's find_balanced, so braces inside them never affect an @markup boundary.
 # This masks them for the deterministic pre-emission brace-balance guard.
@@ -387,7 +398,11 @@ def _materialize_bodies(text, placeholders):
             p = _BODY_DIR / f'{idx}.md'
             p.parent.mkdir(parents=True, exist_ok=True)
             p.write_text(refs[idx])
-        text = text.replace(f'\x01BODY{idx}\x02', ref_for(idx))
+        marker = f'\x01BODY{idx}\x02'
+        # CommonMark wraps a bare marker as a paragraph. Remove that wrapper so
+        # block bodies never become invalid <p><section>/<ul>/<pre> markup.
+        text = re.sub(r'<p>\s*' + re.escape(marker) + r'\s*</p>', ref_for(idx), text)
+        text = text.replace(marker, ref_for(idx))
     _BODY_REGISTRY.clear()
     return text
 
@@ -427,6 +442,63 @@ def _wrap_markup(body, what):
     return f'\n\n\x01BODY{idx}\x02\n\n'
 
 
+def _inline_markdown(value):
+    rendered = render_markdown(value, blocks=False).strip()
+    match = re.fullmatch(r'<p>(.*)</p>', rendered, re.S)
+    return match.group(1) if match else rendered
+
+
+_PM_COMMANDS = {
+    'npm': {'add': 'npm i', 'create': 'npm create', 'dlx': 'npx', 'exec': 'npx',
+            'install': 'npm install', 'run': 'npm run', 'remove': 'npm uninstall', 'dev': '-D'},
+    'yarn': {'add': 'yarn add', 'create': 'yarn create', 'dlx': 'yarn dlx', 'exec': 'yarn',
+             'install': 'yarn install', 'run': 'yarn run', 'remove': 'yarn remove', 'dev': '-D'},
+    'pnpm': {'add': 'pnpm add', 'create': 'pnpm create', 'dlx': 'pnpx', 'exec': 'pnpm',
+             'install': 'pnpm install', 'run': 'pnpm run', 'remove': 'pnpm remove', 'dev': '-D'},
+    'bun': {'add': 'bun add', 'install': 'bun install', 'remove': 'bun remove', 'dev': '-d'},
+}
+
+
+def _package_managers(attributes):
+    command_type = _clean_attr(attributes.get('type') or 'add')
+    package = _clean_attr(attributes.get('pkg'))
+    args = _clean_attr(attributes.get('args'))
+    comment = _clean_attr(attributes.get('comment'))
+    prefix = _clean_attr(attributes.get('prefix'))
+    development = _clean_attr(attributes.get('dev')).lower() == 'true'
+    tabs = []
+    for manager, commands in _PM_COMMANDS.items():
+        command = commands.get(command_type)
+        if not command:
+            continue
+        if prefix:
+            command = f'{prefix} {command}'
+        if comment:
+            command = f'# {comment.replace("{PKG}", manager)}\n{command}'
+        if development and command_type == 'add':
+            command += f' {commands["dev"]}'
+        rendered_package = package
+        if manager == 'yarn' and command_type == 'create':
+            rendered_package = re.sub(r'@(?![^@]*/)[^\s]*$', '', rendered_package)
+        if rendered_package:
+            command += f' {rendered_package}'
+        if args:
+            separator = ' --' if manager == 'npm' and command_type not in {'dlx', 'exec', 'run'} else ''
+            command += f'{separator} {args}'
+        tabs.append((manager, command))
+    buttons = ''.join(
+        f'<button type="button" role="tab" data-nb-pm-tab aria-selected="{str(i == 0).lower()}" tabindex="{0 if i == 0 else -1}">{manager}</button>'
+        for i, (manager, _command) in enumerate(tabs)
+    )
+    panels = ''.join(
+        f'<div role="tabpanel" data-nb-pm-panel{" hidden" if i else ""}>'
+        f'<pre><code data-nb-pm-code>{html.escape(command)}</code></pre>'
+        f'<button type="button" data-nb-pm-copy data-nb-command="{html.escape(command, quote=True)}" aria-label="Copy to clipboard">Copy</button></div>'
+        for i, (_manager, command) in enumerate(tabs)
+    )
+    return f'<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager">{buttons}</div>{panels}</div>'
+
+
 def render(name, a, body=''):
     at = attrs(a)
     title = html.escape(at.get('title') or at.get('text') or name)
@@ -448,15 +520,20 @@ def render(name, a, body=''):
     if name == 'Step':
         return f'<section class="nb-step">{wrapped}</section>'
     if name == 'Details':
-        return f'<details class="nb-details"><summary>{title}</summary>{wrapped}</details>'
+        summary = _inline_markdown(at.get('header') or at.get('title') or at.get('text') or 'Details')
+        ident = f' id="{html.escape(at["id"], quote=True)}"' if at.get('id') else ''
+        opened = ' open' if _has_boolean_attr(a, 'open') or _clean_attr(at.get('open')).lower() == 'true' else ''
+        return f'<details class="nb-details"{ident}{opened}><summary>{summary}</summary><div class="nb-details-body">{wrapped}</div></details>'
     if name == 'FileTree':
         return f'<pre class="nb-file-tree">{wrapped}</pre>'
-    if name in {'Tabs', 'PackageManagers'}:
-        return f'<div class="nb-tabs" data-nb-tabs>{wrapped}</div>'
+    if name == 'PackageManagers':
+        return _package_managers(at)
+    if name == 'Tabs':
+        sync = f' data-nb-sync-key="{html.escape(at["syncKey"], quote=True)}"' if at.get('syncKey') else ''
+        return f'<div class="nb-tabs" data-nb-tabs{sync}><div role="tablist" aria-label="Options" data-nb-tabs-list></div><div data-nb-tabs-panels>{wrapped}</div></div>'
     if name == 'TabItem':
         label = html.escape(at.get('label', at.get('value', 'Tab')))
-        ident = 'tab-' + re.sub(r'[^a-z0-9]+', '-', label.lower()).strip('-')
-        return f'<section class="nb-tab-panel" id="{ident}" data-tab-label="{label}">{wrapped}</section>'
+        return f'<section class="nb-tab-panel" role="tabpanel" data-nb-tabs-content data-nb-tab-label="{label}">{wrapped}</section>'
     cls = MODEL['components'][name]
     if cls == 'browser-interactive':
         return f'<div class="nb-interactive-component" data-cf-component="{name}">{wrapped}</div>'
@@ -658,6 +735,28 @@ def render_markdown(text, blocks=True):
     return cmarkgfm.markdown_to_html(text, options=flag)
 
 
+def add_heading_ids(text):
+    """Add deterministic, de-duplicated IDs to rendered article headings."""
+    used = set(re.findall(r'<h[2-6][^>]*\bid=["\']([^"\']+)', text, re.I))
+
+    def replace(match):
+        level, attributes, content = match.groups()
+        attributes = attributes or ''
+        if re.search(r'\bid=["\']', attributes, re.I):
+            return match.group(0)
+        label = html.unescape(re.sub(r'<[^>]+>', '', content))
+        base = re.sub(r'[^a-z0-9]+', '-', label.casefold()).strip('-') or 'section'
+        slug = base
+        suffix = 1
+        while slug in used:
+            slug = f'{base}-{suffix}'
+            suffix += 1
+        used.add(slug)
+        return f'<h{level}{attributes} id="{slug}">{content}</h{level}>'
+
+    return re.sub(r'<h([2-6])(\s[^>]*)?>(.*?)</h\1>', replace, text, flags=re.I | re.S)
+
+
 def convert(text, path='<memory>'):
     global _BODY_REGISTRY
     _BODY_REGISTRY = []
@@ -701,7 +800,7 @@ def convert(text, path='<memory>'):
     # renders each body exactly once. The page is then inserted via the docs
     # template's @content without an outer markdown pass, which would otherwise
     # re-parse already-rendered body HTML and split hostile fenced code.
-    text = render_markdown(text, blocks=True)
+    text = add_heading_ids(render_markdown(text, blocks=True))
     # Materialize @markup body references: write each component/directive body to
     # a Markdown file under content/.markup/bodies/ and reference it via the
     # file-based @markup("md", path) form (avoids find_balanced fragility).

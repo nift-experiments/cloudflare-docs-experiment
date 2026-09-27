@@ -31,7 +31,7 @@ class TestImporter(unittest.TestCase):
   _,out=mod.convert(src,'fixture'); self.assertIn('nb-steps',out); self.assertIn('content/.markup/bodies/',out)
  def test_blockquote_multiline_component(self):
   src='> Example:\n> <PackageManagers\n> \ttype="create"\n> \tpkg="vike@latest"\n> />\n> End.\n'
-  _,out=mod.convert(src,'fixture'); self.assertIn('nb-tabs',out)
+  _,out=mod.convert(src,'fixture'); self.assertIn('nb-package-managers',out); self.assertIn('npm create vike@latest',out); self.assertIn('yarn create vike',out)
  def test_space_in_closing_tag(self):
   src='<GlossaryTooltip term="CAA record">CAA records</ GlossaryTooltip> end.\n'
   _,out=mod.convert(src,'fixture'); self.assertIn('data-cf-component="GlossaryTooltip"',out)
@@ -115,5 +115,14 @@ class TestImporter(unittest.TestCase):
   _,out,bodies=self._conv(src); self.assertTrue(any('/assets/upstream/images/x.png' in b for b in bodies),'~/assets must be rewritten inside body files')
  def test_top_level_markdown_rendered_by_importer(self):
   src='Some *prose* and `code`.\n\n## Heading\n\n- a\n- b\n'
-  _,out,bodies=self._conv(src); self.assertIn('<em>prose</em>',out); self.assertIn('<h2>Heading</h2>',out); self.assertIn('<ul>',out)
+  _,out,bodies=self._conv(src); self.assertIn('<em>prose</em>',out); self.assertIn('<h2 id="heading">Heading</h2>',out); self.assertIn('<ul>',out)
+ def test_details_header_open_and_body(self):
+  src='<Details header="**Advanced** options" open>\nUse `value`.\n</Details>\n'
+  _,out,bodies=self._conv(src); self.assertIn('<details class="nb-details" open>',out); self.assertIn('<summary><strong>Advanced</strong> options</summary>',out); self.assertIn('Use `value`.',bodies[0])
+ def test_tabs_emit_sync_and_labels(self):
+  src='<Tabs syncKey="language"><TabItem label="JavaScript">JS</TabItem><TabItem value="Python">PY</TabItem></Tabs>\n'
+  _,out,bodies=self._conv(src); joined='\n'.join(bodies); self.assertIn('data-nb-sync-key="language"',out); self.assertIn('data-nb-tab-label="JavaScript"',joined); self.assertIn('data-nb-tab-label="Python"',joined)
+ def test_heading_ids_are_stable_and_unique(self):
+  _,out,_=self._conv('## Hello, world!\n\n## Hello world\n\n### Another section\n')
+  self.assertIn('<h2 id="hello-world">',out); self.assertIn('<h2 id="hello-world-1">',out); self.assertIn('<h3 id="another-section">',out)
 if __name__=='__main__': unittest.main()
