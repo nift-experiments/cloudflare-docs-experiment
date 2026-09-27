@@ -250,6 +250,67 @@ def _guard_balanced_braces(body, what):
 _BODY_REGISTRY = []  # list of (idx, body_with_placeholders)
 _BODY_NEXT = 0       # global monotonically increasing body id
 _BODY_DIR = None      # set by import_corpus to content/.markup/bodies
+_CMARKGFM = None
+_ORDINARY_BOUNDARY = '.ordinary-body-count'
+
+
+def require_cmarkgfm():
+    """Load the mandatory CommonMark renderer with an actionable failure."""
+    global _CMARKGFM
+    if _CMARKGFM is None:
+        try:
+            import cmarkgfm
+        except ImportError as exc:
+            raise RuntimeError(
+                'cmarkgfm is required for Cloudflare corpus rendering; '
+                'install the Python cmarkgfm package before importing'
+            ) from exc
+        _CMARKGFM = cmarkgfm
+    return _CMARKGFM
+
+
+def configure_body_output(body_dir, reset=False):
+    """Configure body materialization and allocate IDs without aliasing files.
+
+    Ordinary-corpus import starts from zero in a clean directory. Generated
+    families resume after the highest existing numeric body file.
+    """
+    global _BODY_DIR, _BODY_NEXT, _BODY_REGISTRY
+    _BODY_DIR = Path(body_dir)
+    _BODY_DIR.mkdir(parents=True, exist_ok=True)
+    _BODY_REGISTRY = []
+    if reset:
+        for path in _BODY_DIR.glob('*.md'):
+            if path.stem.isdigit():
+                path.unlink()
+        _BODY_NEXT = 0
+        return
+    existing = [int(p.stem) for p in _BODY_DIR.glob('*.md') if p.stem.isdigit()]
+    _BODY_NEXT = max(existing, default=-1) + 1
+
+
+def record_ordinary_body_boundary():
+    """Persist the first ID reserved for generated-family bodies."""
+    if _BODY_DIR is None:
+        raise RuntimeError('body output is not configured')
+    (_BODY_DIR / _ORDINARY_BOUNDARY).write_text(f'{_BODY_NEXT}\n')
+
+
+def configure_generated_body_output(body_dir):
+    """Resume at the ordinary boundary and discard stale generated bodies."""
+    global _BODY_DIR, _BODY_NEXT, _BODY_REGISTRY
+    _BODY_DIR = Path(body_dir)
+    marker = _BODY_DIR / _ORDINARY_BOUNDARY
+    if not marker.is_file():
+        raise RuntimeError(
+            f'ordinary body boundary is missing at {marker}; run import_corpus.py first'
+        )
+    boundary = int(marker.read_text().strip())
+    for path in _BODY_DIR.glob('*.md'):
+        if path.stem.isdigit() and int(path.stem) >= boundary:
+            path.unlink()
+    _BODY_REGISTRY = []
+    _BODY_NEXT = boundary
 
 
 def _dedent_component_html(body):
@@ -290,6 +351,11 @@ def _materialize_bodies(text, placeholders):
     would re-convert the already-rendered nested HTML and split hostile fenced
     code. Leaf bodies and bodies carrying their own Markdown keep @markup so the
     Markdown is rendered exactly once."""
+    if _BODY_REGISTRY and _BODY_DIR is None:
+        raise RuntimeError(
+            'component bodies require configured materialization output; '
+            'call configure_body_output() before convert()'
+        )
     refs = {}
     kinds = {}
     for idx, body in _BODY_REGISTRY:
@@ -567,11 +633,9 @@ def render_markdown(text, blocks=True):
     When blocks=True, inserts blank lines around block HTML tags so CommonMark
     treats content inside component/directive HTML blocks as renderable Markdown.
     When blocks=False, renders top-level Markdown only (component bodies have
-    already been rendered). Falls back to passthrough if no engine is available."""
-    try:
-        import cmarkgfm
-    except ImportError:
-        return text
+    already been rendered). cmarkgfm is mandatory because passthrough output is
+    not a semantically valid CP6 build."""
+    cmarkgfm = require_cmarkgfm()
     text = _join_multiline_tags(text)
     if blocks:
         BLOCK = r'(?:div|section|aside|details|pre|table|ul|ol|dl|blockquote|h[1-6])'
@@ -662,6 +726,8 @@ def main():
     ap.add_argument('output')
     args = ap.parse_args()
     src, out = Path(args.source), Path(args.output)
+    require_cmarkgfm()
+    configure_body_output(out / '.markup/bodies', reset=True)
     failures = []
     count = 0
     for p in src.rglob('*'):

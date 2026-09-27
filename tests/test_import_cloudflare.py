@@ -1,17 +1,15 @@
 #!/usr/bin/env python3
-import importlib.util, pathlib, unittest
+import importlib.util, pathlib, tempfile, unittest
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('imp',ROOT/'tools/import_cloudflare.py'); mod=importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
 class TestImporter(unittest.TestCase):
+ def setUp(self):
+  self._tmp=tempfile.TemporaryDirectory(); self._body_dir=pathlib.Path(self._tmp.name); mod.configure_body_output(self._body_dir,reset=True)
+ def tearDown(self):
+  self._tmp.cleanup()
  def _conv(self, src, path='fixture'):
-  import tempfile, pathlib
-  d = tempfile.mkdtemp()
-  mod._BODY_DIR = pathlib.Path(d)
-  try:
-   fm, out = mod.convert(src, path)
-  finally:
-   mod._BODY_DIR = None
-  bodies = sorted([pathlib.Path(p).read_text() for p in pathlib.Path(d).glob('*.md')])
+  before={p.name for p in self._body_dir.glob('*.md')}; fm,out=mod.convert(src,path)
+  bodies=[p.read_text() for p in sorted(self._body_dir.glob('*.md'),key=lambda p:int(p.stem)) if p.name not in before]
   return fm, out, bodies
  def test_primitives(self):
   fm,out=mod.convert((ROOT/'tests/fixtures/primitives.mdx').read_text(),'fixture'); self.assertEqual(fm['title'],'Fixture'); self.assertIn('nb-aside warning',out); self.assertIn('nb-card-grid',out); self.assertIn('nb-step',out)
@@ -50,6 +48,11 @@ class TestImporter(unittest.TestCase):
  def test_component_body_emits_atmarkup(self):
   src='<Steps>\n1. **Install**\n2. Run `foo`.\n</Steps>\n'
   _,out,bodies=self._conv(src); self.assertIn('nb-steps',out); self.assertTrue(bodies); self.assertIn('**Install**',bodies[0])
+ def test_component_body_requires_materialization_output(self):
+  mod._BODY_DIR=None
+  with self.assertRaisesRegex(RuntimeError,'configure_body_output'):
+   mod.convert('<Steps>\n1. Install\n</Steps>\n','fixture')
+  mod.configure_body_output(self._body_dir)
  def test_atmarkup_wraps_markdown_paragraph(self):
   src='<Details title="More">\nA **bold** paragraph with `code`.\n</Details>\n'
   _,out,bodies=self._conv(src); self.assertTrue(bodies); self.assertIn('**bold**',bodies[0]); self.assertIn('`code`',bodies[0])

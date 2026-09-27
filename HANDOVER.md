@@ -320,8 +320,8 @@ Prefer documented Nift behaviour and the existing project structure over guessin
 
 This section is for a **fresh agent resuming this experiment with no prior
 conversation context**. Read this entire section, then the CP reports, then
-verify the baseline before changing anything. The experiment is paused at a
-certified CP6B baseline; the next checkpoint is CP7.
+verify the baseline before changing anything. CP6C repairs and supersedes the
+original CP6B semantic certification; the next checkpoint is CP7.
 
 ## 1. Mission and experiment design
 
@@ -373,22 +373,31 @@ closely as practical.
 - **CP6B — generated/data-driven surface + rendering correctness (CERTIFIED).**
   See Section 4-6 and `reports/CP6-IMPORT.md`,
   `reports/CP6B-RENDERING-ARCHITECTURE.md`.
+- **CP6C — generated-body semantic repair (CERTIFIED).** A readiness audit found
+  that 144 changelog pages had 214 references aliasing unrelated ordinary-doc
+  bodies despite all CP6B headline gates passing. The allocator/materialization
+  contract, semantic tests, route gate, leakage CLI, and dependency gate were
+  repaired. See `reports/CP6C-GENERATED-BODY-REPAIR.md`.
 
 ## 4. Current certified state (exact gates)
 
 - **6,882 / 6,882** ordinary docs import (0 failures).
 - **9,134 tracked HTML pages**, all build, **0 Nift HTML-validation failures**.
-- **0 missing expected routes** (route verifier `tools/verify_routes.py`).
-- **31 / 31** importer regression tests pass.
+- **0 missing expected routes** across 9,134 index routes and **0 missing claimed
+  static/data files** across 196 endpoints (`tools/verify_routes.py`).
+- **39 / 39** importer/generated-family/gate regression tests pass.
 - **REAL rendering leakage = 0** (`tools/leak_scan.py`).
-- INTENTIONAL scanner findings (defensible, not leakage): `code-fence` 187,
-  `code-import` 62, `prose-placeholder` 19, `ts-type-name` 2.
+- INTENTIONAL scanner findings (defensible, not leakage): `code-fence` 188,
+  `code-import` 63, `prose-placeholder` 19, `ts-type-name` 2.
 - Important static/data endpoints reproduced: robots.txt, _headers, __redirects,
   shell assets, changelog RSS index + 75 per-product feeds,
   compatibility-flags.json, Pages build-configuration.json + language-support
   JSON, llms.txt + per-product llms.txt, llms-full.txt + per-product llms-full.txt.
 - Nift **v4.3.0** on the VPS.
-- Final CP6B commit: **`dcc8d92`** (pushed `stage`).
+- CP6B commit `dcc8d92` is historical and **not semantically certified alone**;
+  use the current CP6C `stage` state.
+- Certified dependency baseline: Nift **v4.3.0**, Python **3.12.3**,
+  `cmarkgfm` **0.8.0**, PyYAML **6.0.1**. Missing `cmarkgfm` is fatal.
 
 ### The route verifier still reports broken local references
 
@@ -418,7 +427,9 @@ The most important technical outcome of CP6B. The architecture is **not** simply
 2. **File-based `@markup("md", path)`** was introduced: component/directive
    bodies are written to `content/.markup/bodies/N.md` and referenced by path.
    Importer state: `_BODY_REGISTRY` (idx→body), `_BODY_NEXT` global counter
-   (reset once at import_corpus start, never per page), `_BODY_DIR`.
+   (reset once at import_corpus start, never per page), `_BODY_DIR`. CP6C adds
+   the explicit `configure_body_output()` contract: generated families resume
+   after existing IDs and conversion cannot emit dangling body references.
 3. **Nested `@markup` was found to double-render**: when a `@markup` body
    contains nested `@markup` references, Nift resolves the nested HTML and then
    re-runs CommonMark on the whole result, re-parsing already-rendered `<pre>`
@@ -472,11 +483,12 @@ cd /srv/cloudflare-docs-experiment
 # 1. Restore/initialise the public tree (shell assets) if missing/wiped.
 #    The public dir is a checkout of the SAME repo's `main` branch at c1e5add.
 rm -rf public
-git clone -q -b main https://github.com/nift-experiments/cloudflare-docs-experiment.git public
-git -C public rev-parse HEAD        # expect c1e5add...
+git clone -q --no-checkout https://github.com/nift-experiments/cloudflare-docs-experiment.git public
+git -C public checkout --detach c1e5add168aa9ce207ccb6c09491bad8a6ed7b53
 
-# 2. Clear generated content (dotfiles like content/.markup survive `rm -rf content/*`).
-rm -rf content/*
+# 2. Clear the whole generated tree, including content/.markup.
+rm -rf content
+git restore --source=HEAD -- .nift/tracked.json content/index.html
 # 3. Full-corpus import (writes content/, tracked.json, expected-routes.json,
 #    and copies upstream public/ + src/assets into public/).
 python3 tools/import_corpus.py /srv/cloudflare-docs-upstream
@@ -484,14 +496,14 @@ python3 tools/import_corpus.py /srv/cloudflare-docs-upstream
 python3 tools/generate_families.py /srv/cloudflare-docs-upstream
 # 5. Restore the bespoke root landing page (it is a tracked git file; import_corpus
 #    preserves its tracked entry but `rm -rf content/*` deletes the file).
-git checkout content/index.html
+git restore --source=HEAD -- content/index.html
 # 6. Restore any shell assets the import may have displaced, then build.
 cd public && git checkout -- . && cd ..
 nift build --all        # full clean build; expect 9,134 files
 # 7. Gates.
-python3 -m unittest discover -s tests          # 31/31
-python3 tools/verify_routes.py                 # missing = 0
-python3 tools/leak_scan.py --write-classified  # REAL = 0 (or scan all public/*.html)
+python3 -m unittest discover -s tests -v       # 39/39
+python3 tools/verify_routes.py                 # routes/static missing = 0
+python3 tools/leak_scan.py --write-classified  # REAL = 0; non-zero on REAL leakage
 ```
 
 If the VPS is gone, recreate it (see Section 10 Infrastructure) and restore the
@@ -502,8 +514,9 @@ repo from GitHub before running this.
 Implemented: glossary; directory; field catalog (176); Workers AI legacy models
 (65) + catalog models (161) where reproducible; changelog posts (at upstream
 route `/changelog/<product>/<name>/`) + paginated index + product + product-group
-pages; learning paths (20); `llms.txt` + per-product `llms.txt`; `llms-full.txt`
-+ per-product `llms-full.txt`; videos (30); agent-setup (13); synthesized WARP
+pages; learning-path data (20 routes already covered by ordinary docs); `llms.txt`
++ per-product `llms.txt`; `llms-full.txt`
++ per-product `llms-full.txt`; videos (30); agent-setup (3); synthesized WARP
 release changelog posts (292, under `/changelog/post/`); compatibility-flags.json
 (124); Pages build-configuration.json (28) + language-support-and-tools.json (3);
 changelog RSS index + per-product feeds (76); robots.txt/_headers/__redirects
@@ -521,6 +534,8 @@ changelog RSS index + per-product feeds (76); robots.txt/_headers/__redirects
 ## 8. Important lessons — things NOT to regress
 
 - Do **not** weaken REAL leakage = 0.
+- Do **not** treat leakage scanning as semantic-content validation; preserve the
+  generated-family body-content tests added in CP6C.
 - Do **not** introduce page-specific importer exceptions unless unavoidable and
   documented.
 - Do **not** move back to arbitrary inline `@markup` bodies for corpus content.
@@ -540,9 +555,10 @@ changelog RSS index + per-product feeds (76); robots.txt/_headers/__redirects
 - Experiment checkout: `/srv/cloudflare-docs-experiment` (branch `stage`).
 - Frozen upstream checkout: `/srv/cloudflare-docs-upstream`
   (SHA `bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf`).
-- Nift source/build: `/srv/nift-src`; installed `/usr/local/bin/nift` (v4.3.0).
-- VPS: Linode `cf-nift-dev`, g6-standard-1 (1 vCPU / 2 GB / 50 GB), IP
-  `45.33.120.107`. **Cost-sensitive: the VM may no longer exist when work
+- Nift: checksum-verified official v4.3.0 binary at `/usr/local/bin/nift`.
+- VPS: Linode `cf-nift-dev`, ID `106783401`, `g6-nanode-1` ($5/month,
+  1 vCPU / 1 GB / 25.6 GB), Sydney `ap-southeast`, Ubuntu 24.04 LTS, IP
+  `172.105.161.70`. **Cost-sensitive: the VM may no longer exist when work
   resumes. This handover must not depend on ephemeral VPS state** — GitHub is the
   persistence layer. No credentials/secrets belong in the repo.
 - The original 6-vCPU g6-standard-6 baseline Linode was **destroyed** after the
@@ -598,20 +614,22 @@ state before any comparative claim.
 
 The intended resume state is:
 
-**CP0–CP6B complete and certified. Next work: CP7. Performance comparison remains
+**CP0–CP6C complete and certified. Next work: CP7. Performance comparison remains
 provisional until CP10 same-hardware benchmarking.**
 
 1. Read this HANDOVER.md (especially Sections 4-10).
 2. Read `reports/CP6-IMPORT.md`, `reports/CP6B-RENDERING-ARCHITECTURE.md`,
+   `reports/CP6C-GENERATED-BODY-REPAIR.md`, and
    `reports/PRE-PAUSE-DEVELOPMENT-SNAPSHOT.md`.
 3. Verify the frozen upstream SHA is `bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf`.
-4. Verify the experiment branch/SHA (stage, latest pushed CP6B commit `dcc8d92`
-   at time of pause; local SHA must equal remote `stage`).
+4. Verify the experiment checkout is on the current remote `stage`. Do not use
+   historical CP6B commit `dcc8d92` as the semantic baseline.
 5. Recreate the environment if the VPS is gone (Section 9, 6).
-6. **Run the certified CP6B gates before changing anything:** 6,882/6,882 import;
-   9,134 tracked pages build with 0 HTML-validation failures; 0 missing routes;
-   31/31 tests; REAL leakage = 0. Expected baseline numbers above make any
+6. **Run the certified CP6C gates before changing anything:** 6,882/6,882 import;
+   9,134 tracked pages build with 0 HTML-validation failures; 0 missing routes or
+   claimed static/data files; 39/39 tests; REAL leakage = 0; generated Stream
+   semantic fixture green. Expected baseline numbers above make any
    regression immediately obvious.
 7. Investigate any regression before proceeding.
-8. Begin **CP7** only after the CP6B baseline reproduces. Do not skip ahead to
+8. Begin **CP7** only after the CP6C baseline reproduces. Do not skip ahead to
    benchmarking.

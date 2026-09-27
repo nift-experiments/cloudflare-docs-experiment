@@ -6,22 +6,29 @@ Pinned upstream: `bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf`.
 
 **CP6A — ordinary documentation corpus: CERTIFIED.**
 
-**CP6B — complete Cloudflare site surface: CERTIFIED (REAL leakage = 0).**
+**CP6B — historical generated-surface checkpoint; original semantic certification
+superseded.**
 
-CP6 is deliberately split: CP6A covers the 6,882 ordinary docs; CP6B covers the
-generated/data-driven route families and rendering correctness needed for the
-complete frozen site.
+**CP6C — generated-body materialization repair: CERTIFIED.** See
+`reports/CP6C-GENERATED-BODY-REPAIR.md`.
+
+CP6 is deliberately split: CP6A covers the 6,882 ordinary docs; CP6B introduced
+the generated/data-driven families and rendering architecture; CP6C repairs and
+semantically certifies generated-body materialization.
 
 - Importer converts **all 6,882 frozen docs** with **zero unknown/unresolved constructs**.
 - Nift generates **9,134 tracked pages**, all built successfully on the development VPS.
 - Full Nift build succeeds; **all 9,134 `index.html` routes** present with correct
   trailing-slash semantics.
-- Route verifier: **missing routes = 0**.
+- Route verifier: **9,134 expected index routes and 196 claimed static/data files;
+  missing = 0**.
 - **Rendering architecture implemented (CP6B):** component/directive bodies are
   emitted as file-based `@markup("md", "content/.markup/bodies/N.md")` references
-  (14,755 body files); pure-HTML containers use `@input` so Nift never re-converts
+  (14,973 body files after generated families); pure-HTML containers use `@input` so Nift never re-converts
   already-rendered nested HTML; top-level Markdown is rendered by the importer and
-  inserted via the docs template's `@content`. **REAL rendering leakage = 0.**
+  inserted via the docs template's `@content`. Generated-family body allocation
+  now resumes after ordinary-document IDs and refuses unconfigured output.
+  **REAL rendering leakage = 0.**
 - Development-VPS build measurements (g6-standard-1, 1 vCPU / 2 GB, Nift v4.3.0):
   clean build ~18-27 s wall, peak RSS ~66 MB. **These are development observations,
   not comparable to the frozen Astro baseline** (see HANDOVER).
@@ -31,23 +38,25 @@ complete frozen site.
 **Generated families:** `tools/generate_families.py` reads the frozen collections and
 emits Nift content+tracked entries. Implemented: glossary, directory, field catalog,
 Workers AI legacy models, catalog models, changelog (posts + paginated index + product
-+ product-group pages), learning paths, `llms.txt` + per-product `llms.txt`,
++ product-group pages), learning-path data overlapping ordinary routes, `llms.txt`
++ per-product `llms.txt`,
 `llms-full.txt` + per-product `llms-full.txt`, videos, agent-setup, synthesized
 WARP-release changelog posts, compatibility-flags.json, changelog RSS index + per-product
 feeds, and Pages JSON endpoints. These add 2,251 tracked pages (6,883 → 9,134), all built.
 
-**Rendering correctness — certified:** the importer converts titled directives
+**Rendering correctness — CP6C certified:** the importer converts titled directives
 (`:::note[Title]` → `<aside>` with title), processes directive spans bottom-up (fixing
 dropped component closing tags), auto-closes unclosed directives, and emits
 component/directive bodies as **file-based `@markup("md", path)` boundaries**, so Nift
 renders each body's Markdown directly (no find_balanced fragility). Conversion of **all
 6,882 docs remains zero-failure**. `tools/leak_scan.py` confirms: **REAL rendering
-leakage = 0**. INTENTIONAL code/prose findings remain classified (code-fence 187,
-code-import 62, prose-placeholder 19, ts-type-name 2). The correctness classes fixed
+leakage = 0**. INTENTIONAL code/prose findings remain classified (code-fence 188,
+code-import 63, prose-placeholder 19, ts-type-name 2). The correctness classes fixed
 during certification (nested-directive reordering, irregular closing fences, multiline
 HTML tags, nested-body double conversion, asset refs in bodies, legacy changelog route
 structure) each have a regression test and a generic fix — see
-`reports/CP6B-RENDERING-ARCHITECTURE.md`.
+`reports/CP6B-RENDERING-ARCHITECTURE.md`. CP6C additionally covers generated
+changelog body semantics; leakage scanning alone did not detect the old aliasing.
 
 **Architecture:** `reports/CP6B-RENDERING-ARCHITECTURE.md` documents the final design:
 file-based `@markup("md", path)` for bodies, `@input` for pure-HTML containers,
@@ -93,13 +102,14 @@ routes. Each is recorded below with its data source and route contract.
 
 ### Verifier status for generated families
 
-The route verifier (`tools/verify_routes.py`) reports **0 missing expected routes**.
-The remaining "broken" local references (~1,860) are links from ordinary docs and
+The route verifier (`tools/verify_routes.py`) reports **0 missing expected routes
+or claimed static/data files** across the ordinary and generated manifests.
+The remaining **1,864** broken local references are links from ordinary docs and
 generated pages to documented exclusions and to upstream's own dead/legacy links
 (reproduced faithfully):
 
-- `/api/*`: ~1,585 (external sibling application — documented)
-- `/logs/logpush/.../datasets/...`: ~136 (logpush datasets, fetched at build)
+- `/api/*`: 1,588 (external sibling application — documented)
+- `/logs/logpush/.../datasets/...`: 133 (logpush datasets, fetched at build)
 - `/workers-ai/models/uform-*` etc.: 21 (live/proxied model data, not in frozen tree)
 - Upstream dead links: `/workers/runtime-apis/bindings/mtls/`, `/containers/...`,
   `/realtime/realtimekit/...`, `/changelog/<name>/` links missing the product prefix,
@@ -112,7 +122,7 @@ verifier is not made green by excluding known generated families.
 ### G6 decision
 
 **CP6A (ordinary docs) is certified.** The 6,882-document corpus is fully imported,
-built and route-verified. **CP6B is certified.** Generated families with committed
+built and route-verified. **CP6C supersedes CP6B certification.** Generated families with committed
 data (changelog, glossary, directory, fields, Workers AI models, catalog models,
 learning paths, llms.txt/llms-full.txt, RSS, compatibility flags, Pages JSON,
 agent-setup, videos, WARP) are implemented and built; rendering leakage is zero; the
@@ -134,7 +144,7 @@ documented rather than fabricated.
 11. Directive spans processed bottom-up so component closing tags are not dropped.
 12. Unclosed directives auto-close at end-of-text (upstream omits some closes).
 
-All covered by regression tests (31 tests pass). CP3 census remains green and
+All covered by regression tests. CP3 census remains green and
 deterministic after the scanner mirroring these fixes (0 unknown, 573 unmatched prose).
 
 ## CP6B certification fixes
@@ -159,8 +169,6 @@ deterministic after the scanner mirroring these fixes (0 unknown, 573 unmatched 
 
 ## Test suite
 
-`python3 -m unittest discover -s tests -v` → **31/31 pass** on the development VPS
-(25 importer/conversion tests + 6 root-cause regression tests added during CP6B
-certification: nested-directive double processing, irregular closing fences,
-multiline HTML tags, pure-container `@input`, asset refs in bodies, importer-rendered
-top-level Markdown).
+`python3 -m unittest discover -s tests -v` → **39/39 pass** on the development VPS:
+32 importer/conversion tests, three generated-family/materialization tests, and four
+route/leakage-gate tests.

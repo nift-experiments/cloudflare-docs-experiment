@@ -26,8 +26,10 @@ INTENTIONAL (not leakage; must remain in output):
   - code-placeholder     : markdown/fences inside <pre>/<code> (already rendered
                            by the code highlighter)
 """
-import re, sys, json
+import argparse, re, json
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
 
 KNOWN_COMPONENTS = {
     'Steps', 'Step', 'Tabs', 'TabItem', 'Aside', 'Details', 'Card', 'CardGrid',
@@ -96,7 +98,7 @@ def scan(html):
     for name, rx in REAL.items():
         ms = list(rx.finditer(plain))
         if ms:
-            real[name] = [m.group(0)[:70] for m in ms[:3]]
+            real[name] = [m.group(0)[:70] for m in ms]
     # INTENTIONAL
     intentional = {}
     full = html
@@ -112,29 +114,49 @@ def scan(html):
     return {'real': real, 'intentional': intentional}
 
 
-def main():
-    pub = Path(sys.argv[1] if len(sys.argv) > 1 else "public")
+def scan_public(pub):
+    if not pub.is_dir():
+        raise RuntimeError(f'public output directory does not exist: {pub}')
+    html_files = sorted(pub.rglob('*.html'))
+    if not html_files:
+        raise RuntimeError(f'no HTML files found under public output: {pub}')
     real_total = {}
     intentional_total = {}
     real_files = set()
     real_examples = {}
-    for f in sorted(pub.rglob('*.html')):
+    for f in html_files:
         html = f.read_text(errors='ignore')
         res = scan(html)
         for name, ex in res['real'].items():
             real_total[name] = real_total.get(name, 0) + len(ex)
-            real_files.add(name)
+            real_files.add(str(f.relative_to(pub)))
             real_examples.setdefault(name, []).append((str(f.relative_to(pub)), ex[0]))
         for name, cnt in res['intentional'].items():
             intentional_total[name] = intentional_total.get(name, 0) + cnt
-    print(json.dumps({
-        'scanned_html': sum(1 for _ in pub.rglob('*.html')),
+    return {
+        'scanned_html': len(html_files),
         'REAL_leakage': real_total,
-        'REAL_leakage_files_affected': sorted(real_files),
+        'REAL_leakage_files_affected': len(real_files),
         'REAL_leakage_examples': {k: v[:3] for k, v in real_examples.items()},
         'INTENTIONAL_text': intentional_total,
-    }, indent=2))
+    }
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser()
+    parser.add_argument('public', nargs='?', default=str(ROOT / 'public'))
+    parser.add_argument('--write-classified', nargs='?', const=str(
+        ROOT / 'reports/cp6/leak-scan-classified.json'))
+    args = parser.parse_args(argv)
+    report = scan_public(Path(args.public))
+    output = json.dumps(report, indent=2) + '\n'
+    print(output, end='')
+    if args.write_classified:
+        destination = Path(args.write_classified)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_text(output)
+    return 1 if report['REAL_leakage'] else 0
 
 
 if __name__ == '__main__':
-    main()
+    raise SystemExit(main())

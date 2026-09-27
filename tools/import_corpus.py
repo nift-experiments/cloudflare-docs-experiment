@@ -5,15 +5,13 @@ Generates Nift content, tracked.json, route manifests, copies static assets, and
 reports unresolved dynamic/data families. It never silently skips a docs page.
 """
 from __future__ import annotations
-import argparse, hashlib, json, shutil, subprocess, sys
+import argparse, hashlib, json, shutil, subprocess, sys, tempfile
 from pathlib import Path
 import import_cloudflare as ic
 from import_cloudflare import convert
 
 PIN='bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf'
 ROOT=Path(__file__).resolve().parents[1]
-ic._BODY_DIR = ROOT / 'content/.markup/bodies'
-ic._BODY_NEXT = 0
 
 def git_sha(p):
     return subprocess.check_output(['git','-C',str(p),'rev-parse','HEAD'],text=True).strip()
@@ -34,31 +32,39 @@ def copy_tree(src,dst):
 
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument('upstream'); ap.add_argument('--allow-sha',action='store_true'); ap.add_argument('--dry-run',action='store_true'); a=ap.parse_args()
+    ic.require_cmarkgfm()
     up=Path(a.upstream).resolve(); docs=up/'src/content/docs'
     if not docs.is_dir(): sys.exit('missing src/content/docs')
     sha=git_sha(up)
     if sha!=PIN and not a.allow_sha: sys.exit(f'upstream SHA {sha} != pinned {PIN}')
-    pages=[]; failures=[]
-    for p in sorted(docs.rglob('*')):
-        if p.suffix not in {'.md','.mdx'}: continue
-        rel=p.relative_to(docs); route=route_for(rel)
-        try: fm,body=convert(p.read_text(),p)
-        except Exception as e: failures.append(str(e)); continue
-        pages.append((p,rel,route,fm,body))
-    routes=[x[2] for x in pages]
-    dup=sorted({r for r in routes if routes.count(r)>1})
-    if failures or dup:
-        for x in failures: print(x,file=sys.stderr)
-        if dup: print('route collisions: '+', '.join(dup),file=sys.stderr)
-        return 2
-    if a.dry_run:
-        print(json.dumps({'sha':sha,'docs':len(pages),'routes':len(routes)},indent=2)); return 0
-    content=ROOT/'content/docs'; shutil.rmtree(content,ignore_errors=True)
-    tracked=[]
-    for p,rel,route,fm,body in pages:
-        name=name_for(route)
-        q=ROOT/'content'/Path(name.strip('/')+'/index.md'); q.parent.mkdir(parents=True,exist_ok=True); q.write_text(body)
-        tracked.append({'name':name,'title':fm.get('title') or rel.stem.replace('-',' ').title(),'template':'templates/docs.html','output':output_for(route)})
+    with tempfile.TemporaryDirectory() as body_tmp:
+        ic.configure_body_output(body_tmp, reset=True)
+        pages=[]; failures=[]
+        for p in sorted(docs.rglob('*')):
+            if p.suffix not in {'.md','.mdx'}: continue
+            rel=p.relative_to(docs); route=route_for(rel)
+            try: fm,body=convert(p.read_text(),p)
+            except Exception as e: failures.append(str(e)); continue
+            pages.append((p,rel,route,fm,body))
+        routes=[x[2] for x in pages]
+        dup=sorted({r for r in routes if routes.count(r)>1})
+        if failures or dup:
+            for x in failures: print(x,file=sys.stderr)
+            if dup: print('route collisions: '+', '.join(dup),file=sys.stderr)
+            return 2
+        if a.dry_run:
+            print(json.dumps({'sha':sha,'docs':len(pages),'routes':len(routes)},indent=2)); return 0
+        ic.record_ordinary_body_boundary()
+        body_dir=ROOT/'content/.markup/bodies'
+        shutil.rmtree(body_dir,ignore_errors=True)
+        body_dir.parent.mkdir(parents=True,exist_ok=True)
+        shutil.copytree(body_tmp,body_dir)
+        content=ROOT/'content/docs'; shutil.rmtree(content,ignore_errors=True)
+        tracked=[]
+        for p,rel,route,fm,body in pages:
+            name=name_for(route)
+            q=ROOT/'content'/Path(name.strip('/')+'/index.md'); q.parent.mkdir(parents=True,exist_ok=True); q.write_text(body)
+            tracked.append({'name':name,'title':fm.get('title') or rel.stem.replace('-',' ').title(),'template':'templates/docs.html','output':output_for(route)})
     # Preserve the bespoke Nift landing page at /; upstream docs/index is not the landing route.
     base=json.loads((ROOT/'.nift/tracked.json').read_text()); home=[x for x in base.get('tracked',[]) if x.get('name')=='/']
     tracked=[x for x in tracked if x['name']!='/']

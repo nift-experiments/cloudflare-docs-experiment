@@ -2,7 +2,12 @@
 
 Pinned upstream: `bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf`.
 Date: 2026-09-19.
-Status: **IMPLEMENTED AND CERTIFIED — REAL leakage = 0.**
+Status: **HISTORICAL CP6B ARCHITECTURE — semantic certification superseded by
+CP6C.** Read `CP6C-GENERATED-BODY-REPAIR.md` before relying on these gates.
+
+CP6B's leakage and numerical gates passed while generated changelog bodies could
+alias unrelated ordinary-document body files. CP6C repairs that allocator defect
+and adds semantic generated-content coverage.
 
 ## 1. Problem
 

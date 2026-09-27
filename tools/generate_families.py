@@ -26,6 +26,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PIN = 'bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf'
+sys.path.insert(0, str(ROOT / 'tools'))
+import import_cloudflare as mdx_importer
 
 
 def git_sha(p):
@@ -60,12 +62,7 @@ def rewrite_assets(s):
 def convert_mdx_body(raw, path='family'):
     """Run a raw MDX body through the strict importer so components,
     directives and imports are converted (fatal on unknown constructs)."""
-    import importlib.util
-    spec = importlib.util.spec_from_file_location(
-        'imp', ROOT / 'tools/import_cloudflare.py')
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    fm, body = mod.convert(raw, path)
+    fm, body = mdx_importer.convert(raw, path)
     return body
 
 
@@ -81,9 +78,20 @@ def main():
     up = a.upstream.resolve()
     if git_sha(up) != PIN and not a.allow_sha:
         sys.exit(f'upstream SHA {git_sha(up)} != pinned {PIN}')
+    mdx_importer.require_cmarkgfm()
+    mdx_importer.configure_generated_body_output(ROOT / 'content/.markup/bodies')
     content = ROOT / 'content'
+    tracked_path = ROOT / '.nift/tracked.json'
+    ordinary_manifest = json.loads((ROOT / 'reports/cp6/expected-routes.json').read_text())
+    base_names = {route.strip('/') + '/' for route in ordinary_manifest['routes']}
+    base_names.add('/')
     tracked = []
     families = {}
+    static_files = {
+        '/robots.txt', '/_headers', '/__redirects',
+        '/assets/cf-design.css', '/assets/cf-shell.js',
+        '/assets/cloudflare-logo.svg',
+    }
 
     # ---- Glossary: one page at /glossary/ from all glossary yaml files ----
     glossary_files = sorted((up / 'src/content/glossary').glob('*.yaml'))
@@ -233,12 +241,8 @@ def main():
         pdir = content / 'changelog' / product / name
         pdir.mkdir(parents=True, exist_ok=True)
         pbody = [f'# {fm.get("title", name)}', '']
-        try:
-            converted = convert_mdx_body(raw, f'changelog/{product}/{name}')
-            pbody.append(converted)
-        except Exception as e:
-            pbody.append(body.strip())
-            print(f'  [warn] changelog {product}/{name}: {e}', file=sys.stderr)
+        converted = convert_mdx_body(raw, f'changelog/{product}/{name}')
+        pbody.append(converted)
         (pdir / 'index.md').write_text(rewrite_assets('\n'.join(pbody)) + '\n')
         add_tracked(tracked, f'changelog/{product}/{name}/', fm.get('title', name),
                     'templates/docs-md.html')
@@ -339,7 +343,8 @@ def main():
 
     # ---- Learning paths: /learning-paths/<slug>/... ----
     lp_files = sorted((up / 'src/content/learning-paths').glob('*.json'))
-    lpbase = content / 'learning-paths'
+    lp_added = 0
+    lp_overlaps = 0
     for lf in lp_files:
         lp = json.loads(lf.read_text())
         path = lp.get('path', '')
@@ -347,14 +352,23 @@ def main():
         # path like /learning-paths/mtls/concepts/
         parts = [p for p in path.strip('/').split('/') if p]
         if parts:
-            d = lpbase / parts[-1]
+            name = '/'.join(parts) + '/'
+            if name in base_names:
+                lp_overlaps += 1
+                continue
+            d = content.joinpath(*parts)
             d.mkdir(parents=True, exist_ok=True)
             body = [f'# {title}', '']
             body.append(lp.get('description', ''))
             body.append('')
             (d / 'index.md').write_text(rewrite_assets('\n'.join(body)) + '\n')
-            add_tracked(tracked, '/'.join(parts) + '/', title, 'templates/docs-md.html')
-    families['learning-paths'] = {'source_files': len(lp_files)}
+            add_tracked(tracked, name, title, 'templates/docs-md.html')
+            lp_added += 1
+    families['learning-paths'] = {
+        'source_files': len(lp_files),
+        'routes': lp_added,
+        'ordinary_route_overlaps': lp_overlaps,
+    }
 
     # ---- llms.txt: /llms.txt (root product index) ----
     llms = ['# Cloudflare Developer Documentation', '',
@@ -451,6 +465,7 @@ def main():
     full_dst = ROOT / 'public/llms-full.txt'
     full_dst.parent.mkdir(parents=True, exist_ok=True)
     full_dst.write_text('\n'.join(full_parts) + '\n')
+    static_files.add('/llms-full.txt')
     llm_full_routes = 1
     for prod, pages in sorted(doc_index.items()):
         if not prod:
@@ -461,6 +476,7 @@ def main():
         pd = ROOT / 'public' / prod
         pd.mkdir(parents=True, exist_ok=True)
         (pd / 'llms-full.txt').write_text('\n'.join(prod_parts) + '\n')
+        static_files.add(f'/{prod}/llms-full.txt')
         llm_full_routes += 1
     families['llms-full'] = {'routes': llm_full_routes}
 
@@ -571,6 +587,7 @@ def main():
         cfdst = ROOT / 'public/workers/platform'
         cfdst.mkdir(parents=True, exist_ok=True)
         (cfdst / 'compatibility-flags.json').write_text(json.dumps(cf_flags, indent=2) + '\n')
+        static_files.add('/workers/platform/compatibility-flags.json')
     families['compatibility-flags'] = {'source_files': len(cf_files), 'routes': 1}
 
     # ---- Pages build configuration: /pages/platform/build-configuration.json ----
@@ -582,6 +599,7 @@ def main():
         bc_dst.mkdir(parents=True, exist_ok=True)
         (bc_dst / 'build-configuration.json').write_text(
             json.dumps(dict(sorted(build_configs.items())), indent=2) + '\n')
+        static_files.add('/pages/platform/build-configuration.json')
         families['pages-build-configuration'] = {'source_files': 1}
 
     # ---- Pages language support: /pages/platform/language-support-and-tools.json ----
@@ -602,6 +620,7 @@ def main():
         ls_dst.mkdir(parents=True, exist_ok=True)
         (ls_dst / 'language-support-and-tools.json').write_text(
             json.dumps(pbe_data, indent=2) + '\n')
+        static_files.add('/pages/platform/language-support-and-tools.json')
         families['pages-language-support'] = {'source_files': len(pbe_files)}
 
     # ---- RSS feeds: /changelog/rss/index.xml, <product>.xml, <area>.xml ----
@@ -627,6 +646,7 @@ def main():
         xml.append('</item>')
     xml.append('</channel></rss>')
     (rssbase / 'index.xml').write_text('\n'.join(xml) + '\n')
+    static_files.add('/changelog/rss/index.xml')
     # Per-product feeds: /changelog/rss/<product-id>.xml (skip area slugs that
     # collide with product IDs, mirroring the upstream [product].xml.ts).
     product_ids = sorted({p for _, _, fm in posts
@@ -662,11 +682,10 @@ def main():
             fx.append('</item>')
         fx.append('</channel></rss>')
         (rssbase / f'{pid}.xml').write_text('\n'.join(fx) + '\n')
+        static_files.add(f'/changelog/rss/{pid}.xml')
         rss_feeds += 1
     families['rss'] = {'routes': rss_feeds}
 
-    print(json.dumps({'upstream_sha': git_sha(up), 'families': families,
-                      'total_tracked': len(tracked)}, indent=2))
     # Deduplicate tracked names (e.g. WARP releases also appear as real
     # changelog posts in src/content/changelog).
     seen = set()
@@ -676,8 +695,20 @@ def main():
             seen.add(x['name'])
             deduped.append(x)
     tracked = deduped
+    generated_only = [entry for entry in tracked if entry['name'] not in base_names]
+    generated_manifest = {
+        'upstream_sha': git_sha(up),
+        'routes': sorted(x['output'] for x in generated_only),
+        'static_files': sorted(static_files),
+    }
+    manifest_path = ROOT / 'reports/cp6/expected-generated-routes.json'
+    manifest_path.parent.mkdir(parents=True, exist_ok=True)
+    manifest_path.write_text(json.dumps(generated_manifest, indent=2) + '\n')
+    print(json.dumps({'upstream_sha': git_sha(up), 'families': families,
+                      'total_tracked': len(generated_only),
+                      'static_files': len(static_files)}, indent=2))
     # Merge into .nift/tracked.json, preserving existing entries (home + docs).
-    tpath = ROOT / '.nift/tracked.json'
+    tpath = tracked_path
     if tpath.exists():
         existing = json.loads(tpath.read_text()).get('tracked', [])
         existing_names = {x['name'] for x in existing}
