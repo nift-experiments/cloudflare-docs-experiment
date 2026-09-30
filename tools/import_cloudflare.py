@@ -21,6 +21,7 @@ Real-corpus corrections (Linode validation, pinned bc2bdaee):
 """
 from __future__ import annotations
 import argparse, ast, datetime, html, json, re, sys, textwrap
+from urllib.parse import quote
 from zoneinfo import ZoneInfo
 from pathlib import Path
 
@@ -1657,18 +1658,63 @@ def render(name, a, body=''):
         label = html.escape(at.get('title') or 'YouTube video', quote=True)
         return f'<div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/{video_id}" title="{label}" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>'
     if name == 'Stream':
-        video_id = html.escape(at.get('id', ''), quote=True)
-        label = html.escape(at.get('title') or 'Cloudflare Stream video', quote=True)
-        thumbnail = _clean_attr(at.get('thumbnail'))
+        video = {}
+        file_name = _clean_attr(at.get('file'))
+        if file_name:
+            video = next((item for item in _VIDEOS
+                          if str(item.get('url') or '') == file_name), {})
+        video_id = html.escape(str(at.get('id') or video.get('id') or ''), quote=True)
+        label = html.escape(str(at.get('title') or video.get('title') or 'Cloudflare Stream video'), quote=True)
+        thumbnail_value = at.get('thumbnail') if at.get('thumbnail') is not None else video.get('thumbnail')
+        if isinstance(thumbnail_value, dict):
+            thumbnail = str(thumbnail_value.get('url') or thumbnail_value.get('timestamp') or '')
+        else:
+            thumbnail = _clean_attr(thumbnail_value)
         if thumbnail and not thumbnail.startswith(('http://', 'https://')):
             thumbnail = (f'https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/{video_id}/'
                          f'thumbnails/thumbnail.jpg?fit=crop&time={html.escape(thumbnail, quote=True)}')
         if not thumbnail and video_id:
             thumbnail = (f'https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/{video_id}/'
                          'thumbnails/thumbnail.jpg?fit=crop')
-        poster = (f'<img class="video-poster" src="{html.escape(thumbnail, quote=True)}" alt="{label}">'
-                  if thumbnail else '')
-        return f'<div class="video-frame">{poster}<iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/{video_id}/iframe?preload=true&amp;letterboxColor=transparent" title="{label}" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>'
+        iframe_url = (f'https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/{video_id}/'
+                      'iframe?preload=true&amp;letterboxColor=transparent')
+        if thumbnail:
+            iframe_url += '&amp;poster=' + html.escape(quote(thumbnail, safe=''), quote=True)
+        frame = f'<div class="video-frame"><iframe src="{iframe_url}" title="{label}" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>'
+        chapters = at.get('chapters') if at.get('chapters') is not None else video.get('chapters')
+        if isinstance(chapters, str):
+            chapters = _parse_js_literal(chapters)
+        if not isinstance(chapters, dict) or not chapters:
+            return frame
+        items = []
+        for chapter_title, timestamp in chapters.items():
+            timestamp_text = str(timestamp)
+            if ':' in timestamp_text:
+                seconds = 0
+                for part in timestamp_text.split(':'):
+                    try:
+                        value = float(part)
+                    except ValueError:
+                        value = 0
+                    seconds = seconds * 60 + value
+            else:
+                seconds = sum(float(value) * {'h': 3600, 'm': 60, 's': 1}[unit]
+                              for value, unit in re.findall(r'(\d+(?:\.\d+)?)\s*([hms])', timestamp_text))
+                if not seconds:
+                    try:
+                        seconds = float(timestamp_text)
+                    except ValueError:
+                        seconds = 0
+            seconds = round(seconds)
+            escaped_time = html.escape(timestamp_text, quote=True)
+            item_thumbnail = (f'https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/'
+                              f'{video_id}/thumbnails/thumbnail.jpg?fit=crop&amp;time={seconds}s')
+            items.append(
+                f'<li><button type="button" data-video-time="{seconds}">'
+                f'<img src="{item_thumbnail}" alt="{html.escape(str(chapter_title), quote=True)}">'
+                f'<strong>{html.escape(str(chapter_title))}</strong><span>{escaped_time}</span>'
+                f'</button></li>')
+        return frame + '<details class="nb-details video-chapters"><summary>Chapters</summary><ul>' + ''.join(items) + '</ul></details>'
     if name == 'Tabs':
         sync = f' data-nb-sync-key="{html.escape(at["syncKey"], quote=True)}"' if at.get('syncKey') else ''
         return f'<div class="nb-tabs" data-nb-tabs{sync}><div role="tablist" aria-label="Options" data-nb-tabs-list></div><div data-nb-tabs-panels>{wrapped}</div></div>'

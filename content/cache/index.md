@@ -5,7 +5,7 @@
 <p>Available on all plans</p>
 </div>
 <p>Cache stores copies of frequently accessed content (such as images, videos, or webpages) in geographically distributed data centers that are located closer to end users than origin servers, reducing server load and improving website performance.</p>
-<div class="video-frame"><img class="video-poster" src="https://imagedelivery.net/xDOJvHcv1KwTQn6S-BGFIw/f104ce23-cc3d-4f1a-fa3b-c6a894107d00/public" alt="How Cloudflare protects and accelerates your website or app"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/90d8a506e1e3935cff71223f9d785aa6/iframe?preload=true&amp;letterboxColor=transparent" title="How Cloudflare protects and accelerates your website or app" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+<div class="video-frame"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/90d8a506e1e3935cff71223f9d785aa6/iframe?preload=true&amp;letterboxColor=transparent&amp;poster=https%3A%2F%2Fimagedelivery.net%2FxDOJvHcv1KwTQn6S-BGFIw%2Ff104ce23-cc3d-4f1a-fa3b-c6a894107d00%2Fpublic" title="How Cloudflare protects and accelerates your website or app" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
 <h2 id="features">Features</h2>
 <div class="nb-feature">
 @markup("md", "content/.markup/bodies/1361.md")

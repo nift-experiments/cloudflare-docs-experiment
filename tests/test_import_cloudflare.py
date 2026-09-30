@@ -58,8 +58,24 @@ class TestImporter(unittest.TestCase):
  def test_stream_timestamp_becomes_remote_thumbnail(self):
   _,out=mod.convert('<Stream id="abc" title="Demo" thumbnail="1m37s" />\n','fixture')
   self.assertIn('abc/iframe?preload=true&amp;letterboxColor=transparent',out)
-  self.assertIn('abc/thumbnails/thumbnail.jpg?fit=crop&amp;time=1m37s',out)
-  self.assertIn('<img class="video-poster"',out)
+  self.assertIn('abc%2Fthumbnails%2Fthumbnail.jpg%3Ffit%3Dcrop%26time%3D1m37s',out)
+  self.assertIn('&amp;poster=https%3A%2F%2Fcustomer-1mwganm1ma0xgnmj.cloudflarestream.com',out)
+ def test_stream_materializes_source_defined_chapter_thumbnails(self):
+  _,out=mod.convert('<Stream id="abc" title="Demo" chapters={{ Intro: "3s", "Next step": "1m2s", Odd: "6m:59s", Partial: "5m36" }} />\n','fixture')
+  self.assertIn('<details class="nb-details video-chapters"><summary>Chapters</summary>',out)
+  self.assertIn('abc/thumbnails/thumbnail.jpg?fit=crop&amp;time=3s',out)
+  self.assertIn('data-video-time="62"',out)
+  self.assertIn('data-video-time="0"',out)
+  self.assertIn('data-video-time="300"',out)
+  self.assertIn('alt="Next step"',out)
+  self.assertEqual(4,out.count('<img'))
+ def test_stream_file_resolves_frozen_video_metadata(self):
+  mod.configure_videos([{'url':'demo-video','id':'abc','title':'Demo',
+                         'thumbnail':{'timestamp':'4s'},'chapters':{'Intro':'5s'}}])
+  _,out=mod.convert('<Stream file="demo-video" />\n','fixture')
+  self.assertIn('/abc/iframe?',out)
+  self.assertIn('title="Demo"',out)
+  self.assertIn('data-video-time="5"',out)
  def test_agent_shared_components_render_substantive_content(self):
   src='import ExamplePromptsList from "~/components/agent-setup/ExamplePromptsList.astro";\nimport BuildAgentsCallout from "~/components/agent-setup/BuildAgentsCallout.astro";\n<ExamplePromptsList />\n<BuildAgentsCallout />\n'
   _,out=mod.convert(src,'fixture')

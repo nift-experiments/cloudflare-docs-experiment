@@ -17,6 +17,11 @@
       "classification": "non-frozen-live-input",
       "evidence": "The upstream page includes Skills and MCP server collections downloaded from middlecache plus build-time randomized prompts; those values are not present in the pinned Git tree."
     },
+    "/agent-setup/command-code/": {
+      "reasons": ["upstream-word-coverage-below-70-percent"],
+      "classification": "non-frozen-live-input",
+      "evidence": "The upstream page includes Skills and MCP server collections downloaded from middlecache plus build-time randomized prompts; those values are not present in the pinned Git tree."
+    },
     "/agent-setup/cursor/": {
       "reasons": ["upstream-word-coverage-below-70-percent"],
       "classification": "non-frozen-live-input",

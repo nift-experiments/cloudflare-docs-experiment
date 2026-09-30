@@ -10,7 +10,7 @@
 </aside>
 <p>Cloudflare Tunnel connects your infrastructure to Cloudflare through an outbound-only, <a href="/ssl/post-quantum-cryptography/">post-quantum encrypted</a> connection. Instead of exposing a public IP, you install a lightweight daemon called <code>cloudflared</code> on your server. It creates a persistent tunnel to Cloudflare's global network, so all traffic to your origins flows through Cloudflare — where CDN caching, WAF, Bot Management, and DDoS protection are applied automatically.</p>
 <p>No open inbound ports. No public IPs. No attack surface.</p>
-<div class="video-frame"><img class="video-poster" src="https://imagedelivery.net/xDOJvHcv1KwTQn6S-BGFIw/ecc233ab-9a33-46e3-b339-b2d592fc0d00/public" alt="What is Cloudflare Tunnel?"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/4fa0fe257187f18929c07754a4a4df09/iframe?preload=true&amp;letterboxColor=transparent" title="What is Cloudflare Tunnel?" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+<div class="video-frame"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/4fa0fe257187f18929c07754a4a4df09/iframe?preload=true&amp;letterboxColor=transparent&amp;poster=https%3A%2F%2Fimagedelivery.net%2FxDOJvHcv1KwTQn6S-BGFIw%2Fecc233ab-9a33-46e3-b339-b2d592fc0d00%2Fpublic" title="What is Cloudflare Tunnel?" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
 <h2 id="how-it-works">How it works</h2>
 <ol>
 <li>Install <code>cloudflared</code> on your server or network.</li>

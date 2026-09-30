@@ -2,7 +2,7 @@
 <p>Use Security Analytics as your starting point to understand and analyze traffic patterns, and to create security rules based on the filters you applied.</p>
 <p>To access Security Analytics in the new security dashboard, go to the <strong>Analytics</strong> page.</p>
 <div class="nb-dash-button"></div>
-<div class="video-frame"><img class="video-poster" src="https://imagedelivery.net/xDOJvHcv1KwTQn6S-BGFIw/b8137b46-e0dd-45ab-b24f-4edab0fa0b00/public" alt="Application Security: Get started guide"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/1a426a3ae597ae3935eb97b5f97f106f/iframe?preload=true&amp;letterboxColor=transparent" title="Application Security: Get started guide" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+<div class="video-frame"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/1a426a3ae597ae3935eb97b5f97f106f/iframe?preload=true&amp;letterboxColor=transparent&amp;poster=https%3A%2F%2Fimagedelivery.net%2FxDOJvHcv1KwTQn6S-BGFIw%2Fb8137b46-e0dd-45ab-b24f-4edab0fa0b00%2Fpublic" title="Application Security: Get started guide" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
 <p>By default, Security Analytics queries filter on <code>requestSource = 'eyeball'</code>, which represents requests from end users. Note that requests from Cloudflare Workers (subrequests) are not visible in Security Analytics.</p>
 <h2 id="traffic">Traffic</h2>
 <p>The <strong>Traffic</strong> tab displays information about all incoming HTTP requests for your domain, including requests not handled by Cloudflare security products.</p>

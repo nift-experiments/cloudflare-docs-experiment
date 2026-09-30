@@ -2,7 +2,7 @@
 <h3 class="nb-aside-title" id="prerequisite">Prerequisite</h3>
 @markup("md", "content/.markup/bodies/9002.md")
 </aside>
-<div class="video-frame"><img class="video-poster" src="https://imagedelivery.net/xDOJvHcv1KwTQn6S-BGFIw/d1f88307-30b6-40e3-c38e-7cec03e5ed00/public" alt="Create an API token"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/4e92423fc9126a22af2b0c37825d4195/iframe?preload=true&amp;letterboxColor=transparent" title="Create an API token" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+<div class="video-frame"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/4e92423fc9126a22af2b0c37825d4195/iframe?preload=true&amp;letterboxColor=transparent&amp;poster=https%3A%2F%2Fimagedelivery.net%2FxDOJvHcv1KwTQn6S-BGFIw%2Fd1f88307-30b6-40e3-c38e-7cec03e5ed00%2Fpublic" title="Create an API token" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
 <ol>
 <li>Determine if you want a user token or an <a href="/fundamentals/api/get-started/account-owned-tokens/">Account API token</a>. Use Account API tokens if you prefer service tokens that are not associated with users and your <a href="/fundamentals/api/get-started/account-owned-tokens/#compatibility-matrix">desired API endpoints are compatible</a>.</li>
 <li>From the <a href="https://dash.cloudflare.com/profile/api-tokens/">Cloudflare dashboard</a>, go to <strong>My Profile</strong> &gt; <strong>API Tokens</strong> for user tokens. For Account Tokens, go to <strong>Manage Account</strong> &gt; <strong>API Tokens</strong>.</li>

@@ -2,7 +2,7 @@
 <div class="nb-card"><h3 class="nb-component-title" id="new-dashboard-experience">New dashboard experience</h3>
 @markup("md", "content/.markup/bodies/361.md")
 </div>
-<div class="video-frame"><img class="video-poster" src="https://imagedelivery.net/xDOJvHcv1KwTQn6S-BGFIw/5de3fd69-4208-41db-a1ef-076a523f6d00/public" alt="Application Security dashboard walkthrough"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/81d50c9845612128e65bf6d04bcf9e3a/iframe?preload=true&amp;letterboxColor=transparent" title="Application Security dashboard walkthrough" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+<div class="video-frame"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/81d50c9845612128e65bf6d04bcf9e3a/iframe?preload=true&amp;letterboxColor=transparent&amp;poster=https%3A%2F%2Fimagedelivery.net%2FxDOJvHcv1KwTQn6S-BGFIw%2F5de3fd69-4208-41db-a1ef-076a523f6d00%2Fpublic" title="Application Security dashboard walkthrough" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
 <h2 id="features">Features</h2>
 <div class="nb-feature">
 @markup("md", "content/.markup/bodies/362.md")

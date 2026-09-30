@@ -1,7 +1,7 @@
 <p>Cloudflare compresses content in two ways: between Cloudflare and your website visitors and between Cloudflare and your origin server.</p>
 <h2 id="compression-between-cloudflare-and-website-visitors">Compression between Cloudflare and website visitors</h2>
 <p>In addition to Cloudflare's <a href="/cache/concepts/default-cache-behavior/">default caching behavior</a>, Cloudflare supports Gzip, Brotli, and Zstandard compression when delivering content to website visitors.</p>
-<div class="video-frame"><img class="video-poster" src="https://imagedelivery.net/xDOJvHcv1KwTQn6S-BGFIw/386f9df0-25fc-4d2a-07fa-6dd3497d2e00/public" alt="Content compression"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/9103750883217fcb9274666fd57ebac1/iframe?preload=true&amp;letterboxColor=transparent" title="Content compression" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+<div class="video-frame"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/9103750883217fcb9274666fd57ebac1/iframe?preload=true&amp;letterboxColor=transparent&amp;poster=https%3A%2F%2Fimagedelivery.net%2FxDOJvHcv1KwTQn6S-BGFIw%2F386f9df0-25fc-4d2a-07fa-6dd3497d2e00%2Fpublic" title="Content compression" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/13943.md")
 </aside>

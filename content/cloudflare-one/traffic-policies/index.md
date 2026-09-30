@@ -57,7 +57,7 @@
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/4402.md")
 </aside>
-<div class="video-frame"><img class="video-poster" src="https://imagedelivery.net/xDOJvHcv1KwTQn6S-BGFIw/a6fd20a9-4cdf-4640-81b1-cada4c4f3f00/public" alt="SASE - Protect your users from Internet risks"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/48a3b49b7cdfaef0b3044d1530c82c19/iframe?preload=true&amp;letterboxColor=transparent" title="SASE - Protect your users from Internet risks" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+<div class="video-frame"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/48a3b49b7cdfaef0b3044d1530c82c19/iframe?preload=true&amp;letterboxColor=transparent&amp;poster=https%3A%2F%2Fimagedelivery.net%2FxDOJvHcv1KwTQn6S-BGFIw%2Fa6fd20a9-4cdf-4640-81b1-cada4c4f3f00%2Fpublic" title="SASE - Protect your users from Internet risks" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
 <h2 id="set-up-cloudflare-gateway-traffic-policies">Set up Cloudflare Gateway traffic policies</h2>
 <p>Before you create Cloudflare Gateway traffic policies, you need connect the devices or networks you want to protect and confirm that Cloudflare Gateway can inspect their traffic. For each traffic policy type, follow this workflow:</p>
 <ol>

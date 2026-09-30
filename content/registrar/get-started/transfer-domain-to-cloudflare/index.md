@@ -18,7 +18,7 @@
 @markup("md", "content/.markup/bodies/12746.md")
 </div></details>
 <hr />
-<div class="video-frame"><img class="video-poster" src="https://pub-d9bf66e086fb4b639107aa52105b49dd.r2.dev/Transfer%20your%20domain%20%20to%20Cloudflare_%20%20before%20you%20begin.png" alt="Transfer your domain to Cloudflare: before you begin"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/3c7f20b8e49ea737d6d013d2918c4520/iframe?preload=true&amp;letterboxColor=transparent" title="Transfer your domain to Cloudflare: before you begin" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+<div class="video-frame"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/3c7f20b8e49ea737d6d013d2918c4520/iframe?preload=true&amp;letterboxColor=transparent&amp;poster=https%3A%2F%2Fpub-d9bf66e086fb4b639107aa52105b49dd.r2.dev%2FTransfer%2520your%2520domain%2520%2520to%2520Cloudflare_%2520%2520before%2520you%2520begin.png" title="Transfer your domain to Cloudflare: before you begin" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
 <h2 id="1-add-your-domain-to-cloudflare"><ol>
 <li>Add your domain to Cloudflare</li>
 </ol></h2>

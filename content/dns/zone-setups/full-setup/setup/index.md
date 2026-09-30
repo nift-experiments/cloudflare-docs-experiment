@@ -21,7 +21,7 @@
 <li>Review your DNS records</li>
 </ol></h2>
 <p>Your DNS records must be accurate for your domain to work properly. If you don't know what DNS records are, consider the video below for a quick explanation.</p>
-<div class="video-frame"><img class="video-poster" src="https://imagedelivery.net/xDOJvHcv1KwTQn6S-BGFIw/7e8cdb06-7280-4139-8f13-256e03027f00/public" alt="Review your DNS records"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/07e42365d5c40f2a46a6bde2844f370f/iframe?preload=true&amp;letterboxColor=transparent" title="Review your DNS records" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+<div class="video-frame"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/07e42365d5c40f2a46a6bde2844f370f/iframe?preload=true&amp;letterboxColor=transparent&amp;poster=https%3A%2F%2Fimagedelivery.net%2FxDOJvHcv1KwTQn6S-BGFIw%2F7e8cdb06-7280-4139-8f13-256e03027f00%2Fpublic" title="Review your DNS records" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/7946.md")
 </aside>

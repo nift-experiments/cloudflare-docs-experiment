@@ -9,7 +9,7 @@
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/8866.md")
 </aside>
-<div class="video-frame"><img class="video-poster" src="https://imagedelivery.net/xDOJvHcv1KwTQn6S-BGFIw/57def76d-110a-419e-a7e4-9278829d6800/public" alt="Manage account members"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/492e46e01d4db17c302f8d10278ab3d8/iframe?preload=true&amp;letterboxColor=transparent" title="Manage account members" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+<div class="video-frame"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/492e46e01d4db17c302f8d10278ab3d8/iframe?preload=true&amp;letterboxColor=transparent&amp;poster=https%3A%2F%2Fimagedelivery.net%2FxDOJvHcv1KwTQn6S-BGFIw%2F57def76d-110a-419e-a7e4-9278829d6800%2Fpublic" title="Manage account members" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
 <h2 id="view-account-members">View account members</h2>
 <p>To manage account members, you must have a role of <strong>Super Administrator</strong> and have a <a href="/fundamentals/user-profiles/verify-email-address/">verified email address</a>.</p>
 <div class="nb-tabs" data-nb-tabs data-nb-sync-key="dashPlusAPI"><div role="tablist" aria-label="Options" data-nb-tabs-list></div><div data-nb-tabs-panels>

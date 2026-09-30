@@ -4,7 +4,7 @@
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/154.md")
 </aside>
-<div class="video-frame"><img class="video-poster" src="https://imagedelivery.net/xDOJvHcv1KwTQn6S-BGFIw/b8137b46-e0dd-45ab-b24f-4edab0fa0b00/public" alt="Application Security: Get started guide"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/1a426a3ae597ae3935eb97b5f97f106f/iframe?preload=true&amp;letterboxColor=transparent" title="Application Security: Get started guide" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+<div class="video-frame"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/1a426a3ae597ae3935eb97b5f97f106f/iframe?preload=true&amp;letterboxColor=transparent&amp;poster=https%3A%2F%2Fimagedelivery.net%2FxDOJvHcv1KwTQn6S-BGFIw%2Fb8137b46-e0dd-45ab-b24f-4edab0fa0b00%2Fpublic" title="Application Security: Get started guide" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
 <h2 id="before-you-begin">Before you begin</h2>
 <ul>
 <li>Make sure that you have <a href="/fundamentals/account/">set up a Cloudflare account</a> and <a href="/fundamentals/manage-domains/add-site/">added your domain</a> to Cloudflare.</li>

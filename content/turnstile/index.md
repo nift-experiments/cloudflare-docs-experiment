@@ -2,7 +2,7 @@
 @markup("md", "content/.markup/bodies/237.md")
 </div>
 <p>Turnstile can be embedded into any website without sending traffic through Cloudflare and works without showing visitors a CAPTCHA.</p>
-<div class="video-frame"><img class="video-poster" src="https://imagedelivery.net/xDOJvHcv1KwTQn6S-BGFIw/5b75f329-b7fe-4122-cae4-9bee54c35100/public" alt="Get started with Cloudflare Turnstile"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/7f1104dc5895d96c1957a4db5fdf496a/iframe?preload=true&amp;letterboxColor=transparent" title="Get started with Cloudflare Turnstile" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+<div class="video-frame"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/7f1104dc5895d96c1957a4db5fdf496a/iframe?preload=true&amp;letterboxColor=transparent&amp;poster=https%3A%2F%2Fimagedelivery.net%2FxDOJvHcv1KwTQn6S-BGFIw%2F5b75f329-b7fe-4122-cae4-9bee54c35100%2Fpublic" title="Get started with Cloudflare Turnstile" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
 <p>Cloudflare issues challenges through the <a href="/cloudflare-challenges/">Challenge Platform</a>, which is the same underlying technology powering <a href="/turnstile/">Turnstile</a>.</p>
 <p>In contrast to our Challenge page offerings, Turnstile allows you to run challenges anywhere on your site in a less-intrusive way without requiring the use of Cloudflare's CDN.</p>
 <h2 id="how-turnstile-works">How Turnstile works</h2>

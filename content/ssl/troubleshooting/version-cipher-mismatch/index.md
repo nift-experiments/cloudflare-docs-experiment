@@ -1,4 +1,4 @@
-<div class="video-frame"><img class="video-poster" src="https://imagedelivery.net/xDOJvHcv1KwTQn6S-BGFIw/5183edaa-5d65-4344-adda-37f2cbe69c00/public" alt="ERR_SSL_VERSION_OR_CIPHER_MISMATCH"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/03e51d8a6f9a15e16969b8cc117d9225/iframe?preload=true&amp;letterboxColor=transparent" title="ERR_SSL_VERSION_OR_CIPHER_MISMATCH" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+<div class="video-frame"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/03e51d8a6f9a15e16969b8cc117d9225/iframe?preload=true&amp;letterboxColor=transparent&amp;poster=https%3A%2F%2Fimagedelivery.net%2FxDOJvHcv1KwTQn6S-BGFIw%2F5183edaa-5d65-4344-adda-37f2cbe69c00%2Fpublic" title="ERR_SSL_VERSION_OR_CIPHER_MISMATCH" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
 <p>After you <a href="/fundamentals/manage-domains/add-site/">add a new domain</a> to Cloudflare, your visitors' browsers might display one of the following errors:</p>
 <ul>
 <li><code>ERR_SSL_VERSION_OR_CIPHER_MISMATCH</code> (Chrome)</li>

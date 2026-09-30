@@ -11,7 +11,7 @@
 <h2 id="1-add-your-application-to-access"><ol>
 <li>Add your application to Access</li>
 </ol></h2>
-<div class="video-frame"><img class="video-poster" src="https://pub-d9bf66e086fb4b639107aa52105b49dd.r2.dev/tunnel%203_%20set%20up%20access.png" alt="How to set up Cloudflare Access"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/68749ece14a062ff81eeb1079e0325ed/iframe?preload=true&amp;letterboxColor=transparent" title="How to set up Cloudflare Access" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+<div class="video-frame"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/68749ece14a062ff81eeb1079e0325ed/iframe?preload=true&amp;letterboxColor=transparent&amp;poster=https%3A%2F%2Fpub-d9bf66e086fb4b639107aa52105b49dd.r2.dev%2Ftunnel%25203_%2520set%2520up%2520access.png" title="How to set up Cloudflare Access" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
 <ol>
 <li>
 <p>In the <a href="https://dash.cloudflare.com/">Cloudflare dashboard</a>, go to <strong>Zero Trust</strong> &gt; <strong>Access controls</strong> &gt; <strong>Applications</strong>.</p>

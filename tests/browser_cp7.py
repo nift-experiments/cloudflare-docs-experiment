@@ -108,6 +108,17 @@ def run(public: pathlib.Path | None, base: str | None = None,
                 expect(details).to_have_attribute('open', '')
             checks.append('native disclosure')
 
+            page.goto(base + '/china-network/', wait_until='networkidle')
+            chapters = page.locator('details.video-chapters')
+            expect(chapters).not_to_have_attribute('open', '')
+            page.route('https://embed.cloudflarestream.com/embed/sdk.latest.js', lambda route: route.fulfill(
+                content_type='application/javascript', body='window.Stream=()=>({set currentTime(value){window.__streamChapterTime=value}});'))
+            chapters.locator('summary').click()
+            chapters.locator('[data-video-time]').first.click()
+            expect(page.locator('[data-stream-sdk]')).to_have_count(1)
+            assert page.evaluate('window.__streamChapterTime') == 3
+            checks.append('stream chapter disclosure/seek')
+
             mobile = browser.new_context(viewport={'width': 390, 'height': 844})
             mobile_page = mobile.new_page()
             mobile_page.goto(base + '/workers/get-started/guide/', wait_until='networkidle')

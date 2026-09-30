@@ -5,7 +5,7 @@
 <h2 id="1-create-a-tunnel"><ol>
 <li>Create a tunnel</li>
 </ol></h2>
-<div class="video-frame"><img class="video-poster" src="https://pub-d9bf66e086fb4b639107aa52105b49dd.r2.dev/tunnel%204_%20set%20up%20tunnel.png" alt="How to set up Cloudflare Tunnel"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/4b75ad2aa58700602e94b148827687a2/iframe?preload=true&amp;letterboxColor=transparent" title="How to set up Cloudflare Tunnel" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+<div class="video-frame"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/4b75ad2aa58700602e94b148827687a2/iframe?preload=true&amp;letterboxColor=transparent&amp;poster=https%3A%2F%2Fpub-d9bf66e086fb4b639107aa52105b49dd.r2.dev%2Ftunnel%25204_%2520set%2520up%2520tunnel.png" title="How to set up Cloudflare Tunnel" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
 <ol>
 <li>Log in to the Cloudflare dashboard and go to <strong>Networking</strong> &gt; <strong>Tunnels</strong>.</li>
 </ol>

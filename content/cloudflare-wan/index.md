@@ -28,7 +28,7 @@
 <p>If your requirements are limited to site-to-site connectivity and network-layer security, Cloudflare WAN provides what you need. When you need user-level security policies, identity-based access controls, or secure Internet egress, you can add Cloudflare One capabilities to your existing deployment.</p>
 <p>Cloudflare One builds on the same network infrastructure as Cloudflare WAN, so there is no migration required.</p>
 <p>For more information about Cloudflare One, refer to the <a href="/cloudflare-one/">Cloudflare One documentation</a>.</p>
-<div class="video-frame"><img class="video-poster" src="https://imagedelivery.net/xDOJvHcv1KwTQn6S-BGFIw/e71b5fcd-6de8-4ec5-28b2-4667c34c3900/public" alt="SASE - Connect and secure from any network to anywhere"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/86f22d1f760b77cdc349f89b25b63c3e/iframe?preload=true&amp;letterboxColor=transparent" title="SASE - Connect and secure from any network to anywhere" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+<div class="video-frame"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/86f22d1f760b77cdc349f89b25b63c3e/iframe?preload=true&amp;letterboxColor=transparent&amp;poster=https%3A%2F%2Fimagedelivery.net%2FxDOJvHcv1KwTQn6S-BGFIw%2Fe71b5fcd-6de8-4ec5-28b2-4667c34c3900%2Fpublic" title="SASE - Connect and secure from any network to anywhere" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
 <hr />
 <h2 id="features">Features</h2>
 <div class="nb-feature">
