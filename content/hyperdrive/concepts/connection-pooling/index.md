@@ -1,0 +1,34 @@
+<p>Hyperdrive maintains a pool of connections to your database. These are optimally placed to minimize the latency for your applications. You can configure
+the amount of connections your Hyperdrive configuration uses to connect to your origin database. This enables you to right-size your connection pool based on your database capacity and application requirements.</p>
+<p>For instance, if your Worker makes many queries to your database (which cannot be resolved by Hyperdrive's caching), you may want to allow Hyperdrive to make more connections to your database.
+Conversely, if your Worker makes few queries that actually need to reach your database or if your database allows a small number of database connections, you can reduce the amount of connections Hyperdrive will make to your database.</p>
+<p>All configurations have a minimum of 5 connections, and with a maximum depending on your Workers plan. Refer to the <a href="/hyperdrive/platform/limits/">limits</a> for details.</p>
+<h2 id="how-hyperdrive-pools-database-connections">How Hyperdrive pools database connections</h2>
+<p>Hyperdrive will automatically scale the amount of database connections held open by Hyperdrive depending on your traffic and the amount of load that is put on your database.</p>
+<p>The <code>max_size</code> parameter acts as a soft limit - Hyperdrive may temporarily create additional connections during network issues or high traffic periods to ensure high availability and resiliency.</p>
+<h2 id="restart-the-connection-pool">Restart the connection pool</h2>
+<p>Hyperdrive manages the connection pool for you, including automatic detection and recovery from most database failovers. In rare cases, you may need to restart the pool manually as a break-glass action — for example, after a database failover where Hyperdrive has not yet cycled its connections to the new primary.</p>
+<p>To restart, select your Hyperdrive configuration in the Cloudflare dashboard, go to the <strong>Settings</strong> tab, and select <strong>Restart</strong> under <strong>Danger zone</strong>. Restarting requires the <a href="/fundamentals/manage-members/roles/"><strong>Hyperdrive Admin</strong> role</a>.</p>
+<p>Restarting drains the existing connection pool and forces Hyperdrive to establish new connections to your origin database. After a restart, the <strong>Settings</strong> tab shows when the configuration was last manually restarted.</p>
+<aside class="nb-aside caution">
+@markup("md", "content/.markup/bodies/9108.md")
+</aside>
+<h2 id="pooling-mode">Pooling mode</h2>
+<p>The Hyperdrive connection pooler operates in transaction mode, where the client that executes the query communicates through a single connection for the duration of a transaction. When that transaction has completed, the connection is returned to the pool.</p>
+<p>Hyperdrive supports <a href="https://www.postgresql.org/docs/current/sql-set.html"><code>SET</code> statements</a> for the duration of a transaction or a query. For instance, if you manually create a transaction with <code>BEGIN</code>/<code>COMMIT</code>, <code>SET</code> statements within the transaction will take effect. Moreover, a query that includes a <code>SET</code> command (<code>SET X; SELECT foo FROM bar;</code>) will also apply the <code>SET</code> command. When a connection is returned to the pool, the connection is <code>RESET</code> such that the <code>SET</code> commands will not take effect on subsequent queries.</p>
+<p>This implies that a single Worker invocation may obtain multiple connections to perform its database operations and may need to <code>SET</code> any configurations for every query or transaction. It is not recommended to wrap multiple database operations with a single transaction to maintain the <code>SET</code> state. Doing so will affect the performance and scaling of Hyperdrive, as the connection cannot be reused by other Worker isolates for the duration of the transaction.</p>
+<p>Hyperdrive supports named prepared statements as implemented in the <code>postgres.js</code> and <code>node-postgres</code> drivers. Named prepared statements in other drivers may have worse performance or may not be supported.</p>
+<h2 id="best-practices">Best practices</h2>
+<p>You can configure connection counts using the Cloudflare dashboard or the Cloudflare API. Consider the following best practices to determine the right limit for your use-case:</p>
+<ul>
+<li><strong>Start conservatively</strong>: Begin with a lower connection count and increase as needed based on your application's performance.</li>
+<li><strong>Monitor database metrics</strong>: Watch your database's connection usage and performance metrics to optimize the connection count.</li>
+<li><strong>Consider database limits</strong>: Ensure your configured connection count doesn't exceed your database's maximum connection limit.</li>
+<li><strong>Account for multiple configurations</strong>: If you have multiple Hyperdrive configurations connecting to the same database, consider the total connection count across all configurations.</li>
+</ul>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li>Learn more about <a href="/hyperdrive/concepts/how-hyperdrive-works/">How Hyperdrive works</a>.</li>
+<li>Review <a href="/hyperdrive/platform/limits/">Hyperdrive limits</a> for your Workers plan.</li>
+<li>Learn how to <a href="/hyperdrive/examples/connect-to-postgres/">Connect to PostgreSQL</a> from Hyperdrive.</li>
+</ul>

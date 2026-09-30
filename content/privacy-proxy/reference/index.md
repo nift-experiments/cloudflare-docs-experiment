@@ -1,0 +1,2 @@
+<p>Technical reference documentation for Privacy Proxy configuration and monitoring.</p>
+<ul class="directory-listing"><li><a href="/privacy-proxy/reference/http-headers/">HTTP headers</a></li><li><a href="/privacy-proxy/reference/proxy-status/">Proxy status reference</a></li><li><a href="/privacy-proxy/reference/metrics/">Observability</a></li><li><a href="/privacy-proxy/reference/client-libraries/">Client libraries</a></li></ul>

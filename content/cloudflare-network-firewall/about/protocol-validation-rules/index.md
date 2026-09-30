@@ -1,0 +1,3 @@
+<p>Cloudflare Network Firewall (formerly Magic Firewall) supports <a href="https://datatracker.ietf.org/doc/html/rfc2543">Session Initiation Protocol (SIP)</a> to inspect traffic validity and enforce a positive security model.</p>
+<p>You can use the <code>sip</code> field when creating a rule to determine if packets are valid SIP Layer 7 (L7) protocol. Refer to <a href="/cloudflare-network-firewall/reference/network-firewall-fields/">Cloudflare Network Firewall fields</a>, specifically the <code>sip</code> field, for more information on this topic.</p>
+<p>Contact your account manager if you need Cloudflare Network Firewall to support additional protocols.</p>

@@ -1,0 +1,29 @@
+<p>Even when you have Spectrum enabled to handle Layer 4 traffic (for example, TCP/UDP connections), you may still notice traffic in your Layer 7 (L7) analytics dashboard. This is due to the way Cloudflare's Layer 7 <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
+@markup("md", "content/.markup/bodies/13866.md")
+</div>
+ and Spectrum handle customer identity differently.
+<h2 id="how-spectrum-identifies-a-user-layer-4">How Spectrum identifies a user (Layer 4)</h2>
+<p>In Spectrum, the identity of the customer hostname is based on the Cloudflare IP address that the client uses to connect to the edge. Here is the typical process:</p>
+<ol>
+<li>Spectrum sets up a DNS hostname in the customer's zone that points to its Spectrum edge IP, and links this edge IP and port to the customer's configuration.</li>
+<li>The client performs a DNS lookup on the Spectrum hostname, retrieves the Spectrum edge IP, and connects to that IP and port.</li>
+<li>Spectrum uses this edge IP and port to match the connection to the customer's configuration, identifying the customer.</li>
+</ol>
+<p>This process focuses on Layer 4 associating a hostname and customer configuration around IP addresses and ports.</p>
+<h2 id="how-the-cdn-identifies-a-user-layer-7">How the CDN identifies a user (Layer 7)</h2>
+<ol>
+<li>The customer sets up a DNS hostname in their zone that directs traffic to their origin server.</li>
+<li>The client performs a DNS lookup on the CDN hostname, and the DNS server responds with a CDN edge IP. In contrast to Spectrum, the CDN edge IP is primarily used for traffic management rather than customer identity, as multiple customers can share the same CDN edge IP.</li>
+</ol>
+<p>For the CDN, identifying the customer relies heavily on resolving hostnames during the TLS handshake (SNI) and the HTTP request (<code>Host</code> header). Notably, the CDN is designed to accept any hostname that matches the customer's zone (for example, <code>*.example.com</code>), even if there is no specific Layer 7 DNS match. This means that even Spectrum or Load Balancer hostnames will be accepted as valid under <code>*.example.com</code>.</p>
+<h2 id="the-overlap-layer-7-traffic-being-proxied-through-spectrum">The overlap: Layer 7 traffic being proxied through Spectrum</h2>
+<p>Because the CDN is designed to accept any hostname under your zone (for example, <code>spectrum.example.com</code>), HTTP traffic that should first be proxied by Spectrum, or even HTTP traffic meant for a Layer-4-only Spectrum app, may sometimes be processed directly by the Layer 7 CDN system. The process is the following:</p>
+<ol>
+<li>The client connects to a Layer 7 CDN edge IP while using the hostname of a Spectrum application (for example, <code>spectrum.example.com</code>) during both the TLS handshake and the HTTP request. Essentially, this means the client is attempting to access <code>spectrum.example.com</code> on an incorrect IP.</li>
+<li>The CDN accepts this hostname as part of the customer zone during both the TLS and HTTP phases because it is designed to recognize any hostname under <code>*.example.com</code>. As a result, the request passes through the CDN under the zone's identity.</li>
+<li>However, when the CDN attempts to connect to the origin server, it performs an internal DNS lookup of the HTTP hostname, which resolves to the Spectrum IP (from <code>spectrum.example.com</code> to the Spectrum edge IP). Consequently, the CDN establishes an origin connection to Spectrum, loading its configuration and forwarding the request to the Spectrum origin.</li>
+</ol>
+<p>This means traffic for this hostname undergoes the standard Layer 7 CDN products, including Analytics and logs.</p>
+<h2 id="blocking-unwanted-l7-traffic">Blocking unwanted L7 traffic</h2>
+<p>If you want to prevent traffic for Layer-4-only Spectrum hostnames from being proxied through Layer 7 to your origin (including unwanted scans or requests), we recommend implementing a Layer 7 WAF (Web Application Firewall) rule. This rule can block traffic directed at specific hostnames or ports, ensuring that only legitimate traffic reaches your Spectrum service.</p>
+<p>For example, you can create a WAF rule to block requests to <code>spectrum.example.com</code> unless they originate from a Spectrum IP or a customer's Spectrum BYOIP. The traffic will still be logged in Layer 7 Analytics, including WAF Security Events, but this prevents it from arriving at the wrong address and looping through the CDN a second time.</p>

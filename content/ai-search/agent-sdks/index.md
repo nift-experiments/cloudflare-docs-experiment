@@ -1,0 +1,3 @@
+<p>These guides show how to use AI Search from agent and application frameworks. Each guide starts from an empty project and ends with a working integration that queries an AI Search instance.</p>
+<p>These pages cover how to <em>use</em> an AI Search instance from a framework. To create and manage instances themselves, refer to the <a href="/ai-search/api/">REST API</a>, the <a href="/ai-search/api/search/workers-binding/">Workers binding</a>, or <a href="/ai-search/wrangler-commands/">Wrangler commands</a>.</p>
+<ul class="directory-listing"><li><a href="/ai-search/agent-sdks/agents-sdk/">Agents SDK</a></li><li><a href="/ai-search/agent-sdks/ai-sdk/">AI SDK</a></li><li><a href="/ai-search/agent-sdks/langchain/">LangChain</a></li></ul>

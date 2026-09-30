@@ -1,0 +1,54 @@
+<h2 id="introduction">Introduction</h2>
+<p><a href="/durable-objects/">Durable Objects</a> are built on-top of <a href="/workers/">Cloudflare Workers</a> spanning several locations across our global infrastructure network.
+Each Durable Object instance has its own durable storage persisted across requests, in-memory state, single-threaded execution, and can be placed in a specific region.</p>
+<p>A single Durable Object instance has certain <a href="/durable-objects/platform/limits/">performance and storage capabilities</a>.
+Therefore, to scale an application without being restricted by the limits of a single instance we need to shard our application data as much as possible, and take advantage of the <a href="https://www.cloudflare.com/en-gb/network/">Cloudflare infrastructure</a> by spreading our Durable Object instances across the world, moving both the data and compute as close to the users as possible.</p>
+<p>This document describes a useful architectural pattern to separate the control plane from the data plane of your application to achieve great performance and reliability without compromising on functionality.</p>
+<ul>
+<li>The <strong>control plane</strong> provides the administrative APIs used to manage resource metadata. For example, a user creating and deleting a wiki, or listing all wikis of a user.</li>
+<li>The <strong>data plane</strong> provides the primary function of the application and handles the operations on the resources data directly. For example, fetching and updating the content of a wiki, or updating the content of a collaborative document. Data planes are intentionally less complicated and usually handle a much larger volume of requests.</li>
+<li>The <strong>management plane</strong> is an optional component of a system providing a higher level of interaction than the control plane to simplify configuration and operations. In this document, we will not focus on this as the same principles apply as to the control plane.</li>
+</ul>
+<h2 id="control-and-data-plane-separation-pattern">Control and data plane separation pattern</h2>
+<p>In this pattern, our application consists of at least one Durable Object instance per resource type handling all its control plane operations, and as many Durable Object instances as we need for the data plane operations, one for each resource instance created in the application.</p>
+<p>You can scale to millions of Durable Object instances, one for each of your resources.</p>
+<p>The main advantage of this architectural pattern is that our data plane operations, usually with larger volume of requests than control plane operations, are handled directly by the Durable Object instances holding the resource data without going through the control plane Durable Object instance.
+Therefore, the application's performance and availability is not limited by a single Durable Object instance, but is shared across thousands or millions of Durable Objects.</p>
+<p>Consider an example for a generic resource type <code>XYZ</code>, where <code>XYZ</code> could in-practice be a wiki, a collaborative document, a database for each user, or any other resource type in your application.</p>
+<p><img src="/assets/upstream/images/reference-architecture/durable-objects-control-data-plane-pattern/diagram.svg" alt="Figure 1: Control and data plane architectural pattern for Durable Objects" title="Figure 1: Control and data plane architectural pattern for Durable Objects" /></p>
+<ol>
+<li>A user in London (LHR) initiates a resource <code>XYZ</code> creation request. The request is routed to the nearest Cloudflare datacenter and received by the Workers fleet which serves the application API.</li>
+<li>The Worker code will route the request to the appropriate control plane Durable Object instance managing the resources of type <code>XYZ</code>. We will use the <code>idFromName</code> approach to reference the Durable Object instance by name (<code>control-plane-xyz</code>). This allows immediate access to the control plane Durable Object instances without needing to maintain a mapping.
+<ul>
+<li>The location of the control plane Durable Object will be close to the first request accessing it, or to the explicit region we provide using <a href="/durable-objects/reference/data-location/#provide-a-location-hint">Location Hints</a>.</li>
+</ul>
+</li>
+<li>The control plane Durable Object instance (<code>control-plane-xyz</code>) receives the request, and immediately creates another Durable Object instance (<code>data-plane-xyz-03</code>) near the user request's location (using Location Hints) so that the actual Durable Object instance holding the resource's content is near the user that created it. - We call a custom <code>init(...)</code> function on the created Durable Object instance (<code>data-plane-xyz-03</code>) passing any required metadata info that will be needed to start handling user requests.
+The Durable Object instance stores this information in its local storage and performs any necessary initialisation.
+This step can be skipped if each subsequent request to the created resource contains all the information needed to handle the request. For example, if the request URL contains all the information as path and query parameters. - We use the <a href="/durable-objects/api/namespace/#idfromname"><code>idFromName</code></a> approach to reference the Durable Object (<code>data-plane-xyz-03</code>) which allows the use of name-based resource identifiers. - Alternatively, we can use the <a href="/durable-objects/api/namespace/#newuniqueid"><code>newUniqueId</code></a> approach to reference the Durable Object which will give us a random resource identifier to use instead of a name-based one. This random identifier will need to be communicated back to the user so that they provide it in their subsequent requests when accessing the resource.</li>
+<li>The control plane Durable Object instance (<code>control-plane-xyz</code>) stores the generated identifier (<code>data-plane-xyz-03</code>) to its local storage, in order to be able to list/delete all created resources, and then returns it to the Worker.</li>
+<li>The user receives a successful response for the creation of the resource and the corresponding identifier, and (optionally) gets redirected to the resource itself.</li>
+<li>The user sends a write request to the API for the resource identifier returned in the previous step, in order to update the content of the resource.</li>
+<li>The Worker code uses the resource identifier provided to directly reference the data plane Durable Object instance for that resource (<code>data-plane-xyz-03</code>). The Durable Object instance will handle the request appropriately by writing the content to its local durable persistent storage and return a response accordingly.</li>
+<li>Another user from Portland (PDX) is sending a read request to a previously created resource (<code>data-plane-xyz-01</code>).</li>
+<li>The Worker code directly references the Durable Object instance holding the data for the given resource identifier (<code>data-plane-xyz-01</code>), and the Durable Object instance will return its content by reading its local storage.</li>
+</ol>
+<p>As long as the application data model allows sharding at the resource level, you can scale out as much as you want, while taking advantage of data locality near the user that accesses that resource.</p>
+<p>The same pattern can be applied as many times as necessary to achieve the performance required.</p>
+<p>For example, depending on our load, we could further shard our control plane Durable Object into several Durable Objects.
+Instead of having a single Durable Object instance for all resources of type <code>XYZ</code>, we could have one for each region.
+The name-based approach to reference a Durable Object instance simplifies targeting the appropriate instance accordingly.</p>
+<p>In conclusion, as long as you find a way to shard your application's data model in fine-grained resources that are self-contained, you are able to dedicate at least one Durable Object instance to each resource and scale out.</p>
+<h2 id="related-resources">Related resources</h2>
+<ul>
+<li><a href="/durable-objects/api/namespace/">Durable Objects Namespace documentation</a></li>
+<li><a href="https://blog.cloudflare.com/durable-objects-easy-fast-correct-choose-three/">Durable Objects: Easy, Fast, Correct — Choose three</a></li>
+<li><a href="https://blog.cloudflare.com/sqlite-in-durable-objects/">Zero-latency SQLite storage in every Durable Object</a></li>
+<li><a href="https://thenewstack.io/data-control-management-three-planes-different-altitudes/">Data, Control, Management: Three Planes, Different Altitudes</a></li>
+<li>Examples of this architectural pattern in real-world applications:
+<ul>
+<li><a href="https://blog.cloudflare.com/how-we-built-cloudflare-queues/">Durable Objects aren't just durable, they're fast: a 10x speedup for Cloudflare Queues</a></li>
+<li><a href="https://www.lambrospetrou.com/articles/tiddlyflare/">Building a global TiddlyWiki hosting platform with Cloudflare Durable Objects and Workers — Tiddlyflare</a></li>
+</ul>
+</li>
+</ul>

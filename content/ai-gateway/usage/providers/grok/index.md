@@ -1,0 +1,32 @@
+<h2 id="endpoint">Endpoint</h2>
+<pre><code class="language-txt">https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/grok&#10;</code></pre>
+<h2 id="url-structure">URL structure</h2>
+<p>When making requests to <a href="https://docs.x.ai/docs#getting-started">Grok</a>, replace <code>https://api.x.ai/v1</code> in the URL you are currently using with <code>https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/grok</code>.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>When making requests to Grok, ensure you have the following:</p>
+<ul>
+<li>Your AI Gateway Account ID.</li>
+<li>Your AI Gateway gateway name.</li>
+<li>An active xAI API token.</li>
+<li>The name of the xAI model you want to use.</li>
+</ul>
+<h2 id="examples">Examples</h2>
+<h3 id="curl">cURL</h3>
+<pre><code class="language-bash">curl https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/grok/v1/chat/completions \&#10;  &#45;-header &#x27;content-type: application/json&#x27; \&#10;  &#45;-header &#x27;Authorization: Bearer {xai_api_token}&#x27; \&#10;  &#45;-data &#x27;{&#10;    &quot;model&quot;: &quot;grok-4&quot;,&#10;    &quot;messages&quot;: [&#10;        {&#10;            &quot;role&quot;: &quot;user&quot;,&#10;            &quot;content&quot;: &quot;What is Cloudflare?&quot;&#10;        }&#10;    ]&#10;}&#x27;&#10;</code></pre>
+<h3 id="use-openai-sdk-with-javascript">Use OpenAI SDK with JavaScript</h3>
+<p>If you are using the OpenAI SDK with JavaScript, you can set your endpoint like this:</p>
+<pre><code class="language-js">import OpenAI from &quot;openai&quot;;&#10;&#10;const openai = new OpenAI({&#10;	apiKey: &quot;&lt;api key&gt;&quot;,&#10;	baseURL:&#10;		&quot;https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/grok&quot;,&#10;});&#10;&#10;const completion = await openai.chat.completions.create({&#10;	model: &quot;grok-4&quot;,&#10;	messages: [&#10;		{&#10;			role: &quot;system&quot;,&#10;			content:&#10;				&quot;You are Grok, a chatbot inspired by the Hitchhiker&#x27;s Guide to the Galaxy.&quot;,&#10;		},&#10;		{&#10;			role: &quot;user&quot;,&#10;			content: &quot;What is the meaning of life, the universe, and everything?&quot;,&#10;		},&#10;	],&#10;});&#10;&#10;console.log(completion.choices[0].message);&#10;</code></pre>
+<h3 id="use-openai-sdk-with-python">Use OpenAI SDK with Python</h3>
+<p>If you are using the OpenAI SDK with Python, you can set your endpoint like this:</p>
+<pre><code class="language-python">import os&#10;from openai import OpenAI&#10;&#10;XAI_API_KEY = os.getenv(&quot;XAI_API_KEY&quot;)&#10;client = OpenAI(&#10;    api_key=XAI_API_KEY,&#10;    base_url=&quot;https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/grok&quot;,&#10;)&#10;&#10;completion = client.chat.completions.create(&#10;    model=&quot;grok-4&quot;,&#10;    messages=[&#10;        {&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;You are Grok, a chatbot inspired by the Hitchhiker&#x27;s Guide to the Galaxy.&quot;},&#10;        {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;What is the meaning of life, the universe, and everything?&quot;},&#10;    ],&#10;)&#10;&#10;print(completion.choices[0].message)&#10;</code></pre>
+<h3 id="use-anthropic-sdk-with-javascript">Use Anthropic SDK with JavaScript</h3>
+<p>If you are using the Anthropic SDK with JavaScript, you can set your endpoint like this:</p>
+<pre><code class="language-js">import Anthropic from &quot;@anthropic-ai/sdk&quot;;&#10;&#10;const anthropic = new Anthropic({&#10;	apiKey: &quot;&lt;api key&gt;&quot;,&#10;	baseURL:&#10;		&quot;https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/grok&quot;,&#10;});&#10;&#10;const msg = await anthropic.messages.create({&#10;	model: &quot;grok-beta&quot;,&#10;	max_tokens: 128,&#10;	system:&#10;		&quot;You are Grok, a chatbot inspired by the Hitchhiker&#x27;s Guide to the Galaxy.&quot;,&#10;	messages: [&#10;		{&#10;			role: &quot;user&quot;,&#10;			content: &quot;What is the meaning of life, the universe, and everything?&quot;,&#10;		},&#10;	],&#10;});&#10;&#10;console.log(msg);&#10;</code></pre>
+<h3 id="use-anthropic-sdk-with-python">Use Anthropic SDK with Python</h3>
+<p>If you are using the Anthropic SDK with Python, you can set your endpoint like this:</p>
+<pre><code class="language-python">import os&#10;from anthropic import Anthropic&#10;&#10;XAI_API_KEY = os.getenv(&quot;XAI_API_KEY&quot;)&#10;client = Anthropic(&#10;    api_key=XAI_API_KEY,&#10;    base_url=&quot;https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/grok&quot;,&#10;)&#10;&#10;message = client.messages.create(&#10;    model=&quot;grok-beta&quot;,&#10;    max_tokens=128,&#10;    system=&quot;You are Grok, a chatbot inspired by the Hitchhiker&#x27;s Guide to the Galaxy.&quot;,&#10;    messages=[&#10;        {&#10;            &quot;role&quot;: &quot;user&quot;,&#10;            &quot;content&quot;: &quot;What is the meaning of life, the universe, and everything?&quot;,&#10;        },&#10;    ],&#10;)&#10;&#10;print(message.content)&#10;</code></pre>
+<h2 id="openai-compatible-endpoint">OpenAI-Compatible Endpoint</h2>
+<p>You can also access Grok models using the OpenAI API schema through the <a href="/ai-gateway/usage/rest-api/">REST API</a>. Send your requests to:</p>
+<pre><code class="language-txt">https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/v1/chat/completions&#10;</code></pre>
+<p>Specify:</p>
+<pre><code class="language-json">{&#10;	&amp;quot;model&amp;quot;: &amp;quot;grok/{model}&amp;quot;&#10;}</code></pre>

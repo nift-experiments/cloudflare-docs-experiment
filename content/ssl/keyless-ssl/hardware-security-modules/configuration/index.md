@@ -1,0 +1,25 @@
+<aside class="nb-aside caution">
+<h3 class="nb-aside-title" id="important">Important</h3>
+@markup("md", "content/.markup/bodies/14204.md")
+</aside>
+<p>To get started with your PKCS#11 token you will need to initialize it with a private key, PIN, and token label. The instructions to do this will be specific to each hardware device, and you should follow the instructions provided by your vendor. You will also need to find the path to your <code>module</code>, a shared object file (<code>.so</code>). Having initialized your device, you can query it to check your token label with:</p>
+<pre><code class="language-sh">pkcs11-tool --module &lt;module path&gt; --list-token-slots&#10;</code></pre>
+<p>You will also want to check the label of the private key you imported (or generated). Run the following command and look for a <code>Private Key Object</code>:</p>
+<pre><code class="language-bash">pkcs11-tool --module &lt;module path&gt; --pin &lt;pin&gt; \&#10;    &#45;-list-token-slots --login --list-objects&#10;</code></pre>
+<p>You now have all the information you need to use your PKCS#11 token with the Keyless server, by adding to the <code>private_key_stores</code> section in the configuration file. You can specify the key pairs that you want Keyless to have access to in the <a href="https://tools.ietf.org/html/rfc7512">configuration file using the PKCS#11 URI</a> format.</p>
+<h2 id="pkcs-11-uri">PKCS#11 URI</h2>
+<p>A PKCS#11 URI is a sequence of attribute value pairs separated by a semicolon that form a one-level path component, optionally followed by a query. The general form represented is:</p>
+<pre><code class="language-txt">pkcs11:path-component[?query-component]&#10;</code></pre>
+<p>The URI path component contains attributes that identify a resource. The query component can contain a few attributes that may be needed to retrieve the resource identified by the URI path component. Attributes in the path component are delimited by the <code>;</code> character, and attributes in the query component use <code>&amp;</code> as a delimiter. All attributes are URL-encoded.</p>
+<p>Keyless requires the following three attributes be specified:</p>
+<ul>
+<li><strong>Module</strong>: use <code>module-path</code> to locate the PKCS#11 module library.</li>
+<li><strong>Token</strong>: use <code>serial</code>, <code>slot-id</code>, or <code>token</code> to specify the PKCS#11 token.</li>
+<li><strong>Slot</strong>: use <code>id</code> or <code>object</code> to specify the PKCS#11 key pair.</li>
+</ul>
+<p>For certain modules, a query attribute <code>max-sessions</code> is required in order to prevent opening too many sessions to the module. Certain additional attributes, such as <code>pin-value</code>, may be necessary depending on the situation. Refer to the documentation for your PKCS#11 module for more details.</p>
+<h2 id="examples">Examples</h2>
+<p>Here are some examples of PKCS#11 URIs for keys stored on various modules:</p>
+<pre><code class="language-txt">private_key_stores:&#10;&#45; uri: pkcs11:token=SoftHSM2%20RSA%20Token;id=%03?module-path=/usr/lib64/libsofthsm2.so&amp;pin-value=1234&#10;&#45; uri: pkcs11:token=accelerator;object=thaleskey?module-path=/opt/nfast/toolkits/pkcs11/libcknfast.so&#10;&#45; uri: pkcs11:token=YubiKey%20PIV;id=%00?module-path=/usr/lib64/libykcs11.so&amp;pin-value=123456&amp;max-sessions=1&#10;&#45; uri: pkcs11:token=elab2parN;id=%04?module-path=/usr/lib/libCryptoki2_64.so&amp;pin-value=crypto1&#10;</code></pre>
+<h2 id="limitations">Limitations</h2>
+<p>For now, only one PKCS#11 module can be used at a time, so if you have keys on multiple HSMs, we recommend <a href="https://p11-glue.github.io/p11-glue/">using p11-glue to consolidate access through one module</a>.</p>

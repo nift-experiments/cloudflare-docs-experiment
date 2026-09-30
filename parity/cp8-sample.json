@@ -1,0 +1,275 @@
+{
+  "schemaVersion": 1,
+  "upstreamSha": "bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf",
+  "selection": "fixed major products + seeded minimum-hash depth/feature strata + generated families",
+  "viewports": [
+    {
+      "name": "mobile",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "tablet",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "name": "sidebar-breakpoint",
+      "width": 1024,
+      "height": 900
+    },
+    {
+      "name": "desktop",
+      "width": 1440,
+      "height": 1200
+    }
+  ],
+  "routes": [
+    {
+      "route": "/",
+      "reasons": [
+        "homepage"
+      ]
+    },
+    {
+      "route": "/agent-setup/",
+      "reasons": [
+        "generated-family"
+      ]
+    },
+    {
+      "route": "/ai-search/",
+      "reasons": [
+        "depth-1"
+      ]
+    },
+    {
+      "route": "/ai-search/agent-sdks/ai-sdk/",
+      "reasons": [
+        "package-managers"
+      ]
+    },
+    {
+      "route": "/ai-search/api/migration/autorag-filter-format/",
+      "reasons": [
+        "file-tree"
+      ]
+    },
+    {
+      "route": "/cache/",
+      "reasons": [
+        "major-product"
+      ]
+    },
+    {
+      "route": "/changelog/",
+      "reasons": [
+        "generated-family"
+      ]
+    },
+    {
+      "route": "/changelog/2/",
+      "reasons": [
+        "generated-family"
+      ]
+    },
+    {
+      "route": "/changelog/post/2026-03-18-media-transformations-workers-binding/",
+      "reasons": [
+        "generated-family"
+      ]
+    },
+    {
+      "route": "/cloudflare-for-platforms/cloudflare-for-saas/security/certificate-management/issue-and-validate/validate-certificates/txt/",
+      "reasons": [
+        "depth-7"
+      ]
+    },
+    {
+      "route": "/cloudflare-one/",
+      "reasons": [
+        "major-product"
+      ]
+    },
+    {
+      "route": "/cloudflare-one/access-controls/policies/common-policies/",
+      "reasons": [
+        "details"
+      ]
+    },
+    {
+      "route": "/cloudflare-one/networks/connectors/cloudflare-wan/configuration/appliance/network-options/dhcp/dhcp-relay/",
+      "reasons": [
+        "depth-9"
+      ]
+    },
+    {
+      "route": "/cloudflare-one/team-and-resources/devices/cloudflare-one-client/deployment/mdm-deployment/partners/jumpcloud/",
+      "reasons": [
+        "depth-8"
+      ]
+    },
+    {
+      "route": "/d1/examples/d1-and-sveltekit/",
+      "reasons": [
+        "tabs"
+      ]
+    },
+    {
+      "route": "/ddos-protection/advanced-ddos-systems/api/programmable-flow-protection/json-objects/",
+      "reasons": [
+        "tables"
+      ]
+    },
+    {
+      "route": "/ddos-protection/change-log/http/2023-11-10-emergency/",
+      "reasons": [
+        "depth-4"
+      ]
+    },
+    {
+      "route": "/directory/",
+      "reasons": [
+        "generated-family"
+      ]
+    },
+    {
+      "route": "/dns/",
+      "reasons": [
+        "major-product"
+      ]
+    },
+    {
+      "route": "/fundamentals/",
+      "reasons": [
+        "major-product"
+      ]
+    },
+    {
+      "route": "/glossary/",
+      "reasons": [
+        "generated-family"
+      ]
+    },
+    {
+      "route": "/hyperdrive/examples/connect-to-postgres/postgres-drivers-and-libraries/prisma-orm/",
+      "reasons": [
+        "depth-5"
+      ]
+    },
+    {
+      "route": "/learning-paths/sase-overview-course/series/",
+      "reasons": [
+        "major-product"
+      ]
+    },
+    {
+      "route": "/pages/",
+      "reasons": [
+        "major-product"
+      ]
+    },
+    {
+      "route": "/r2/",
+      "reasons": [
+        "major-product"
+      ]
+    },
+    {
+      "route": "/realtime/",
+      "reasons": [
+        "major-product"
+      ]
+    },
+    {
+      "route": "/realtime/realtimekit/ui-kit/api-reference/core/rtk-participants-stage-queue/",
+      "reasons": [
+        "depth-6"
+      ]
+    },
+    {
+      "route": "/realtime/realtimekit/ui-kit/api-reference/react-native/rtkparticipanttile/",
+      "reasons": [
+        "code"
+      ]
+    },
+    {
+      "route": "/ruleset-engine/rules-language/fields/reference/http.cookie/",
+      "reasons": [
+        "generated-family"
+      ]
+    },
+    {
+      "route": "/sandbox/guides/",
+      "reasons": [
+        "depth-2"
+      ]
+    },
+    {
+      "route": "/ssl/",
+      "reasons": [
+        "major-product"
+      ]
+    },
+    {
+      "route": "/use-cases/solutions/stop-account-takeover-attacks/",
+      "reasons": [
+        "steps"
+      ]
+    },
+    {
+      "route": "/videos/app-sec-dashboard/",
+      "reasons": [
+        "generated-family"
+      ]
+    },
+    {
+      "route": "/waf/",
+      "reasons": [
+        "major-product"
+      ]
+    },
+    {
+      "route": "/workers-ai/",
+      "reasons": [
+        "major-product"
+      ]
+    },
+    {
+      "route": "/workers-ai/models/llama-3.1-8b-instruct-fp8/",
+      "reasons": [
+        "generated-family"
+      ]
+    },
+    {
+      "route": "/workers/",
+      "reasons": [
+        "major-product"
+      ]
+    },
+    {
+      "route": "/workers/demos/chatgpt-app/",
+      "reasons": [
+        "cards"
+      ]
+    },
+    {
+      "route": "/workers/runtime-apis/scheduler/",
+      "reasons": [
+        "depth-3"
+      ]
+    },
+    {
+      "route": "/workers/tutorials/build-a-jamstack-app/",
+      "reasons": [
+        "images"
+      ]
+    },
+    {
+      "route": "/workflows/build/call-workflows-from-pages/",
+      "reasons": [
+        "asides"
+      ]
+    }
+  ]
+}

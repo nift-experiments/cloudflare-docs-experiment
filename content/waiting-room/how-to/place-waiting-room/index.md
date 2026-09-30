@@ -1,0 +1,15 @@
+<p>When <a href="/waiting-room/how-to/create-waiting-room/">configuring a waiting room</a>, you need to indicate which pages the waiting room will cover.</p>
+<p>Your waiting room requires at least one hostname and path in its configuration settings. There is an implied wildcard after the path, meaning the waiting room will also apply to any subpaths. When there is an active queue, all new users will enter the queue at any URLs covered by this hostname and path combination. If you have multiple waiting rooms, the waiting room with the most specific subpath takes precedence.</p>
+<h2 id="apply-to-multiple-hostnames-and-paths">Apply to multiple hostnames and paths</h2>
+<p>Advanced Waiting Room customers can apply a single waiting room to multiple hostnames and paths. To do so via the UI, after adding the first hostname and path, select <strong>Add Hostname and Path</strong> and then input the next hostname and path combination you would like the waiting room to cover. If adding more than one hostname and path for a single waiting room, you must also create a unique waiting room cookie by filling out the Custom cookie field. To add multiple hostnames and paths via the API, utilize the <code>additional_routes</code> field and customize the cookie suffix with the <code>cookie_suffix</code> field.</p>
+<p>You cannot add any hostname and path combinations already configured for another waiting room. Hostnames must belong to the zone that the waiting room is configured on.</p>
+<p>A single waiting room can be applied to multiple custom hostnames as long as the following is true:</p>
+<ul>
+<li>The apex domain is the same between the custom hostnames</li>
+<li>Each custom hostname is <a href="#custom-hostnames">configured explicitly</a> in SSL for SaaS setup.</li>
+</ul>
+<h2 id="custom-hostnames">Custom hostnames</h2>
+<p>To deploy a waiting room to a custom hostname, the non-wildcard custom hostname must be <a href="/cloudflare-for-platforms/cloudflare-for-saas/domain-support/create-custom-hostnames/">configured and active in SSL for SaaS</a>. Then, <a href="/waiting-room/how-to/create-waiting-room/">create</a> a Waiting Room and optionally apply it to <a href="#apply-to-multiple-hostnames-and-paths">multiple hostnames</a> with the same apex domain.</p>
+<p>This means that – if you want a waiting room for <code>hello.example.com</code> – <code>hello.example.com</code> must be an active custom hostname. You will not be able to create a waiting room at <code>hello.example.com</code> based on only <code>example.com</code> being set up as a custom hostname, even if you have enabled wildcards for this custom hostname in SSL for SaaS setup.</p>
+<h2 id="create-exceptions-to-waiting-room-coverage">Create exceptions to waiting room coverage</h2>
+<p>If there are subpaths or query strings of the path you have configured for your waiting room that you would not like the waiting room to apply to, you can create a <a href="/waiting-room/additional-options/waiting-room-rules/bypass-rules/#common-use-cases">Waiting Room bypass rule</a> to ensure that traffic is not queued at these parts of your site.</p>

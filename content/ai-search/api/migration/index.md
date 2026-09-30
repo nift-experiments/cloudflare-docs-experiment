@@ -1,0 +1,2 @@
+<p>Migrate from the legacy AutoRAG APIs to the current AI Search APIs.</p>
+<ul class="directory-listing"><li><a href="/ai-search/api/migration/workers-binding/">Workers binding migration</a></li><li><a href="/ai-search/api/migration/rest-api/">REST API migration</a></li><li><a href="/ai-search/api/migration/workers-binding-legacy/">Workers binding (legacy)</a></li><li><a href="/ai-search/api/migration/autorag-filter-format/">Metadata filter (legacy)</a></li></ul>

@@ -1,0 +1,1 @@
+<ul class="directory-listing"><li><a href="/d1/observability/debug-d1/">Debug D1</a></li><li><a href="/d1/observability/metrics-analytics/">Metrics and analytics</a></li><li><a href="/d1/observability/billing/">Billing</a></li><li><a href="/d1/observability/audit-logs/">Audit Logs</a></li></ul>

@@ -1,0 +1,2 @@
+<p>The Optimization section will show you a list of Cloudflare products that are recommended for enhancing your website's performance.</p>
+<ul class="directory-listing"><li><a href="/speed/optimization/recommendations/">Recommendations</a></li><li><a href="/speed/optimization/measurement/">Measurement</a></li><li><a href="/speed/optimization/images/">Image optimization</a></li><li><a href="/speed/optimization/content/">Content optimizations</a></li><li><a href="/speed/optimization/protocol/">Protocol optimization</a></li></ul>

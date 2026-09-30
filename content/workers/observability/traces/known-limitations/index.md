@@ -1,0 +1,20 @@
+<p>Workers tracing is currently in open beta. This page documents current limitations and any upcoming features on our roadmap.</p>
+<p>To provide more feedback and send feature requests, head to the <a href="https://github.com/cloudflare/workers-sdk/discussions/11062">Workers tracing GitHub discussion</a>.</p>
+<h3 id="non-i-o-operations-may-report-time-of-0-ms">Non-I/O operations may report time of 0 ms</h3>
+<p>Due to <a href="/workers/reference/security-model/#step-1-disallow-timers-and-multi-threading">security measures put in place to prevent Spectre attacks</a>, the Workers
+Runtime does not update time until I/O events take place. This means that some spans will return a length of <code>0 ms</code> even when the operation took longer.</p>
+<p>The Cloudflare Workers team is exploring security measures that would allow exposing time lengths at millisecond-level granularity in these cases.</p>
+<h3 id="trace-context-propagation-to-external-services">Trace context propagation to external services</h3>
+<p>When exporting traces to external platforms, trace IDs are not propagated to services outside of Cloudflare. This means traces from your Workers will not link with traces from non-Cloudflare services in your observability tools.</p>
+<p>We are working on automatic trace context propagation using <a href="https://www.w3.org/TR/trace-context/">W3C Trace Context standards</a>, which will enable complete end-to-end visibility across your existing tools and services.</p>
+<h3 id="incomplete-spans-attributes">Incomplete spans attributes</h3>
+<p>We are planning to add more detailed attributes on each span. You can find a complete list of what is already instrumented <a href="/workers/observability/traces/spans-and-attributes">here</a>.</p>
+<p>Your feedback on any missing information will help us prioritize additions and changes. Please comment on the <a href="https://github.com/cloudflare/workers-sdk/discussions/11062">Workers tracing GitHub discussion</a>
+if specific attributes would be helpful to use tracing effectively.</p>
+<h3 id="span-and-attribute-names-subject-to-change">Span and attribute names subject to change</h3>
+<p>As Workers tracing is currently in beta, span names and attribute names are not yet finalized. We may refine these names during the beta period to improve clarity and align with OpenTelemetry semantic conventions. We recommend reviewing the <a href="/workers/observability/traces/spans-and-attributes">spans and attributes documentation</a> periodically for updates.</p>
+<h3 id="known-bugs-and-other-call-outs">Known bugs and other call outs</h3>
+<ul>
+<li>There are currently are a few attributes that only apply to some spans (e.g.<code>service.name</code>, <code>faas.name</code>). When filtering or grouping by the Worker name across traces and logs, use <code>$metadata.service</code> instead, as it will apply consistently across all event types.</li>
+<li>While a trace is in progress, the event will show <code>Trace in Progress</code> on the root span. Please wait a few moments for the full trace to become available</li>
+</ul>

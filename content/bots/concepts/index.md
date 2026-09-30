@@ -1,0 +1,2 @@
+<p>Refer to the following pages for more information on bot concepts:</p>
+<ul class="directory-listing"><li><a href="/bots/concepts/bot/">Bots</a></li><li><a href="/bots/concepts/bot-score/">Bot scores</a></li><li><a href="/bots/concepts/bot-tags/">Bot tags</a></li><li><a href="/bots/concepts/feedback-loop/">Bot Feedback Loop</a></li><li><a href="/bots/concepts/bot-detection-engines/">Bot detection engines</a></li></ul>

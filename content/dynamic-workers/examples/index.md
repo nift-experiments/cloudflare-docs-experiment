@@ -1,0 +1,2 @@
+<p>These examples show how teams use Dynamic Workers to run code safely, bundle dependencies, and return results to an application or agent.</p>
+<ul class="directory-listing"><li><a href="/dynamic-workers/examples/dynamic-workers-starter/">Dynamic Workers Starter</a></li><li><a href="/dynamic-workers/examples/dynamic-workers-playground/">Dynamic Workers Playground</a></li><li><a href="/dynamic-workers/examples/codemode/">Code Mode Example</a></li><li><a href="/dynamic-workers/examples/dynamic-workflows-playground/">Dynamic Workflows Playground</a></li></ul>

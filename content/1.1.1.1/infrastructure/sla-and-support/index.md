@@ -1,0 +1,4 @@
+<p>As you use 1.1.1.1 in your infrastructure or service, note that dedicated technical support is limited.</p>
+<p>You are subject to the <a href="https://www.cloudflare.com/website-terms/">Cloudflare Website and Online Services Terms of Use</a> and no service level agreements (SLAs) are provided.</p>
+<p>If you need SLAs and dedicated support, consider using <a href="/cloudflare-one/traffic-policies/">Cloudflare Gateway</a> instead. Gateway adds policy-based DNS filtering and management.</p>
+<p>Gateway includes other advanced options such as domain categories, customized filtering, and scheduling capabilities. For example, if you are a device manufacturer or network operator, you can use a multi-tenant environment — where a single deployment serves multiple separate customers — to allow your customers to configure their own individual filters.</p>

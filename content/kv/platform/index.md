@@ -1,0 +1,1 @@
+<ul class="directory-listing"><li><a href="/kv/platform/pricing/">Pricing</a></li><li><a href="/kv/platform/limits/">Limits</a></li><li><a href="/workers/platform/storage-options/">Choose a data or storage product</a></li><li><a href="/kv/platform/release-notes/">Release notes</a></li><li><a href="/kv/platform/event-subscriptions/">Event subscriptions</a></li></ul>

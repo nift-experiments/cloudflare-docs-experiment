@@ -1,0 +1,10 @@
+<div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
+<div class="changelog-tools"><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
+<article class="changelog-detail"><a href="/changelog/">← Back to all posts</a>
+<time>September 26, 2025</time><h2 id="post-title">Automatic loopback bindings via ctx.exports</h2>
+<div class="changelog-badges"><span>workers</span></div><div class="changelog-body"><p>The <a href="/workers/runtime-apis/context/#exports"><code>ctx.exports</code> API</a> contains automatically-configured bindings corresponding to your Worker's top-level exports. For each top-level export extending <code>WorkerEntrypoint</code>, <code>ctx.exports</code> will contain a <a href="/workers/runtime-apis/bindings/service-bindings">Service Binding</a> by the same name, and for each export extending <code>DurableObject</code> (and for which storage has been configured via a <a href="/durable-objects/reference/durable-objects-migrations/">migration</a>), <code>ctx.exports</code> will contain a <a href="/durable-objects/api/namespace/">Durable Object namespace binding</a>. This means you no longer have to configure these bindings explicitly in <code>wrangler.jsonc</code>/<code>wrangler.toml</code>.</p>
+<p>Example:</p>
+<pre><code class="language-js">import { WorkerEntrypoint } from &quot;cloudflare:workers&quot;;&#10;&#10;export class Greeter extends WorkerEntrypoint {&#10;  greet(name) {&#10;    return `Hello, ${name}!`;&#10;  }&#10;}&#10;&#10;export default {&#10;  async fetch(request, env, ctx) {&#10;    let greeting = await ctx.exports.Greeter.greet(&quot;World&quot;)&#10;    return new Response(greeting);&#10;  }&#10;}&#10;</code></pre>
+<p>At present, you must use <a href="/workers/configuration/compatibility-flags#enable-ctxexports">the <code>enable_ctx_exports</code> compatibility flag</a> to enable this API, though it will be on by default in the future.</p>
+<p><a href="/workers/runtime-apis/context/#exports">See the API reference for more information.</a></p>
+</div></article></div>

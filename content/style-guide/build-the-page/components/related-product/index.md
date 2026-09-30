@@ -1,0 +1,4 @@
+<p>The <code>&lt;RelatedProduct&gt;</code> component lists products related or connected to the current product.</p>
+<p>The header parameter is the name of the product and the href parameter links to the product. The product parameter defines the product icon to use based on the slugified name.</p>
+<p>Use in Overview pages.</p>
+<pre><code class="language-mdx">import { RelatedProduct } from &quot;~/components&quot;;&#10;&#10;&lt;RelatedProduct header=&quot;R2&quot; href=&quot;/r2/&quot; product=&quot;r2&quot;&gt;&#10;    Store large amounts of unstructured data without the costly egress bandwidth fees associated with typical cloud storage services.&#10;&lt;/RelatedProduct&gt;&#10;&#10;&lt;RelatedProduct header=&quot;Images&quot; href=&quot;/images/&quot; product=&quot;images&quot;&gt;&#10;    A suite of products tailored to your image-processing needs.&#10;&lt;/RelatedProduct&gt;&#10;</code></pre>

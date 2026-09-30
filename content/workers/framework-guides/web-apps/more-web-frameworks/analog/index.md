@@ -1,0 +1,31 @@
+<p>In this guide, you will create a new <a href="https://analogjs.org/">Analog</a> application and deploy to Cloudflare Workers.</p>
+<p><a href="https://analogjs.org/">Analog</a> is a fullstack meta-framework for Angular, powered by <a href="https://vitejs.dev/">Vite</a> and <a href="https://nitro.unjs.io/">Nitro</a>.</p>
+<aside class="nb-aside tip">
+<h3 class="nb-aside-title" id="already-have-an-analog-project">Already have an Analog project?</h3>
+@markup("md", "content/.markup/bodies/16986.md")
+</aside>
+<div class="nb-interactive-component" data-cf-component="AutoconfigDiagram"></div>
+<h2 id="1-set-up-a-new-project"><ol>
+<li>Set up a new project</li>
+</ol></h2>
+<p>Use the <a href="https://www.npmjs.com/package/create-cloudflare"><code>create-cloudflare</code></a> CLI (C3) to set up a new project. C3 will create a new project directory, initiate Analog's official setup tool, and provide the option to deploy instantly.</p>
+<p>To use <code>create-cloudflare</code> to create a new Analog project, run the following command:</p>
+<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre><code data-nb-pm-code>npm create cloudflare@latest -- my-analog-app --framework=analog</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm create cloudflare@latest -- my-analog-app --framework=analog" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>yarn create cloudflare my-analog-app --framework=analog</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn create cloudflare my-analog-app --framework=analog" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>pnpm create cloudflare@latest my-analog-app --framework=analog</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm create cloudflare@latest my-analog-app --framework=analog" aria-label="Copy to clipboard">Copy</button></div></div>
+<p>After setting up your project, change your directory by running the following command:</p>
+<pre><code class="language-sh">cd my-analog-app&#10;</code></pre>
+<h2 id="2-develop-locally"><ol start="2">
+<li>Develop locally</li>
+</ol></h2>
+<p>After you have created your project, run the following command in the project directory to start a local server. This will allow you to preview your project locally during development.</p>
+<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre><code data-nb-pm-code>npm run dev</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm run dev" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>yarn run dev</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn run dev" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>pnpm run dev</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm run dev" aria-label="Copy to clipboard">Copy</button></div></div>
+<h2 id="3-deploy-your-project"><ol start="3">
+<li>Deploy your Project</li>
+</ol></h2>
+<p>Your project can be deployed to a <code>*.workers.dev</code> subdomain or a <a href="/workers/configuration/routing/custom-domains/">Custom Domain</a>, from your own machine or from any CI/CD system, including <a href="/workers/ci-cd/builds/">Cloudflare's own</a>.</p>
+<p>The following command will build and deploy your project. If you're using CI, ensure you update your <a href="/workers/ci-cd/builds/configuration/#build-settings">&quot;deploy command&quot;</a> configuration appropriately.</p>
+<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre><code data-nb-pm-code>npm run deploy</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm run deploy" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>yarn run deploy</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn run deploy" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>pnpm run deploy</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm run deploy" aria-label="Copy to clipboard">Copy</button></div></div>
+<hr />
+<h2 id="bindings">Bindings</h2>
+<p>Your Analog application can be fully integrated with the Cloudflare Developer Platform, in both local development and in production, by using product bindings. The <a href="https://nitro.unjs.io/deploy/providers/cloudflare#direct-access-to-cloudflare-bindings">Nitro documentation</a> provides information about configuring bindings and how you can access them in your Analog API routes.</p>
+<p>With bindings, your application can be fully integrated with the Cloudflare Developer Platform, giving you access to compute, storage, AI and more.</p>
+<p><a class="nb-card nb-link-card" href="/workers/runtime-apis/bindings/"><h3 id="card-bindings-workers-runtime-apis-bindings">Bindings</h3><p>Access to compute, storage, AI and more.</p></a></p>

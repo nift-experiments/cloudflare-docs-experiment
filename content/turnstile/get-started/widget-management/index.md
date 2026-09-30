@@ -1,0 +1,2 @@
+<p>Refer to the following pages for more information about managing Turnstile widgets:</p>
+<ul class="directory-listing"><li><a href="/turnstile/get-started/widget-management/dashboard/">Create and manage widgets using the Cloudflare dashboard</a></li><li><a href="/turnstile/get-started/widget-management/api/">Create and manage widgets using Cloudflare API</a></li><li><a href="/turnstile/get-started/widget-management/terraform/">Create and manage widgets using Terraform</a></li></ul>

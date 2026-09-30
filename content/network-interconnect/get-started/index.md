@@ -1,0 +1,216 @@
+<aside class="nb-aside note">
+<h3 class="nb-aside-title" id="bgp-architecture-and-resiliency">BGP architecture and resiliency</h3>
+@markup("md", "content/.markup/bodies/707.md")
+</aside>
+<h2 id="prerequisites">Prerequisites</h2>
+<h3 id="cni-port-availability">CNI port availability</h3>
+<p>Your Cloudflare account team determines CNI eligibility and port availability. Notably:</p>
+<ul>
+<li>CNI ports are currently offered at no charge to Enterprise customers.
+<ul>
+<li>Non-Enterprise customers (and any third party) may peer with Cloudflare via Internet Exchange according to our <a href="https://www.cloudflare.com/peering-policy/">open peering policy</a>.</li>
+</ul>
+</li>
+<li>CNI is available at select Cloudflare data centers:
+<ul>
+<li>The type of Dataplane offered in that location will determine specifications of the supported connection, such as the MTU.</li>
+<li>The diversity offered in the location will vary.</li>
+</ul>
+</li>
+<li>Customers must have a BGP session established for CNI v1 to be operational.</li>
+</ul>
+<h3 id="prefix-requirements">Prefix requirements</h3>
+<p>To peer with Cloudflare, advertise prefixes with a prefix length of <code>/24</code> or shorter for IPv4 and <code>/48</code> or shorter for IPv6.</p>
+<h2 id="product-use-cases">Product use cases</h2>
+<p>CNI provides a private point-to-point IP connection with Cloudflare. There are two Dataplanes that come with different technical specifications.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Dataplane v1</th>
+<th>Dataplane v2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Magic Transit Direct Server Return (DSR)</strong> <br /> Distributed Denial of Service (DDoS) protection for all ingress traffic from the Internet to your public network. Send egress traffic via your ISP.</td>
+<td>Supported with or without a GRE tunnel established over the interconnect circuit.</td>
+<td>Supported.</td>
+</tr>
+<tr>
+<td><strong>Magic Transit with Egress</strong> <br /> DDoS protection for all ingress traffic from the Internet to your public network. Send egress traffic via Cloudflare.</td>
+<td>Supported with a GRE tunnel established over the interconnect circuit.</td>
+<td>Supported.</td>
+</tr>
+<tr>
+<td><strong>Cloudflare WAN and Zero Trust</strong>  <br /> Build a secure, private network backbone connecting your Zero Trust users and applications with all your sites, data centers, and clouds.</td>
+<td>Supported with a GRE tunnel established over the interconnect circuit.</td>
+<td>Supported.</td>
+</tr>
+<tr>
+<td><strong>Peering</strong> <br /> Exchange public routes with a single Cloudflare PoP (Point of Presence).</td>
+<td>Supported. <br /><br /> All customers connecting with the edge data center will exchange public routes at that PoP with AS13335. Connectivity is established at each individual PoP. Routes for other edge locations in Cloudflare's network may not be available. Routes for customer-advertised prefixes will be available only in the connected PoP.</td>
+<td>Not supported.</td>
+</tr>
+<tr>
+<td><strong>Application Security and Performance</strong> <br /> Improve the performance and security of your web applications</td>
+<td><strong>Supported via peering</strong>: Customers can use Argo Smart Routing to direct origin traffic via the edge peering connection when it is determined to be the lowest latency option. Customers must maintain a direct Internet connection which will always be used for a portion of traffic and during failure scenarios. <br /> <strong>Supported Via Magic Transit</strong>: Customers may configure any product with an origin server IP address that is protected by Magic Transit. Magic Transit will direct this traffic via the overlay and customer can control interconnect next-hops using the Magic Transit Virtual Network routing table.</td>
+<td>When the origin IPs are behind Magic Transit over a CNI v2, all Cloudflare services that work with public origins (like Load Balancer, WAF, Cache) will run over the CNI.</td>
+</tr>
+</tbody>
+</table>
+<p>For more details refer to the <a href="/network-interconnect/get-started/#prerequisites">prerequisites section</a>.</p>
+<h2 id="technical-specifications">Technical specifications</h2>
+<ul>
+<li><strong>Supported port types</strong>:
+<ul>
+<li><strong>Dataplane v1</strong>: 10GBASE-LR (single-mode fiber) and 100GBASE-LR (single-mode fiber).</li>
+<li><strong>Dataplane v2</strong>: 10GBASE-LR (single-mode fiber) and 100GBASE-LR4 (single-mode fiber) optics are supported.</li>
+</ul>
+</li>
+<li><strong>Distance limitations:</strong> Cloudflare does not support optical links longer than 10 km. For longer distances, you must use intermediate hardware or a third-party provider to extend the connection.</li>
+<li><strong>IP addressing:</strong> All CNI connections and Partner CNI connections use a <code>/31</code> subnet for point-to-point IP connectivity between your router and Cloudflare.</li>
+<li><strong>VLAN support:</strong>
+<ul>
+<li><strong>Dataplane v1</strong>: CNI ports may be assigned a single 802.1Q VLAN tag.</li>
+<li><strong>Dataplane v2</strong>: VLAN tagging (802.1Q) and QinQ are not yet supported.</li>
+</ul>
+</li>
+<li><strong>MTU considerations:</strong>
+<ul>
+<li><strong>Dataplane v1</strong>: Supports a native 1,500-byte MTU for traffic from Cloudflare to you (ingress), but still requires a 1,476-byte MTU for traffic from you to Cloudflare (egress).</li>
+<li><strong>Dataplane v2</strong>: Supports a maximum MTU of 1,500 bytes bidirectionally with no GRE requirement.</li>
+</ul>
+</li>
+<li><strong>Bidirectional Forwarding Detection (BFD):</strong>
+<ul>
+<li><strong>Dataplane v1</strong>: BFD provides fast failure detection for BGP sessions and is supported on direct connections. To enable BFD, contact your account team. Note that BFD on a CNI does not impact the failover time for IPsec/GRE tunnels, which rely on separate health checks.</li>
+<li><strong>Dataplane v2</strong>: Not yet supported.</li>
+</ul>
+</li>
+<li><strong>Link Aggregation Control Protocol (LACP)</strong>:
+<ul>
+<li><strong>Dataplane v1</strong>: To increase bandwidth and provide link resiliency, Cloudflare supports combining multiple physical CNI ports into a single logical channel using Link Aggregation Control Protocol (LACP). You can bundle multiple connections to increase total throughput and add redundancy to your private connection with Cloudflare.</li>
+<li><strong>Dataplane v2</strong>: Not yet supported. Use ECMP instead.</li>
+</ul>
+</li>
+</ul>
+<h2 id="performance-characteristics">Performance characteristics</h2>
+<p>The following are the maximum throughput rates supported by the CNI connection. Actual performance will depend on your specific use case and configuration.</p>
+<table>
+<thead>
+<tr>
+<th>Direction (use case)</th>
+<th>10G Circuit</th>
+<th>100G Circuit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>From Cloudflare to Customer (all use cases)</td>
+<td>Up to 10 Gbps</td>
+<td>Up to 100 Gbps</td>
+</tr>
+<tr>
+<td>From Customer to Cloudflare (peering use case)</td>
+<td>Up to 10 Gbps</td>
+<td>Up to 100 Gbps</td>
+</tr>
+<tr>
+<td>From Customer to Cloudflare (Magic Transit/WAN)</td>
+<td><strong>v1</strong>: Up to 1 Gbps per GRE tunnel over the CNI <br /> <strong>v2</strong>: Up to 1 Gbps per CNI connection</td>
+<td><strong>v1</strong>: Up to 1 Gbps per GRE tunnel over the CNI <br /> <strong>v2</strong>: Up to 1 Gbps per CNI connection</td>
+</tr>
+</tbody>
+</table>
+<h2 id="service-expectations">Service expectations</h2>
+<p>Consider the following service levels when planning your deployment:</p>
+<ul>
+<li><strong>No Formal SLA</strong>:
+<ul>
+<li>CNI is currently offered at no charge and without a formal <a href="https://www.cloudflare.com/service-specific-terms-network-services/#cf-network-interconnect-terms">Service Level Agreement (SLA)</a>.</li>
+<li>Cloudflare will work to restore CNI service in the event of a Cloudflare issue. In some Cloudflare data centers the recovery time could be several days. Therefore, we always recommend backup connectivity to a different device or via an Internet tunnel.</li>
+</ul>
+</li>
+<li><strong>Observability</strong>: There is no visibility of the interconnect config/status within the Cloudflare dashboard.</li>
+<li><strong>Availability</strong>: Locations that support device-level diversity can maintain connectivity during maintenance when your connections terminate on separate devices. Single-device deployments will experience full service disruption during maintenance.</li>
+<li><strong>Backup Connectivity</strong>: You are required to maintain alternative Internet connectivity as a backup for all CNI implementations.</li>
+<li><strong>Capacity planning</strong>: You are responsible for capacity planning across your available links to Cloudflare, based on the topology and size of those links.</li>
+</ul>
+<h2 id="location-alignment">Location alignment</h2>
+<h3 id="available-locations">Available locations</h3>
+<p>Direct connections are available at any Cloudflare data center where you are also located. Make sure to check whether the location of interest has the right dataplane version and diversity requirements for your use case. Refer to <a href="/network-interconnect/locations/">available locations</a> for details.</p>
+<h3 id="connectivity-partners">Connectivity partners</h3>
+<p>Cloudflare partners with leading global providers, including: Console Connect, CoreSite, Digital Realty, Equinix Fabric, Megaport, PacketFabric, and Zayo.</p>
+<h2 id="end-to-end-implementation-workflow">End-to-end implementation workflow</h2>
+<p>The process of provisioning a CNI typically takes two to four weeks, depending on the complexity of implementation and third-party provider timelines. The most common delays occur during the physical connection phase, which is outside of Cloudflare's direct control.</p>
+<ol>
+<li><strong>Submit request</strong>: Work with your account team to create a CNI request ticket, providing your desired CNI type, location, use case, and technical details. An Implementation Manager will be assigned to guide the process.</li>
+<li><strong>Review configuration</strong>: For the v1 Dataplane, the Implementation Manager will provide a detailed configuration document covering IP addressing, VLANs, and other technical specifications. You must review and approve this document. For the v2 Dataplane, this step is not necessary.</li>
+<li><strong>Order connection</strong>:
+<ul>
+<li>For a <strong>Direct Interconnect</strong>, you will receive a Letter of Authorization (LOA) from Cloudflare to order the physical cross-connect from the data center facility operator.</li>
+<li>For a <strong>Partner Interconnect</strong>, you will use the provided details to order a virtual circuit from the partner's portal.</li>
+</ul>
+</li>
+<li><strong>Configure network</strong>: Both Cloudflare and your network team will configure the respective network devices according to the approved document.</li>
+<li><strong>Test and verify</strong>: Once the connection is physically established, teams will perform basic connectivity tests (for example, ping) and, if applicable, verify that the BGP session can be established.</li>
+<li>Enable tunnel health checks for <a href="/magic-transit/how-to/configure-tunnel-endpoints/#add-tunnels">Magic Transit</a> and/or <a href="/cloudflare-wan/configuration/how-to/configure-tunnel-endpoints/#add-tunnels">Cloudflare WAN</a>.</li>
+<li><strong>Activate services</strong>: Configure your Cloudflare products (for example, Magic Transit) to route traffic over the new CNI. The Implementation Manager will verify end-to-end traffic flow before marking the deployment as complete.</li>
+<li><a href="/network-interconnect/monitoring-and-alerts/#enable-cloudflare-status-maintenance-notification">Add maintenance notifications</a>.</li>
+</ol>
+<h2 id="how-to-guides">How-to guides</h2>
+<h3 id="provision-a-direct-interconnect">Provision a Direct Interconnect</h3>
+<ol>
+<li><strong>Project Kickoff</strong>: In an initial kickoff call, you will confirm the scope and timeline with Cloudflare. Be prepared to provide the following information:
+<ul>
+<li>desired colocation facility</li>
+<li>required port speeds (10G or 100G)</li>
+<li>BGP ASN for Peering/Magic Transit</li>
+<li>BGP password (optional)</li>
+</ul>
+</li>
+<li><strong>Order Cross-Connect</strong>: Cloudflare will issue a Letter of Authorization (LOA). This document grants you permission to order a physical cross-connect between your equipment and a specific port on Cloudflare's hardware within the data center. The end-to-end process for ordering a cross-connect can take one to two weeks or more, depending on the facility provider. Cloudflare's demarcation is the port that is specified in the LOA. You are responsible for the deployment, provisioning, and ongoing support and operation of this connection, and the commercial relationships with the facility provider and any third-party connectivity providers.</li>
+</ol>
+<h3 id="provision-a-partner-interconnect">Provision a Partner Interconnect</h3>
+<p>Cloudflare partners with leading connectivity providers globally. To provision a Partner Interconnect, you will initiate a connection request from your chosen provider's administrative portal. Cloudflare will then review and accept the request to activate the virtual circuit.</p>
+<h3 id="provision-a-cloud-interconnect">Provision a Cloud Interconnect</h3>
+<p>Enterprise customers using Cloudflare WAN can get started with Cloud Interconnect by contacting their account team.</p>
+<h4 id="aws-direct-connect-beta">AWS Direct Connect (beta)</h4>
+<p>If you are a Cloudflare WAN customer, you can connect to <a href="https://docs.aws.amazon.com/directconnect/">AWS Direct Connect</a> using Cloud Interconnect. Cloud Interconnect supports AWS Dedicated Direct Connect, which provides a full physical port allocation in AWS. AWS Hosted Direct Connect is not yet supported.</p>
+<p>For your AWS Dedicated Direct Connect, you can choose between connection speeds of 10 Gbps or 1 Gbps.</p>
+<p>To connect to AWS Direct Connect:</p>
+<ol>
+<li>Contact your account team to start the Cloud Interconnect provisioning process. Your team will let you know of available interconnect locations so you can choose the best one for you, as well as all the details involved in this process.</li>
+<li>Log in to your AWS portal and order a Direct Connect.</li>
+<li>AWS will provide you a Letter of Authorization (LOA) and a VLAN ID that you need to send to your account team.</li>
+<li>Your account team will continue the process of provisioning your Cloud Interconnect with the AWS documents you have provided. Overall, this process should take around four weeks to finish.</li>
+</ol>
+<h4 id="google-cloud-interconnect">Google Cloud Interconnect</h4>
+<ol>
+<li>In the Cloudflare dashboard, go to <strong>Interconnects</strong>.</li>
+</ol>
+<div class="nb-dash-button"></div>
+<ol start="2">
+<li>Select <strong>Create an interconnect</strong>.</li>
+<li>Under <strong>Cloud Interconnect</strong>, select <strong>Create new</strong>.</li>
+<li>Under <strong>Google Integration</strong>, select <strong>Select integration</strong>.</li>
+<li>Give your interconnect a name and optionally a description. Make sure the MTU value matches the MTU configured on the <a href="https://cloud.google.com/network-connectivity/docs/interconnect/how-to/dedicated/creating-vlan-attachments">GCP VLAN attachment</a>.</li>
+<li>Select <strong>Continue</strong>.</li>
+<li>From the <strong>Interface speed</strong> drop-down menu, select an interface speed. GCP will charge you based on the speed of the interconnect that you choose.</li>
+<li>Enter your <a href="https://cloud.google.com/network-connectivity/docs/interconnect/how-to/partner/creating-vlan-attachments">VLAN attachment pairing key</a>.</li>
+<li>Select <strong>Continue</strong>.</li>
+<li>Review the details you provided, and select <strong>Confirm order</strong>.</li>
+</ol>
+<p>Your Google Cloud Platform (GCP) interconnect will take a few minutes to be available. A BGP session will be established but no routes will be exchanged.</p>
+<h4 id="gcp-next-steps">GCP next steps</h4>
+<p>You can now select <strong>View interconnects</strong> for a list of all interconnects on your account. Select the interconnect name to show the interconnect details. The interconnect has a unique <strong>Interconnect ID</strong>.</p>
+<p>After you have configured your Google Cloud Interconnect, you will need to add routes to use the interconnect:</p>
+<ul>
+<li>To create routes in the Cloudflare Virtual Network routing table to direct traffic towards GCP:
+- Add <a href="/cloudflare-wan/configuration/how-to/configure-routes/#configure-static-routes">static routes</a> to your Cloudflare WAN routing table with <a href="/cloudflare-wan/configuration/how-to/configure-tunnel-endpoints/#legacy-bidirectional-health-checks">legacy bidirectional tunnel health checks</a> to detect failures and steer traffic to alternative paths.
+- Note that routes advertised by BGP from GCP Cloud Router will be ignored.</li>
+<li>To create routes in GCP routing table to direct traffic towards Cloudflare, you must use the GCP Cloud Router:
+- Add <a href="https://cloud.google.com/network-connectivity/docs/router/how-to/configure-custom-learned-routes">custom learned routes to Cloud Router</a>.
+- Use the BGP session. Reach out to your account team to request a list of one or more prefixes to advertise, and specify the interconnect ID you want to advertise over.</li>
+</ul>

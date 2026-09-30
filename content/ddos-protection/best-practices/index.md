@@ -1,0 +1,2 @@
+<p>Refer to the following pages for more information on DDoS protection best practices:</p>
+<ul class="directory-listing"><li><a href="/ddos-protection/best-practices/third-party/">Third-party services and DDoS protection</a></li><li><a href="/ddos-protection/best-practices/proactive-defense/">Proactive DDoS defense</a></li><li><a href="/learning-paths/prevent-ddos-attacks/concepts/">Prevent DDoS attacks</a></li></ul>

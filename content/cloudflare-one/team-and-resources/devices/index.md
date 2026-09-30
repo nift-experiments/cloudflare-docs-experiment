@@ -1,0 +1,2 @@
+<p>Configure devices to send DNS queries to Cloudflare, or proxy all traffic leaving the device through Cloudflare's network.</p>
+<ul class="directory-listing"><li><a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/">Cloudflare One Client</a></li><li><a href="/cloudflare-one/team-and-resources/devices/user-side-certificates/">User-side certificates</a></li><li><a href="/cloudflare-one/team-and-resources/devices/device-registration/">Device registration</a></li></ul>

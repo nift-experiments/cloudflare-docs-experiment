@@ -17,18 +17,28 @@ class QuietHandler(http.server.SimpleHTTPRequestHandler):
         pass
 
 
-def run(public: pathlib.Path):
-    handler = functools.partial(QuietHandler, directory=public)
-    server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), handler)
-    thread = threading.Thread(target=server.serve_forever, daemon=True)
-    thread.start()
-    base = f'http://127.0.0.1:{server.server_port}'
+def run(public: pathlib.Path | None, base: str | None = None,
+        chromium_executable: str | None = None, provenance=None):
+    server = thread = None
+    if base is None:
+        handler = functools.partial(QuietHandler, directory=public)
+        server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), handler)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        base = f'http://127.0.0.1:{server.server_port}'
+    base = base.rstrip('/')
     checks = []
     console_errors = []
 
     try:
         with sync_playwright() as playwright:
-            browser = playwright.chromium.launch(headless=True, args=['--no-sandbox'])
+            launch_args = ['--no-sandbox']
+            if base.startswith('http://') and not base.startswith('http://127.0.0.1'):
+                launch_args.append(f'--unsafely-treat-insecure-origin-as-secure={base}')
+            launch = {'headless': True, 'args': launch_args}
+            if chromium_executable:
+                launch['executable_path'] = chromium_executable
+            browser = playwright.chromium.launch(**launch)
             context = browser.new_context(viewport={'width': 1440, 'height': 900})
             context.grant_permissions(['clipboard-read', 'clipboard-write'], origin=base)
             page = context.new_page()
@@ -54,8 +64,8 @@ def run(public: pathlib.Path):
             checks.append('theme cycle/persistence')
 
             expect(page.locator('[data-nb-toc-list] a')).not_to_have_count(0)
-            page.locator('[data-copy-page]').click()
-            expect(page.locator('[data-copy-page-status]')).to_contain_text('copied')
+            page.locator('[data-copy-page]:visible').first.click()
+            expect(page.locator('[data-copy-page-status]:visible').first).to_contain_text('copied')
             checks.append('generated TOC/page Markdown copy')
 
             page.keyboard.press('Control+k')
@@ -101,6 +111,14 @@ def run(public: pathlib.Path):
             mobile = browser.new_context(viewport={'width': 390, 'height': 844})
             mobile_page = mobile.new_page()
             mobile_page.goto(base + '/workers/get-started/guide/', wait_until='networkidle')
+            expect(mobile_page.locator('[data-article-tools]')).to_be_visible()
+            expect(mobile_page.locator('[data-mobile-toc]')).to_be_visible()
+            mobile_geometry = mobile_page.evaluate('''() => {
+              const box = (selector) => document.querySelector(selector).getBoundingClientRect();
+              return {h1: box('h1'), tools: box('[data-article-tools]'), toc: box('[data-mobile-toc]')};
+            }''')
+            assert mobile_geometry['tools']['top'] >= mobile_geometry['h1']['bottom']
+            assert mobile_geometry['toc']['top'] >= mobile_geometry['tools']['bottom']
             mobile_page.locator('[data-menu-btn]').click()
             expect(mobile_page.locator('[data-mobile-sidebar]')).to_be_visible()
             expect(mobile_page.locator('[data-mobile-sidebar] [data-shared-sidebar-nav]')).to_be_visible()
@@ -109,20 +127,64 @@ def run(public: pathlib.Path):
             expect(mobile_page.locator('[data-sidebar-home] [data-shared-sidebar-nav]')).to_have_count(1)
             checks.append('mobile navigation open/close/restore')
             mobile.close()
+
+            tablet = browser.new_context(viewport={'width': 768, 'height': 1024})
+            tablet_page = tablet.new_page()
+            tablet_page.goto(base + '/workers/get-started/guide/', wait_until='networkidle')
+            expect(tablet_page.locator('.top-nav')).to_be_visible()
+            expect(tablet_page.locator('[data-menu-btn]')).not_to_be_visible()
+            expect(tablet_page.locator('[data-sidebar-home]')).not_to_be_visible()
+            expect(tablet_page.locator('[data-article-tools]')).to_be_visible()
+            expect(tablet_page.locator('[data-mobile-toc]')).to_be_visible()
+            tablet_geometry = tablet_page.evaluate('''() => {
+              const box = (selector) => document.querySelector(selector).getBoundingClientRect();
+              return {h1: box('h1'), tools: box('[data-article-tools]'), toc: box('[data-mobile-toc]'),
+                overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth};
+            }''')
+            assert tablet_geometry['tools']['top'] >= tablet_geometry['h1']['bottom']
+            assert tablet_geometry['toc']['top'] >= tablet_geometry['tools']['bottom']
+            assert not tablet_geometry['overflow']
+            checks.append('tablet navigation breakpoint')
+            tablet.close()
+
+            sidebar_breakpoint = browser.new_context(viewport={'width': 1024, 'height': 900})
+            sidebar_page = sidebar_breakpoint.new_page()
+            sidebar_page.goto(base + '/workers/get-started/guide/', wait_until='networkidle')
+            expect(sidebar_page.locator('[data-sidebar-home]')).to_be_visible()
+            expect(sidebar_page.locator('[data-menu-btn]')).not_to_be_visible()
+            checks.append('sidebar breakpoint')
+            sidebar_breakpoint.close()
             context.close()
             browser.close()
     finally:
-        server.shutdown()
-        thread.join()
+        if server:
+            server.shutdown()
+            thread.join()
 
     if console_errors:
         raise AssertionError('browser console errors: ' + json.dumps(console_errors))
-    print(json.dumps({'checks': checks, 'console_errors': console_errors}, indent=2))
+    print(json.dumps({'base': base, 'candidateProvenance': provenance,
+                      'checks': checks, 'console_errors': console_errors}, indent=2))
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--public', type=pathlib.Path,
                         default=pathlib.Path(__file__).resolve().parents[1] / 'public')
+    parser.add_argument('--base')
+    parser.add_argument('--chromium-executable')
+    parser.add_argument('--candidate-provenance', type=pathlib.Path)
+    parser.add_argument('--deployment-attestation', type=pathlib.Path)
     args = parser.parse_args()
-    run(args.public.resolve())
+    provenance = (json.loads(args.candidate_provenance.read_text())
+                  if args.candidate_provenance else None)
+    if bool(args.candidate_provenance) != bool(args.deployment_attestation):
+        parser.error('--candidate-provenance and --deployment-attestation must be used together')
+    if args.deployment_attestation:
+        attestation = json.loads(args.deployment_attestation.read_text())
+        if not attestation.get('verified') or attestation.get('candidateProvenance') != provenance:
+            parser.error('deployment attestation does not verify candidate provenance')
+        if not args.base or attestation.get('url', '').rstrip('/') != args.base.rstrip('/'):
+            parser.error('deployment attestation URL mismatch')
+    run(args.public.resolve() if not args.base else None, args.base,
+        args.chromium_executable, provenance)

@@ -1,0 +1,1 @@
+<ul class="directory-listing"><li><a href="/reference-architecture/diagrams/iot/optimizing-and-securing-connected-transportation-systems/">Optimizing and securing connected transportation systems</a></li></ul>

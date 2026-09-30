@@ -1,0 +1,22 @@
+<p>SCIM (System for Cross-domain Identity Management) activity logs allow administrators to audit how <a href="/cloudflare-one/team-and-resources/users/scim/">SCIM provisioning</a> events in an identity provider (such as create, update, and delete) affect a user's identity and group membership in Zero Trust. You can compare your Zero Trust SCIM logs with your identity provider's SCIM logs to track how identity data is shared between the two services and pinpoint the source of any provisioning errors.</p>
+<h2 id="view-scim-logs">View SCIM logs</h2>
+<p>For an overview of SCIM events across all users, log in to the <a href="https://dash.cloudflare.com/">Cloudflare dashboard</a> and go to <strong>Zero Trust</strong> &gt; <strong>Insights</strong> &gt; <strong>Logs</strong> &gt; <strong>SCIM provisioning logs</strong>. This page lists the inbound SCIM requests that your identity providers have sent to Cloudflare. You can select an individual request to view more details about the SCIM operation.</p>
+<p>To investigate how SCIM events impacted a specific user, go to their <a href="/cloudflare-one/team-and-resources/users/users/">User Registry identity</a>. View their last seen identity and group memberships, and track how their identity has changed over time.</p>
+<aside class="nb-aside note">
+@markup("md", "content/.markup/bodies/4979.md")
+</aside>
+<h2 id="log-fields">Log fields</h2>
+<p>SCIM provisioning logs show the following information for each inbound SCIM request:</p>
+<ul>
+<li><strong>IdP name</strong>: Name of the identity provider that sent the request</li>
+<li><strong>Timestamp</strong>: Date and time of the request</li>
+<li><strong>Action</strong>: HTTP request method (<code>POST</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code>). <code>POST</code> indicates a resource was created, <code>PUT</code> indicates a full resource replacement, <code>PATCH</code> indicates a partial update, and <code>DELETE</code> indicates a resource was removed.</li>
+<li><strong>User email</strong>: User who received the SCIM identity update</li>
+<li><strong>Group name</strong>: Group that received the SCIM identity update</li>
+<li><strong>Resource type</strong>: Whether the request modified a group or a user (<code>GROUP</code> or <code>USER</code>)</li>
+<li><strong>CF resource ID</strong>: Persistent identifier for the user or group created by Cloudflare SCIM. Use this ID to look up the resource in Zero Trust.</li>
+<li><strong>IDP resource ID</strong>: Identifier for the user or group provided by the identity provider. Use this ID to match the log entry with the corresponding record in your identity provider.</li>
+<li><strong>Outcome</strong>: Whether the SCIM request was applied successfully (<code>SUCCESS</code> or <code>ERROR</code>)</li>
+<li><strong>Request body</strong>: HTTP request body containing the data that was added, modified, or removed</li>
+<li><strong>JSON log</strong>: SCIM request log in JSON format</li>
+</ul>

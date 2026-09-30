@@ -1,0 +1,16 @@
+<p>Each LAN interface (physical port + VLAN tag) on Cloudflare One Appliance (formerly Magic WAN Connector) is part of a <em>directly-attached subnet</em> — a subnet that the Appliance connects to directly. When you specify a static address for the LAN interface, you indicate both the interface's address and the subnet it attaches to. For example, <code>192.168.100.13/24</code> means the LAN interface has the IP address <code>192.168.100.13</code>, and is part of the subnet <code>192.168.100.0/24</code>.</p>
+<p>Some LANs have additional subnets behind Layer 3 routers that sit between those subnets and the Cloudflare One Appliance. These are routed subnets — the Appliance does not connect to them directly but can reach them through a next-hop router. You need to configure routed subnets so that Cloudflare installs the correct routes to forward traffic to the right Appliance and LAN interface.</p>
+<p>Refer to the following diagram for an example of how this might work:</p>
+<aside class="nb-aside note">
+@markup("md", "content/.markup/bodies/6979.md")
+</aside>
+<pre class="mermaid">&#10;&#10;	{`&#10;		flowchart TB&#10;		accTitle: Routed subnets&#10;		accDescr: Some LANs are complex, and might have additional subnets behind L3 routers.&#10;&#10;		a((WAN)) --> b&#10;&#10;		subgraph b [Cloudflare One Appliance]&#10;		direction TB&#10;		c(LAN 1)&#10;		d(LAN n)&#10;		end&#10;&#10;		c --- e(subnet x):::blue&#10;		d --- f(subnet 192.168.100.0/24):::blue&#10;&#10;		f---|192.168.100.10|g(Layer 3 router)&#10;&#10;		g --- h(routed subnet y):::red&#10;		g --- i(192.168.200.0/24):::red&#10;		g --- j(layer 3 router)&#10;		j --- k(routed subnet z):::red&#10;&#10;		classDef blue fill:#add8e6,color: black&#10;		classDef red fill:#ff6900,color: black&#10;	`}&#10;&#10;</pre>
+<br/>
+<p>To add a routed subnet to your LAN, you need:</p>
+<ul>
+<li><strong>A prefix</strong>: The subnet's CIDR prefix; Cloudflare will automatically install static routes to this prefix in our global network (to forward <a href="https://www.cloudflare.com/learning/network-layer/what-is-a-packet/">packets</a> for this subnet to the right Cloudflare One Appliance), and in your Cloudflare One Appliance (to forward packets for this subnet to the right LAN interface). In the figure above, the routed subnet in the center has the prefix <code>192.168.200.0/24</code>.</li>
+<li><strong>A next-hop address</strong>: The address of the L3 router to which the Cloudflare One Appliance should forward packets for this subnet. In the figure, the routed subnet in the center has the next-hop address <code>192.168.100.10</code>.</li>
+</ul>
+<p>Optionally, you can also <a href="/cloudflare-wan/configuration/appliance/network-options/nat-subnet/">enable NAT for a subnet</a> by providing a static overlay prefix.</p>
+<h2 id="create-routed-subnets">Create routed subnets</h2>
+<p>For instructions on creating routed subnets, refer to <strong>Create a LAN</strong> in either <a href="/cloudflare-wan/configuration/appliance/configure-hardware-appliance/#create-a-lan">Configure hardware Appliance</a> or <a href="/cloudflare-wan/configuration/appliance/configure-virtual-appliance/#create-a-lan">Configure Virtual Appliance</a>.</p>

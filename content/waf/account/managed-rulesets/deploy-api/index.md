@@ -1,0 +1,38 @@
+<aside class="nb-aside note">
+@markup("md", "content/.markup/bodies/15443.md")
+</aside>
+<p>Use the <a href="/ruleset-engine/rulesets-api/">Rulesets API</a> to deploy a WAF managed ruleset to the <code>http_request_firewall_managed</code> phase at the account level.</p>
+<p>The <a href="/waf/managed-rules/#available-managed-rulesets">WAF Managed Rules</a> page includes the IDs of the different WAF managed rulesets. You will need this information when deploying rulesets via API.</p>
+<p>If you are using Terraform, refer to <a href="/terraform/additional-configurations/waf-managed-rulesets/#deploy-managed-rulesets-at-the-account-level">WAF Managed Rules configuration using Terraform</a>.</p>
+<h2 id="example">Example</h2>
+<p>The following example deploys the <a href="/waf/managed-rules/reference/cloudflare-managed-ruleset/">Cloudflare Managed Ruleset</a> to the <code>http_request_firewall_managed</code> phase of a given account (<code>$ACCOUNT_ID</code>) by creating a rule that executes the managed ruleset. The rules in the managed ruleset are executed when the zone name matches one of <code>example.com</code> or <code>anotherexample.com</code>.</p>
+<ol>
+<li></li>
+</ol>
+<p>Invoke the <a href="/api/resources/rulesets/subresources/phases/methods/get/">Get an account entry point ruleset</a> operation to obtain the definition of the entry point ruleset for the <code>http_request_firewall_managed</code> phase. You will need the <a href="/fundamentals/account/find-account-and-zone-ids/">account ID</a> for this task.</p>
+<pre class="nb-api-request"><code class="language-bash">curl --request GET \&#10;  --url https://api.cloudflare.com/client/v4/accounts/{account_id}/rulesets/phases/{ruleset_phase}/entrypoint \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot;</code></pre>
+<pre><code class="language-json">{&#10;	&quot;result&quot;: {&#10;		&quot;description&quot;: &quot;Account-level phase entry point&quot;,&#10;		&quot;id&quot;: &quot;&lt;RULESET_ID&gt;&quot;,&#10;		&quot;kind&quot;: &quot;root&quot;,&#10;		&quot;last_updated&quot;: &quot;2024-03-16T15:40:08.202335Z&quot;,&#10;		&quot;name&quot;: &quot;root&quot;,&#10;		&quot;phase&quot;: &quot;http_request_firewall_managed&quot;,&#10;		&quot;rules&quot;: [&#10;			// ...&#10;		],&#10;		&quot;source&quot;: &quot;firewall_managed&quot;,&#10;		&quot;version&quot;: &quot;10&quot;&#10;	},&#10;	&quot;success&quot;: true,&#10;	&quot;errors&quot;: [],&#10;	&quot;messages&quot;: []&#10;}&#10;</code></pre>
+<ol start="2">
+<li></li>
+</ol>
+<p>If the entry point ruleset already exists (that is, if you received a <code>200 OK</code> status code and the ruleset definition), take note of the ruleset ID in the response. Then, invoke the <a href="/api/resources/rulesets/subresources/rules/methods/create/">Create an account ruleset rule</a> operation to add an <code>execute</code> rule to the existing ruleset deploying the <p><a href="/waf/managed-rules/reference/cloudflare-managed-ruleset/">Cloudflare Managed Ruleset</a> (with ID �CODE9�)</p>
+. By default, the rule will be added at the end of the list of rules already in the ruleset.</p>
+<pre class="nb-api-request"><code class="language-bash">curl --request POST \&#10;  --url https://api.cloudflare.com/client/v4/accounts/{account_id}/rulesets/{ruleset_id}/rules \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;action&quot;: &quot;execute&quot;,&#10;  &quot;action_parameters&quot;: {&#10;    &quot;id&quot;: &quot;efb7b8c949ac4650a09736fc376e9aee&quot;&#10;  },&#10;  &quot;expression&quot;: &quot;(cf.zone.name in {\&quot;example.com\&quot; \&quot;anotherexample.com\&quot;}) and cf.zone.plan eq \&quot;ENT\&quot;&quot;,&#10;  &quot;description&quot;: &quot;Execute the Cloudflare Managed Ruleset&quot;&#10;}&#x27;</code></pre>
+<pre><code class="language-json">{&#10;	&quot;result&quot;: {&#10;		&quot;id&quot;: &quot;&lt;RULESET_ID&gt;&quot;,&#10;		&quot;name&quot;: &quot;Account-level phase entry point&quot;,&#10;		&quot;description&quot;: &quot;&quot;,&#10;		&quot;kind&quot;: &quot;root&quot;,&#10;		&quot;version&quot;: &quot;11&quot;,&#10;		&quot;rules&quot;: [&#10;			// ... any existing rules&#10;			{&#10;				&quot;id&quot;: &quot;&lt;RULE_ID&gt;&quot;,&#10;				&quot;version&quot;: &quot;1&quot;,&#10;				&quot;action&quot;: &quot;execute&quot;,&#10;				&quot;action_parameters&quot;: {&#10;					&quot;id&quot;: &quot;efb7b8c949ac4650a09736fc376e9aee&quot;,&#10;					&quot;version&quot;: &quot;latest&quot;&#10;				},&#10;				&quot;expression&quot;: &quot;(cf.zone.name in {\&quot;example.com\&quot; \&quot;anotherexample.com\&quot;}) and cf.zone.plan eq \&quot;ENT\&quot;&quot;,&#10;				&quot;description&quot;: &quot;Execute the Cloudflare Managed Ruleset&quot;,&#10;				&quot;last_updated&quot;: &quot;2024-03-18T18:30:08.122758Z&quot;,&#10;				&quot;ref&quot;: &quot;&lt;RULE_REF&gt;&quot;,&#10;				&quot;enabled&quot;: true&#10;			}&#10;		],&#10;		&quot;last_updated&quot;: &quot;2024-03-18T18:30:08.122758Z&quot;,&#10;		&quot;phase&quot;: &quot;http_request_firewall_managed&quot;&#10;	},&#10;	&quot;success&quot;: true,&#10;	&quot;errors&quot;: [],&#10;	&quot;messages&quot;: []&#10;}&#10;</code></pre>
+<aside class="nb-aside caution">
+@markup("md", "content/.markup/bodies/15442.md")
+</aside>
+<ol start="3">
+<li></li>
+</ol>
+<p>If the entry point ruleset does not exist (that is, if you received a <code>404 Not Found</code> status code in step 1), create it using the <a href="/api/resources/rulesets/methods/create/">Create an account ruleset</a> operation. Include a single rule in the <code>rules</code> array that executes the <p>Cloudflare Managed Ruleset (with ID �CODE14�)</p>
+for <p>all incoming requests where the zone name matches one of �CODE15� or �CODE16�</p>
+.</p>
+<pre class="nb-api-request"><code class="language-bash">curl --request POST \&#10;  --url https://api.cloudflare.com/client/v4/accounts/{account_id}/rulesets \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;name&quot;: &quot;My ruleset&quot;,&#10;  &quot;description&quot;: &quot;Entry point ruleset for WAF managed rulesets&quot;,&#10;  &quot;kind&quot;: &quot;root&quot;,&#10;  &quot;phase&quot;: &quot;http_request_firewall_managed&quot;,&#10;  &quot;rules&quot;: [&#10;    {&#10;      &quot;action&quot;: &quot;execute&quot;,&#10;      &quot;action_parameters&quot;: {&#10;        &quot;id&quot;: &quot;efb7b8c949ac4650a09736fc376e9aee&quot;&#10;      },&#10;      &quot;expression&quot;: &quot;(cf.zone.name in {\&quot;example.com\&quot; \&quot;anotherexample.com\&quot;}) and cf.zone.plan eq \&quot;ENT\&quot;&quot;,&#10;      &quot;description&quot;: &quot;Execute the Cloudflare Managed Ruleset&quot;&#10;    }&#10;  ]&#10;}&#x27;</code></pre>
+<h2 id="next-steps">Next steps</h2>
+<p>To customize the behavior of the rules included in a managed ruleset, <a href="/ruleset-engine/managed-rulesets/override-managed-ruleset/">create an override</a>.</p>
+<p>To skip the execution of WAF managed rulesets or some of their rules, <a href="/waf/managed-rules/waf-exceptions/define-api/">create an exception</a> (also called a skip rule).</p>
+<p>Exceptions have priority over overrides.</p>
+<h2 id="more-resources">More resources</h2>
+<p>For instructions on deploying a managed ruleset at the zone level via API, refer to <a href="/waf/managed-rules/deploy-api/">Deploy a WAF managed ruleset via API (zone)</a>.</p>
+<p>For more information on working with managed rulesets via API, refer to <a href="/ruleset-engine/managed-rulesets/">Work with managed rulesets</a> in the Ruleset Engine documentation.</p>

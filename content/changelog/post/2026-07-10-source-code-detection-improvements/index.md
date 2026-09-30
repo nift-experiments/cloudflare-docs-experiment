@@ -1,0 +1,10 @@
+<div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
+<div class="changelog-tools"><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
+<article class="changelog-detail"><a href="/changelog/">← Back to all posts</a>
+<time>July 10, 2026</time><h2 id="post-title">Source code detection improvements</h2>
+<div class="changelog-badges"><span>dlp</span></div><div class="changelog-body"><p>Data Loss Prevention (DLP) source code detection now focuses on identifying whole source code file uploads and downloads. Previously, source code detection performed partial scans resulting in a higher rate of false positives. Since only whole source code files are evaluated, code embedded in other content — such as chat messages, documentation, or code samples — is no longer flagged as source code, removing a common source of false positives.</p>
+<p>Source code detection requires a minimum of 500 characters to evaluate a file. Files below this threshold are not flagged to reduce noise. This threshold filters out small fragments that lack enough context for reliable classification.</p>
+<p>Enable and set <a href="/cloudflare-one/data-loss-prevention/dlp-profiles/advanced-settings/#confidence-thresholds">confidence levels</a> to tune match sensitivity. A higher confidence level reduces false positives by requiring stronger signals that the content is truly source code. A lower confidence level catches more files at the cost of additional noise.</p>
+<p>Source code detection applies to standalone source code files in <a href="/cloudflare-one/traffic-policies/http-policies/">Gateway HTTP policies</a>. It does not detect source code embedded within other file types or payloads, such as <code>.docx</code> files or chat messages.</p>
+<p>For more information, refer to <a href="/cloudflare-one/data-loss-prevention/dlp-profiles/predefined-profiles/#source-code">Source Code predefined profiles</a>.</p>
+</div></article></div>

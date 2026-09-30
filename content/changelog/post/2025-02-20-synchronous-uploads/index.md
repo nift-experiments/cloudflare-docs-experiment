@@ -1,0 +1,9 @@
+<div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
+<div class="changelog-tools"><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
+<article class="changelog-detail"><a href="/changelog/">← Back to all posts</a>
+<time>February 21, 2025</time><h2 id="post-title">Workers for Platforms - Instant dispatch for newly created User Workers</h2>
+<div class="changelog-badges"><span>workers-for-platforms</span></div><div class="changelog-body"><p><a href="https://developers.cloudflare.com/cloudflare-for-platforms/">Workers for Platforms</a> is an architecture wherein a centralized <a href="/cloudflare-for-platforms/workers-for-platforms/how-workers-for-platforms-works/#dynamic-dispatch-worker">dispatch Worker</a> processes incoming requests and routes them to isolated sub-Workers, called <a href="/cloudflare-for-platforms/workers-for-platforms/how-workers-for-platforms-works/#user-workers">User Workers</a>.</p>
+<p><img src="/assets/upstream/images/changelog/workers-for-platforms/wfp-request.png" alt="Workers for Platforms Requests" /></p>
+<p>Previously, when a new User Worker was uploaded, there was a short delay before it became available for dispatch. This meant that even though an API request could return a 200 OK response, the script might not yet be ready to handle requests, causing unexpected failures for platforms that immediately dispatch to new Workers.</p>
+<p><strong>With this update, first-time uploads of User Workers are now deployed synchronously</strong>. A 200 OK response guarantees the script is fully provisioned and ready to handle traffic immediately, ensuring more predictable deployments and reducing errors.</p>
+</div></article></div>

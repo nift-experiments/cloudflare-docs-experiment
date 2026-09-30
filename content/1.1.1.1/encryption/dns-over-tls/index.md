@@ -1,0 +1,18 @@
+<p>By default, DNS is sent over a plaintext connection. DNS over TLS (DoT) is one way to send DNS queries over an encrypted connection. Cloudflare supports DNS over TLS on standard port <code>853</code> and is compliant with <a href="https://tools.ietf.org/html/rfc7858">RFC 7858</a>.</p>
+<p>DoT wraps standard DNS traffic inside a TLS-encrypted TCP connection. This prevents anyone between your device and the resolver from reading or modifying your DNS queries.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>Cloudflare supports DNS over TLS (DoT) on <code>1.1.1.1</code>, <code>1.0.0.1</code>, and the corresponding IPv6 addresses (<code>2606:4700:4700::1111</code> and <code>2606:4700:4700::1001</code>) on port <code>853</code>. If your DoT client does not support IP addresses, Cloudflare's DoT endpoint can also be reached by hostname on <code>one.one.one.one</code>.</p>
+<p>A stub resolver is the DNS client software on your device that sends queries to a DNS resolver. With DoT, the stub resolver connects to the resolver over a TLS connection:</p>
+<ol>
+<li>Before the connection, the DNS stub resolver stores a fingerprint of 1.1.1.1's TLS certificate. This fingerprint is a base64-encoded SHA-256 hash of the certificate's public key information, known as the Subject Public Key Info (SPKI) pin. The stub resolver uses this pin to verify it is connecting to the authentic 1.1.1.1 server.</li>
+<li>The DNS stub resolver establishes a TCP connection with <code>1.1.1.1:853</code>.</li>
+<li>The DNS stub resolver initiates a TLS handshake — a process where both sides agree on encryption parameters and the client verifies the server's identity.</li>
+<li>In the TLS handshake, 1.1.1.1 presents its TLS certificate.</li>
+<li>Once the TLS connection is established, the DNS stub resolver can send DNS over an encrypted connection, preventing eavesdropping and tampering.</li>
+<li>All DNS queries sent over the TLS connection must comply with specifications of <a href="https://tools.ietf.org/html/rfc1035#section-4.2.2">sending DNS over TCP</a>.</li>
+</ol>
+<h2 id="example">Example</h2>
+<pre><code class="language-sh">kdig -d @1.1.1.1 +tls-ca +tls-host=one.one.one.one example.com&#10;</code></pre>
+<pre><code class="language-sh">&#10;;; DEBUG: Querying for owner(example.com.), class(1), type(1), server(1.1.1.1), port(853), protocol(TCP)&#10;;; DEBUG: TLS, imported 138 system certificates&#10;;; DEBUG: TLS, received certificate hierarchy:&#10;;; DEBUG:  #1, C=US,ST=California,L=San Francisco,O=Cloudflare\, Inc.,CN=cloudflare-dns.com&#10;;; DEBUG:      SHA-256 PIN: GP8Knf7qBae+aIfythytMbYnL+yowaWVeD6MoLHkVRg=&#10;;; DEBUG:  #2, C=US,O=DigiCert Inc,CN=DigiCert TLS Hybrid ECC SHA384 2020 CA1&#10;;; DEBUG:      SHA-256 PIN: e0IRz5Tio3GA1Xs4fUVWmH1xHDiH2dMbVtCBSkOIdqM=&#10;;; DEBUG: TLS, skipping certificate PIN check&#10;;; DEBUG: TLS, The certificate is trusted.&#10;;; TLS session (TLS1.3)-(ECDHE-X25519)-(ECDSA-SECP256R1-SHA256)-(AES-256-GCM)&#10;;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY; status: NOERROR; id: 3395&#10;;; Flags: qr rd ra; QUERY: 1; ANSWER: 1; AUTHORITY: 0; ADDITIONAL: 1&#10;&#10;;; EDNS PSEUDOSECTION:&#10;;; Version: 0; flags: ; UDP size: 1232 B; ext-rcode: NOERROR&#10;;; PADDING: 408 B&#10;&#10;;; QUESTION SECTION:&#10;;; example.com.        		IN	A&#10;&#10;;; ANSWER SECTION:&#10;example.com.        	75897	IN	A	93.184.216.34&#10;&#10;;; Received 468 B&#10;;; Time 2023-06-23 18:05:42 PDT&#10;;; From 1.1.1.1@853(TCP) in 12.1 ms&#10;</code></pre>
+<h2 id="supported-tls-versions">Supported TLS versions</h2>
+<p>Cloudflare's DNS over TLS supports TLS 1.3 and TLS 1.2.</p>

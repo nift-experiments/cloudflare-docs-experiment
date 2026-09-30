@@ -1,0 +1,9 @@
+<div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
+<div class="changelog-tools"><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
+<article class="changelog-detail"><a href="/changelog/">← Back to all posts</a>
+<time>August 14, 2026</time><h2 id="post-title">WebSocket reporting now includes full connection data transfer and duration</h2>
+<div class="changelog-badges"><span>analytics</span></div><div class="changelog-body"><p>Cloudflare has fixed an issue affecting WebSocket data transfer and session duration reporting. HTTP Traffic Analytics and HTTP request logs now correctly report data transferred throughout a WebSocket connection and the duration of the full session. During the affected period, reporting captured only the bytes and duration of the initial <code>101 Switching Protocols</code> handshake for some WebSocket connections.</p>
+<p>Customers with WebSocket traffic will see the correct <strong>Data Transfer</strong> in the dashboard and <code>EdgeResponseBytes</code> in analytics and HTTP request logs. Reported session duration now reflects the full WebSocket session rather than only the handshake. These changes restore the accounting of existing WebSocket traffic and duration. They do not indicate an increase in traffic or alter WebSocket connection behavior.</p>
+<p>The separate <a href="/logs/logpush/logpush-job/datasets/zone/websocket_analytics/">WebSocket Analytics Logpush dataset</a> continues to provide per-connection directional byte counts, timestamps, and close details.</p>
+<p>For more information about HTTP Traffic Analytics, refer to <a href="/analytics/account-and-zone-analytics/zone-analytics/#http-traffic">Zone Analytics</a>.</p>
+</div></article></div>

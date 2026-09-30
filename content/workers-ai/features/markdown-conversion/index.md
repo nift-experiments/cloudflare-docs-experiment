@@ -1,0 +1,9 @@
+<p><a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> is essential for text generation and large language models (LLMs) in training and inference because it can provide structured, semantic, human, and machine-readable input. Likewise, Markdown facilitates chunking and structuring input data for better retrieval and synthesis in the context of RAGs, and its simplicity and ease of parsing and rendering make it ideal for AI Agents.</p>
+<p>For these reasons, document conversion plays an important role when designing and developing AI applications. Workers AI provides the <code>toMarkdown</code> utility method that developers can use from the <a href="/workers-ai/features/markdown-conversion/usage/binding/"><code>env.AI</code></a> binding or the <a href="/workers-ai/features/markdown-conversion/usage/rest-api/">REST APIs</a> for quick, easy, and convenient conversion and summary of documents in multiple formats to Markdown language.</p>
+<h2 id="pricing">Pricing</h2>
+<p><code>toMarkdown</code> is free for most format conversions. In some cases, like image conversion, it can use Workers AI models for object detection and summarization, which may incur additional costs if it exceeds the Workers AI free allocation limits. Refer to <a href="/workers-ai/features/markdown-conversion/how-it-works/">what models we use</a> and the <a href="/workers-ai/platform/pricing/">Workers AI pricing page</a> for more details.</p>
+<h2 id="other-markdown-conversion-features">Other Markdown conversion features</h2>
+<ul>
+<li>The Browser Run <a href="/browser-run/quick-actions/markdown-endpoint/">/markdown</a> endpoint supports markdown conversion if you need to render a dynamic page or application in a real browser before converting it.</li>
+<li><a href="/fundamentals/reference/markdown-for-agents/">Markdown for Agents</a> allows real-time document conversion for Cloudflare zones using content negotiation headers.</li>
+</ul>

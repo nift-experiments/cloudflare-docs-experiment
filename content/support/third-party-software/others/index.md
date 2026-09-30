@@ -1,0 +1,2 @@
+<p>Below you will find links to the relevant sections for Others support-focused material.</p>
+<ul class="directory-listing"><li><a href="/support/third-party-software/others/configure-cloudflare-and-heroku-over-https/">Configure Cloudflare and Heroku over HTTPS</a></li><li><a href="/support/third-party-software/others/reduce-data-transfer-egress-costs-between-azure-and-cloudflare/">Reduce data transfer (egress costs) between Azure and Cloudflare</a></li></ul>

@@ -1,0 +1,2 @@
+<p>Query your AI Search instances with natural language and get relevant results or AI-generated responses.</p>
+<ul class="directory-listing"><li><a href="/ai-search/api/search/workers-binding/">Workers binding</a></li><li><a href="/ai-search/api/search/rest-api/">REST API</a></li><li><a href="/ai-search/api/search/mcp/">MCP</a></li><li><a href="/ai-search/api/search/public-endpoint/">Public endpoint</a></li></ul>

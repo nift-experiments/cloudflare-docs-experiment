@@ -1,0 +1,2 @@
+<p>Visit the following pages for commonly asked questions:</p>
+<ul class="directory-listing"><li><a href="/analytics/faq/about-analytics/">About Cloudflare Analytics</a></li><li><a href="/analytics/faq/graphql-api-inconsistent-results/">GraphQL API inconsistent results</a></li><li><a href="/analytics/faq/wae-faqs/">Workers Analytics Engine FAQs</a></li><li><a href="/analytics/faq/other-faqs/">Other FAQs</a></li></ul>

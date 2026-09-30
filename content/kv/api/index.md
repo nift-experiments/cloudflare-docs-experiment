@@ -1,0 +1,1 @@
+<ul class="directory-listing"><li><a href="/kv/api/read-key-value-pairs/">Read key-value pairs</a></li><li><a href="/kv/api/write-key-value-pairs/">Write key-value pairs</a></li><li><a href="/kv/api/delete-key-value-pairs/">Delete key-value pairs</a></li><li><a href="/kv/api/list-keys/">List keys</a></li></ul>

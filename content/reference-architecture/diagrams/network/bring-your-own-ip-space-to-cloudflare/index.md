@@ -1,0 +1,37 @@
+<h2 id="introduction">Introduction</h2>
+<p>Cloudflare brings security and performance to our customers' digital estates. However, one of the characteristics of proxying services is that interactions on the web that go to Cloudflare (DNS queries or requests to SaaS providers, for example) will appear to the world as coming from the Cloudflare IP space. This can create challenges for some enterprises.</p>
+<p>For example, partners or other B2B relationships may use the public IP space owned by a customer for attestation and attribution in various transactions. They may look at the resolved address for a public hostname (for example, <code>www.example.com</code>) and expect that IP to match a specific range or address known to be owned by the customer.</p>
+<p><a href="/byoip/">Bring Your Own IP (BYOIP)</a> allows enterprises to bring their IP space to Cloudflare, thus gaining the security and performance of the Cloudflare platform while still appearing to the rest of the world via their own public IP space. This reference architecture diagram highlights the different ways customers can bring their IP space to the Cloudflare network and the benefits that are achieved.</p>
+<h2 id="byoip-scenario-one-cloudflare-proxy-services">BYOIP scenario one - Cloudflare proxy services</h2>
+<p>The default behavior when a DNS query is made to a Cloudflare proxied hostname will be to return one of Cloudflare's <a href="https://www.cloudflare.com/ips/">default anycast IP addresses</a>. The traffic is then accelerated, protected, and, if not served by Cloudflare cache, sent to the customer's origin server.</p>
+<p>In the diagram below, instead of the default behavior, traffic will proxy through Cloudflare's application services platform but DNS queries will return an IP address that is owned by the customer while also benefiting from Cloudflare's anycast network.</p>
+<p>There are two different network ranges used in this example:</p>
+<ul>
+<li><code>152.3.15.0/24</code> - Customer owned IP range that will be associated with the Cloudflare network.</li>
+<li><code>152.3.14.0/24</code> - Customer owned IP range that will continue to be associated with their origin network.</li>
+</ul>
+<p><img src="/assets/upstream/images/reference-architecture/bring-your-own-ip-space-to-cloudflare/figure1.svg" alt="Figure 1: Cloudflare announces customer IP range and proxies it to the origin server IP." title="Figure 1: Cloudflare announces customer IP range and proxies it to the origin server IP." /></p>
+<ol>
+<li>In order for Cloudflare to respond to DNS queries with addresses from the customer's space, a Letter of Agency (LOA) must be provided by the customer to Cloudflare, so that the addresses can be provisioned and advertised. This address space (in the example, <code>152.3.15.0/24</code>) must be dedicated for Cloudflare's configuration and not used anywhere within the customer environment.</li>
+<li>The Cloudflare DNS configuration for the origin server <code>www.abc.com</code> is configured with the IP address <code>152.3.14.10/32</code>.</li>
+<li>A DNS query for <code>www.abc.com</code> is made.</li>
+<li>Cloudflare returns an address from the customer's space that was previously configured from a BYOIP space provided by the customer. In this case, the response was <code>152.2.15.200</code>, which is a part of the <code>/24</code> prefix of <code>152.2.15.0/24</code>.</li>
+<li>The eyeball sends a request to <code>152.2.15.200</code> which is routed to Cloudflare.</li>
+<li>Cloudflare proxies the connection, using the SNI (<code>www.abc.com</code>) to determine the actual origin IP, <code>152.3.14.10</code>. The request is then routed through Cloudflare's proxy services, such as DDoS protection, Web Application Firewall, and Bot Management.</li>
+<li>Successful requests are sent to origin (if not served by cache) to <code>152.3.14.10</code> with a source IP of the Cloudflare network.</li>
+</ol>
+<h2 id="byoip-scenario-two-network-ddos-protection">BYOIP scenario two - network DDoS protection</h2>
+<p>Cloudflare is well known for its DDoS mitigation services protecting public websites and APIs. The same technologies can also be used to protect entire networks. Cloudflare's <a href="/magic-transit/">Magic Transit</a> service offers a cloud-based network DDoS mitigation service for our customers' public IP space.</p>
+<p><img src="/assets/upstream/images/reference-architecture/bring-your-own-ip-space-to-cloudflare/figure2.svg" alt="Figure 2: Protection against DDoS attacks can be placed in front of the BYOIP range in front of your Cloudflare tunneled network." title="Figure 2: Protection against DDoS attacks can be placed in front of the BYOIP range in front of your Cloudflare tunneled network." /></p>
+<ol>
+<li>In order for Cloudflare to attract traffic destined for customer network prefixes, a Letter of Agency (LOA) must be provided by the customer to Cloudflare, so that the network prefixes can be provisioned and advertised.</li>
+<li>Once provisioned, Cloudflare will advertise the customer prefixes to the Internet, attracting traffic destined for those networks to the Cloudflare network.</li>
+<li>All traffic destined for those prefixes is routed to Cloudflare.</li>
+<li>DDoS traffic is mitigated by Cloudflare and legitimate traffic is directed back to customer networks via <a href="/cloudflare-wan/">tunnels</a>, or via <a href="/network-interconnect/">Cloudflare Network Interconnect</a> (CNI) on ramps to the customer environment.</li>
+</ol>
+<p>More detailed information about Magic Transit capabilities can be found in the <a href="/reference-architecture/architectures/magic-transit/">Magic Transit Reference Architecture</a>.</p>
+<h2 id="related-resources">Related resources</h2>
+<ul>
+<li><a href="/reference-architecture/diagrams/network/protect-hybrid-cloud-networks-with-cloudflare-magic-transit/">Protect hybrid cloud networks with Cloudflare Magic Transit</a></li>
+<li><a href="/reference-architecture/diagrams/network/protect-public-networks-with-cloudflare/">Protect public networks with Cloudflare</a></li>
+</ul>

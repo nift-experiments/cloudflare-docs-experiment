@@ -1,0 +1,2 @@
+<p>Platform details for Cloudflare Email Service, including limits and pricing.</p>
+<ul class="directory-listing"><li><a href="/email-service/platform/limits/">Limits</a></li><li><a href="/email-service/platform/pricing/">Pricing</a></li><li><a href="/api/resources/email_routing/">Email Routing REST API</a></li><li><a href="/api/resources/email_sending/">Email Sending REST API</a></li><li><a href="/email-service/platform/event-subscriptions/">Event subscriptions</a></li></ul>

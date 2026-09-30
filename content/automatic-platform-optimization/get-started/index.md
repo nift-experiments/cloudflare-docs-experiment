@@ -1,0 +1,2 @@
+<p>Before you configure APO for your WordPress site, complete the following tasks.</p>
+<ul class="directory-listing"><li><a href="/automatic-platform-optimization/get-started/confirm-dns-records/">Confirm DNS records</a></li><li><a href="/automatic-platform-optimization/get-started/change-nameservers/">Change nameservers</a></li><li><a href="/automatic-platform-optimization/get-started/activate-cf-wp-plugin/">Activate the Cloudflare WordPress plugin</a></li><li><a href="/automatic-platform-optimization/get-started/verify-apo-works/">Verify APO works</a></li></ul>

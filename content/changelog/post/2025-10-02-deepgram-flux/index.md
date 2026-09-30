@@ -1,0 +1,23 @@
+<div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
+<div class="changelog-tools"><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
+<article class="changelog-detail"><a href="/changelog/">← Back to all posts</a>
+<time>October 2, 2025</time><h2 id="post-title">New Deepgram Flux model available on Workers AI</h2>
+<div class="changelog-badges"><span>workers-ai</span></div><div class="changelog-body"><p>Deepgram's newest Flux model <a href="/workers-ai/models/flux/"><code>@cf/deepgram/flux</code></a> is now available on Workers AI, hosted directly on Cloudflare's infrastructure. We're excited to be a launch partner with Deepgram and offer their new Speech Recognition model built specifically for enabling voice agents. Check out <a href="https://deepgram.com/flux">Deepgram's blog</a> for more details on the release.</p>
+<p>The Flux model can be used in conjunction with Deepgram's speech-to-text model <a href="/workers-ai/models/nova-3/"><code>@cf/deepgram/nova-3</code></a> and text-to-speech model <a href="/workers-ai/models/aura-1/"><code>@cf/deepgram/aura-1</code></a> to build end-to-end voice agents. Having Deepgram on Workers AI takes advantage of our edge GPU infrastructure, for ultra low latency voice AI applications.</p>
+<h4 id="promotional-pricing">Promotional Pricing</h4>
+For the month of October 2025, Deepgram's Flux model will be free to use on Workers AI. Official pricing will be announced soon and charged after the promotional pricing period ends on October 31, 2025. Check out the [model page](/workers-ai/models/flux/) for pricing details in the future.
+<h4 id="example-usage">Example Usage</h4>
+<p>The new Flux model is WebSocket only as it requires live bi-directional streaming in order to recognize speech activity.</p>
+<ol>
+<li>Create a worker that establishes a websocket connection with <code>@cf/deepgram/flux</code></li>
+</ol>
+<pre><code class="language-js">export default {&#10;  async fetch(request, env, ctx): Promise&lt;Response&gt; {&#10;    const resp = await env.AI.run(&quot;@cf/deepgram/flux&quot;, {&#10;      encoding: &quot;linear16&quot;,&#10;      sample_rate: &quot;16000&quot;&#10;    }, {&#10;      websocket: true&#10;    });&#10;    return resp;&#10;  },&#10;} satisfies ExportedHandler&lt;Env&gt;;&#10;</code></pre>
+<ol start="2">
+<li>Deploy your worker</li>
+</ol>
+<pre><code class="language-bash">npx wrangler deploy&#10;</code></pre>
+<ol start="3">
+<li>Write a client script to connect to your worker and start sending random audio bytes to it</li>
+</ol>
+<pre><code class="language-js">const ws = new WebSocket(&#x27;wss://&lt;your-worker-url.com&gt;&#x27;);&#10;&#10;ws.onopen = () =&gt; {&#10;  console.log(&#x27;Connected to WebSocket&#x27;);&#10;&#10;  // Generate and send random audio bytes&#10;  // You can replace this part with a function&#10;  // that reads from your mic or other audio source&#10;  const audioData = generateRandomAudio();&#10;  ws.send(audioData);&#10;  console.log(&#x27;Audio data sent&#x27;);&#10;};&#10;&#10;ws.onmessage = (event) =&gt; {&#10;  // Transcription will be received here&#10;  // Add your custom logic to parse the data&#10;  console.log(&#x27;Received:&#x27;, event.data);&#10;};&#10;&#10;ws.onerror = (error) =&gt; {&#10;  console.error(&#x27;WebSocket error:&#x27;, error);&#10;};&#10;&#10;ws.onclose = () =&gt; {&#10;  console.log(&#x27;WebSocket closed&#x27;);&#10;};&#10;&#10;// Generate random audio data (1 second of noise at 44.1kHz, mono)&#10;function generateRandomAudio() {&#10;  const sampleRate = 44100;&#10;  const duration = 1;&#10;  const numSamples = sampleRate * duration;&#10;  const buffer = new ArrayBuffer(numSamples * 2);&#10;  const view = new Int16Array(buffer);&#10;&#10;  for (let i = 0; i &lt; numSamples; i++) {&#10;    view[i] = Math.floor(Math.random() * 65536 - 32768);&#10;  }&#10;&#10;  return buffer;&#10;}&#10;</code></pre>
+</div></article></div>

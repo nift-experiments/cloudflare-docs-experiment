@@ -1,0 +1,2 @@
+<p>Refer to the following pages for more information about Cloudflare DDoS protection:</p>
+<ul class="directory-listing"><li><a href="/ddos-protection/reference/analytics/">Analytics</a></li><li><a href="/ddos-protection/reference/reports/">Reports</a></li><li><a href="/ddos-protection/reference/alerts/">Alerts</a></li><li><a href="/ddos-protection/reference/logs/">Logs</a></li><li><a href="/ddos-protection/reference/simulate-ddos-attack/">Simulating test DDoS attacks</a></li></ul>

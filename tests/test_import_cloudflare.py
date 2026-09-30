@@ -4,7 +4,7 @@ ROOT=pathlib.Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('imp',ROOT/'tools/import_cloudflare.py'); mod=importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
 class TestImporter(unittest.TestCase):
  def setUp(self):
-  self._tmp=tempfile.TemporaryDirectory(); self._body_dir=pathlib.Path(self._tmp.name); mod.configure_body_output(self._body_dir,reset=True)
+  self._tmp=tempfile.TemporaryDirectory(); self._body_dir=pathlib.Path(self._tmp.name); mod.configure_body_output(self._body_dir,reset=True); mod.configure_resources([]); mod.configure_partials(None); mod.configure_pages_build_presets({}); mod.configure_pages_build_environments([]); mod.configure_glossaries({}); mod.configure_release_notes({}); mod.configure_wrangler_commands({}); mod.configure_videos([])
  def tearDown(self):
   self._tmp.cleanup()
  def _conv(self, src, path='fixture'):
@@ -39,8 +39,63 @@ class TestImporter(unittest.TestCase):
   src='import {\n\tCardGrid,\n\tDescription,\n} from "~/components";\nimport { Foo } from "@cloudflare/realtimekit";\n\n<div class="nb-description">Body.</div>\n'
   _,out=mod.convert(src,'fixture'); self.assertNotIn('~/components',out); self.assertNotIn('realtimekit',out); self.assertIn('nb-description',out)
  def test_markdown_renders_inside_components(self):
-  src='<Steps>1. **Bold** and `code`.</Steps>\n:::note[Title]\nA **note**.\n:::\n'
-  _,out=mod.convert(src,'fixture'); self.assertIn('nb-aside-title',out); self.assertNotIn(':::',out)
+   src='<Steps>1. **Bold** and `code`.</Steps>\n:::note[Title]\nA **note**.\n:::\n'
+   _,out=mod.convert(src,'fixture'); self.assertIn('nb-aside-title',out); self.assertNotIn(':::',out)
+ def test_gfm_tables_render_as_tables(self):
+  _,out=mod.convert('| Value | Meaning |\n| --- | --- |\n| server | update |\n','fixture'); self.assertIn('<table>',out); self.assertNotIn('| Value',out)
+ def test_gfm_footnotes_render_section_and_definition(self):
+  _,out=mod.convert('A statement.[^1]\n\n[^1]: Supporting detail.\n','fixture')
+  self.assertIn('<h2 id="footnotes">Footnotes</h2>',out)
+  self.assertIn('Supporting detail.',out)
+  self.assertNotIn('[^1]',out)
+ def test_gfm_tables_inside_component_bodies_are_materialized(self):
+  _,_,bodies=self._conv('<Tabs><TabItem label="One">\n| Value | Meaning |\n| --- | --- |\n| server | update |\n</TabItem></Tabs>\n'); self.assertTrue(any('<table>' in body for body in bodies)); self.assertFalse(any('| Value' in body for body in bodies))
+ def test_video_components_materialize_iframes(self):
+  src='import { YouTube, Stream } from "~/components";\n<YouTube id="abc" />\n<Stream id="def" title="Demo" thumbnail="https://example.com/poster.jpg" />\n'
+  _,out=mod.convert(src,'fixture'); self.assertIn('<iframe src="https://www.youtube-nocookie.com/embed/abc"',out); self.assertIn('<iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/def/iframe',out); self.assertIn('title="Demo"',out)
+ def test_plan_materializes_availability_label(self):
+  _,out=mod.convert('<Plan type="all" />\n','fixture'); self.assertIn('<div class="nb-plan">',out); self.assertIn('Available on all plans',out)
+ def test_stream_timestamp_becomes_remote_thumbnail(self):
+  _,out=mod.convert('<Stream id="abc" title="Demo" thumbnail="1m37s" />\n','fixture')
+  self.assertIn('abc/iframe?preload=true&amp;letterboxColor=transparent',out)
+  self.assertIn('abc/thumbnails/thumbnail.jpg?fit=crop&amp;time=1m37s',out)
+  self.assertIn('<img class="video-poster"',out)
+ def test_agent_shared_components_render_substantive_content(self):
+  src='import ExamplePromptsList from "~/components/agent-setup/ExamplePromptsList.astro";\nimport BuildAgentsCallout from "~/components/agent-setup/BuildAgentsCallout.astro";\n<ExamplePromptsList />\n<BuildAgentsCallout />\n'
+  _,out=mod.convert(src,'fixture')
+  self.assertEqual(5,out.count('language-txt'))
+  self.assertIn('persistent conversation history',out)
+  self.assertIn('Build an MCP server',out)
+ def test_ai_gateway_code_snippets_render_all_provider_variants(self):
+  _,out=mod.convert('import CodeSnippets from "~/components/ai-gateway/code-examples.astro";\n<CodeSnippets forceClient="aisdk" />\n','fixture')
+  self.assertEqual(24,out.count('language-javascript'))
+  self.assertIn('workers-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast',out)
+ def test_pages_build_environment_renders_each_version_table(self):
+  mod.configure_pages_build_environments([
+   {'id':'v1','languages':[{'name':'Node.js','default':'18','supported':'Any version','environment_variable':'NODE_VERSION','file':['.nvmrc']}]},
+   {'id':'v2','languages':[{'name':'Node.js','default':'22','supported':'Any version','environment_variable':'NODE_VERSION','file':['.nvmrc']}]},
+  ])
+  _,out=mod.convert('<PagesBuildEnvironmentLanguages />\n','fixture')
+  self.assertEqual(2,out.count('<table>'))
+  self.assertIn('NODE_VERSION',out)
+ def test_pre_blocks_are_opaque_to_outer_markdown_pass(self):
+  _,out=mod.convert('```ts\nconst first = 1;\n\nconst second = 2;\n```\n','fixture')
+  self.assertNotIn('\n',out[out.index('<pre'):out.index('</pre>')])
+  self.assertIn('&#10;',out)
+ def test_jsx_template_literal_attribute_is_materialized(self):
+  _,out=mod.convert('<a href={`https://example.com/feed`}>RSS feed</a>\n','fixture')
+  self.assertIn('<a href="https://example.com/feed">RSS feed</a>',out)
+ def test_components_usage_materializes_component_sections(self):
+  _,out=mod.convert('import { ComponentsUsage } from "~/components";\n<ComponentsUsage />\n','fixture')
+  self.assertIn('<h2 id="anchorheading">AnchorHeading</h2>',out); self.assertIn('<h2 id="wranglernamespace">WranglerNamespace</h2>',out)
+ def test_nested_link_card_html_is_not_indented_code(self):
+  src='<CardGrid>\n      <LinkCard title="Example" href="/example/" />\n</CardGrid>\n'
+  _,_,bodies=self._conv(src); combined='\n'.join(bodies)
+  self.assertIn('\n<a class="nb-card nb-link-card"',combined)
+  self.assertNotIn('\n      <a class="nb-card nb-link-card"',combined)
+ def test_api_request_materializes_code_example(self):
+  src='import { APIRequest } from "~/components";\n<APIRequest path="/accounts/{account_id}/access/groups" method="POST" />\n'
+  _,out=mod.convert(src,'fixture'); self.assertIn('<pre class="nb-api-request"><code class="language-bash">',out); self.assertIn('curl --request POST',out); self.assertIn('/accounts/{account_id}/access/groups',out)
  def test_unclosed_directive_auto_closes(self):
   src=':::caution[Warning]\nContent here without closing delimiter.\n'
   _,out=mod.convert(src,'fixture'); self.assertIn('nb-aside caution',out); self.assertNotIn(':::',out)
@@ -113,9 +168,52 @@ class TestImporter(unittest.TestCase):
  def test_asset_refs_rewritten_in_bodies(self):
   src='<Details>\n![alt](~/assets/images/x.png)\n</Details>\n'
   _,out,bodies=self._conv(src); self.assertTrue(any('/assets/upstream/images/x.png' in b for b in bodies),'~/assets must be rewritten inside body files')
+
+ def test_imported_astro_images_are_native_and_rewritten(self):
+  src='import shot from "~/assets/images/shot.png";\n\n<Image src={shot} alt="Shot" />\n<img src={shot.src} alt="Shot 2" />\n'
+  _,out,_=self._conv(src)
+  self.assertEqual(out.count('<img src="/assets/upstream/images/shot.png"'),2)
+  self.assertNotIn('{shot',out)
+
+ def test_content_h1_is_demoted_beneath_template_title(self):
+  _,out,_=self._conv('# Repeated page title\n')
+  self.assertIn('<h2 id="repeated-page-title">Repeated page title</h2>',out)
+  self.assertNotIn('<h1',out)
+
+ def test_component_body_headings_are_demoted_and_addressable(self):
+  _,_,bodies=self._conv('<Details>\n# Nested title\n\n## Nested section\n</Details>')
+  rendered='\n'.join(bodies)
+  self.assertIn('<h2 id="body-0-nested-title">Nested title</h2>',rendered)
+  self.assertIn('<h2 id="body-0-nested-section">Nested section</h2>',rendered)
+
+ def test_component_body_common_indent_is_not_code(self):
+  _,_,bodies=self._conv('<Description>\n\tIndented description.\n</Description>')
+  self.assertIn('Indented description.',bodies[0])
+  self.assertNotIn('\tIndented description.',bodies[0])
+
+ def test_indented_fence_markers_cannot_become_headings(self):
+  src='<Details>\n   ```python\n   # comment\n   ---\n   ```\n</Details>'
+  _,_,bodies=self._conv(src)
+  rendered='\n'.join(bodies)
+  self.assertIn('&#35; comment',rendered)
+  self.assertIn('&#45;--',rendered)
+
+ def test_card_without_href_is_not_placeholder_link(self):
+  _,out,_=self._conv('<Card title="Status">Body</Card>')
+  self.assertIn('<div class="nb-card">',out)
+  self.assertNotIn('href="#"',out)
+ def test_link_title_card_preserves_heading_semantics(self):
+  _,out,_=self._conv('<LinkTitleCard title="Get started" href="/start/">Begin.</LinkTitleCard>')
+  self.assertIn('<h3 id="card-get-started-start"><a href="/start/">Get started</a></h3>',out)
+  self.assertIn('href="/start/"',out)
  def test_top_level_markdown_rendered_by_importer(self):
   src='Some *prose* and `code`.\n\n## Heading\n\n- a\n- b\n'
   _,out,bodies=self._conv(src); self.assertIn('<em>prose</em>',out); self.assertIn('<h2 id="heading">Heading</h2>',out); self.assertIn('<ul>',out)
+ def test_empty_navigation_page_keeps_frontmatter_description(self):
+  src='---\ntitle: Overview\ndescription: Learn the product fundamentals.\n---\n'
+  fm,out,_=self._conv(src)
+  self.assertEqual('Learn the product fundamentals.',fm['description'])
+  self.assertIn('<p>Learn the product fundamentals.</p>',out)
  def test_details_header_open_and_body(self):
   src='<Details header="**Advanced** options" open>\nUse `value`.\n</Details>\n'
   _,out,bodies=self._conv(src); self.assertIn('<details class="nb-details" open>',out); self.assertIn('<summary><strong>Advanced</strong> options</summary>',out); self.assertIn('Use `value`.',bodies[0])
@@ -125,4 +223,88 @@ class TestImporter(unittest.TestCase):
  def test_heading_ids_are_stable_and_unique(self):
   _,out,_=self._conv('## Hello, world!\n\n## Hello world\n\n### Another section\n')
   self.assertIn('<h2 id="hello-world">',out); self.assertIn('<h2 id="hello-world-1">',out); self.assertIn('<h3 id="another-section">',out)
+ def test_duplicate_existing_heading_ids_are_rewritten(self):
+  out=mod.add_heading_ids('<h3 id="card-same">Same</h3><h3 id="card-same">Same</h3>'); self.assertEqual(1,out.count('id="card-same"')); self.assertIn('id="card-same-1"',out)
+ def test_resources_by_selector_materializes_matching_docs(self):
+  mod.configure_resources([
+   {'id':'sandbox/guides/alpha','route':'/sandbox/guides/alpha/','title':'Alpha guide','description':'First guide.','pcx_content_type':'how-to','products':['sandbox'],'reviewed':'2026-01-01'},
+   {'id':'sandbox/tutorials/beta','route':'/sandbox/tutorials/beta/','title':'Beta tutorial','description':'Other.','pcx_content_type':'tutorial','products':['sandbox'],'reviewed':'2026-01-02'},
+  ])
+  src='import { ResourcesBySelector } from "~/components";\n<ResourcesBySelector directory="sandbox/guides/" types={["how-to"]} />\n'
+  _,out,_=self._conv(src)
+  self.assertIn('Alpha guide',out); self.assertIn('/sandbox/guides/alpha/',out); self.assertIn('First guide.',out); self.assertNotIn('Beta tutorial',out)
+ def test_resources_by_selector_fails_closed_when_empty(self):
+  src='import { ResourcesBySelector } from "~/components";\n<ResourcesBySelector directory="missing/" types={["how-to"]} />\n'
+  with self.assertRaisesRegex(ValueError,'no resources match'): self._conv(src)
+ def test_link_buttons_inside_raw_div_remain_balanced(self):
+  src='import { LinkButton } from "~/components";\n<div>\n\t<LinkButton href="/one/">One</LinkButton>\n\t<LinkButton href="/two/" target="_blank">Two</LinkButton>\n</div>\n'
+  _,out,_=self._conv(src)
+  self.assertEqual(out.count('<div'),out.count('</div>'))
+  self.assertEqual(2,out.count('class="nb-link-button"'))
+  self.assertNotIn('&lt;div',out)
+  self.assertIn('rel="noopener noreferrer"',out)
+ def test_render_expands_nested_frozen_partials(self):
+  partials=self._body_dir/'partials'; product=partials/'example'; product.mkdir(parents=True)
+  (product/'inner.mdx').write_text('Inner **content**.\n')
+  (product/'outer.mdx').write_text('Outer content.\n\n<Render file="inner" product="example" />\n')
+  mod.configure_partials(partials)
+  src='import { Render } from "~/components";\n<Render file="outer" product="example" />\n'
+  _,out,_=self._conv(src)
+  self.assertIn('Outer content.',out); self.assertIn('Inner <strong>content</strong>.',out)
+  self.assertNotIn('data-cf-component="Render"',out)
+ def test_render_missing_upstream_partial_retains_explicit_shell(self):
+  partials=self._body_dir/'partials'; partials.mkdir()
+  mod.configure_partials(partials)
+  _,out,_=self._conv('<Render file="missing" product="example" />')
+  self.assertIn('data-cf-component="Render"',out)
+ def test_render_literal_params_expand_runtime_props(self):
+  partials=self._body_dir/'partials'; product=partials/'example'; product.mkdir(parents=True)
+  (product/'dynamic.mdx').write_text('Value: {props.label}\n\n<a href={props.url}>Open</a>\n')
+  mod.configure_partials(partials)
+  _,out,_=self._conv('<Render file="dynamic" product="example" params={{label: "A", url: "/a/"}} />')
+  self.assertNotIn('data-cf-component="Render"',out)
+  self.assertIn('Value: A',out)
+  self.assertIn('href="/a/"',out)
+  self.assertNotIn('props.label',out)
+ def test_render_array_params_expand_runtime_props(self):
+  partials=self._body_dir/'partials'; product=partials/'example'; product.mkdir(parents=True)
+  (product/'dynamic.mdx').write_text('<SubtractIPCalculator defaults={{ subtract: props.items }} />\n')
+  mod.configure_partials(partials)
+  _,out,_=self._conv('<Render file="dynamic" product="example" params={{items: ["10.0.0.1", "10.0.0.0/24"]}} />')
+  self.assertNotIn('data-cf-component="Render"',out)
+  self.assertIn('SubtractIPCalculator',out)
+ def test_pages_build_preset_renders_configuration_table(self):
+  mod.configure_pages_build_presets({'astro': {'build_command': 'npm run build', 'build_output_directory': 'dist'}})
+  _,out,_=self._conv('<PagesBuildPreset framework="astro" />')
+  self.assertIn('<table>',out); self.assertIn('npm run build',out); self.assertIn('<code>dist</code>',out)
+ def test_render_forwards_params_to_nested_partial(self):
+  partials=self._body_dir/'partials'; product=partials/'example'; product.mkdir(parents=True)
+  (product/'inner.mdx').write_text('Inner {props.label}.\n')
+  (product/'outer.mdx').write_text('<Render file="inner" product="example" params={{ label: props.label }} />\n')
+  mod.configure_partials(partials)
+  _,out,_=self._conv('<Render file="outer" product="example" params={{ label: "forwarded" }} />')
+  self.assertIn('Inner forwarded.',out); self.assertNotIn('data-cf-component="Render"',out)
+ def test_glossary_renders_configured_terms(self):
+  mod.configure_glossaries({'workers': {'productName': 'Workers', 'entries': [{'term': 'isolate', 'general_definition': 'a lightweight runtime'}]}})
+  _,out,_=self._conv('<Glossary product="workers" />')
+  self.assertIn('<table',out); self.assertIn('isolate',out); self.assertIn('A lightweight runtime',out)
+ def test_glossary_definition_renders_configured_term(self):
+  mod.configure_glossaries({'workers': {'entries': [{'term': 'isolate', 'general_definition': 'a **lightweight** runtime'}]}})
+  _,out,_=self._conv('<GlossaryDefinition term="isolate" prepend="In Workers, " />')
+  self.assertIn('In Workers, a <strong>lightweight</strong> runtime',out)
+ def test_api_request_renders_nested_json(self):
+  src='''<APIRequest path="/zones/{zone_id}/rulesets" method="PUT" json={{ rules: [{ action: "compress_response", enabled: true }], count: 2 }} />'''
+  _,out,_=self._conv(src)
+  self.assertIn('compress_response',out); self.assertIn('&quot;enabled&quot;: true',out)
+ def test_rule_id_renders_visible_suffix(self):
+  _,out,_=self._conv('<RuleID id="00000000-1111-2222-3333-abcdef123456" />')
+  self.assertIn('ef123456',out); self.assertIn('00000000-1111-2222-3333-abcdef123456',out)
+ def test_product_release_notes_render_configured_entries(self):
+  mod.configure_release_notes({'sdk': {'entries': [{'publish_date': '2026-01-02', 'title': 'SDK 2', 'description': 'Added **support**.'}]}})
+  fm,out=mod.convert('<ProductReleaseNotes />','fixture',metadata={'release_notes_file_name':['sdk']})
+  self.assertIn('<h2',out); self.assertIn('2026-01-02',out); self.assertIn('<strong>support</strong>',out)
+ def test_wrangler_namespace_renders_commands_and_arguments(self):
+  mod.configure_wrangler_commands({'d1': [{'command':'wrangler d1 create','metadata':{'description':'Create a database'},'args':{'name':{'description':'Database name','demandOption':True}},'positionalArgs':['name']}]})
+  _,out,_=self._conv('<WranglerNamespace namespace="d1" />')
+  self.assertIn('d1 create',out); self.assertIn('<pre>',out); self.assertIn('Database name',out)
 if __name__=='__main__': unittest.main()

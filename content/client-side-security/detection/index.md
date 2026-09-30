@@ -1,0 +1,1 @@
+<ul class="directory-listing"><li><a href="/client-side-security/detection/monitor-connections-scripts/">Monitor resources and cookies</a></li><li><a href="/client-side-security/detection/review-malicious-scripts/">Review resources considered malicious</a></li><li><a href="/client-side-security/detection/review-changed-scripts/">Review changed scripts</a></li></ul>

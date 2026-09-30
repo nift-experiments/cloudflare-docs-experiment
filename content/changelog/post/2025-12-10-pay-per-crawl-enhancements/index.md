@@ -1,0 +1,21 @@
+<div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
+<div class="changelog-tools"><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
+<article class="changelog-detail"><a href="/changelog/">← Back to all posts</a>
+<time>December 10, 2025</time><h2 id="post-title">Pay Per Crawl (Private beta) - Discovery API, custom pricing, and advanced configuration</h2>
+<div class="changelog-badges"><span>ai-crawl-control</span></div><div class="changelog-body"><p>Pay Per Crawl is introducing enhancements for both AI crawler operators and site owners, focusing on programmatic discovery, flexible pricing models, and granular configuration control.</p>
+<h4 id="for-ai-crawler-operators">For AI crawler operators</h4>
+<h4 id="discovery-api">Discovery API</h4>
+<p>A new authenticated API endpoint allows verified crawlers to programmatically discover domains participating in Pay Per Crawl. Crawlers can use this to build optimized crawl queues, cache domain lists, and identify new participating sites. This eliminates the need to discover payable content through trial requests.</p>
+<p>The API endpoint is <code>GET https://crawlers-api.ai-audit.cfdata.org/charged_zones</code> and requires Web Bot Auth authentication. Refer to <a href="/ai-crawl-control/features/pay-per-crawl/use-pay-per-crawl-as-ai-owner/discover-payable-content/">Discover payable content</a> for authentication steps, request parameters, and response schema.</p>
+<h4 id="payment-header-signature-requirement">Payment header signature requirement</h4>
+<p>Payment headers (<code>crawler-exact-price</code> or <code>crawler-max-price</code>) must now be included in the Web Bot Auth <code>signature-input</code> header components. This security enhancement prevents payment header tampering, ensures authenticated payment intent, validates crawler identity with payment commitment, and protects against replay attacks with modified pricing. Crawlers must add their payment header to the list of signed components when <a href="/ai-crawl-control/features/pay-per-crawl/use-pay-per-crawl-as-ai-owner/crawl-pages/#22-sign-your-request-with-web-bot-auth">constructing the signature-input header</a>.</p>
+<h4 id="new-crawler-error-header">New <code>crawler-error</code> header</h4>
+<p>Pay Per Crawl error responses now include a new <code>crawler-error</code> header with 11 specific <a href="/ai-crawl-control/features/pay-per-crawl/use-pay-per-crawl-as-ai-owner/error-codes/">error codes</a> for programmatic handling. Error response bodies remain unchanged for compatibility. These codes enable robust error handling, automated retry logic, and accurate spending tracking.</p>
+<h4 id="for-site-owners">For site owners</h4>
+<h4 id="configure-free-pages">Configure free pages</h4>
+<p>Site owners can now offer free access to specific pages like homepages, navigation, or discovery pages while charging for other content. Create a <a href="/ai-crawl-control/features/pay-per-crawl/use-pay-per-crawl-as-site-owner/advanced-configuration/#disable-pay-per-crawl-by-uri-pattern">Configuration Rule</a> in <strong>Rules</strong> &gt; <strong>Configuration Rules</strong>, set your URI pattern using wildcard, exact, or prefix matching on the <strong>URI Full</strong> field, and enable the <strong>Disable Pay Per Crawl</strong> setting. When disabled for a URI pattern, crawler requests pass through without blocking or charging.</p>
+<p>Some paths are always free to crawl. These paths are: <code>/robots.txt</code>, <code>/sitemap.xml</code>, <code>/security.txt</code>, <code>/.well-known/security.txt</code>, <code>/crawlers.json</code>.</p>
+<h4 id="get-started">Get started</h4>
+<p><strong>AI crawler operators</strong>: <a href="/ai-crawl-control/features/pay-per-crawl/use-pay-per-crawl-as-ai-owner/discover-payable-content/">Discover payable content</a> | <a href="/ai-crawl-control/features/pay-per-crawl/use-pay-per-crawl-as-ai-owner/crawl-pages/">Crawl pages</a></p>
+<p><strong>Site owners</strong>: <a href="/ai-crawl-control/features/pay-per-crawl/use-pay-per-crawl-as-site-owner/advanced-configuration/">Advanced configuration</a></p>
+</div></article></div>

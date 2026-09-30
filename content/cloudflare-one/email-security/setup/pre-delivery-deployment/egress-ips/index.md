@@ -1,0 +1,13 @@
+<p>When Email Security processes inbound messages through an <a href="/cloudflare-one/email-security/setup/pre-delivery-deployment/mx-inline-deployment/">MX/Inline deployment</a>, it re-delivers the messages to your mailbox from its own IP addresses, known as egress IPs (the source addresses Cloudflare sends outbound mail from). Your existing email provider (such as Microsoft 365 or Google Workspace) needs to be configured to accept connections from these addresses, otherwise it will reject the messages as coming from an unauthorized sender.</p>
+<p>Add all of the following addresses to your mail provider's IP allowlist.</p>
+<aside class="nb-aside caution">
+<h3 class="nb-aside-title" id="additional-information-for-microsoft-365">Additional information for Microsoft 365</h3>
+@markup("md", "content/.markup/bodies/4945.md")
+</aside>
+<h3 id="ipv4">IPv4</h3>
+<pre><code class="language-txt">52.11.209.211&#10;52.89.255.11&#10;52.0.67.109&#10;54.173.50.115&#10;104.30.32.0/19&#10;158.51.64.0/26&#10;158.51.65.0/26&#10;134.195.26.0/23&#10;35.157.195.63&#10;52.58.35.43&#10;</code></pre>
+<h3 id="ipv6">IPv6</h3>
+<pre><code class="language-txt">2405:8100:c400::/38&#10;</code></pre>
+<h2 id="microsoft-365-24-addresses">Microsoft 365 <code>/24</code> addresses</h2>
+<p>Use these IPv4 addresses for Microsoft 365, instead of the <code>/19</code> and <code>/23</code> subnets:</p>
+<pre><code class="language-txt">104.30.32.0/24&#10;104.30.33.0/24&#10;104.30.34.0/24&#10;104.30.35.0/24&#10;104.30.36.0/24&#10;104.30.37.0/24&#10;104.30.38.0/24&#10;104.30.39.0/24&#10;104.30.40.0/24&#10;104.30.41.0/24&#10;104.30.42.0/24&#10;104.30.43.0/24&#10;104.30.44.0/24&#10;104.30.45.0/24&#10;104.30.46.0/24&#10;104.30.47.0/24&#10;104.30.48.0/24&#10;104.30.49.0/24&#10;104.30.50.0/24&#10;104.30.51.0/24&#10;104.30.52.0/24&#10;104.30.53.0/24&#10;104.30.54.0/24&#10;104.30.55.0/24&#10;104.30.56.0/24&#10;104.30.57.0/24&#10;104.30.58.0/24&#10;104.30.59.0/24&#10;104.30.60.0/24&#10;104.30.61.0/24&#10;104.30.62.0/24&#10;104.30.63.0/24&#10;134.195.26.0/24&#10;134.195.27.0/24&#10;</code></pre>

@@ -1,0 +1,46 @@
+<p>Most development teams struggle to keep track of their APIs. Cloudflare API Discovery helps you map out and understand your API attack surface — the full set of endpoints that could be targeted by attackers.</p>
+<h2 id="process">Process</h2>
+<p>Cloudflare produces a map of <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
+@markup("md", "content/.markup/bodies/3200.md")
+</div> by grouping similar request paths together (path normalization).
+<p>For example, you might have thousands of APIs, but a lot of the calls look similar, such as:</p>
+<ul>
+<li><code>api.example.com/profile/238</code></li>
+<li><code>api.example.com/profile/392</code></li>
+</ul>
+<p>Both paths serve a similar purpose — retrieving user profiles — but they are not identical. To simplify your endpoints, these examples might both map to <code>api.example.com/profile/*</code>.</p>
+<p>API Discovery runs this process across all your traffic, generating a simple map of endpoints that might look like:</p>
+<pre><code>/api/login/{customer_identifier}&#10;/api/auth&#10;/api/account/{customer_identifier}&#10;/api/password_reset&#10;/api/logout&#10;</code></pre>
+<p>Similarly, if you have multiple subdomains that share the same set of endpoints, Cloudflare consolidates subdomains:</p>
+<pre><code class="language-txt">us-api.example.com/api/v1/users/{var1}&#10;de-api.example.com/api/v1/users/{var1}&#10;fr-api.example.com/api/v1/users/{var1}&#10;jp-api.example.com/api/v1/users/{var1}&#10;</code></pre>
+<p>Cloudflare consolidates these to <code>{hostVar1}.example.com/api/v1/users/{var1}</code>.</p>
+<p>For more technical details, refer to the <a href="https://blog.cloudflare.com/ml-api-discovery-and-schema-learning/">blog post</a>.</p>
+<h3 id="discovered-operations">Discovered operations</h3>
+<p>Web Assets adds discovered API endpoints to the operation inventory as candidate operations. Candidate operations provide context for matching, logging, detections, and rules before you manually review them.</p>
+<p>You do not need to promote every discovered operation. Promote an operation to move it to the <code>full</code> state and start profile learning. Full operations support persisted API profiles, risk findings, and protections that require a known API endpoint.</p>
+<p>To promote a discovered operation:</p>
+<div class="nb-steps">
+@markup("md", "content/.markup/bodies/3201.md")
+</div>
+<p>Cloudflare moves the operation to the <code>full</code> state. The row action then changes to <strong>Profile learned</strong>. For more information, refer to <a href="/security/web-assets/manage-operations/#promote-an-operation">Promote an operation</a>.</p>
+<h3 id="machine-learning-based-discovery">Machine learning-based discovery</h3>
+<p>Your API endpoints are discovered with both session identifier-based discovery and machine learning-based discovery.</p>
+<p>To access machine learning-based discovery:</p>
+<div class="nb-steps">
+@markup("md", "content/.markup/bodies/3202.md")
+</div>
+<p>If all of your zone's API traffic contains the <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
+@markup("md", "content/.markup/bodies/3203.md")
+</div> that you have configured, both sources may deliver the same results due to similarities between their underlying methodology. Machine learning-based discovery can identify API traffic regardless of whether your API uses a session identifier.
+<p>You can direct any feedback about your API Discovery results to your account team.</p>
+<h2 id="requirements">Requirements</h2>
+<p>API Discovery requires an active API Shield subscription at both the account and zone level. If your subscription is active at the account level but not assigned to the zone, Discovery will not run for that zone.</p>
+<p>For an endpoint to appear in Discovery results, every request must meet the following conditions:</p>
+<ul>
+<li>The request must return a <code>2xx</code> response code from the Cloudflare edge.</li>
+<li>The request must not originate directly from a Cloudflare Worker. Traffic sent through the Cloudflare traffic simulator or other Worker-based test harnesses will not be counted toward Discovery thresholds.</li>
+<li>The endpoint must receive at least 500 requests within a continuous 10-day period.</li>
+</ul>
+<p>For more information, refer to <a href="/security/web-assets/manage-operations/#discovery-requirements/">Discovery requirements</a>.</p>
+<h2 id="availability">Availability</h2>
+<p>API Discovery is only available for Enterprise customers. If you are an Enterprise customer interested in this product, contact your account team.</p>

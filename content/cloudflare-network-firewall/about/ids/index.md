@@ -1,0 +1,8 @@
+<p>Cloudflare's Intrusion Detection System (IDS) is a Cloudflare Advanced Network Firewall (formerly Magic Firewall) feature you can use to actively monitor for a wide range of known threat signatures in your traffic. An IDS expands the security coverage of a firewall to analyze traffic against a broader threat database, detecting a variety of sophisticated attacks such as ransomware, data exfiltration, and network scanning based on signatures or “fingerprints” in network traffic.</p>
+<p>With Cloudflare's global anycast network, you get:</p>
+<ul>
+<li>Cloudflare's entire global network capacity is now the capacity of your IDS.</li>
+<li>Built in redundancy and failover. Every server runs Cloudflare's IDS software, and traffic is automatically attracted to the closest network location to its source.</li>
+<li>Continuous deployment for improvements to Cloudflare's IDS capabilities.</li>
+</ul>
+<p>Refer to <a href="/cloudflare-network-firewall/how-to/enable-ids/">Enable IDS</a> for more information on enabling IDS and creating new rulesets. After IDS is enabled, your traffic will be scanned to find malicious traffic. The detections are logged to destinations that can be configured from the dashboard. Refer to <a href="/cloudflare-network-firewall/how-to/use-logpush-with-ids/">Use Logpush with IDS</a> for instructions on configuring a destination to receive the detections. Additionally, all traffic that is analyzed can be accessed via <a href="/analytics/network-analytics/">network analytics</a>. Refer to <a href="/cloudflare-network-firewall/tutorials/graphql-analytics/">GraphQL Analytics</a> to query the analytics data.</p>

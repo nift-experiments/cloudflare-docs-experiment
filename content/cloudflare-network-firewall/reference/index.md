@@ -1,0 +1,2 @@
+<p>Review the content below for more information about Cloudflare Network Firewall (formerly Magic Firewall).</p>
+<ul class="directory-listing"><li><a href="/cloudflare-network-firewall/reference/network-firewall-fields/">Cloudflare Network Firewall fields</a></li><li><a href="/ruleset-engine/rules-language/functions/#cloudflare-network-firewall-functions">Cloudflare Network Firewall functions</a></li></ul>

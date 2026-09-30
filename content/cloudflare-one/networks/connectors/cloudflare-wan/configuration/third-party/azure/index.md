@@ -1,0 +1,2 @@
+<p>Microsoft Azure integration guides currently available:</p>
+<ul class="directory-listing"><li><a href="/cloudflare-one/networks/connectors/cloudflare-wan/configuration/third-party/azure/azure-virtual-wan/">Microsoft Azure Virtual WAN</a></li><li><a href="/cloudflare-one/networks/connectors/cloudflare-wan/configuration/third-party/azure/azure-vpn-gateway/">Microsoft Azure VPN Gateway</a></li></ul>

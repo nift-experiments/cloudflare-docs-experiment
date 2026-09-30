@@ -1,0 +1,2 @@
+<p>Deploy a fully working platform to your Cloudflare account and customize it for your use case.</p>
+<ul class="directory-listing"><li><a href="https://github.com/cloudflare/templates/tree/main/worker-publisher-template">Platform Starter Kit</a></li><li><a href="https://github.com/cloudflare/vibesdk">Deploy an AI vibe coding platform</a></li><li><a href="https://github.com/cloudflare/templates/tree/main/internal-sites-template">Deploy an Internal Static Sites Platform</a></li></ul>

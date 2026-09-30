@@ -1,0 +1,9 @@
+<h2 id="restore-super-administrator-after-group-misconfiguration">Restore Super Administrator after group misconfiguration</h2>
+<p>If you have removed all Super Administrators mistakenly, you can restore the role to account member(s) using the Account API Token you created for SCIM provisioning.</p>
+<p>First, fetch a list of account members and find the member ID for the user you want to restore Super Admin to via <a href="/api/resources/accounts/subresources/members/methods/list/">list members</a>.</p>
+<pre><code class="language-curl">curl -X GET &quot;https://api.cloudflare.com/client/v4/accounts/{account_id}/members&quot; \&#10;  &#45;H &quot;Authorization: Bearer YOUR_SCIM_AOT&quot; \&#10;  &#45;H &quot;Content-Type: application/json&quot;&#10;</code></pre>
+<p>Then restore the Super Admin role to that member via <a href="/api/resources/accounts/subresources/members/methods/update/">update member</a></p>
+<pre><code class="language-curl">curl -X PUT &quot;https://api.cloudflare.com/client/v4/accounts/{account_id}/members/{member_id}&quot; \&#10;  &#45;H &quot;Authorization: Bearer YOUR_SCIM_AOT&quot; \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;roles&quot;: [&#10;      {&#10;        &quot;id&quot;: &quot;33666b9c79b9a5273fc7344ff42f953d&quot;&#10;      }&#10;    ]&#10;  }&#x27;&#10;</code></pre>
+<p>The value <code>33666b9c79b9a5273fc7344ff42f953d</code> is the role ID of Super Administrator.</p>
+<h2 id="update-email-domains-after-onboarding">Update email domains after onboarding</h2>
+<p>We currently <strong>do not</strong> support updating email domains for users. This means that any SCIM <code>PATCH</code>/<code>PUT</code> operations that change email domains will be rejected. We recommend not using the email as the matching attribute if email domains are expected to change, and restarting provisioning manually.</p>

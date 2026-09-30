@@ -1,0 +1,2 @@
+<p>Refer to the following pages for more information about Turnstile's additional configurations:</p>
+<ul class="directory-listing"><li><a href="/turnstile/additional-configuration/hostname-management/">Hostname management</a></li><li><a href="/cloudflare-challenges/concepts/clearance/#pre-clearance-support-in-turnstile">Pre-clearance support</a></li><li><a href="/turnstile/additional-configuration/ephemeral-id/">Ephemeral IDs</a></li><li><a href="/turnstile/additional-configuration/offlabel/">Remove Cloudflare branding with Offlabel</a></li></ul>

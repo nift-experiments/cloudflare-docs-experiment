@@ -1,0 +1,7 @@
+<div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
+<div class="changelog-tools"><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
+<article class="changelog-detail"><a href="/changelog/">← Back to all posts</a>
+<time>December 8, 2025</time><h2 id="post-title">Wrangler config is optional when using Vite plugin</h2>
+<div class="changelog-badges"><span>workers</span></div><div class="changelog-body"><p>When using the <a href="/workers/vite-plugin/">Cloudflare Vite plugin</a> to build and deploy Workers, a Wrangler configuration file is now optional for assets-only (static) sites. If no <code>wrangler.toml</code>, <code>wrangler.json</code>, or <code>wrangler.jsonc</code> file is found, the plugin generates sensible defaults for an assets-only site. The <code>name</code> is based on the <code>package.json</code> or the project directory name, and the <code>compatibility_date</code> uses the latest date supported by your installed Miniflare version.</p>
+<p>This allows easier setup for static sites using Vite. Note that SPAs will still need to <a href="https://developers.cloudflare.com/workers/static-assets/routing/single-page-application/">set <code>assets.not_found_handling</code> to <code>single-page-application</code></a> in order to function correctly.</p>
+</div></article></div>

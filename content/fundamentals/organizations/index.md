@@ -1,0 +1,31 @@
+<p>An Organization is a top-level container in Cloudflare for managing multiple accounts. It allows administrators to govern accounts, members, and resources from a single location rather than managing each account individually. Organization Super Administrators have implicit access to all accounts within the Organization. This means they do not need explicit membership on each account.</p>
+<aside class="nb-aside note">
+@markup("md", "content/.markup/bodies/8813.md")
+</aside>
+<h2 id="who-is-this-for">Who is this for?</h2>
+<p>Organizations is available to <strong>Enterprise customers of any size</strong> and <strong>MSSP/Distributor partners</strong> who manage multiple Cloudflare accounts. Whether you have 5 accounts or 500, Organizations helps you manage them from one dashboard.</p>
+<p>Organizations supports two customer types, each with a different structure:</p>
+<ul>
+<li><strong><a href="/fundamentals/organizations/for-enterprise/">Enterprise Organizations</a></strong>: A single-tier structure for businesses managing their own accounts. One Organization contains multiple accounts directly.</li>
+<li><strong><a href="/fundamentals/organizations/for-mssp-distributors/">MSSP/Distributor Organizations</a></strong>: A multi-tier structure for channel partners and managed security service providers (MSSPs). A Distributor Organization contains child MSSP Organizations, each managing their own customer accounts.</li>
+</ul>
+<p>Organization type is set at creation and cannot be changed.</p>
+<h3 id="enterprise-hierarchy">Enterprise hierarchy</h3>
+<pre><code>Organization&#10;├── Account 1&#10;│   ├── Zone A&#10;│   └── Zone B&#10;├── Account 2&#10;│   ├── Zone C&#10;│   └── Zone D&#10;└── Account 3&#10;    └── Zone E&#10;</code></pre>
+<h3 id="mssp-distributor-hierarchy">MSSP/Distributor hierarchy</h3>
+<pre><code>Distributor Organization&#10;├── MSSP Organization A&#10;│   ├── Sub-Organization A1&#10;│   │   ├── Customer Account 1&#10;│   │   │   ├── Zone A&#10;│   │   │   └── Zone B&#10;│   │   └── Customer Account 2&#10;│   │       └── Zone C&#10;│   └── Customer Account 3&#10;│       └── Zone D&#10;└── MSSP Organization B&#10;    ├── Customer Account 4&#10;    │   └── Zone E&#10;    └── Customer Account 5&#10;        └── Zone F&#10;</code></pre>
+<p>MSSP/Distributor Organizations support up to 5 levels of nested sub-organizations.</p>
+<h2 id="core-features">Core features</h2>
+<ul>
+<li><strong>Centralized account management</strong>: Manage all accounts from a single dashboard.</li>
+<li><strong>Implicit access</strong>: Organization Super Administrators can access any account in the Organization without requiring explicit per-account membership.</li>
+<li><strong>Aggregate analytics</strong>: View, filter, and download aggregate HTTP analytics across all Organization child accounts.</li>
+<li><strong>Organization-level membership</strong>: Invite members to the Organization once, granting them access to all child accounts.</li>
+<li><strong>WAF and Gateway policy sharing</strong>: Create security policies once and share them across accounts in your Organization.</li>
+<li><strong>IdP federation</strong>: Share a single identity provider configuration across all accounts in your Organization. Refer to <a href="/cloudflare-one/integrations/identity-providers/idp-federation/">IdP federation</a> for setup details.</li>
+<li><strong>API, SDK, and Terraform support</strong>: Manage Organizations programmatically with the <a href="/api/resources/organizations/">Cloudflare Organizations API</a>, SDKs, or Terraform provider. User API Tokens support some Organization operations, but they cannot complete the full Terraform resource lifecycle. Refer to <a href="/fundamentals/organizations/limitations/#api-authentication">API authentication</a>.</li>
+<li><strong>Enhanced account switcher</strong>: Navigate between accounts with an Organization-aware account switcher in the dashboard.</li>
+</ul>
+<p>For a full list of features and limitations specific to each Organization type, refer to the <a href="/fundamentals/organizations/for-enterprise/">Enterprise</a> or <a href="/fundamentals/organizations/for-mssp-distributors/">MSSP/Distributor</a> guide.</p>
+<hr />
+<ul class="directory-listing"><li><a href="/fundamentals/organizations/for-enterprise/">Organizations for Enterprise</a></li><li><a href="/fundamentals/organizations/for-mssp-distributors/">Organizations for MSSP and Distributors</a></li><li><a href="/fundamentals/organizations/policy-sharing/">Policy sharing</a></li><li><a href="/fundamentals/organizations/limitations/">Limitations and troubleshooting</a></li><li><a href="/fundamentals/organizations/setup/">Set up</a></li><li><a href="/fundamentals/organizations/manage-members/">Manage members</a></li><li><a href="/fundamentals/organizations/manage-organization/">Manage organizations</a></li></ul>

@@ -1,0 +1,1 @@
+<ul class="directory-listing"><li><a href="/email-security/email-configuration/lists/allowed-patterns/">Allowed patterns</a></li><li><a href="/email-security/email-configuration/lists/trusted-domains/">Trusted domains</a></li><li><a href="/email-security/email-configuration/lists/block-list/">Block lists</a></li></ul>

@@ -1,0 +1,2 @@
+<p>There are many other ways to use 1.1.1.1 beyond the traditional set up in operating systems and routers.</p>
+<ul class="directory-listing"><li><a href="/1.1.1.1/additional-options/dns-in-google-sheets/">DNS in Google Sheets</a></li><li><a href="/1.1.1.1/additional-options/dns-over-discord/">DNS over Discord</a></li><li><a href="/1.1.1.1/additional-options/dns-over-tor/">DNS over Tor</a></li></ul>

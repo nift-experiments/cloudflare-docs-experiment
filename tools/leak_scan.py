@@ -51,11 +51,9 @@ REAL = {
     'mdx-directive': re.compile(r':::(?:note|caution|tip|warning|info)\['),
     'mdx-bare-directive': re.compile(r'^\s*:::\s*$', re.M),
     'mdx-import': re.compile(r'^\s*(?:import|export)\s+[\w{*].*?\bfrom\s+["\']', re.M),
-    'component-open': re.compile(r'<(Steps|Tabs|TabItem|Aside|Details|Card|CardGrid|'
-                                 r'LinkCard|LinkTitleCard|ListCard|TypeScriptExample|'
-                                 r'WranglerConfig|PackageManagers|FAQList|FAQItem|'
-                                 r'TroubleshootingList|TroubleshootingItem|FileTree|'
-                                 r'Steps)\b'),
+    'component-open': re.compile(
+        r'(?:<|&lt;)(?:' + '|'.join(
+            re.escape(name) for name in sorted(KNOWN_COMPONENTS)) + r')\b'),
     'escaped-html': re.compile(r'&lt;(div|section|aside|details|p|a|h[1-6]|pre|code)\b'),
 }
 
@@ -147,8 +145,27 @@ def main(argv=None):
     parser.add_argument('public', nargs='?', default=str(ROOT / 'public'))
     parser.add_argument('--write-classified', nargs='?', const=str(
         ROOT / 'reports/cp6/leak-scan-classified.json'))
+    parser.add_argument('--candidate-provenance', type=Path)
     args = parser.parse_args(argv)
     report = scan_public(Path(args.public))
+    ordinary_manifest = ROOT / 'reports/cp6/expected-routes.json'
+    generated_manifest = ROOT / 'reports/cp6/expected-generated-routes.json'
+    if ordinary_manifest.is_file() and generated_manifest.is_file():
+        ordinary_sha = json.loads(ordinary_manifest.read_text()).get('upstream_sha')
+        generated_sha = json.loads(generated_manifest.read_text()).get('upstream_sha')
+        if not ordinary_sha or ordinary_sha != generated_sha:
+            raise RuntimeError('ordinary/generated manifest upstream SHA mismatch')
+        report['upstreamSha'] = ordinary_sha
+    if args.candidate_provenance:
+        provenance = json.loads(args.candidate_provenance.read_text())
+        if provenance.get('upstreamSha') != report.get('upstreamSha'):
+            parser.error('candidate provenance upstream SHA mismatch')
+        from artifact_provenance import tree_digest
+        digest, file_count = tree_digest(Path(args.public))
+        if (provenance.get('publicTreeSha256') != digest or
+                provenance.get('publicFileCount') != file_count):
+            parser.error('candidate provenance public tree mismatch')
+        report['candidateProvenance'] = provenance
     output = json.dumps(report, indent=2) + '\n'
     print(output, end='')
     if args.write_classified:

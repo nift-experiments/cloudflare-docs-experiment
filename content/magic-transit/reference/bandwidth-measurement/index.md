@@ -1,0 +1,13 @@
+<p>Cloudflare measures Magic Transit usage based on the 95th percentile of clean bandwidth for your network. &quot;Clean bandwidth&quot; refers to the egress traffic Cloudflare routes to your network after applying all Distributed Denial of Service (<a href="/ddos-protection/">DDoS</a>) mitigation and firewall functions. The usage measurement explicitly excludes attack traffic we block at our global network.</p>
+<p>To measure 95th percentile bandwidth, Cloudflare records clean bandwidth leaving our global network at five-minute intervals, sorts these measurements in descending order, and discards the top 5% of measurements it recorded. The highest remaining value constitutes the 95th percentile bandwidth measurement for that time period.</p>
+<h2 id="bandwidth-limits-and-overages">Bandwidth limits and overages</h2>
+<p>Magic Transit contracts may include a subscribed bandwidth amount, but this is a billing metric, not a technical limitation. Cloudflare does not restrict, throttle, or drop traffic when your usage exceeds your contracted bandwidth. Instead, overage charges apply according to your contract terms.</p>
+<p>If you want to discuss adjusting your subscribed bandwidth or contract terms, contact your Cloudflare account team.</p>
+<h2 id="cloudflare-originated-traffic">Cloudflare-originated traffic</h2>
+<p>Clean bandwidth includes all egress traffic Cloudflare routes to your network through Magic Transit tunnels and interconnects. This includes traffic that originated from the public Internet, as well as response traffic from services within the Cloudflare network (such as Cloudflare CDN) destined to your servers.</p>
+<p>For example, if you have onboarded <code>10.0.0.0/20</code> to Magic Transit and are advertising it from the Cloudflare edge, but have also advertised a more specific <code>10.0.1.0/24</code> via your ISP, the following applies:</p>
+<ul>
+<li><strong>Internet traffic</strong> to <code>10.0.1.0/24</code> reaches you via your ISP because the global Internet routing table uses Longest Prefix Match.</li>
+<li><strong>Cloudflare-originated traffic</strong> to <code>10.0.1.0/24</code> is routed through your Magic Transit tunnels and interconnects because Cloudflare keeps that traffic inside its own network when the covering /20 prefix is advertised from Cloudflare. This traffic counts toward your bandwidth usage.</li>
+</ul>
+<p><strong>To avoid this:</strong> If you do not want Cloudflare-originated traffic flowing through your Magic Transit tunnel, withdraw the covering prefix from Cloudflare. The traffic will then egress to the Internet and follow standard Internet routing (including your more specific ISP routes).</p>

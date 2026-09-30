@@ -1,0 +1,2 @@
+<p>Refer to the following pages for more information about Cloudflare Challenges:</p>
+<ul class="directory-listing"><li><a href="/cloudflare-challenges/reference/challenge-solve-rate/">Challenge solve rate (CSR)</a></li><li><a href="/cloudflare-challenges/reference/private-access-tokens/">Private Access Tokens (PAT)</a></li><li><a href="/cloudflare-challenges/reference/supported-browsers/">Supported browsers</a></li><li><a href="/cloudflare-challenges/reference/supported-languages/">Supported languages</a></li></ul>

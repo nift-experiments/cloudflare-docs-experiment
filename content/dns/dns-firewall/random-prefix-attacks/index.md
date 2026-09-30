@@ -1,0 +1,12 @@
+<p>Random prefix attacks are when someone sends a lot of traffic to subdomains that are highly unlikely to exist (<code>12345.example.com</code>, <code>abcdefg.example.com</code>), but are still associated with your main domain (<code>example.com</code>).</p>
+<p>Usually, a DNS query to each random subdomain (or prefix) is not repeated, so it cannot be cached by resolvers or any other proxies and always reaches the authoritative nameservers. Rate limiting or blocking queries based on source IP can introduce a high amount of false positives, since random prefix attacks commonly are conducted via public resolvers. This makes these attacks particularly effective and hard to mitigate.</p>
+<p>As part of <a href="/dns/dns-firewall/">DNS Firewall</a>, Cloudflare can protect your upstream authoritative nameservers from these attacks by blocking DNS queries that are determined to be part of an attack and thus preventing them from reaching your authoritative nameservers, where they could cause harm by overloading resources. This protection is an opt-in feature because of the potential for false positives.</p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="/dns/dns-firewall/random-prefix-attacks/about/">Background information</a></li>
+<li><a href="/dns/dns-firewall/random-prefix-attacks/setup/">Setup</a></li>
+</ul>
+<h2 id="limitations">Limitations</h2>
+<p>To reduce the impact of false positives, Cloudflare does not block entire <a href="https://publicsuffix.org/">public suffixes</a> (such as <code>com</code>). However, it can block domains directly under them (such as <code>example.com</code>).</p>
+<p>In addition, the default setting for the automatic mitigation ensures that it will only be deployed if upstream authoritative nameservers are determined to be unresponsive (and likely overloaded by an attack). This means that, as long as your authoritative nameservers can handle the traffic during a random prefix attack, Cloudflare will not actively block queries in order to avoid false positives. This setting is called <code>&quot;only_when_upstream_unhealthy&quot;</code> and is always true if not explicitly disabled during <a href="/dns/dns-firewall/random-prefix-attacks/setup/">Setup</a>.</p>
+<p>Because Cloudflare does not know which domains and subdomains exist as DNS records on an upstream nameserver, this feature takes a best effort approach by blocking DNS queries to affected subdomains in order to allow upstream nameservers to keep responding to DNS queries to unaffected subdomains.</p>

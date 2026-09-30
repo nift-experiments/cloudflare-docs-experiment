@@ -1,0 +1,2 @@
+<p>If you need help setting up a new Cloudflare account, refer to the following resources:</p>
+<ul class="directory-listing"><li><a href="/fundamentals/account/create-account/">Create account</a></li><li><a href="/fundamentals/account/account-security/">Account security</a></li><li><a href="/fundamentals/account/find-account-and-zone-ids/">Find account and zone IDs</a></li><li><a href="/fundamentals/account/change-super-admin/">Change Super Administrator</a></li></ul>

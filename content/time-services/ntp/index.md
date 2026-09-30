@@ -1,0 +1,7 @@
+<p><a href="https://tools.ietf.org/html/rfc1305">Network Time Protocol</a> (NTP) is an Internet protocol designed to synchronize time between computer systems communicating over unreliable and variable-latency network paths. Cloudflare offers its version of NTP for free so you can use our <a href="https://www.cloudflare.com/network/">global anycast network</a> to synchronize time from our closest server.</p>
+<h2 id="background">Background</h2>
+<p>NTP works by having a client send a query packet out to an NTP server that then responds with its clock time. The client then computes an estimate of the difference between its clock and the remote clock and attempts to compensate for any network delay. The NTP client then queries multiple servers and implements algorithms to select the best estimate.</p>
+<p>Cloudflare does not implement leap smearing: NTP includes a Leap Indicator field <a href="https://tools.ietf.org/html/rfc5905#section-7.3">spec</a> and the kernel will apply the leap second correction at the appropriate time. This is the behavior servers in <code>pool.ntp.org</code> share. Using servers that smear time along with servers that do not may lead to unpredictable and anomalous results.</p>
+<h2 id="next-steps">Next steps</h2>
+<p>For more background information about NTP, refer to the <a href="https://blog.cloudflare.com/secure-time/">introductory blog</a>.</p>
+<p>To enable NTP on your device, refer to our <a href="/time-services/ntp/usage/">Usage guide</a>.</p>

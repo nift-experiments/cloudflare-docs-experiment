@@ -1,7 +1,47 @@
-<nav class="breadcrumbs">Home / Cloudflare Docs</nav>
-<h1>Cloudflare Developer Docs</h1>
-<div class="page-actions">Last updated Sep 18, 2026 &nbsp;|&nbsp; Copy as Markdown &nbsp;|&nbsp; View as Markdown &nbsp;|&nbsp; Agent setup</div>
-<p>This CP2 shell is the design-system reference surface for the Nift port. Bulk Cloudflare content is intentionally deferred until the content-model checkpoints.</p>
-<h2 id="design-system">Design system</h2><p>The shell now uses the frozen upstream Nimbus colour, typography, layout and theme tokens rather than an approximate visual palette.</p>
-<h2 id="geometry">Geometry</h2><p>The 56px sticky header, 18.75rem sidebar, 18rem table of contents and 43.5rem article width mirror the upstream documentation layout.</p>
-<h2 id="theme">Theme</h2><p>The theme bootstrap follows the upstream <code>ui-mode</code> preference contract and supports light, dark and automatic system modes before paint.</p>
+<div class="home-content">
+<section class="home-hero" aria-labelledby="home-title">
+<h1 id="home-title">Cloudflare Developer Docs</h1>
+<p>Explore guides and tutorials to start building on Cloudflare's platform.</p>
+<div class="home-actions"><a class="primary-action" href="@path('fundamentals/get-started/')">Get started</a><a href="@path('agent-setup/')">Set up an AI agent</a></div>
+</section>
+<section aria-labelledby="build-heading"><h2 id="build-heading">Powerful primitives, seamlessly integrated</h2><div class="home-card-grid">
+<article class="home-card"><p class="eyebrow">Compute</p><h3 id="deploy-with-one-command">Deploy with one command</h3><p>Build serverless functions and full-stack applications on Cloudflare's global network.</p><code>npm create cloudflare@latest my-app</code><a href="@path('workers/get-started/guide/')">Create your first Worker</a></article>
+<article class="home-card"><p class="eyebrow">AI</p><h3 id="ai-inference-platform">The AI inference platform</h3><p>Run AI inference globally, build agents, and search across your data.</p><code>npx wrangler ai models</code><a href="@path('workers-ai/models/')">Browse available models</a></article>
+<article class="home-card"><p class="eyebrow">Storage and databases</p><h3 id="database-feels-instant">Make your database feel instant, everywhere</h3><p>Use serverless SQL, globally distributed key-value storage, and database acceleration.</p><code>npx wrangler d1 create my-database</code><a href="@path('d1/get-started/')">Get started with D1</a></article>
+<article class="home-card"><p class="eyebrow">Media</p><h3 id="media-pipelines">Build media pipelines without infrastructure headaches</h3><p>Store, optimize, transform, and deliver images and video without managing media infrastructure.</p><code>curl --request POST https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/images/v1</code><a href="@path('images/get-started/introduction/')">Get started with Images</a></article>
+</div></section>
+<section class="home-agent" aria-labelledby="agent-heading"><h2 id="agent-heading">Build with your favorite AI agent</h2><p>Connect coding agents to current Cloudflare documentation, skills, and tools.</p><a href="@path('agent-setup/')"><h3>Browse all agent setup guides</h3></a></section>
+<section aria-labelledby="updates-heading"><h2 id="updates-heading">What's new</h2><p>The latest features and improvements shipping across Cloudflare.</p><div class="home-card-grid">
+<a class="home-card" href="@path('changelog/')"><h3>Delete Workflow instances individually or in batches</h3><span>Manage Workflow instances with more precise controls.</span></a>
+<a class="home-card" href="@path('changelog/')"><h3>Create additional Free accounts through the dashboard and API</h3><span>Organize projects across additional Cloudflare accounts.</span></a>
+<a class="home-card" href="@path('changelog/')"><h3>Reject busy synchronous inference requests</h3><span>Workers AI now reports overloaded synchronous requests directly.</span></a>
+<a class="home-card" href="@path('changelog/')"><h3>Workers traces now automatically include JavaScript RPC session spans</h3><span>Trace RPC sessions without additional instrumentation.</span></a>
+<a class="home-card" href="@path('changelog/')"><h3>Hyperdrive support for Python Workers</h3><span>Connect Python Workers to supported databases through Hyperdrive.</span></a>
+<a class="home-card" href="@path('changelog/')"><h3>R2 Data Catalog adds table maintenance visibility and manual queueing</h3><span>Inspect and control table maintenance work.</span></a>
+<a class="home-card" href="@path('changelog/')"><h3>Stream Workflow instance events in your Worker or via the API with .subscribe()</h3><span>Subscribe to Workflow instance events from Workers or through the API.</span></a>
+<a class="home-card" href="@path('changelog/')"><h3>Access for Infrastructure now supports tagged targets and tag-based target criteria</h3><span>Organize infrastructure targets and policies with reusable tags.</span></a>
+</div></section>
+<section aria-labelledby="security-heading"><h2 id="security-heading">Security that scales</h2><p>Everything you need to secure applications, APIs, and infrastructure.</p><div class="home-card-grid compact">
+<h3 class="eyebrow">Public websites &amp; apps</h3>
+<a class="home-card" href="@path('waf/')"><h3>Protect your applications without sacrificing performance</h3><span>Identify and block malicious payloads before they compromise your application.</span></a>
+<a class="home-card" href="@path('ssl/')"><h3>Encrypt your site in minutes</h3><span>Streamline TLS certificate management.</span></a>
+<a class="home-card" href="@path('turnstile/')"><h3>Verify visitors without CAPTCHA</h3><span>Block unwanted bots without slowing down real users.</span></a>
+<h3 class="eyebrow">Corporate and home networks</h3>
+<a class="home-card" href="@path('cloudflare-one/networks/connectors/cloudflare-tunnel/')"><h3>Securely connect origins with post-quantum encrypted tunnels</h3><span>Use outbound-only encrypted tunnels with no open ports.</span></a>
+<a class="home-card" href="@path('cloudflare-one/access-controls/')"><h3>Secure internal applications with Cloudflare Access</h3><span>Apply identity-first access to private applications and infrastructure.</span></a>
+<a class="home-card" href="@path('cloudflare-one/traffic-policies/')"><h3>Secure Internet browsing without disruptions</h3><span>Inspect browser traffic with a cloud-native secure web gateway.</span></a>
+</div></section>
+<section aria-labelledby="performance-heading"><h2 id="performance-heading">Faster web performance</h2><p>Accelerate websites with Cloudflare CDN caching, Brotli compression, minification, intelligent cache purging, image optimization, smart routing, and load balancing. Track Core Web Vitals consistently across cities and regions.</p><div class="home-card-grid compact">
+<a class="home-card" href="@path('dns/')"><h3>Fast, reliable and resilient DNS queries</h3><span>Resolve DNS globally on Cloudflare's network.</span></a>
+<a class="home-card" href="@path('cache/')"><h3>Minimize origin load and accelerate dynamic content</h3><span>Serve content close to every visitor.</span></a>
+<a class="home-card" href="@path('cache/how-to/cache-rules/')"><h3>Default caching for static assets, with cache rules for full control</h3><span>Customize cache behavior for every application.</span></a>
+<a class="home-card" href="@path('speed/')"><h3>Assess your site speed and apply recommended optimizations</h3><span>Measure and improve site performance.</span></a>
+<a class="home-card" href="@path('images/')"><h3>Transform, optimize, and deliver images worldwide</h3><span>Build responsive image pipelines.</span></a>
+<a class="home-card" href="@path('web-analytics/')"><h3>Understand the performance of your web pages</h3><span>Use privacy-first analytics from real visitors.</span></a>
+</div><p><a href="@path('directory/')">Explore the Cloudflare product directory</a></p></section>
+<section aria-labelledby="community-heading"><h2 id="community-heading">Connect with Cloudflare</h2><p>Find answers, share ideas, read product news and the engineering blog, or contribute code and documentation on GitHub. Our developer ecosystem brings administrators, teams, and organizations together.</p><div class="home-card-grid compact">
+<a class="home-card" href="https://discord.cloudflare.com"><h3>Join the conversation</h3><span>Meet other developers in the Cloudflare Discord community.</span></a>
+<a class="home-card" href="https://github.com/cloudflare/cloudflare-docs"><h3>View the source</h3><span>Contribute to Cloudflare's open documentation.</span></a>
+<a class="home-card" href="https://blog.cloudflare.com"><h3>Read the latest</h3><span>Follow product launches and engineering stories.</span></a>
+</div></section>
+</div>

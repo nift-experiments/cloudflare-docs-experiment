@@ -1,0 +1,2 @@
+<p>Reference material for Email Service, including postmaster information, email headers, troubleshooting, and FAQ.</p>
+<ul class="directory-listing"><li><a href="/email-service/reference/postmaster/">Postmaster</a></li><li><a href="/email-service/reference/headers/">Email headers</a></li><li><a href="/email-service/reference/troubleshooting/">Troubleshooting</a></li><li><a href="/email-service/reference/faq/">FAQ</a></li></ul>

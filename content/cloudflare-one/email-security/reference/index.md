@@ -1,0 +1,1 @@
+<ul class="directory-listing"><li><a href="/cloudflare-one/email-security/reference/how-es-detects-phish/">How Email security detects phish</a></li><li><a href="/cloudflare-one/email-security/reference/dispositions-and-attributes/">Dispositions and attributes</a></li><li><a href="/cloudflare-one/email-security/reference/regional-processing/">Regional processing</a></li></ul>

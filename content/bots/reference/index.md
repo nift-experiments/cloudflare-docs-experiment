@@ -1,0 +1,2 @@
+<p>Refer to the following pages for more information on Cloudflare's bot solutions:</p>
+<ul class="directory-listing"><li><a href="/bots/reference/bot-verification/">Bot verification methods</a></li><li><a href="/bots/reference/bot-management-variables/">Bot Management variables</a></li><li><a href="/bots/reference/machine-learning-models/">Machine Learning models</a></li><li><a href="/bots/reference/alerts/">Bot Detection Alerts</a></li><li><a href="/bots/reference/sample-terms/">Sample terms</a></li></ul>

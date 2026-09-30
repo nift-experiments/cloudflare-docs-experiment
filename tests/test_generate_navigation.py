@@ -29,6 +29,7 @@ class TestNavigation(unittest.TestCase):
             self.write(root, pathlib.Path('widget/start/index.mdx'), 'title: Start here\nsidebar:\n  group:\n    label: Getting started\n    badge: Beta\n  order: 2')
             self.write(root, pathlib.Path('widget/start/install.mdx'), 'title: Install\nsidebar:\n  order: 1')
             self.write(root, pathlib.Path('widget/start/hidden.mdx'), 'title: Hidden\nsidebar:\n  hidden: true')
+            self.write(root, pathlib.Path('widget/start/disabled.mdx'), 'title: Disabled\nsidebar: false')
             self.write(root, pathlib.Path('widget/reference/index.mdx'), 'title: Reference\nsidebar:\n  group:\n    hideIndex: true\n  order: 3')
             self.write(root, pathlib.Path('widget/reference/api.mdx'), 'title: API')
             destination = root / 'out/navigation.json'
@@ -51,6 +52,7 @@ class TestNavigation(unittest.TestCase):
             self.assertEqual(getting_started['href'], '/widget/start/')
             self.assertEqual([node['label'] for node in getting_started['children']], ['Install', 'Overview'])
             self.assertNotIn('Hidden', json.dumps(tree))
+            self.assertNotIn('Disabled', json.dumps(tree))
             reference = next(node for node in tree if node['label'] == 'Reference')
             self.assertEqual([node['label'] for node in reference['children']], ['API'])
             context = first['routes']['/widget/start/install/']
@@ -69,6 +71,21 @@ class TestNavigation(unittest.TestCase):
             rendered = json.dumps(result['products']['thing']['children'])
             self.assertIn('/thing/archive/', rendered)
             self.assertNotIn('/thing/archive/old/', rendered)
+
+    def test_route_normalization_matches_imported_routes(self):
+        self.assertEqual(
+            '/realtime/realtimekit/broadcast-apis/',
+            nav.route_for(pathlib.Path('realtime/realtimekit/collaborative-stores/broadcast.mdx'),
+                          {'slug': 'realtime/realtimekit/broadcast-apis'}),
+        )
+        self.assertEqual(
+            '/rules/reference/geographic-locations/',
+            nav.route_for(pathlib.Path('rules/reference/geographic locations.mdx')),
+        )
+        self.assertEqual(
+            '/waf/tools/wordpresscom-and-cloudflare/',
+            nav.route_for(pathlib.Path('waf/tools/wordpress.com-and-cloudflare.mdx')),
+        )
 
 
 if __name__ == '__main__':

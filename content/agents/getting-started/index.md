@@ -1,0 +1,8 @@
+<p>Start building agents that can remember context, communicate with users, and act on their own. Pick the path that matches what you want to build first.</p>
+<h2 id="choose-a-path">Choose a path</h2>
+<p><a class="nb-card nb-link-card" href="/agents/getting-started/quick-start/"><h3 id="card-quick-start-agents-getting-started-quick-start">Quick start</h3><p>Build a small stateful counter agent and learn the core Agent, state, and client SDK model.</p></a></p>
+<p><a class="nb-card nb-link-card" href="/agents/examples/chat-agent/"><h3 id="card-build-a-chat-agent-agents-examples-chat-agent">Build a chat agent</h3><p>Build a streaming AI chat agent with Workers AI, server tools, client tools, and approvals.</p></a></p>
+<p><a class="nb-card nb-link-card" href="/agents/getting-started/add-to-existing-project/"><h3 id="card-add-agents-to-an-existing-project-agents-getting-started-add-to-existing-project">Add Agents to an existing project</h3><p>Install the Agents SDK into an existing Workers application and wire up routing.</p></a></p>
+<p><a class="nb-card nb-link-card" href="/agents/getting-started/testing-your-agent/"><h3 id="card-testing-your-agents-agents-getting-started-testing-your-agent">Testing your Agents</h3><p>Write tests with Vitest and the Workers test pool.</p></a></p>
+<h2 id="all-getting-started-pages">All getting started pages</h2>
+<ul class="directory-listing"><li><a href="/agents/getting-started/quick-start/">Quick start</a></li><li><a href="/agents/getting-started/add-to-existing-project/">Add to existing project</a></li><li><a href="/agents/getting-started/testing-your-agent/">Testing your Agents</a></li></ul>

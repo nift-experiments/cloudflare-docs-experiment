@@ -1,0 +1,6 @@
+<p>Handlers are methods on Workers that can receive and process external inputs, and can be invoked from outside your Worker. For example, the <code>fetch()</code> handler receives an HTTP request, and can return a response:</p>
+<pre><code class="language-js">export default {&#10;	async fetch(request, env, ctx) {&#10;		return new Response(&#x27;Hello World!&#x27;);&#10;	},&#10;};&#10;</code></pre>
+<p>The following handlers are available within Workers:</p>
+<ul class="directory-listing"><li><a href="/durable-objects/api/alarms/">Alarm Handler</a></li><li><a href="/email-service/api/route-emails/email-handler/">Email Handler</a></li><li><a href="/workers/runtime-apis/handlers/fetch/">Fetch Handler</a></li><li><a href="/queues/configuration/javascript-apis/#consumer">Queue Handler</a></li><li><a href="/workers/runtime-apis/handlers/scheduled/">Scheduled Handler</a></li><li><a href="/workers/runtime-apis/handlers/tail/">Tail Handler</a></li></ul>
+<h2 id="handlers-in-python-workers">Handlers in Python Workers</h2>
+<p>When you <a href="/workers/languages/python/">write Workers in Python</a>, handlers are placed in a class named <code>Default</code> that extends the <a href="/workers/runtime-apis/bindings/service-bindings/rpc/"><code>WorkerEntrypoint</code> class</a> (which you can import from the <code>workers</code> SDK module).</p>

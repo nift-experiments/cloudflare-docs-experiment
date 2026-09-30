@@ -1,0 +1,2 @@
+<p>Review the reference content to learn more about specific caching functionality.</p>
+<ul class="directory-listing"><li><a href="/reference-architecture/architectures/cdn/">CDN Reference Architecture</a></li><li><a href="/cache/reference/csam-scanning/">CSAM Scanning Tool</a></li><li><a href="/cache/reference/development-mode/">Development Mode</a></li><li><a href="/cache/reference/range-requests/">Range request behavior</a></li><li><a href="/cache/reference/etag-headers/">Using ETag Headers with Cloudflare</a></li></ul>

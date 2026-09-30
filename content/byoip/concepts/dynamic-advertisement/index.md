@@ -1,0 +1,6 @@
+<p>Dynamic advertisement allows you to control when Cloudflare announces your IP prefixes via <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
+@markup("md", "content/.markup/bodies/3792.md")
+</div>. When a prefix is advertised, Cloudflare announces it to the Internet so that traffic destined for those IPs can be routed to Cloudflare. When a prefix is withdrawn, Cloudflare stops announcing it — traffic will then follow whatever other BGP routes exist for that prefix.
+<p>You can advertise and withdraw prefixes on demand using the <a href="/byoip/concepts/dynamic-advertisement/best-practices/#via-the-api">Cloudflare API</a> or the <a href="/byoip/concepts/dynamic-advertisement/best-practices/#via-the-cloudflare-dashboard">IP Prefixes page</a> in the Cloudflare dashboard. Enabling advertisement typically takes two to seven minutes, and disabling advertisement takes approximately 15 minutes.</p>
+<p>When using the API, you can authorize the call with your email and API key or create a service token for this purpose. A successful API response indicates the service registered the request.</p>
+<p>Both the API and the Cloudflare dashboard support <a href="/byoip/concepts/prefix-delegations/">prefix delegations</a>, which allow other Cloudflare accounts to interact with your prefix. The effect of a delegation is service-specific.</p>

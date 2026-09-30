@@ -1,0 +1,66 @@
+<aside class="nb-aside note">
+@markup("md", "content/.markup/bodies/3954.md")
+</aside>
+<p>Organizations that serve content or connect employees in Mainland China face connectivity challenges due to China's network infrastructure and regulatory requirements. Global Acceleration is a suite of connectivity offerings that address these challenges by providing optimized network paths into and out of China. Global Acceleration is provided by Cloudflare's partners including China Mobile International (CMI), CBC Tech, and JD Cloud.</p>
+<div class="video-frame"><img class="video-poster" src="https://imagedelivery.net/xDOJvHcv1KwTQn6S-BGFIw/2093e8e7-2720-4595-0a4c-5e57ba67bd00/public" alt="Global Acceleration"><iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/18457868eb13222051618b0d138e0225/iframe?preload=true&amp;letterboxColor=transparent" title="Global Acceleration" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+<p>Global Acceleration can support the following scenarios:</p>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Scenario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#cdn-global-acceleration">CDN Global Acceleration</a></td>
+<td>Improved performance for dynamic content (API responses, personalized pages) on China Network CDN.</td>
+</tr>
+<tr>
+<td><a href="#cloudflare-one-client-global-acceleration">Cloudflare One Client Global Acceleration</a></td>
+<td>Cloudflare One Client used in Mainland China.</td>
+</tr>
+<tr>
+<td><a href="#cloudflare-wan-global-acceleration">Cloudflare WAN Global Acceleration</a></td>
+<td>Cloudflare WAN used in Mainland China.</td>
+</tr>
+<tr>
+<td><a href="#icp-services">ICP</a></td>
+<td>China Network prerequisite.</td>
+</tr>
+<tr>
+<td><a href="#mlps-services">MLPS</a></td>
+<td>China cybersecurity compliance certification.</td>
+</tr>
+<tr>
+<td><a href="#travel-sim">Travel SIM</a></td>
+<td>Temporary Cloudflare One Client access for employees traveling to Mainland China.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="cdn-global-acceleration">CDN Global Acceleration</h2>
+<p>CDN Global Acceleration provides stable and reliable connections for dynamic content — such as API responses and personalized pages — entering and exiting China, improving performance for users within the country.</p>
+<h2 id="cloudflare-one-client-global-acceleration">Cloudflare One Client Global Acceleration</h2>
+<p>Cloudflare One Client Global Acceleration (formerly WARP Global Acceleration) enables <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/">Cloudflare One Client</a> access within China, allowing remote employees to maintain secure and consistent connections.</p>
+<h2 id="cloudflare-wan-global-acceleration">Cloudflare WAN Global Acceleration</h2>
+<p>Cloudflare WAN Global Acceleration (formerly Magic WAN Global Acceleration) enables <a href="/cloudflare-wan/">Cloudflare WAN</a> access within China, allowing in-office employees to maintain secure and reliable connectivity.</p>
+<h2 id="icp-services">ICP services</h2>
+<p>The Internet Content Provider (ICP) service simplifies the process of acquiring an <a href="/china-network/concepts/icp/">ICP filing or license</a> for your domains. An ICP is a regulatory requirement for all websites operating in Mainland China.</p>
+<h2 id="mlps-services">MLPS services</h2>
+<p>The Multi-Level Protection Scheme (MLPS) service add-on streamlines the process of obtaining MLPS Level 3 certification, a China cybersecurity compliance standard required for certain applications handling sensitive data.</p>
+<h2 id="travel-sim">Travel SIM</h2>
+<p>Travel SIM offers temporary, seamless Cloudflare One Client access for individual employees traveling to China, ensuring uninterrupted connectivity during their visit.</p>
+<hr />
+<h2 id="general-process">General process</h2>
+<h3 id="1-validate-prerequisites"><ol>
+<li>Validate prerequisites</li>
+</ol></h3>
+<p>Ensure that you have a Cloudflare <a href="https://www.cloudflare.com/plans/enterprise/">Enterprise plan</a> and <a href="/china-network/">China Network</a>, if you want CDN Global Acceleration. Cloudflare One Client and Cloudflare WAN entitlements are required for Cloudflare One Client Connection or Cloudflare WAN Global Acceleration.</p>
+<h3 id="2-sign-contract"><ol start="2">
+<li>Sign contract</li>
+</ol></h3>
+<p>Contact your Cloudflare account team. They will assist you with contracting with us, or our local China partners, depending on the service.</p>
+<h3 id="3-deploy-global-acceleration"><ol start="3">
+<li>Deploy Global Acceleration</li>
+</ol></h3>
+<p>Our local China partners will assist you to deploy Global Acceleration.</p>

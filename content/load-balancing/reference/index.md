@@ -1,0 +1,2 @@
+<p>See the following pages for more information about Cloudflare Load Balancing:</p>
+<ul class="directory-listing"><li><a href="/load-balancing/reference/migration-guides/">Migration guides</a></li><li><a href="/load-balancing/reference/load-balancing-analytics/">Analytics</a></li><li><a href="/load-balancing/reference/region-mapping-api/">Regions API</a></li><li><a href="/load-balancing/reference/limitations/">Limitations</a></li></ul>

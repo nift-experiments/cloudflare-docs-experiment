@@ -1,0 +1,2 @@
+<p>Understand the key concepts behind Privacy Proxy, including how the protocol works, deployment architectures, and privacy-preserving authentication.</p>
+<ul class="directory-listing"><li><a href="/privacy-proxy/concepts/how-it-works/">How Privacy Proxy works</a></li><li><a href="/privacy-proxy/concepts/deployment-models/">Deployment models</a></li><li><a href="/privacy-proxy/concepts/authentication/">Authentication</a></li><li><a href="/privacy-proxy/concepts/geolocation/">Geolocation</a></li></ul>

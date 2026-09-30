@@ -1,0 +1,26 @@
+<p>Cloudy is Cloudflare's first version of an AI agent, with assistant-like functionality designed to help users understand and improve their Cloudflare configurations in multiple areas of the product suite.</p>
+<p>Cloudy is powered by <a href="/workers-ai/">Workers AI</a> and helps identify and solve issues such as identifying redundant rules, optimizing execution order, analyzing conflicting rules, and identifying disabled rules. Cloudy can also help investigate threat events and provide actionable recommendations.</p>
+<h2 id="availability">Availability</h2>
+<p>Cloudy, currently in beta, is available in several Cloudflare products such as WAF, Zero Trust, and Analytics. Throughout the rest of 2025, Cloudflare plans to roll out additional AI agent capabilities across other areas of Cloudflare.</p>
+<aside class="nb-aside note">
+<h3 class="nb-aside-title" id="send-us-your-feedback">Send us your feedback</h3>
+@markup("md", "content/.markup/bodies/8806.md")
+</aside>
+<h2 id="what-data-does-cloudy-have-access-to">What data does Cloudy have access to?</h2>
+<p>Cloudy has access to your Cloudflare configuration. It combines this data with a purpose-built LLM prompt.</p>
+<p>Additionally, Cloudy takes Role-Based Access Control (RBAC) restrictions into account: it can only access the same Cloudflare configuration settings as the currently logged in user, based on their <a href="/fundamentals/manage-members/roles/">roles and permissions</a>.</p>
+<p>All your configuration information is only included in the purpose-built prompt — it is not used to train Cloudy or the LLM model(s) powering it.</p>
+<h2 id="is-cloudy-trained-on-user-or-customer-data">Is Cloudy trained on user or customer data?</h2>
+<p>No. Your Cloudflare configuration is used in the purpose-built prompt that enables Cloudy to turn raw configuration data into consistent, clear summaries and actionable recommendations.</p>
+<p>Cloudy does not share your Cloudflare configuration with other customers. Your configuration is also not used for LLM model training.</p>
+<p>Cloudy brings the same enterprise-grade security as the rest of Cloudflare's offerings. You can learn more about Cloudflare's approach to responsible AI in the <a href="https://www.cloudflare.com/trust-hub/responsible-ai/">Trust Hub</a>.</p>
+<h2 id="can-i-opt-out-of-cloudy">Can I opt out of Cloudy?</h2>
+<p>Currently, Cloudflare does not provide an opt out mechanism that completely disables all possible use of Cloudy. You can only opt out of the chat interface available in the Cloudflare dashboard.</p>
+<p>However, Cloudy is an entirely optional tool that you can choose not to use. By not using Cloudy, you will not get summaries based on your current configuration or any actionable recommendations.</p>
+<p>To opt out of the chat interface, do the following:</p>
+<ol>
+<li>Log in to the <a href="https://dash.cloudflare.com/">Cloudflare dashboard</a> and select your account.</li>
+<li>Go to <strong>Manage Account</strong> &gt; <strong>Configurations</strong>.</li>
+<li>Turn off the <strong>Cloudy features</strong> setting.</li>
+</ol>
+<p>As noted above, Cloudy is not trained on user or customer data and does not share your Cloudflare setup with other customers.</p>

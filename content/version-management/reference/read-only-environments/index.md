@@ -1,0 +1,6 @@
+<p>When an environment is read-only, versions deployed to this environment will permanently become read-only. This configuration protects sensitive environments from accidental changes.</p>
+<p><strong>Version Zero</strong> is an exception to this rule and is always editable.</p>
+<p><strong>Production</strong> is a read-only environment by default. This means that any version associated with <strong>Production</strong> also becomes read-only. This configuration prevents another member of your account from accidentally editing the version associated with your live traffic. You can change this configuration by editing the environment.
+<br/></p>
+<p>For similar reasons, some organizations may make <strong>Staging</strong> a read-only environment. Otherwise, another member of your account could make changes to a version in <strong>Staging</strong> <em>after</em> your organization has performed the validation tests prior to promoting to <strong>Production</strong>. Without having a read-only <strong>Staging</strong> environment, this change could be released into <strong>Production</strong> without testing and might cause an issue with live traffic.</p>
+<p>To change the read-only status of an environment, <a href="/version-management/how-to/environments/#edit-environment">edit the environment</a>.</p>

@@ -1,0 +1,26 @@
+<p>The Direct Creator Upload feature in Cloudflare Images lets your users upload images with a one-time upload URL without exposing your API key or token to the client. Using a direct creator upload also eliminates the need for an intermediary storage bucket and the storage/egress costs associated with it.</p>
+<p>You can set up <a href="/images/storage/upload-images/configure-webhooks/">webhooks</a> to receive notifications on your direct creator upload workflow.</p>
+<h2 id="request-a-one-time-upload-url">Request a one-time upload URL</h2>
+<p>Make a <code>POST</code> request to the <code>direct_upload</code> endpoint using the example below as reference.</p>
+<aside class="nb-aside note">
+@markup("md", "content/.markup/bodies/9478.md")
+</aside>
+<pre><code class="language-bash">curl --request POST \&#10;https://api.cloudflare.com/client/v4/accounts/{account_id}/images/v2/direct_upload \&#10;&#45;-header &quot;Authorization: Bearer &lt;API_TOKEN&gt;&quot; \&#10;&#45;-form &#x27;requireSignedURLs=true&#x27; \&#10;&#45;-form &#x27;metadata={&quot;key&quot;:&quot;value&quot;}&#x27;&#10;</code></pre>
+<p>After a successful request, you will receive a response similar to the example below. The <code>id</code> field is a future image identifier that will be uploaded by a creator.</p>
+<pre><code class="language-json">{&#10;	&quot;result&quot;: {&#10;		&quot;id&quot;: &quot;2cdc28f0-017a-49c4-9ed7-87056c83901&quot;,&#10;		&quot;uploadURL&quot;: &quot;https://upload.imagedelivery.net/Vi7wi5KSItxGFsWRG2Us6Q/2cdc28f0-017a-49c4-9ed7-87056c83901&quot;&#10;	},&#10;	&quot;result_info&quot;: null,&#10;	&quot;success&quot;: true,&#10;	&quot;errors&quot;: [],&#10;	&quot;messages&quot;: []&#10;}&#10;</code></pre>
+<p>After calling the endpoint, a new draft image record is created, but the image will not appear in the list of images. If you want to check the status of the image record, you can make a request to the one-time upload URL using the <code>direct_upload</code> endpoint.</p>
+<h2 id="check-the-image-record-status">Check the image record status</h2>
+<p>To check the status of a new draft image record, use the one-time upload URL as shown in the example below.</p>
+<pre><code class="language-bash">curl https://api.cloudflare.com/client/v4/accounts/{account_id}/images/v1/{image_id} \&#10;&#45;-header &quot;Authorization: Bearer &lt;API_TOKEN&gt;&quot;&#10;</code></pre>
+<p>After a successful request, you should receive a response similar to the example below. The <code>draft</code> field is set to <code>true</code> until a creator uploads an image. After an image is uploaded, the draft field is removed.</p>
+<pre><code class="language-json">{&#10;	&quot;result&quot;: {&#10;		&quot;id&quot;: &quot;2cdc28f0-017a-49c4-9ed7-87056c83901&quot;,&#10;		&quot;metadata&quot;: {&#10;			&quot;key&quot;: &quot;value&quot;&#10;		},&#10;		&quot;uploaded&quot;: &quot;2022-01-31T16:39:28.458Z&quot;,&#10;		&quot;requireSignedURLs&quot;: true,&#10;		&quot;variants&quot;: [&#10;			&quot;https://imagedelivery.net/Vi7wi5KSItxGFsWRG2Us6Q/2cdc28f0-017a-49c4-9ed7-87056c83901/public&quot;,&#10;			&quot;https://imagedelivery.net/Vi7wi5KSItxGFsWRG2Us6Q/2cdc28f0-017a-49c4-9ed7-87056c83901/thumbnail&quot;&#10;		],&#10;		&quot;draft&quot;: true&#10;	},&#10;	&quot;success&quot;: true,&#10;	&quot;errors&quot;: [],&#10;	&quot;messages&quot;: []&#10;}&#10;</code></pre>
+<p>The backend endpoint should return the <code>uploadURL</code> property to the client, which uploads the image without needing to pass any authentication information with it.</p>
+<p>Below is an example of an HTML page that takes a one-time upload URL and uploads any image the user selects.</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;&#10;&lt;html&gt;&#10;	&lt;body&gt;&#10;		&lt;form&#10;			action=&quot;INSERT_UPLOAD_URL_HERE&quot;&#10;			method=&quot;post&quot;&#10;			enctype=&quot;multipart/form-data&quot;&#10;		&gt;&#10;			&lt;input type=&quot;file&quot; id=&quot;myFile&quot; name=&quot;file&quot; /&gt;&#10;			&lt;input type=&quot;submit&quot; /&gt;&#10;		&lt;/form&gt;&#10;	&lt;/body&gt;&#10;&lt;/html&gt;&#10;</code></pre>
+<p>By default, the <code>uploadURL</code> expires after 30 minutes if unused. To override this option, add the following argument to the cURL command:</p>
+<pre><code class="language-txt">&#45;-data &#x27;{&quot;expiry&quot;:&quot;2021-09-14T16:00:00Z&quot;}&#x27;&#10;</code></pre>
+<p>The expiry value must be a minimum of two minutes and maximum of six hours in the future.</p>
+<h2 id="direct-creator-upload-with-custom-id">Direct Creator Upload with custom ID</h2>
+<p>You can specify a <a href="/images/storage/upload-images/upload-custom-path/">custom ID</a> when you first request a one-time upload URL, instead of using the automatically generated ID for your image. Note that images with a custom ID cannot be made private with the <a href="/images/optimization/hosted-images/serve-private-images/">signed URL tokens</a> feature (<code>--requireSignedURLs=true</code>).</p>
+<p>To specify a custom ID, pass a form field with the name ID and corresponding custom ID value as shown in the example below.</p>
+<pre><code class="language-txt">&#45;-form &#x27;id=this/is/my-customid&#x27;&#10;</code></pre>

@@ -1,0 +1,1 @@
+<p><strong>Random steering</strong> sends requests to endpoints purely based on <a href="/load-balancing/understand-basics/traffic-steering/origin-level-steering/#weights">endpoint weights</a>. Distributes traffic more accurately, but may cause requests from the same IP to hit different endpoints.</p>

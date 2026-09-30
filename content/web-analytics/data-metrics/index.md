@@ -1,0 +1,2 @@
+<p>In this section, you can find information about the data and metrics available in Web Analytics.</p>
+<ul class="directory-listing"><li><a href="/web-analytics/data-metrics/high-level-metrics/">High-level metrics</a></li><li><a href="/web-analytics/data-metrics/page-load-time-summary/">Page load time</a></li><li><a href="/web-analytics/data-metrics/core-web-vitals/">Core Web Vitals</a></li><li><a href="/web-analytics/data-metrics/dimensions/">Dimensions</a></li><li><a href="/web-analytics/data-metrics/data-origin-and-collection/">Data origin and collection</a></li></ul>

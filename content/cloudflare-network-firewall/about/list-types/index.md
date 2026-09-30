@@ -1,0 +1,7 @@
+<h2 id="threat-intelligence">Threat intelligence</h2>
+<p>Cloudflare handles millions of HTTP requests each second and blocks billions of cyber threats each day. Cloudflare uses that data to detect malicious actors on the Internet and turns that information into a list of known malicious IP addresses. Cloudflare also integrates with a number of third-party vendors to augment the coverage.</p>
+<p>The threat intelligence feed categories are described in <a href="/waf/tools/lists/managed-lists/#managed-ip-lists">Managed IP Lists</a>. All of these lists are compatible with Cloudflare Network Firewall (formerly Magic Firewall).</p>
+<h2 id="ip-lists">IP lists</h2>
+<p>Use <a href="/waf/tools/lists/custom-lists/#ip-lists">IP lists</a> to group services in networks, like web servers, or for lists of known bad IP addresses to make managing good network endpoints easier. IP lists are helpful for users with very expansive firewall rules with many IP lists. By default, you can add up to 10,000 IPs across all lists. Refer to <a href="/cloudflare-one/traffic-policies/packet-filtering/add-policies/#use-an-ip-list">Use an IP list</a> to check an example of how to use an IP list.</p>
+<h2 id="geo-blocking">Geo-blocking</h2>
+<p>Geo-blocking enables you to selectively allow or block traffic to any country. Refer to <a href="/cloudflare-one/traffic-policies/packet-filtering/add-policies/#block-a-country">Block a country</a> to check an example of how to block a country.</p>

@@ -1,0 +1,23 @@
+<table style="width: 100%">
+<thead>
+<tr>
+<th>Rule ID</th>
+<th>Description</th>
+<th>Previous Action</th>
+<th>New Action</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>...e4fe8e55</td>
+<td>
+				User-Agent-aware DDoS Protection (Available only to Enterprise zones
+				with Advanced DDoS service).
+</td>
+<td>log</td>
+<td>managed_challenge</td>
+<td></td>
+</tr>
+</tbody>
+</table>

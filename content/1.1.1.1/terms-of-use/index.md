@@ -1,0 +1,2 @@
+<p>By using 1.1.1.1 Public DNS Resolver or 1.1.1.1 for Families, you agree to the <a href="https://www.cloudflare.com/website-terms/">Cloudflare Website and Online Services Terms of Use</a>.</p>
+<p>If you are an <a href="/1.1.1.1/infrastructure/network-operators/">Internet Service Provider (ISP) or network equipment provider</a> that integrates 1.1.1.1, you agree to provide proper attribution to Cloudflare in accordance with the Cloudflare Trademark Guidelines. Contact <code>resolver@cloudflare.com</code> for logo requests.</p>

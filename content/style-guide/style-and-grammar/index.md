@@ -1,0 +1,2 @@
+<p>This section covers how a page should read: the house voice and tone, accessibility, grammar, and formatting. Start with voice and tone, then apply the grammar and formatting rules as you write.</p>
+<ul class="directory-listing"><li><a href="/style-guide/style-and-grammar/voice-and-tone/">Voice and tone</a></li><li><a href="/style-guide/style-and-grammar/accessibility/">Accessibility guidelines</a></li><li><a href="/style-guide/style-and-grammar/grammar/">Grammar</a></li><li><a href="/style-guide/style-and-grammar/formatting/">Formatting</a></li></ul>

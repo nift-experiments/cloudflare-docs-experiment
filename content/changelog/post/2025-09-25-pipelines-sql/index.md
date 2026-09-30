@@ -1,0 +1,12 @@
+<div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
+<div class="changelog-tools"><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
+<article class="changelog-detail"><a href="/changelog/">← Back to all posts</a>
+<time>September 25, 2025</time><h2 id="post-title">Pipelines now supports SQL transformations and Apache Iceberg</h2>
+<div class="changelog-badges"><span>pipelines</span></div><div class="changelog-body"><p>Today, we're launching the new <a href="/pipelines/">Cloudflare Pipelines</a>: a streaming data platform that ingests events, transforms them with <a href="/pipelines/sql-reference/select-statements/">SQL</a>, and writes to <a href="/r2/">R2</a> as <a href="https://iceberg.apache.org/">Apache Iceberg</a> tables or Parquet files.</p>
+<p>Pipelines can receive events via <a href="/pipelines/streams/writing-to-streams/#send-via-http">HTTP endpoints</a> or <a href="/pipelines/streams/writing-to-streams/#send-via-workers">Worker bindings</a>, transform them with SQL, and deliver to R2 with exactly-once guarantees. This makes it easy to build analytics-ready warehouses for server logs, mobile application events, IoT telemetry, or clickstream data without managing streaming infrastructure.</p>
+<p>For example, here's a pipeline that ingests clickstream events and filters out bot traffic while extracting domain information:</p>
+<pre><code class="language-sql">INSERT into events_table&#10;SELECT&#10;  user_id,&#10;  lower(event) AS event_type,&#10;  to_timestamp_micros(ts_us) AS event_time,&#10;  regexp_match(url, &#x27;^https?://([^/]+)&#x27;)[1]  AS domain,&#10;  url,&#10;  referrer,&#10;  user_agent&#10;FROM events_json&#10;WHERE event = &#x27;page_view&#x27;&#10;  AND NOT regexp_like(user_agent, &#x27;(?i)bot|spider&#x27;);&#10;</code></pre>
+<p>Get started by creating a pipeline in the dashboard or running a single command in <a href="/workers/wrangler/">Wrangler</a>:</p>
+<pre><code class="language-bash">npx wrangler pipelines setup&#10;</code></pre>
+<p>Check out our <a href="/pipelines/getting-started/">getting started guide</a> to learn how to create a pipeline that delivers events to an <a href="/r2-data-catalog/">Iceberg table</a> you can query with R2 SQL. Read more about today's announcement in our <a href="https://blog.cloudflare.com/cloudflare-data-platform">blog post</a>.</p>
+</div></article></div>

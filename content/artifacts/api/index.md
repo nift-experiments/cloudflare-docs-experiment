@@ -1,0 +1,2 @@
+<p>Use the Artifacts API reference to understand the interfaces exposed across Workers, HTTP, and Git-compatible workflows.</p>
+<ul class="directory-listing"><li><a href="/artifacts/api/workers-binding/">Workers binding</a></li><li><a href="/artifacts/api/rest-api/">REST API</a></li><li><a href="/artifacts/api/git-protocol/">Git protocol</a></li><li><a href="/artifacts/api/wrangler/">Wrangler commands</a></li><li><a href="/artifacts/api/errors/">Errors</a></li></ul>

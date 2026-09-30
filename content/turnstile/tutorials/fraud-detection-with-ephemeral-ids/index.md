@@ -1,0 +1,50 @@
+<p><a href="/turnstile/additional-configuration/ephemeral-id/">Ephemeral IDs</a> let you detect fraud patterns that evade traditional IP-based detection. This tutorial will show you how to log Ephemeral IDs, detect suspicious patterns, and block bad actors.</p>
+<p>Attackers often create hundreds of fake accounts to abuse promotions, rotate through proxy pools to avoid IP-based rate limiting, and use real browsers to evade basic bot detection.</p>
+<p>Traditional IP-based detection fails because each request appears to come from a different address. Ephemeral IDs solve this by identifying the underlying client device, even when IP addresses change.</p>
+<h2 id="before-you-begin">Before you begin</h2>
+<ul>
+<li>Ephemeral IDs require <a href="/bots/plans/bm-subscription/">Enterprise Bot Management</a> with the <a href="/turnstile/plans/">Enterprise Turnstile add-on</a>, or <a href="/turnstile/plans/">standalone Enterprise Turnstile</a>. Contact your account team to enable this feature.</li>
+<li>You must have basic familiarity with Turnstile integration. Refer to <a href="/turnstile/get-started/">Get started with Turnstile</a> for more information.</li>
+</ul>
+<aside class="nb-aside caution">
+<h3 class="nb-aside-title" id="ephemeral-ids-are-not-guaranteed-to-be-unique">Ephemeral IDs are not guaranteed to be unique</h3>
+@markup("md", "content/.markup/bodies/14987.md")
+</aside>
+<hr />
+<h3 id="set-up-logging">Set up logging</h3>
+<p>Create a table to store events with Ephemeral IDs.</p>
+<pre><code class="language-sql">CREATE TABLE turnstile_events (&#10;    id              BIGSERIAL PRIMARY KEY,&#10;    ephemeral_id    VARCHAR(64) NOT NULL,&#10;    event_type      VARCHAR(50) NOT NULL,  -- &#x27;signup&#x27;, &#x27;login&#x27;, &#x27;checkout&#x27;&#10;    ip_address      VARCHAR(45),&#10;    user_id         VARCHAR(128),          -- NULL for signups, populated after&#10;    created_at      TIMESTAMPTZ DEFAULT NOW()&#10;);&#10;&#10;CREATE TABLE blocked_ephemeral_ids (&#10;    ephemeral_id    VARCHAR(64) PRIMARY KEY,&#10;    reason          VARCHAR(255),&#10;    created_at      TIMESTAMPTZ DEFAULT NOW()&#10;);&#10;</code></pre>
+<h3 id="extract-and-log-the-ephemeral-ids">Extract and log the Ephemeral IDs</h3>
+<p>When you call Siteverify, the Ephemeral ID is returned in the <code>metadata</code> field. Log it with every protected action.</p>
+<pre><code class="language-typescript">async function verifyAndLogTurnstile(&#10;	token: string,&#10;	ip: string,&#10;	secretKey: string,&#10;	eventType: string,&#10;	db: Database,&#10;): Promise&lt;{ success: boolean; ephemeralId?: string; isBlocked: boolean }&gt; {&#10;	// Call Siteverify API&#10;	const response = await fetch(&#10;		&quot;https://challenges.cloudflare.com/turnstile/v0/siteverify&quot;,&#10;		{&#10;			method: &quot;POST&quot;,&#10;			headers: { &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot; },&#10;			body: new URLSearchParams({&#10;				secret: secretKey,&#10;				response: token,&#10;				remoteip: ip,&#10;			}),&#10;		},&#10;	);&#10;&#10;	const result = await response.json();&#10;&#10;	if (!result.success) {&#10;		return { success: false, isBlocked: false };&#10;	}&#10;&#10;	const ephemeralId = result.metadata?.ephemeral_id;&#10;&#10;	if (ephemeralId) {&#10;		// Log the event&#10;		await db.query(&#10;			`INSERT INTO turnstile_events (ephemeral_id, event_type, ip_address)&#10;       VALUES ($1, $2, $3)`,&#10;			[ephemeralId, eventType, ip],&#10;		);&#10;&#10;		// Check if already blocked&#10;		const blocked = await db.query(&#10;			`SELECT 1 FROM blocked_ephemeral_ids WHERE ephemeral_id = $1`,&#10;			[ephemeralId],&#10;		);&#10;&#10;		if (blocked.rows.length &gt; 0) {&#10;			return { success: true, ephemeralId, isBlocked: true };&#10;		}&#10;	}&#10;&#10;	return { success: true, ephemeralId, isBlocked: false };&#10;}&#10;</code></pre>
+<h3 id="use-the-ephemeral-id-in-your-sign-up-flow">Use the Ephemeral ID in your sign up flow</h3>
+<pre><code class="language-typescript">export async function handleSignup(request: Request, env: Env) {&#10;	const formData = await request.formData();&#10;	const email = formData.get(&quot;email&quot;) as string;&#10;	const turnstileToken = formData.get(&quot;cf-turnstile-response&quot;) as string;&#10;	const ip = request.headers.get(&quot;CF-Connecting-IP&quot;) || &quot;&quot;;&#10;&#10;	// Verify Turnstile and log the Ephemeral ID&#10;	const verification = await verifyAndLogTurnstile(&#10;		turnstileToken,&#10;		ip,&#10;		env.TURNSTILE_SECRET_KEY,&#10;		&quot;signup&quot;,&#10;		env.DB,&#10;	);&#10;&#10;	if (!verification.success) {&#10;		return new Response(&quot;Verification failed&quot;, { status: 400 });&#10;	}&#10;&#10;	// Block if this device is flagged&#10;	if (verification.isBlocked) {&#10;		// Return a generic message - don&#x27;t reveal detection&#10;		return new Response(&quot;Please verify your email to continue&quot;, {&#10;			status: 202,&#10;		});&#10;	}&#10;&#10;	// Proceed with normal signup&#10;	const userId = await createUser(email, formData.get(&quot;password&quot;));&#10;&#10;	// Update the log with the new user ID&#10;	if (verification.ephemeralId) {&#10;		await env.DB.query(&#10;			`UPDATE turnstile_events&#10;       SET user_id = $1&#10;       WHERE ephemeral_id = $2 AND event_type = &#x27;signup&#x27; AND user_id IS NULL&#10;       ORDER BY created_at DESC LIMIT 1`,&#10;			[userId, verification.ephemeralId],&#10;		);&#10;	}&#10;&#10;	return new Response(&quot;Account created&quot;, { status: 201 });&#10;}&#10;</code></pre>
+<h3 id="detect-fraud-patterns">Detect fraud patterns</h3>
+<p>Run the following query periodically (for example, every five minutes) to find suspicious Ephemeral IDs:</p>
+<pre><code class="language-sql">&#45;- Find devices creating multiple accounts in the last hour&#10;SELECT&#10;    ephemeral_id,&#10;    COUNT(*) as signup_count,&#10;    COUNT(DISTINCT ip_address) as unique_ips&#10;FROM turnstile_events&#10;WHERE&#10;    event_type = &#x27;signup&#x27;&#10;    AND created_at &gt; NOW() - INTERVAL &#x27;1 hour&#x27;&#10;GROUP BY ephemeral_id&#10;HAVING COUNT(*) &gt; 3;  -- More than 3 signups = suspicious&#10;</code></pre>
+<p>When you find suspicious IDs, block them:</p>
+<pre><code class="language-sql">INSERT INTO blocked_ephemeral_ids (ephemeral_id, reason)&#10;SELECT&#10;    ephemeral_id,&#10;    &#x27;Multiple signups: &#x27; || COUNT(*) || &#x27; in 1 hour&#x27;&#10;FROM turnstile_events&#10;WHERE&#10;    event_type = &#x27;signup&#x27;&#10;    AND created_at &gt; NOW() - INTERVAL &#x27;1 hour&#x27;&#10;GROUP BY ephemeral_id&#10;HAVING COUNT(*) &gt; 3&#10;ON CONFLICT (ephemeral_id) DO NOTHING;&#10;</code></pre>
+<h3 id="investigate-and-take-action">Investigate and take action</h3>
+<p>When you ban accounts for abuse, find other accounts from the same device:</p>
+<pre><code class="language-sql">&#45;- Find all accounts created from the same device as a banned user&#10;SELECT DISTINCT te2.user_id, te2.created_at&#10;FROM turnstile_events te1&#10;JOIN turnstile_events te2 ON te1.ephemeral_id = te2.ephemeral_id&#10;WHERE te1.user_id = &#x27;BANNED_USER_ID&#x27;&#10;  AND te2.user_id IS NOT NULL&#10;  AND te2.user_id != &#x27;BANNED_USER_ID&#x27;;&#10;</code></pre>
+<p>Bulk-flag accounts for review:</p>
+<pre><code class="language-sql">&#45;- Flag all accounts from a suspicious device&#10;UPDATE users&#10;SET status = &#x27;under_review&#x27;&#10;WHERE id IN (&#10;    SELECT DISTINCT user_id&#10;    FROM turnstile_events&#10;    WHERE ephemeral_id = &#x27;x:SUSPICIOUS_ID_HERE&#x27;&#10;      AND user_id IS NOT NULL&#10;);&#10;</code></pre>
+<hr />
+<h2 id="recommendations">Recommendations</h2>
+<aside class="nb-aside note">
+<h3 class="nb-aside-title" id="privacy">Privacy</h3>
+@markup("md", "content/.markup/bodies/14986.md")
+</aside>
+<ul>
+<li><strong>Log immediately</strong>: Capture the Ephemeral ID right when you call Siteverify.</li>
+<li><strong>Silent rejection</strong>: When blocking fraud, return generic errors. Never reveal that you detected the device.</li>
+<li><strong>Tune thresholds</strong>: Start conservative (for example, three sign ups per hour) with the query and adjust based on your traffic.</li>
+<li><strong>Combine signals</strong>: Use Ephemeral IDs alongside IP reputation and behavior analytics.</li>
+</ul>
+<hr />
+<h2 id="related-resources">Related resources</h2>
+<ul>
+<li><a href="/turnstile/additional-configuration/ephemeral-id/">Ephemeral IDs</a></li>
+<li><a href="/turnstile/get-started/server-side-validation/">Server-side validation</a></li>
+<li><a href="/turnstile/tutorials/integrating-turnstile-waf-and-bot-management/">Integrate Turnstile, WAF, and Bot Management</a></li>
+</ul>

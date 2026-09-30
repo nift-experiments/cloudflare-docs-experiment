@@ -1,0 +1,19 @@
+<p>For advanced use cases, it is sometimes useful to be able to retrieve a value in a particular way. For instance, you might be using <code>zaraz.track</code> to send a list of products to Zaraz, but the third-party tool you want to send this data to requires the total cost of the products. Alternatively, you may want to manipulate a value, such as converting it to lowercase.</p>
+<p>Cloudflare Zaraz uses JSONata to enable you to perform complex operations on your data. With JSONata, you can evaluate expressions against the <a href="/zaraz/reference/context/">Zaraz Context</a>, allowing you to access and manipulate a wide range of values. To learn more about the values available and how to access them, consult the <a href="/zaraz/reference/context/">full reference</a>. You can also refer to the <a href="https://docs.jsonata.org/">complete JSONata documentation</a> for more information about JSONata's capabilities.</p>
+<p>To use JSONata inside Zaraz, follow these steps:</p>
+<ol>
+<li>In the Cloudflare dashboard, go to the <strong>Tag setup</strong> page.</li>
+</ol>
+<div class="nb-dash-button"></div>
+2. Go to **Tools configuration** > **Tools**.
+3. Select **Edit** next to a tool that you have already configured.
+4. Select an action or add a new one.
+5. Choose the field you want to use JSONata in, and wrap your JSONata expression with double curly brackets, like `{{ expression }}`.
+<p>JSONata can also be used inside Triggers, Tool Settings, and String Variables.</p>
+<h2 id="examples">Examples</h2>
+<h3 id="converting-a-string-to-lowercase">Converting a string to lowercase</h3>
+<p>Converting a string to lowercase is useful if you want to compare it to something else, for example a regular expression. Assuming the original string comes from a cookie named <code>myCookie</code>, turning the value lowercase can be done using <code>{{ $lowercase(system.cookies.myCookie) }}</code>.</p>
+<h3 id="sending-a-sum-of-all-products-in-the-cart">Sending a sum of all products in the cart</h3>
+<p>Assuming you are using <code>zaraz.ecommerce()</code> to send the cart content like this:</p>
+<pre><code class="language-js">zaraz.track(&#x27;Product List Viewed&#x27;,&#10;  {  products:&#10;    [&#10;    {&#10;      sku: &#x27;2671033&#x27;,&#10;      name: &#x27;V-neck T-shirt&#x27;,&#10;      price: 14.99,&#10;      quantity: 3&#10;    },{&#10;      sku: &#x27;2671034&#x27;,&#10;      name: &#x27;T-shirt&#x27;,&#10;      price: 10.99,&#10;      quantity: 2&#10;    },&#10;    ],&#10;  }&#10;);&#10;</code></pre>
+<p>If the field in which you want to show the sum, you will enter <code>{{ $sum(client.products.(price * quantity)) }}</code>. This will multiply the price of each product by its quantity, and then sum up the total.</p>

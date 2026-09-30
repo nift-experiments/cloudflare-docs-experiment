@@ -1,0 +1,6 @@
+<aside class="nb-aside note">
+@markup("md", "content/.markup/bodies/17136.md")
+</aside>
+<p>The <a href="https://nodejs.org/api/string_decoder.html"><code>node:string_decoder</code></a> is a legacy utility module that predates the WHATWG standard <a href="/workers/runtime-apis/encoding/#textencoder">TextEncoder</a> and <a href="/workers/runtime-apis/encoding/#textdecoder">TextDecoder</a> API. In most cases, you should use <code>TextEncoder</code> and <code>TextDecoder</code> instead. <code>StringDecoder</code> is available in the Workers runtime primarily for compatibility with existing npm packages that rely on it. <code>StringDecoder</code> can be accessed using:</p>
+<pre><code class="language-js">const { StringDecoder } = require(&quot;node:string_decoder&quot;);&#10;const decoder = new StringDecoder(&quot;utf8&quot;);&#10;&#10;const cent = Buffer.from([0xc2, 0xa2]);&#10;console.log(decoder.write(cent));&#10;&#10;const euro = Buffer.from([0xe2, 0x82, 0xac]);&#10;console.log(decoder.write(euro));&#10;</code></pre>
+<p>Refer to the <a href="https://nodejs.org/dist/latest-v20.x/docs/api/string_decoder.html">Node.js documentation for <code>string_decoder</code></a> for more information.</p>

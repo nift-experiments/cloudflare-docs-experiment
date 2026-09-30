@@ -1,0 +1,13 @@
+<div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
+<div class="changelog-tools"><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
+<article class="changelog-detail"><a href="/changelog/">← Back to all posts</a>
+<time>April 30, 2026</time><h2 id="post-title">Cloud Observatory connection metrics improvements</h2>
+<div class="changelog-badges"><span>radar</span></div><div class="changelog-body"><p>The <a href="https://radar.cloudflare.com/cloud-observatory">Cloud Observatory</a> on <a href="/radar/"><strong>Radar</strong></a> now provides improved connection metric insights, offering new ways to explore TCP round-trip time, TCP handshake duration, TLS handshake duration, and response header receive duration across cloud provider origin servers.</p>
+<p>The <a href="https://radar.cloudflare.com/cloud-observatory#connection-metrics">Cloud Observatory overview</a> now shows connection metrics broken down by cloud provider, making it easy to compare connection performance across Amazon Web Services, Google Cloud, Microsoft Azure, and Oracle Cloud.</p>
+<p><img src="/assets/upstream/images/radar/cloud-observatory-connection-metrics-by-provider.png" alt="Screenshot of Cloud Observatory connection metrics broken down by cloud provider" /></p>
+<p>Each <a href="https://radar.cloudflare.com/cloud-observatory/amazon#connection-metrics">provider page</a> now shows connection metrics for the top five regions, with a selector to rank by lowest or highest values.</p>
+<p><img src="/assets/upstream/images/radar/cloud-observatory-connection-metrics-by-region.png" alt="Screenshot of Cloud Observatory connection metrics broken down by region for a provider" /></p>
+<p>Each <a href="https://radar.cloudflare.com/cloud-observatory/amazon/us-east-1#connection-metrics">region page</a> now displays connection metrics as percentile distributions (25th percentile, median, and 75th percentile), providing insight into the range and variability of connection times.</p>
+<p><img src="/assets/upstream/images/radar/cloud-observatory-connection-metrics-percentiles.png" alt="Screenshot of Cloud Observatory connection metrics with percentile distribution for a region" /></p>
+<p>These views are also available through the <a href="/api/resources/radar/subresources/origins/"><code>Origins</code> API</a>, using the <code>timeseries_groups</code> endpoint with the <code>ORIGIN</code>, <code>REGION</code>, or <code>PERCENTILE</code> dimension.</p>
+</div></article></div>

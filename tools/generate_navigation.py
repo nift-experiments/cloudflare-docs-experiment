@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import subprocess
 from pathlib import Path
 
 import yaml
@@ -14,8 +15,14 @@ PIN = 'bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf'
 FRONT = re.compile(r'^---\n(.*?)\n---\n?', re.S)
 
 
-def route_for(relative):
-    value = relative.as_posix().rsplit('.', 1)[0]
+def route_for(relative, meta=None):
+    slug = (meta or {}).get('slug')
+    if slug:
+        return '/' + str(slug).strip('/').lower() + '/'
+    value = relative.as_posix().lower().rsplit('.', 1)[0]
+    parts = value.split('/')
+    parts[-1] = parts[-1].replace(' ', '-').replace('.', '')
+    value = '/'.join(parts)
     if value.endswith('/index'):
         value = value[:-6]
     return '/' if value == 'index' else f'/{value.strip("/")}/'
@@ -60,7 +67,7 @@ def page_record(path, docs_root):
     relative = path.relative_to(docs_root)
     meta, body = frontmatter(path)
     sidebar = sidebar_data(meta)
-    route = route_for(relative)
+    route = route_for(relative, meta)
     title = str(meta.get('title') or humanize(relative.stem))
     label = str(sidebar.get('label') or title)
     external = meta.get('external_link')
@@ -117,13 +124,13 @@ def directory_node(path_parts, records, is_root=False):
     child_names = sorted({record['parts'][len(path_parts)] for record in records
                           if len(record['parts']) > len(path_parts) + 1})
     children = []
-    if index and not index['hidden'] and not index['hideIndex']:
+    if index and not index['hidden'] and not index['disabled'] and not index['hideIndex']:
         overview = link_node(index)
         overview['label'] = index['label'] if is_root else 'Overview'
         overview['searchText'] = overview['label'].casefold()
         children.append(overview)
     for record in direct:
-        if not record['hidden']:
+        if not record['hidden'] and not record['disabled']:
             children.append(link_node(record))
     for child_name in child_names:
         child_parts = path_parts + (child_name,)
@@ -133,7 +140,7 @@ def directory_node(path_parts, records, is_root=False):
                             if len(record['parts']) == len(child_parts) + 1
                             and record['parts'][-1] == 'index'), None)
         if child_index and child_index['hideChildren']:
-            if not child_index['hidden']:
+            if not child_index['hidden'] and not child_index['disabled']:
                 children.append(link_node(child_index))
             continue
         nested = directory_node(child_parts, child_records)
@@ -182,7 +189,18 @@ def product_labels(upstream, products):
 
 def generate(upstream, destination, upstream_sha=PIN):
     docs_root = upstream / 'src/content/docs'
-    paths = sorted(path for path in docs_root.rglob('*') if path.suffix in {'.md', '.mdx'})
+    repository = subprocess.run(
+        ['git', '-C', str(upstream), 'rev-parse', '--is-inside-work-tree'],
+        text=True, capture_output=True,
+    ).returncode == 0
+    if repository:
+        tracked = subprocess.check_output(
+            ['git', '-C', str(upstream), 'ls-files', '-z', '--', 'src/content/docs'],
+        ).decode().split('\0')
+        paths = sorted(upstream / path for path in tracked
+                       if path and Path(path).suffix in {'.md', '.mdx'})
+    else:
+        paths = sorted(path for path in docs_root.rglob('*') if path.suffix in {'.md', '.mdx'})
     records = [page_record(path, docs_root) for path in paths]
     products = sorted({record['parts'][0] for record in records if record['parts']})
     labels = product_labels(upstream, products)

@@ -1,0 +1,2 @@
+<p>Refer to the following pages for more information about Turnstile:</p>
+<ul class="directory-listing"><li><a href="/turnstile/reference/content-security-policy/">Content Security Policy</a></li><li><a href="https://www.cloudflare.com/turnstile-privacy-policy/">Turnstile Privacy Addendum</a></li><li><a href="/turnstile/reference/supported-languages/">Supported languages</a></li><li><a href="/cloudflare-challenges/reference/supported-browsers/">Supported browsers</a></li></ul>

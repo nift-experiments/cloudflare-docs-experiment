@@ -1,0 +1,86 @@
+<p>Use Compression Rules to customize the compression applied to responses from Cloudflare's global network to your website visitors, based on the file extension and content type. Compression Rules are powered by the <a href="/ruleset-engine/">Ruleset Engine</a>.</p>
+<p>Cloudflare <a href="/speed/optimization/content/compression/">compresses some responses by default</a>, based on the content type. With Compression Rules, you can customize the default behavior, which includes defining preferred compression algorithms for particular file types.</p>
+<p>When a compression rule matches and lists several compression algorithms (such as gzip and Brotli), Cloudflare selects the first algorithm from your list that the visitor's browser supports. Cloudflare determines browser support from the <code>accept-encoding</code> HTTP request header, which browsers send automatically to indicate which compression formats they can decompress. If multiple compression rules match the same request, the last matching rule takes precedence.</p>
+<aside class="nb-aside note">
+@markup("md", "content/.markup/bodies/13027.md")
+</aside>
+<h2 id="get-started">Get started</h2>
+<p>Cloudflare provides you with rules templates for common use cases.</p>
+<ol>
+<li>In the Cloudflare dashboard, go to the Rules <strong>Overview</strong> page.</li>
+</ol>
+<div class="nb-dash-button"></div>
+<ol start="2">
+<li>Select <strong>Templates</strong>, and then select one of the available templates.</li>
+</ol>
+<p>You can also refer to the <a href="/rules/examples/">Examples gallery</a> in the developer docs.</p>
+<p>Alternatively, follow the instructions in the following pages to get started:</p>
+<ul>
+<li><a href="/rules/compression-rules/create-dashboard/">Create a compression rule in the dashboard</a></li>
+<li><a href="/rules/compression-rules/create-api/">Create a compression rule via Cloudflare API</a></li>
+</ul>
+<hr />
+<h2 id="availability">Availability</h2>
+<p>Compression Rules are available in all Cloudflare plans.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Free</th>
+<th>Pro</th>
+<th>Business</th>
+<th>Enterprise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Availability</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Number of rules</td>
+<td>10</td>
+<td>25</td>
+<td>50</td>
+<td>300</td>
+</tr>
+</tbody>
+</table>
+<h2 id="relevant-fields">Relevant fields</h2>
+<p>The following fields are commonly used in expressions of compression rules:</p>
+<table>
+<thead>
+<tr>
+<th>Field in <a href="/ruleset-engine/rules-language/expressions/edit-expressions/#expression-builder">Expression Builder</a></th>
+<th>Field name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Media Type</em></td>
+<td><a href="/ruleset-engine/rules-language/fields/reference/http.response.content_type.media_type/"><code>http.response.content_type.media_type</code></a></td>
+</tr>
+<tr>
+<td><em>File extension</em></td>
+<td><a href="/ruleset-engine/rules-language/fields/reference/http.request.uri.path.extension/"><code>http.request.uri.path.extension</code></a></td>
+</tr>
+<tr>
+<td>N/A</td>
+<td><a href="/ruleset-engine/rules-language/fields/reference/raw.http.request.uri.path.extension/"><code>raw.http.request.uri.path.extension</code></a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="important-remarks">Important remarks</h2>
+<ul>
+<li>
+<p>If a compression rule matches but the visitor's browser does not support any of the compression algorithms configured in the rule (based on the <code>accept-encoding</code> request header), the response will not be compressed.</p>
+</li>
+<li>
+<p>If a compression rule matches but the origin server's response includes a <code>cache-control: no-transform</code> HTTP header, the compression rule will not modify the response. Origin servers use this header to indicate that intermediaries (like Cloudflare) should not alter the response body.</p>
+</li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>When troubleshooting Compression Rules, use <a href="/rules/trace-request/">Cloudflare Trace</a> to determine if a rule is triggering for a specific URL.</p>

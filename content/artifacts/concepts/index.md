@@ -1,0 +1,2 @@
+<p>Use these concepts to understand namespaces, repos, versioning behavior, and the operating model for Artifacts.</p>
+<ul class="directory-listing"><li><a href="/artifacts/concepts/how-artifacts-works/">How Artifacts works</a></li><li><a href="/artifacts/concepts/namespaces/">Namespaces</a></li><li><a href="/artifacts/concepts/repositories/">Repositories</a></li><li><a href="/artifacts/concepts/best-practices/">Best practices for Artifacts</a></li></ul>

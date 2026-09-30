@@ -1,0 +1,1 @@
+<pre><code class="language-mdx">import { PagesBuildPreset } from &quot;~/components&quot;;&#10;&#10;&lt;PagesBuildPreset framework=&quot;gatsby&quot; /&gt;&#10;&lt;PagesBuildPreset framework=&quot;next-js-static&quot; /&gt;&#10;</code></pre>

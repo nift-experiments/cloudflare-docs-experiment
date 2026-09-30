@@ -1,0 +1,11 @@
+<div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
+<div class="changelog-tools"><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
+<article class="changelog-detail"><a href="/changelog/">← Back to all posts</a>
+<time>October 24, 2025</time><h2 id="post-title">Automatic resource provisioning for KV, R2, and D1</h2>
+<div class="changelog-badges"><span>workers</span></div><div class="changelog-body"><p>Previously, if you wanted to develop or deploy a worker with attached resources, you'd have to first manually create the desired resources. Now, if your Wrangler configuration file includes a KV namespace, D1 database, or R2 bucket that does not yet exist on your account, you can develop locally and deploy your application seamlessly, without having to run additional commands.</p>
+<p>Automatic provisioning is launching as an open beta, and we'd love to hear your feedback to help us make improvements! It currently works for KV, R2, and D1 bindings. You can disable the feature using the <code>--no-x-provision</code> flag.</p>
+<p>To use this feature, update to wrangler@4.45.0 and add bindings to your config file <em>without</em> resource IDs e.g.:</p>
+<pre><code class="language-jsonc">{&#10;	&quot;kv_namespaces&quot;: [{ &quot;binding&quot;: &quot;MY_KV&quot; }],&#10;	&quot;d1_databases&quot;: [{ &quot;binding&quot;: &quot;MY_DB&quot; }],&#10;	&quot;r2_buckets&quot;: [{ &quot;binding&quot;: &quot;MY_R2&quot; }],&#10;}&#10;</code></pre>
+<p><code>wrangler dev</code> will then automatically create these resources for you locally, and on your next run of <code>wrangler deploy</code>, Wrangler will call the Cloudflare API to create the requested resources and link them to your Worker.</p>
+<p>Though resource IDs will be automatically written back to your Wrangler config file after resource creation, resources will stay linked across future deploys even without adding the resource IDs to the config file. This is especially useful for shared templates, which now no longer need to include account-specific resource IDs when adding a binding.</p>
+</div></article></div>

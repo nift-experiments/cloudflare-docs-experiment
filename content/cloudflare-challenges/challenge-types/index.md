@@ -1,0 +1,2 @@
+<p>Refer to the following pages for more information on available challenge types:</p>
+<ul class="directory-listing"><li><a href="/cloudflare-challenges/challenge-types/challenge-pages/">Interstitial Challenge Pages</a></li><li><a href="/cloudflare-challenges/challenge-types/turnstile/">Turnstile</a></li><li><a href="/cloudflare-challenges/challenge-types/javascript-detections/">JavaScript Detections</a></li></ul>

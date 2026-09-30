@@ -1,0 +1,4 @@
+<p>Explore the following <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
+@markup("md", "content/.markup/bodies/11459.md")
+</div> of how to use SDKs and other tools with R2.
+<ul class="directory-listing"><li><a href="/reference-architecture/diagrams/storage/egress-free-storage-multi-cloud/">Multi-cloud setup</a></li><li><a href="/r2/examples/authenticate-r2-auth-tokens/">Authenticate against R2 API using auth tokens</a></li><li><a href="/r2/examples/authenticate-r2-temp-credentials/">Authenticate against R2 with temporary credentials</a></li><li><a href="/r2/examples/rclone/">Rclone</a></li><li><a href="/r2/examples/aws/">S3 SDKs</a></li><li><a href="/r2/examples/terraform/">Terraform</a></li><li><a href="/r2/examples/terraform-aws/">Terraform (AWS)</a></li><li><a href="/r2/examples/ssec/">Use SSE-C</a></li><li><a href="/r2/examples/cache-api/">Use the Cache API</a></li></ul>

@@ -1,0 +1,21 @@
+<div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
+<div class="changelog-tools"><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
+<article class="changelog-detail"><a href="/changelog/">← Back to all posts</a>
+<time>June 17, 2025</time><h2 id="post-title">SSRF vulnerability in @opennextjs/cloudflare proactively mitigated for all Cloudflare customers</h2>
+<div class="changelog-badges"><span>workers</span></div><div class="changelog-body"><p>Mitigations have been put in place for all existing and future deployments of sites with the Cloudflare adapter for Open Next in response to an identified Server-Side Request Forgery (SSRF) vulnerability in the <code>@opennextjs/cloudflare</code> package.</p>
+<p>The vulnerability stemmed from an unimplemented feature in the Cloudflare adapter for Open Next, which allowed users to proxy arbitrary remote content via the <code>/_next/image</code> endpoint.</p>
+<p>This issue allowed attackers to load remote resources from arbitrary hosts under the victim site's domain for any site deployed using the Cloudflare adapter for Open Next. For example: <code>https://victim-site.com/_next/image?url=https://attacker.com</code>. In this example, attacker-controlled content from <code>attacker.com</code> is served through the victim site's domain (<code>victim-site.com</code>), violating the same-origin policy and potentially misleading users or other services.</p>
+<p>References: <a href="https://www.cve.org/cverecord?id=CVE-2025-6087">https://www.cve.org/cverecord?id=CVE-2025-6087</a>, <a href="https://github.com/opennextjs/opennextjs-cloudflare/security/advisories/GHSA-rvpw-p7vw-wj3m">https://github.com/opennextjs/opennextjs-cloudflare/security/advisories/GHSA-rvpw-p7vw-wj3m</a></p>
+<h4 id="impact">Impact</h4>
+<ul>
+<li>SSRF via unrestricted remote URL loading</li>
+<li>Arbitrary remote content loading</li>
+<li>Potential internal service exposure or phishing risks through domain abuse</li>
+</ul>
+<h4 id="mitigation">Mitigation</h4>
+<p>The following mitigations have been put in place:</p>
+<p><strong>Server side updates</strong> to Cloudflare's platform to restrict the content loaded via the <code>/_next/image</code> endpoint to images. The update automatically mitigates the issue for all existing and any future sites deployed to Cloudflare using the affected version of the Cloudflare adapter for Open Next</p>
+<p><strong>Root cause fix:</strong> Pull request <a href="https://github.com/opennextjs/opennextjs-cloudflare/pull/727">#727</a> to the Cloudflare adapter for Open Next. The patched version of the adapter has been released as <code>@opennextjs/cloudflare@1.3.0</code></p>
+<p><strong>Package dependency update:</strong> Pull request <a href="https://github.com/cloudflare/workers-sdk/pull/9608">cloudflare/workers-sdk#9608</a> to create-cloudflare (c3) to use the fixed version of the Cloudflare adapter for Open Next. The patched version of create-cloudflare has been published as <code>create-cloudflare@2.49.3</code>.</p>
+<p>In addition to the automatic mitigation deployed on Cloudflare's platform, we encourage affected users to upgrade to <code>@opennext/cloudflare</code> v1.3.0 and use the <a href="https://nextjs.org/docs/pages/api-reference/components/image#remotepatterns"><code>remotePatterns</code></a> filter in Next config if they need to allow-list external urls with images assets.</p>
+</div></article></div>

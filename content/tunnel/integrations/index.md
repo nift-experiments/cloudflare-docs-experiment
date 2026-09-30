@@ -1,0 +1,30 @@
+<p>Cloudflare Tunnel integrates with other Cloudflare products to extend connectivity, security, and availability for your applications.</p>
+<h2 id="cloudflare-one-private-networking">Cloudflare One (private networking)</h2>
+<p>Beyond publishing public applications, Cloudflare Tunnel is the connectivity layer for <a href="/cloudflare-one/">Cloudflare One</a> — Cloudflare's SASE platform. The same post-quantum encrypted tunnels that serve your public applications can also serve private traffic when combined with the <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/">Cloudflare One Client</a>:</p>
+<ul>
+<li><strong>Private applications</strong> — Expose internal web apps, SSH servers, RDP hosts, and other services to authenticated users without making them publicly reachable.</li>
+<li><strong>Private networks</strong> — Route entire IP ranges (RFC 1918, custom CIDRs) through a tunnel, replacing site-to-site VPNs. Users on Cloudflare One Client-enrolled devices reach private IPs as if they were on your private network.</li>
+<li><strong>Network traffic filtering</strong> — Apply DNS, HTTP, and network-level policies through <a href="/cloudflare-one/traffic-policies/">Cloudflare Gateway</a> to all traffic flowing through the tunnel.</li>
+</ul>
+<p>If you are using Cloudflare Tunnel for Zero Trust network access, VPN replacement, or private network connectivity, refer to the <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/">Cloudflare One Tunnel documentation</a> for setup and configuration.</p>
+<p><strong>Related:</strong> <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/private-net/cloudflared/">Connect private networks</a> | <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/ssh/">SSH guide</a> | <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/rdp/">RDP guide</a> | <a href="/learning-paths/replace-vpn/get-started/">Replace your VPN</a></p>
+<h2 id="workers-vpc">Workers VPC</h2>
+<p><a href="/workers-vpc/">Workers VPC</a> enables Cloudflare Workers to access private resources such as databases, internal APIs, and other services. Cloudflare Tunnel serves as the connectivity layer, establishing a post-quantum encrypted outbound connection from your private network to Cloudflare. You can manage your tunnels directly from <a href="/workers/wrangler/commands/tunnel/">Wrangler</a>, the Cloudflare Developer Platform CLI.</p>
+<p><strong>Get started:</strong> <a href="/tunnel/get-started/">Create a tunnel</a> and then follow the <a href="/workers-vpc/get-started/">Workers VPC guide</a> to configure VPC Services.</p>
+<p><strong>Related:</strong> <a href="/workers-vpc/examples/private-api/">Connect to a private API</a> | <a href="/workers-vpc/examples/private-s3-bucket/">Connect to an S3 bucket</a></p>
+<h2 id="load-balancing">Load Balancing</h2>
+<p><a href="/load-balancing/">Cloudflare Load Balancing</a> distributes traffic across multiple origins using health checks, steering algorithms, and failover logic. Combined with Tunnel, you can load balance traffic to origins without publicly routable IP addresses.</p>
+<p>Each tunnel is assigned a subdomain (<code>&lt;UUID&gt;.cfargotunnel.com</code>). Add this as an endpoint in a Load Balancer pool with the application hostname as the host header.</p>
+<p><strong>Get started:</strong> Refer to <a href="/tunnel/concepts/routing/#load-balancing">Load Balancing setup</a> for step-by-step instructions.</p>
+<p><strong>Related:</strong> <a href="/tunnel/configuration/#replicas-and-high-availability">Tunnel replicas</a> | <a href="/reference-architecture/architectures/load-balancing/">Load Balancing reference architecture</a></p>
+<h2 id="cloudflare-access">Cloudflare Access</h2>
+<p><a href="/cloudflare-one/access-controls/">Cloudflare Access</a> provides an identity-aware proxy that authenticates every request to your applications. Combined with Tunnel, Access lets you publish internal web applications to the Internet while ensuring only authorized users can reach them. You can configure <a href="/cloudflare-one/access-controls/policies/">Access policies</a> based on user identity, source IP ranges, service tokens for machine-to-machine authentication, and more.</p>
+<p><strong>Get started:</strong> <a href="/cloudflare-one/access-controls/applications/http-apps/self-hosted-public-app/">Publish a self-hosted application</a>.</p>
+<p><strong>Related:</strong> <a href="/cloudflare-one/integrations/identity-providers/">Identity providers</a> | <a href="/cloudflare-one/access-controls/applications/http-apps/authorization-cookie/validating-json/">Validate Access JWTs</a></p>
+<h2 id="spectrum">Spectrum</h2>
+<p><a href="/spectrum/">Cloudflare Spectrum</a> extends DDoS protection and traffic acceleration to non-HTTP protocols. You can route Spectrum application traffic to origins connected via Tunnel using a DNS CNAME record or Load Balancer.</p>
+<p>Spectrum integration with Tunnel is only supported for HTTP and HTTPS applications. For the full list of limitations, refer to the <a href="/spectrum/reference/limitations/">Spectrum limitations documentation</a>.</p>
+<h2 id="additional-integrations">Additional integrations</h2>
+<div class="nb-card-grid">
+@input("content/.markup/bodies/14905.md")
+</div>

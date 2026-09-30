@@ -1,0 +1,20 @@
+<table style="width: 100%">
+<thead>
+<tr>
+<th>Rule ID</th>
+<th>Description</th>
+<th>Previous Action</th>
+<th>New Action</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>...89e250ce</td>
+<td>IPv4 GRE encapsulated IP or PPP (Inner protocol 0x0800 or 0x880B)</td>
+<td>ddos_dynamic</td>
+<td>ddos_dynamic</td>
+<td></td>
+</tr>
+</tbody>
+</table>

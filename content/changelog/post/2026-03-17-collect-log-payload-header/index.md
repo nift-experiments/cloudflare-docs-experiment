@@ -1,0 +1,9 @@
+<div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
+<div class="changelog-tools"><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
+<article class="changelog-detail"><a href="/changelog/">← Back to all posts</a>
+<time>March 17, 2026</time><h2 id="post-title">Log AI Gateway request metadata without storing payloads</h2>
+<div class="changelog-badges"><span>ai-gateway</span></div><div class="changelog-body"><p>AI Gateway now supports the <code>cf-aig-collect-log-payload</code> header, which controls whether request and response bodies are stored in logs. By default, this header is set to <code>true</code> and payloads are stored alongside metadata. Set this header to <code>false</code> to skip payload storage while still logging metadata such as token counts, model, provider, status code, cost, and duration.</p>
+<p>This is useful when you need usage metrics but do not want to persist sensitive prompt or response data.</p>
+<pre><code class="language-bash">curl https://gateway.ai.cloudflare.com/v1/$ACCOUNT_ID/$GATEWAY_ID/openai/chat/completions \&#10;  &#45;-header &quot;Authorization: Bearer $TOKEN&quot; \&#10;  &#45;-header &#x27;Content-Type: application/json&#x27; \&#10;  &#45;-header &#x27;cf-aig-collect-log-payload: false&#x27; \&#10;  &#45;-data &#x27;{&#10;    &quot;model&quot;: &quot;gpt-4o-mini&quot;,&#10;    &quot;messages&quot;: [&#10;      {&#10;        &quot;role&quot;: &quot;user&quot;,&#10;        &quot;content&quot;: &quot;What is the email address and phone number of user123?&quot;&#10;      }&#10;    ]&#10;  }&#x27;&#10;</code></pre>
+<p>For more information, refer to <a href="/ai-gateway/observability/logging/#collect-log-payload-cf-aig-collect-log-payload">Logging</a>.</p>
+</div></article></div>

@@ -1,0 +1,19 @@
+<div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
+<div class="changelog-tools"><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
+<article class="changelog-detail"><a href="/changelog/">← Back to all posts</a>
+<time>April 15, 2025</time><h2 id="post-title">Fixed and documented Workers Routes and Secrets API</h2>
+<div class="changelog-badges"><span>workers</span><span>workers-for-platforms</span></div><div class="changelog-body"><h4 id="workers-routes-api">Workers Routes API</h4>
+<p>Previously, a request to the Workers <a href="/api/resources/workers/subresources/routes/methods/create/">Create Route API</a> always returned <code>null</code> for &quot;script&quot; and an empty string for &quot;pattern&quot; even if the request was successful.</p>
+<pre><code class="language-bash">curl https://api.cloudflare.com/client/v4/zones/$CF_ACCOUNT_ID/workers/routes \&#10;&#45;X PUT \&#10;&#45;H &quot;Authorization: Bearer $CF_API_TOKEN&quot; \&#10;&#45;H &#x27;Content-Type: application/json&#x27; \&#10;&#45;-data &#x27;{ &quot;pattern&quot;: &quot;example.com/*&quot;, &quot;script&quot;: &quot;hello-world-script&quot; }&#x27;&#10;</code></pre>
+<pre><code class="language-json">{&#10;	&quot;result&quot;: {&#10;		&quot;id&quot;: &quot;bf153a27ba2b464bb9f04dcf75de1ef9&quot;,&#10;		&quot;pattern&quot;: &quot;&quot;,&#10;		&quot;script&quot;: null,&#10;		&quot;request_limit_fail_open&quot;: false&#10;	},&#10;	&quot;success&quot;: true,&#10;	&quot;errors&quot;: [],&#10;	&quot;messages&quot;: []&#10;}&#10;</code></pre>
+<p>Now, it properly returns all values!</p>
+<pre><code class="language-json">{&#10;	&quot;result&quot;: {&#10;		&quot;id&quot;: &quot;bf153a27ba2b464bb9f04dcf75de1ef9&quot;,&#10;		&quot;pattern&quot;: &quot;example.com/*&quot;,&#10;		&quot;script&quot;: &quot;hello-world-script&quot;,&#10;		&quot;request_limit_fail_open&quot;: false&#10;	},&#10;	&quot;success&quot;: true,&#10;	&quot;errors&quot;: [],&#10;	&quot;messages&quot;: []&#10;}&#10;</code></pre>
+<h4 id="workers-secrets-api">Workers Secrets API</h4>
+<p>The <a href="/api/resources/workers/subresources/scripts/subresources/secrets/">Workers</a> and <a href="/api/resources/workers_for_platforms/subresources/dispatch/subresources/namespaces/subresources/scripts/subresources/secrets/">Workers for Platforms</a> secrets APIs are now properly documented in the Cloudflare OpenAPI docs. Previously, these endpoints were not publicly documented, leaving users confused on how to directly manage their secrets via the API. Now, you can find the proper endpoints in our public documentation, as well as in our API Library SDKs such as <a href="https://github.com/cloudflare/cloudflare-typescript">cloudflare-typescript</a> (&gt;4.2.0) and <a href="https://github.com/cloudflare/cloudflare-python">cloudflare-python</a> (&gt;4.1.0).</p>
+<p>Note the <code>cloudflare_workers_secret</code> and <code>cloudflare_workers_for_platforms_script_secret</code> <a href="https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs">Terraform resources</a> are being removed in a future release. This resource is not recommended for managing secrets. Users should instead use the:</p>
+<ul>
+<li><a href="/api/resources/secrets_store/">Secrets Store</a> with the &quot;Secrets Store Secret&quot; binding on Workers and Workers for Platforms Script Upload</li>
+<li>&quot;Secret Text&quot; Binding on <a href="/api/resources/workers/subresources/scripts/methods/update/">Workers Script Upload</a> and <a href="/api/resources/workers_for_platforms/subresources/dispatch/subresources/namespaces/subresources/scripts/methods/update/">Workers for Platforms Script Upload</a></li>
+<li>Workers (and WFP) Secrets API</li>
+</ul>
+</div></article></div>

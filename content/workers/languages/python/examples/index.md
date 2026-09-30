@@ -1,0 +1,43 @@
+<p>Cloudflare has a wide range of Python examples in the <a href="/workers/examples/?languages=Python">Workers Example gallery</a>.</p>
+<p>In addition to those examples, consider the following ones that illustrate Python-specific behavior.</p>
+<h2 id="modules-in-your-worker">Modules in your Worker</h2>
+<p>Let's say your Worker has the following structure:</p>
+<pre><code>├── src&#10;│   ├── module.py&#10;│   └── main.py&#10;├── uv.lock&#10;├── pyproject.toml&#10;└── wrangler.toml&#10;</code></pre>
+<p>In order to import <code>module.py</code> in <code>main.py</code>, you would use the following import statement:</p>
+<pre><code class="language-python">import module&#10;</code></pre>
+<p>In this case, the main module is set to <code>src/main.py</code> in the wrangler.toml file like so:</p>
+<pre><code class="language-toml">main = &quot;src/main.py&quot;&#10;</code></pre>
+<p>This means that the <code>src</code> directory does not need to be specified in the import statement.</p>
+<h2 id="parse-an-incoming-request-url">Parse an incoming request URL</h2>
+<pre><code class="language-python">from workers import WorkerEntrypoint, Response&#10;from urllib.parse import urlparse, parse_qs&#10;&#10;class Default(WorkerEntrypoint):&#10;    async def fetch(self, request):&#10;        &#35; Parse the incoming request URL&#10;        url = urlparse(request.url)&#10;        &#35; Parse the query parameters into a Python dictionary&#10;        params = parse_qs(url.query)&#10;&#10;        if &quot;name&quot; in params:&#10;            greeting = &quot;Hello there, {name}&quot;.format(name=params[&quot;name&quot;][0])&#10;            return Response(greeting)&#10;&#10;&#10;        if url.path == &quot;/favicon.ico&quot;:&#10;          return Response(&quot;&quot;)&#10;&#10;        return Response(&quot;Hello world!&quot;)&#10;</code></pre>
+<h2 id="parse-json-from-the-incoming-request">Parse JSON from the incoming request</h2>
+<pre><code class="language-python">from workers import WorkerEntrypoint, Response&#10;&#10;class Default(WorkerEntrypoint):&#10;    async def fetch(self, request):&#10;        body = await request.json()  # returns a native Python dict&#10;        name = body[&quot;name&quot;]&#10;        return Response(&quot;Hello, {name}&quot;.format(name=name))&#10;</code></pre>
+<h2 id="return-a-json-response">Return a JSON response</h2>
+<pre><code class="language-python">from workers import WorkerEntrypoint, Response&#10;&#10;class Default(WorkerEntrypoint):&#10;    async def fetch(self, request):&#10;        data = {&quot;greeting&quot;: &quot;Hello, World!&quot;, &quot;status&quot;: &quot;ok&quot;}&#10;        return Response.json(data)&#10;</code></pre>
+<h2 id="read-bundled-asset-files-in-your-worker">Read bundled asset files in your Worker</h2>
+<p>Let's say your Worker has the following structure:</p>
+<pre><code>├── src&#10;│   ├── file.html&#10;│   └── main.py&#10;└── wrangler.jsonc&#10;</code></pre>
+<p>In order to read a file in your Worker, you would do the following:</p>
+<pre><code class="language-python">from pathlib import Path&#10;from workers import WorkerEntrypoint, Response&#10;&#10;class Default(WorkerEntrypoint):&#10;    async def fetch(self, request):&#10;        html_file = Path(__file__).parent / &quot;file.html&quot;&#10;        return Response(html_file.read_text(), headers={&quot;Content-Type&quot;: &quot;text/html&quot;})&#10;</code></pre>
+<h2 id="emit-logs-from-your-python-worker">Emit logs from your Python Worker</h2>
+<pre><code class="language-python">&#35; To use the JavaScript console APIs&#10;from js import console&#10;from workers import WorkerEntrypoint, Response&#10;&#35; To use the native Python logging&#10;import logging&#10;&#10;class Default(WorkerEntrypoint):&#10;    async def fetch(self, request):&#10;        &#35; Use the console APIs from JavaScript&#10;        &#35; https://developer.mozilla.org/en-US/docs/Web/API/console&#10;        console.log(&quot;console.log from Python!&quot;)&#10;&#10;        &#35; Alternatively, use the native Python logger&#10;        logger = logging.getLogger(__name__)&#10;&#10;        &#35; The default level is warning. We can change that to info.&#10;        logging.basicConfig(level=logging.INFO)&#10;&#10;        logger.error(&quot;error from Python!&quot;)&#10;        logger.info(&quot;info log from Python!&quot;)&#10;&#10;        &#35; Or just use print()&#10;        print(&quot;print() from Python!&quot;)&#10;&#10;        return Response(&quot;We&#x27;re testing logging!&quot;)&#10;</code></pre>
+<h2 id="publish-to-a-queue">Publish to a Queue</h2>
+<pre><code class="language-python">from workers import WorkerEntrypoint, Response&#10;&#10;class Default(WorkerEntrypoint):&#10;    async def fetch(self, request):&#10;			  &#35; Bindings are available on the &#x27;env&#x27; attribute&#10;        &#35; https://developers.cloudflare.com/queues/&#10;&#10;        &#35; The default contentType is &quot;json&quot;&#10;        &#35; We can also pass plain text strings&#10;        await self.env.QUEUE.send(&quot;hello&quot;, contentType=&quot;text&quot;)&#10;        &#35; Send a JSON payload&#10;        await self.env.QUEUE.send({&quot;hello&quot;: &quot;world&quot;})&#10;&#10;        return Response.json({&quot;write&quot;: &quot;success&quot;})&#10;</code></pre>
+<h2 id="query-a-d1-database">Query a D1 Database</h2>
+<pre><code class="language-python">from workers import WorkerEntrypoint, Response&#10;&#10;class Default(WorkerEntrypoint):&#10;    async def fetch(self, request):&#10;        results = await self.env.DB.prepare(&quot;PRAGMA table_list&quot;).run()&#10;        &#35; Return a JSON response&#10;        return Response.json(results)&#10;</code></pre>
+<p>Refer to <a href="/d1/examples/query-d1-from-python-workers/">Query D1 from Python Workers</a> for a more in-depth tutorial that covers how to create a new D1 database and configure bindings to D1.</p>
+<h2 id="durable-object">Durable Object</h2>
+<pre><code class="language-python">from workers import WorkerEntrypoint, Response, DurableObject&#10;&#10;class List(DurableObject):&#10;    async def get_messages(self):&#10;        messages = await self.ctx.storage.get(&quot;messages&quot;)&#10;        return messages if messages else []&#10;&#10;    async def add_message(self, message):&#10;        messages = await self.get_messages()&#10;        messages.append(message)&#10;        await self.ctx.storage.put(&quot;messages&quot;, messages)&#10;        return&#10;&#10;    async def say_hello(self):&#10;        result = self.ctx.storage.sql.exec(&#10;            &quot;SELECT &#x27;Hello, World!&#x27; as greeting&quot;&#10;        ).one()&#10;&#10;        return result.greeting&#10;</code></pre>
+<p>Refer to <a href="/durable-objects/get-started/">Durable Objects documentation</a> for more information.</p>
+<h2 id="cron-trigger">Cron Trigger</h2>
+<pre><code class="language-python">from workers import WorkerEntrypoint&#10;&#10;class Default(WorkerEntrypoint):&#10;    async def scheduled(self, controller, env, ctx):&#10;        &#35; All four parameters (self, controller, env, ctx) are required —&#10;        &#35; unlike fetch() which only takes (self, request).&#10;        print(&quot;cron processed&quot;)&#10;</code></pre>
+<p>Refer to <a href="/workers/configuration/cron-triggers/">Cron Triggers documentation</a> for more information.</p>
+<h2 id="workflows">Workflows</h2>
+<pre><code class="language-python">from workers import WorkflowEntrypoint&#10;&#10;class MyWorkflow(WorkflowEntrypoint):&#10;    async def run(self, event, step):&#10;        @step.do()&#10;        async def step_a():&#10;            &#35; do some work&#10;            return 10&#10;&#10;        @step.do()&#10;        async def step_b():&#10;            &#35; do some work&#10;            return 20&#10;&#10;        @step.do(concurrent=True)&#10;        async def my_final_step(step_a, step_b):&#10;            &#35; should return 30&#10;            return step_a + step_b&#10;&#10;        await my_final_step()&#10;</code></pre>
+<p>Refer to the <a href="/workflows/python/">Python Workflows documentation</a> for more information.</p>
+<h2 id="query-postgresql-or-mysql-with-hyperdrive">Query PostgreSQL or MySQL with Hyperdrive</h2>
+<p>Refer to the <a href="/hyperdrive/examples/python-workers/">Hyperdrive from Python Workers</a> for supported drivers and examples.</p>
+<h2 id="more-examples">More Examples</h2>
+<p>Or you can clone <a href="https://github.com/cloudflare/python-workers-examples">the examples repository</a> to explore
+even more examples:</p>
+<pre><code class="language-bash">git clone https://github.com/cloudflare/python-workers-examples&#10;</code></pre>

@@ -1,0 +1,2 @@
+<p>Review the topics below for more information about concepts related to BYOIP.</p>
+<ul class="directory-listing"><li><a href="/byoip/concepts/dynamic-advertisement/">Dynamic advertisement</a></li><li><a href="/byoip/concepts/irr-entries/">Internet Routing Registry (IRR)</a></li><li><a href="/byoip/concepts/route-filtering-rpki/">Route filtering and RPKI</a></li><li><a href="/byoip/concepts/loa/">Letter of Agency</a></li><li><a href="/byoip/concepts/prefix-delegations/">Prefix delegations</a></li><li><a href="/byoip/concepts/static-ips/">Static IPs</a></li></ul>

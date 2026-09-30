@@ -1,0 +1,35 @@
+<h2 id="are-dlp-and-dls-the-same">Are DLP and DLS the same?</h2>
+<p>No, they are not. DLP stands for <a href="/cloudflare-one/data-loss-prevention/">Data Loss Prevention</a>, and it is part of Cloudflare's Zero Trust offering (requiring Gateway, Cloudflare's secure web gateway for filtering outbound internet traffic). DLP allows you to scan web traffic and SaaS applications for sensitive data like secret keys, financial information (credit card numbers), and other keywords.</p>
+<p><a href="/data-localization/">Data Localization Suite</a> (DLS) is a separate suite of features that allows you to control where your data is processed and stored to meet data residency requirements.</p>
+<h2 id="are-cloudflare-s-services-gdpr-compliant">Are Cloudflare's services GDPR compliant?</h2>
+<p>Yes, even without DLS, Cloudflare services are designed to satisfy the requirements of the GDPR (General Data Protection Regulation). Cloudflare services are also verified compliant with the EU Cloud Code of Conduct (EU Cloud CoC), Verification-ID: 2023LVL02SCOPE4316. For further information, visit EU Cloud CoC <a href="https://eucoc.cloud/en/public-register">public register</a>.</p>
+<h2 id="how-can-i-use-dls">How can I use DLS?</h2>
+<p>Once you have purchased DLS, your account team will enable DLS on your account, and you will be able to configure all features via the dashboard or API. You can find more specific information under the <a href="/data-localization/how-to/">Configuration guides</a> section.</p>
+<h2 id="does-regional-services-work-with-http-3-quic">Does Regional Services work with HTTP/3 / QUIC?</h2>
+<p>Not yet. HTTP/3 uses the QUIC transport protocol, which is not currently compatible with Regional Services.</p>
+<h2 id="can-i-apply-regional-services-to-only-part-of-my-traffic">Can I apply Regional Services to only part of my traffic?</h2>
+<p>Yes. <a href="/data-localization/regional-services/">Regional Services</a> is not all-or-nothing. You choose which hostnames or zones are regionalized by assigning a region to each one, and all other traffic continues to be served from Cloudflare's global network as usual. For example, you can regionalize <code>eu.example.com</code> to the European Union while <code>www.example.com</code> keeps using the global network. Different hostnames can also use different regions.</p>
+<p>This also lets you keep latency-sensitive, non-sensitive content global. For instance, you can serve static CDN content that does not normally contain PII — such as product images on a global <code>assets.example.com</code> hostname — from Cloudflare's global network for best performance, while regionalizing only the hostnames that handle personal data.</p>
+<p>The granularity depends on which <a href="/data-localization/regional-services/#ways-to-use-regional-services">Regional Services option</a> you use. With Regional Hostnames, you assign a region per hostname. With Regionalized Spectrum Applications, the region is assigned per zone and applies to all Spectrum HTTP/S applications in that zone.</p>
+<h2 id="how-is-traffic-from-users-outside-the-configured-region-handled">How is traffic from users outside the configured region handled?</h2>
+<p>Regional Services accepts connections at any Cloudflare data center worldwide. When a request arrives outside the configured region, Cloudflare forwards it — still encrypted — to a data center inside the region, where TLS termination (decryption) and all Layer 7 processing take place. As a result, requests from users far from the configured region experience additional latency corresponding to the round trip to the in-region data center.</p>
+<p>If you want users inside a region to benefit from local processing while still serving a global audience, consider using a regionalized hostname for in-region users (for example, <code>eu.example.com</code>) alongside a non-regionalized hostname for everyone else (for example, <code>www.example.com</code>).</p>
+<h2 id="which-regional-services-option-works-with-static-ips-or-byoip">Which Regional Services option works with Static IPs or BYOIP?</h2>
+<ul>
+<li><a href="/spectrum/about/static-ip/">Spectrum Static IPs</a> are supported only by Regionalized Spectrum Applications.</li>
+<li><a href="/byoip/">BYOIP</a> is supported by both Regionalized Spectrum Applications and <a href="/data-localization/regional-services/ip-bindings/">Regionalized IP Bindings</a>.</li>
+<li>Regional Hostnames use Cloudflare's shared anycast IP addresses and do not support Static IPs.</li>
+</ul>
+<p>For an overview of each option, refer to <a href="/data-localization/regional-services/#ways-to-use-regional-services">Ways to use Regional Services</a>.</p>
+<h2 id="what-is-the-difference-between-managed-and-custom-regions">What is the difference between managed and custom regions?</h2>
+<p>In short, <strong>managed regions</strong> are predefined regions that Cloudflare maintains and are available to all accounts, while <strong>custom regions</strong> are tailored to your account when the managed regions do not meet your compliance requirements. For full details on both region types and which Regional Services options support them, refer to <a href="/data-localization/region-support/#region-types">Region types</a>.</p>
+<h2 id="are-there-other-options-if-i-prefer-not-to-have-cloudflare-handle-tls-termination-decryption">Are there other options if I prefer not to have Cloudflare handle TLS termination (decryption)?</h2>
+<p>Yes, you have these options available:</p>
+<ul>
+<li><a href="/spectrum/">Spectrum TCP/UDP Apps</a> (without TLS termination)</li>
+<li><a href="/magic-transit/">Magic Transit</a></li>
+<li><a href="/privacy-gateway/">Privacy Gateway</a></li>
+</ul>
+<p>These options only offer L3/L4 DDoS protection (network-layer and transport-layer protections). Using them means that no application-layer (L7) security or performance services can be applied, because Cloudflare does not decrypt the traffic.</p>
+<h2 id="i-have-configured-customer-metadata-boundary-data-localization-metadata-boundary-for-eu-region-i-am-accessing-the-cloudflare-dashboard-from-europe-why-am-i-getting-an-error-data-not-available-due-to-your-account-s-customer-metadata-boundary-configuration">I have configured <a href="/data-localization/metadata-boundary/">Customer Metadata Boundary</a> for EU region, I am accessing the Cloudflare Dashboard from Europe, why am I getting an error <code>Data not available due to your account's Customer Metadata Boundary configuration</code>?</h2>
+<p>This is typically caused by dynamic network routing. Based on Internet conditions that vary over time, your connection may be routed to a data center that is physically outside your configured region. This can be based on a variety of factors, including latency and network congestion. Enabling <a href="/data-localization/metadata-boundary/out-of-region-access/">Out of region access</a> allows requests arriving in the United States to pull Customer Logs from the European Union and vice-versa. The analytics are still exclusively stored in the CMB configured region.</p>

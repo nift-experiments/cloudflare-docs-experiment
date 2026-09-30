@@ -1,0 +1,3 @@
+<p>Diagnostics tools allow administrators to remotely investigate device connectivity and network performance issues. Use remote captures to collect packet captures and diagnostic logs from end-user devices, or run speed tests to measure network throughput and latency from the Cloudflare One client.</p>
+<p>To access diagnostics, go to the <a href="https://dash.cloudflare.com/one">Cloudflare One dashboard</a> and select <strong>Insights</strong> &gt; <strong>Digital experience</strong> &gt; <strong>Diagnostics</strong>.</p>
+<ul class="directory-listing"><li><a href="/cloudflare-one/insights/dex/diagnostics/client-packet-capture/">Client packet capture</a></li><li><a href="/cloudflare-one/insights/dex/diagnostics/speed-test/">Speed test</a></li></ul>

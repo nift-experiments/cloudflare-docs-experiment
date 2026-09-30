@@ -1,0 +1,2 @@
+<p>Core concepts behind how Cloudflare Email Service handles deliverability, authentication, and the email lifecycle.</p>
+<ul class="directory-listing"><li><a href="/email-service/concepts/email-lifecycle/">Email lifecycle</a></li><li><a href="/email-service/concepts/deliverability/">Email deliverability</a></li><li><a href="/email-service/concepts/email-authentication/">Email authentication</a></li><li><a href="/email-service/concepts/suppressions/">Suppression lists</a></li></ul>

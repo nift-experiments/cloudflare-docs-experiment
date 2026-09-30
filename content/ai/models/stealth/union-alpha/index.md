@@ -1,0 +1,405 @@
+<img src="/assets/upstream/images/workers-ai/meta.svg" alt="Stealth logo" width="48" height="48">
+
+<h1 id="union-alpha">Union Alpha</h1>
+
+<p><code>stealth/union-alpha</code></p>
+
+Union Alpha is a multimodal model designed for research, coding, and agentic workflows. It delivers frontier-level performance across diverse general-purpose tasks.
+
+<div class="table-scroll"><table><tbody>
+<tr><th>Task</th><td>Text Generation</td></tr>
+<tr><th>Unit pricing</th><td>Input tokens (per 1M): 0, Output tokens (per 1M): 0, Cached input tokens (per 1M): 0</td></tr>
+</tbody></table></div>
+
+<h2 id="usage">Usage</h2>
+
+Ask Union Alpha for a concise answer.
+
+<section class="model-example"><strong>Simple Question</strong>
+<p>Ask Union Alpha for a concise answer.</p>
+<pre><code class="language-json">{
+  &quot;input&quot;: {
+    &quot;messages&quot;: [
+      {
+        &quot;content&quot;: &quot;What is the capital of France? Answer in one word.&quot;,
+        &quot;role&quot;: &quot;user&quot;
+      }
+    ],
+    &quot;max_tokens&quot;: 16
+  },
+  &quot;output&quot;: {
+    &quot;text&quot;: &quot;Paris&quot;
+  },
+  &quot;raw_response&quot;: {
+    &quot;id&quot;: &quot;chatcmpl-mu3b7o02sf9tov9z&quot;,
+    &quot;object&quot;: &quot;chat.completion&quot;,
+    &quot;model&quot;: &quot;union-alpha&quot;,
+    &quot;choices&quot;: [
+      {
+        &quot;index&quot;: 0,
+        &quot;message&quot;: {
+          &quot;role&quot;: &quot;assistant&quot;,
+          &quot;content&quot;: &quot;Paris&quot;
+        },
+        &quot;finish_reason&quot;: &quot;stop&quot;
+      }
+    ],
+    &quot;usage&quot;: {
+      &quot;prompt_tokens&quot;: 29,
+      &quot;completion_tokens&quot;: 5,
+      &quot;total_tokens&quot;: 34,
+      &quot;prompt_tokens_details&quot;: {
+        &quot;cached_tokens&quot;: 28
+      },
+      &quot;cost&quot;: 3.6700000000000004e-05
+    },
+    &quot;gatewayMetadata&quot;: {
+      &quot;keySource&quot;: &quot;Unified&quot;
+    }
+  }
+}</code></pre>
+<pre><code class="language-typescript">const response = await env.AI.run(
+  &#x27;stealth/union-alpha&#x27;,
+  {
+    messages: [{ content: &#x27;What is the capital of France? Answer in one word.&#x27;, role: &#x27;user&#x27; }],
+    max_tokens: 16,
+  },
+)
+console.log(response)</code></pre>
+<pre><code class="language-bash">curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/v1/chat/completions \
+  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \
+  --header &quot;Content-Type: application/json&quot; \
+  --data &#x27;{
+  &quot;model&quot;: &quot;stealth/union-alpha&quot;,
+  &quot;messages&quot;: [
+    {
+      &quot;content&quot;: &quot;What is the capital of France? Answer in one word.&quot;,
+      &quot;role&quot;: &quot;user&quot;
+    }
+  ],
+  &quot;max_tokens&quot;: 16
+}&#x27;</code></pre>
+</section>
+
+<h2 id="examples">Examples</h2>
+
+<section class="model-example"><strong>System Guidance</strong>
+<p>Set a helpful system role before asking a question.</p>
+<pre><code class="language-json">{
+  &quot;input&quot;: {
+    &quot;messages&quot;: [
+      {
+        &quot;content&quot;: &quot;You explain technical topics in plain language.&quot;,
+        &quot;role&quot;: &quot;system&quot;
+      },
+      {
+        &quot;content&quot;: &quot;What is an API? Explain it in two sentences.&quot;,
+        &quot;role&quot;: &quot;user&quot;
+      }
+    ],
+    &quot;max_tokens&quot;: 64
+  },
+  &quot;output&quot;: {
+    &quot;text&quot;: &quot;An API (Application Programming Interface) is a set of rules that lets different software programs communicate with each other. For example, a weather app can use an API to request the latest forecast from a weather service.&quot;
+  },
+  &quot;raw_response&quot;: {
+    &quot;id&quot;: &quot;chatcmpl-mu3b7pxpj3kdi2v5&quot;,
+    &quot;object&quot;: &quot;chat.completion&quot;,
+    &quot;model&quot;: &quot;union-alpha&quot;,
+    &quot;choices&quot;: [
+      {
+        &quot;index&quot;: 0,
+        &quot;message&quot;: {
+          &quot;role&quot;: &quot;assistant&quot;,
+          &quot;content&quot;: &quot;An API (Application Programming Interface) is a set of rules that lets different software programs communicate with each other. For example, a weather app can use an API to request the latest forecast from a weather service.&quot;
+        },
+        &quot;finish_reason&quot;: &quot;stop&quot;
+      }
+    ],
+    &quot;usage&quot;: {
+      &quot;prompt_tokens&quot;: 19,
+      &quot;completion_tokens&quot;: 46,
+      &quot;total_tokens&quot;: 65,
+      &quot;prompt_tokens_details&quot;: {
+        &quot;cached_tokens&quot;: 0
+      },
+      &quot;cost&quot;: 0.00031125
+    },
+    &quot;gatewayMetadata&quot;: {
+      &quot;keySource&quot;: &quot;Unified&quot;
+    }
+  }
+}</code></pre>
+<pre><code class="language-typescript">const response = await env.AI.run(
+  &#x27;stealth/union-alpha&#x27;,
+  {
+    messages: [
+      { content: &#x27;You explain technical topics in plain language.&#x27;, role: &#x27;system&#x27; },
+      { content: &#x27;What is an API? Explain it in two sentences.&#x27;, role: &#x27;user&#x27; },
+    ],
+    max_tokens: 64,
+  },
+)
+console.log(response)</code></pre>
+<pre><code class="language-bash">curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/v1/chat/completions \
+  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \
+  --header &quot;Content-Type: application/json&quot; \
+  --data &#x27;{
+  &quot;model&quot;: &quot;stealth/union-alpha&quot;,
+  &quot;messages&quot;: [
+    {
+      &quot;content&quot;: &quot;You explain technical topics in plain language.&quot;,
+      &quot;role&quot;: &quot;system&quot;
+    },
+    {
+      &quot;content&quot;: &quot;What is an API? Explain it in two sentences.&quot;,
+      &quot;role&quot;: &quot;user&quot;
+    }
+  ],
+  &quot;max_tokens&quot;: 64
+}&#x27;</code></pre>
+</section>
+
+<section class="model-example"><strong>Coding Example</strong>
+<p>Ask for a short coding example.</p>
+<pre><code class="language-json">{
+  &quot;input&quot;: {
+    &quot;messages&quot;: [
+      {
+        &quot;content&quot;: &quot;Write a JavaScript function that reverses a string. Include one example call.&quot;,
+        &quot;role&quot;: &quot;user&quot;
+      }
+    ],
+    &quot;max_tokens&quot;: 128
+  },
+  &quot;output&quot;: {
+    &quot;text&quot;: &quot;```javascript\nfunction reverseString(str) {\n  return [...str].reverse().join(\&quot;\&quot;);\n}\n\n// Example call:\nconsole.log(reverseString(\&quot;hello\&quot;)); // \&quot;olleh\&quot;\n```&quot;
+  },
+  &quot;raw_response&quot;: {
+    &quot;id&quot;: &quot;chatcmpl-mu3b7t0objtvuaa4&quot;,
+    &quot;object&quot;: &quot;chat.completion&quot;,
+    &quot;model&quot;: &quot;union-alpha&quot;,
+    &quot;choices&quot;: [
+      {
+        &quot;index&quot;: 0,
+        &quot;message&quot;: {
+          &quot;role&quot;: &quot;assistant&quot;,
+          &quot;content&quot;: &quot;```javascript\nfunction reverseString(str) {\n  return [...str].reverse().join(\&quot;\&quot;);\n}\n\n// Example call:\nconsole.log(reverseString(\&quot;hello\&quot;)); // \&quot;olleh\&quot;\n```&quot;
+        },
+        &quot;finish_reason&quot;: &quot;stop&quot;
+      }
+    ],
+    &quot;usage&quot;: {
+      &quot;prompt_tokens&quot;: 14,
+      &quot;completion_tokens&quot;: 39,
+      &quot;total_tokens&quot;: 53,
+      &quot;prompt_tokens_details&quot;: {
+        &quot;cached_tokens&quot;: 0
+      },
+      &quot;cost&quot;: 0.00026125
+    },
+    &quot;gatewayMetadata&quot;: {
+      &quot;keySource&quot;: &quot;Unified&quot;
+    }
+  }
+}</code></pre>
+<pre><code class="language-typescript">const response = await env.AI.run(
+  &#x27;stealth/union-alpha&#x27;,
+  {
+    messages: [
+      {
+        content: &#x27;Write a JavaScript function that reverses a string. Include one example call.&#x27;,
+        role: &#x27;user&#x27;,
+      },
+    ],
+    max_tokens: 128,
+  },
+)
+console.log(response)</code></pre>
+<pre><code class="language-bash">curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/v1/chat/completions \
+  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \
+  --header &quot;Content-Type: application/json&quot; \
+  --data &#x27;{
+  &quot;model&quot;: &quot;stealth/union-alpha&quot;,
+  &quot;messages&quot;: [
+    {
+      &quot;content&quot;: &quot;Write a JavaScript function that reverses a string. Include one example call.&quot;,
+      &quot;role&quot;: &quot;user&quot;
+    }
+  ],
+  &quot;max_tokens&quot;: 128
+}&#x27;</code></pre>
+</section>
+
+<section class="model-example"><strong>Follow-up Conversation</strong>
+<p>Continue a short conversation with prior assistant context.</p>
+<pre><code class="language-json">{
+  &quot;input&quot;: {
+    &quot;messages&quot;: [
+      {
+        &quot;content&quot;: &quot;I am planning a weekend trip to a coastal city.&quot;,
+        &quot;role&quot;: &quot;user&quot;
+      },
+      {
+        &quot;content&quot;: &quot;Consider walkable neighborhoods, local food, and a nearby beach.&quot;,
+        &quot;role&quot;: &quot;assistant&quot;
+      },
+      {
+        &quot;content&quot;: &quot;What should I prioritize when choosing where to stay?&quot;,
+        &quot;role&quot;: &quot;user&quot;
+      }
+    ],
+    &quot;max_tokens&quot;: 96
+  },
+  &quot;output&quot;: {
+    &quot;text&quot;: &quot;Prioritize **location over amenities** for a short weekend\u2014you\u2019ll get more out of your trip if you spend less time in transit.\n\n- **Your main activity:** Stay near the beach for a relaxing getaway, or near the center for restaurants, sightseeing, and nightlife.\n- **Walkability and transport:** Look for caf\u00e9s and dinner options within walking distance, plus easy access to the airport or train station. If you\u2019re driving, check parking costs.\n- **Total&quot;
+  },
+  &quot;raw_response&quot;: {
+    &quot;id&quot;: &quot;chatcmpl-mu3b7wo2jrkvi2t8&quot;,
+    &quot;object&quot;: &quot;chat.completion&quot;,
+    &quot;model&quot;: &quot;union-alpha&quot;,
+    &quot;choices&quot;: [
+      {
+        &quot;index&quot;: 0,
+        &quot;message&quot;: {
+          &quot;role&quot;: &quot;assistant&quot;,
+          &quot;content&quot;: &quot;Prioritize **location over amenities** for a short weekend\u2014you\u2019ll get more out of your trip if you spend less time in transit.\n\n- **Your main activity:** Stay near the beach for a relaxing getaway, or near the center for restaurants, sightseeing, and nightlife.\n- **Walkability and transport:** Look for caf\u00e9s and dinner options within walking distance, plus easy access to the airport or train station. If you\u2019re driving, check parking costs.\n- **Total&quot;
+        },
+        &quot;finish_reason&quot;: &quot;length&quot;
+      }
+    ],
+    &quot;usage&quot;: {
+      &quot;prompt_tokens&quot;: 43,
+      &quot;completion_tokens&quot;: 96,
+      &quot;total_tokens&quot;: 139,
+      &quot;prompt_tokens_details&quot;: {
+        &quot;cached_tokens&quot;: 0
+      },
+      &quot;cost&quot;: 0.00065375
+    },
+    &quot;gatewayMetadata&quot;: {
+      &quot;keySource&quot;: &quot;Unified&quot;
+    }
+  }
+}</code></pre>
+<pre><code class="language-typescript">const response = await env.AI.run(
+  &#x27;stealth/union-alpha&#x27;,
+  {
+    messages: [
+      { content: &#x27;I am planning a weekend trip to a coastal city.&#x27;, role: &#x27;user&#x27; },
+      {
+        content: &#x27;Consider walkable neighborhoods, local food, and a nearby beach.&#x27;,
+        role: &#x27;assistant&#x27;,
+      },
+      { content: &#x27;What should I prioritize when choosing where to stay?&#x27;, role: &#x27;user&#x27; },
+    ],
+    max_tokens: 96,
+  },
+)
+console.log(response)</code></pre>
+<pre><code class="language-bash">curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/v1/chat/completions \
+  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \
+  --header &quot;Content-Type: application/json&quot; \
+  --data &#x27;{
+  &quot;model&quot;: &quot;stealth/union-alpha&quot;,
+  &quot;messages&quot;: [
+    {
+      &quot;content&quot;: &quot;I am planning a weekend trip to a coastal city.&quot;,
+      &quot;role&quot;: &quot;user&quot;
+    },
+    {
+      &quot;content&quot;: &quot;Consider walkable neighborhoods, local food, and a nearby beach.&quot;,
+      &quot;role&quot;: &quot;assistant&quot;
+    },
+    {
+      &quot;content&quot;: &quot;What should I prioritize when choosing where to stay?&quot;,
+      &quot;role&quot;: &quot;user&quot;
+    }
+  ],
+  &quot;max_tokens&quot;: 96
+}&#x27;</code></pre>
+</section>
+
+<section class="model-example"><strong>Creative Writing</strong>
+<p>Generate a compact piece of creative writing.</p>
+<pre><code class="language-json">{
+  &quot;input&quot;: {
+    &quot;messages&quot;: [
+      {
+        &quot;content&quot;: &quot;Write a four-line poem about finding light after a difficult day.&quot;,
+        &quot;role&quot;: &quot;user&quot;
+      }
+    ],
+    &quot;max_tokens&quot;: 96
+  },
+  &quot;output&quot;: {
+    &quot;text&quot;: &quot;The weary day sank softly out of sight,\nAnd left me searching shadows for a spark.\nThen one small star unfolded into light\u2014\nEnough to lead me gently through the dark.&quot;
+  },
+  &quot;raw_response&quot;: {
+    &quot;id&quot;: &quot;chatcmpl-mu3b80ptkze4dltt&quot;,
+    &quot;object&quot;: &quot;chat.completion&quot;,
+    &quot;model&quot;: &quot;union-alpha&quot;,
+    &quot;choices&quot;: [
+      {
+        &quot;index&quot;: 0,
+        &quot;message&quot;: {
+          &quot;role&quot;: &quot;assistant&quot;,
+          &quot;content&quot;: &quot;The weary day sank softly out of sight,\nAnd left me searching shadows for a spark.\nThen one small star unfolded into light\u2014\nEnough to lead me gently through the dark.&quot;
+        },
+        &quot;finish_reason&quot;: &quot;stop&quot;
+      }
+    ],
+    &quot;usage&quot;: {
+      &quot;prompt_tokens&quot;: 12,
+      &quot;completion_tokens&quot;: 39,
+      &quot;total_tokens&quot;: 51,
+      &quot;prompt_tokens_details&quot;: {
+        &quot;cached_tokens&quot;: 0
+      },
+      &quot;cost&quot;: 0.00025875
+    },
+    &quot;gatewayMetadata&quot;: {
+      &quot;keySource&quot;: &quot;Unified&quot;
+    }
+  }
+}</code></pre>
+<pre><code class="language-typescript">const response = await env.AI.run(
+  &#x27;stealth/union-alpha&#x27;,
+  {
+    messages: [
+      { content: &#x27;Write a four-line poem about finding light after a difficult day.&#x27;, role: &#x27;user&#x27; },
+    ],
+    max_tokens: 96,
+  },
+)
+console.log(response)</code></pre>
+<pre><code class="language-bash">curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/v1/chat/completions \
+  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \
+  --header &quot;Content-Type: application/json&quot; \
+  --data &#x27;{
+  &quot;model&quot;: &quot;stealth/union-alpha&quot;,
+  &quot;messages&quot;: [
+    {
+      &quot;content&quot;: &quot;Write a four-line poem about finding light after a difficult day.&quot;,
+      &quot;role&quot;: &quot;user&quot;
+    }
+  ],
+  &quot;max_tokens&quot;: 96
+}&#x27;</code></pre>
+</section>
+
+<h2 id="parameters">Parameters</h2>
+
+<h3 id="input">Input</h3>
+
+<div class="table-scroll"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>messages</code></td><td>array</td><td>Required.</td></tr><tr><td><code>messages[].role</code></td><td>string</td><td>Required. Values: system, developer, user, assistant, tool</td></tr><tr><td><code>messages[].content</code></td><td>string or null or array</td><td></td></tr><tr><td><code>temperature</code></td><td>number</td><td>Minimum: 0; Maximum: 2</td></tr><tr><td><code>max_tokens</code></td><td>number</td><td></td></tr><tr><td><code>max_completion_tokens</code></td><td>number</td><td></td></tr><tr><td><code>top_p</code></td><td>number</td><td>Minimum: 0; Maximum: 1</td></tr><tr><td><code>frequency_penalty</code></td><td>number</td><td>Minimum: -2; Maximum: 2</td></tr><tr><td><code>presence_penalty</code></td><td>number</td><td>Minimum: -2; Maximum: 2</td></tr><tr><td><code>stream</code></td><td>boolean</td><td></td></tr><tr><td><code>stream_options</code></td><td>object</td><td></td></tr><tr><td><code>stream_options.include_usage</code></td><td>boolean</td><td></td></tr><tr><td><code>tools</code></td><td>array</td><td></td></tr><tr><td><code>tool_choice</code></td><td>object</td><td></td></tr><tr><td><code>response_format</code></td><td>object</td><td></td></tr><tr><td><code>modalities</code></td><td>array</td><td></td></tr><tr><td><code>audio</code></td><td>object</td><td></td></tr><tr><td><code>audio.voice</code></td><td>string</td><td>Values: alloy, ash, ballad, coral, echo, sage, shimmer, verse</td></tr><tr><td><code>audio.format</code></td><td>string</td><td>Values: wav, mp3, flac, opus, pcm16</td></tr><tr><td><code>reasoning_effort</code></td><td>['string', 'null']</td><td>Optional reasoning control; availability and accepted values are model-dependent.</td></tr></tbody></table></div>
+
+<h3 id="output">Output</h3>
+
+<div class="table-scroll"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>id</code></td><td>string</td><td>Required.</td></tr><tr><td><code>object</code></td><td>string</td><td>Required.</td></tr><tr><td><code>created</code></td><td>number</td><td></td></tr><tr><td><code>model</code></td><td>string</td><td>Required.</td></tr><tr><td><code>choices</code></td><td>array</td><td>Required.</td></tr><tr><td><code>choices[].index</code></td><td>number</td><td>Required.</td></tr><tr><td><code>choices[].message</code></td><td>object</td><td>Required.</td></tr><tr><td><code>choices[].message.role</code></td><td>string</td><td>Required.</td></tr><tr><td><code>choices[].message.content</code></td><td>['string', 'null']</td><td></td></tr><tr><td><code>choices[].message.tool_calls</code></td><td>array or null</td><td></td></tr><tr><td><code>choices[].message.audio</code></td><td>object or null</td><td></td></tr><tr><td><code>choices[].message.audio.id</code></td><td>string</td><td></td></tr><tr><td><code>choices[].message.audio.data</code></td><td>string</td><td></td></tr><tr><td><code>choices[].message.audio.expires_at</code></td><td>number</td><td></td></tr><tr><td><code>choices[].message.audio.transcript</code></td><td>string</td><td></td></tr><tr><td><code>choices[].message.audio.id</code></td><td>string</td><td></td></tr><tr><td><code>choices[].message.audio.data</code></td><td>string</td><td></td></tr><tr><td><code>choices[].message.audio.expires_at</code></td><td>number</td><td></td></tr><tr><td><code>choices[].message.audio.transcript</code></td><td>string</td><td></td></tr><tr><td><code>choices[].finish_reason</code></td><td>['string', 'null']</td><td>Required.</td></tr><tr><td><code>usage</code></td><td>object</td><td></td></tr><tr><td><code>usage.prompt_tokens</code></td><td>number</td><td>Required.</td></tr><tr><td><code>usage.completion_tokens</code></td><td>number</td><td>Required.</td></tr><tr><td><code>usage.total_tokens</code></td><td>number</td><td>Required.</td></tr></tbody></table></div>
+
+<h2 id="api-schemas-raw">API Schemas (Raw)</h2>
+
+- [Input schema](/ai/models/stealth/union-alpha/schema-input.json)
+- [Output schema](/ai/models/stealth/union-alpha/schema-output.json)
+

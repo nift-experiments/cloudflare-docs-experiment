@@ -1,0 +1,6 @@
+<p>You can configure Cloudflare One Client (formerly WARP) settings to work alongside existing infrastructure and provide users with differential access to resources.</p>
+<aside class="nb-aside note">
+<h3 class="nb-aside-title" id="managed-deployments">Managed deployments</h3>
+@markup("md", "content/.markup/bodies/6179.md")
+</aside>
+<ul class="directory-listing"><li><a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/modes/">Client modes</a></li><li><a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/settings/">Device client settings</a></li><li><a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/device-profiles/">Device profiles</a></li><li><a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/managed-networks/">Managed networks</a></li><li><a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/route-traffic/">Route traffic</a></li><li><a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/device-ips/">Device IPs</a></li><li><a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/client-sessions/">Client sessions</a></li></ul>

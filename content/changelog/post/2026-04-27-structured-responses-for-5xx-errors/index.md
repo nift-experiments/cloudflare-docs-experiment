@@ -1,0 +1,62 @@
+<div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
+<div class="changelog-tools"><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
+<article class="changelog-detail"><a href="/changelog/">← Back to all posts</a>
+<time>April 27, 2026</time><h2 id="post-title">Structured error responses for Cloudflare 5xx errors</h2>
+<div class="changelog-badges"><span>fundamentals</span></div><div class="changelog-body"><p>Cloudflare-generated 5xx error responses now return structured JSON and Markdown when agents request them, matching the format already available for 1xxx errors. Responses follow <a href="https://www.rfc-editor.org/rfc/rfc9457">RFC 9457 (Problem Details for HTTP APIs)</a> and include a <code>Retry-After</code> HTTP header on retryable codes.</p>
+<h4 id="changes">Changes</h4>
+<p><strong>5xx coverage.</strong> Ten Cloudflare-generated error codes (500, 502, 504, 520-526) now serve structured responses. These are errors Cloudflare itself generates when it cannot reach or understand the origin server. Origin-generated 5xx responses that Cloudflare passes through are not affected.</p>
+<p><strong>Fault attribution.</strong> The <code>error_category</code> field tells agents where the fault lies:</p>
+<ul>
+<li><code>origin</code> (502, 504, 520-524) — the origin server is responsible. Transient; retry with the backoff in <code>retry_after</code>.</li>
+<li><code>cloudflare</code> (500) — Cloudflare's fault, not the website or the request. Short retry.</li>
+<li><code>ssl</code> (525, 526) — the origin's TLS configuration is broken. Do not retry.</li>
+</ul>
+<p><strong>Retry-After header.</strong> Retryable codes (500, 502, 504, 520-524) include a <code>Retry-After</code> HTTP header matching the <code>retry_after</code> body field. Non-retryable codes (525, 526) do not include the header.</p>
+<h4 id="negotiation-behavior">Negotiation behavior</h4>
+<table>
+<thead>
+<tr>
+<th>Request header sent</th>
+<th>Response format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Accept: application/json</code></td>
+<td>JSON (<code>application/json</code> content type)</td>
+</tr>
+<tr>
+<td><code>Accept: application/problem+json</code></td>
+<td>JSON (<code>application/problem+json</code> content type)</td>
+</tr>
+<tr>
+<td><code>Accept: application/json, text/markdown;q=0.9</code></td>
+<td>JSON</td>
+</tr>
+<tr>
+<td><code>Accept: text/markdown</code></td>
+<td>Markdown</td>
+</tr>
+<tr>
+<td><code>Accept: text/markdown, application/json</code></td>
+<td>Markdown (equal <code>q</code>, first-listed wins)</td>
+</tr>
+<tr>
+<td><code>Accept: */*</code></td>
+<td>HTML (default)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="availability">Availability</h4>
+<p>Available now for all zones on all plans.</p>
+<h4 id="get-started">Get started</h4>
+<p>Get JSON response for error 522:</p>
+<pre><code class="language-bash">curl -s --compressed -H &quot;Accept: application/json&quot; -A &quot;TestAgent/1.0&quot; -H &quot;Accept-Encoding: gzip, deflate&quot; &quot;&lt;YOUR_DOMAIN&gt;/cdn-cgi/error/522&quot; | jq .&#10;</code></pre>
+<p>Check presence of the <code>Retry-After</code> HTTP header associated with the JSON response for error 521:</p>
+<pre><code class="language-bash">curl -s --compressed -D - -o /dev/null -H &quot;Accept: application/json&quot; -A &quot;TestAgent/1.0&quot; -H &quot;Accept-Encoding: gzip, deflate&quot; &quot;&lt;YOUR_DOMAIN&gt;/cdn-cgi/error/521&quot; | grep -i retry-after&#10;</code></pre>
+<p>References:</p>
+<ul>
+<li><a href="https://www.rfc-editor.org/rfc/rfc9457">RFC 9457 — Problem Details for HTTP APIs</a></li>
+<li><a href="/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/">Cloudflare 5xx error documentation</a></li>
+</ul>
+</div></article></div>

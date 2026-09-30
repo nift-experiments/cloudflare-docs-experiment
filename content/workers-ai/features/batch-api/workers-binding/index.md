@@ -1,0 +1,21 @@
+<p>You can use Workers Bindings to interact with the Batch API.</p>
+<h2 id="send-a-batch-request">Send a Batch request</h2>
+<p>Send your initial batch inference request by composing a JSON payload containing an array of individual inference requests and the <code>queueRequest: true</code> property (which is what controls queueing behavior).</p>
+<aside class="nb-aside note">
+<h3 class="nb-aside-title" id="note">Note</h3>
+@markup("md", "content/.markup/bodies/15827.md")
+</aside>
+<pre><code class="language-ts">export interface Env {&#10;	AI: Ai;&#10;}&#10;export default {&#10;	async fetch(request, env): Promise&lt;Response&gt; {&#10;		const embeddings = await env.AI.run(&#10;			&quot;@cf/baai/bge-m3&quot;,&#10;			{&#10;				requests: [&#10;					{&#10;						query: &quot;This is a story about Cloudflare&quot;,&#10;						contexts: [&#10;							{&#10;								text: &quot;This is a story about an orange cloud&quot;,&#10;							},&#10;							{&#10;								text: &quot;This is a story about a llama&quot;,&#10;							},&#10;							{&#10;								text: &quot;This is a story about a hugging emoji&quot;,&#10;							},&#10;						],&#10;					},&#10;				],&#10;			},&#10;			{ queueRequest: true },&#10;		);&#10;&#10;		return Response.json(embeddings);&#10;	},&#10;} satisfies ExportedHandler&lt;Env&gt;;&#10;</code></pre>
+<pre><code class="language-json">{&#10;	&quot;status&quot;: &quot;queued&quot;,&#10;	&quot;model&quot;: &quot;@cf/baai/bge-m3&quot;,&#10;	&quot;request_id&quot;: &quot;000-000-000&quot;&#10;}&#10;</code></pre>
+<p>You will get a response with the following values:</p>
+<ul>
+<li><strong><code>status</code></strong>: Indicates that your request is queued.</li>
+<li><strong><code>request_id</code></strong>: A unique identifier for the batch request.</li>
+<li><strong><code>model</code></strong>: The model used for the batch inference.</li>
+</ul>
+<p>Of these, the <code>request_id</code> is important for when you need to <a href="#poll-batch-status">poll the batch status</a>.</p>
+<h3 id="poll-batch-status">Poll batch status</h3>
+<p>Once your batch request is queued, use the <code>request_id</code> to poll for its status. During processing, the API returns a status <code>queued</code> or <code>running</code> indicating that the request is still in the queue or being processed.</p>
+<pre><code class="language-typescript">export interface Env {&#10;	AI: Ai;&#10;}&#10;&#10;export default {&#10;	async fetch(request, env): Promise&lt;Response&gt; {&#10;		const status = await env.AI.run(&quot;@cf/baai/bge-m3&quot;, {&#10;			request_id: &quot;000-000-000&quot;,&#10;		});&#10;&#10;		return Response.json(status);&#10;	},&#10;} satisfies ExportedHandler&lt;Env&gt;;&#10;</code></pre>
+<pre><code class="language-json">{&#10;	&quot;responses&quot;: [&#10;		{&#10;			&quot;id&quot;: 0,&#10;			&quot;result&quot;: {&#10;				&quot;response&quot;: [&#10;					{ &quot;id&quot;: 0, &quot;score&quot;: 0.73974609375 },&#10;					{ &quot;id&quot;: 1, &quot;score&quot;: 0.642578125 },&#10;					{ &quot;id&quot;: 2, &quot;score&quot;: 0.6220703125 }&#10;				]&#10;			},&#10;			&quot;success&quot;: true,&#10;			&quot;external_reference&quot;: &quot;reference-1&quot;&#10;		}&#10;	],&#10;	&quot;usage&quot;: { &quot;prompt_tokens&quot;: 12, &quot;completion_tokens&quot;: 0, &quot;total_tokens&quot;: 12 }&#10;}&#10;</code></pre>
+<p>When the inference is complete, the API returns a final HTTP status code of <code>200</code> along with an array of responses. Each response object corresponds to an individual input prompt, identified by an <code>id</code> that maps to the index of the prompt in your original request.</p>

@@ -1,0 +1,12 @@
+<p>The Cloudflare Filters API supports an endpoint for validating expressions.</p>
+<h2 id="examples">Examples</h2>
+<h3 id="validate-expression-via-query-string">Validate expression via query string</h3>
+<pre><code class="language-bash">curl &quot;https://api.cloudflare.com/client/v4/filters/validate-expr?expression=ip.src==34&quot; \&#10;&#45;-header &quot;X-Auth-Email: &lt;EMAIL&gt;&quot; \&#10;&#45;-header &quot;X-Auth-Key: &lt;API_KEY&gt;&quot;&#10;</code></pre>
+<pre><code class="language-json">{&#10;  &quot;result&quot;: null,&#10;  &quot;success&quot;: false,&#10;  &quot;errors&quot;: [&#10;    {&#10;      &quot;message&quot;: &quot;Filter parsing error:\n`ip.src==34`\n          ^^ couldn&#x27;t parse address in network: invalid IP address syntax\n&quot;&#10;    }&#10;  ],&#10;  &quot;messages&quot;: null&#10;}&#10;</code></pre>
+<p>Note the validation error in the response. In this example, the error is due to an invalid IP address format:</p>
+<pre><code class="language-txt">Filter parsing error:&#10;`ip.src==34`&#10;          ^^ couldn&#x27;t parse address in network: invalid IP address syntax&#10;</code></pre>
+<h3 id="validate-expression-via-json-object">Validate expression via JSON object</h3>
+<pre><code class="language-bash">curl &quot;https://api.cloudflare.com/client/v4/filters/validate-expr&quot; \&#10;&#45;-header &quot;X-Auth-Email: &lt;EMAIL&gt;&quot; \&#10;&#45;-header &quot;X-Auth-Key: &lt;API_KEY&gt;&quot; \&#10;&#45;-header &quot;Content-Type: application/json&quot; \&#10;&#45;-data &#x27;{&#10;  &quot;expression&quot;: &quot;ip.src in {2400:cb00::/32 2405:8100::/2000 2c0f:f248::/32 2a06:98c0::/29}&quot;&#10;}&#x27;&#10;</code></pre>
+<pre><code class="language-json">{&#10;  &quot;result&quot;: null,&#10;  &quot;success&quot;: false,&#10;  &quot;errors&quot;: [&#10;    {&#10;      &quot;message&quot;: &quot;Filter parsing error:\n`ip.src in {2400:cb00::/32 2405:8100::/2000 2c0f:f248::/32 2a06:98c0::/29}`\n                                        ^^^^ number too large to fit in target type while parsing with radix 10\n&quot;&#10;    }&#10;  ],&#10;  &quot;messages&quot;: null&#10;}&#10;</code></pre>
+<p>Note the validation error in the response. In this example, the value for the subnet mask, <code>/2000</code>, is not a valid IPv6 CIDR mask:</p>
+<pre><code class="language-txt">Filter parsing error:&#10;`ip.src in {2400:cb00::/32 2405:8100::/2000 2c0f:f248::/32 2a06:98c0::/29}`&#10;                                       ^^^^ number too large to fit in target type while parsing with radix 10&#10;</code></pre>

@@ -1,0 +1,2 @@
+<p>Refer to the following pages for more information about Turnstile extensions:</p>
+<ul class="directory-listing"><li><a href="/pages/functions/plugins/turnstile/">Pages Plugin</a></li><li><a href="/turnstile/extensions/google-firebase/">Implement Turnstile with Google Firebase</a></li><li><a href="/waiting-room/waiting-room-analytics/#turnstile-widget-traffic">Waiting Room Analytics</a></li></ul>

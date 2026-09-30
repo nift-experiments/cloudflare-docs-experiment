@@ -1,0 +1,24 @@
+<h2 id="stale-while-revalidate">Stale-while-revalidate</h2>
+<p>When a cached asset expires, Cloudflare uses the <a href="/cache/concepts/cache-control/#revalidation"><code>stale-while-revalidate</code></a> directive in <code>Cache-Control</code> to determine whether it can continue serving the stale asset while fetching a fresh copy from the origin. If the directive is present and the asset is within the allowed staleness window, Cloudflare serves the expired content to visitors and revalidates in the background. By using headers like <code>If-Modified-Since</code> and <code>ETag</code>, Cloudflare validates content without fully re-fetching it, reducing origin traffic.</p>
+<h2 id="asynchronous-revalidation">Asynchronous revalidation</h2>
+<p>Revalidation is fully asynchronous. When a cached asset expires and <code>stale-while-revalidate</code> is set, the first request that arrives after expiry triggers revalidation in the background. That request immediately receives stale content with an <a href="/cache/concepts/cache-responses/#updating">UPDATING</a> status instead of blocking until the origin responds. All following requests also receive stale content with an <code>UPDATING</code> status until the origin responds. Once revalidation completes, subsequent requests receive fresh content with a <a href="/cache/concepts/cache-responses/#hit">HIT</a> status.</p>
+<p>If the stale content is still valid, Cloudflare sets a new TTL. If the content has changed, the origin provides fresh content to replace the old.</p>
+<h2 id="controlling-stale-behavior">Controlling stale behavior</h2>
+<p>Cloudflare only serves stale content during revalidation if your origin includes the <code>stale-while-revalidate</code> directive in its <code>Cache-Control</code> header. Without this directive, visitors wait for the origin to respond before receiving content.</p>
+<p>If your origin sets <code>stale-while-revalidate</code> but you want to override it, you can disable stale serving through the <a href="/cache/how-to/cache-rules/settings/#serve-stale-content-while-revalidating">Serve stale content while revalidating</a> setting in Cache Rules.</p>
+<h3 id="directives-that-disable-stale-while-revalidate">Directives that disable stale-while-revalidate</h3>
+<p>When <a href="/cache/concepts/cache-control/#enable-origin-cache-control">Origin Cache Control</a> is enabled, the following <code>Cache-Control</code> directives prevent Cloudflare from serving stale content, per <a href="https://www.rfc-editor.org/rfc/rfc9111.html#section-4.2.4">RFC 9111 §4.2.4</a>:</p>
+<ul>
+<li><strong><code>must-revalidate</code></strong> — Prohibits serving stale content; the cache must revalidate with the origin first.</li>
+<li><strong><code>proxy-revalidate</code></strong> — Same as <code>must-revalidate</code>, but only applies to shared caches (like Cloudflare).</li>
+<li><strong><code>s-maxage</code></strong> — Implies <code>proxy-revalidate</code> semantics, so shared caches cannot serve stale content.</li>
+<li><strong><code>no-cache</code></strong> — Requires revalidation before serving any cached response.</li>
+</ul>
+<p>If any of these directives are present alongside <code>stale-while-revalidate</code>, Cloudflare will not serve stale content — requests will return <code>EXPIRED</code> instead of <code>UPDATING</code>.</p>
+<aside class="nb-aside note">
+<h3 class="nb-aside-title" id="workaround-for-different-edge-and-browser-ttls">Workaround for different edge and browser TTLs</h3>
+@markup("md", "content/.markup/bodies/3815.md")
+</aside>
+<p>For all available directives or behavior when Origin Cache Control is disabled, refer to <a href="/cache/concepts/cache-control/#cache-control-directives">Cache-Control directives</a>.</p>
+<h2 id="smart-revalidation-towards-users">Smart revalidation towards users</h2>
+<p>When both <a href="https://datatracker.ietf.org/doc/html/rfc7232?cf_history_state=%7B%22guid%22%3A%22C255D9FF78CD46CDA4F76812EA68C350%22%2C%22historyId%22%3A15%2C%22targetId%22%3A%226C8153BAEF7BC0C5A331E28F8BCF1ABA%22%7D#section-2.2"><code>Last-Modified</code></a> and <a href="https://datatracker.ietf.org/doc/html/rfc7232?cf_history_state=%7B%22guid%22%3A%22C255D9FF78CD46CDA4F76812EA68C350%22%2C%22historyId%22%3A13%2C%22targetId%22%3A%226C8153BAEF7BC0C5A331E28F8BCF1ABA%22%7D#section-2.3"><code>Etag</code></a> headers are absent from the origin server response, Smart Edge Revalidation will use the time the object was cached on Cloudflare's global network as the <code>Last-Modified</code> header value. When a browser sends a revalidation request to Cloudflare using <code>If-Modified-Since</code> or <code>If-None-Match</code>, our global network can answer those revalidation questions using the <code>Last-Modified</code> header generated from Smart Edge Revalidation. In this way, our global network can ensure efficient revalidation even if the headers are not sent from the origin.</p>

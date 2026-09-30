@@ -1,0 +1,2 @@
+<p>Manage users in your Zero Trust organization.</p>
+<ul class="directory-listing"><li><a href="/cloudflare-one/team-and-resources/users/seat-management/">Seat management</a></li><li><a href="/cloudflare-one/team-and-resources/users/scim/">SCIM provisioning</a></li><li><a href="/cloudflare-one/team-and-resources/users/users/">User logs</a></li><li><a href="/cloudflare-one/team-and-resources/users/risk-score/">Risk score</a></li></ul>

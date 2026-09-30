@@ -1,0 +1,6 @@
+<p>Cloudflare provides unmetered and unlimited <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
+@markup("md", "content/.markup/bodies/7473.md")
+</div> protection at layers 3, 4, and 7 to all customers on all plans and services.
+<p>The protection is enabled by Cloudflare's <a href="/ddos-protection/about/components/#autonomous-edge">Autonomous DDoS Protection Edge</a>, which automatically detects and mitigates DDoS attacks.</p>
+<p>The Autonomous Edge includes multiple dynamic mitigation rules exposed as <a href="/ddos-protection/managed-rulesets/">managed rulesets</a>, which provide comprehensive protection against a variety of DDoS attacks across layers 3/4 and layer 7 of the OSI model.</p>
+<p><a href="/ddos-protection/managed-rulesets/adaptive-protection/">Adaptive DDoS Protection</a> also learns your unique traffic patterns and adapts to them to provide better protection against sophisticated DDoS attacks on layer 7 and layers 3/4. Your Internet properties can be secured from sophisticated TCP and DNS DDoS attacks using <a href="/ddos-protection/advanced-ddos-systems/overview/">Advanced DDoS Protection</a> that leverages stateful inspection and traffic profiling.</p>

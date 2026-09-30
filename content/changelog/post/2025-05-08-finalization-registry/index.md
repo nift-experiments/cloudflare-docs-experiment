@@ -1,0 +1,8 @@
+<div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
+<div class="changelog-tools"><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
+<article class="changelog-detail"><a href="/changelog/">← Back to all posts</a>
+<time>May 8, 2025</time><h2 id="post-title">Improved memory efficiency for WebAssembly Workers</h2>
+<div class="changelog-badges"><span>workers</span></div><div class="changelog-body"><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/FinalizationRegistry">FinalizationRegistry</a> is now available in Workers. You can opt-in using the <a href="/workers/configuration/compatibility-flags/#enable-finalizationregistry-and-weakref"><code>enable_weak_ref</code></a> compatibility flag.</p>
+<p>This can reduce memory leaks when using WebAssembly-based Workers, which includes <a href="/workers/languages/python/">Python Workers</a> and <a href="/workers/languages/rust/">Rust Workers</a>. The FinalizationRegistry works by enabling toolchains such as <a href="https://emscripten.org/">Emscripten</a> and <a href="https://wasm-bindgen.github.io/wasm-bindgen/">wasm-bindgen</a> to automatically free WebAssembly heap allocations. If you are using WASM and seeing Exceeded Memory errors and cannot determine a cause using <a href="/workers/observability/dev-tools/memory-usage/">memory profiling</a>, you may want to enable the FinalizationRegistry.</p>
+<p>For more information refer to the <a href="/workers/configuration/compatibility-flags/#enable-finalizationregistry-and-weakref"><code>enable_weak_ref</code></a> compatibility flag documentation.</p>
+</div></article></div>

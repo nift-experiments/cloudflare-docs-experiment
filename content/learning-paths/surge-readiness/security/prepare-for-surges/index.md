@@ -1,0 +1,6 @@
+<h2 id="reduce-server-strain">Reduce server strain</h2>
+<p>Utilize Cloudflare's <a href="/cache/">caching</a> to enhance load times and reduce server strain. Also, features like the <a href="/waiting-room">Waiting Room</a> and <a href="/waf/rate-limiting-rules/">Rate Limiting</a> can be used to effectively manage excess demand and ensure a stable user experience.</p>
+<h2 id="unlimited-ddos-protection">Unlimited DDoS Protection</h2>
+<p>Cloudflare's Advanced <a href="/ddos-protection/">DDoS protection</a> is always on for Enterprise customers and is used to mitigate DDoS attacks of all forms and sizes including those that target UDP and ICMP protocols, as well as SYN/ACK, DNS amplification, SMURF, and Layer 7 attacks.</p>
+<h2 id="browser-integrity-check">Browser Integrity Check</h2>
+<p><a href="/waf/tools/browser-integrity-check/">Browser Integrity Check</a> looks for requests with HTTP headers commonly used by spammers, bots, and crawlers such as requests with a missing or non-standard user agent. If a threat is found, Cloudflare will present a challenge page before allowing access. This may affect your API and can be selectively disabled using <a href="/rules/page-rules/">Page Rules</a>.</p>

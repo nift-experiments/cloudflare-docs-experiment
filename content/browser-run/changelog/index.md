@@ -1,0 +1,116 @@
+<p>This is a detailed changelog of every update to Browser Run (formerly Browser Rendering). For a higher-level summary of major updates to every Cloudflare product, including Browser Run, visit <a href="/changelog/">developers.cloudflare.com/changelog</a>.</p>
+<h2 id="2026-07-28">2026-07-28</h2><strong>Structured handoff for Human in the Loop</strong><ul>
+<li><a href="/browser-run/features/human-in-the-loop/">Human in the Loop</a> now supports structured handoff using Cloudflare-specific CDP commands. Your script calls <code>Cloudflare.handoff</code> with instructions for the human operator and waits for a <code>Cloudflare.handoffComplete</code> event, replacing the need to manually poll for completion. Refer to the <a href="/browser-run/features/human-in-the-loop/">Human in the Loop documentation</a> for examples and best practices.</li>
+</ul><h2 id="2026-07-07">2026-07-07</h2><strong>New endpoint: /accessibilityTree</strong><ul>
+<li>Added the <a href="/browser-run/quick-actions/accessibility-tree-endpoint/"><code>/accessibilityTree</code> endpoint</a> to capture the accessibility tree from a rendered webpage. The accessibility tree includes roles, names, values, states, and hierarchy, giving AI agents and automation workflows a structured view of page elements without parsing raw HTML or interpreting screenshots. You can capture the full page tree, return only semantically meaningful nodes with <code>interestingOnly</code>, or capture a subtree with <code>root</code>.</li>
+</ul><h2 id="2026-06-12">2026-06-12</h2><strong>New tutorial: Pre-render pages for crawlers</strong><ul>
+<li>Added a new tutorial on how to <a href="/browser-run/how-to/pre-render-pages/">pre-render JavaScript-heavy pages</a> using Browser Run and a Worker. The tutorial covers building a pre-rendering endpoint that calls the <a href="/browser-run/quick-actions/content-endpoint/"><code>/content</code> Quick Action</a> to render pages in managed headless Chrome and return crawler-ready HTML for search crawlers, social preview bots, AI indexing jobs, or partner integrations.</li>
+</ul><h2 id="2026-06-11">2026-06-11</h2><strong>New formats parameter for /snapshot</strong><ul>
+<li>The <a href="/browser-run/quick-actions/snapshot/"><code>/snapshot</code> endpoint</a> now supports a <code>formats</code> parameter that lets you return multiple page formats in a single API call. Previously, <code>/snapshot</code> returned only HTML content and a screenshot. You can now also include Markdown and the accessibility tree in the same response. Refer to the <a href="/browser-run/quick-actions/snapshot/"><code>/snapshot</code> documentation</a> for usage examples and accepted values.</li>
+</ul><h2 id="2026-05-28">2026-05-28</h2><strong>Use Quick Actions directly from Workers</strong><ul>
+<li>You can now call <a href="/browser-run/quick-actions/">Quick Actions</a> directly from a <a href="/workers/">Worker</a> using the <code>quickAction()</code> method on the <a href="/browser-run/reference/wrangler/#bindings">browser binding</a>. This removes the need for API tokens or external HTTP requests when using Quick Actions within Workers. Supported actions include <a href="/browser-run/quick-actions/screenshot-endpoint/">screenshot</a>, <a href="/browser-run/quick-actions/pdf-endpoint/">PDF</a>, <a href="/browser-run/quick-actions/content-endpoint/">content</a>, <a href="/browser-run/quick-actions/markdown-endpoint/">markdown</a>, <a href="/browser-run/quick-actions/json-endpoint/">JSON</a>, <a href="/browser-run/quick-actions/scrape-endpoint/">scrape</a>, <a href="/browser-run/quick-actions/links-endpoint/">links</a>, and <a href="/browser-run/quick-actions/snapshot/">snapshot</a>. The <code>quickAction()</code> method requires a compatibility date of <code>2026-03-24</code> or later.</li>
+</ul><h2 id="2026-04-15">2026-04-15</h2><strong>@cloudflare/playwright v1.3.0 released</strong><ul>
+<li>Released version 1.3.0 of <a href="https://github.com/cloudflare/playwright/releases/tag/v1.3.0"><code>@cloudflare/playwright</code></a>. Starting with this version, the library uses the standard CDP (Chrome DevTools Protocol) internally to communicate with Browser Run, replacing the previous chunked protocol. This aligns with Browser Run's <a href="/changelog/post/2026-04-10-browser-rendering-cdp-endpoint/">full CDP support</a> and prevents compatibility issues when using the latest compatibility dates. If you encounter any issues, you can downgrade by setting a <code>compatibility_date</code> prior to <code>2026-03-17</code> or by adding the <code>no_websocket_standard_binary_type</code> flag. Refer to the <a href="https://github.com/cloudflare/playwright?tab=readme-ov-file#cdp-protocol-support"><code>@cloudflare/playwright</code> README</a> for details.</li>
+</ul><h2 id="2026-04-15-1">2026-04-15</h2><strong>Higher concurrency limits</strong><ul>
+<li>Increased the default <a href="/browser-run/limits/#workers-paid">concurrent browser limit</a> for Workers Paid plans from 30 to <strong>120 per account</strong>.</li>
+<li>Increased new browser instance rate for Workers Paid plans from 30 per minute to <strong>1 per second</strong>.</li>
+<li>Rate limits across the <a href="/browser-run/limits/">limits page</a> are now expressed in per-second terms, matching how they are enforced.</li>
+</ul><h2 id="2026-04-15-2">2026-04-15</h2><strong>Live View</strong><ul>
+<li><a href="/browser-run/features/live-view/">Live View</a> lets you see and interact with a remote browser session in real time. Use it to debug automation scripts, monitor what a browser is doing, or manually step in when a task requires human intervention. Access Live View from the Cloudflare dashboard, via the hosted UI at <code>live.browser.run</code>, or using native Chrome DevTools.</li>
+</ul><h2 id="2026-04-15-3">2026-04-15</h2><strong>Human in the Loop</strong><ul>
+<li><a href="/browser-run/features/human-in-the-loop/">Human in the Loop</a> lets a human step into a live browser session to handle what automation cannot, such as login pages, CAPTCHAs, or sensitive data entry, then hand control back to the script. Access any active session through <a href="/browser-run/features/live-view/">Live View</a>.</li>
+</ul><h2 id="2026-04-15-4">2026-04-15</h2><strong>Session Recordings</strong><ul>
+<li><a href="/browser-run/features/session-recording/">Session Recordings</a> captures DOM changes, mouse and keyboard events, and page navigation as structured data so you can replay any browser session after it ends. Enable recordings by passing <code>recording: true</code> when launching a browser. After the session closes, access recordings from the <strong>Runs</strong> tab in the Cloudflare dashboard or retrieve them via API.</li>
+</ul><h2 id="2026-04-15-5">2026-04-15</h2><strong>WebMCP support</strong><ul>
+<li>Browser Run now supports <a href="/browser-run/features/webmcp/">WebMCP</a> (Web Model Context Protocol), which allows websites to declare structured tools that AI agents can discover and execute. WebMCP-enabled browsers are available through the experimental lab browser pool.</li>
+</ul><h2 id="2026-04-14">2026-04-14</h2><strong>Wrangler CLI commands for Browser Rendering</strong><ul>
+<li>Added <code>wrangler browser</code> commands to create, manage, and view browser sessions directly from the terminal. Available commands: <code>create</code>, <code>close</code>, <code>list</code>, and <code>view</code>. For full usage details, refer to <a href="/browser-run/reference/wrangler-commands/">Wrangler commands</a>.</li>
+</ul><h2 id="2026-04-13">2026-04-13</h2><strong>@cloudflare/puppeteer v1.1.0 released</strong><ul>
+<li>Released version 1.1.0 of <a href="https://github.com/cloudflare/puppeteer/releases/tag/v1.1.0"><code>@cloudflare/puppeteer</code></a>, which replaces the internal chunked protocol with plain CDP. This fixes a compatibility issue when using the latest compatibility dates.</li>
+</ul><h2 id="2026-04-10">2026-04-10</h2><strong>Chrome DevTools Protocol (CDP) and MCP client support</strong><ul>
+<li>Browser Rendering now exposes the <a href="/browser-run/cdp/">Chrome DevTools Protocol (CDP)</a> as an endpoint. Any CDP-compatible client, including <a href="/browser-run/cdp/puppeteer/">Puppeteer</a> and <a href="/browser-run/cdp/playwright/">Playwright</a>, can connect from any environment, whether that is <a href="/workers/">Cloudflare Workers</a>, your local machine, or a cloud environment. <a href="/browser-run/cdp/mcp-clients/">MCP clients</a> like Claude Desktop, Claude Code, Cursor, and OpenCode can also use Browser Rendering as their remote browser.</li>
+</ul><h2 id="2026-04-06">2026-04-06</h2><strong>Local development: headful mode (experimental)</strong><ul>
+<li>You can now run Chrome in visible (headful) mode during local development by setting <code>X_BROWSER_HEADFUL=true</code> before running <code>wrangler dev</code> or <code>vite dev</code>. This makes it easier to visually debug your browser automation scripts. This feature is experimental and may change without notice.</li>
+</ul><h2 id="2026-03-23">2026-03-23</h2><strong>@cloudflare/playwright v1.2.0 released</strong><ul>
+<li>Released version 1.2.0 of <a href="https://github.com/cloudflare/playwright/releases/tag/v1.2.0"><code>@cloudflare/playwright</code></a>, now upgraded to <a href="https://playwright.dev/docs/release-notes#version-158">Playwright v1.58.2</a>.</li>
+</ul><h2 id="2026-03-17">2026-03-17</h2><strong>Separate bot detection IDs for Browser Rendering methods</strong><ul>
+<li>Browser Rendering now uses separate bot detection IDs for the <a href="/browser-run/quick-actions/">REST API</a> and <a href="/browser-run/#integration-methods">Browser Sessions</a> versus the <a href="/browser-run/quick-actions/crawl-endpoint/">crawl endpoint</a>, allowing you to identify and control each method independently. For the full list of IDs, refer to <a href="/browser-run/reference/automatic-request-headers/#bot-detection">Automatic request headers</a>.</li>
+</ul><h2 id="2026-03-10">2026-03-10</h2><strong>New REST API endpoint: /crawl (Beta)</strong><ul>
+<li>Added the <a href="/browser-run/quick-actions/crawl-endpoint/"><code>/crawl</code> endpoint</a> (beta) to the REST API. The <code>/crawl</code> endpoint scrapes content from a starting URL and follows links across the site, up to a configurable depth or page limit. Responses can be returned as HTML, Markdown, or structured JSON (powered by <a href="/workers-ai/">Workers AI</a>).</li>
+</ul><h2 id="2026-03-04">2026-03-04</h2><strong>Increased REST API rate limits</strong><ul>
+<li>Increased <a href="/browser-run/limits/#workers-paid">REST API rate limits</a> for Workers Paid plans from 180 requests per minute (3 per second) to 600 requests per minute (10 per second). No action is needed to benefit from the higher limits.</li>
+</ul><h2 id="2026-02-26">2026-02-26</h2><strong>New tutorial: Generate OG images for Astro sites</strong><ul>
+<li>Added a new tutorial on how to <a href="/browser-run/how-to/og-images-astro/">generate OG images for Astro sites</a> using Browser Rendering. The tutorial walks through creating an Astro template, using Browser Rendering to screenshot it as a PNG, and serving the generated images.</li>
+</ul><h2 id="2026-02-24">2026-02-24</h2><strong>Documentation updates for robots.txt and sitemaps</strong><ul>
+<li>Added <a href="/browser-run/reference/robots-txt/">robots.txt and sitemaps reference page</a> with guidance on configuring robots.txt and sitemaps for sites accessed by Browser Rendering, including sitemap index files and caching headers.</li>
+</ul><h2 id="2026-02-18">2026-02-18</h2><strong>@cloudflare/playwright v1.1.1 released</strong><ul>
+<li>Released version 1.1.1 of <a href="https://github.com/cloudflare/playwright/releases/tag/v1.1.1"><code>@cloudflare/playwright</code></a>, which includes a bug fix that resolves a chunking issue that could occur when generating large PDFs. Upgrade to this version to avoid this issue.</li>
+</ul><h2 id="2026-02-03">2026-02-03</h2><strong>@cloudflare/puppeteer v1.0.6 released</strong><ul>
+<li>Released version 1.0.6 of <a href="https://github.com/cloudflare/puppeteer/releases/tag/v1.0.6"><code>@cloudflare/puppeteer</code></a>, which includes a fix for rendering large text PDFs.</li>
+</ul><h2 id="2026-01-21">2026-01-21</h2><strong>@cloudflare/puppeteer v1.0.5 released</strong><ul>
+<li>Released version 1.0.5 of <a href="https://www.npmjs.com/package/@cloudflare/puppeteer/v/1.0.5"><code>@cloudflare/puppeteer</code></a>, which includes a performance optimization for base64 decoding.</li>
+</ul><h2 id="2026-01-08">2026-01-08</h2><strong>@cloudflare/playwright v1.1.0 released</strong><ul>
+<li>Released version 1.1.0 of <a href="https://github.com/cloudflare/playwright"><code>@cloudflare/playwright</code></a>, now upgraded to <a href="https://playwright.dev/docs/release-notes#version-157">Playwright v1.57.0</a>.</li>
+</ul><h2 id="2026-01-07">2026-01-07</h2><strong>Bug fixes for JSON endpoint, waitForSelector timeout, and WebSocket rendering</strong><ul>
+<li>Updated the <a href="/browser-run/quick-actions/json-endpoint/"><code>/json</code> endpoint</a> fallback model and improved error handling for when plan limits of Workers Free plan users are reached.</li>
+<li>REST API requests using <code>waitForSelector</code> will now correctly fail if the specified selector is not found within the time limit.</li>
+<li>Fixed an issue where pages using WebSockets were not rendering correctly.</li>
+</ul><h2 id="2025-12-04">2025-12-04</h2><strong>Added guidance on allowlisting Browser Rendering in Bot Management</strong><ul>
+<li>Added <a href="/browser-run/faq/#can-i-allowlist-browser-run-on-my-own-website">FAQ guidance</a> on how to create a WAF skip rule to allowlist Browser Rendering requests when using Bot Management on your zone.</li>
+</ul><h2 id="2025-12-03">2025-12-03</h2><strong>Improved AI JSON response parsing and debugging</strong><ul>
+<li>Added <code>rawAiResponse</code> field to <a href="/browser-run/quick-actions/json-endpoint/"><code>/json</code> endpoint</a> error responses, allowing you to inspect the unparsed AI output when JSON parsing fails for easier debugging.</li>
+<li>Improved AI response handling to better distinguish between valid JSON objects, arrays, and invalid payloads, increasing type safety and reliability.</li>
+</ul><h2 id="2025-10-21">2025-10-21</h2><strong>Added guidance on REST API timeouts and custom fonts</strong><ul>
+<li>Added <a href="/browser-run/reference/timeouts/">REST API timeouts</a> page explaining how Browser Rendering uses independent timers (for page load, selectors, and actions) and how to configure them.</li>
+<li>Updated <a href="/browser-run/reference/supported-fonts/">Supported fonts</a> guide with instructions on using your own custom fonts via <code>addStyleTag()</code> in <a href="/browser-run/playwright/">Playwright</a> or <a href="/browser-run/puppeteer/">Puppeteer</a>.</li>
+</ul><h2 id="2025-09-25">2025-09-25</h2><strong>Updates to Playwright, new support for Stagehand, and increased limits</strong><ul>
+<li><a href="/browser-run/playwright/">Playwright</a> support in Browser Rendering is now GA. We've upgraded to <a href="https://playwright.dev/docs/release-notes#version-155">Playwright v1.55</a>.</li>
+<li>Added support for <a href="/browser-run/stagehand/">Stagehand</a>, an open source browser automation framework, powered by <a href="/workers-ai">Workers AI</a>. Stagehand enables developers to build more reliably and flexibly by combining code with natural-language instructions.</li>
+<li>Increased <a href="/browser-run/limits/#workers-paid">limits</a> for paid plans on both the <a href="/browser-run/quick-actions/">REST API</a> and <a href="/browser-run/#integration-methods">Browser Sessions</a>.</li>
+</ul><h2 id="2025-09-22">2025-09-22</h2><strong>Added `excludeExternalLinks` parameter to `/links` REST endpoint</strong><ul>
+<li>Added <code>excludeExternalLinks</code> parameter when using the <a href="/browser-run/quick-actions/links-endpoint/"><code>/links</code> endpoint</a>. When set to <code>true</code>, links pointing to outside the domain of the requested URL are excluded.</li>
+</ul><h2 id="2025-09-02">2025-09-02</h2><strong>Added `X-Browser-Ms-Used` response header</strong><ul>
+<li>Each REST API response now includes the <code>X-Browser-Ms-Used</code> response header, which reports the browser time (in milliseconds) used by the request.</li>
+</ul><h2 id="2025-08-20">2025-08-20</h2><strong>Browser Rendering billing goes live</strong><ul>
+<li>Billing for Browser Rendering begins today, August 20th, 2025. See <a href="/browser-run/pricing/">pricing page</a> for full details. You can monitor usage via the <a href="https://dash.cloudflare.com/?to=/:account/workers/browser-run">Cloudflare dashboard</a>.</li>
+</ul><h2 id="2025-08-18">2025-08-18</h2><strong>Wrangler updates to local dev</strong><ul>
+<li>Improved the local development experience by updating the method for downloading the dev mode browser and added support for <a href="/platform/puppeteer/#list-open-sessions"><code>/v1/sessions</code> endpoint</a>, allowing you to list open browser rendering sessions. Upgrade to <code>wrangler@4.31.0</code> to get started.</li>
+</ul><h2 id="2025-07-29">2025-07-29</h2><strong>Updates to Playwright, local dev support, and REST API</strong><ul>
+<li><a href="/browser-run/playwright/">Playwright</a> upgraded to <a href="https://github.com/microsoft/playwright/releases/tag/v1.54.1">Playwright v1.54.1</a> and <a href="/browser-run/playwright/playwright-mcp/">Playwright MCP</a> upgraded to be in sync with upstream Playwright MCP v0.0.30.</li>
+<li>Local development with <code>npx wrangler dev</code> now supports <a href="/browser-run/playwright/">Playwright</a> when using Browser Rendering. Upgrade to the latest version of wrangler to get started.</li>
+<li>The <a href="/browser-run/quick-actions/content-endpoint/"><code>/content</code> endpoint</a> now returns the page's title, making it easier to identify pages.</li>
+<li>The <a href="/browser-run/quick-actions/json-endpoint/"><code>/json</code> endpoint</a> now allows you to specify your own AI model for the extraction, using the <code>custom_ai</code> parameter.</li>
+<li>The default viewport size on the <a href="/browser-run/quick-actions/screenshot-endpoint/"><code>/screenshot</code> endpoint</a> has been increased from 800x600 to 1920x1080. You can still override the viewport via request options.</li>
+</ul><h2 id="2025-07-25">2025-07-25</h2><strong>@cloudflare/puppeteer 1.0.4 released</strong><ul>
+<li>We have released version 1.0.4 of <a href="https://github.com/cloudflare/puppeteer"><code>@cloudflare/puppeteer</code></a>, now in sync with Puppeteer v22.13.1.</li>
+</ul><h2 id="2025-07-24">2025-07-24</h2><strong>Playwright now supported in local development</strong><ul>
+<li>You can now use Playwright with local development. Upgrade to wrangler@4.26.0 to get started.</li>
+</ul><h2 id="2025-07-16">2025-07-16</h2><strong>Pricing update to Browser Rendering</strong><ul>
+<li>Billing for Browser Rendering starts on August 20, 2025, with usage beyond the included <a href="/browser-run/limits/">limits</a> charged according to the new <a href="/browser-run/pricing/">pricing rates</a>.</li>
+</ul><h2 id="2025-07-03">2025-07-03</h2><strong>Local development support</strong><ul>
+<li>We added local development support to Browser Rendering, making it simpler than ever to test and iterate before deploying.</li>
+</ul><h2 id="2025-06-30">2025-06-30</h2><strong>New Web Bot Auth headers</strong><ul>
+<li>Browser Rendering now supports <a href="/bots/reference/bot-verification/web-bot-auth/">Web Bot Auth</a> by automatically attaching <code>Signature-agent</code>, <code>Signature</code>, and <code>Signature-input </code> headers to verify that a request originates from Cloudflare Browser Rendering.</li>
+</ul><h2 id="2025-06-27">2025-06-27</h2><strong>Bug fix to debug log noise in Workers</strong><ul>
+<li>Fixed an issue where all debug logging was on by default and would flood logs. Debug logs is now off by default but can be re-enabled by setting <a href="https://pptr.dev/guides/debugging#log-devtools-protocol-traffic"><code>process.env.DEBUG</code></a> when needed.</li>
+</ul><h2 id="2025-05-26">2025-05-26</h2><strong>Playwright MCP</strong><ul>
+<li>You can now deploy <a href="/browser-run/playwright/playwright-mcp/">Playwright MCP</a> and use any MCP client to get AI models to interact with Browser Rendering.</li>
+</ul><h2 id="2025-04-30">2025-04-30</h2><strong>Automatic Request Headers</strong><ul>
+<li><a href="/browser-run/reference/automatic-request-headers/">Clarified Automatic Request headers</a> in Browser Rendering. These headers are unique to Browser Rendering, and are automatically included and cannot be removed or overridden.</li>
+</ul><h2 id="2025-04-07">2025-04-07</h2><strong>New free tier and REST API GA with additional endpoints</strong><ul>
+<li>Browser Rendering now has a new free tier.</li>
+<li>The <a href="/browser-run/quick-actions/">REST API</a> is Generally Available.</li>
+<li>Released new endpoints <a href="/browser-run/quick-actions/json-endpoint/"><code>/json</code></a>, <a href="/browser-run/quick-actions/links-endpoint/"><code>/links</code></a>, and <a href="/browser-run/quick-actions/markdown-endpoint/"><code>/markdown</code></a>.</li>
+</ul><h2 id="2025-04-04">2025-04-04</h2><strong>Playwright support</strong><ul>
+<li>You can now use <a href="/browser-run/playwright/">Playwright's</a> browser automation capabilities from Cloudflare Workers.</li>
+</ul><h2 id="2025-02-27">2025-02-27</h2><strong>New Browser Rendering REST API</strong><ul>
+<li>Released a new <a href="/browser-run/quick-actions/">REST API</a> in open beta. Available to all customers with a Workers Paid Plan.</li>
+</ul><h2 id="2025-01-31">2025-01-31</h2><strong>Increased limits</strong><ul>
+<li>Increased the limits on the number of concurrent browsers, and browsers per minute from 2 to 10.</li>
+</ul><h2 id="2024-08-08">2024-08-08</h2><strong>Update puppeteer to 21.1.0</strong><ul>
+<li>Rebased the fork on the original implementation up till version 21.1.0</li>
+</ul><h2 id="2024-04-02">2024-04-02</h2><strong>Browser Rendering Available for everyone</strong><ul>
+<li>Browser Rendering is now out of beta and available to all customers with Workers Paid Plan. Analytics and logs are available in Cloudflare's dashboard, under &quot;Worker &amp; Pages&quot;.</li>
+</ul><h2 id="2023-05-19">2023-05-19</h2><strong>Browser Rendering Beta</strong><ul>
+<li>Beta Launch</li>
+</ul>

@@ -1,0 +1,1 @@
+<ul class="directory-listing"><li><a href="/cloudflare-one/email-security/setup/post-delivery-deployment/bcc-journaling/journaling-setup/m365-journaling/">Microsoft 365 journaling setup</a></li><li><a href="/cloudflare-one/email-security/setup/post-delivery-deployment/bcc-journaling/journaling-setup/manual-add/">Manually add domains</a></li></ul>

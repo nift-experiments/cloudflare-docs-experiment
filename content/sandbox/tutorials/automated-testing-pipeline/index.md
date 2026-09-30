@@ -1,0 +1,50 @@
+<p>Build a testing pipeline that clones Git repositories, installs dependencies, runs tests, and reports results.</p>
+<p><strong>Time to complete</strong>: 25 minutes</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ol>
+<li>Sign up for a <a href="https://dash.cloudflare.com/sign-up/workers-and-pages">Cloudflare account</a>.</li>
+<li>Install <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm"><code>Node.js</code></a>.</li>
+</ol>
+<details class="nb-details"><summary>Node.js version manager</summary><div class="nb-details-body">
+@markup("md", "content/.markup/bodies/13334.md")
+</div></details>
+<p>You'll also need a GitHub repository with tests (public or private with access token).</p>
+<h2 id="1-create-your-project"><ol>
+<li>Create your project</li>
+</ol></h2>
+<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre><code data-nb-pm-code>npm create cloudflare@latest -- test-pipeline --template=cloudflare/sandbox-sdk/examples/minimal</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm create cloudflare@latest -- test-pipeline --template=cloudflare/sandbox-sdk/examples/minimal" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>yarn create cloudflare test-pipeline --template=cloudflare/sandbox-sdk/examples/minimal</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn create cloudflare test-pipeline --template=cloudflare/sandbox-sdk/examples/minimal" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>pnpm create cloudflare@latest test-pipeline --template=cloudflare/sandbox-sdk/examples/minimal</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm create cloudflare@latest test-pipeline --template=cloudflare/sandbox-sdk/examples/minimal" aria-label="Copy to clipboard">Copy</button></div></div>
+<pre><code class="language-sh">cd test-pipeline&#10;</code></pre>
+<h2 id="2-build-the-pipeline"><ol start="2">
+<li>Build the pipeline</li>
+</ol></h2>
+<p>Replace <code>src/index.ts</code>:</p>
+<pre><code class="language-typescript">import { getSandbox, proxyToSandbox, parseSSEStream, type Sandbox, type ExecEvent } from &#x27;@cloudflare/sandbox&#x27;;&#10;&#10;export { Sandbox } from &#x27;@cloudflare/sandbox&#x27;;&#10;&#10;interface Env {&#10;	Sandbox: DurableObjectNamespace&lt;Sandbox&gt;;&#10;	GITHUB_TOKEN?: string;&#10;}&#10;&#10;export default {&#10;	async fetch(request: Request, env: Env): Promise&lt;Response&gt; {&#10;		const proxyResponse = await proxyToSandbox(request, env);&#10;		if (proxyResponse) return proxyResponse;&#10;&#10;		if (request.method !== &#x27;POST&#x27;) {&#10;			return new Response(&#x27;POST { &quot;repoUrl&quot;: &quot;https://github.com/owner/repo&quot;, &quot;branch&quot;: &quot;main&quot; }&#x27;);&#10;		}&#10;&#10;		try {&#10;			const { repoUrl, branch } = await request.json();&#10;&#10;			if (!repoUrl) {&#10;				return Response.json({ error: &#x27;repoUrl required&#x27; }, { status: 400 });&#10;			}&#10;&#10;			const sandbox = getSandbox(env.Sandbox, `test-${Date.now()}`);&#10;&#10;			try {&#10;				// Clone repository&#10;				console.log(&#x27;Cloning repository...&#x27;);&#10;				let cloneUrl = repoUrl;&#10;				&#10;				if (env.GITHUB_TOKEN &amp;&amp; cloneUrl.includes(&#x27;github.com&#x27;)) {&#10;					cloneUrl = cloneUrl.replace(&#x27;https://&#x27;, `https://${env.GITHUB_TOKEN}@`);&#10;				}&#10;&#10;				await sandbox.gitCheckout(cloneUrl, {&#10;					...(branch &amp;&amp; { branch }),&#10;					depth: 1,&#10;					targetDir: &#x27;repo&#x27;&#10;				});&#10;				console.log(&#x27;Repository cloned&#x27;);&#10;&#10;				// Detect project type&#10;				const projectType = await detectProjectType(sandbox);&#10;				console.log(`Detected ${projectType} project`);&#10;&#10;				// Install dependencies&#10;				const installCmd = getInstallCommand(projectType);&#10;				if (installCmd) {&#10;					console.log(&#x27;Installing dependencies...&#x27;);&#10;					const installStream = await sandbox.execStream(`cd /workspace/repo &amp;&amp; ${installCmd}`);&#10;					&#10;					let installExitCode = 0;&#10;					for await (const event of parseSSEStream&lt;ExecEvent&gt;(installStream)) {&#10;						if (event.type === &#x27;stdout&#x27; || event.type === &#x27;stderr&#x27;) {&#10;							console.log(event.data);&#10;						} else if (event.type === &#x27;complete&#x27;) {&#10;							installExitCode = event.exitCode;&#10;						}&#10;					}&#10;					&#10;					if (installExitCode !== 0) {&#10;						return Response.json({&#10;							success: false,&#10;							error: &#x27;Install failed&#x27;,&#10;							exitCode: installExitCode&#10;						});&#10;					}&#10;					console.log(&#x27;Dependencies installed&#x27;);&#10;				}&#10;&#10;				// Run tests&#10;				console.log(&#x27;Running tests...&#x27;);&#10;				const testCmd = getTestCommand(projectType);&#10;				const testStream = await sandbox.execStream(`cd /workspace/repo &amp;&amp; ${testCmd}`);&#10;				&#10;				let testExitCode = 0;&#10;				for await (const event of parseSSEStream&lt;ExecEvent&gt;(testStream)) {&#10;					if (event.type === &#x27;stdout&#x27; || event.type === &#x27;stderr&#x27;) {&#10;						console.log(event.data);&#10;					} else if (event.type === &#x27;complete&#x27;) {&#10;						testExitCode = event.exitCode;&#10;					}&#10;				}&#10;				console.log(`Tests completed with exit code ${testExitCode}`);&#10;&#10;				return Response.json({&#10;					success: testExitCode === 0,&#10;					exitCode: testExitCode,&#10;					projectType,&#10;					message: testExitCode === 0 ? &#x27;All tests passed&#x27; : &#x27;Tests failed&#x27;&#10;				});&#10;&#10;			} finally {&#10;				await sandbox.destroy();&#10;			}&#10;&#10;		} catch (error: any) {&#10;			return Response.json({ error: error.message }, { status: 500 });&#10;		}&#10;	},&#10;};&#10;&#10;async function detectProjectType(sandbox: any): Promise&lt;string&gt; {&#10;	try {&#10;		await sandbox.readFile(&#x27;/workspace/repo/package.json&#x27;);&#10;		return &#x27;nodejs&#x27;;&#10;	} catch {}&#10;&#10;	try {&#10;		await sandbox.readFile(&#x27;/workspace/repo/requirements.txt&#x27;);&#10;		return &#x27;python&#x27;;&#10;	} catch {}&#10;&#10;	try {&#10;		await sandbox.readFile(&#x27;/workspace/repo/go.mod&#x27;);&#10;		return &#x27;go&#x27;;&#10;	} catch {}&#10;&#10;	return &#x27;unknown&#x27;;&#10;}&#10;&#10;function getInstallCommand(projectType: string): string {&#10;	switch (projectType) {&#10;		case &#x27;nodejs&#x27;: return &#x27;npm install&#x27;;&#10;		case &#x27;python&#x27;: return &#x27;pip install -r requirements.txt || pip install -e .&#x27;;&#10;		case &#x27;go&#x27;: return &#x27;go mod download&#x27;;&#10;		default: return &#x27;&#x27;;&#10;	}&#10;}&#10;&#10;function getTestCommand(projectType: string): string {&#10;	switch (projectType) {&#10;		case &#x27;nodejs&#x27;: return &#x27;npm test&#x27;;&#10;		case &#x27;python&#x27;: return &#x27;python -m pytest || python -m unittest discover&#x27;;&#10;		case &#x27;go&#x27;: return &#x27;go test ./...&#x27;;&#10;		default: return &#x27;echo &quot;Unknown project type&quot;&#x27;;&#10;	}&#10;}&#10;</code></pre>
+<h2 id="3-test-locally"><ol start="3">
+<li>Test locally</li>
+</ol></h2>
+<p>Start the dev server:</p>
+<pre><code class="language-sh">npm run dev&#10;</code></pre>
+<p>Test with a repository:</p>
+<pre><code class="language-sh">curl -X POST http://localhost:8787 \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;repoUrl&quot;: &quot;https://github.com/cloudflare/sandbox-sdk&quot;&#10;  }&#x27;&#10;</code></pre>
+<p>You will see progress logs in the wrangler console, and receive a JSON response:</p>
+<pre><code class="language-json">{&#10;  &quot;success&quot;: true,&#10;  &quot;exitCode&quot;: 0,&#10;  &quot;projectType&quot;: &quot;nodejs&quot;,&#10;  &quot;message&quot;: &quot;All tests passed&quot;&#10;}&#10;</code></pre>
+<h2 id="4-deploy"><ol start="4">
+<li>Deploy</li>
+</ol></h2>
+<pre><code class="language-sh">npx wrangler deploy&#10;</code></pre>
+<p>For private repositories, set your GitHub token:</p>
+<pre><code class="language-sh">npx wrangler secret put GITHUB_TOKEN&#10;</code></pre>
+<h2 id="what-you-built">What you built</h2>
+<p>An automated testing pipeline that:</p>
+<ul>
+<li>Clones Git repositories</li>
+<li>Detects project type (Node.js, Python, Go)</li>
+<li>Installs dependencies automatically</li>
+<li>Runs tests and reports results</li>
+</ul>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li><a href="/sandbox/guides/streaming-output/">Streaming output</a> - Add real-time test output</li>
+<li><a href="/sandbox/guides/background-processes/">Background processes</a> - Handle long-running tests</li>
+<li><a href="/sandbox/api/sessions/">Sessions API</a> - Cache dependencies between runs</li>
+</ul>

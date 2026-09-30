@@ -1,0 +1,23 @@
+<p>The following examples show practical SQL queries you can use with the <code>http_requests</code> dataset in Log Explorer. For the full list of supported SQL syntax, refer to <a href="/log-explorer/sql-queries/">SQL queries supported</a>.</p>
+<p>Adjust the date ranges in each example to match the time period you want to query.</p>
+<h2 id="summarize-cdn-usage">Summarize CDN usage</h2>
+<p>Get a high-level summary of total requests and data transfer for a specific time period. Results include total bytes transferred and conversions to megabytes and gigabytes.</p>
+<pre><code class="language-sql">SELECT&#10;  COUNT(*) AS total_requests,&#10;  SUM(EdgeResponseBytes) AS total_data_transfer,&#10;  SUM(EdgeResponseBytes) / (1024.0 * 1024.0 * 1024.0) AS total_data_transfer_gb,&#10;  SUM(EdgeResponseBytes) / (1024.0 * 1024.0) AS total_data_transfer_mb&#10;FROM&#10;  http_requests&#10;WHERE {{ timeFilter }}&#10;</code></pre>
+<h2 id="review-distribution-of-security-actions">Review distribution of security actions</h2>
+<p>Understand how security actions, such as blocks and challenges, are distributed across your traffic and identify the most common security responses applied to requests.</p>
+<pre><code class="language-sql">SELECT&#10;  SecurityAction,&#10;  COUNT(*) AS ActionCount&#10;FROM http_requests&#10;WHERE SecurityAction != &#x27;unknown&#x27;&#10;  AND SecurityAction IS NOT NULL&#10;GROUP BY SecurityAction&#10;ORDER BY ActionCount DESC&#10;</code></pre>
+<h2 id="find-ips-that-triggered-challenges">Find IPs that triggered challenges</h2>
+<p>Identify the top client IP addresses and request URIs that triggered managed, JavaScript, or interactive challenges to investigate potential bot activity or targeted attacks.</p>
+<pre><code class="language-sql">SELECT&#10;  ClientIP,&#10;  ClientRequestURI,&#10;  SecurityActions,&#10;  COUNT(*) AS Count&#10;FROM http_requests&#10;WHERE {{ timeFilter }}&#10;  AND (&#10;    ARRAY_CONTAINS(SecurityActions, &#x27;challenge&#x27;)&#10;    OR ARRAY_CONTAINS(SecurityActions, &#x27;managedChallenge&#x27;)&#10;    OR ARRAY_CONTAINS(SecurityActions, &#x27;jsChallenge&#x27;)&#10;    OR ARRAY_CONTAINS(SecurityActions, &#x27;challengeSolved&#x27;)&#10;  )&#10;GROUP BY&#10;  ClientIP,&#10;  ClientRequestURI,&#10;  SecurityActions&#10;ORDER BY Count DESC&#10;LIMIT 20&#10;</code></pre>
+<h2 id="find-highest-bandwidth-consumers-by-uri">Find highest bandwidth consumers by URI</h2>
+<p>Identify which request URIs consume the most bandwidth to pinpoint large assets or endpoints that drive the most data transfer.</p>
+<pre><code class="language-sql">SELECT&#10;  ClientRequestURI,&#10;  SUM(EdgeResponseBytes) / (1024 * 1024) AS MegabytesTransferred&#10;FROM http_requests&#10;WHERE  {{ timeFilter }}&#10;GROUP BY ClientRequestURI&#10;ORDER BY MegabytesTransferred DESC&#10;LIMIT 10&#10;</code></pre>
+<h2 id="analyze-client-round-trip-time-by-country">Analyze client round-trip time by country</h2>
+<p>Analyze client TCP round-trip time (RTT) across different countries to identify regions with high latency that might benefit from additional optimization.</p>
+<pre><code class="language-sql">SELECT&#10;  ClientCountry,&#10;  COUNT(*) AS requests,&#10;  AVG(ClientTCPRttMs) AS avg_rtt,&#10;  MIN(ClientTCPRttMs) AS min_rtt,&#10;  MAX(ClientTCPRttMs) AS max_rtt&#10;FROM http_requests&#10;WHERE {{ timeFilter }}&#10;GROUP BY ClientCountry&#10;ORDER BY avg_rtt DESC&#10;LIMIT 20&#10;</code></pre>
+<h2 id="summarize-cdn-traffic-by-cache-status">Summarize CDN traffic by cache status</h2>
+<p>Break down traffic by cache status and measure the average time to first byte (TTFB) for each status to evaluate cache effectiveness and identify opportunities to improve cache hit ratios.</p>
+<pre><code class="language-sql">SELECT&#10;  CacheCacheStatus,&#10;  COUNT(*) AS requests,&#10;  SUM(EdgeResponseBytes) AS total_bytes,&#10;  AVG(EdgeTimeToFirstByteMs) AS avg_ttfb&#10;FROM http_requests&#10;WHERE {{ timeFilter }}&#10;GROUP BY CacheCacheStatus&#10;ORDER BY requests DESC&#10;</code></pre>
+<h2 id="find-slowest-paths-by-time-to-first-byte">Find slowest paths by time to first byte</h2>
+<p>Find request paths with the highest average time to first byte (TTFB), along with request counts and server error counts toidentify slow endpoints that may need optimization.</p>
+<pre><code class="language-sql">SELECT&#10;  ClientRequestPath,&#10;  AVG(EdgeTimeToFirstByteMs) AS avg_ttfb,&#10;  COUNT(*) AS requests,&#10;  SUM(CASE WHEN EdgeResponseStatus &gt;= 500 THEN 1 ELSE 0 END) AS errors&#10;FROM http_requests&#10;WHERE {{ timeFilter }}&#10;GROUP BY ClientRequestPath&#10;ORDER BY avg_ttfb DESC&#10;LIMIT 10 &#10;</code></pre>

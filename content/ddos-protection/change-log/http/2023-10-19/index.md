@@ -1,0 +1,24 @@
+<table style="width: 100%">
+<thead>
+<tr>
+<th>Rule ID</th>
+<th>Description</th>
+<th>Previous Action</th>
+<th>New Action</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>...61bc58d5</td>
+<td>
+				HTTP requests with unusual HTTP headers or URI path (signature #55).
+</td>
+<td>ddos_dynamic</td>
+<td>ddos_dynamic</td>
+<td>
+				Requests will be challenged by default, larger attacks are blocked.
+</td>
+</tr>
+</tbody>
+</table>

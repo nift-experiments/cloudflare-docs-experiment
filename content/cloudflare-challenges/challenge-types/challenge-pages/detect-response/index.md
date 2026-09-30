@@ -1,0 +1,7 @@
+<p>When a request encounters a Cloudflare Challenge Page instead of the originally anticipated response, the Challenge Page response (regardless of the Challenge Page type) will have the <code>cf-mitigated</code> header present and set to <code>challenge</code>. This header can be leveraged to detect if a response was challenged when making fetch/XHR requests. This header provides a reliable way to identify whether a response is a Challenge or not, enabling a web application to take appropriate action based on the result. For example, a front-end application encountering a response from the backend may check the presence of this header value to handle cases where Challenge Pages encountered unexpectedly.</p>
+<aside class="nb-aside note">
+@markup("md", "content/.markup/bodies/4049.md")
+</aside>
+<p>For the <code>cf-mitigated</code> header, <code>challenge</code> is the only valid value. The header is set for all Challenge Page types.</p>
+<p>To illustrate, here is a JavaScript code snippet that demonstrates how to use the <code>cf-mitigated</code> header to detect whether a response was challenged:</p>
+<pre><code class="language-js">fetch(&quot;/my-api-endpoint&quot;).then((response) =&gt; {&#10;	if (response.headers.get(&quot;cf-mitigated&quot;) === &quot;challenge&quot;) {&#10;		// Handle challenged response&#10;	} else {&#10;		// Process response as usual&#10;	}&#10;});&#10;</code></pre>

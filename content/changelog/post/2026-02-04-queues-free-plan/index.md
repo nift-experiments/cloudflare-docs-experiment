@@ -1,0 +1,8 @@
+<div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
+<div class="changelog-tools"><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
+<article class="changelog-detail"><a href="/changelog/">← Back to all posts</a>
+<time>February 4, 2026</time><h2 id="post-title">Cloudflare Queues now available on Workers Free plan</h2>
+<div class="changelog-badges"><span>queues</span></div><div class="changelog-body"><p><a href="/queues">Cloudflare Queues</a> is now part of the Workers free plan, offering guaranteed message delivery across up to <strong>10,000 queues</strong> to either <a href="/workers">Cloudflare Workers</a> or <a href="/queues/configuration/pull-consumers">HTTP pull consumers</a>. Every Cloudflare account now includes <strong>10,000 operations per day</strong> across reads, writes, and deletes. For more details on how each operation is defined, refer to <a href="https://developers.cloudflare.com/workers/platform/pricing/#queues">Queues pricing</a>.</p>
+<p>All features of the existing Queues functionality are available on the free plan, including unlimited <a href="/queues/event-subscriptions/">event subscriptions</a>. Note that the maximum retention period on the free tier, however, is 24 hours rather than 14 days.</p>
+<p>If you are new to Cloudflare Queues, follow <a href="https://developers.cloudflare.com/queues/get-started/">this guide</a> or try one of our <a href="/queues/tutorials/">tutorials</a> to get started.</p>
+</div></article></div>

@@ -1,0 +1,66 @@
+<p><a href="https://python.langchain.com/">LangChain</a> is a framework for building applications with large language models. The <a href="https://pypi.org/project/langchain-cloudflare/"><code>langchain-cloudflare</code></a> package provides <code>CloudflareAISearchRetriever</code>, a standard LangChain retriever backed by AI Search.</p>
+<p>The retriever only searches. To create an instance and upload content, pair it with the <a href="https://github.com/cloudflare/cloudflare-python">Cloudflare Python SDK</a>. This guide uses the Python SDK to create an AI Search instance with hybrid search enabled and index a file, then uses the LangChain retriever to search it as a tool.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li><a href="https://www.python.org/downloads/">Python</a> 3.10 or later</li>
+<li>Your <a href="/fundamentals/account/find-account-and-zone-ids/">account ID</a></li>
+<li>An API token with both the <strong>AI Search:Edit</strong> and <strong>AI Search:Run</strong> permissions</li>
+</ul>
+<p>To create the token, follow <a href="/ai-search/get-started/api/#1-create-an-api-token">Create an API token</a> and add both permissions. <strong>Edit</strong> provisions the instance and uploads files; <strong>Run</strong> performs the search.</p>
+<h2 id="1-install-the-packages"><ol>
+<li>Install the packages</li>
+</ol></h2>
+<p>Create a project directory and a virtual environment to isolate your dependencies.</p>
+<pre><code class="language-sh">mkdir ai-search-langchain &amp;&amp; cd ai-search-langchain&#10;python3 -m venv .venv&#10;source .venv/bin/activate&#10;</code></pre>
+<p>On Windows, activate the virtual environment with <code>.venv\Scripts\activate</code> instead.</p>
+<p>Install both packages:</p>
+<pre><code class="language-sh">pip install -U langchain-cloudflare cloudflare&#10;</code></pre>
+<p>The <code>cloudflare</code> SDK creates the instance and uploads files. The <code>langchain-cloudflare</code> package provides the retriever and the RAG and agent-tool helpers. Installing <code>langchain-cloudflare</code> also installs <code>langchain-core</code>, so you do not need to install <code>langchain</code> separately.</p>
+<h2 id="2-set-your-credentials"><ol start="2">
+<li>Set your credentials</li>
+</ol></h2>
+<p>Export your account ID and API token. The Cloudflare SDK reads these automatically.</p>
+<pre><code class="language-sh">export CLOUDFLARE_ACCOUNT_ID=&quot;&lt;ACCOUNT_ID&gt;&quot;&#10;export CLOUDFLARE_API_TOKEN=&quot;&lt;API_TOKEN&gt;&quot;&#10;</code></pre>
+<h2 id="3-create-an-instance-with-hybrid-search"><ol start="3">
+<li>Create an instance with hybrid search</li>
+</ol></h2>
+<p>Create a file named <code>main.py</code>. The following code creates an instance with <a href="/ai-search/configuration/indexing/hybrid-search/">hybrid search</a> enabled by setting <code>index_method</code> to index both vectors and keywords. Because no data source is connected, the instance uses <a href="/ai-search/configuration/data-source/built-in-storage/">built-in storage</a>.</p>
+<p>Creating an instance that already exists fails, so the code checks for it first and creates it only if it is missing.</p>
+<pre><code class="language-python">import os&#10;&#10;from cloudflare import Cloudflare, NotFoundError&#10;&#10;ACCOUNT_ID = os.environ[&quot;CLOUDFLARE_ACCOUNT_ID&quot;]&#10;API_TOKEN = os.environ[&quot;CLOUDFLARE_API_TOKEN&quot;]&#10;NAMESPACE = &quot;default&quot;&#10;INSTANCE_NAME = &quot;knowledge-base&quot;&#10;&#10;&#35; The SDK authenticates with this token; the account ID is passed on each call.&#10;client = Cloudflare(api_token=API_TOKEN)&#10;&#10;&#35; create() fails if the instance already exists, so check for it with read()&#10;&#35; first and only create it when read() raises NotFoundError.&#10;try:&#10;    client.aisearch.namespaces.instances.read(&#10;        INSTANCE_NAME, account_id=ACCOUNT_ID, name=NAMESPACE&#10;    )&#10;    print(f&quot;Instance &#x27;{INSTANCE_NAME}&#x27; already exists.&quot;)&#10;except NotFoundError:&#10;    client.aisearch.namespaces.instances.create(&#10;        name=NAMESPACE,&#10;        account_id=ACCOUNT_ID,&#10;        id=INSTANCE_NAME,&#10;        &#35; Index both vectors and keywords to enable hybrid search.&#10;        index_method={&quot;vector&quot;: True, &quot;keyword&quot;: True},&#10;    )&#10;    print(f&quot;Created instance &#x27;{INSTANCE_NAME}&#x27;.&quot;)&#10;</code></pre>
+<p>The first positional argument to <code>create()</code> is the namespace name. If you created a vector-only instance earlier, enable hybrid search on it with <code>client.aisearch.namespaces.instances.update(...)</code> instead.</p>
+<h2 id="4-upload-and-index-a-file"><ol start="4">
+<li>Upload and index a file</li>
+</ol></h2>
+<p>Add the following to <code>main.py</code> to upload a document to built-in storage. Setting <code>wait_for_completion</code> to <code>True</code> inside the <code>file</code> argument waits until the file is indexed before returning.</p>
+<pre><code class="language-python">item = client.aisearch.namespaces.instances.items.upload(&#10;    id=INSTANCE_NAME,&#10;    account_id=ACCOUNT_ID,&#10;    name=NAMESPACE,&#10;    file={&#10;        &#35; (filename, file bytes, content type)&#10;        &quot;file&quot;: (&#10;            &quot;workers-ai.md&quot;,&#10;            b&quot;To configure Workers AI, add an [ai] binding and call env.AI.run().&quot;,&#10;            &quot;text/markdown&quot;,&#10;        ),&#10;        &#35; Block until indexing finishes so the file is searchable right away.&#10;        &quot;wait_for_completion&quot;: True,&#10;    },&#10;)&#10;&#10;print(f&quot;Uploaded &#x27;{item.key}&#x27; (status: {item.status}).&quot;)&#10;</code></pre>
+<p>If indexing is still finishing, <code>item.status</code> may be <code>running</code>; the file continues indexing in the background and becomes searchable shortly after.</p>
+<h2 id="5-query-your-instance"><ol start="5">
+<li>Query your instance</li>
+</ol></h2>
+<p>There are three ways to use your instance from LangChain. Pick the one that fits your application:</p>
+<ul>
+<li><a href="#search-directly">Search directly</a> returns the matching documents.</li>
+<li><a href="#use-ai-search-as-an-agent-tool">Use AI Search as an agent tool</a> gives an agent the ability to search your content.</li>
+<li><a href="#build-a-rag-chain">Build a RAG chain</a> generates an answer from the retrieved documents.</li>
+</ul>
+<p>All three use the same <code>CloudflareAISearchRetriever</code>, which the first option creates.</p>
+<h3 id="search-directly">Search directly</h3>
+<p>Point a <code>CloudflareAISearchRetriever</code> at the instance. Set <code>retrieval_type</code> to <code>hybrid</code> to use the vector and keyword indexes you enabled.</p>
+<pre><code class="language-python">from langchain_cloudflare import CloudflareAISearchRetriever&#10;&#10;retriever = CloudflareAISearchRetriever(&#10;    account_id=ACCOUNT_ID,&#10;    api_token=API_TOKEN,&#10;    instance_name=INSTANCE_NAME,&#10;    namespace=NAMESPACE,&#10;    retrieval_type=&quot;hybrid&quot;,  # query both the vector and keyword indexes&#10;    k=5,  # maximum number of results to return (capped at 50)&#10;)&#10;&#10;&#35; invoke() runs a search and returns standard LangChain Documents.&#10;docs = retriever.invoke(&quot;How do I configure Workers AI?&quot;)&#10;&#10;for doc in docs:&#10;    &#35; Each document carries its relevance score and source filename in metadata.&#10;    print(doc.metadata[&quot;score&quot;], doc.metadata[&quot;filename&quot;])&#10;    print(doc.page_content)&#10;</code></pre>
+<p>The <code>k</code> parameter sets the maximum number of results, mapped to <code>max_num_results</code> and capped at 50.</p>
+<h3 id="use-ai-search-as-an-agent-tool">Use AI Search as an agent tool</h3>
+<p>Wrap the retriever with <code>create_retriever_tool</code> to give an agent the ability to search your content. This is the recommended way to use AI Search from a LangChain agent.</p>
+<pre><code class="language-python">from langchain_core.tools import create_retriever_tool&#10;&#10;&#35; create_retriever_tool wraps the retriever as a standard LangChain tool. The&#10;&#35; name and description are what the agent&#x27;s model sees when deciding to call it.&#10;search_tool = create_retriever_tool(&#10;    retriever,&#10;    name=&quot;cloudflare_ai_search&quot;,&#10;    description=&quot;Search the knowledge base for relevant passages.&quot;,&#10;)&#10;&#10;print(search_tool.invoke({&quot;query&quot;: &quot;How do I configure Workers AI?&quot;}))&#10;</code></pre>
+<p><code>search_tool</code> is a standard LangChain tool. Pass it to any LangChain or LangGraph agent alongside your other tools.</p>
+<h3 id="build-a-rag-chain">Build a RAG chain</h3>
+<p>To answer questions from the retrieved content, combine the retriever with a model. This example uses <code>ChatCloudflareWorkersAI</code>, which is included in the same package. Pass your account ID and token the same way you did for the retriever.</p>
+<p>Because this option calls <a href="/workers-ai/">Workers AI</a> to generate the answer, the token you pass here also needs the <strong>Workers AI</strong> permission. Add it to the token you already created, or pass a separate token.</p>
+<pre><code class="language-python">from langchain_cloudflare import ChatCloudflareWorkersAI&#10;from langchain_core.output_parsers import StrOutputParser&#10;from langchain_core.prompts import ChatPromptTemplate&#10;from langchain_core.runnables import RunnablePassthrough&#10;&#10;llm = ChatCloudflareWorkersAI(&#10;    account_id=ACCOUNT_ID,&#10;    api_token=API_TOKEN,&#10;    model=&quot;@cf/zai-org/glm-5.2&quot;,&#10;)&#10;&#10;prompt = ChatPromptTemplate.from_template(&#10;    &quot;Answer the question using only the context below.\n\n&quot;&#10;    &quot;Context:\n{context}\n\n&quot;&#10;    &quot;Question: {question}&quot;&#10;)&#10;&#10;&#10;&#35; Join the retrieved documents into a single context string for the prompt.&#10;def format_docs(docs):&#10;    return &quot;\n\n&quot;.join(doc.page_content for doc in docs)&#10;&#10;&#10;&#35; LCEL chain: retrieve context and pass the question through, fill the prompt,&#10;&#35; call the model, then parse the response down to a plain string.&#10;chain = (&#10;    {&quot;context&quot;: retriever | format_docs, &quot;question&quot;: RunnablePassthrough()}&#10;    | prompt&#10;    | llm&#10;    | StrOutputParser()&#10;)&#10;&#10;print(chain.invoke(&quot;How do I configure Workers AI?&quot;))&#10;</code></pre>
+<h2 id="use-inside-a-python-worker">Use inside a Python Worker</h2>
+<p>Inside a <a href="/workers/languages/python/">Python Worker</a>, pass a Worker binding instead of REST credentials. The binding path is asynchronous, so use <code>ainvoke</code>.</p>
+<pre><code class="language-python">from workers import WorkerEntrypoint, Response&#10;from langchain_cloudflare import CloudflareAISearchRetriever&#10;&#10;&#10;class Default(WorkerEntrypoint):&#10;    async def fetch(self, request):&#10;        &#35; Pass a Worker binding instead of REST credentials.&#10;        retriever = CloudflareAISearchRetriever(binding=self.env.MY_SEARCH)&#10;        &#35; The binding path is asynchronous, so use ainvoke.&#10;        docs = await retriever.ainvoke(&quot;How do I configure Workers AI?&quot;)&#10;        return Response.json({&quot;matches&quot;: [doc.page_content for doc in docs]})&#10;</code></pre>
+<p><code>self.env.MY_SEARCH</code> is a dedicated <code>ai_search</code> binding, not the Workers AI binding (<code>self.env.AI</code>). For a <a href="/ai-search/concepts/namespaces/">namespace binding</a>, pass <code>self.env.&lt;NAMESPACE&gt;.get(&quot;my-instance&quot;)</code>.</p>
+<h2 id="next-steps">Next steps</h2>
+<p><a class="nb-card nb-link-card" href="/ai-search/configuration/indexing/hybrid-search/"><h3 id="card-hybrid-search-ai-search-configuration-indexing-hybrid-search">Hybrid search</h3><p>Combine vector and keyword search with configurable fusion.</p></a></p>
+<p><a class="nb-card nb-link-card" href="/ai-search/get-started/python/"><h3 id="card-python-sdk-quickstart-ai-search-get-started-python">Python SDK quickstart</h3><p>Create and manage AI Search instances from Python.</p></a></p>
+<p><a class="nb-card nb-link-card" href="/ai-search/configuration/retrieval/"><h3 id="card-retrieval-configuration-ai-search-configuration-retrieval">Retrieval configuration</h3><p>Tune filtering, reranking, query rewriting, and caching.</p></a></p>

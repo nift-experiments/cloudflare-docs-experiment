@@ -1,0 +1,73 @@
+<p>As seen in the <a href="/browser-run/how-to/deploy-worker/">Deploy a Browser Run Worker</a> guide, Browser Run can be used to generate screenshots for any given URL. Alongside screenshots, you can also generate full PDF documents for a given webpage, and can also provide the webpage markup and style ourselves.</p>
+<p>You can generate PDFs with Browser Run in two ways:</p>
+<ul>
+<li><strong><a href="/browser-run/quick-actions/">Quick Actions</a></strong>: Use the <a href="/browser-run/quick-actions/pdf-endpoint/">/pdf endpoint</a>. This is ideal if you do not need to customize rendering behavior.</li>
+<li><strong><a href="/browser-run/puppeteer/">Puppeteer</a> or <a href="/browser-run/playwright/">Playwright</a></strong>: Use browser automation within Workers for additional control and customization.</li>
+</ul>
+<p>Choose the method that best fits your use case.</p>
+<p>The following example shows you how to generate a PDF using <a href="/browser-run/puppeteer/">Puppeteer</a>.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ol>
+<li>Use the <code>create-cloudflare</code> CLI to generate a new Hello World Cloudflare Worker script:</li>
+</ol>
+<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre><code data-nb-pm-code>npm create cloudflare@latest -- browser-worker</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm create cloudflare@latest -- browser-worker" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>yarn create cloudflare browser-worker</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn create cloudflare browser-worker" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>pnpm create cloudflare@latest browser-worker</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm create cloudflare@latest browser-worker" aria-label="Copy to clipboard">Copy</button></div></div>
+<ol start="2">
+<li>Install <code>@cloudflare/puppeteer</code>, which allows you to control the Browser Run instance:</li>
+</ol>
+<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">bun</button></div><div role="tabpanel" data-nb-pm-panel><pre><code data-nb-pm-code>npm i @cloudflare/puppeteer</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm i @cloudflare/puppeteer" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>yarn add @cloudflare/puppeteer</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn add @cloudflare/puppeteer" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>pnpm add @cloudflare/puppeteer</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm add @cloudflare/puppeteer" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>bun add @cloudflare/puppeteer</code></pre><button type="button" data-nb-pm-copy data-nb-command="bun add @cloudflare/puppeteer" aria-label="Copy to clipboard">Copy</button></div></div>
+<ol start="3">
+<li>Add your Browser Run binding to your new Wrangler configuration:</li>
+</ol>
+<div class="nb-wrangler-config">
+@markup("md", "content/.markup/bodies/3674.md")
+</div>
+<aside class="nb-aside note">
+<h3 class="nb-aside-title" id="use-real-headless-browser-during-local-development">Use real headless browser during local development</h3>
+@markup("md", "content/.markup/bodies/3673.md")
+</aside>
+<ol start="4">
+<li>Replace the contents of <code>src/index.ts</code> (or <code>src/index.js</code> for JavaScript projects) with the following skeleton script:</li>
+</ol>
+<pre><code class="language-ts">import puppeteer from &quot;@cloudflare/puppeteer&quot;;&#10;&#10;const generateDocument = (name: string) =&gt; {};&#10;&#10;export default {&#10;	async fetch(request, env) {&#10;		const { searchParams } = new URL(request.url);&#10;		let name = searchParams.get(&quot;name&quot;);&#10;&#10;		if (!name) {&#10;			return new Response(&quot;Please provide a name using the ?name= parameter&quot;);&#10;		}&#10;&#10;		const browser = await puppeteer.launch(env.BROWSER);&#10;		const page = await browser.newPage();&#10;&#10;		// Step 1: Define HTML and CSS&#10;		const document = generateDocument(name);&#10;&#10;		// Step 2: Send HTML and CSS to our browser&#10;		await page.setContent(document);&#10;&#10;		// Step 3: Generate and return PDF&#10;&#10;		return new Response();&#10;	},&#10;};&#10;</code></pre>
+<h2 id="1-define-html-and-css"><ol>
+<li>Define HTML and CSS</li>
+</ol></h2>
+<p>Rather than using Browser Run to navigate to a user-provided URL, manually generate a webpage, then provide that webpage to the Browser Run instance. This allows you to render any design you want.</p>
+<aside class="nb-aside note">
+@markup("md", "content/.markup/bodies/3672.md")
+</aside>
+<p>For this example, we are going to take in user-provided content (via a '?name=' parameter), and have that name output in the final PDF document.</p>
+<p>To start, fill out your <code>generateDocument</code> function with the following:</p>
+<pre><code class="language-ts">const generateDocument = (name: string) =&gt; {&#10;	return `&#10;&lt;!DOCTYPE html&gt;&#10;&lt;html lang=&quot;en&quot;&gt;&#10;  &lt;head&gt;&#10;    &lt;meta charset=&quot;utf-8&quot; /&gt;&#10;    &lt;style&gt;&#10;      html,&#10;      body,&#10;      &#35;container {&#10;        width: 100%;&#10;        height: 100%;&#10;        margin: 0;&#10;      }&#10;      body {&#10;        font-family: Baskerville, Georgia, Times, serif;&#10;        background-color: #f7f1dc;&#10;      }&#10;      strong {&#10;        color: #5c594f;&#10;        font-size: 128px;&#10;        margin: 32px 0 48px 0;&#10;      }&#10;      em {&#10;        font-size: 24px;&#10;      }&#10;      &#35;container {&#10;        flex-direction: column;&#10;        display: flex;&#10;        align-items: center;&#10;        justify-content: center;&#10;        text-align: center;&#10;      }&#10;    &lt;/style&gt;&#10;  &lt;/head&gt;&#10;&#10;  &lt;body&gt;&#10;    &lt;div id=&quot;container&quot;&gt;&#10;      &lt;em&gt;This is to certify that&lt;/em&gt;&#10;      &lt;strong&gt;${name}&lt;/strong&gt;&#10;      &lt;em&gt;has rendered a PDF using Cloudflare Workers&lt;/em&gt;&#10;    &lt;/div&gt;&#10;  &lt;/body&gt;&#10;&lt;/html&gt;&#10;`;&#10;};&#10;</code></pre>
+<p>This example HTML document should render a beige background imitating a certificate showing that the user-provided name has successfully rendered a PDF using Cloudflare Workers.</p>
+<aside class="nb-aside note">
+@markup("md", "content/.markup/bodies/3671.md")
+</aside>
+<h2 id="2-load-html-and-css-into-browser"><ol start="2">
+<li>Load HTML and CSS Into Browser</li>
+</ol></h2>
+<p>Now that you have your fully styled HTML document, you can take the contents and send it to your browser instance. Create an empty page to store this document as follows:</p>
+<pre><code class="language-ts">const browser = await puppeteer.launch(env.BROWSER);&#10;const page = await browser.newPage();&#10;</code></pre>
+<p>The <a href="https://github.com/cloudflare/puppeteer/blob/main/docs/api/puppeteer.page.setcontent.md"><code>page.setContent()</code></a> function can then be used to set the page's HTML contents from a string, so you can pass in your created document directly like so:</p>
+<pre><code class="language-ts">await page.setContent(document);&#10;</code></pre>
+<h2 id="3-generate-and-return-pdf"><ol start="3">
+<li>Generate and Return PDF</li>
+</ol></h2>
+<p>With your Browser Run instance now rendering your provided HTML and CSS, you can use the <a href="https://github.com/cloudflare/puppeteer/blob/main/docs/api/puppeteer.page.pdf.md"><code>page.pdf()</code></a> command to generate a PDF file and return it to the client.</p>
+<pre><code class="language-ts">let pdf = page.pdf({ printBackground: true });&#10;</code></pre>
+<p>The <code>page.pdf()</code> call supports a <a href="https://github.com/cloudflare/puppeteer/blob/main/docs/api/puppeteer.pdfoptions.md">number of options</a>, including setting the dimensions of the generated PDF to a specific paper size, setting specific margins, and allowing fully-transparent backgrounds. For now, you are only overriding the <code>printBackground</code> option to allow your <code>body</code> background styles to show up.</p>
+<p>Now that you have your PDF data, return it to the client in the <code>Response</code> with an <code>application/pdf</code> content type:</p>
+<pre><code class="language-ts">return new Response(pdf, {&#10;	headers: {&#10;		&quot;content-type&quot;: &quot;application/pdf&quot;,&#10;	},&#10;});&#10;</code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>The full Worker script now looks as follows:</p>
+<pre><code class="language-ts">import puppeteer from &quot;@cloudflare/puppeteer&quot;;&#10;&#10;const generateDocument = (name: string) =&gt; {&#10;	return `&#10;&lt;!DOCTYPE html&gt;&#10;&lt;html lang=&quot;en&quot;&gt;&#10;  &lt;head&gt;&#10;    &lt;meta charset=&quot;utf-8&quot; /&gt;&#10;    &lt;style&gt;&#10;	  html, body, #container {&#10;		width: 100%;&#10;	    height: 100%;&#10;		margin: 0;&#10;	  }&#10;      body {&#10;        font-family: Baskerville, Georgia, Times, serif;&#10;        background-color: #f7f1dc;&#10;      }&#10;      strong {&#10;        color: #5c594f;&#10;		font-size: 128px;&#10;		margin: 32px 0 48px 0;&#10;      }&#10;	  em {&#10;		font-size: 24px;&#10;	  }&#10;      &#35;container {&#10;		flex-direction: column;&#10;        display: flex;&#10;        align-items: center;&#10;        justify-content: center;&#10;		text-align: center&#10;      }&#10;    &lt;/style&gt;&#10;  &lt;/head&gt;&#10;&#10;  &lt;body&gt;&#10;    &lt;div id=&quot;container&quot;&gt;&#10;		&lt;em&gt;This is to certify that&lt;/em&gt;&#10;		&lt;strong&gt;${name}&lt;/strong&gt;&#10;		&lt;em&gt;has rendered a PDF using Cloudflare Workers&lt;/em&gt;&#10;	&lt;/div&gt;&#10;  &lt;/body&gt;&#10;&lt;/html&gt;&#10;`;&#10;};&#10;&#10;export default {&#10;	async fetch(request, env) {&#10;		const { searchParams } = new URL(request.url);&#10;		let name = searchParams.get(&quot;name&quot;);&#10;&#10;		if (!name) {&#10;			return new Response(&quot;Please provide a name using the ?name= parameter&quot;);&#10;		}&#10;&#10;		const browser = await puppeteer.launch(env.BROWSER);&#10;		const page = await browser.newPage();&#10;&#10;		// Step 1: Define HTML and CSS&#10;		const document = generateDocument(name);&#10;&#10;		// // Step 2: Send HTML and CSS to our browser&#10;		await page.setContent(document);&#10;&#10;		// // Step 3: Generate and return PDF&#10;		const pdf = await page.pdf({ printBackground: true });&#10;&#10;		// Close browser since we no longer need it&#10;		await browser.close();&#10;&#10;		return new Response(pdf, {&#10;			headers: {&#10;				&quot;content-type&quot;: &quot;application/pdf&quot;,&#10;			},&#10;		});&#10;	},&#10;};&#10;</code></pre>
+<p>You can run this script to test it via:</p>
+<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre><code data-nb-pm-code>npx wrangler dev</code></pre><button type="button" data-nb-pm-copy data-nb-command="npx wrangler dev" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>yarn wrangler dev</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn wrangler dev" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>pnpm wrangler dev</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm wrangler dev" aria-label="Copy to clipboard">Copy</button></div></div>
+<p>With your script now running, you can pass in a <code>?name</code> parameter to the local URL (such as <code>http://localhost:8787/?name=Harley</code>) and should see the following:</p>
+<p><img src="/assets/upstream/images/browser-run/pdf-generation.png" alt="A screenshot of a generated PDF, with the author's name shown in a mock certificate." />.</p>
+<hr />
+<h2 id="custom-fonts">Custom fonts</h2>
+<p>If your PDF requires a specific font that is not pre-installed in the Browser Run environment, you can load custom fonts using <code>addStyleTag</code>. This allows you to inject fonts from a CDN or embed them as Base64 strings before generating your PDF.</p>
+<p>For detailed instructions and examples, refer to <a href="/browser-run/features/custom-fonts/">Use your own custom font</a>.</p>
+<hr />
+<p>Dynamically generating PDF documents solves a number of common use-cases, from invoicing customers to archiving documents to creating dynamic certificates (as seen in the simple example here).</p>

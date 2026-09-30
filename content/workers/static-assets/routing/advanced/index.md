@@ -1,0 +1,2 @@
+<p>Learn how to configure advanced routing options for the static assets of your Worker.</p>
+<ul class="directory-listing"><li><a href="/workers/versions-and-deployments/gradual-deployments/version-affinity/#static-assets">Gradual rollouts</a></li><li><a href="/workers/static-assets/routing/advanced/html-handling/">HTML handling</a></li><li><a href="/workers/static-assets/routing/advanced/serving-a-subdirectory/">Serving a subdirectory</a></li></ul>

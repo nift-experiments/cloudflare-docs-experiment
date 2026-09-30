@@ -1,0 +1,1 @@
+<ul class="directory-listing"><li><a href="/ai-crawl-control/features/analyze-ai-traffic/">Analyze AI traffic</a></li><li><a href="/ai-crawl-control/features/manage-ai-crawlers/">Manage AI crawlers</a></li><li><a href="/ai-crawl-control/features/track-robots-txt/">Directives</a></li><li><a href="/ai-crawl-control/features/pay-per-crawl/">Pay Per Crawl</a></li></ul>

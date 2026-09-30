@@ -1,0 +1,81 @@
+<p>Almost every React website needs a form to collect user data. <a href="https://formspree.io/">Formspree</a> is a back-end service that handles form processing and storage, allowing developers to include forms on their website without writing server-side code or functions.</p>
+<p>In this tutorial, you will create a <code>&lt;form&gt;</code> component using React and add it to a single page application built with <code>create-react-app</code>. Though you are using <code>create-react-app</code> (CRA), the concepts will apply to any React framework including Next.js, Gatsby, and more. You will use Formspree to collect the submitted data and send out email notifications when new submissions arrive, without requiring any server-side coding.</p>
+<p>You will deploy your site to Cloudflare Pages. Refer to the <a href="/pages/get-started/">Get started guide</a> to familiarize yourself with the platform.</p>
+<h2 id="setup">Setup</h2>
+<p>To begin, create a new React project on your local machine with <code>create-react-app</code>. Then create a <a href="https://repo.new/">new GitHub repository</a>, and attach the GitHub location as a remote destination:</p>
+<pre><code class="language-sh">&#35; create new project with create-react-app&#10;npx create-react-app new-app&#10;&#35; enter new directory&#10;cd new-app&#10;&#35; attach git remote&#10;git remote add origin git@github.com:&lt;username&gt;/&lt;repo&gt;.git&#10;&#35; change default branch name&#10;git branch -M main&#10;</code></pre>
+<p>You may now modify the React application in the <code>new-app</code> directory you created.</p>
+<h2 id="the-front-end-code">The front-end code</h2>
+<p>The starting point for <code>create-react-app</code> includes a simple Hello World website. You will be adding a Contact Us form that accepts a name, email address, and message. The form code is adapted from the HTML Forms tutorial. For a more in-depth explanation of how HTML forms work and additional learning resources, refer to the <a href="/pages/tutorials/forms/">HTML Forms tutorial</a>.</p>
+<p>First, create a new react component called <code>ContactForm.js</code> and place it in the <code>src</code> folder alongside <code>App.js</code>.</p>
+<pre><code>project-root/&#10;├─ package.json&#10;└─ src/&#10;   ├─ ContactForm.js&#10;   ├─ App.js&#10;   └─ ...&#10;</code></pre>
+<p>Next, you will build the form component using a helper library from Formspree, <a href="https://github.com/formspree/formspree-react"><code>@formspree/react</code></a>. This library contains a <code>useForm</code> hook to simplify the process of handling form submission events and managing form state.</p>
+<p>Install it with:</p>
+<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">bun</button></div><div role="tabpanel" data-nb-pm-panel><pre><code data-nb-pm-code>npm i @formspree/react</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm i @formspree/react" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>yarn add @formspree/react</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn add @formspree/react" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>pnpm add @formspree/react</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm add @formspree/react" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>bun add @formspree/react</code></pre><button type="button" data-nb-pm-copy data-nb-command="bun add @formspree/react" aria-label="Copy to clipboard">Copy</button></div></div>
+<p>Then paste the following code snippet into the <code>ContactForm.js</code> file:</p>
+<pre><code class="language-jsx">import { useForm, ValidationError } from &quot;@formspree/react&quot;;&#10;&#10;export default function ContactForm() {&#10;	const [state, handleSubmit] = useForm(&quot;YOUR_FORM_ID&quot;);&#10;&#10;	if (state.succeeded) {&#10;		return &lt;p&gt;Thanks for your submission!&lt;/p&gt;;&#10;	}&#10;&#10;	return (&#10;		&lt;form method=&quot;POST&quot; onSubmit={handleSubmit}&gt;&#10;			&lt;label htmlFor=&quot;name&quot;&gt;Full Name&lt;/label&gt;&#10;			&lt;input id=&quot;name&quot; type=&quot;text&quot; name=&quot;name&quot; required /&gt;&#10;			&lt;ValidationError prefix=&quot;Name&quot; field=&quot;name&quot; errors={state.errors} /&gt;&#10;&#10;			&lt;label htmlFor=&quot;email&quot;&gt;Email Address&lt;/label&gt;&#10;			&lt;input id=&quot;email&quot; type=&quot;email&quot; name=&quot;email&quot; required /&gt;&#10;			&lt;ValidationError prefix=&quot;Email&quot; field=&quot;email&quot; errors={state.errors} /&gt;&#10;&#10;			&lt;label htmlFor=&quot;message&quot;&gt;Message&lt;/label&gt;&#10;			&lt;textarea id=&quot;message&quot; name=&quot;message&quot; required&gt;&lt;/textarea&gt;&#10;			&lt;ValidationError prefix=&quot;Message&quot; field=&quot;message&quot; errors={state.errors} /&gt;&#10;&#10;			&lt;button type=&quot;submit&quot; disabled={state.submitting}&gt;&#10;				Submit&#10;			&lt;/button&gt;&#10;			&lt;ValidationError errors={state.errors} /&gt;&#10;		&lt;/form&gt;&#10;	);&#10;}&#10;</code></pre>
+<p>Currently, the form contains a placeholder <code>YOUR_FORM_ID</code>. You replace this with your own form endpoint later in this tutorial.</p>
+<p>The <code>useForm</code> hook returns a <code>state</code> object and a <code>handleSubmit</code> function which you pass to the <code>onSubmit</code> form attribute. Combined, these provide a way to submit the form data via AJAX and update form state depending on the response received.</p>
+<p>For clarity, this form does not include any styling, but in the GitHub project (<a href="https://github.com/formspree/formspree-example-cloudflare-react">https://github.com/formspree/formspree-example-cloudflare-react</a>) you can review an example of how to apply styles to the form.</p>
+<aside class="nb-aside note">
+@markup("md", "content/.markup/bodies/10870.md")
+</aside>
+<p>To add this form to your website, import the component:</p>
+<pre><code class="language-jsx">import ContactForm from &quot;./ContactForm&quot;;&#10;</code></pre>
+<p>Then insert the form into the page as a react component:</p>
+<pre><code class="language-jsx">&lt;ContactForm /&gt;&#10;</code></pre>
+<p>For example, you can update your <code>src/App.js</code> file to add the form:</p>
+<pre><code class="language-jsx">import ContactForm from &quot;./ContactForm&quot;; // &lt;-- import the form component&#10;import logo from &quot;./logo.svg&quot;;&#10;import &quot;./App.css&quot;;&#10;&#10;function App() {&#10;	return (&#10;		&lt;div className=&quot;App&quot;&gt;&#10;			&lt;header className=&quot;App-header&quot;&gt;&#10;				&lt;img src={logo} className=&quot;App-logo&quot; alt=&quot;logo&quot; /&gt;&#10;				&lt;p&gt;&#10;					Edit &lt;code&gt;src/App.js&lt;/code&gt; and save to reload.&#10;				&lt;/p&gt;&#10;				&lt;a&#10;					className=&quot;App-link&quot;&#10;					href=&quot;https://reactjs.org&quot;&#10;					target=&quot;_blank&quot;&#10;					rel=&quot;noopener noreferrer&quot;&#10;				&gt;&#10;					Learn React&#10;				&lt;/a&gt;&#10;&#10;				{/* your contact form component goes here */}&#10;				&lt;ContactForm /&gt;&#10;			&lt;/header&gt;&#10;		&lt;/div&gt;&#10;	);&#10;}&#10;&#10;export default App;&#10;</code></pre>
+<p>Now you have a single-page application containing a Contact Us form with several fields for the user to fill out. However, you have not set up the form to submit to a valid form endpoint yet. You will do that in the <a href="#the-formspree-back-end">next section</a>.</p>
+<aside class="nb-aside note">
+<h3 class="nb-aside-title" id="github-repository">GitHub repository</h3>
+@markup("md", "content/.markup/bodies/10869.md")
+</aside>
+<h2 id="the-formspree-back-end">The Formspree back end</h2>
+<p>The React form is complete, however, when the user submits this form, they will get a <code>Form not found</code> error. To fix this, create a new Formspree form, and copy its unique ID into the form's <code>useForm</code> invocation.</p>
+<p>To create a Formspree form, sign up for <a href="https://formspree.io/register">an account on Formspree</a>. Then create a new form with the <strong>+ New form</strong> button. Name your new form <code>Contact-us form</code> and update the recipient email to an email where you wish to receive your form submissions. Finally, select <strong>Create Form</strong>.</p>
+<p><img src="/assets/upstream/images/pages/tutorials/react-new-form-dialog.png" alt="Creating a Formspree form" /></p>
+<p>You will be presented with instructions on how to integrate your new form. Copy the form’s <code>hashid</code> (the last 8 alphanumeric characters from the URL) and paste it into the <code>useForm</code> function in the <code>ContactForm</code> component you created above.</p>
+<p><img src="/assets/upstream/images/pages/tutorials/react-form-endpoint.png" alt="Newly generated form endpoint that you can copy to use in the ContactForm component" /></p>
+<p>Your component should now have a line like this:</p>
+<pre><code class="language-jsx">const [state, handleSubmit] = useForm(&quot;mqldaqwx&quot;);&#10;&#10;/* replace the random-like string above with your own form&#x27;s ID */&#10;</code></pre>
+<p>Now when you submit your form, you should be shown a Thank You message. The form data will be submitted to your account on <a href="https://formspree.io/">Formspree.io</a>.</p>
+<p>From here you can adjust your form processing logic to update the <a href="https://help.formspree.io/hc/en-us/articles/115008379348-Changing-a-form-email-address">notification email address</a>, or add plugins like <a href="https://help.formspree.io/hc/en-us/articles/360036563573-Use-Google-Sheets-to-send-your-submissions-to-a-spreadsheet">Google Sheets</a>, <a href="https://help.formspree.io/hc/en-us/articles/360045648933-Send-Slack-notifications">Slack</a>, and more.</p>
+<p>For more help setting up Formspree, refer to the following resources:</p>
+<ul>
+<li>For general help with Formspree, refer to the <a href="https://help.formspree.io/hc/en-us">Formspree help site</a>.</li>
+<li>For more help creating forms in React, refer to the <a href="https://help.formspree.io/hc/en-us/articles/360055613373-The-Formspree-React-library">formspree-react documentation</a></li>
+<li>For tips on integrating Formspree with popular platforms like Next.js, Gatsby and Eleventy, refer to the <a href="https://formspree.io/guides">Formspree guides</a>.</li>
+</ul>
+<h2 id="deployment">Deployment</h2>
+<p>You are now ready to deploy your project.</p>
+<p>If you have not already done so, save your progress within <code>git</code> and then push the commit(s) to the GitHub repository:</p>
+<pre><code class="language-sh">&#35; Add all files&#10;git add -A&#10;&#35; Commit w/ message&#10;git commit -m &quot;working example&quot;&#10;&#35; Push commit(s) to remote&#10;git push -u origin main&#10;</code></pre>
+<p>Your work now resides within the GitHub repository, which means that Pages is able to access it too.</p>
+<p>If this is your first Cloudflare Pages project, refer to the <a href="/pages/get-started/">Get started guide</a> for a complete walkthrough. After selecting the appropriate GitHub repository, you must configure your project with the following build settings:</p>
+<ul>
+<li><strong>Project name</strong> – Your choice</li>
+<li><strong>Production branch</strong> – <code>main</code></li>
+<li><strong>Framework preset</strong> – Create React App</li>
+<li><strong>Build command</strong> – <code>npm run build</code></li>
+<li><strong>Build output directory</strong> – <code>build</code></li>
+</ul>
+<p>After selecting <strong>Save and Deploy</strong>, your Pages project will begin its first deployment. When successful, you will be presented with a unique <code>*.pages.dev</code> subdomain and a link to your live demo.</p>
+<h2 id="using-environment-variables-with-forms">Using environment variables with forms</h2>
+<p>Sometimes it is helpful to set up two forms, one for development, and one for production. That way you can develop and test your form without corrupting your production dataset, or sending test notifications to clients.</p>
+<p>To set up production and development forms first create a second form in Formspree. Name this form Contact Us Testing, and note the form's <a href="https://help.formspree.io/hc/en-us/articles/360015130174-Getting-your-form-s-hashid-"><code>hashid</code></a>.</p>
+<p>Then change the <code>useForm</code> hook in your <code>ContactForm.js</code> file so that it is initialized with an environment variable, rather than a string:</p>
+<pre><code class="language-jsx">const [state, handleSubmit] = useForm(process.env.REACT_APP_FORM_ID);&#10;</code></pre>
+<p>In your Cloudflare Pages project settings, add the <code>REACT_APP_FORM_ID</code> environment variable to both the Production and Preview environments. Use your original form's <code>hashid</code> for Production, and the new test form's <code>hashid</code> for the Preview environment:</p>
+<p><img src="/assets/upstream/images/pages/tutorials/env-vars.png" alt="Edit option for environment variables in your Production and Preview environments" /></p>
+<p>Now, when you commit and push changes to a branch of your git repository, a new preview app will be created with a form that submits to the test form URL. However, your production website will continue to submit to the original form URL.</p>
+<aside class="nb-aside note">
+@markup("md", "content/.markup/bodies/10868.md")
+</aside>
+<p>In this tutorial, you built and deployed a website using Cloudflare Pages and Formspree to handle form submissions. You created a React application with a form that communicates with Formspree to process and store submission requests and send notifications.</p>
+<p>If you would like to review the full source code for this application, you can find it on <a href="https://github.com/formspree/formspree-example-cloudflare-react">GitHub</a>.</p>
+<h2 id="related-resources">Related resources</h2>
+<ul>
+<li><a href="/pages/tutorials/add-an-html-form-with-formspree/">Add an HTML form with Formspree</a></li>
+<li><a href="/pages/tutorials/forms/">HTML Forms</a></li>
+</ul>

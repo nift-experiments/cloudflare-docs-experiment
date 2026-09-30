@@ -1,0 +1,3 @@
+<p>Zaraz provides a client-side web API that you can use anywhere inside the <code>&lt;body&gt;</code> tag of a page.</p>
+<p>This API allows you to send events and data to Zaraz, that you can later use when creating your triggers. Using the API lets you tailor the behavior of Zaraz to your needs: You can launch tools only when you need them, or send information you care about that is not otherwise automatically collected from your site.</p>
+<ul class="directory-listing"><li><a href="/zaraz/web-api/track/">Track</a></li><li><a href="/zaraz/web-api/set/">Set</a></li><li><a href="/zaraz/web-api/ecommerce/">E-commerce</a></li><li><a href="/zaraz/web-api/debug-mode/">Debug mode</a></li></ul>

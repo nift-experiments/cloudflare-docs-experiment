@@ -1,0 +1,30 @@
+<p>In an effort to make analytics an ubiquitous component of all Cloudflare's products, Cloudflare has implemented, and continues to evolve, several ways in which customers can access and gain insights from Internet properties on Cloudflare.</p>
+<p>You can access root-level analytics that give you an overview of metadata related to your Cloudflare account, analytics related to specific properties and products, and the GraphQL API that gives you more control over how you visualize the analytics and log information available on the Cloudflare dashboard.</p>
+<p>Refer to <a href="/analytics/types-of-analytics/">Types of analytics</a> for more information regarding this subject.</p>
+<h2 id="how-cloudflare-captures-and-processes-analytics-data">How Cloudflare captures and processes analytics data</h2>
+<p>The underlying datasets that Cloudflare Analytics captures and processes share the following characteristics:</p>
+<ul>
+<li>All metrics reflect traffic proxied through the Cloudflare network (also known as orange-clouded), as configured via DNS records in the Cloudflare DNS app. Note that for a <a href="/dns/zone-setups/partial-setup/">CNAME setup</a>, Cloudflare is unable to offer DNS metrics.</li>
+<li>Cloudflare does not count traffic for unproxied DNS records. However, if your site is not proxied through Cloudflare but Cloudflare is your authoritative DNS server, then we are able to collect DNS metrics.</li>
+<li>Cloudflare can only proxy information for traffic targeting <a href="/fundamentals/reference/network-ports/">specific ports</a>.</li>
+<li>In determining the originating country, Cloudflare uses the IP address associated with each request. Learn about <a href="/network/ip-geolocation/">Configuring Cloudflare IP Geolocation</a>.</li>
+</ul>
+<h2 id="apparent-data-discrepancies">Apparent data discrepancies</h2>
+<p>It is possible that your Cloudflare metrics do not fully align with data for the same site as reported by other analytics sources, such as Google Analytics and web server logs.</p>
+<p>Once Cloudflare identifies a unique IP address for a request, we identify such request as a visit. Therefore, the number of visitors Cloudflare Analytics shows is probably higher than what other analytics services may report.</p>
+<p>For example, Google Analytics and other web-based analytics programs use JavaScript on the web browser to track visitors. As a result, Google Analytics does not record threats, bots, and automated crawlers because those requests typically do not trigger JavaScript. Also, these services do not track visitors who disable JavaScript on their browser or who leave a page before it fully loads.</p>
+<p>Finally, it is likely that unique visitor data from the Cloudflare Analytics app is greater than your search analytics unique pageviews. This is because pageviews reflect when someone visits a page via a web browser and loads the entire page. However, when another site or service like a bot, plugin, or API is consuming partial content from your site (but not loading a full page), this counts as a unique visitor in Cloudflare and not as a pageview.</p>
+<h2 id="about-missing-metrics">About missing metrics</h2>
+<p>You may not be seeing metrics on Cloudflare Analytics for the following reasons:</p>
+<ul>
+<li>You only recently signed up for Cloudflare. Metrics are delayed 24 hours for domains on a free Cloudflare plan.</li>
+<li>If you signed up directly with Cloudflare, your nameservers might not be pointing to Cloudflare at your registrar just yet. Registrars can take 24-72 hours to update their nameservers. Metrics will not start gathering until we detect the nameservers pointing to Cloudflare.</li>
+<li>If you signed up through a Cloudflare <a href="https://www.cloudflare.com/partners/">hosting partner option</a>, something might not be configured correctly. Contact the hosting partner for support.</li>
+<li>Some browser extensions designed to block ads may prevent analytics from loading. To address this issue, disable the ad block extension or allow <code>cloudflare.com</code> on it.</li>
+</ul>
+<aside class="nb-aside note">
+@markup("md", "content/.markup/bodies/3131.md")
+</aside>
+<h2 id="why-does-the-analytics-data-on-the-overview-page-not-match-what-i-have-under-view-more-analytics">Why does the analytics data on the <strong>Overview</strong> page not match what I have under <strong>View More Analytics</strong>?</h2>
+<p>The Overview page shows analytics based on all traffic, including subrequests. However, when you navigate to <strong>Analytics &amp; Logs</strong> &gt; <strong>HTTP Traffic</strong>, the metrics (for example, <code>Requests</code>, <code>Data</code>, <code>Visits</code>) are filtered to show only end user traffic (that is, <code>requestSource = eyeball</code>).</p>
+<p>As a result, subrequests are excluded from the <strong>HTTP Traffic</strong> view, which can lead to discrepancies between the numbers shown in <strong>Overview</strong> and those displayed in other analytics sections of the dashboard.</p>

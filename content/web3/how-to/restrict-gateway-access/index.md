@@ -1,0 +1,2 @@
+<p>If you are using a <a href="/web3/about/">Web3 gateway</a> for internal application calls, you may want to restrict gateway access to specific backend services.</p>
+<p>You can achieve this goal by <a href="/cloudflare-one/access-controls/policies/">creating general Access policies</a> to block normal traffic and then <a href="/cloudflare-one/access-controls/service-credentials/service-tokens/">creating service tokens</a> to allow access by your backend service.</p>

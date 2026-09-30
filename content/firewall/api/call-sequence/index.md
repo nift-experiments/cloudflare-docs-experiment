@@ -1,0 +1,24 @@
+<p>The API call examples in this site illustrate the <strong>recommended sequence</strong> of calling the two APIs (the <a href="/firewall/api/cf-filters/">Cloudflare Filters API</a> and the <a href="/firewall/api/cf-firewall-rules/">Firewall Rules API</a>).</p>
+<aside class="nb-aside caution">
+<h3 class="nb-aside-title" id="deprecation-notice">Deprecation notice</h3>
+@markup("md", "content/.markup/bodies/8701.md")
+</aside>
+<p>The image below depicts this sequence, which can be applied for creating and editing rules. The reverse would apply for delete operations.</p>
+<p><img src="/assets/upstream/images/firewall/recommended-flow.png" alt="Recommended flow for calling the Cloudflare Filters API and Firewall Rules API when creating or editing rules" /></p>
+<p>Cloudflare recommends this sequence because it facilitates filter reusability and allows working with either API independently. Thanks to the standalone nature of Cloudflare Filters, the same filter can be shared in multiple firewall rules and in other future Cloudflare products and features.</p>
+<p>For example, a filter that matches all traffic for your API (that is, <code>http.request.uri.path matches &quot;^/api/.*$&quot;</code>) may disable caching, disable human CAPTCHAs, configure JSON custom errors, and appear in a firewall rule. With the recommended sequence above, you would repeat steps 3-6 for every Cloudflare feature to configure against the same filter created in steps 1-2.</p>
+<p>However, for a <code>POST</code> operation, the <strong>simplified sequence</strong> — shown below — allows you to create both a filter and rule in the same call. In this case, the filter and rule only refer to each other.</p>
+<p><img src="/assets/upstream/images/firewall/simple-flow.png" alt="Basic flow for invoking the Firewall Rules API to create both a filter and a rule in a single call" /></p>
+<p>In this sequence, a single <code>POST</code> request to the <code>/firewall/rules</code> endpoint takes the filter object in the JSON to create the filter in the Filters API (also via a <code>POST</code> request). If successful, the firewall rule is created.</p>
+<p>Below is an example call and response using this method:</p>
+<pre><code class="language-bash">curl &quot;https://api.cloudflare.com/client/v4/zones/{zone_id}/firewall/rules&quot; \&#10;&#45;-header &quot;X-Auth-Email: &lt;EMAIL&gt;&quot; \&#10;&#45;-header &quot;X-Auth-Key: &lt;API_KEY&gt;&quot; \&#10;&#45;-header &quot;Content-Type: application/json&quot; \&#10;&#45;-data &#x27;[&#10;  {&#10;    &quot;filter&quot;: {&#10;      &quot;expression&quot;: &quot;http.request.uri.path contains \&quot;/api/\&quot; and ip.src eq 93.184.216.34&quot;&#10;    },&#10;    &quot;action&quot;: &quot;block&quot;&#10;  }&#10;]&#x27;&#10;</code></pre>
+<pre><code class="language-json">{&#10;	&quot;result&quot;: [&#10;		{&#10;			&quot;id&quot;: &quot;&lt;RULE_ID&gt;&quot;,&#10;			&quot;paused&quot;: false,&#10;			&quot;action&quot;: &quot;block&quot;,&#10;			&quot;priority&quot;: null,&#10;			&quot;filter&quot;: {&#10;				&quot;id&quot;: &quot;&lt;FILTER_ID&gt;&quot;,&#10;				&quot;expression&quot;: &quot;http.request.uri.path contains \&quot;/api/\&quot; and ip.src eq 93.184.216.34&quot;,&#10;				&quot;paused&quot;: false&#10;			}&#10;		}&#10;	],&#10;	&quot;success&quot;: true,&#10;	&quot;errors&quot;: [],&#10;	&quot;messages&quot;: []&#10;}&#10;</code></pre>
+<p>However, this approach has some disadvantages:</p>
+<ul>
+<li>The firewall rules client has to implement error and exception handling for every potential failure occurring in both the firewall rules and the filters APIs.</li>
+<li>To protect against accidentally modifying or deleting filters used by other Cloudflare features, the <code>PUT</code> or <code>DELETE</code> operations are not allowed.</li>
+</ul>
+<p>By default, if either the filter or rule is invalid, neither will be created.</p>
+<p>However, one exception applies. If you are about to exceed your rule quota, Cloudflare may create the filter but not the firewall rule. This happens because the rule is only created after the filter in the sequence diagram.</p>
+<p>After you resolve the issue of exceeding your quota or requesting a feature that is unavailable to your zone, return to the recommended flow to create a rule that references the filter.</p>
+<p>In summary, Cloudflare strongly recommends the sequence with the two API calls. Limit your rule and filter creation using the simplified sequence for emergency situations, and only via <code>curl</code> requests.</p>

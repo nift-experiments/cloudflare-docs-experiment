@@ -1,0 +1,2 @@
+<p>These guides walk you through the migration processes associated with various changes in Cloudflare's SSL/TLS infrastructure.</p>
+<ul class="directory-listing"><li><a href="/ssl/reference/migration-guides/entrust-distrust/">Entrust distrust by major browsers</a></li><li><a href="/ssl/reference/migration-guides/digicert-g1-distrust/">DigiCert Legacy Root (G1) distrust by major browsers</a></li></ul>

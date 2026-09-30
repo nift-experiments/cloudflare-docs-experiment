@@ -1,0 +1,1 @@
+<p>In the <strong>Recommendations</strong> tab, with one click you can enable all the recommended settings available for your plan. You can enable all the recommended settings at once or you can also just enable the ones you want.</p>

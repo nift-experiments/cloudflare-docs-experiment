@@ -1,0 +1,4 @@
+<p>DNS over HTTPS (DoH) encrypts DNS queries by wrapping them inside regular HTTPS requests. This prevents attackers from forging or altering your DNS traffic.</p>
+<p>DoH sends DNS traffic over port <code>443</code> — the default port for HTTPS web traffic. Because DoH queries use the same port and protocol as normal web browsing, they are difficult to distinguish from other HTTPS traffic on the network.</p>
+<p>DoH supports the HTTP, HTTP/2, and HTTP/3 protocols.</p>
+<ul class="directory-listing"><li><a href="/1.1.1.1/encryption/dns-over-https/make-api-requests/">Make API requests to 1.1.1.1</a></li><li><a href="/1.1.1.1/encryption/dns-over-https/encrypted-dns-browsers/">Configure DoH on your browser</a></li><li><a href="/1.1.1.1/encryption/dns-over-https/dns-over-https-client/">Connect to 1.1.1.1 using DoH clients</a></li></ul>

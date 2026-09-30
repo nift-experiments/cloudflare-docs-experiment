@@ -1,0 +1,2 @@
+<p class="article-summary">Transcode an image from Workers AI before uploading to R2</p>
+<pre><code class="language-js">const stream = await env.AI.run(&quot;@cf/bytedance/stable-diffusion-xl-lightning&quot;, {&#10;	prompt: YOUR_PROMPT_HERE,&#10;});&#10;&#10;// Convert to AVIF&#10;const image = (&#10;	await env.IMAGES.input(stream).output({ format: &quot;image/avif&quot; })&#10;).response();&#10;&#10;const fileName = &quot;image.avif&quot;;&#10;&#10;// Upload to R2&#10;await env.R2.put(fileName, image.body);&#10;</code></pre>

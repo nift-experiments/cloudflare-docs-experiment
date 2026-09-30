@@ -1,0 +1,18 @@
+<div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
+<div class="changelog-tools"><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
+<article class="changelog-detail"><a href="/changelog/">← Back to all posts</a>
+<time>June 30, 2025</time><h2 id="post-title">Remote bindings (beta) now works with Next.js — connect to remote resources (D1, KV, R2, etc.) during local development</h2>
+<div class="changelog-badges"><span>workers</span></div><div class="changelog-body"><p>We <a href="https://github.com/cloudflare/workers-sdk/discussions/9660">recently announced</a> our public beta for <a href="/workers/local-development/#remote-bindings">remote bindings</a>, which allow you to connect to deployed resources running on your Cloudflare account (like <a href="/r2">R2 buckets</a> or <a href="/d1">D1 databases</a>) while running a local development session.</p>
+<p>Now, you can use remote bindings with your Next.js applications through the <a href="https://opennext.js.org/cloudflare/bindings#remote-bindings"><code>@opennextjs/cloudflare</code> adaptor</a> by enabling the experimental feature in your <code>next.config.ts</code>:</p>
+<pre><code class="language-diff">&#45; initOpenNextCloudflareForDev();&#10;&#43; initOpenNextCloudflareForDev({&#10;&#43;  experimental: { remoteBindings: true }&#10;&#43; });&#10;</code></pre>
+<p>Then, all you have to do is specify which bindings you want connected to the deployed resource on your Cloudflare account via the <code>experimental_remote</code> flag in your binding definition:</p>
+<div class="nb-wrangler-config">
+@markup("md", "content/.markup/bodies/17780.md")</div>
+<p>You can then run <code>next dev</code> to start a local development session (or start a preview with <code>opennextjs-cloudflare preview</code>), and all requests to <code>env.MY_BUCKET</code> will be proxied to the remote <code>testing-bucket</code> — rather than the <a href="/workers/local-development/#bindings-during-local-development">default local binding simulations</a>.</p>
+<h4 id="remote-bindings-isr">Remote bindings &amp; ISR</h4>
+<p>Remote bindings are also used during the build process, which comes with significant benefits for pages using <a href="https://opennext.js.org/aws/inner_workings/components/server/node#isrssg">Incremental Static Regeneration (ISR)</a>. During the build step for an ISR page, your server executes the page's code just as it would for normal user requests. If a page needs data to display (like fetching user info from <a href="/kv">KV</a>), those requests are actually made. The server then uses this fetched data to render the final HTML.</p>
+<p>Data fetching is a critical part of this process, as the finished HTML is only as good as the data it was built with. If the build process can't fetch real data, you end up with a pre-rendered page that's empty or incomplete.</p>
+<p><strong>With remote bindings support in OpenNext,</strong> your pre-rendered pages are built with real data from the start. The build process uses any configured remote bindings, and any data fetching occurs against the deployed resources on your Cloudflare account.</p>
+<p><strong>Want to learn more?</strong> Get started with <a href="https://opennext.js.org/cloudflare/bindings#remote-bindings">remote bindings and OpenNext</a>.</p>
+<p><strong>Have feedback?</strong> Join the discussion in our <a href="https://github.com/cloudflare/workers-sdk/discussions/9660">beta announcement</a> to share feedback or report any issues.</p>
+</div></article></div>

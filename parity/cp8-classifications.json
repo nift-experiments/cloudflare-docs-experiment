@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "upstreamSha": "bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf",
+  "routes": {
+    "/agent-setup/bionic/": {
+      "reasons": ["upstream-word-coverage-below-70-percent"],
+      "classification": "non-frozen-live-input",
+      "evidence": "The upstream page includes Skills and MCP server collections downloaded from middlecache plus build-time randomized prompts; those values are not present in the pinned Git tree."
+    },
+    "/agent-setup/claude-code/": {
+      "reasons": ["upstream-word-coverage-below-70-percent"],
+      "classification": "non-frozen-live-input",
+      "evidence": "The upstream page includes Skills and MCP server collections downloaded from middlecache plus build-time randomized prompts; those values are not present in the pinned Git tree."
+    },
+    "/agent-setup/codex/": {
+      "reasons": ["upstream-word-coverage-below-70-percent"],
+      "classification": "non-frozen-live-input",
+      "evidence": "The upstream page includes Skills and MCP server collections downloaded from middlecache plus build-time randomized prompts; those values are not present in the pinned Git tree."
+    },
+    "/agent-setup/cursor/": {
+      "reasons": ["upstream-word-coverage-below-70-percent"],
+      "classification": "non-frozen-live-input",
+      "evidence": "The upstream page includes Skills and MCP server collections downloaded from middlecache plus build-time randomized prompts; those values are not present in the pinned Git tree."
+    },
+    "/agent-setup/github-copilot/": {
+      "reasons": ["upstream-word-coverage-below-70-percent"],
+      "classification": "non-frozen-live-input",
+      "evidence": "The upstream page includes Skills and MCP server collections downloaded from middlecache plus build-time randomized prompts; those values are not present in the pinned Git tree."
+    },
+    "/agent-setup/opencode/": {
+      "reasons": ["upstream-word-coverage-below-70-percent"],
+      "classification": "non-frozen-live-input",
+      "evidence": "The upstream page includes Skills and MCP server collections downloaded from middlecache plus build-time randomized prompts; those values are not present in the pinned Git tree."
+    },
+    "/agent-setup/visual-studio-code/": {
+      "reasons": ["upstream-word-coverage-below-70-percent"],
+      "classification": "non-frozen-live-input",
+      "evidence": "The upstream page includes Skills and MCP server collections downloaded from middlecache plus build-time randomized prompts; those values are not present in the pinned Git tree."
+    },
+    "/agent-setup/windsurf/": {
+      "reasons": ["upstream-word-coverage-below-70-percent"],
+      "classification": "non-frozen-live-input",
+      "evidence": "The upstream page includes Skills and MCP server collections downloaded from middlecache plus build-time randomized prompts; those values are not present in the pinned Git tree."
+    },
+    "/logs/logpush/llms.txt": {
+      "reasons": [
+        "upstream-text-word-coverage-below-75-percent"
+      ],
+      "classification": "non-frozen-live-input",
+      "evidence": "Astro includes ignored Logpush dataset documents downloaded by its predev hook. They are absent from the pinned Git tree and intentionally excluded from deterministic Git-tracked discovery."
+    },
+    "/reference-architecture/diagrams/network/optimizing-roaming-experience-with-geolocated-ips/": {
+      "reasons": ["heading-order-coverage-below-70-percent"],
+      "classification": "valid-structure-normalization",
+      "evidence": "The frozen source uses two body H1 headings beneath the page title. The candidate demotes those body headings to H2 to preserve exactly one page H1 while retaining their text and order."
+    },
+    "/rules/custom-errors/api-calls/": {
+      "reasons": ["upstream-non-200", "response-kind-mismatch"],
+      "classification": "non-frozen-live-input",
+      "evidence": "The frozen page uses APIRequest paths containing {zone_identifier}, while Astro predev downloads a mutable middlecache OpenAPI schema whose matching paths use {zone_id}. APIRequest performs an exact operation lookup and throws when the source path is absent, producing the upstream 500. The schema is not part of the pinned Git tree, so the candidate's 200 response is not a reproducible parity defect."
+    },
+    "/style-guide/build-the-page/components/usage/": {
+      "reasons": ["word-precision-below-70-percent"],
+      "classification": "reference-runtime-nondeterminism",
+      "evidence": "The Astro ComponentsUsage inventory is process-local and changed across fresh runs at the same frozen SHA, exposing 22 headings, then approximately 110 headings, then a different partial inventory. The deterministic candidate inventory is derived from frozen imported component usage; the final full-run reason is classified exactly rather than chasing mutable reference initialization state."
+    }
+  }
+}

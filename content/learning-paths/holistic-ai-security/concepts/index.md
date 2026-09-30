@@ -1,0 +1,8 @@
+<p>The goal of this learning path is to provide Cloudflare One users with the strategy and tools to securely adopt generative AI within their organizations. This guide will help address new security challenges and mitigate risks like shadow AI and data loss.</p>
+<h2 id="objectives">Objectives</h2>
+<ul>
+<li>Determine risk tolerance: Identify areas of concern and risk tolerance for AI use to establish a baseline for your organization's AI security strategy.</li>
+<li>Monitor AI usage: Utilize Cloudflare One's tools, such as the Shadow IT dashboard and API CASB integrations, to gain visibility into both sanctioned and unsanctioned AI application usage.</li>
+<li>Build security policies: Create granular security policies using Cloudflare Gateway to control AI usage, prevent data loss with DLP, and manage user behavior through actions like blocking or redirecting.</li>
+<li>Secure sanctioned models: Apply Zero Trust principles to sanctioned AI models and internal services like Model Context Protocol (MCP) servers to ensure secure access and protect sensitive data from being exposed.</li>
+</ul>

@@ -1,0 +1,1 @@
+<ul class="directory-listing"><li><a href="/workers-ai/features/function-calling/embedded/examples/fetch/">Use fetch() handler</a></li><li><a href="/workers-ai/features/function-calling/embedded/examples/openapi/">Tools based on OpenAPI Spec</a></li><li><a href="/workers-ai/features/function-calling/embedded/examples/kv/">Use KV API</a></li></ul>

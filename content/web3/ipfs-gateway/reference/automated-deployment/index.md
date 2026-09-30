@@ -1,0 +1,7 @@
+<p>Static sites are easy to deploy automatically. The code of the site is usually kept in a Git repository and deployed by pushing the latest commit to a repository that's connected to a Continuous Integration service like <a href="https://travis-ci.org/">Travis CI</a>, or by pushing to a repository directly on the server and activating a post-receive hook. Either way, the production version of the site is built and then copied into the serving path of an Apache or NGINX instance.</p>
+<p>IPFS usually fits into these systems: instead of copying the production version of a website into the serving path of an HTTP server, you would upload the same files to an IPFS node and update your DNS records with the new hash. There are several tools that help with different parts of this:</p>
+<ul>
+<li><a href="https://github.com/agentofuser/ipfs-deploy">ipfs-deploy</a> helps upload data to a third-party pinning providers and automatically update Cloudflare-managed DNS records.</li>
+<li><a href="https://github.com/ipfs-shipyard/dnslink-cloudflare">dnslink-cloudflare</a> is a script to programmatically update DNSLink records. This can be run with the <code>-Q</code> flag of <code>ipfs add</code> that only outputs the top-level hash.</li>
+<li><a href="https://guide.fission.codes/developers/custom-domains/using-cloudflare-ipfs-gateway">Fission's IPFS support</a> lets you use the Fission IPFS app publishing system from the CLI or from GitHub Actions, while using Cloudflare-managed DNS and gateway.</li>
+</ul>

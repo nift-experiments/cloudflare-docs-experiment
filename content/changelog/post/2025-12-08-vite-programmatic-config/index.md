@@ -1,0 +1,20 @@
+<div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
+<div class="changelog-tools"><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
+<article class="changelog-detail"><a href="/changelog/">← Back to all posts</a>
+<time>December 8, 2025</time><h2 id="post-title">Configure Workers programmatically using the Vite plugin</h2>
+<div class="changelog-badges"><span>workers</span></div><div class="changelog-body"><p>The <a href="/workers/vite-plugin/">Cloudflare Vite plugin</a> now supports programmatic configuration of Workers without a Wrangler configuration file. You can use the <code>config</code> option to define Worker settings directly in your Vite configuration, or to modify existing configuration loaded from a Wrangler config file. This is particularly useful when integrating with other build tools or frameworks, as it allows them to control Worker configuration without needing users to manage a separate config file.</p>
+<h4 id="the-config-option">The <code>config</code> option</h4>
+<p>The Vite plugin's new <code>config</code> option accepts either a partial configuration object or a function that receives the current configuration and returns overrides. This option is applied after any config file is loaded, allowing the plugin to override specific values or define Worker configuration entirely in code.</p>
+<h4 id="example-usage">Example usage</h4>
+<p>Setting <code>config</code> to an object to provide configuration values that merge with defaults and config file settings:</p>
+<pre><code class="language-ts">import { defineConfig } from &quot;vite&quot;;&#10;import { cloudflare } from &quot;@cloudflare/vite-plugin&quot;;&#10;&#10;export default defineConfig({&#10;	plugins: [&#10;		cloudflare({&#10;			config: {&#10;				name: &quot;my-worker&quot;,&#10;				compatibility_flags: [&quot;nodejs_compat&quot;],&#10;				send_email: [&#10;					{&#10;						name: &quot;EMAIL&quot;,&#10;					},&#10;				],&#10;			},&#10;		}),&#10;	],&#10;});&#10;</code></pre>
+<p>Use a function to modify the existing configuration:</p>
+<pre><code class="language-ts">import { defineConfig } from &quot;vite&quot;;&#10;import { cloudflare } from &quot;@cloudflare/vite-plugin&quot;;&#10;export default defineConfig({&#10;	plugins: [&#10;		cloudflare({&#10;			config: (userConfig) =&gt; {&#10;				delete userConfig.compatibility_flags;&#10;			},&#10;		}),&#10;	],&#10;});&#10;</code></pre>
+<p>Return an object with values to merge:</p>
+<pre><code class="language-ts">import { defineConfig } from &quot;vite&quot;;&#10;import { cloudflare } from &quot;@cloudflare/vite-plugin&quot;;&#10;&#10;export default defineConfig({&#10;	plugins: [&#10;		cloudflare({&#10;			config: (userConfig) =&gt; {&#10;				if (!userConfig.compatibility_flags.includes(&quot;no_nodejs_compat&quot;)) {&#10;					return { compatibility_flags: [&quot;nodejs_compat&quot;] };&#10;				}&#10;			},&#10;		}),&#10;	],&#10;});&#10;</code></pre>
+<h4 id="auxiliary-workers">Auxiliary Workers</h4>
+<p>Auxiliary Workers also support the <code>config</code> option, enabling multi-Worker architectures without config files.</p>
+<p>Define auxiliary Workers without config files using <code>config</code> inside the <code>auxiliaryWorkers</code> array:</p>
+<pre><code class="language-ts">import { defineConfig } from &quot;vite&quot;;&#10;import { cloudflare } from &quot;@cloudflare/vite-plugin&quot;;&#10;&#10;export default defineConfig({&#10;	plugins: [&#10;		cloudflare({&#10;			config: {&#10;				name: &quot;entry-worker&quot;,&#10;				main: &quot;./src/entry.ts&quot;,&#10;				services: [{ binding: &quot;API&quot;, service: &quot;api-worker&quot; }],&#10;			},&#10;			auxiliaryWorkers: [&#10;				{&#10;					config: {&#10;						name: &quot;api-worker&quot;,&#10;						main: &quot;./src/api.ts&quot;,&#10;					},&#10;				},&#10;			],&#10;		}),&#10;	],&#10;});&#10;</code></pre>
+<p>For more details and examples, see <a href="/workers/vite-plugin/reference/programmatic-configuration/">Programmatic configuration</a>.</p>
+</div></article></div>

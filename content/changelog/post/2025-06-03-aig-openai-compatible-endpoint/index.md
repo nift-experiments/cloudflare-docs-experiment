@@ -1,0 +1,10 @@
+<div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
+<div class="changelog-tools"><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
+<article class="changelog-detail"><a href="/changelog/">← Back to all posts</a>
+<time>June 3, 2025</time><h2 id="post-title">AI Gateway adds OpenAI compatible endpoint</h2>
+<div class="changelog-badges"><span>ai-gateway</span></div><div class="changelog-body"><p>Users can now use an <a href="/ai-gateway/usage/chat-completion/">OpenAI Compatible endpoint</a> in AI Gateway to easily switch between providers, while keeping the exact same request and response formats. We're launching now with the chat completions endpoint, with the embeddings endpoint coming up next.</p>
+<p>To get started, use the OpenAI compatible chat completions endpoint URL with your own account id and gateway id and switch between providers by changing the <code>model</code> and <code>apiKey</code> parameters.</p>
+<pre><code class="language-js">import OpenAI from &quot;openai&quot;;&#10;const client = new OpenAI({&#10;	apiKey: &quot;YOUR_PROVIDER_API_KEY&quot;, // Provider API key&#10;	baseURL:&#10;		&quot;https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/compat&quot;,&#10;});&#10;&#10;const response = await client.chat.completions.create({&#10;	model: &quot;google-ai-studio/gemini-2.0-flash&quot;,&#10;	messages: [{ role: &quot;user&quot;, content: &quot;What is Cloudflare?&quot; }],&#10;});&#10;&#10;console.log(response.choices[0].message.content);&#10;</code></pre>
+<p>Additionally, the <a href="/ai-gateway/usage/chat-completion/">OpenAI Compatible endpoint</a> can be combined with our <a href="/ai-gateway/usage/universal/">Universal Endpoint</a> to add fallbacks across multiple providers. That means AI Gateway will return every response in the same standardized format, no extra parsing logic required!</p>
+<p>Learn more in the <a href="/ai-gateway/usage/chat-completion/">OpenAI Compatibility</a> documentation.</p>
+</div></article></div>

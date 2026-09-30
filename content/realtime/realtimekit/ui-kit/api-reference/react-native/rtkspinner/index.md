@@ -1,0 +1,27 @@
+<p>An animated loading spinner component.</p>
+<h2 id="properties">Properties</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>style</code></td>
+<td><code>object</code></td>
+<td>❌</td>
+<td>-</td>
+<td>Custom styles to override spinner appearance</td>
+</tr>
+</tbody>
+</table>
+<h2 id="usage-examples">Usage Examples</h2>
+<h3 id="basic-usage">Basic Usage</h3>
+<pre><code class="language-tsx">import { RtkSpinner } from &quot;@cloudflare/realtimekit-react-native-ui&quot;;&#10;&#10;function MyComponent() {&#10;	return &lt;RtkSpinner /&gt;;&#10;}&#10;</code></pre>
+<h3 id="with-properties">With Properties</h3>
+<pre><code class="language-tsx">import { RtkSpinner } from &quot;@cloudflare/realtimekit-react-native-ui&quot;;&#10;&#10;function MyComponent() {&#10;	return &lt;RtkSpinner style={{ width: 48, height: 48 }} /&gt;;&#10;}&#10;</code></pre>

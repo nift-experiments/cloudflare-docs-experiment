@@ -18,13 +18,37 @@
     "templates/footer.html",
     "templates/head.html",
     "templates/header.html",
+    "templates/mobile-sidebar.html",
     "templates/sidebar.html",
     "templates/template.html",
     "templates/toc.html"
   ],
   "reqs": [
+    "public/agent-setup/index.html",
     "public/assets/cf-design.css",
     "public/assets/cf-shell.js",
-    "public/assets/cloudflare-logo.svg"
+    "public/assets/cloudflare-logo.svg",
+    "public/assets/fonts/inter-latin-wght-normal.woff2",
+    "public/cache/how-to/cache-rules/index.html",
+    "public/cache/index.html",
+    "public/changelog/index.html",
+    "public/cloudflare-one/access-controls/index.html",
+    "public/cloudflare-one/networks/connectors/cloudflare-tunnel/index.html",
+    "public/cloudflare-one/traffic-policies/index.html",
+    "public/d1/get-started/index.html",
+    "public/directory/index.html",
+    "public/dns/index.html",
+    "public/favicon.png",
+    "public/fundamentals/get-started/index.html",
+    "public/images/get-started/introduction/index.html",
+    "public/images/index.html",
+    "public/index.html",
+    "public/speed/index.html",
+    "public/ssl/index.html",
+    "public/turnstile/index.html",
+    "public/waf/index.html",
+    "public/web-analytics/index.html",
+    "public/workers-ai/models/index.html",
+    "public/workers/get-started/guide/index.html"
   ]
 }

@@ -1,0 +1,2 @@
+<p>This section contains reference information for Response Header Transform Rules.</p>
+<ul class="directory-listing"><li><a href="/rules/transform/response-header-modification/reference/header-format/">Format of HTTP response header names and values</a></li><li><a href="/rules/transform/response-header-modification/reference/fields-functions/">Available fields and functions</a></li><li><a href="/rules/transform/response-header-modification/reference/parameters/">API parameter reference</a></li></ul>

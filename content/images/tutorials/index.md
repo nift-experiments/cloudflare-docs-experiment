@@ -1,0 +1,1 @@
+<ul class="directory-listing"><li><a href="/images/tutorials/optimize-mobile-viewing/">Optimize mobile viewing</a></li><li><a href="/images/tutorials/optimize-user-uploaded-image/">Transform user-uploaded images before uploading to R2</a></li></ul>

@@ -1,0 +1,41 @@
+<p>In this guide, you will create a new <a href="https://waku.gg/">Waku</a> application and deploy to Cloudflare Workers (with the new <a href="/workers/static-assets/">Workers Assets</a>). Waku is a minimal React framework built for <a href="https://react.dev/blog/2024/12/05/react-19">React 19</a> and <a href="https://react.dev/reference/rsc/server-components">React Server Components</a>. The use of Server Components is completely optional. It can be configured to run Server Components during build and output static HTML or it can be configured to run with dynamic React server rendering. It is built on top of <a href="https://hono.dev/">Hono</a> and <a href="https://vite.dev/">Vite</a>.</p>
+<aside class="nb-aside tip">
+<h3 class="nb-aside-title" id="already-have-a-waku-project">Already have a Waku project?</h3>
+@markup("md", "content/.markup/bodies/16972.md")
+</aside>
+<div class="nb-interactive-component" data-cf-component="AutoconfigDiagram"></div>
+<h2 id="1-set-up-a-new-project"><ol>
+<li>Set up a new project</li>
+</ol></h2>
+<p>Use the <a href="https://www.npmjs.com/package/create-cloudflare"><code>create-cloudflare</code></a> CLI (C3) to set up a new project. C3 will create a new project directory, initiate Waku's official setup tool, and provide the option to deploy instantly.</p>
+<p>To use <code>create-cloudflare</code> to create a new Waku project with Workers Assets, run the following command:</p>
+<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre><code data-nb-pm-code>npm create cloudflare@latest my-waku-app -- --framework=waku</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm create cloudflare@latest my-waku-app -- --framework=waku" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>yarn create cloudflare@latest my-waku-app --framework=waku</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn create cloudflare@latest my-waku-app --framework=waku" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>pnpm create cloudflare@latest my-waku-app --framework=waku</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm create cloudflare@latest my-waku-app --framework=waku" aria-label="Copy to clipboard">Copy</button></div></div>
+<p>For setup, select the following options:</p>
+<ul>
+<li>For <em>What would you like to start with?</em>, choose <code>Framework Starter</code>.</li>
+<li>For <em>Which development framework do you want to use?</em>, choose <code>Waku</code>.</li>
+<li>Complete the framework's own CLI wizard.</li>
+<li>For <em>Do you want to use git for version control?</em>, choose <code>Yes</code>.</li>
+<li>For <em>Do you want to deploy your application?</em>, choose <code>No</code> (we will be making some changes before deploying).</li>
+</ul>
+<p>After setting up your project, change your directory by running the following command:</p>
+<pre><code class="language-sh">cd my-waku-app&#10;</code></pre>
+<h2 id="2-develop-locally"><ol start="2">
+<li>Develop locally</li>
+</ol></h2>
+<p>After you have created your project, run the following command in the project directory to start a local server. This will allow you to preview your project locally during development.</p>
+<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre><code data-nb-pm-code>npm run dev</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm run dev" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>yarn run dev</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn run dev" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>pnpm run dev</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm run dev" aria-label="Copy to clipboard">Copy</button></div></div>
+<h2 id="3-deploy-your-project"><ol start="3">
+<li>Deploy your project</li>
+</ol></h2>
+<p>Your project can be deployed to a <code>*.workers.dev</code> subdomain or a <a href="/workers/configuration/routing/custom-domains/">Custom Domain</a>, from your own machine or from any CI/CD system, including <a href="/workers/ci-cd/builds/">Cloudflare's own</a>.</p>
+<p>The following command will build and deploy your project. If you are using CI, ensure you update your <a href="/workers/ci-cd/builds/configuration/#build-settings">&quot;deploy command&quot;</a> configuration appropriately.</p>
+<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre><code data-nb-pm-code>npm run deploy</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm run deploy" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>yarn run deploy</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn run deploy" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>pnpm run deploy</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm run deploy" aria-label="Copy to clipboard">Copy</button></div></div>
+<hr />
+<h2 id="bindings">Bindings</h2>
+<p>Your Waku application can be fully integrated with the Cloudflare Developer Platform, in both local development and in production, by using product bindings. The <a href="https://waku.gg/guides/cloudflare#accessing-cloudflare-bindings-execution-context-and-request-response-objects">Waku Cloudflare documentation</a> provides information about configuring bindings and how you can access them in your React Server Components.</p>
+<h2 id="static-assets">Static assets</h2>
+<p>You can serve static assets in your Waku application by adding them to the <code>./public/</code> directory. Common examples include images, stylesheets, fonts, and web manifests.</p>
+<p>During the build process, Waku copies <code>.js</code>, <code>.css</code>, <code>.html</code>, and <code>.txt</code> files from this directory into the final assets output. <code>.txt</code> files are used for storing data used by Server Components that are rendered at build time.</p>
+<p>By default, Cloudflare first tries to match a request path against a static asset path, which is based on the file structure of the uploaded asset directory. This is either the directory specified by <code>assets.directory</code> in your Wrangler config or, in the case of the <a href="/workers/vite-plugin/">Cloudflare Vite plugin</a>, the output directory of the client build. Failing that, we invoke a Worker if one is present. If there is no Worker, or the Worker then uses the asset binding, Cloudflare will fallback to the behaviour set by <a href="/workers/static-assets/#routing-behavior"><code>not_found_handling</code></a>.</p>
+<p>Refer to the <a href="/workers/static-assets/routing/">routing documentation</a> for more information about how routing works with static assets, and how to customize this behavior.</p>

@@ -1,0 +1,28 @@
+<p><a href="/cache/advanced-configuration/early-hints/">Early Hints</a> help the browser to load webpages faster. Early Hints is enabled automatically on all <code>pages.dev</code> domains and custom domains.</p>
+<p>Early Hints automatically caches any <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/preload"><code>preload</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/preconnect"><code>preconnect</code></a> type <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Link"><code>Link</code> headers</a> to send as Early Hints to the browser. The hints are sent to the browser before the full response is prepared, and the browser can figure out how to load the webpage faster for the end user. There are two ways to create these <code>Link</code> headers in Pages:</p>
+<h2 id="configure-early-hints">Configure Early Hints</h2>
+<p>Early Hints can be created with either of the two methods detailed below.</p>
+<h3 id="1-configure-your-headers-file"><ol>
+<li>Configure your <code>_headers</code> file</li>
+</ol></h3>
+<p>Create custom headers using the <a href="/pages/configuration/headers/"><code>_headers</code> file</a>. If you include a particular stylesheet on your <code>/blog/</code> section of your website, you would create the following rule:</p>
+<pre><code class="language-txt">/blog/*&#10;  Link: &lt;/styles.css&gt;; rel=preload; as=style&#10;</code></pre>
+<p>Pages will attach this <code>Link: &lt;/styles.css&gt;; rel=preload; as=style</code> header. Early Hints will then emit this header as an Early Hint once cached.</p>
+<h3 id="2-automatic-link-header-generation"><ol start="2">
+<li>Automatic <code>Link</code> header generation</li>
+</ol></h3>
+<p>In order to make the authoring experience easier, Pages also automatically generates <code>Link</code> headers from any <code>&lt;link&gt;</code> HTML elements with the following attributes:</p>
+<ul>
+<li><code>href</code></li>
+<li><code>as</code> (optional)</li>
+<li><code>rel</code> (one of <code>preconnect</code>, <code>preload</code>, or <code>modulepreload</code>)</li>
+</ul>
+<p><code>&lt;link&gt;</code> elements which contain any other additional attributes (for example, <code>fetchpriority</code>, <code>crossorigin</code> or <code>data-do-not-generate-a-link-header</code>) will not be used to generate <code>Link</code> headers in order to prevent accidentally losing any custom prioritization logic that would otherwise be dropped as an Early Hint.</p>
+<p>This allows you to directly create Early Hints as you are writing your document, without needing to alternate between your HTML and <code>_headers</code> file.</p>
+<pre><code class="language-html">&lt;html&gt;&#10;	&lt;head&gt;&#10;		&lt;link rel=&quot;preload&quot; href=&quot;/style.css&quot; as=&quot;style&quot; /&gt;&#10;		&lt;link rel=&quot;stylesheet&quot; href=&quot;/style.css&quot; /&gt;&#10;	&lt;/head&gt;&#10;&lt;/html&gt;&#10;</code></pre>
+<h3 id="disable-automatic-link-header-generation-automatic-link-header">Disable automatic <code>Link</code> header generation Automatic <code>Link</code> header</h3>
+<p>Remove any automatically generated <code>Link</code> headers by adding the following to your <code>_headers</code> file:</p>
+<pre><code class="language-txt">/*&#10;  ! Link&#10;</code></pre>
+<aside class="nb-aside caution">
+@markup("md", "content/.markup/bodies/11065.md")
+</aside>

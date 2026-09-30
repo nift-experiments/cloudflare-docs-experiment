@@ -1,0 +1,3 @@
+<p>Workers is a polyglot platform, and provides first-class support for the following programming languages:</p>
+<ul class="directory-listing"><li><a href="/workers/languages/javascript/">JavaScript</a></li><li><a href="/workers/languages/typescript/">TypeScript</a></li><li><a href="/workers/languages/python/">Python Workers</a></li><li><a href="/workers/languages/rust/">Rust</a></li></ul>
+<p>Workers also supports <a href="/workers/runtime-apis/webassembly/">WebAssembly</a> (abbreviated as &quot;Wasm&quot;) — a binary format that many languages can be compiled to. This allows you to write Workers using programming language beyond the languages listed above, including C, C++, Kotlin, Go and more.</p>

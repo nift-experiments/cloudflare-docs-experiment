@@ -1,0 +1,6 @@
+<aside class="nb-aside caution">
+@markup("md", "content/.markup/bodies/16084.md")
+</aside>
+<p>The <a href="/workers/wrangler/api/#unstable_startworker"><code>unstable_startWorker()</code></a> API exposes the internals of the Wrangler dev server, and allows you to customize how it runs. Compared to using <a href="/workers/testing/miniflare/writing-tests/">Miniflare directly for testing</a>, you can pass in a Wrangler configuration file, and it will automatically load the configuration for you.</p>
+<p>This example uses <code>node:test</code>, but should apply to any testing framework:</p>
+<pre><code class="language-ts">import assert from &quot;node:assert&quot;;&#10;import test, { after, before, describe } from &quot;node:test&quot;;&#10;import { unstable_startWorker } from &quot;wrangler&quot;;&#10;&#10;describe(&quot;worker&quot;, () =&gt; {&#10;	let worker;&#10;&#10;	before(async () =&gt; {&#10;		worker = await unstable_startWorker({ config: &quot;wrangler.json&quot; });&#10;	});&#10;&#10;	test(&quot;hello world&quot;, async () =&gt; {&#10;		assert.strictEqual(&#10;			await (await worker.fetch(&quot;http://example.com&quot;)).text(),&#10;			&quot;Hello world&quot;,&#10;		);&#10;	});&#10;&#10;	after(async () =&gt; {&#10;		await worker.dispose();&#10;	});&#10;});&#10;</code></pre>

@@ -1,0 +1,23 @@
+<p>Tunnel health alerts notify you when the reliability of your tunnel connections drops below an acceptable threshold. Understanding how Cloudflare calculates these alerts helps you interpret notifications and distinguish between brief, recoverable issues and sustained problems that require attention.</p>
+<p>Cloudflare uses a multi-window approach that combines short-term and long-term metrics to avoid alerting on transient issues while still detecting real degradation. The following sections explain the key concepts behind this process.</p>
+<h3 id="service-level-indicator-sli">Service-level indicator (SLI)</h3>
+<p>SLI is the ratio of positive events to total events. An SLI of 0% means the feature is not working at all, and an SLI of 100% means the feature is fully working as expected.</p>
+<aside class="nb-aside note">
+@markup("md", "content/.markup/bodies/6781.md")
+</aside>
+<h3 id="service-level-objectives-slos">Service-level objectives (SLOs)</h3>
+<p>SLOs are the threshold for the SLI and set a target level of reliability for IPsec/GRE tunnels. For example, an SLO could be 99.9% of tunnel states being healthy over the past 30 days. Cloudflare calculates the SLI values for the SLO based on the <a href="/cloudflare-wan/reference/tunnel-health-checks/#down"><code>down</code> tunnel state value</a>, not on the timeout results from tunnel health checks.</p>
+<h3 id="error-budget">Error budget</h3>
+<p>The error budget is the amount of unsuccessful events that can happen over the course of the SLO time window while maintaining the service at the level of availability the SLO defines.</p>
+<p>The SLO is a target percentage, and the error budget equals 100% minus the SLO. For example, assume that during 30 days there were one million tunnel health checks in your account, and your SLO is set to 99.9%. The error budget for this case would be:</p>
+<pre><code class="language-txt">number of events x (1 - SLO) = 1,000,000 x (1-0.999) = 1,000&#10;</code></pre>
+<p>This means the SLO allows for 1,000 unsuccessful tunnel health checks over the course of 30 days. However, what happens if all errors happen in one hour instead of 30 days? This leads to the concept of burn rate.</p>
+<h3 id="burn-rate">Burn rate</h3>
+<p>The burn rate measures how fast you expend the error budget over a given time window relative to the SLO window. In the example, an SLO of 99.9% means you can observe 1,000 tunnel health check failures over the course of 30 days. However, those same 1,000 health check failures are not acceptable during one hour.</p>
+<h2 id="when-cloudflare-alerts-you">When Cloudflare alerts you</h2>
+<p>To determine when to send Tunnel health alerts, Cloudflare relies on a multi-window, multi-burn rate approach. Every five minutes, Cloudflare analyzes the last hour and the last five minutes of data. Cloudflare calculates the SLI for the short window (five minutes) and long window (one hour) of data.</p>
+<p>Cloudflare only alerts you when both the short and long windows fall short of the configured threshold. This means both windows must fail the threshold for an alert to trigger. For example, if you defined a threshold of 99%:</p>
+<ul>
+<li>Short window: 99.2%, Long window: 99%. Cloudflare would not trigger an alert because the short window exceeds the 99% threshold.</li>
+<li>Short window: 98%, Long window: 98%. Cloudflare would trigger an alert because both windows fall short of the 99% threshold.</li>
+</ul>

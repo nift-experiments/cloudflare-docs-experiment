@@ -1,0 +1,1 @@
+<ul class="directory-listing"><li><a href="/workers-ai/configuration/bindings/">Workers Bindings</a></li><li><a href="/workers-ai/configuration/open-ai-compatibility/">OpenAI compatible API endpoints</a></li><li><a href="/workers-ai/configuration/ai-sdk/">Vercel AI SDK</a></li><li><a href="/workers-ai/configuration/hugging-face-chat-ui/">Hugging Face Chat UI</a></li></ul>

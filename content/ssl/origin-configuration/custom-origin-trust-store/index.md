@@ -1,0 +1,52 @@
+<p>By default, Cloudflare's global network maintains <a href="https://github.com/cloudflare/cfssl_trust">a list of publicly trusted certificate authorities</a>. This means that when using <a href="/ssl/origin-configuration/ssl-modes/full-strict/">Full (strict) encryption mode</a>, Cloudflare will only trust origin server certificates issued by a CA included in this trust store.</p>
+<p>Custom Origin Trust Store allows you to upload certificate authorities (CAs) that Cloudflare will use to authenticate connections to your origin server. Use this feature to override the default trust store with your preferred CA or CAs.
+<br /></p>
+<p>When a CA has been uploaded to Custom Origin Trust Store, Cloudflare will ignore all default publicly trusted CAs and exclusively use the CA or CAs that have been uploaded to authenticate the origin server.</p>
+<h2 id="availability">Availability</h2>
+<p>To get access to Custom Origin Trust Store, <a href="/ssl/edge-certificates/advanced-certificate-manager/">Advanced Certificate Manager</a> must be enabled on the zone.</p>
+<h2 id="post-quantum-certificate-authorities">Post-quantum certificate authorities</h2>
+<p>Custom Origin Trust Store accepts ML-DSA (FIPS 204) post-quantum certificate authorities. Refer to <a href="/ssl/post-quantum-cryptography/pqc-to-origin/#post-quantum-signatures">Post-quantum signatures</a> for certificate generation and upload guidance.</p>
+<h2 id="how-to">How to</h2>
+<p>To manage origin trust stores in the dashboard:</p>
+<ol>
+<li>Go to the <strong>Origin Server</strong> page.</li>
+</ol>
+<div class="nb-dash-button"></div>
+<ol start="2">
+<li>Select the <strong>Custom Origin Trust Store</strong> tab.</li>
+<li>Select <strong>Upload trust store</strong> to add a CA certificate, or use the table to manage existing trust stores.</li>
+</ol>
+<p>To manage origin trust stores using the API, refer to the <a href="#api-commands">API commands</a>.</p>
+<h2 id="limitations">Limitations</h2>
+<p>With <a href="/ssl/origin-configuration/ssl-modes/full-strict/">Full (strict) encryption mode</a> enabled, if your uploaded CA expires and no alternative CAs are valid within the trust store, Cloudflare will not be able to properly authenticate connections to the origin server.</p>
+<h2 id="api-commands">API commands</h2>
+<h4 id="list-custom-origin-trust-store-details">List Custom Origin Trust Store Details</h4>
+<ul>
+<li>API documentation: <a href="/api/resources/acm/subresources/custom_trust_store/methods/list/">List Custom Origin Trust Store Details</a></li>
+<li>Method: <code>GET</code></li>
+<li>Endpoint: <code>/zones/$ZONE_ID/acm/custom_trust_store</code></li>
+</ul>
+<h4 id="custom-origin-trust-store-details">Custom Origin Trust Store Details</h4>
+<ul>
+<li>API documentation: <a href="/api/resources/acm/subresources/custom_trust_store/methods/get/">Custom Origin Trust Store Details</a></li>
+<li>Method: <code>GET</code></li>
+<li>Endpoint: <code>/zones/$ZONE_ID/acm/custom_trust_store/$CUSTOM_ORIGIN_TRUST_STORE_ID</code></li>
+</ul>
+<aside class="nb-aside note">
+@markup("md", "content/.markup/bodies/13999.md")
+</aside>
+<h4 id="upload-custom-origin-trust-store">Upload Custom Origin Trust Store</h4>
+<ul>
+<li>API documentation: <a href="/api/resources/acm/subresources/custom_trust_store/methods/create/">Upload Custom Origin Trust Store</a></li>
+<li>Method: <code>POST</code></li>
+<li>Endpoint: <code>/zones/$ZONE_ID/acm/custom_trust_store</code></li>
+</ul>
+<h4 id="delete-custom-origin-trust-store">Delete Custom Origin Trust Store</h4>
+<ul>
+<li>API documentation: <a href="/api/resources/acm/subresources/custom_trust_store/methods/delete/">Delete Custom Origin Trust Store</a></li>
+<li>Method: <code>DELETE</code></li>
+<li>Endpoint: <code>/zones/$ZONE_ID/acm/custom_trust_store/$CUSTOM_ORIGIN_TRUST_STORE_ID</code></li>
+</ul>
+<aside class="nb-aside note">
+@markup("md", "content/.markup/bodies/13998.md")
+</aside>

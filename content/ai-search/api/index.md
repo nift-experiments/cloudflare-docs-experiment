@@ -1,0 +1,1 @@
+<ul class="directory-listing"><li><a href="/ai-search/api/instances/">Instances</a></li><li><a href="/ai-search/api/search/">Search</a></li><li><a href="/ai-search/api/items/">Items</a></li><li><a href="/ai-search/api/migration/">API Migration</a></li></ul>

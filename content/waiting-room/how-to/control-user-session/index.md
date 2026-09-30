@@ -1,0 +1,11 @@
+<p>Adjust these settings to control how long a user can hold their place on your site after leaving the waiting room.</p>
+<h2 id="session-duration">Session duration</h2>
+<p>Once on your site, a user is considered active as long as they make an HTTP request to any URL covered by your waiting room once every <strong>session duration</strong> minutes.  Each new request restarts a user’s time to stay active equal to <strong>session duration</strong>.</p>
+<h2 id="disable-session-renewal-to-limit-browsing-time">Disable session renewal to limit browsing time</h2>
+<p>You can limit each user’s time on your site to only one session duration by checking the box next to Disable Session Renewal from the dashboard. Once a user has been active on your site for <strong>session duration</strong> minutes, if there is active queueing, that user will be sent to the back of the queue. If there is not an active queue when <strong>session duration</strong> minutes is over, this user will be given a new waiting room cookie and counted as a new user again.</p>
+<h2 id="revoke-a-user-s-session-using-origin-commands">Revoke a user’s session using origin commands</h2>
+<p>To terminate a user's session when they perform a specific action, you can send a command to the waiting room using an HTTP header on the response from your origin. This command tells the waiting room to revoke the session of the user associated with the current response. This allows spots to open up more dynamically and may increase throughput from your queue.</p>
+<p>To enable this feature in the Cloudflare Dashboard, check the box next to Allow session termination via origin commands from the dashboard.
+To enable this feature through the <a href="/api/resources/waiting_rooms/methods/update/">Cloudflare API</a>, update the <code>enabled_origin_commands</code> property to include the value <code>”revoke”</code> in the list of enabled origin commands.</p>
+<p>Then, to return a revocation origin command and revoke the user's session associated with the current request, add the <code>Cf-Waiting-Room-Command: revoke</code> HTTP header to the response from your origin.</p>
+<p>To get the number of sessions revoked, you can query <code>sessionsRevoked</code> metrics from your <a href="/waiting-room/waiting-room-analytics/#graphql-analytics">Waiting Room analytics</a> data via GraphQL API.</p>

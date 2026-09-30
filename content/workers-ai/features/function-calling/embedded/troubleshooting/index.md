@@ -1,0 +1,20 @@
+<p>This section will describe tools for troubleshooting and address common errors.</p>
+<h2 id="logging">Logging</h2>
+<p>General <a href="/workers/observability/logs/">logging</a> capabilities for Workers also apply to embedded function calling.</p>
+<h3 id="function-invocations">Function invocations</h3>
+<p>The invocations of tools can be logged as in any Worker using <code>console.log()</code>:</p>
+<pre><code class="language-ts">export default {&#10;	async fetch(request, env, ctx) {&#10;		const sum = (args: { a: number; b: number }): Promise&lt;string&gt; =&gt; {&#10;			const { a, b } = args;&#10;      // Logging from within embedded function invocations&#10;      console.log(`The sum function has been invoked with the arguments a: ${a} and b: ${b}`)&#10;			return Promise.resolve((a + b).toString());&#10;		};&#10;    ...&#10;  }&#10;}&#10;</code></pre>
+<h3 id="logging-within-runwithtools">Logging within <code>runWithTools</code></h3>
+<p>The <code>runWithTools</code> function has a <code>verbose</code> mode that emits helpful logs for debugging of function calls as well input and output statistics.</p>
+<pre><code class="language-ts">const response = await runWithTools(&#10;  env.AI,&#10;  &#x27;@hf/nousresearch/hermes-2-pro-mistral-7b&#x27;,&#10;  {&#10;    messages: [&#10;      ...&#10;    ],&#10;    tools: [&#10;      ...&#10;    ],&#10;  },&#10;  // Enable verbose mode&#10;  { verbose: true }&#10;);&#10;</code></pre>
+<h2 id="performance">Performance</h2>
+<p>To respond to a LLM prompt with embedded function, potentially multiple AI inference requests and function invocations are needed, which can have an impact on user experience.</p>
+<p>Consider the following to improve performance:</p>
+<ul>
+<li>Shorten prompts (to reduce time for input processing)</li>
+<li>Reduce number of tools provided</li>
+<li>Stream the final response to the end user (to minimize the time to interaction). See example below:</li>
+</ul>
+<pre><code class="language-ts">async fetch(request, env, ctx) {&#10;  const response = (await runWithTools(&#10;    env.AI,&#10;    &#x27;@hf/nousresearch/hermes-2-pro-mistral-7b&#x27;,&#10;    {&#10;      messages: [&#10;        ...&#10;      ],&#10;      tools: [&#10;        ...&#10;      ],&#10;    },&#10;    {&#10;      // Enable response streaming&#10;      streamFinalResponse: true,&#10;    }&#10;  )) as ReadableStream;&#10;&#10;  // Set response headers for streaming&#10;  return new Response(response, {&#10;    headers: {&#10;      &#x27;content-type&#x27;: &#x27;text/event-stream&#x27;,&#10;    },&#10;  });&#10;}&#10;</code></pre>
+<h2 id="common-errors">Common Errors</h2>
+<p>If you are getting a <code>BadInput</code> error, your inputs may exceed our current context window for our models. Try reducing input tokens to resolve this error.</p>

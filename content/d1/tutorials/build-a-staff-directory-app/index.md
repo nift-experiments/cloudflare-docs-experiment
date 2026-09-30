@@ -1,0 +1,106 @@
+<p>In this tutorial, you will learn how to use D1 to build a staff directory. This application will allow users to access information about an organization's employees and give admins the ability to add new employees directly within the app.
+To do this, you will first need to set up a <a href="/d1/get-started/">D1 database</a> to manage data seamlessly, then you will develop and deploy your application using the <a href="https://github.com/honojs/honox">HonoX Framework</a> and <a href="/pages">Cloudflare Pages</a>.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Before moving forward with this tutorial, make sure you have the following:</p>
+<ul>
+<li>A Cloudflare account, if you do not have one, <a href="https://dash.cloudflare.com/sign-up/workers-and-pages">sign up</a> before continuing.</li>
+<li>A recent version of <a href="https://docs.npmjs.com/getting-started">npm</a> installed.</li>
+</ul>
+<p>If you do not want to go through with the setup now, <a href="https://github.com/lauragift21/staff-directory">view the completed code</a> on GitHub.</p>
+<h2 id="1-install-honox"><ol>
+<li>Install HonoX</li>
+</ol></h2>
+<p>In this tutorial, you will use <a href="https://github.com/honojs/honox">HonoX</a>, a meta-framework for creating full-stack websites and Web APIs to build your application. To use HonoX in your project, run the <code>hono-create</code> command.</p>
+<p>To get started, run the following command:</p>
+<pre><code class="language-sh">npm create hono@latest&#10;</code></pre>
+<p>During the setup process, you will be asked to provide a name for your project directory and to choose a template. When making your selection, choose the <code>x-basic</code> template.</p>
+<h2 id="2-initialize-your-honox-application"><ol start="2">
+<li>Initialize your HonoX application</li>
+</ol></h2>
+<p>Once your project is set up, you can see a list of generated files as below. This is a typical project structure for a HonoX application:</p>
+<pre><code>.&#10;├── app&#10;│   ├── global.d.ts // global type definitions&#10;│   ├── routes&#10;│   │   ├── _404.tsx // not found page&#10;│   │   ├── _error.tsx // error page&#10;│   │   ├── _renderer.tsx // renderer definition&#10;│   │   ├── about&#10;│   │   │   └── [name].tsx // matches `/about/:name`&#10;│   │   └── index.tsx // matches `/`&#10;│   └── server.ts // server entry file&#10;├── package.json&#10;├── tsconfig.json&#10;└── vite.config.ts&#10;</code></pre>
+<p>The project includes directories for app code, routes, and server setup, alongside configuration files for package management, TypeScript, and Vite.</p>
+<h2 id="3-create-a-database"><ol start="3">
+<li>Create a database</li>
+</ol></h2>
+<p>To create a database for your project, use the Cloudflare CLI tool, <a href="/workers/wrangler">Wrangler</a>, which supports the <code>wrangler d1</code> command for D1 database operations. Create a new database named <code>staff-directory</code> with the following command:</p>
+<pre><code class="language-sh">npx wrangler d1 create staff-directory&#10;</code></pre>
+<p>After creating your database, you will need to set up a <a href="/workers/runtime-apis/bindings/">binding</a> in the <a href="/workers/wrangler/configuration/">Wrangler configuration file</a> to integrate your database with your application.</p>
+<p>This binding enables your application to interact with Cloudflare resources such as D1 databases, KV namespaces, and R2 buckets. To configure this, create a Wrangler file in your project's root directory and input the basic setup information:</p>
+<div class="nb-wrangler-config">
+@markup("md", "content/.markup/bodies/7305.md")
+</div>
+<p>Next, add the database binding details to your Wrangler file. This involves specifying a binding name (in this case, <code>DB</code>), which will be used to reference the database within your application, along with the <code>database_name</code> and <code>database_id</code> provided when you created the database:</p>
+<div class="nb-wrangler-config">
+@markup("md", "content/.markup/bodies/7306.md")
+</div>
+<p>You have now configured your application to access and interact with your D1 database, either through the command line or directly within your codebase.</p>
+<p>You will also need to make adjustments to your Vite config file in <code>vite.config.js</code>. Add the following config settings to ensure that Vite is properly set up to work with Cloudflare bindings in local environment:</p>
+<pre><code class="language-ts">import adapter from &quot;@hono/vite-dev-server/cloudflare&quot;;&#10;&#10;export default defineConfig(({ mode }) =&gt; {&#10;	if (mode === &quot;client&quot;) {&#10;		return {&#10;			plugins: [client()],&#10;		};&#10;	} else {&#10;		return {&#10;			plugins: [&#10;				honox({&#10;					devServer: {&#10;						adapter,&#10;					},&#10;				}),&#10;				pages(),&#10;			],&#10;		};&#10;	}&#10;});&#10;</code></pre>
+<h2 id="4-interact-with-d1"><ol start="4">
+<li>Interact with D1</li>
+</ol></h2>
+<p>To interact with your D1 database, you can directly issue SQL commands using the <code>wrangler d1 execute</code> command:</p>
+<pre><code class="language-sh">wrangler d1 execute staff-directory --command &quot;SELECT name FROM sqlite_schema WHERE type =&#x27;table&#x27;&quot;&#10;</code></pre>
+<p>The command above allows you to run queries or operations directly from the command line.</p>
+<p>For operations such as initial data seeding or batch processing, you can pass a SQL file with your commands. To do this, create a <code>schema.sql</code> file in the root directory of your project and insert your SQL queries into this file:</p>
+<pre><code class="language-sql">CREATE TABLE locations (&#10;    location_id INTEGER PRIMARY KEY AUTOINCREMENT,&#10;    location_name VARCHAR(255) NOT NULL&#10;);&#10;&#10;CREATE TABLE departments (&#10;    department_id INTEGER PRIMARY KEY AUTOINCREMENT,&#10;    department_name VARCHAR(255) NOT NULL&#10;);&#10;&#10;CREATE TABLE employees (&#10;    employee_id INTEGER PRIMARY KEY AUTOINCREMENT,&#10;    name VARCHAR(255) NOT NULL,&#10;    position VARCHAR(255) NOT NULL,&#10;    image_url VARCHAR(255) NOT NULL,&#10;    join_date DATE NOT NULL,&#10;    location_id INTEGER REFERENCES locations(location_id),&#10;    department_id INTEGER REFERENCES departments(department_id)&#10;);&#10;&#10;INSERT INTO locations (location_name) VALUES (&#x27;London, UK&#x27;), (&#x27;Paris, France&#x27;), (&#x27;Berlin, Germany&#x27;), (&#x27;Lagos, Nigeria&#x27;), (&#x27;Nairobi, Kenya&#x27;), (&#x27;Cairo, Egypt&#x27;), (&#x27;New York, NY&#x27;), (&#x27;San Francisco, CA&#x27;), (&#x27;Chicago, IL&#x27;);&#10;&#10;INSERT INTO departments (department_name) VALUES (&#x27;Software Engineering&#x27;), (&#x27;Product Management&#x27;), (&#x27;Information Technology (IT)&#x27;), (&#x27;Quality Assurance (QA)&#x27;), (&#x27;User Experience (UX)/User Interface (UI) Design&#x27;), (&#x27;Sales and Marketing&#x27;), (&#x27;Human Resources (HR)&#x27;), (&#x27;Customer Support&#x27;), (&#x27;Research and Development (R&amp;D)&#x27;), (&#x27;Finance and Accounting&#x27;);&#10;</code></pre>
+<p>The above queries will create three tables: <code>Locations</code>, <code>Departments</code>, and <code>Employees</code>. To populate these tables with initial data, use the <code>INSERT INTO</code> command. After preparing your schema file with these commands, you can apply it to the D1 database. Do this by using the <code>--file</code> flag to specify the schema file for execution:</p>
+<pre><code class="language-sh">wrangler d1 execute staff-directory --file=./schema.sql&#10;</code></pre>
+<p>To execute the schema locally and seed data into your local directory, pass the <code>--local</code> flag to the above command.</p>
+<h2 id="5-create-sql-statements"><ol start="5">
+<li>Create SQL statements</li>
+</ol></h2>
+<p>After setting up your D1 database and configuring the Wrangler file as outlined in previous steps, your database is accessible in your code through the <code>DB</code> binding. This allows you to directly interact with the database by preparing and executing SQL statements. In the following step, you will learn how to use this binding to perform common database operations such as retrieving data and inserting new records.</p>
+<h3 id="retrieve-data-from-database">Retrieve data from database</h3>
+<pre><code class="language-ts">export const findAllEmployees = async (db: D1Database) =&gt; {&#10;	const query = `&#10;      SELECT employees.*, locations.location_name, departments.department_name&#10;      FROM employees&#10;      JOIN locations ON employees.location_id = locations.location_id&#10;      JOIN departments ON employees.department_id = departments.department_id&#10;      `;&#10;	const { results } = await db.prepare(query).run();&#10;	const employees = results;&#10;	return employees;&#10;};&#10;</code></pre>
+<h3 id="insert-data-into-the-database">Insert data into the database</h3>
+<pre><code class="language-ts">export const createEmployee = async (db: D1Database, employee: Employee) =&gt; {&#10;	const query = `&#10;      INSERT INTO employees (name, position, join_date, image_url, department_id, location_id)&#10;      VALUES (?, ?, ?, ?, ?, ?)`;&#10;&#10;	const results = await db&#10;		.prepare(query)&#10;		.bind(&#10;			employee.name,&#10;			employee.position,&#10;			employee.join_date,&#10;			employee.image_url,&#10;			employee.department_id,&#10;			employee.location_id,&#10;		)&#10;		.run();&#10;	const employees = results;&#10;	return employees;&#10;};&#10;</code></pre>
+<p>For a complete list of all the queries used in the application, refer to the <a href="https://github.com/lauragift21/staff-directory/blob/main/app/db.ts">db.ts</a> file in the codebase.</p>
+<h2 id="6-develop-the-ui"><ol start="6">
+<li>Develop the UI</li>
+</ol></h2>
+<p>The application uses <code>hono/jsx</code> for rendering. You can set up a Renderer in <code>app/routes/_renderer.tsx</code> using the JSX-rendered middleware, serving as the entry point for your application:</p>
+<pre><code class="language-ts">import { jsxRenderer } from &#x27;hono/jsx-renderer&#x27;&#10;import { Script } from &#x27;honox/server&#x27;&#10;&#10;export default jsxRenderer(({ children, title }) =&gt; {&#10;  return (&#10;    &lt;html lang=&quot;en&quot;&gt;&#10;      &lt;head&gt;&#10;        &lt;meta charset=&quot;utf-8&quot; /&gt;&#10;        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;&#10;        &lt;title&gt;{title}&lt;/title&gt;&#10;        &lt;Script src=&quot;/app/client.ts&quot; async /&gt;&#10;      &lt;/head&gt;&#10;      &lt;body&gt;{children}&lt;/body&gt;&#10;    &lt;/html&gt;&#10;  )&#10;})&#10;</code></pre>
+<p>Add the bindings defined earlier in <code>global.d.ts</code> file where the global type definitions for TypeScript is defined ensuring type consistency across your application:</p>
+<pre><code class="language-ts">declare module &quot;hono&quot; {&#10;	interface Env {&#10;		Variables: {};&#10;		Bindings: {&#10;			DB: D1Database;&#10;		};&#10;	}&#10;}&#10;</code></pre>
+<p>This application uses <a href="https://tailwindcss.com/">Tailwind CSS</a> for styling. To use Tailwind CSS, refer to the <a href="https://v2.tailwindcss.com/docs">TailwindCSS documentation</a>, or follow the steps <a href="https://github.com/honojs/honox?tab=readme-ov-file#using-tailwind-css">provided on GitHub</a>.</p>
+<p>To display a list of employees, invoke the <code>findAllEmployees</code> function from your <code>db.ts</code> file and call that within the <code>routes/index.tsx</code> file. The <code>createRoute()</code> function present in the file serves as a helper function for defining routes that handle different HTTP methods like <code>GET</code>, <code>POST</code>, <code>PUT</code>, or <code>DELETE</code>.</p>
+<pre><code class="language-ts">import { css } from &#x27;hono/css&#x27;&#10;import { createRoute } from &#x27;honox/factory&#x27;&#10;import Counter from &#x27;../islands/counter&#x27;&#10;&#10;const className = css`&#10;  font-family: sans-serif;&#10;`&#10;&#10;export default createRoute((c) =&gt; {&#10;  const name = c.req.query(&#x27;name&#x27;) ?? &#x27;Hono&#x27;&#10;  return c.render(&#10;    &lt;div class={className}&gt;&#10;      &lt;h1&gt;Hello, {name}!&lt;/h1&gt;&#10;      &lt;Counter /&gt;&#10;    &lt;/div&gt;,&#10;    { title: name }&#10;  )&#10;})&#10;</code></pre>
+<p>The existing code within the file includes a placeholder that uses the Counter component. You should replace this section with the following code block:</p>
+<pre><code class="language-ts">import { createRoute } from &#x27;honox/factory&#x27;&#10;import type { FC } from &#x27;hono/jsx&#x27;&#10;import type { Employee } from &#x27;../db&#x27;&#10;import { findAllEmployees, findAllDepartments, findAllLocations } from &#x27;../db&#x27;&#10;&#10;const EmployeeCard: FC&lt;{ employee: Employee }&gt; = ({ employee }) =&gt; {&#10;  const { employee_id, name, image_url, department_name, location_name } = employee;&#10;  return (&#10;    &lt;div className=&quot;max-w-sm bg-white border border-gray-200 rounded-lg shadow-md&quot;&gt;&#10;      &lt;a href=&quot;/employee/${employee_id}&quot;&gt;&#10;        &lt;img className=&quot;bg-indigo-600 p-4 rounded-t-lg&quot; src={image_url} alt={name} /&gt;&#10;        //...&#10;      &lt;/a&gt;&#10;    &lt;/div&gt;&#10;  );&#10;};&#10;&#10;export const GET = createRoute(async (c) =&gt; {&#10;  const employees = await findAllEmployees(c.env.DB)&#10;  const locations = await findAllLocations(c.env.DB)&#10;  const departments = await findAllDepartments(c.env.DB)&#10;  return c.render(&#10;    &lt;section className=&quot;flex-grow&quot;&gt;&#10;      &lt;h1 className=&quot;mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl mt-12&quot;&gt;&#10;        &lt;span className=&quot;text-transparent bg-clip-text bg-gradient-to-r to-blue-600 from-sky-400&quot;&gt;{`Directory `}&lt;/span&gt;&#10;      &lt;/h1&gt;&#10;      //...&#10;      &lt;/section&gt;&#10;      &lt;section className=&quot;flex flex-wrap -mx-4&quot;&gt;&#10;        {employees.map((employee) =&gt; (&#10;          &lt;div className=&quot;w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-2 mb-4&quot;&gt;&#10;            &lt;EmployeeCard employee={employee} /&gt;&#10;          &lt;/div&gt;&#10;        ))}&#10;      &lt;/section&gt;&#10;    &lt;/section&gt;&#10;  )&#10;})&#10;</code></pre>
+<p>The code snippet demonstrates how to import the <code>findAllEmployees</code>, <code>findAllLocations</code>, and <code>findAllDepartments</code> functions from the <code>db.ts</code> file, and how to use the binding <code>c.env.DB</code> to invoke these functions. With these, you can retrieve and display the fetched data on the page.</p>
+<h3 id="add-an-employee">Add an employee</h3>
+<p>Use the <code>export POST</code> route to create a new employee through the <code>/admin</code> page:</p>
+<pre><code class="language-ts">import { createRoute } from &quot;honox/factory&quot;;&#10;import type { Employee } from &quot;../../db&quot;;&#10;import { getFormDataValue, getFormDataNumber } from &quot;../../utils/formData&quot;;&#10;import { createEmployee } from &quot;../../db&quot;;&#10;&#10;export const POST = createRoute(async (c) =&gt; {&#10;	try {&#10;		const formData = await c.req.formData();&#10;		const imageFile = formData.get(&quot;image_file&quot;);&#10;		let imageUrl = &quot;&quot;;&#10;&#10;		// TODO: process image url with R2&#10;&#10;		const employeeData: Employee = {&#10;			employee_id: getFormDataValue(formData, &quot;employee_id&quot;),&#10;			name: getFormDataValue(formData, &quot;name&quot;),&#10;			position: getFormDataValue(formData, &quot;position&quot;),&#10;			image_url: imageUrl,&#10;			join_date: getFormDataValue(formData, &quot;join_date&quot;),&#10;			department_id: getFormDataNumber(formData, &quot;department_id&quot;),&#10;			location_id: getFormDataNumber(formData, &quot;location_id&quot;),&#10;			location_name: &quot;&quot;,&#10;			department_name: &quot;&quot;,&#10;		};&#10;&#10;		await createEmployee(c.env.DB, employeeData);&#10;		return c.redirect(&quot;/&quot;, 303);&#10;	} catch (error) {&#10;		return new Response(&quot;Error processing your request&quot;, { status: 500 });&#10;	}&#10;});&#10;</code></pre>
+<h3 id="store-images-in-r2">Store images in R2</h3>
+<p>During the process of creating a new employee, the image uploaded can be stored in an R2 bucket prior to being added to the database.</p>
+<p>To store an image in an R2 bucket:</p>
+<ol>
+<li>Create an R2 bucket.</li>
+<li>Upload the image to this bucket.</li>
+<li>Obtain a public URL for the image from the bucket. This URL is then saved in your database, linking to the image stored in the R2 bucket.</li>
+</ol>
+<p>Use the <code>wrangler r2 bucket create</code> command to create a bucket:</p>
+<pre><code class="language-sh">wrangler r2 bucket create employee-avatars&#10;</code></pre>
+<p>Once the bucket is created, add the R2 bucket binding to your Wrangler file:</p>
+<div class="nb-wrangler-config">
+@markup("md", "content/.markup/bodies/7307.md")
+</div>
+<p>Pass the R2 binding to the <code>global.d.ts</code> file:</p>
+<pre><code class="language-ts">declare module &quot;hono&quot; {&#10;	interface Env {&#10;		Variables: {};&#10;		Bindings: {&#10;			DB: D1Database;&#10;			MY_BUCKET: R2Bucket;&#10;		};&#10;	}&#10;}&#10;</code></pre>
+<p>To store the uploaded image in the R2 bucket, you can use the <code>put()</code> method provided by R2. This method allows you to upload the image file to your bucket:</p>
+<pre><code class="language-ts">if (imageFile instanceof File) {&#10;	const key = `${new Date().getTime()}-${imageFile.name}`;&#10;	const fileBuffer = await imageFile.arrayBuffer();&#10;&#10;	await c.env.MY_BUCKET.put(key, fileBuffer, {&#10;		httpMetadata: {&#10;			contentType: imageFile.type || &quot;application/octet-stream&quot;,&#10;		},&#10;	});&#10;	console.log(`File uploaded successfully: ${key}`);&#10;	imageUrl = `https://pub-8d936184779047cc96686a631f318fce.r2.dev/${key}`;&#10;}&#10;</code></pre>
+<p><a href="https://github.com/lauragift21/staff-directory">Refer to GitHub</a> for the full codebase.</p>
+<h2 id="7-deploy-your-honox-application"><ol start="7">
+<li>Deploy your HonoX application</li>
+</ol></h2>
+<p>With your application ready for deployment, you can use Wrangler to build and deploy your project to the Cloudflare Network. Ensure you are logged in to your Cloudflare account by running the <code>wrangler whoami</code> command. If you are not logged in, Wrangler will prompt you to login by creating an API key that you can use to make authenticated requests automatically from your computer.</p>
+<p>After successful login, confirm that your Wrangler file is configured similarly to the code block below:</p>
+<div class="nb-wrangler-config">
+@markup("md", "content/.markup/bodies/7308.md")
+</div>
+<p>Run <code>wrangler deploy</code> to deploy your project to Cloudflare. After deployment you can test your application is working by accessing the deployed URL provided for you. Your browser should display your application with the base frontend you created. If you do not have any data populated in your database, go to the <code>/admin</code> page to add a new employee, and this should return a new employee in your home page.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>In this tutorial, you built a staff directory application where users can view all employees within an organization. Refer to the <a href="https://github.com/lauragift21/staff-directory">Staff directory repository</a> for the full source code.</p>
+<p><img src="https://github.com/lauragift21/staff-directory/raw/main/demo.gif" alt="staff directory demo" /></p>

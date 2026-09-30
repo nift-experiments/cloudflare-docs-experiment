@@ -1,0 +1,86 @@
+<p>If a URL you expected to be cached is served from the origin every time, the <code>cf-cache-status</code> response header identifies which cache decision Cloudflare made. Fetch the URL, inspect the header, and follow the section that matches the value you see:</p>
+<ul>
+<li><code>DYNAMIC</code> — Cloudflare decided the request was not eligible for cache before it looked in the cache. Refer to <a href="#dynamic--request-not-eligible-for-cache">DYNAMIC — request not eligible for cache</a>.</li>
+<li><code>BYPASS</code> — Cloudflare was ready to cache the response, but the origin response or configuration prevented it. Refer to <a href="#bypass--origin-response-is-not-cacheable">BYPASS — origin response is not cacheable</a>.</li>
+<li><code>MISS</code> on multiple consecutive requests from the same client — the response is cacheable but keeps missing the cache. Refer to <a href="#repeated-miss--cacheable-but-not-in-cache">Repeated MISS — cacheable but not in cache</a>.</li>
+</ul>
+<p>For any other status, refer to <a href="/cache/concepts/cache-responses/">Cache responses</a> for the full list.</p>
+<aside class="nb-aside note">
+@markup("md", "content/.markup/bodies/3797.md")
+</aside>
+<h2 id="before-you-start">Before you start</h2>
+<p>A recent <a href="/cache/how-to/purge-cache/purge-everything/">Purge Everything</a>, <a href="/cache/how-to/purge-cache/purge-by-single-file/">purge by URL</a>, <a href="/cache/how-to/purge-cache/purge_by_prefix/">purge by prefix</a>, <a href="/cache/how-to/purge-cache/purge-by-tags/">purge by tag</a>, or <a href="/cache/how-to/purge-cache/purge-by-hostname/">purge by hostname</a> clears the cache. The next request in each data center repopulates cache and returns <code>MISS</code> before subsequent requests return <code>HIT</code>. If a purge ran recently, wait for the cache to repopulate before continuing.</p>
+<h2 id="dynamic-request-not-eligible-for-cache">DYNAMIC — request not eligible for cache</h2>
+<p>Cloudflare made the &quot;do not cache&quot; decision at request time, before looking in the cache. Common causes:</p>
+<ul>
+<li><strong>The file extension is not in the <a href="/cache/concepts/default-cache-behavior/#default-cached-file-extensions">default cached file extensions</a> list</strong> — for example, <code>.html</code> or a JSON API response — and no rule enables caching for it. Add a <a href="/cache/how-to/cache-rules/">Cache Rule</a> with <strong>Eligible for cache</strong> set to <em>Yes</em>.</li>
+<li><strong>A rule instructs Cloudflare to bypass cache.</strong> Check whether a Cache Rule with the <a href="/cache/how-to/cache-rules/settings/#bypass-cache">Bypass cache</a> setting, or a legacy <code>Cache Level: Bypass</code> <a href="/rules/configuration-rules/">Configuration Rule</a> or <a href="/rules/page-rules/">Page Rule</a>, matches the URL. Use <a href="/rules/trace-request/">Rule Trace</a> to confirm which rules apply.</li>
+<li><strong>The request method is not <code>GET</code> or <code>HEAD</code>.</strong> Cloudflare only caches these two methods.</li>
+<li><strong><a href="/cache/reference/development-mode/">Development Mode</a> is enabled on the zone.</strong> Development Mode suspends cache for three hours and returns <code>DYNAMIC</code> for every response.</li>
+</ul>
+<p>Once the request is eligible, subsequent responses reflect the response-time decision (<code>HIT</code>, <code>MISS</code>, <code>BYPASS</code>, and so on).</p>
+<h2 id="bypass-origin-response-is-not-cacheable">BYPASS — origin response is not cacheable</h2>
+<p>The request was eligible for cache, but the origin response or configuration prevented Cloudflare from storing it. Common causes:</p>
+<ul>
+<li>
+<p><strong>The response exceeds the <a href="/cache/concepts/default-cache-behavior/#cacheable-size-limits">cacheable size limit</a> for your plan.</strong> Split the object into smaller assets, or move to a plan with a higher limit. <a href="/r2/">R2</a> is an origin storage alternative — it does not raise the CDN cacheable size limit.</p>
+</li>
+<li>
+<p><strong>The origin returned <code>no-store</code> or bare <code>private</code> in a <code>Cloudflare-CDN-Cache-Control</code> or <code>CDN-Cache-Control</code> header.</strong> Cloudflare evaluates these headers ahead of <code>Cache-Control</code>, in the precedence <code>Cloudflare-CDN-Cache-Control</code> &gt; <code>CDN-Cache-Control</code> &gt; <code>Cache-Control</code>. An origin returning <code>Cache-Control: public, max-age=3600</code> together with <code>CDN-Cache-Control: no-store</code> produces <code>BYPASS</code>. Cloudflare does not forward <code>Cloudflare-CDN-Cache-Control</code> to the client, so it is not visible in the response — if you see <code>BYPASS</code> without a <code>CDN-Cache-Control</code> header, check what the origin actually sent, or have the origin drop the header and retest. A <a href="/cache/how-to/cache-rules/">Cache Rule</a> with an <a href="/cache/how-to/cache-rules/settings/#edge-ttl">Edge Cache TTL</a> setting that ignores origin cache-control overrides both directives. Refer to <a href="/cache/concepts/cdn-cache-control/">CDN-Cache-Control</a> for the precedence rules.</p>
+</li>
+<li>
+<p><strong><code>no-cache</code>, <code>max-age=0</code>, or <code>s-maxage=0</code> in <code>Cloudflare-CDN-Cache-Control</code> or <code>CDN-Cache-Control</code> do not produce <code>BYPASS</code>.</strong> They produce <code>MISS</code> on the first request, then <a href="/cache/concepts/cache-responses/#revalidated"><code>REVALIDATED</code></a> or <a href="/cache/concepts/cache-responses/#expired"><code>EXPIRED</code></a> on subsequent requests.</p>
+</li>
+<li>
+<p><strong>The origin returned <code>Cache-Control: no-store</code> or bare <code>private</code>.</strong> These directives block caching in either <a href="/cache/concepts/cache-control/">Origin Cache Control</a> mode by default. Two exceptions: <code>Cache-Control: private=&quot;&lt;header&gt;&quot;</code> with field names remains cacheable — Cloudflare drops only the named headers. And a <a href="/cache/how-to/cache-rules/">Cache Rule</a> with an Edge TTL that ignores origin cache-control (<strong>Edge TTL → Ignore cache-control header and use this TTL</strong> or <strong>Status code TTL</strong>) overrides both directives, so a response with <code>no-store</code> plus that Edge TTL setting is cached.</p>
+</li>
+<li>
+<p><strong>The origin returned <code>Cache-Control: no-cache</code>, <code>max-age=0</code>, or <code>s-maxage=0</code>, and <a href="/cache/concepts/cache-control/">Origin Cache Control</a> is disabled</strong> (the default on Enterprise plans). With Origin Cache Control enabled (the default on Free, Pro, and Business plans), these directives cause Cloudflare to cache and revalidate the response instead, producing <a href="/cache/concepts/cache-responses/#revalidated"><code>REVALIDATED</code></a> or <a href="/cache/concepts/cache-responses/#expired"><code>EXPIRED</code></a>. Refer to <a href="/cache/concepts/cache-control/#understand-no-store-and-no-cache-directives">Understand <code>no-store</code> and <code>no-cache</code> directives</a> and the <a href="/cache/concepts/cache-control/#conditions">Conditions</a> table.</p>
+</li>
+<li>
+<p><strong>The origin returned a <code>Set-Cookie</code> header.</strong> By default, Cloudflare does not cache responses that include <code>Set-Cookie</code>. To cache the response, use one of the following:</p>
+<ul>
+<li>Set an explicit Edge TTL on a <a href="/cache/how-to/cache-rules/">Cache Rule</a> using <strong>Edge TTL → Ignore cache-control header and use this TTL</strong> or <strong>Status code TTL</strong>. Cloudflare ignores the origin's directives, strips <code>Set-Cookie</code>, and caches the response.</li>
+<li>Have the origin return <code>Cache-Control: private=&quot;Set-Cookie&quot;</code> or <code>no-cache=&quot;Set-Cookie&quot;</code>. Cloudflare drops the named header and caches the rest.</li>
+<li>Strip <code>Set-Cookie</code> before the cache decision, using a <a href="/rules/transform/response-header-modification/">Response Header Modification Transform Rule</a>.</li>
+<li>On Enterprise plans with <a href="/cache/concepts/cache-control/">Origin Cache Control</a> disabled, Cloudflare strips <code>Set-Cookie</code> and caches the response under the default cache level. A <code>Cache Level: Cache Everything</code> <a href="/rules/page-rules/">Page Rule</a> or a Cache Rule with <strong>Eligible for cache</strong> set to <em>Yes</em> — either without an explicit Edge TTL — overrides this and returns <code>BYPASS</code>.</li>
+</ul>
+<p>Refer to <a href="/cache/concepts/cache-behavior/#interaction-of-set-cookie-response-header-with-cache">Interaction of <code>Set-Cookie</code> response header with Cache</a> for the full matrix.</p>
+</li>
+<li>
+<p><strong>The origin returned <code>Vary: *</code>.</strong> This value always bypasses cache, regardless of other configuration.</p>
+</li>
+<li>
+<p><strong>The request included an <code>Authorization</code> header and <a href="/cache/concepts/cache-control/">Origin Cache Control</a> is enabled</strong> (the default on Free, Pro, and Business plans). In that mode, the response is cacheable only if <code>Cache-Control</code> also includes <code>public</code>, <code>s-maxage</code>, or <code>must-revalidate</code>. On Enterprise plans with Origin Cache Control disabled, <code>Authorization</code> does not by itself prevent caching.</p>
+</li>
+</ul>
+<p>Refer to <a href="/cache/concepts/cache-responses/#bypass">BYPASS</a> for the reference definition of this status.</p>
+<h2 id="repeated-miss-cacheable-but-not-in-cache">Repeated MISS — cacheable but not in cache</h2>
+<p><code>MISS</code> on the first request in each data center is expected — that request populates the cache. If the same URL keeps returning <code>MISS</code> across consecutive requests, one of the following is happening.</p>
+<h3 id="cache-key-variance">Cache key variance</h3>
+<p>Cloudflare builds the cache key from the origin scheme, host, path, and query string by default. Cookies, headers, and device type can also contribute when configured. The scheme in the cache key is the scheme Cloudflare uses to reach the origin, not the scheme the client used — a zone with a single origin scheme serves HTTP and HTTPS client requests from the same cache entry.</p>
+<p>If each real client request produces a different key, the cache never sees a repeat and every request is a <code>MISS</code>. Common patterns:</p>
+<ul>
+<li><strong>Query parameters that change per request</strong> — session IDs, timestamps, or marketing tags such as <code>utm_*</code>. By default, every unique query string is a separate cache entry. Configure <a href="/cache/how-to/cache-rules/">Cache Rules</a> or <a href="/cache/how-to/cache-keys/#cache-key-settings">Cache Key Settings</a> to exclude or ignore parameters whose value changes per request. Sorting only canonicalizes parameter order — use it when requests differ only in the order of parameters, not when the values differ.</li>
+<li><strong>A <a href="/cache/how-to/cache-keys/">custom cache key</a> includes a cookie or header with a value that changes per user.</strong> The <a href="/cache/how-to/cache-keys/#create-custom-cache-keys">Create custom cache keys</a> section warns that custom keys &quot;may reduce your cache hit rate and result in cache sharding&quot; — this is the same behavior.</li>
+<li><strong><a href="/cache/how-to/cache-rules/examples/cache-device-type/">Cache by device type</a> classifies clients differently than expected</strong>, particularly for bots or clients with unusual <code>User-Agent</code> values.</li>
+<li><strong><a href="/cache/how-to/cache-rules/settings/#vary">Vary in Cache Rules</a> is configured</strong> for a header, the origin lists that header in its <code>Vary</code> response header, and the action is <code>normalize</code> or <code>passthrough</code>. Each response variant is stored under a separate key. When the header has high cardinality — for example, an unnormalized <code>Accept-Language</code> value or a per-user header — the practical hit rate drops. The <code>bypass</code> action prevents caching entirely.</li>
+</ul>
+<p>Two identical requests produce the same cache key and cannot reveal variance. To diagnose, use <a href="/rules/trace-request/">Rule Trace</a> to see the applied cache-key configuration and Vary action for the URL, then compare that against the request attributes (query string, cookies, headers, device type) that differ between real client requests.</p>
+<h3 id="eviction-and-low-traffic-assets">Eviction and low-traffic assets</h3>
+<p>Low-traffic assets can be evicted from the cache before the next request arrives. If two consecutive requests to the same URL from the same data center both return <code>MISS</code>, enable <a href="/cache/how-to/tiered-cache/">Tiered Cache</a> or <a href="/cache/advanced-configuration/cache-reserve/">Cache Reserve</a> to retain long-tail content longer.</p>
+<p>If your requests reach different Cloudflare data centers, each produces its own first-request <code>MISS</code>. Compare the data center code — the last three characters of the <code>cf-ray</code> header — to confirm two responses came from the same data center. Different client networks can still reach the same data center, so a network change does not guarantee a different location.</p>
+<h2 id="confirm-the-response-reaches-cache">Confirm the response reaches cache</h2>
+<p>After adjusting configuration, request the URL twice from the same client and verify the expected outcome for your configuration:</p>
+<ul>
+<li><strong>Fresh, positive Edge TTL:</strong> <code>cf-cache-status: HIT</code> and an <code>Age</code> header that increases on subsequent requests. <code>Age</code> is absent on the first request that fills the local data center's cache from an upper tier via <a href="/cache/how-to/tiered-cache/">Tiered Cache</a> — the <code>HIT</code> reflects the upper tier, but the local data center has not served it from cache yet. Subsequent requests include <code>Age</code>, and with Tiered Cache the value can already be large because it reflects the object's age in Cloudflare's network-wide cache.</li>
+<li><strong>Origin returns <code>Cache-Control: no-cache</code> with <a href="/cache/concepts/cache-control/">Origin Cache Control</a> enabled:</strong> <code>cf-cache-status: REVALIDATED</code> when the origin confirms the cached copy is unchanged, or <a href="/cache/concepts/cache-responses/#expired"><code>EXPIRED</code></a> when the origin returns new content. Both indicate the response is cached. <code>must-revalidate</code> on its own does not force revalidation on every request — it only prevents serving stale content after the freshness TTL expires.</li>
+</ul>
+<p>If the response is still <code>MISS</code> or <code>BYPASS</code> after these checks, capture two full responses (request and response headers, including <code>cf-ray</code> values) and open a support case. The <code>cf-ray</code> values are required to trace the request through the Cloudflare network.</p>
+<h2 id="related-resources">Related resources</h2>
+<ul>
+<li><a href="/cache/concepts/cache-responses/">Cache responses</a> — reference for every <code>cf-cache-status</code> value.</li>
+<li><a href="/cache/concepts/default-cache-behavior/">Default cache behavior</a> — when Cloudflare caches successfully by default.</li>
+<li><a href="/cache/how-to/cache-rules/">Cache Rules</a> — configure Edge TTL, eligibility, and cache key.</li>
+<li><a href="/cache/performance-review/cache-analytics/">Cache Analytics</a> — measure hit rate and identify low-performing URLs.</li>
+</ul>

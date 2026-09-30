@@ -1,0 +1,2 @@
+<p>Communication channels define how agents communicate with users and external systems.</p>
+<ul class="directory-listing"><li><a href="/agents/communication-channels/chat/">Chat</a></li><li><a href="/agents/communication-channels/voice/">Voice</a></li><li><a href="/agents/communication-channels/email/">Email</a></li><li><a href="/agents/communication-channels/slack/">Slack</a></li><li><a href="/agents/communication-channels/webhooks/">Webhooks</a></li></ul>

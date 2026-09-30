@@ -1,0 +1,243 @@
+<img src="/assets/upstream/images/workers-ai/recraft.svg" alt="Recraft logo" width="48" height="48">
+
+<h1 id="recraft-v4-1-utility-svg">Recraft V4.1 Utility SVG</h1>
+
+<p><code>recraft/recraftv4-1-utility-vector</code></p>
+
+Generate production-ready SVG vector graphics from text prompts with a general-purpose model suited for a wide range of design and illustration tasks.
+
+<div class="table-scroll"><table><tbody>
+<tr><th>Task</th><td>Text-to-Image</td></tr>
+<tr><th>Terms</th><td><a href="https://www.recraft.ai/terms">Model terms</a></td></tr>
+<tr><th>Unit pricing</th><td>Per image: 0.08</td></tr>
+</tbody></table></div>
+
+<h2 id="usage">Usage</h2>
+
+Generate a basic vector icon
+
+<section class="model-example"><strong>Simple Icon</strong>
+<p>Generate a basic vector icon</p>
+<pre><code class="language-json">{
+  &quot;input&quot;: {
+    &quot;prompt&quot;: &quot;A simple flat icon of a calendar with a date marked&quot;
+  },
+  &quot;output&quot;: {
+    &quot;image&quot;: &quot;https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/recraft__recraftv4-1-utility-vector/simple-icon.jpg&quot;
+  },
+  &quot;raw_response&quot;: {
+    &quot;gatewayMetadata&quot;: {
+      &quot;keySource&quot;: &quot;Unified&quot;
+    },
+    &quot;result&quot;: {
+      &quot;image&quot;: &quot;https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/recraft__recraftv4-1-utility-vector/simple-icon.jpg&quot;
+    },
+    &quot;state&quot;: &quot;Completed&quot;
+  }
+}</code></pre>
+<pre><code class="language-typescript">const response = await env.AI.run(
+  &#x27;recraft/recraftv4-1-utility-vector&#x27;,
+  { prompt: &#x27;A simple flat icon of a calendar with a date marked&#x27; },
+)
+console.log(response)</code></pre>
+<pre><code class="language-bash">curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \
+  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \
+  --header &quot;Content-Type: application/json&quot; \
+  --data &#x27;{
+  &quot;model&quot;: &quot;recraft/recraftv4-1-utility-vector&quot;,
+  &quot;input&quot;: {
+    &quot;prompt&quot;: &quot;A simple flat icon of a calendar with a date marked&quot;
+  }
+}&#x27;</code></pre>
+<img src="https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/recraft__recraftv4-1-utility-vector/simple-icon.jpg" alt="Simple Icon">
+</section>
+
+<h2 id="examples">Examples</h2>
+
+<section class="model-example"><strong>App Icon</strong>
+<p>Mobile app icon in vector format</p>
+<pre><code class="language-json">{
+  &quot;input&quot;: {
+    &quot;prompt&quot;: &quot;A clean app icon featuring a magnifying glass over a document&quot;,
+    &quot;size&quot;: &quot;1024x1024&quot;
+  },
+  &quot;output&quot;: {
+    &quot;image&quot;: &quot;https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/recraft__recraftv4-1-utility-vector/app-icon.jpg&quot;
+  },
+  &quot;raw_response&quot;: {
+    &quot;gatewayMetadata&quot;: {
+      &quot;keySource&quot;: &quot;Unified&quot;
+    },
+    &quot;result&quot;: {
+      &quot;image&quot;: &quot;https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/recraft__recraftv4-1-utility-vector/app-icon.jpg&quot;
+    },
+    &quot;state&quot;: &quot;Completed&quot;
+  }
+}</code></pre>
+<pre><code class="language-typescript">const response = await env.AI.run(
+  &#x27;recraft/recraftv4-1-utility-vector&#x27;,
+  { prompt: &#x27;A clean app icon featuring a magnifying glass over a document&#x27;, size: &#x27;1024x1024&#x27; },
+)
+console.log(response)</code></pre>
+<pre><code class="language-bash">curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \
+  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \
+  --header &quot;Content-Type: application/json&quot; \
+  --data &#x27;{
+  &quot;model&quot;: &quot;recraft/recraftv4-1-utility-vector&quot;,
+  &quot;input&quot;: {
+    &quot;prompt&quot;: &quot;A clean app icon featuring a magnifying glass over a document&quot;,
+    &quot;size&quot;: &quot;1024x1024&quot;
+  }
+}&#x27;</code></pre>
+<img src="https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/recraft__recraftv4-1-utility-vector/app-icon.jpg" alt="App Icon">
+</section>
+
+<section class="model-example"><strong>Illustration</strong>
+<p>Vector illustration for general use</p>
+<pre><code class="language-json">{
+  &quot;input&quot;: {
+    &quot;prompt&quot;: &quot;A flat vector illustration of a team of people collaborating around a table with laptops&quot;,
+    &quot;size&quot;: &quot;1024x1024&quot;
+  },
+  &quot;output&quot;: {
+    &quot;image&quot;: &quot;https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/recraft__recraftv4-1-utility-vector/illustration.jpg&quot;
+  },
+  &quot;raw_response&quot;: {
+    &quot;gatewayMetadata&quot;: {
+      &quot;keySource&quot;: &quot;Unified&quot;
+    },
+    &quot;result&quot;: {
+      &quot;image&quot;: &quot;https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/recraft__recraftv4-1-utility-vector/illustration.jpg&quot;
+    },
+    &quot;state&quot;: &quot;Completed&quot;
+  }
+}</code></pre>
+<pre><code class="language-typescript">const response = await env.AI.run(
+  &#x27;recraft/recraftv4-1-utility-vector&#x27;,
+  {
+    prompt:
+      &#x27;A flat vector illustration of a team of people collaborating around a table with laptops&#x27;,
+    size: &#x27;1024x1024&#x27;,
+  },
+)
+console.log(response)</code></pre>
+<pre><code class="language-bash">curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \
+  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \
+  --header &quot;Content-Type: application/json&quot; \
+  --data &#x27;{
+  &quot;model&quot;: &quot;recraft/recraftv4-1-utility-vector&quot;,
+  &quot;input&quot;: {
+    &quot;prompt&quot;: &quot;A flat vector illustration of a team of people collaborating around a table with laptops&quot;,
+    &quot;size&quot;: &quot;1024x1024&quot;
+  }
+}&#x27;</code></pre>
+<img src="https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/recraft__recraftv4-1-utility-vector/illustration.jpg" alt="Illustration">
+</section>
+
+<section class="model-example"><strong>With Brand Colors</strong>
+<p>Vector with specific color palette</p>
+<pre><code class="language-json">{
+  &quot;input&quot;: {
+    &quot;prompt&quot;: &quot;A simple shield icon representing protection and security&quot;,
+    &quot;controls&quot;: {
+      &quot;background_color&quot;: {
+        &quot;rgb&quot;: [
+          245,
+          245,
+          245
+        ]
+      },
+      &quot;colors&quot;: [
+        {
+          &quot;rgb&quot;: [
+            34,
+            139,
+            87
+          ]
+        },
+        {
+          &quot;rgb&quot;: [
+            255,
+            255,
+            255
+          ]
+        }
+      ]
+    }
+  },
+  &quot;output&quot;: {
+    &quot;image&quot;: &quot;https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/recraft__recraftv4-1-utility-vector/with-brand-colors.jpg&quot;
+  },
+  &quot;raw_response&quot;: {
+    &quot;gatewayMetadata&quot;: {
+      &quot;keySource&quot;: &quot;Unified&quot;
+    },
+    &quot;result&quot;: {
+      &quot;image&quot;: &quot;https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/recraft__recraftv4-1-utility-vector/with-brand-colors.jpg&quot;
+    },
+    &quot;state&quot;: &quot;Completed&quot;
+  }
+}</code></pre>
+<pre><code class="language-typescript">const response = await env.AI.run(
+  &#x27;recraft/recraftv4-1-utility-vector&#x27;,
+  {
+    prompt: &#x27;A simple shield icon representing protection and security&#x27;,
+    controls: {
+      background_color: { rgb: [245, 245, 245] },
+      colors: [{ rgb: [34, 139, 87] }, { rgb: [255, 255, 255] }],
+    },
+  },
+)
+console.log(response)</code></pre>
+<pre><code class="language-bash">curl https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run \
+  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \
+  --header &quot;Content-Type: application/json&quot; \
+  --data &#x27;{
+  &quot;model&quot;: &quot;recraft/recraftv4-1-utility-vector&quot;,
+  &quot;input&quot;: {
+    &quot;prompt&quot;: &quot;A simple shield icon representing protection and security&quot;,
+    &quot;controls&quot;: {
+      &quot;background_color&quot;: {
+        &quot;rgb&quot;: [
+          245,
+          245,
+          245
+        ]
+      },
+      &quot;colors&quot;: [
+        {
+          &quot;rgb&quot;: [
+            34,
+            139,
+            87
+          ]
+        },
+        {
+          &quot;rgb&quot;: [
+            255,
+            255,
+            255
+          ]
+        }
+      ]
+    }
+  }
+}&#x27;</code></pre>
+<img src="https://pub-04a6d208d361438ea01b797e6973bd19.r2.dev/catalog/recraft__recraftv4-1-utility-vector/with-brand-colors.jpg" alt="With Brand Colors">
+</section>
+
+<h2 id="parameters">Parameters</h2>
+
+<h3 id="input">Input</h3>
+
+<div class="table-scroll"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>prompt</code></td><td>string</td><td>Required.</td></tr><tr><td><code>size</code></td><td>string</td><td></td></tr><tr><td><code>style</code></td><td>string</td><td></td></tr><tr><td><code>substyle</code></td><td>string</td><td></td></tr><tr><td><code>controls</code></td><td>object</td><td></td></tr><tr><td><code>controls.colors</code></td><td>array</td><td></td></tr><tr><td><code>controls.colors[].rgb</code></td><td>array</td><td>Required.</td></tr><tr><td><code>controls.background_color</code></td><td>object</td><td></td></tr><tr><td><code>controls.background_color.rgb</code></td><td>array</td><td>Required.</td></tr></tbody></table></div>
+
+<h3 id="output">Output</h3>
+
+<div class="table-scroll"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>image</code></td><td>string</td><td>Required.</td></tr></tbody></table></div>
+
+<h2 id="api-schemas-raw">API Schemas (Raw)</h2>
+
+- [Input schema](/ai/models/recraft/recraftv4-1-utility-vector/schema-input.json)
+- [Output schema](/ai/models/recraft/recraftv4-1-utility-vector/schema-output.json)
+

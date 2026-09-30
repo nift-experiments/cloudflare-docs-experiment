@@ -1,0 +1,2 @@
+<p>Refer to the following pages for more information on legacy WAF features:</p>
+<ul class="directory-listing"><li><a href="/waf/reference/legacy/old-waf-managed-rules/">WAF managed rules (previous version)</a></li><li><a href="/waf/reference/legacy/old-rate-limiting/">Rate Limiting (previous version)</a></li><li><a href="/firewall/">Firewall rules</a></li><li><a href="/waf/reference/legacy/firewall-rules-upgrade/">Firewall rules upgrade</a></li></ul>

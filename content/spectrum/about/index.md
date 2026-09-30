@@ -1,0 +1,2 @@
+<p>For more information about concepts related to Spectrum, refer to the sections below.</p>
+<ul class="directory-listing"><li><a href="/spectrum/about/byoip/">BYOIP</a></li><li><a href="/spectrum/about/load-balancer/">Cloudflare Load Balancing</a></li><li><a href="/spectrum/about/ddos-for-spectrum/">DDoS Protection for Spectrum</a></li><li><a href="/spectrum/about/ftp/">FTP</a></li><li><a href="/spectrum/about/static-ip/">Static IP</a></li></ul>

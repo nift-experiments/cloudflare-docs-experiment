@@ -1,0 +1,8 @@
+<h2 id="json-object">JSON object</h2>
+<p>This page contains an example of the DNS protection rule JSON object used in the API.</p>
+<pre><code class="language-json">{&#10;  &quot;id&quot;: &quot;31c70c65-9f81-4669-94ed-1e1e041e7b06&quot;,&#10;  &quot;scope&quot;: &quot;region&quot;,&#10;  &quot;name&quot;: &quot;WEUR&quot;,&#10;  &quot;mode&quot;: &quot;monitoring&quot;,&#10;  &quot;profile_sensitivity&quot;: &quot;medium&quot;,&#10;  &quot;rate_sensitivity&quot;: &quot;medium&quot;,&#10;  &quot;burst_sensitivity&quot;: &quot;medium&quot;,&#10;  &quot;created_on&quot;: &quot;2023-10-01T13:10:38.762503+01:00&quot;,&#10;  &quot;modified_on&quot;: &quot;2023-10-01T13:10:38.762503+01:00&quot;&#10;}&#10;</code></pre>
+<p>The <code>scope</code> field value must be one of <code>global</code>, <code>region</code>, or <code>datacenter</code>. You must provide a region code (or data center code) in the <code>name</code> field when specifying a <code>region</code> (or <code>datacenter</code>) scope.</p>
+<p>The <code>mode</code> value must be one of <code>enabled</code>, <code>disabled</code>, or <code>monitoring</code>.</p>
+<p>The <code>profile_sensitivity</code> field value must be one of <code>low</code> (default), <code>medium</code>, <code>high</code>, or <code>very_high</code>.</p>
+<p>The <code>rate_sensitivity</code> and <code>burst_sensitivity</code> field values must be one of <code>low</code>, <code>medium</code>, or <code>high</code>.</p>
+<p>For more information on the rule settings, refer to <a href="/ddos-protection/advanced-ddos-systems/concepts/#rule-settings">Rule settings</a>.</p>

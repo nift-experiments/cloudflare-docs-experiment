@@ -1,0 +1,1 @@
+<ul class="directory-listing"><li><a href="/r2/api/workers/workers-api-usage/">Use R2 from Workers</a></li><li><a href="/r2/api/workers/workers-multipart-usage/">Use the R2 multipart API from Workers</a></li><li><a href="/r2/api/workers/workers-api-reference/">Workers API reference</a></li></ul>

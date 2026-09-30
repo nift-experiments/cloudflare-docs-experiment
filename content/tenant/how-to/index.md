@@ -1,0 +1,1 @@
+<ul class="directory-listing"><li><a href="/tenant/how-to/manage-accounts/">Manage accounts</a></li><li><a href="/tenant/how-to/manage-subscriptions/">Manage subscriptions</a></li><li><a href="/tenant/how-to/get-account-details/">Get account details</a></li><li><a href="/tenant/how-to/get-tenant-details/">Get tenant details</a></li></ul>

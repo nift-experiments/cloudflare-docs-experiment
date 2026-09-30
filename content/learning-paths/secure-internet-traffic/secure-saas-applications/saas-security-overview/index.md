@@ -1,0 +1,7 @@
+<p>The concept of SaaS (software-as-a-service) security is top of mind for many security organizations but is not explicitly defined. When organizations approach Cloudflare for help securing their SaaS apps, it can mean a number of different things with a number of ideal outcomes. Cloudflare distills SaaS security into three key concepts:</p>
+<ol>
+<li>Better protection for the front door of your SaaS applications with considerations for both managed and unmanaged endpoint access.</li>
+<li>Assurances for the ability to apply inline security tooling. In other words, we ensure the ability to apply restrictions on file uploads/downloads, the ability to access administrative targets, and the application of policies to prevent or detect data loss. Managing distinct policies for hundreds (on average) of SaaS apps means inline security will always meaningfully drift.</li>
+<li>Visibility and control for your critical SaaS applications whether or not users are actively engaging with them (also known as out-of-band). This concept becomes most critical when you have limited ability to apply inline policy using TLS inspection and other methods.</li>
+</ol>
+<p>Cloudflare offers multiple solutions that achieve and sometimes overlap with all three of the defined concepts. Through combinations of Access for SaaS identity proxy, WARP with dedicated IP addresses, Browser Isolation, and CASB API, Cloudflare helps define and address any potential SaaS security goals.</p>

@@ -1,0 +1,2 @@
+<p>Use the following reference information when setting up and deploying your waiting rooms:</p>
+<ul class="directory-listing"><li><a href="/waiting-room/reference/configuration-settings/">Configuration settings</a></li><li><a href="/waiting-room/reference/waiting-room-api/">API commands</a></li><li><a href="/waiting-room/reference/best-practices/">Best practices</a></li><li><a href="/waiting-room/reference/waiting-room-cookie/">Cookies</a></li><li><a href="/waiting-room/reference/queueing-methods/">Queueing method</a></li></ul>

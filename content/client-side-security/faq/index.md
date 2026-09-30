@@ -1,0 +1,10 @@
+<h2 id="what-happens-to-csp-http-headers-set-by-the-origin-server-when-i-create-a-content-security-rule">What happens to CSP HTTP headers set by the origin server when I create a content security rule?</h2>
+<p>When you create content security rules, Cloudflare will generate content security policy (CSP) directives from those rules based on their configuration:</p>
+<ul>
+<li>Log rules will create CSP directives for the <code>Content-Security-Policy-Report-Only</code> HTTP header.</li>
+<li>Allow rules will create CSP directives for the <code>Content-Security-Policy</code> HTTP header.</li>
+</ul>
+<p>Client-side security only adds new CSP HTTP headers to the response. This means that Cloudflare will keep any <code>Content-Security-Policy-Report-Only</code> and <code>Content-Security-Policy</code> HTTP headers in the response set by the origin server and it will add separate HTTP headers for the content security rules configured on your Cloudflare zone.</p>
+<p>It is recommended that you only have one rule in <a href="/client-side-security/rules/#rule-actions">allow mode</a> (that is, a content security rule being enforced). If there is more than one <code>Content-Security-Policy</code> HTTP header in the response, the most restrictive policy wins. For more information, refer to the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy#multiple_content_security_policies">MDN documentation</a>.</p>
+<h2 id="can-i-add-a-nonce-csp-directive-to-a-content-security-rule">Can I add a <code>nonce</code> CSP directive to a content security rule?</h2>
+<p>Client-side security currently does not support <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP#nonces"><code>nonce</code></a> directives in content security rules. Instead, you can use a <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP#hashes"><code>hash</code></a> CSP directive. For details on the supported directives and values, refer to <a href="/client-side-security/rules/csp-directives/">Supported CSP directives</a>.</p>

@@ -1,0 +1,2 @@
+<p>Advanced patterns and examples for routing incoming emails with Cloudflare Email Service.</p>
+<ul class="directory-listing"><li><a href="/email-service/examples/email-routing/email-storage/">Email storage and processing</a></li><li><a href="/email-service/examples/email-routing/spam-filtering/">Spam filtering</a></li><li><a href="/email-service/examples/email-routing/hard-bounce-handling/">Handle hard bounce emails</a></li></ul>

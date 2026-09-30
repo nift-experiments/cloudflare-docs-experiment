@@ -1,0 +1,16 @@
+<p>Below is an example of using <a href="https://duckdb.org/">DuckDB</a> to connect to R2 Data Catalog. For more information on connecting to R2 Data Catalog with DuckDB, refer to <a href="https://duckdb.org/docs/stable/core_extensions/iceberg/iceberg_rest_catalogs#r2-catalog">DuckDB documentation</a>.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Sign up for a <a href="https://dash.cloudflare.com/sign-up/workers-and-pages">Cloudflare account</a>.</li>
+<li><a href="/r2/buckets/create-buckets/">Create an R2 bucket</a> and <a href="/r2-data-catalog/manage-catalogs/#enable-r2-data-catalog-on-a-bucket">enable the data catalog</a>.</li>
+<li><a href="/r2/api/tokens/">Create an R2 API token</a> with both <a href="/r2/api/tokens/#permissions">R2 and data catalog permissions</a>.</li>
+<li>Install <a href="https://duckdb.org/docs/installation/">DuckDB</a>.
+<ul>
+<li>Note: <a href="https://github.com/duckdb/duckdb/releases/tag/v1.4.0">DuckDB 1.4.0</a> or greater is required to attach and write to <a href="https://duckdb.org/docs/stable/core_extensions/iceberg/iceberg_rest_catalogs">Iceberg REST Catalogs</a>.</li>
+</ul>
+</li>
+<li>Note: DuckDB <a href="https://duckdb.org/docs/stable/core_extensions/iceberg/iceberg_rest_catalogs#limitations-for-update-and-delete">does not currently support</a> <code>DELETE</code> on partitioned tables.</li>
+</ul>
+<h2 id="example-usage">Example usage</h2>
+<p>In the <a href="https://duckdb.org/docs/stable/clients/cli/overview.html">DuckDB CLI</a> (Command Line Interface), run the following commands:</p>
+<pre><code class="language-sql">&#45;- Install the iceberg DuckDB extension (if you haven&#x27;t already) and load the extension.&#10;INSTALL iceberg;&#10;LOAD iceberg;&#10;&#10;&#45;- Install and load httpfs extension for reading/writing files over HTTP(S).&#10;INSTALL httpfs;&#10;LOAD httpfs;&#10;&#10;&#45;- Create a DuckDB secret to store R2 Data Catalog credentials.&#10;CREATE SECRET r2_secret (&#10;    TYPE ICEBERG,&#10;    TOKEN &#x27;&lt;token&gt;&#x27;&#10;);&#10;&#10;&#45;- Attach R2 Data Catalog with the following ATTACH statement.&#10;ATTACH &#x27;&lt;warehouse_name&gt;&#x27; AS my_r2_catalog (&#10;    TYPE ICEBERG,&#10;    ENDPOINT &#x27;&lt;catalog_uri&gt;&#x27;&#10;);&#10;&#10;&#45;- Create the default schema in the catalog and set it as the active schema.&#10;CREATE SCHEMA my_r2_catalog.default;&#10;USE my_r2_catalog.default;&#10;&#10;&#45;- Create and populate a sample Iceberg table with data.&#10;CREATE TABLE my_iceberg_table AS SELECT a FROM range(4) t(a);&#10;&#10;&#45;- Show all available tables.&#10;SHOW ALL TABLES;&#10;&#10;&#45;- Query the Iceberg table you just created.&#10;SELECT * FROM my_r2_catalog.default.my_iceberg_table;&#10;</code></pre>

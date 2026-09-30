@@ -1,0 +1,2 @@
+<p>Once your gateway becomes <a href="/web3/reference/gateway-status/">active</a>, you can customize the Cloudflare settings associated with your hostname.</p>
+<p>Since your traffic is automatically proxied through Cloudflare, you customize your website settings to take advantage of various <a href="/fundamentals/concepts/how-cloudflare-works/#cloudflare-as-a-reverse-proxy">security, performance, and reliability</a> benefits.</p>

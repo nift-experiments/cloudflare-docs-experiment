@@ -1,0 +1,6 @@
+<p class="article-summary">Allow or deny a request based on a known pre-shared key in a header. This is not meant to replace the [WebCrypto API](/workers/runtime-apis/web-crypto/).</p>
+<aside class="nb-aside caution">
+<h3 class="nb-aside-title" id="caution-when-using-in-production">Caution when using in production</h3>
+@markup("md", "content/.markup/bodies/13125.md")
+</aside>
+<pre><code class="language-js">export default {&#10;	async fetch(request) {&#10;		/**&#10;		 &#42; @param {string} PRESHARED_AUTH_HEADER_KEY Custom header to check for key&#10;		 &#42; @param {string} PRESHARED_AUTH_HEADER_VALUE Hard-coded key value&#10;		 &#42;/&#10;		const PRESHARED_AUTH_HEADER_KEY = &quot;X-Custom-PSK&quot;;&#10;		const PRESHARED_AUTH_HEADER_VALUE = &quot;mypresharedkey&quot;;&#10;		const psk = request.headers.get(PRESHARED_AUTH_HEADER_KEY);&#10;&#10;		if (psk === PRESHARED_AUTH_HEADER_VALUE) {&#10;			// Correct preshared header key supplied. Fetch request from origin.&#10;			return fetch(request);&#10;		}&#10;&#10;		// Incorrect key supplied. Reject the request.&#10;		return new Response(&quot;Sorry, you have supplied an invalid key.&quot;, {&#10;			status: 403,&#10;		});&#10;	},&#10;};&#10;</code></pre>

@@ -1,0 +1,1 @@
+<ul class="directory-listing"><li><a href="/images/optimization/transformations/overview/">Image Resizing</a></li><li><a href="/images/polish/">Polish</a></li><li><a href="/speed/optimization/images/mirage/">Cloudflare Mirage (deprecated)</a></li><li><a href="/speed/optimization/images/troubleshooting/">Troubleshooting</a></li></ul>

@@ -1,0 +1,7 @@
+<p>Streams are durable, buffered queues that receive and store events for processing in <a href="/pipelines/">Cloudflare Pipelines</a>. They provide reliable data ingestion via HTTP endpoints and Worker bindings, ensuring no data loss even during downstream processing delays or failures.</p>
+<p>A single stream can be read by multiple pipelines, allowing you to route the same data to different destinations or apply different transformations. For example, you might send user events to both a real-time analytics pipeline and a data warehouse pipeline.</p>
+<p>Streams currently accept events in JSON format and support both structured events with defined schemas and unstructured JSON. When a schema is provided, streams will validate and enforce it for incoming events.</p>
+<h2 id="learn-more">Learn more</h2>
+<p><a class="nb-card nb-link-card" href="/pipelines/streams/manage-streams/"><h3 id="card-manage-streams-pipelines-streams-manage-streams">Manage streams</h3><p>Create, configure, and delete streams using Wrangler or the API.</p></a></p>
+<p><a class="nb-card nb-link-card" href="/pipelines/streams/writing-to-streams/"><h3 id="card-writing-to-streams-pipelines-streams-writing-to-streams">Writing to streams</h3><p>Send events to streams via HTTP endpoints or Worker bindings.</p></a></p>
+<p><a class="nb-card nb-link-card" href="/pipelines/streams/logpush/"><h3 id="card-logpush-as-a-source-pipelines-streams-logpush">Logpush as a source</h3><p>Use Cloudflare Logpush to send logs from Cloudflare products to a Pipelines stream.</p></a></p>

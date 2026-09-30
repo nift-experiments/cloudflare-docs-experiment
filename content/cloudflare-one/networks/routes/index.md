@@ -1,0 +1,2 @@
+<p>Routes map IP addresses, hostnames, and published applications to Cloudflare One connectors on your private network.</p>
+<ul class="directory-listing"><li><a href="/cloudflare-one/networks/routes/add-routes/">Add routes</a></li><li><a href="/cloudflare-one/networks/routes/reserved-ips/">Reserved IP addresses</a></li><li><a href="/cloudflare-one/networks/routes/configure-initial-resolved-ips/">Configure initial resolved IPs</a></li></ul>

@@ -1,0 +1,3 @@
+<p>Due to changes in the flow of submission messages, Microsoft no longer honors mail flow rules for the Microsoft Report Message button. Therefore, Email security is not compatible with this tool anymore.</p>
+<p>To learn more about what is happening, log in to your Microsoft account as an administrator, and <a href="https://admin.microsoft.com/AdminPortal/Home?ref=MessageCenter/:/messages/MC690173">review the communication from Microsoft</a>.</p>
+<p>If you need to submit phish samples or missed phish to Email security, we recommend using the <a href="/email-security/email-configuration/phish-submissions/phishnet-o365/">PhishNet for Office 365</a> integrated app instead.</p>

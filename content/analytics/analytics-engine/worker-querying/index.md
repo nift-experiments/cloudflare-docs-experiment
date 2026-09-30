@@ -1,0 +1,25 @@
+<p>If you want to access Analytics Engine data from within a Worker you can use <code>fetch</code> to access the SQL API. The API can return JSON data that is easy to interact with in JavaScript.</p>
+<h2 id="authentication">Authentication</h2>
+<p>In order that your Worker can authenticate with the API you will need your account ID and an API token.</p>
+<ul>
+<li>Your 32 character account ID can be obtained from the Cloudflare dashboard.</li>
+<li>An API token can also be generated in the dashboard. Refer to the <a href="/analytics/analytics-engine/sql-api/#authentication">SQL API docs</a> for more information on this.</li>
+</ul>
+<p>We recommend storing the account ID as an environment variable and the API token as a secret in your worker. This can be done through the dashboard or through Wrangler. Refer to the <a href="/workers/configuration/environment-variables/">Workers documentation</a> for more details on this.</p>
+<h2 id="querying">Querying</h2>
+<p>Use the JavaScript <code>fetch</code> API as follows to execute a query:</p>
+<pre><code class="language-js">const query = &quot;SELECT * FROM my_dataset&quot;;&#10;const API = `https://api.cloudflare.com/client/v4/accounts/${env.ACCOUNT_ID}/analytics_engine/sql`;&#10;const response = await fetch(API, {&#10;	method: &quot;POST&quot;,&#10;	headers: {&#10;		Authorization: `Bearer ${env.API_TOKEN}`,&#10;	},&#10;	body: query,&#10;});&#10;const responseJSON = await response.json();&#10;</code></pre>
+<p>The data will be returned in the format described in the <a href="/analytics/analytics-engine/sql-reference/statements/#json">FORMAT</a> section of the documentation, allowing you to extract meta information about the names and types of returned columns in addition to the data itself and a row count.</p>
+<h2 id="example-worker">Example Worker</h2>
+<p>The following is a sample Worker which executes a query against a dataset of weather readings and displays minimum and maximum values for each city.</p>
+<h3 id="environment-variable-setup">Environment variable setup</h3>
+<p>First the environment variables are set up with the account ID and API token.</p>
+<p>The account ID is set in the <a href="/workers/wrangler/configuration/">Wrangler configuration file</a>:</p>
+<div class="nb-wrangler-config">
+@markup("md", "content/.markup/bodies/3135.md")
+</div>
+<p>The API_TOKEN can be set as a secret, using the wrangler command line tool, by running the following and entering your token string:</p>
+<pre><code class="language-sh">npx wrangler secret put API_TOKEN&#10;</code></pre>
+<h3 id="worker-script">Worker script</h3>
+<p>The worker script itself executes a query and formats the result:</p>
+<pre><code class="language-js">export default {&#10;	async fetch(request, env) {&#10;		// This worker only responds to requests at the root.&#10;		if (new URL(request.url).pathname != &quot;/&quot;) {&#10;			return new Response(&quot;Not found&quot;, { status: 404 });&#10;		}&#10;&#10;		// SQL string to be executed.&#10;		const query = `&#10;            SELECT&#10;                blob1 AS city,&#10;                max(double1) as max_temp,&#10;                min(double1) as min_temp&#10;            FROM weather&#10;            WHERE timestamp &gt; NOW() - INTERVAL &#x27;1&#x27; DAY&#10;            GROUP BY city&#10;            ORDER BY city`;&#10;&#10;		// Build the API endpoint URL and make a POST request with the query string&#10;		const API = `https://api.cloudflare.com/client/v4/accounts/${env.ACCOUNT_ID}/analytics_engine/sql`;&#10;		const queryResponse = await fetch(API, {&#10;			method: &quot;POST&quot;,&#10;			headers: {&#10;				Authorization: `Bearer ${env.API_TOKEN}`,&#10;			},&#10;			body: query,&#10;		});&#10;&#10;		// The API will return a 200 status code if the query succeeded.&#10;		// In case of failure we log the error message and return a failure message.&#10;		if (queryResponse.status != 200) {&#10;			console.error(&quot;Error querying:&quot;, await queryResponse.text());&#10;			return new Response(&quot;An error occurred!&quot;, { status: 500 });&#10;		}&#10;&#10;		// Read the JSON data from the query response and render the data as HTML.&#10;		const queryJSON = await queryResponse.json();&#10;		return new Response(renderResponse(queryJSON.data), {&#10;			headers: { &quot;content-type&quot;: &quot;text/html&quot; },&#10;		});&#10;	},&#10;};&#10;&#10;// renderCity renders a table row as HTML from a data row.&#10;function renderCity(row) {&#10;	return `&lt;tr&gt;&lt;td&gt;${row.city}&lt;/td&gt;&lt;td&gt;${row.min_temp}&lt;/td&gt;&lt;td&gt;${row.max_temp}&lt;/td&gt;&lt;/tr&gt;`;&#10;}&#10;&#10;// renderResponse renders a simple HTML table of results.&#10;function renderResponse(data) {&#10;	return `&lt;!DOCTYPE html&gt;&#10;&lt;html&gt;&#10;    &lt;body&gt;&#10;        &lt;table&gt;&#10;            &lt;tr&gt;&lt;th&gt;City&lt;/th&gt;&lt;th&gt;Min Temp&lt;/th&gt;&lt;th&gt;Max Temp&lt;/th&gt;&lt;/tr&gt;&#10;            ${data.map(renderCity).join(&quot;\n&quot;)}&#10;        &lt;/table&gt;&#10;    &lt;/body&gt;&#10;&lt;html&gt;`;&#10;}&#10;</code></pre>

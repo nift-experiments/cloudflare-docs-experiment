@@ -1,0 +1,3 @@
+<p>Global traffic steering policies decide how a load balancer routes traffic to attached and healthy pools.
+<br/></p>
+<ul class="directory-listing"><li><a href="/load-balancing/understand-basics/traffic-steering/steering-policies/standard-options/">Standard</a></li><li><a href="/load-balancing/understand-basics/traffic-steering/steering-policies/geo-steering/">Geo</a></li><li><a href="/load-balancing/understand-basics/traffic-steering/steering-policies/dynamic-steering/">Dynamic</a></li><li><a href="/load-balancing/understand-basics/traffic-steering/steering-policies/proximity-steering/">Proximity</a></li><li><a href="/load-balancing/understand-basics/traffic-steering/steering-policies/least-outstanding-requests/">Least Outstanding Requests</a></li></ul>

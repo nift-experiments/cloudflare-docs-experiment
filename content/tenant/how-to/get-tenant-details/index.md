@@ -1,0 +1,5 @@
+<p>A <a href="/tenant/glossary/#tenant-admin"><strong>Tenant Admin</strong></a>'s unit and membership details will be used for access of resources and all Tenant operations on the API. The unit ID (<code>unit_tag</code>), for example, can be used to create an account on a specific unit.</p>
+<p>This is especially useful when a Tenant Admin has multiple units and wants to create an account on a specific unit. All accounts created are associated with the units, each of which can have one or more memberships.</p>
+<p>To retrieve tenant details, send a <code>GET</code> request to the <code>/user/tenants</code> endpoint:</p>
+<pre><code class="language-bash">curl &quot;https://api.cloudflare.com/client/v4/user/tenants&quot; \&#10;&#45;-header &quot;X-Auth-Email: &lt;EMAIL&gt;&quot; \&#10;&#45;-header &quot;X-Auth-Key: &lt;API_KEY&gt;&quot;&#10;</code></pre>
+<p>A successful request will return an HTTP status of <code>200</code> and a response body containing tenant information, unit information, memberships, and tenant entitlements for all tenants administered by the user.</p>

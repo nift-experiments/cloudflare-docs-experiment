@@ -1,0 +1,29 @@
+<p>Version Management works through a combination of <strong>environments</strong> and <strong>versions</strong>.</p>
+<pre><code class="language-mermaid">stateDiagram-v2&#10;    V2: Version 2&#10;    V22: Version 2 &lt;br/&gt;(applied manually)&#10;    V23: Version 2 &lt;br/&gt;(promoted from Development)&#10;    V24: Version 2 &lt;br/&gt;(promoted from Staging)&#10;    Revert: Production (rollback)&#10;    V1: Version 1 &lt;br/&gt;(rolled back due to issues)&#10;    V2 --&gt; Development&#10;    Development --&gt; Staging&#10;    Staging --&gt; Production&#10;    Production --&gt; Revert&#10;    state Development {&#10;        V22&#10;    }&#10;    note right of Development&#10;            At each level, test then promote the version.&#10;        end note&#10;    state Staging {&#10;        V23&#10;    }&#10;    state Production {&#10;        V24&#10;    }&#10;    state Revert {&#10;        V1&#10;    }&#10;    note right of Revert&#10;            Once promoted into an environment, a version can be rolled back.&#10;        end note&#10;</code></pre>
+<h2 id="environments">Environments</h2>
+<p>An environment is a place to test different versions of your zone configurations.
+<br/></p>
+<p>After you <a href="/version-management/how-to/enable/">enable</a> version management, you will have the ability to create default environments:</p>
+<ul>
+<li><strong>Development</strong>: Meant to validate that changes work correctly. The default <a href="/version-management/reference/traffic-filters/">traffic filters</a> are that the <code>cf.zone.name</code> matches your zone name, the <code>Edge Server IP</code> is a specific value, and the request contains a cookie with <code>development=true</code>.</li>
+<li><strong>Staging</strong>: Meant to test changes before sending them to <strong>Production</strong>. The default <a href="/version-management/reference/traffic-filters/">traffic filters</a> are that the <code>cf.zone.name</code> matches your zone name and the <code>Edge Server IP</code> is a specific value.</li>
+<li><strong>Production</strong>: Meant to hold all configurations applied to your zone. You cannot edit the <a href="/version-management/reference/traffic-filters/">traffic filters</a> - which are just that the <code>cf.zone.name</code> is equal to your zone's name - and cannot delete this environment. This environment has a read-only check enabled, so versions promoted to this environment will become read-only as well.</li>
+</ul>
+<p>When you <a href="/version-management/how-to/versions/#create-version">create</a> a new version, that version will be available to apply to your <strong>Development</strong> environment (or whatever environment has the lowest rank). Once you test a version in your <strong>Development</strong> environment, you would promote that version to the <strong>Staging</strong> environment and - with no issues - then promote it to <strong>Production</strong>.</p>
+<p>To send traffic to specific environments, send requests to that environment that match the pattern specified in its <a href="/version-management/reference/traffic-filters/">traffic filters</a>.</p>
+<h2 id="versions">Versions</h2>
+<p>A version is a collection of configurations related to your zone, such as WAF custom rules and <a href="/version-management/reference/available-configurations/">other optimization configurations</a>.
+<br/></p>
+<p>Once you <a href="/version-management/how-to/enable/">enable</a> Version Management, Cloudflare will automatically create:</p>
+<ul>
+<li><strong>Version Zero</strong>, think about this as the configuration of your current zone. Once default environments are created, Version Zero is automatically deployed to them, guaranteeing no disruption in your live traffic. This Version is also permanently editable. In case you decide to disable Zone Versioning, Version Zero will become your zone again.</li>
+<li><strong>Global Configuration</strong>, you can find all the configurations here that are not supported by Version Management.</li>
+</ul>
+<aside class="nb-aside caution">
+<h3 class="nb-aside-title" id="important">Important</h3>
+@markup("md", "content/.markup/bodies/200.md")
+</aside>
+<p>On the Environments page, you can create default environments for <strong>Production</strong>, <strong>Staging</strong>, and <strong>Development</strong>.</p>
+<p>When your version is ready, you would then test and promote it through various environments until it reaches <strong>Production</strong> (or whatever your final environment is).</p>
+<p>You can create a new version at any time by choosing to <a href="/version-management/how-to/versions/#create-version"><strong>Clone</strong></a> an existing version, which automatically copies over configurations from an existing version.</p>
+<p>Version configurations are applied to zone traffic when you <a href="/version-management/how-to/environments/#promote-a-version">promote a version</a> to a new environment and then send traffic to that environment that matches the pattern specified in its <a href="/version-management/reference/traffic-filters/">traffic filters</a>.</p>

@@ -1,0 +1,36 @@
+<div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
+<div class="changelog-tools"><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
+<article class="changelog-detail"><a href="/changelog/">← Back to all posts</a>
+<time>September 1, 2026</time><h2 id="post-title">WAF Release - 2026-09-01</h2>
+<div class="changelog-badges"><span>waf</span></div><div class="changelog-body"><p>This release introduces a new threat detection to enhance protection against SQL injection (SQLi) attempts exploiting complex query syntax.</p>
+<p><strong>Key Findings</strong></p>
+<ul>
+<li>SQLi Protection: Improved coverage for SQL injection patterns involving WHERE comparisons combined with WITH clauses.</li>
+</ul>
+<table style="width: 100%">
+<thead>
+<tr>
+<th>Ruleset</th>
+<th>Rule ID</th>
+<th>Legacy Rule ID</th>
+<th>Description</th>
+<th>Previous Action</th>
+<th>New Action</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cloudflare Managed Ruleset</td>
+<td>
+				<code class="nb-rule-id" title="d2d75b2f0614405f9fab0354bcfa0966">bcfa0966</code>
+</td>
+<td>N/A</td>
+<td>SQLi - WHERE Comparison With WITH Clause</td>
+<td>Log</td>
+<td>Block</td>
+<td>This is a new detection.</td>
+</tr>
+</tbody>
+</table>
+</div></article></div>

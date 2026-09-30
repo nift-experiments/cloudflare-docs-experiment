@@ -1,0 +1,9 @@
+<p>This section is the planning layer of the style guide. It tells you what kind of page to write, where it lives, and what parts it is built from. The three areas follow the order you meet them when you plan a page. Once the page is planned, <a href="/style-guide/style-and-grammar/">Style and grammar</a> covers how to write it in the house voice.</p>
+<h2 id="what-to-write">What to write</h2>
+<p><a href="/style-guide/documentation-content-strategy/content-types/">Content types</a> catalog the defined page shapes and help you choose the right one. Every type documents how it is structured, scaffolded, and maintained.</p>
+<h2 id="how-to-structure-it">How to structure it</h2>
+<p><a href="/style-guide/documentation-content-strategy/information-architecture/">Information architecture</a> governs on-page section order and the folder shape a reader navigates. <a href="/style-guide/documentation-content-strategy/file-conventions/">File conventions</a> governs the repo file, folder, and image naming a builder works with.</p>
+<h2 id="the-parts-a-page-is-built-from">The parts a page is built from</h2>
+<p><a href="/style-guide/documentation-content-strategy/component-attributes/">Component attributes</a> covers the content-strategy parts of a page, such as introductions, prerequisites, and next steps. Formatting and component mechanics live in their own sibling sections, linked from each part.</p>
+<h2 id="all-pages-in-this-section">All pages in this section</h2>
+<ul class="directory-listing"><li><a href="/style-guide/documentation-content-strategy/content-types/">Content types</a></li><li><a href="/style-guide/documentation-content-strategy/information-architecture/">Information architecture</a></li><li><a href="/style-guide/documentation-content-strategy/file-conventions/">File conventions</a></li><li><a href="/style-guide/documentation-content-strategy/component-attributes/">Component attributes</a></li></ul>

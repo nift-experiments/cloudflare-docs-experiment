@@ -1,0 +1,1 @@
+<ul class="directory-listing"><li><a href="/r2/api/s3/api/">S3 API compatibility</a></li><li><a href="/r2/api/s3/extensions/">Extensions</a></li><li><a href="/r2/api/s3/presigned-urls/">Presigned URLs</a></li><li><a href="/r2/api/s3/temporary-credentials/">Temporary credentials</a></li></ul>

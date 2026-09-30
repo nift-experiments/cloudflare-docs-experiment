@@ -1,0 +1,11 @@
+<p>Magic Transit leverages Cloudflare's global anycast network. As of writing this guide, Cloudflare's global network spans <div class="nb-data-component" data-cf-component="PublicStats"></div>, and has <div class="nb-data-component" data-cf-component="PublicStats"></div>. This bandwidth allows it to absorb all manners of attack that otherwise would overwhelm a typical data center or on-premise hardware Distributed Denial-of-Service (DDoS) appliances.</p>
+<p>The number of DDoS attacks has been steadily increasing in recent years. In the first quarter of 2025, Cloudflare <a href="https://blog.cloudflare.com/ddos-threat-report-for-2025-q1/#ddos-attacks-in-numbers">mitigated 16.8 million network-layer DDoS attacks</a>. This represents a 397% increase quarter over quarter and a 509% increase year over year.</p>
+<p>Other advantages of choosing Magic Transit:</p>
+<ul>
+<li><strong>Scalability</strong>: As Cloudflare's global network expands, so does Magic Transit ability to absorb ever bigger DDoS attacks.</li>
+<li><strong>Ease of management</strong>: Magic Transit offers centralized, cloud-based management tools that simplify configuration and monitoring of your network security.</li>
+<li><strong>Improvement of network performance</strong>: Magic Transit steers traffic along tunnel routes based on priorities you define and uses equal-cost multi-path routing to provide load-balancing across tunnels with the same prefix and priority.</li>
+<li><strong>Integration with zero-trust services</strong>: Magic Transit integrates with other Cloudflare products, including Cloudflare One's SASE offerings, Cloudflare Network Firewall, and more.</li>
+<li><strong>Integration with CNI</strong>: Directly connect your infrastructure to Cloudflare with CNI and bypass the Internet. Beyond a more reliable and secure experience, using CNI is an alternative to anycast GRE tunnels for getting traffic delivered to your infrastructure with a 1500-byte maximum transmission unit (MTU) handoff.</li>
+<li><strong>Real-time traffic visibility and alerting</strong>: Monitor and analyze traffic patterns, threat activity, and mitigation actions in real time through Cloudflare's analytics and logging tools. Set up customized alerts to notify you of potential threats, enabling faster incident response and better-informed network decisions.</li>
+</ul>

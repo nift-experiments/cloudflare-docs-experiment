@@ -1,0 +1,2 @@
+<p>To further ensure the security and efficiency of image optimization services, you can adopt Cloudflare products that safeguard against malicious activities.</p>
+<p>Cloudflare security products like <a href="/waf/">Cloudflare WAF</a>, <a href="/bots/get-started/bot-management/">Cloudflare Bot Management</a> and <a href="/waf/rate-limiting-rules/">Cloudflare Rate Limiting</a> can enhance the protection of your image optimization requests against abuse. This proactive approach ensures a reliable and efficient experience for all legitimate users.</p>

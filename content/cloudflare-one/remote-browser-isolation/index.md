@@ -1,0 +1,10 @@
+<aside class="nb-aside note">
+@markup("md", "content/.markup/bodies/4467.md")
+</aside>
+<p>Cloudflare Browser Isolation complements the <a href="/cloudflare-one/traffic-policies/">Secure Web Gateway</a> (which inspects and filters HTTP/HTTPS traffic) and <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/">Zero Trust Network Access</a> (which controls access to private applications) by executing active webpage content — executable code such as JavaScript and plugins — in a secure isolated browser. Because active content executes remotely instead of on the user's device, Browser Isolation protects users from zero-day attacks (attacks that exploit vulnerabilities with no available patch) and malware.</p>
+<p>Browser Isolation also protects users from phishing attacks by preventing user input on risky websites and controlling data transmission to sensitive web applications. You can further filter isolated traffic with Gateway <a href="/cloudflare-one/traffic-policies/http-policies/">HTTP</a> and <a href="/cloudflare-one/traffic-policies/dns-policies/">DNS</a> policies.</p>
+<p>Remote browsing is invisible to the user who continues to use their browser normally without changing their preferred browser and habits. Every open tab and window is automatically isolated. When the user closes the isolated browser, their session is automatically deleted.</p>
+<h2 id="privacy">Privacy</h2>
+<p>Cloudflare Browser Isolation is a security product. In order to serve transparent isolated browsing and block web based threats our network decrypts Internet traffic using the <a href="/cloudflare-one/team-and-resources/devices/user-side-certificates/">Cloudflare root CA</a>. Traffic logs are retained as per the <a href="/cloudflare-one/insights/logs/">Zero Trust</a> documentation.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>For help resolving common issues with Browser Isolation, refer to <a href="/cloudflare-one/remote-browser-isolation/troubleshooting/">Troubleshoot Browser Isolation</a>.</p>

@@ -1,0 +1,1 @@
+<ul class="directory-listing"><li><a href="/vectorize/best-practices/create-indexes/">Create indexes</a></li><li><a href="/vectorize/best-practices/insert-vectors/">Insert vectors</a></li><li><a href="/vectorize/best-practices/list-vectors/">List vectors</a></li><li><a href="/vectorize/best-practices/query-vectors/">Query vectors</a></li></ul>

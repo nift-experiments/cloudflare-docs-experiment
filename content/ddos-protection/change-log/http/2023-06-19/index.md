@@ -1,0 +1,20 @@
+<table style="width: 100%">
+<thead>
+<tr>
+<th>Rule ID</th>
+<th>Description</th>
+<th>Previous Action</th>
+<th>New Action</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>...de244156</td>
+<td>HTTP requests from known botnet (signature #59).</td>
+<td>N/A</td>
+<td>block</td>
+<td></td>
+</tr>
+</tbody>
+</table>

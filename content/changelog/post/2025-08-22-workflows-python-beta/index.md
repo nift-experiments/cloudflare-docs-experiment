@@ -1,0 +1,13 @@
+<div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
+<div class="changelog-tools"><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
+<article class="changelog-detail"><a href="/changelog/">← Back to all posts</a>
+<time>August 22, 2025</time><h2 id="post-title">Build durable multi-step applications in Python with Workflows (now in beta)</h2>
+<div class="changelog-badges"><span>workflows</span><span>workers</span></div><div class="changelog-body"><p>You can now build <a href="/workflows/">Workflows</a> using Python. With Python Workflows, you get automatic retries, state persistence, and the ability to run multi-step operations that can span minutes, hours, or weeks using Python’s familiar syntax and the <a href="/workers/languages/python/">Python Workers</a> runtime.</p>
+<p>Python Workflows use the same step-based execution model as JavaScript Workflows, but with Python syntax and access to Python’s ecosystem. Python Workflows also enable <a href="/workflows/python/dag/">DAG (Directed Acyclic Graph) workflows</a>, where you can define complex dependencies between steps using the depends parameter.</p>
+<p>Here’s a simple example:</p>
+<pre><code class="language-python">from workers import Response, WorkflowEntrypoint&#10;&#10;class PythonWorkflowStarter(WorkflowEntrypoint):&#10;    async def run(self, event, step):&#10;        @step.do(&quot;my first step&quot;)&#10;        async def my_first_step():&#10;            &#35; do some work&#10;            return &quot;Hello Python!&quot;&#10;&#10;        await my_first_step()&#10;&#10;        await step.sleep(&quot;my-sleep-step&quot;, &quot;10 seconds&quot;)&#10;&#10;        @step.do(&quot;my second step&quot;)&#10;        async def my_second_step():&#10;            &#35; do some more work&#10;            return &quot;Hello again!&quot;&#10;&#10;        await my_second_step()&#10;&#10;class Default(WorkerEntrypoint):&#10;    async def fetch(self, request):&#10;        await self.env.MY_WORKFLOW.create()&#10;        return Response(&quot;Hello Workflow creation!&quot;)&#10;</code></pre>
+<aside class="nb-aside note">
+@markup("md", "content/.markup/bodies/17831.md")</aside>
+<p>Python Workflows support the same core capabilities as JavaScript Workflows, including sleep scheduling, event-driven workflows, and built-in error handling with configurable retry policies.</p>
+<p>To learn more and get started, refer to <a href="/workflows/python/">Python Workflows documentation</a>.</p>
+</div></article></div>

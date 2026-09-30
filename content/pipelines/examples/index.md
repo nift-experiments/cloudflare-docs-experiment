@@ -1,0 +1,2 @@
+<p>Explore the following examples for Cloudflare Pipelines.</p>
+<div class="nb-card-grid resource-grid"><a class="nb-card nb-link-card resource-card" href="/pipelines/examples/bluesky-firehose-fanout/"><strong>Fan out a stream to multiple Iceberg tables</strong><span>Route Bluesky Jetstream events into multiple R2 Data Catalog tables using a single Pipelines stream and multiple SQL statements.</span><small>Example</small></a></div>

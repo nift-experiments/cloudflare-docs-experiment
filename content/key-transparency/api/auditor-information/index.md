@@ -1,0 +1,5 @@
+<p>The Auditor is designed to sign epoch information, which includes the time at which the request is received by the Auditor, the epoch number, and the epoch digest. The Auditor serializes this information in binary using protobuf or bincode and checks whether the requested inclusion is valid, as in it satisfies <a href="/key-transparency/api/epochs/#constraints">publication constraints</a>.</p>
+<p>If the Log is setup to provide <a href="https://github.com/facebook/akd">AKD</a> audit proof, the Auditor verifies them asynchronously.</p>
+<h2 id="get-auditor-information">Get Auditor information</h2>
+<p><code>keys</code> contain Auditor public keys which allow for key rotation later.</p>
+<pre><code class="language-sh">curl &#x27;https://plexi.key-transparency.cloudflare.com/info&#x27;&#10;{&#10;  &quot;keys&quot;: [&#10;    {&#10;      &quot;public_key&quot;: &quot;d1036a33a8731e82a29dc68210988b32b60b7c1bd22d2341f2e339f4db3a2f4a&quot;,&#10;      &quot;not_before&quot;: 1712311441501&#10;    }&#10;  ],&#10;  &quot;logs&quot;: [&#10;    &quot;508607faff7cb16be841e901eca41a6239461f239e7e610c9ea2576f334bc144&quot;&#10;  ]&#10;}&#10;</code></pre>

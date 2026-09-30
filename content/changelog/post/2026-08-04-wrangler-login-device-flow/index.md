@@ -1,0 +1,12 @@
+<div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
+<div class="changelog-tools"><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
+<article class="changelog-detail"><a href="/changelog/">← Back to all posts</a>
+<time>August 4, 2026</time><h2 id="post-title">Log in to Wrangler without a local callback server</h2>
+<div class="changelog-badges"><span>workers</span></div><div class="changelog-body"><p><code>wrangler login</code> now supports the <a href="https://www.rfc-editor.org/rfc/rfc8628">OAuth 2.0 Device Authorization Grant</a>. Pass <code>--device</code> to authenticate without starting a temporary callback server on <code>localhost:8976</code>:</p>
+<pre><code class="language-sh">npx wrangler login --device&#10;</code></pre>
+<p>Wrangler prints a verification URL and a short user code, opens the URL in your default browser with the code already filled in, and polls Cloudflare for an access token while you approve the request:</p>
+<pre><code class="language-sh"> ⛅️ wrangler 4.119.0&#10;────────────────────&#10;Attempting to login via OAuth Device Authorization Grant...&#10;To authorize Wrangler, please visit:&#10;&#10;  https://dash.cloudflare.com/oauth2/device&#10;&#10;and enter the code:&#10;&#10;  jPqK6Qvs&#10;&#10;You have 5 minutes to approve this request.&#10;&#10;Opening a link in your default browser: https://dash.cloudflare.com/oauth2/device?user_code=jPqK6Qvs&#10;Successfully logged in.&#10;</code></pre>
+<p>The default login flow needs your browser to reach <code>localhost:8976</code>, which is not always possible from containers, remote SSH sessions, or GitHub Codespaces. Previously these environments required forwarding ports or fetching the callback URL with <code>curl</code> from a second terminal session. Because <code>--device</code> has no callback server, those workarounds are no longer necessary.</p>
+<p>Since the plain verification URL and user code are both printed to the terminal, you can also approve the request from a phone or another machine. Pass <code>--browser=false</code> to stop Wrangler from opening a browser at all.</p>
+<p>Available in Wrangler version 4.119.0 or later. For more information, refer to <a href="/workers/wrangler/commands/general/#login"><code>wrangler login</code></a>.</p>
+</div></article></div>

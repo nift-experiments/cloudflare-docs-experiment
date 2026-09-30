@@ -1,0 +1,1 @@
+<ul class="directory-listing"><li><a href="/agents/model-context-protocol/protocol/tools/">Tools</a></li><li><a href="/agents/model-context-protocol/protocol/authorization/">Authorization</a></li><li><a href="/agents/model-context-protocol/protocol/transport/">Transport</a></li><li><a href="/agents/model-context-protocol/protocol/governance/">MCP governance</a></li></ul>

@@ -1,0 +1,1 @@
+<ul class="directory-listing"><li><a href="/images/storage/upload-images/">Upload images</a></li><li><a href="/images/storage/manage-images/">Manage hosted images</a></li><li><a href="/images/storage/binding/">Manage hosted images with Workers</a></li></ul>

@@ -1,0 +1,1 @@
+<p>Use the <a href="/api-shield/security/mtls/configure/">Mutual TLS</a> Rule interface in the Cloudflare dashboard to create an mTLS rule that requires requests to your API or web application to present a valid client certificate.</p>

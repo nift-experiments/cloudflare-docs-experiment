@@ -1,0 +1,27 @@
+<p>The Interplanetary File System (IPFS) is a peer-to-peer file storage network. Instead of storing files on a single server (the way traditional web hosting works), IPFS distributes files across many computers around the world.</p>
+<p>Any computer can join the IPFS network by installing the IPFS software and start hosting and serving files.</p>
+<p>If someone uploads a file to the IPFS network, anyone else running IPFS can view and download that file — no central server is involved.</p>
+<h2 id="content-identifiers">Content Identifiers</h2>
+<p>Every file added to IPFS is given a unique address derived from a hash of the file's content. This address is called a Content Identifier (CID). A CID contains two pieces of information: the hash of the file and an identifier for the hash algorithm used, combined into a single string.</p>
+<p>Because the CID is derived from the content itself, two identical files always produce the same CID, and any change to a file produces a different CID. This is what makes IPFS &quot;content-addressed&quot; — you look up files by what they contain, not by where they are stored.</p>
+<p>IPFS uses <a href="https://en.wikipedia.org/wiki/SHA-2">SHA-256</a> by default, and encodes the result with <a href="https://en.wikipedia.org/wiki/Base58">Base58</a> — an encoding scheme that omits visually ambiguous characters (such as zero and the capital letter O) to reduce transcription errors.</p>
+<p>A CID typically looks like: <code>QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco</code></p>
+<p>IPFS also supports other encodings (<a href="https://en.wikipedia.org/wiki/Base32">Base32</a>) and hash algorithms (<a href="https://en.wikipedia.org/wiki/SHA-3">SHA-3</a>, <a href="https://en.wikipedia.org/wiki/BLAKE_(hash_function)">BLAKE2</a>).</p>
+<h2 id="uploading-to-ipfs">Uploading to IPFS</h2>
+<p>IPFS tracks which computers have which files using a <a href="https://en.wikipedia.org/wiki/Distributed_hash_table">Distributed Hash Table (DHT)</a> — a lookup system that maps CIDs to the network addresses of computers hosting that content. No single computer holds the entire lookup table. Instead, each computer in the network stores a portion of it and knows where to find the rest.</p>
+<p>&quot;Uploading&quot; content to IPFS does not mean sending your file to a central server. It means announcing to the network that you have the content by adding an entry to the DHT that maps your file's CID to your network address. When someone else wants to download that file, they look up the CID in the DHT, find your address, and download the data directly from you.</p>
+<p>Because multiple computers can host the same file, downloads are spread across all of them. If any one host goes offline, the others continue to serve the content. This redundancy is what gives IPFS its speed and reliability advantages over single-server hosting.</p>
+<h2 id="directories">Directories</h2>
+<p>You can upload more than just individual files. For example, consider a folder called <code>example</code>, which has exactly one file, <code>example_text.txt</code>, containing the string <code>I'm trying out IPFS</code>.</p>
+<p>If that folder were uploaded with the command <code>ipfs add -r ./example</code>, both the folder and the file it contains would have their own CID. In this case, the folder would have the CID <code>QmdbaSQbGU6Wo9i5LyWWVLuU8g6WrYpWh2K4Li4QuuE8Fr</code> while the file would have the CID <code>QmXnnyufdzAWL5CqZ2RnSNgPbvCc1ALT73s6epPrRnZ1Xy</code>.</p>
+<p>You could then access the file in two ways:</p>
+<ul>
+<li>Requesting the file directly:<br />
+<code>https://cloudflare-ipfs.com/ipfs/QmXnnyufdzAWL5CqZ2RnSNgPbvCc1ALT73s6epPrRnZ1Xy</code></li>
+<li>Requesting the file by name, from the directory:<br />
+<code>https://cloudflare-ipfs.com/ipfs/QmdbaSQbGU6Wo9i5LyWWVLuU8g6WrYpWh2K4Li4QuuE8Fr/example_text.txt</code></li>
+</ul>
+<p>While the CID of a file will only change if the file itself changes, the CID of a directory changes any time <strong>any</strong> of the files in it change, or if any files are added/removed.</p>
+<p>Directories make it possible to address an entire static website with a single CID and access different pages of the website by requesting different files in the directory.</p>
+<h2 id="related-resources">Related resources</h2>
+<p>For help with additional concepts, refer to the <a href="https://docs.ipfs.tech/concepts/">IPFS</a> documentation.</p>

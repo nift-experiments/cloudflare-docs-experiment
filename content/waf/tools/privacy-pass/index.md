@@ -1,0 +1,17 @@
+<p><a href="https://datatracker.ietf.org/wg/privacypass/about/">Privacy Pass</a> specifies an extensible protocol for creating and redeeming anonymous and transferable tokens. Its specification is maintained by the IETF.
+Cloudflare provides &quot;Silk - Privacy Pass Client&quot;. This is a Chrome and Firefox browser extension used for research, which provides a better visitor experience for Cloudflare-protected websites. Privacy Pass is especially helpful for visitors from shared networks, VPNs, and Tor that tend to have poorer IP reputations.</p>
+<p>For instance, a visitor IP address with poor reputation may receive a Cloudflare challenge page before gaining access to a Cloudflare-protected website. Privacy Pass allows the visitor to solve a challenge with or without interaction, depending on the device. Solving this challenge is coordinated with a third party attester in such a way that Cloudflare does not see the attestation method or the interaction, preserving visitors' privacy while maintaining a high level of security.</p>
+<hr />
+<h2 id="set-up-privacy-pass">Set up Privacy Pass</h2>
+<h3 id="for-your-end-users">For your end users</h3>
+<p>Your end users should download the Privacy Pass extension for either Google Chrome or Firefox:</p>
+<ul>
+<li><a href="https://chrome.google.com/webstore/detail/privacy-pass/ajhmfdgkijocedmfjonnpjfojldioehi">Chrome extension</a></li>
+<li><a href="https://addons.mozilla.org/en-US/firefox/addon/privacy-pass/">Firefox extension</a></li>
+</ul>
+<p>The Privacy Pass code is <a href="https://github.com/cloudflare/pp-browser-extension">available on GitHub</a>. You can report any issues in this repository.</p>
+<hr />
+<h2 id="support-for-privacy-pass-v1-legacy">Support for Privacy Pass v1 (legacy)</h2>
+<p>In 2017 Cloudflare <a href="https://blog.cloudflare.com/cloudflare-supports-privacy-pass/">announced support</a> for Privacy Pass, a recent protocol to let users prove their identity across multiple sites anonymously without enabling tracking. The initial use case was to provide untraceable tokens to sites to vouch for users who might otherwise have been presented with a CAPTCHA challenge. In the time since this release, Privacy Pass has evolved both at the <a href="https://datatracker.ietf.org/wg/privacypass/documents/">IETF</a> and within Cloudflare. The version announced in 2017 is now considered legacy, and these legacy Privacy Pass tokens are no longer supported as an alternative to Cloudflare challenges. As has been discussed on our blog <a href="https://blog.cloudflare.com/end-cloudflare-captcha/">The end road for CAPTCHA</a>, Cloudflare uses a variety of signals to infer if incoming traffic is likely automated. The (legacy) Privacy Pass zone setting is no longer meaningful to Cloudflare customers as Cloudflare now operates <a href="https://blog.cloudflare.com/turnstile-ga/">CAPTCHA free</a>, and supports the latest <a href="https://blog.cloudflare.com/eliminating-captchas-on-iphones-and-macs-using-new-standard/">Privacy Pass draft</a>.</p>
+<p>In September 2023, Cloudflare removed support for Privacy Pass v1 (legacy) tokens as an alternative to Cloudflare managed challenges, and in March 2024 the current public-facing API was removed.</p>
+<p>The full deprecation notice for the first version of Privacy Pass is available on the <a href="/fundamentals/api/reference/deprecations/#2024-03-31">API deprecations</a> page.</p>

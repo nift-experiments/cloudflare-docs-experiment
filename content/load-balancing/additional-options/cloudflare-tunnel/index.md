@@ -1,0 +1,2 @@
+<p>Cloudflare Tunnel (formerly Argo Tunnel) establishes a secure outbound connection which runs in your infrastructure to connect the applications and machines to Cloudflare.</p>
+<p>For more details on how to use Load Balancing with Cloudflare Tunnel and public hostnames, refer to <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/routing-to-tunnel/public-load-balancers/">Route tunnel traffic using a load balancer</a>. For using private IPs instead, refer to <a href="/load-balancing/private-network/warp-to-tunnel/">Set up private IPs with Tunnel</a>.</p>

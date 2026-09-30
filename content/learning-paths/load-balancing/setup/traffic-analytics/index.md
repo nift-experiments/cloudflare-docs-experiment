@@ -1,0 +1,1 @@
+<p>As you send sample requests to your test domain, review the <a href="/load-balancing/reference/load-balancing-analytics/">load balancing analytics</a> page to make sure your load balancer is distributing requests like you were expecting.</p>

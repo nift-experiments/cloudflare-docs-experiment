@@ -1,0 +1,8 @@
+<p>AI Search supports three search modes: vector, keyword, and hybrid. By default, new instances use vector search only. You can enable keyword or hybrid search when creating or updating an instance.</p>
+<h2 id="vector-search">Vector search</h2>
+<p>Vector search converts your query into a vector embedding and finds chunks with similar meaning, even when the exact words differ. It knows that &quot;deployment guide&quot; and &quot;how to ship my app&quot; mean similar things. However, it can lose specifics. In a query like &quot;ERR_CONNECTION_REFUSED timeout,&quot; vector search captures the broad concept of connection failures but might not surface the page that contains that exact error string.</p>
+<h2 id="keyword-search">Keyword search</h2>
+<p>Keyword search matches chunks that contain your query terms exactly using BM25 full-text search. When you search &quot;ERR_CONNECTION_REFUSED timeout,&quot; BM25 finds documents that actually contain &quot;ERR_CONNECTION_REFUSED&quot; as a term. However, it may miss a page about &quot;troubleshooting network connections&quot; that describes the same problem. Refer to <a href="/ai-search/configuration/indexing/keyword-search/">Keyword search</a> for setup.</p>
+<h2 id="hybrid-search">Hybrid search</h2>
+<p>Hybrid search runs vector and keyword search in parallel and merges the results using a fusion method. Vector search understands intent, keyword search matches specific terms. Together, a query like &quot;ERR_CONNECTION_REFUSED timeout&quot; finds the exact error page and related troubleshooting content. Refer to <a href="/ai-search/configuration/indexing/hybrid-search/">Hybrid search</a> for setup.</p>
+<p><img src="/assets/upstream/images/ai-search/hybrid-search.png" alt="Hybrid search" /></p>

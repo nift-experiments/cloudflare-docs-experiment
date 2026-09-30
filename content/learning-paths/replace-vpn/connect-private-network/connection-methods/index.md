@@ -1,0 +1,83 @@
+<p>There are <a href="/reference-architecture/architectures/sase/#connecting-networks">multiple ways</a> to onramp traffic from your private networks to Cloudflare. This page covers the two software-based methods commonly used for VPN replacement: Cloudflare Mesh and Cloudflare Tunnel. Both involve installing lightweight software on a host machine in your network to create a secure connection to Cloudflare's global network.</p>
+<h2 id="cloudflare-mesh">Cloudflare Mesh</h2>
+<p><a href="/mesh/">Cloudflare Mesh</a> (formerly WARP Connector) runs the Cloudflare One Client (<code>warp-cli</code>) in headless mode on a Linux server. It operates as a Layer 3 proxy, supports bidirectional traffic (TCP, UDP, ICMP), and assigns a private Mesh IP to every participant. Use Mesh when you need:</p>
+<ul>
+<li>User-to-network access (replacing a VPN)</li>
+<li>Network-to-network / site-to-site connectivity</li>
+<li>Server-initiated connections (VoIP, SIP, AD updates, SCCM, DevOps)</li>
+<li>Client-to-client connectivity between enrolled devices</li>
+</ul>
+<h2 id="cloudflare-tunnel">Cloudflare Tunnel</h2>
+<p><a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/">Cloudflare Tunnel</a> runs the <code>cloudflared</code> daemon on a host machine. It creates an outbound-only connection and proxies traffic from Cloudflare to your internal applications or network. Use Tunnel when you need:</p>
+<ul>
+<li>Publishing specific applications by hostname</li>
+<li>Outbound-only connectivity (no inbound ports opened)</li>
+<li>Proxying HTTP/S, TCP, or SSH traffic to specific services</li>
+<li>Running on non-Linux platforms (macOS, Windows)</li>
+</ul>
+<h2 id="comparison-table">Comparison table</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Cloudflare Mesh</th>
+<th>Cloudflare Tunnel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bidirectional traffic</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>High availability</td>
+<td>✅ (active-passive)</td>
+<td>✅ (active-active replicas)</td>
+</tr>
+<tr>
+<td>Source IP of request</td>
+<td>Virtual IP of requesting device</td>
+<td><code>cloudflared</code> host machine</td>
+</tr>
+<tr>
+<td>Host machine</td>
+<td>Linux (amd64, arm64)</td>
+<td>Linux, macOS, Windows</td>
+</tr>
+<tr>
+<td>IPv4</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>IPv6</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>OSI layer</td>
+<td>L3</td>
+<td>L7</td>
+</tr>
+<tr>
+<td>Protocol</td>
+<td>MASQUE</td>
+<td>QUIC or HTTP/2</td>
+</tr>
+<tr>
+<td>Protocols proxied</td>
+<td>TCP, UDP, ICMP</td>
+<td>HTTP/S, TCP, SSH, RDP, SMB</td>
+</tr>
+<tr>
+<td>Connection handling</td>
+<td>End-to-end — preserves long-lived TCP connections across the full path</td>
+<td>Proxied — TCP connections are terminated and re-established at Cloudflare, which can interrupt long-lived sessions (for example, SAP transactions, database replication streams, or persistent RDP sessions may drop when <code>cloudflared</code> reconnects)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="recommendation">Recommendation</h2>
+<p>For most VPN replacement scenarios, <a href="/learning-paths/replace-vpn/connect-private-network/cloudflared/">Cloudflare Tunnel</a> is the easiest way to get started. It runs on all platforms (Linux, macOS, Windows, containers, Raspberry Pi), does not require return route configuration (traffic is source-NATed to the <code>cloudflared</code> host), and does not interfere with existing VPN software on the same machine.</p>
+<p>Use <a href="/learning-paths/replace-vpn/connect-private-network/cloudflare-mesh/">Cloudflare Mesh</a> when you need bidirectional connectivity with server-initiated traffic (VoIP, SIP, AD updates, SCCM), site-to-site networking between multiple locations, deployments where preserving the original source IP is important, or workloads with long-lived TCP connections sensitive to interruptions (SAP, database replication, ERP systems).</p>
+<p>Both methods can be used together. For example, use Tunnel for straightforward user-to-application access and add Mesh nodes where you need bidirectional or site-to-site connectivity.</p>

@@ -1,0 +1,2 @@
+<p>The runtime powers your agent — state, communication, execution, and operations.</p>
+<ul class="directory-listing"><li><a href="/agents/runtime/agents-api/">Agents API</a></li><li><a href="/agents/runtime/lifecycle/">Lifecycle</a></li><li><a href="/agents/runtime/communication/">Communication</a></li><li><a href="/agents/runtime/execution/">Execution</a></li><li><a href="/agents/runtime/operations/">Operations</a></li></ul>

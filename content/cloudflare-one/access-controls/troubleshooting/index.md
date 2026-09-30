@@ -1,0 +1,47 @@
+<p>Review common troubleshooting scenarios for Cloudflare Access.</p>
+<h2 id="authentication-and-login">Authentication and login</h2>
+<h3 id="ajax-cors-errors">AJAX/CORS errors</h3>
+<p>Cloudflare Access requires that the <code>credentials: same-origin</code> parameter be added to JavaScript when using the Fetch API to include cookies. AJAX requests fail if this parameter is missing, resulting in an error such as <code>No Access-Control-Allow-Origin header is present on the requested resource</code>. For more information, refer to <a href="/cloudflare-one/access-controls/applications/http-apps/authorization-cookie/cors/">CORS settings</a>.</p>
+<h3 id="saml-verification-failure">SAML verification failure</h3>
+<p>The error <code>SAML Verify: Invalid SAML response, SAML Verify: No certificate selected to verify</code> occurs when the identity provider (IdP) does not include the signing public key in the SAML response. Cloudflare Access requires the public key to match the <strong>Signing certificate</strong> uploaded to Zero Trust. Configure your IdP to include the public key in the response.</p>
+<h3 id="identity-provider-user-group-info-error">Identity provider user/group info error</h3>
+<p>The error <code>Failed to fetch user/group information from the identity provider</code> occurs when Cloudflare lacks the necessary API permissions to communicate with your IdP. Review the <a href="/cloudflare-one/integrations/identity-providers/">SSO integration guide</a> for your specific IdP and ensure the application has the correct permissions (for example, Microsoft Entra or Okta).</p>
+<h3 id="google-workspace-redirect-loop">Google Workspace redirect loop</h3>
+<p>If you place your Google Workspace behind Access, you cannot use Google or Google Workspace as an identity provider for that application. This creates an infinite redirect cycle because both systems depend on each other to complete the login.</p>
+<h3 id="invalid-session-error">Invalid session error</h3>
+<p>The error <code>Invalid session. Please try logging in again</code> indicates that Access was unable to validate your <code>CF_Session</code> cookie. This can happen if software or a firewall on your device interferes with requests to Access. Ensure that the same browser instance is used to both initiate and complete the sign-in.</p>
+<h3 id="firefox-private-window">Firefox Private Window</h3>
+<p>Firefox's default tracking prevention in Private Windows may prevent the <code>CF_authorization</code> cookie from being sent, especially for XHR requests. To resolve this, you may need to exempt your application domain and your <a href="/cloudflare-one/glossary/#team-name">team domain</a> from tracking protection.</p>
+<h3 id="workers-routes-on-the-login-path">Workers routes on the login path</h3>
+<p>If you have a Cloudflare Worker route assigned to your application's login path, the Worker may overwrite the <code>cf-authorization</code> cookie. To prevent this, ensure your Worker script does not modify or strip the <code>Set-Cookie</code> header for Access cookies.</p>
+<h2 id="identity-providers">Identity providers</h2>
+<h3 id="otp-email-not-received">OTP email not received</h3>
+<p>If a user does not receive a one-time PIN (OTP) email:</p>
+<ul>
+<li><strong>Policy denial</strong>: If the user's email address does not match any <strong>Allow</strong> policies for the application, Cloudflare will not send an OTP email. The login page will still display a message saying the email was sent to prevent account enumeration.</li>
+<li><strong>Email suppression</strong>: The user's email may be on a suppression list due to previous delivery failures. Check your email logs or contact Support to clear suppressions.</li>
+</ul>
+<h3 id="otp-code-already-used">OTP code already used</h3>
+<p>The error <code>This One-Time PIN has already been used</code> occurs when the OTP code has already been redeemed before the user enters it. OTP codes are single-use and expire 10 minutes after the initial request. This error most commonly occurs when an email security or anti-phishing tool on your network automatically follows links in emails, consuming the code before you have a chance to enter it.</p>
+<p>To resolve the issue, select <strong>Request new code</strong> on the login page. If the error recurs consistently, add <code>noreply@notify.cloudflare.com</code> to your email security tool's allowlist to prevent it from scanning Cloudflare authentication emails. For setup instructions, refer to <a href="/cloudflare-one/integrations/identity-providers/one-time-pin/">One-time PIN login</a>.</p>
+<h3 id="google-super-admin-login">Google Super Admin login</h3>
+<p>If you use Access as the SSO provider for your Google Workspace, Google Super Admins cannot sign in via Access when accessing <code>admin.google.com</code>. Google requires Super Admins to use their original Google password to ensure they can always access the admin console.</p>
+<h3 id="missing-saml-attributes">Missing SAML attributes</h3>
+<p>If you receive a <code>Required attributes are missing</code> error during SAML authentication, verify that your IdP is sending the mandatory <strong>email</strong> attribute. Additionally, check for typos in attribute names (for example, <code>groups</code> vs <code>gropus</code>) in your <a href="/cloudflare-one/integrations/identity-providers/">IdP configuration</a>.</p>
+<h2 id="applications-and-certificates">Applications and certificates</h2>
+<h3 id="ssh-short-lived-certificates">SSH short-lived certificates</h3>
+<p>The error <code>Error 0: Bad Request. Please create a ca for application</code> appears if a certificate has not been generated for the Access application. Refer to <a href="/cloudflare-one/access-controls/applications/non-http/short-lived-certificates-legacy/">SSH short-lived certificates</a> to generate a CA for the application.</p>
+<h3 id="ssh-origin-auth-failed">SSH &quot;Origin auth failed&quot;</h3>
+<p>This error often indicates a configuration issue on the target server's SSH daemon (<code>sshd</code>):</p>
+<ul>
+<li><strong>SSHD config</strong>: Verify that <code>PubkeyAuthentication</code> is set to <code>yes</code> and <code>TrustedUserCAKeys</code> points to the correct Cloudflare CA file.</li>
+<li><strong>Multiple auth methods</strong>: Cloudflare Access for Infrastructure currently does not support <code>AuthenticationMethods</code> with multiple comma-separated requirements (for example, <code>publickey,keyboard-interactive</code>).</li>
+</ul>
+<h3 id="team-domain-change-error">Team domain change error</h3>
+<p>The error <code>Access api error auth_domain_cannot_be_updated_dash_sso</code> occurs if you try to change your team domain while <a href="/fundamentals/manage-members/dashboard-sso/">Cloudflare dashboard SSO</a> is enabled. Dashboard SSO does not currently support team domain changes.</p>
+<h3 id="long-lived-ssh-sessions-disconnect">Long-lived SSH sessions disconnect</h3>
+<p>All connections proxied through Cloudflare Gateway, including traffic to <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/ssh/ssh-infrastructure-access/">Access for Infrastructure</a> SSH targets, have a maximum guaranteed duration of 10 hours. If a connection is active during a Gateway release, it will be terminated 10 hours later.</p>
+<p>To prevent unexpected disconnects, we recommend terminating sessions on a predefined schedule (for example, an 8-hour idle timeout). You can configure this using <code>ChannelTimeout</code> in your SSH server or client configuration.</p>
+<hr />
+<h2 id="how-to-contact-support">How to contact Support</h2>
+<p>If you cannot resolve the issue, <a href="/support/contacting-cloudflare-support/">open a support case</a>. Please provide a <a href="/support/troubleshooting/general-troubleshooting/gathering-information-for-troubleshooting-sites/#generate-a-har-file">HAR file</a> captured while reproducing the error and the <strong>Ray ID</strong> if an error page is displayed.</p>

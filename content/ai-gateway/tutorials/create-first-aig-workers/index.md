@@ -1,0 +1,35 @@
+<p>This tutorial guides you through creating your first AI Gateway using Workers AI on the Cloudflare dashboard. The intended audience is beginners who are new to AI Gateway and Workers AI. Creating an AI Gateway enables the user to efficiently manage and secure AI requests, allowing them to utilize AI models for tasks such as content generation, data processing, or predictive analysis with enhanced control and performance.</p>
+<h2 id="sign-up-and-log-in">Sign up and log in</h2>
+<ol>
+<li><strong>Sign up</strong>: If you do not have a Cloudflare account, <a href="https://cloudflare.com/sign-up">sign up</a>.</li>
+<li><strong>Log in</strong>: Access the Cloudflare dashboard by logging in to the <a href="https://dash.cloudflare.com/login">Cloudflare dashboard</a>.</li>
+</ol>
+<h2 id="create-gateway">Create gateway</h2>
+<p>Then, create a new AI Gateway.</p>
+<div class="nb-tabs" data-nb-tabs data-nb-sync-key="dashPlusAPI"><div role="tablist" aria-label="Options" data-nb-tabs-list></div><div data-nb-tabs-panels>
+@input("content/.markup/bodies/2796.md")
+</div></div>
+<h2 id="connect-your-ai-provider">Connect Your AI Provider</h2>
+<ol>
+<li>In the AI Gateway section, select the gateway you created.</li>
+<li>Select <strong>Workers AI</strong> as your provider to set up an endpoint specific to Workers AI.
+You will receive an endpoint URL for sending requests.</li>
+</ol>
+<h2 id="send-your-first-request">Send your first request</h2>
+<ol>
+<li>Go to <strong>AI</strong> &gt; <strong>Workers AI</strong> in the Cloudflare dashboard.</li>
+<li>Select <strong>Use REST API</strong> and follow the steps to create and copy the API token and Account ID.</li>
+<li>Send a request using the <a href="/ai-gateway/usage/rest-api/">REST API</a>. Replace <code>$CLOUDFLARE_ACCOUNT_ID</code> and <code>$CLOUDFLARE_API_TOKEN</code> with your actual account ID and API token:</li>
+</ol>
+<pre><code class="language-bash">&#35; Run `wrangler whoami` to get your account ID to replace $CLOUDFLARE_ACCOUNT_ID,&#10;&#35; and `wrangler auth token` to get an auth token to replace $CLOUDFLARE_API_TOKEN.&#10;curl -X POST &quot;https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/v1/chat/completions&quot; \&#10;  &#45;-header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  &#45;-header &quot;cf-aig-gateway-id: default&quot; \&#10;  &#45;-header &quot;Content-Type: application/json&quot; \&#10;  &#45;-data &#x27;{&#10;    &quot;model&quot;: &quot;@cf/moonshotai/kimi-k2.6&quot;,&#10;    &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;What is Cloudflare?&quot;}]&#10;  }&#x27;&#10;</code></pre>
+<p>The expected output would be similar to :</p>
+<pre><code class="language-bash">{&quot;result&quot;:{&quot;response&quot;:&quot;I&#x27;d be happy to explain what Cloudflare is.\n\nCloudflare is a cloud-based service that provides a range of features to help protect and improve the performance, security, and reliability of websites, applications, and other online services. Think of it as a shield for your online presence!\n\nHere are some of the key things Cloudflare does:\n\n1. **Content Delivery Network (CDN)**: Cloudflare has a network of servers all over the world. When you visit a website that uses Cloudflare, your request is sent to the nearest server, which caches a copy of the website&#x27;s content. This reduces the time it takes for the content to load, making your browsing experience faster.\n2. **DDoS Protection**: Cloudflare protects against Distributed Denial-of-Service (DDoS) attacks. This happens when a website is overwhelmed with traffic from multiple sources to make it unavailable. Cloudflare filters out this traffic, ensuring your site remains accessible.\n3. **Firewall**: Cloudflare acts as an additional layer of security, filtering out malicious traffic and hacking attempts, such as SQL injection or cross-site scripting (XSS) attacks.\n4. **SSL Encryption**: Cloudflare offers free SSL encryption, which secure sensitive information (like passwords, credit card numbers, and browsing data) with an HTTPS connection (the \&quot;S\&quot; stands for Secure).\n5. **Bot Protection**: Cloudflare has an AI-driven system that identifies and blocks bots trying to exploit vulnerabilities or scrape your content.\n6. **Analytics**: Cloudflare provides insights into website traffic, helping you understand your audience and make informed decisions.\n7. **Cybersecurity**: Cloudflare offers advanced security features, such as intrusion protection, DNS filtering, and Web Application Firewall (WAF) protection.\n\nOverall, Cloudflare helps protect against cyber threats, improves website performance, and enhances security for online businesses, bloggers, and individuals who need to establish a strong online presence.\n\nWould you like to know more about a specific aspect of Cloudflare?&quot;},&quot;success&quot;:true,&quot;errors&quot;:[],&quot;messages&quot;:[]}%&#10;</code></pre>
+<h2 id="view-analytics">View Analytics</h2>
+<p>Monitor your AI Gateway to view usage metrics.</p>
+<ol>
+<li>Go to <strong>AI</strong> &gt; <strong>AI Gateway</strong> in the dashboard.</li>
+<li>Select your gateway to view metrics such as request counts, token usage, caching efficiency, errors, and estimated costs. You can also turn on additional configurations like logging and rate limiting.</li>
+</ol>
+<h2 id="optional-next-steps">Optional - Next steps</h2>
+<p>To build more with Workers, refer to <a href="/workers/tutorials/">Tutorials</a>.</p>
+<p>If you have any questions, need assistance, or would like to share your project, join the Cloudflare Developer community on <a href="https://discord.cloudflare.com">Discord</a> to connect with other developers and the Cloudflare team.</p>

@@ -1,4 +1,6 @@
 .nift/.lock
+.nift/public/*/
+reports/cp8/
 
 __pycache__/
 *.pyc

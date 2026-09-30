@@ -1,0 +1,9 @@
+<p>It is useful to retry write queries from your application when you encounter a transient <a href="/d1/observability/debug-d1/#error-list">error</a>. From the list of <code>D1_ERROR</code>s, refer to the Recommended action column to determine if a query should be retried.</p>
+<aside class="nb-aside note">
+@markup("md", "content/.markup/bodies/7377.md")
+</aside>
+<h2 id="example-of-retrying-queries">Example of retrying queries</h2>
+<p>Consider the following example of a <code>shouldRetry(...)</code> function, taken from the <a href="https://github.com/cloudflare/templates/blob/main/d1-starter-sessions-api-template/src/index.ts#L108">D1 read replication starter template</a>.</p>
+<p>You should make sure your retries apply an exponential backoff with jitter strategy for more successful retries.
+You can use libraries abstracting that already like <a href="https://github.com/cloudflare/actors"><code>@cloudflare/actors</code></a>, or <a href="https://github.com/cloudflare/actors/blob/9ba112503132ddf6b5cef37ff145e7a2dd5ffbfc/packages/core/src/retries.ts#L18">copy the retry logic</a> in your own code directly.</p>
+<pre><code class="language-ts">import { tryWhile } from &quot;@cloudflare/actors&quot;;&#10;&#10;function queryD1Example(d1: D1Database, sql: string) {&#10;  return await tryWhile(async () =&gt; {&#10;    return await d1.prepare(sql).run();&#10;  }, shouldRetry);&#10;}&#10;&#10;function shouldRetry(err: unknown, nextAttempt: number) {&#10;  const errMsg = String(err);&#10;  const isRetryableError =&#10;    errMsg.includes(&quot;Network connection lost&quot;) ||&#10;    errMsg.includes(&quot;storage caused object to be reset&quot;) ||&#10;    errMsg.includes(&quot;reset because its code was updated&quot;);&#10;  if (nextAttempt &lt;= 5 &amp;&amp; isRetryableError) {&#10;    return true;&#10;  }&#10;  return false;&#10;}&#10;</code></pre>

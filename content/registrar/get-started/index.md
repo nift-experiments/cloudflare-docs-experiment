@@ -1,0 +1,1 @@
+<ul class="directory-listing"><li><a href="/registrar/get-started/register-domain/">Register a new domain</a></li><li><a href="/registrar/get-started/transfer-domain-to-cloudflare/">Transfer your domain to Cloudflare</a></li><li><a href="/registrar/get-started/enable-dnssec/">Enable DNSSEC</a></li></ul>

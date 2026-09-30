@@ -1,0 +1,3 @@
+<p>drand (pronounced &quot;dee-rand&quot;) is a distributed randomness beacon daemon written in Golang. Servers running drand can be linked to each other to produce collective, publicly verifiable, unbiased, unpredictable random values at fixed intervals using bilinear pairings and threshold cryptography.</p>
+<p>drand is meant to be an Internet infrastructure level service that provides randomness to applications, similar to how NTP provides timing information and Certificate Transparency Logs provide certificate issuance information.</p>
+<p>For the most up-to-date documentation on drand, please visit <a href="https://drand.love">drand.love</a>.</p>

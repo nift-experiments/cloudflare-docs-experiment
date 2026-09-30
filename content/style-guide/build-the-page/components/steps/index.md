@@ -1,0 +1,1 @@
+<pre><code class="language-mdx">import { Steps } from &quot;~/components&quot;&#10;&#10;&lt;Steps&gt;&#10;1. Import the `Steps` components&#10;2. Wrap your numbered list in the `Steps` components&#10;3. Done!&#10;&lt;/Steps&gt;&#10;</code></pre>

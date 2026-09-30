@@ -1,0 +1,2 @@
+<p>This guide details how to migrate from Wrangler v1 to v2.</p>
+<ul class="directory-listing"><li><a href="/workers/wrangler/migration/v1-to-v2/eject-webpack/">1. Migrate webpack projects</a></li><li><a href="/workers/wrangler/migration/v1-to-v2/update-v1-to-v2/">2. Update to Wrangler v2</a></li><li><a href="/workers/wrangler/migration/v1-to-v2/wrangler-legacy/">Wrangler v1 (legacy)</a></li></ul>

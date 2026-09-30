@@ -1,0 +1,1 @@
+<ul class="directory-listing"><li><a href="/resource-tagging/reference/resource-types/">Supported resource types</a></li><li><a href="/resource-tagging/reference/limits/">Limits and validation</a></li><li><a href="/resource-tagging/reference/error-codes/">Error codes</a></li></ul>

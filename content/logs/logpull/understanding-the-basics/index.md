@@ -1,0 +1,19 @@
+<h2 id="access-pattern">Access pattern</h2>
+<p>The basic access pattern is <em>give me all the logs for zone Z for minute M</em> where the minute <em>M</em> refers to the time the log entries were written to disk in Cloudflare's log aggregation system.</p>
+<p>To start, try running your query every minute. If responses are too small, go up to 5 minutes as this will be appropriate for most zones. If the responses are too large, try going down to 15 seconds.</p>
+<p>If your zone has so many logs that it takes longer than 1 minute to read 1 minute worth of logs, run 2 workers staggered, each requesting 1 minute worth of logs every 2 minutes.</p>
+<p>Data returned by the API will not change on repeat calls. The order of messages in the response may be different, but the number and content of the messages will always be the same for a given query as long as the response code is <code>200</code> and there is no error reading the response body.</p>
+<p>Because our log processing system ingests data in batches, most zones with less than 1 million requests per minute will have &quot;empty&quot; minutes. Queries for such a minute result in responses with status <code>200</code> but no data in the body. This does not mean that there were no requests proxied by Cloudflare for that minute. It just means that our system did not process a batch of logs for that zone in that minute.</p>
+<h2 id="order-of-the-data-returned">Order of the data returned</h2>
+<p>The <code>logs/received</code> API endpoint exposes data by time received, which is the time the event was written to disk in the Cloudflare Logs aggregation system.</p>
+<p>Ordering by log aggregation time instead of log generation time results in lower (faster) log pipeline latency and deterministic log pulls. Functionally, it is similar to tailing a log file or reading from <em>rsyslog</em> (albeit in chunks).</p>
+<p>This means that to obtain logs for a given time range, you can issue one call for each consecutive minute (or other time range). Because log lines are batched by time received and made available, there is no late arriving data. A response for a given minute will never change. You do not have to repeatedly poll a given time range to receive logs as they converge on our aggregation system.</p>
+<h2 id="format-of-the-data-returned">Format of the data returned</h2>
+<p>The Logpull API returns data in NDJSON format, whereby each log line is a valid JSON object. Major analysis tools like Google BigQuery and AWS Kinesis require this format.</p>
+<p>To turn the resulting log data into a JSON array with one array element per log line, you can use the <code>jq</code> tool. Essentially, you pipe the API response into <em>jq</em> using the <em>slurp</em> (or simply <em>s</em>) flag:</p>
+<p><code>&lt;API request data&gt; | jq -s</code></p>
+<p>Refer to <a href="https://jqlang.github.io/jq/download/">Download jq</a> for more information on obtaining and installing <code>jq</code>.</p>
+<p>The following is a sample log with default fields:</p>
+<pre><code class="language-json">{&#10;  &quot;ClientIP&quot;: &quot;89.163.242.206&quot;,&#10;  &quot;ClientRequestHost&quot;: &quot;www.theburritobot.com&quot;,&#10;  &quot;ClientRequestMethod&quot;: &quot;GET&quot;,&#10;  &quot;ClientRequestURI&quot;: &quot;/static/img/testimonial-hipster.png&quot;,&#10;  &quot;EdgeEndTimestamp&quot;: 1506702504461999900,&#10;  &quot;EdgeResponseBytes&quot;: 69045,&#10;  &quot;EdgeResponseStatus&quot;: 200,&#10;  &quot;EdgeStartTimestamp&quot;: 1506702504433000200,&#10;  &quot;RayID&quot;: &quot;3a6050bcbe121a87&quot;&#10;}&#10;</code></pre>
+<h2 id="data-retention-period">Data retention period</h2>
+<p>You can query for logs starting from 1 minute in the past (relative to the actual time that you make the query) and go back at least 3 days and up to 7 days. For longer durations, we recommend using <a href="/logs/logpush/">Logpush</a>.</p>

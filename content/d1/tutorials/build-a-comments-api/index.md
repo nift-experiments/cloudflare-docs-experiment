@@ -1,0 +1,80 @@
+<p>In this tutorial, you will use D1 and <a href="https://hono.dev/">Hono</a> to build a JSON API that stores and retrieves comments for a blog. You will create a D1 database, define a schema, and wire up <code>GET</code> and <code>POST</code> endpoints that read from and write to the database.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ol>
+<li>Sign up for a <a href="https://dash.cloudflare.com/sign-up/workers-and-pages">Cloudflare account</a>.</li>
+<li>Install <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm"><code>Node.js</code></a>.</li>
+</ol>
+<details class="nb-details"><summary>Node.js version manager</summary><div class="nb-details-body">
+@markup("md", "content/.markup/bodies/7309.md")
+</div></details>
+<h2 id="1-create-a-new-worker-project"><ol>
+<li>Create a new Worker project</li>
+</ol></h2>
+<div class="nb-steps">
+@markup("md", "content/.markup/bodies/7310.md")
+</div>
+<h2 id="2-install-hono"><ol start="2">
+<li>Install Hono</li>
+</ol></h2>
+<p>Install <a href="https://hono.dev/">Hono</a>, a lightweight web framework for building APIs on Workers:</p>
+<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">bun</button></div><div role="tabpanel" data-nb-pm-panel><pre><code data-nb-pm-code>npm i hono</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm i hono" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>yarn add hono</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn add hono" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>pnpm add hono</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm add hono" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>bun add hono</code></pre><button type="button" data-nb-pm-copy data-nb-command="bun add hono" aria-label="Copy to clipboard">Copy</button></div></div>
+<h2 id="3-create-a-database"><ol start="3">
+<li>Create a database</li>
+</ol></h2>
+<div class="nb-steps">
+@markup("md", "content/.markup/bodies/7312.md")
+</div>
+<p><a href="/workers/runtime-apis/bindings/">Bindings</a> allow your Workers to access resources, like D1 databases, KV namespaces, and R2 buckets, using a variable name in code. Your D1 database is accessible in your Worker on <code>env.DB</code>.</p>
+<h2 id="4-create-a-schema-and-seed-the-database"><ol start="4">
+<li>Create a schema and seed the database</li>
+</ol></h2>
+<div class="nb-steps">
+@markup("md", "content/.markup/bodies/7313.md")
+</div>
+<h2 id="5-initialize-the-hono-application"><ol start="5">
+<li>Initialize the Hono application</li>
+</ol></h2>
+<p>Replace the contents of <code>src/index.ts</code> with the following code. This sets up a Hono application with a typed <code>Bindings</code> interface so that <code>env.DB</code> is correctly typed as a <code>D1Database</code>:</p>
+<div class="nb-type-script-example">
+@markup("md", "content/.markup/bodies/7314.md")
+</div>
+<h2 id="6-query-comments"><ol start="6">
+<li>Query comments</li>
+</ol></h2>
+<p>Add the logic for the <code>GET</code> endpoint to retrieve comments for a given post. This uses the D1 <a href="/d1/worker-api/">Workers Binding API</a> to prepare and execute a parameterized query:</p>
+<div class="nb-type-script-example">
+@markup("md", "content/.markup/bodies/7315.md")
+</div>
+<p>The code uses <a href="/d1/worker-api/d1-database/#prepare"><code>prepare</code></a> to create a parameterized statement, <a href="/d1/worker-api/prepared-statements/#bind"><code>bind</code></a> to safely pass the slug value (preventing SQL injection), and <a href="/d1/worker-api/prepared-statements/#run"><code>run</code></a> to execute the query.</p>
+<h2 id="7-insert-comments"><ol start="7">
+<li>Insert comments</li>
+</ol></h2>
+<p>Add the <code>POST</code> endpoint to create new comments. This validates the request body before inserting a row:</p>
+<div class="nb-type-script-example">
+@markup("md", "content/.markup/bodies/7316.md")
+</div>
+<h2 id="8-optional-add-cors-support"><ol start="8">
+<li>(Optional) Add CORS support</li>
+</ol></h2>
+<p>If you plan to call this API from a front-end application on a different origin, add CORS middleware. Import the <code>cors</code> module from Hono and add it before your routes:</p>
+<div class="nb-type-script-example">
+@markup("md", "content/.markup/bodies/7317.md")
+</div>
+<p>When you make requests to <code>/api/*</code>, Hono will automatically generate and add CORS headers to responses from your API.</p>
+<h2 id="9-deploy-your-application"><ol start="9">
+<li>Deploy your application</li>
+</ol></h2>
+<div class="nb-steps">
+@markup("md", "content/.markup/bodies/7318.md")
+</div>
+<h2 id="full-example">Full example</h2>
+<p>The complete <code>src/index.ts</code> with all routes and CORS support:</p>
+<div class="nb-type-script-example">
+@markup("md", "content/.markup/bodies/7319.md")
+</div>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li>Refer to the <a href="/d1/worker-api/">D1 Workers Binding API</a> for a full list of available methods.</li>
+<li>Learn about <a href="/d1/best-practices/local-development/">D1 local development</a> for testing your database without deploying.</li>
+<li>Explore <a href="/d1/reference/community-projects/">community projects built on D1</a>.</li>
+</ul>

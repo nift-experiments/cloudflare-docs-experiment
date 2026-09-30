@@ -1,0 +1,2 @@
+<p>This section covers how a page is put together: the MDX syntax you write in, the frontmatter metadata every page carries, and the components you can add for richer formatting. Start with the Markdown and MDX basics, then set the frontmatter, then reach for components as you need them.</p>
+<ul class="directory-listing"><li><a href="/style-guide/build-the-page/markdown-and-mdx/">Markdown and MDX</a></li><li><a href="/style-guide/build-the-page/frontmatter/">Frontmatter</a></li><li><a href="/style-guide/build-the-page/components/">Components</a></li></ul>

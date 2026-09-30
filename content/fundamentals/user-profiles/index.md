@@ -1,0 +1,2 @@
+<p>Each user has a profile that contains several settings, such as <a href="/fundamentals/user-profiles/customize-account/#notifications">Communication preferences</a> and <a href="/fundamentals/user-profiles/customize-account/#language">Language preferences</a>.</p>
+<p>To access your profile, select the user icon and then <strong>My Profile</strong> from any page within the <a href="https://dash.cloudflare.com">Cloudflare dashboard</a>.</p>

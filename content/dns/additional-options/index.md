@@ -1,0 +1,2 @@
+<p>Beyond <a href="/dns/zone-setups/">setting up your zone</a> and <a href="/dns/manage-dns-records/">updating your DNS records</a>, you may want to customize the following settings in Cloudflare DNS:</p>
+<ul class="directory-listing"><li><a href="/dns/additional-options/dns-zone-defaults/">Configure DNS zone defaults</a></li><li><a href="/dns/additional-options/analytics/">Analytics and logs</a></li><li><a href="/dns/additional-options/reverse-zones/">Reverse zones and PTR records</a></li></ul>

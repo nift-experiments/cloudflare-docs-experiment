@@ -1,0 +1,88 @@
+<div class="nb-interactive-component" data-cf-component="GlossaryTooltip">
+@markup("md", "content/.markup/bodies/8308.md")
+</div> are a
+powerful compute API that provides a compute with storage building block. Each
+Durable Object has its own private, transactional, and strongly consistent
+storage. Durable Objects
+<div class="nb-interactive-component" data-cf-component="GlossaryTooltip">
+@markup("md", "content/.markup/bodies/8309.md")
+</div> provides
+access to a Durable Object's attached storage.
+<p>A Durable Object's <a href="/durable-objects/reference/in-memory-state/">in-memory state</a> is preserved as long as the Durable Object is not evicted from memory. Inactive Durable Objects with no incoming request traffic can be evicted. There are normal operations like <a href="/workers/versions-and-deployments/">code deployments</a> that trigger Durable Objects to restart and lose their in-memory state. For these reasons, you should use Storage API to persist state durably on disk that needs to survive eviction or restart of Durable Objects.</p>
+<h2 id="access-storage">Access storage</h2>
+<aside class="nb-aside note">
+<h3 class="nb-aside-title" id="recommended-sqlite-backed-durable-objects">Recommended SQLite-backed Durable Objects</h3>
+@markup("md", "content/.markup/bodies/8307.md")
+</aside>
+<aside class="nb-aside note">
+<h3 class="nb-aside-title" id="storage-billing-on-sqlite-backed-durable-objects">Storage billing on SQLite-backed Durable Objects</h3>
+@markup("md", "content/.markup/bodies/8306.md")
+</aside>
+<p><a href="/durable-objects/api/sqlite-storage-api/">Storage API methods</a> are available on <code>ctx.storage</code> parameter passed to the Durable Object constructor. Storage API has several methods, including SQL, point-in-time recovery (PITR), key-value (KV), and alarm APIs.</p>
+<p>Only Durable Object classes with a SQLite storage backend can access SQL API.</p>
+<h3 id="create-sqlite-backed-durable-object-class">Create SQLite-backed Durable Object class</h3>
+<p>Use <code>new_sqlite_classes</code> on the migration in your Worker's Wrangler file:</p>
+<div class="nb-wrangler-config">
+@markup("md", "content/.markup/bodies/8310.md")
+</div>
+<p><a href="/durable-objects/api/sqlite-storage-api/#exec">SQL API</a> is available on <code>ctx.storage.sql</code> parameter passed to the Durable Object constructor.</p>
+<p>SQLite-backed Durable Objects also offer <a href="/durable-objects/api/sqlite-storage-api/#pitr-point-in-time-recovery-api">point-in-time recovery API</a>, which uses <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
+@markup("md", "content/.markup/bodies/8311.md")
+</div> to allow you to restore a Durable Object's embedded SQLite database to any point in time in the past 30 days.
+<h3 id="initialize-instance-variables-from-storage">Initialize instance variables from storage</h3>
+<p>A common pattern is to initialize a Durable Object from <a href="/durable-objects/api/sqlite-storage-api/">persistent storage</a> and set instance variables the first time it is accessed. Since future accesses are routed to the same Durable Object, it is then possible to return any initialized values without making further calls to persistent storage.</p>
+<pre><code class="language-ts">import { DurableObject } from &quot;cloudflare:workers&quot;;&#10;&#10;export class Counter extends DurableObject {&#10;	value: number;&#10;&#10;	constructor(ctx: DurableObjectState, env: Env) {&#10;		super(ctx, env);&#10;&#10;		// `blockConcurrencyWhile()` ensures no requests are delivered until&#10;		// initialization completes.&#10;		ctx.blockConcurrencyWhile(async () =&gt; {&#10;			// After initialization, future reads do not need to access storage.&#10;			this.value = (await ctx.storage.get(&quot;value&quot;)) || 0;&#10;		});&#10;	}&#10;&#10;	async getCounterValue() {&#10;		return this.value;&#10;	}&#10;}&#10;</code></pre>
+<h3 id="remove-a-durable-object-s-storage">Remove a Durable Object's storage</h3>
+<p>A Durable Object fully ceases to exist if, when it shuts down, its storage is empty. If you never write to a Durable Object's storage at all (including setting <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
+@markup("md", "content/.markup/bodies/8312.md")
+</div>), then storage remains empty, and so the Durable Object will no longer exist once it shuts down.
+<p>However if you ever write using <a href="/durable-objects/api/sqlite-storage-api/">Storage API</a>, including setting alarms, then you must explicitly call <a href="/durable-objects/api/sqlite-storage-api/#deleteall"><code>storage.deleteAll()</code></a> to empty storage and <a href="/durable-objects/api/sqlite-storage-api/#deletealarm"><code>storage.deleteAlarm()</code></a> if you've configured an alarm. It is not sufficient to simply delete the specific data that you wrote, such as deleting a key or dropping a table, as some metadata may remain. The only way to remove all storage is to call <code>deleteAll()</code>. Calling <code>deleteAll()</code> ensures that a Durable Object will not be billed for storage.</p>
+<pre><code class="language-ts">export class MyDurableObject extends DurableObject&lt;Env&gt; {&#10;	constructor(ctx: DurableObjectState, env: Env) {&#10;		super(ctx, env);&#10;	}&#10;&#10;	// Clears Durable Object storage&#10;	async clearDo(): Promise&lt;void&gt; {&#10;		// If you&#x27;ve configured a Durable Object alarm&#10;		await this.ctx.storage.deleteAlarm();&#10;&#10;		// This will delete all the storage associated with this Durable Object instance&#10;		// This will also delete the Durable Object instance itself&#10;		await this.ctx.storage.deleteAll();&#10;	}&#10;}&#10;</code></pre>
+<h2 id="sql-api-examples">SQL API Examples</h2>
+<p><a href="/durable-objects/api/sqlite-storage-api/#exec">SQL API</a> examples below use the following SQL schema:</p>
+<pre><code class="language-ts">import { DurableObject } from &quot;cloudflare:workers&quot;;&#10;&#10;export class MyDurableObject extends DurableObject {&#10;  sql: SqlStorage&#10;  constructor(ctx: DurableObjectState, env: Env) {&#10;    super(ctx, env);&#10;    this.sql = ctx.storage.sql;&#10;&#10;    this.sql.exec(`CREATE TABLE IF NOT EXISTS artist(&#10;      artistid    INTEGER PRIMARY KEY,&#10;      artistname  TEXT&#10;    );INSERT INTO artist (artistid, artistname) VALUES&#10;      (123, &#x27;Alice&#x27;),&#10;      (456, &#x27;Bob&#x27;),&#10;      (789, &#x27;Charlie&#x27;);`&#10;    );&#10;  }&#10;}&#10;</code></pre>
+<p>Iterate over query results as row objects:</p>
+<pre><code class="language-ts">  let cursor = this.sql.exec(&quot;SELECT * FROM artist;&quot;);&#10;&#10;  for (let row of cursor) {&#10;    // Iterate over row object and do something&#10;  }&#10;</code></pre>
+<p>Convert query results to an array of row objects:</p>
+<pre><code class="language-ts">  // Return array of row objects: [{&quot;artistid&quot;:123,&quot;artistname&quot;:&quot;Alice&quot;},{&quot;artistid&quot;:456,&quot;artistname&quot;:&quot;Bob&quot;},{&quot;artistid&quot;:789,&quot;artistname&quot;:&quot;Charlie&quot;}]&#10;  let resultsArray1 = this.sql.exec(&quot;SELECT * FROM artist;&quot;).toArray();&#10;  // OR&#10;  let resultsArray2 = Array.from(this.sql.exec(&quot;SELECT * FROM artist;&quot;));&#10;  // OR&#10;  let resultsArray3 = [...this.sql.exec(&quot;SELECT * FROM artist;&quot;)]; // JavaScript spread syntax&#10;</code></pre>
+<p>Convert query results to an array of row values arrays:</p>
+<pre><code class="language-ts">  // Returns [[123,&quot;Alice&quot;],[456,&quot;Bob&quot;],[789,&quot;Charlie&quot;]]&#10;  let cursor = this.sql.exec(&quot;SELECT * FROM artist;&quot;);&#10;  let resultsArray = cursor.raw().toArray();&#10;&#10;  // Returns [&quot;artistid&quot;,&quot;artistname&quot;]&#10;  let columnNameArray = this.sql.exec(&quot;SELECT * FROM artist;&quot;).columnNames.toArray();&#10;</code></pre>
+<p>Get first row object of query results:</p>
+<pre><code class="language-ts">  // Returns {&quot;artistid&quot;:123,&quot;artistname&quot;:&quot;Alice&quot;}&#10;  let firstRow = this.sql.exec(&quot;SELECT * FROM artist ORDER BY artistname DESC;&quot;).toArray()[0];&#10;</code></pre>
+<p>Check if query results have exactly one row:</p>
+<pre><code class="language-ts">  // returns error&#10;  this.sql.exec(&quot;SELECT * FROM artist ORDER BY artistname ASC;&quot;).one();&#10;&#10;  // returns { artistid: 123, artistname: &#x27;Alice&#x27; }&#10;  let oneRow = this.sql.exec(&quot;SELECT * FROM artist WHERE artistname = ?;&quot;, &quot;Alice&quot;).one()&#10;</code></pre>
+<p>Returned cursor behavior:</p>
+<pre><code class="language-ts">  let cursor = this.sql.exec(&quot;SELECT * FROM artist ORDER BY artistname ASC;&quot;);&#10;  let result = cursor.next();&#10;  if (!result.done) {&#10;    console.log(result.value); // prints { artistid: 123, artistname: &#x27;Alice&#x27; }&#10;  } else {&#10;    // query returned zero results&#10;  }&#10;&#10;  let remainingRows = cursor.toArray();&#10;  console.log(remainingRows); // prints [{ artistid: 456, artistname: &#x27;Bob&#x27; },{ artistid: 789, artistname: &#x27;Charlie&#x27; }]&#10;</code></pre>
+<p>Returned cursor and <code>raw()</code> iterator iterate over the same query results:</p>
+<pre><code class="language-ts">  let cursor = this.sql.exec(&quot;SELECT * FROM artist ORDER BY artistname ASC;&quot;);&#10;  let result = cursor.raw().next();&#10;&#10;  if (!result.done) {&#10;    console.log(result.value); // prints [ 123, &#x27;Alice&#x27; ]&#10;  } else {&#10;    // query returned zero results&#10;  }&#10;&#10;  console.log(cursor.toArray()); // prints [{ artistid: 456, artistname: &#x27;Bob&#x27; },{ artistid: 789, artistname: &#x27;Charlie&#x27; }]&#10;</code></pre>
+<p><code>sql.exec().rowsRead()</code>:</p>
+<pre><code class="language-ts">  let cursor = this.sql.exec(&quot;SELECT * FROM artist;&quot;);&#10;  cursor.next()&#10;  console.log(cursor.rowsRead); // prints 1&#10;&#10;  cursor.toArray(); // consumes remaining cursor&#10;  console.log(cursor.rowsRead); // prints 3&#10;</code></pre>
+<h2 id="typescript-and-query-results">TypeScript and query results</h2>
+<p>You can use TypeScript <a href="https://www.typescriptlang.org/docs/handbook/2/generics.html#working-with-generic-type-variables">type parameters</a> to provide a type for your results, allowing you to benefit from type hints and checks when iterating over the results of a query.</p>
+<aside class="nb-aside caution">
+@markup("md", "content/.markup/bodies/8305.md")
+</aside>
+<p>Your type must conform to the shape of a TypeScript <a href="https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type">Record</a> type representing the name (<code>string</code>) of the column and the type of the column. The column type must be a valid <code>SqlStorageValue</code>: one of <code>ArrayBuffer | string | number | null</code>.</p>
+<p>For example,</p>
+<pre><code class="language-ts">type User = {&#10;	id: string;&#10;	name: string;&#10;	email_address: string;&#10;	version: number;&#10;};&#10;</code></pre>
+<p>This type can then be passed as the type parameter to a <code>sql.exec()</code> call:</p>
+<pre><code class="language-ts">// The type parameter is passed between angle brackets before the function argument:&#10;const result = this.ctx.storage.sql&#10;	.exec&lt;User&gt;(&#10;		&quot;SELECT id, name, email_address, version FROM users WHERE id = ?&quot;,&#10;		user_id,&#10;	)&#10;	.one();&#10;// result will now have a type of &quot;User&quot;&#10;&#10;// Alternatively, if you are iterating over results using a cursor&#10;let cursor = this.sql.exec&lt;User&gt;(&#10;	&quot;SELECT id, name, email_address, version FROM users WHERE id = ?&quot;,&#10;	user_id,&#10;);&#10;for (let row of cursor) {&#10;	// Each row object will be of type User&#10;}&#10;&#10;// Or, if you are using raw() to convert results into an array, define an array type:&#10;type UserRow = [&#10;	id: string,&#10;	name: string,&#10;	email_address: string,&#10;	version: number,&#10;];&#10;&#10;// ... and then pass it as the type argument to the raw() method:&#10;let cursor = sql&#10;	.exec(&#10;		&quot;SELECT id, name, email_address, version FROM users WHERE id = ?&quot;,&#10;		user_id,&#10;	)&#10;	.raw&lt;UserRow&gt;();&#10;&#10;for (let row of cursor) {&#10;	// row is of type User&#10;}&#10;</code></pre>
+<p>You can represent the shape of any result type you wish, including more complex types. If you are performing a
+<code>JOIN</code> across multiple tables, you can compose a type that reflects the results of your queries.</p>
+<h2 id="indexes-in-sqlite">Indexes in SQLite</h2>
+<p>Creating indexes for your most queried tables and filtered columns reduces how much data is scanned and improves query performance at the same time. If you have a read-heavy workload (most common), this can be particularly advantageous. Writing to columns referenced in an index will add at least one (1) additional row written to account for updating the index, but this is typically offset by the reduction in rows read due to the benefits of an index.</p>
+<h2 id="sql-in-durable-objects-vs-d1">SQL in Durable Objects vs D1</h2>
+<p>Cloudflare Workers offers a SQLite-backed serverless database product - <a href="/d1/">D1</a>. How should you compare <a href="/durable-objects/best-practices/access-durable-objects-storage/">SQLite in Durable Objects</a> and D1?</p>
+<p><strong>D1 is a managed database product.</strong></p>
+<p>D1 fits into a familiar architecture for developers, where application servers communicate with a database over the network. Application servers are typically Workers; however, D1 also supports external, non-Worker access via an <a href="https://developers.cloudflare.com/api/resources/d1/subresources/database/methods/query/">HTTP API</a>, which helps unlock <a href="/d1/reference/community-projects/#_top">third-party tooling</a> support for D1.</p>
+<p>D1 aims for a &quot;batteries included&quot; feature set, including the above HTTP API, <a href="/d1/reference/migrations/#_top">database schema management</a>, <a href="/d1/best-practices/import-export-data/">data import/export</a>, and <a href="/d1/observability/metrics-analytics/#query-insights">database query insights</a>.</p>
+<p>With D1, your application code and SQL database queries are not colocated which can impact application performance. If performance is a concern with D1, Workers has <a href="/workers/configuration/placement/#_top">Smart Placement</a> to dynamically run your Worker in the best location to reduce total Worker request latency, considering everything your Worker talks to, including D1.</p>
+<p><strong>SQLite in Durable Objects is a lower-level compute with storage building block for distributed systems.</strong></p>
+<p>By design, Durable Objects are accessed with Workers-only.</p>
+<p>Durable Objects require a bit more effort, but in return, give you more flexibility and control. With Durable Objects, you must implement two pieces of code that run in different places: a front-end Worker which routes incoming requests from the Internet to a unique Durable Object, and the Durable Object itself, which runs on the same machine as the SQLite database. You get to choose what runs where, and it may be that your application benefits from running some application business logic right next to the database.</p>
+<p>With SQLite in Durable Objects, you may also need to build some of your own database tooling that comes out-of-the-box with D1.</p>
+<p>SQL query pricing and limits are intended to be identical between D1 (<a href="/d1/platform/pricing/">pricing</a>, <a href="/d1/platform/limits/">limits</a>) and SQLite in Durable Objects (<a href="/durable-objects/platform/pricing/#sqlite-storage-backend">pricing</a>, <a href="/durable-objects/platform/limits/">limits</a>).</p>
+<h2 id="related-resources">Related resources</h2>
+<ul>
+<li><a href="https://blog.cloudflare.com/sqlite-in-durable-objects">Zero-latency SQLite storage in every Durable Object blog post</a></li>
+</ul>
