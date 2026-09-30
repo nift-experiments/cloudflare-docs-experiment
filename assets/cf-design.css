@@ -265,7 +265,8 @@ body[data-scroll-locked] { overflow: hidden; }
 .video-landing { width: min(70rem, calc(100% - 2rem)); margin: 0 auto; padding: 2rem 0 6rem; }
 .video-landing > header { max-width: 40rem; margin: 0 auto 5.5rem; text-align: center; }.video-landing h1 { font-size: clamp(2.25rem, 4vw, 3rem); line-height: 1.1; font-weight: 500; }
 .video-content { max-width: 47rem; margin: 0 auto; }.video-frame { position: relative; overflow: hidden; aspect-ratio: 16 / 9; margin: 1.5rem 0; background: var(--nb-surface-sunken); }
-.video-frame iframe { width: 100%; height: 100%; border: 0; }.video-frame .video-poster { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; margin: 0; object-fit: cover; }.video-transcript { max-height: 28rem; overflow-y: auto; }
+.video-frame iframe { width: 100%; height: 100%; border: 0; }.video-transcript { max-height: 28rem; overflow-y: auto; }
+.video-chapters { margin: 1rem 0; }.video-chapters ul { display: flex; gap: 1rem; overflow-x: auto; margin: 0; padding: 1rem 0 0; list-style: none; }.video-chapters li { margin: 0; }.video-chapters button { display: flex; width: 9rem; height: 100%; flex-direction: column; align-items: center; gap: .5rem; padding: .75rem; border: 1px solid var(--nb-border); border-radius: 5px; background: transparent; color: var(--nb-foreground); cursor: pointer; }.video-chapters img { width: 7.5rem; height: 4rem; margin: 0; border-radius: 4px; object-fit: cover; }.video-chapters span { color: var(--nb-muted-foreground); font-size: .75rem; }
 @media (max-width: 639px) { .video-landing > header { max-width: 18rem; } .video-content { width: calc(100% - 1rem); } }
 @media (min-width: 640px) and (max-width: 899px) { .video-landing > header, .video-content { max-width: 33.125rem; } }
 .changelog-tools { display: flex; justify-content: flex-end; align-items: center; gap: 1.5rem; min-height: 4rem; margin-bottom: 2rem; }

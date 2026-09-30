@@ -485,6 +485,26 @@
     });
   }
 
+  function initStreamChapters() {
+    document.addEventListener("click", function (event) {
+      var button = event.target.closest && event.target.closest("[data-video-time]");
+      if (!button) return;
+      var details = button.closest(".video-chapters");
+      var iframe = details && details.previousElementSibling && details.previousElementSibling.querySelector("iframe");
+      if (!iframe) return;
+      var seek = function () { if (window.Stream) window.Stream(iframe).currentTime = Number(button.dataset.videoTime); };
+      if (window.Stream) { seek(); return; }
+      var script = document.querySelector("[data-stream-sdk]");
+      if (!script) {
+        script = document.createElement("script");
+        script.src = "https://embed.cloudflarestream.com/embed/sdk.latest.js";
+        script.dataset.streamSdk = "";
+        document.head.appendChild(script);
+      }
+      script.addEventListener("load", seek, { once: true });
+    });
+  }
+
   function initArticleTools() {
     var article = document.querySelector(".article-wrap");
     var heading = article && article.querySelector("h1");
@@ -585,6 +605,7 @@
     initPackageManagers();
     initArticleTools();
     initCopy();
+    initStreamChapters();
     initTables();
     initTOC();
     initSearch();
