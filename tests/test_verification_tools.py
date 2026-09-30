@@ -27,6 +27,7 @@ corpus_parity = load_tool('audit_corpus_parity')
 page_metadata = load_tool('page_metadata')
 metadata_audit = load_tool('audit_metadata')
 accessibility_audit = load_tool('audit_accessibility')
+browser_cp9 = load_tool('../tests/browser_cp9')
 
 
 class TestPageMetadata(unittest.TestCase):
@@ -144,6 +145,35 @@ class TestMetadataAudit(unittest.TestCase):
             report = metadata_audit.audit(public, ordinary, generated)
             self.assertIn('social_metadata', report['findings'])
 
+    def test_noindex_with_json_ld_and_sitemap_entry_fails(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = pathlib.Path(tmp)
+            public = base / 'public'
+            public.mkdir()
+            head = page_metadata.build_head('/', 'Home')['head_html']
+            head = head.replace('<meta name="generator" content="Nift">',
+                                '<meta name="generator" content="Nift">'
+                                '<meta name="robots" content="noindex, nofollow">')
+            (public / 'index.html').write_text(
+                f'<html lang="en"><head>{head}</head><body></body></html>')
+            (public / 'robots.txt').write_text(
+                f'User-agent: *\nSitemap: {page_metadata.ORIGIN}/sitemap-index.xml\n')
+            (public / 'sitemap-index.xml').write_text(
+                '<?xml version="1.0"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+                f'<sitemap><loc>{page_metadata.ORIGIN}/sitemap-0.xml</loc></sitemap></sitemapindex>')
+            (public / 'sitemap-0.xml').write_text(
+                '<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+                f'<url><loc>{page_metadata.ORIGIN}/</loc></url></urlset>')
+            ordinary = base / 'ordinary.json'
+            generated = base / 'generated.json'
+            ordinary.write_text(json.dumps({'upstream_sha': 'pinned', 'routes': []}))
+            generated.write_text(json.dumps({'upstream_sha': 'pinned', 'routes': []}))
+
+            report = metadata_audit.audit(public, ordinary, generated)
+
+            self.assertIn('noindex_json_ld', report['findings'])
+            self.assertIn('sitemap_includes_excluded', report['findings'])
+
 
 class TestAccessibilityAudit(unittest.TestCase):
     def test_labels_and_aria_targets_are_enforced(self):
@@ -170,6 +200,34 @@ class TestAccessibilityAudit(unittest.TestCase):
             self.assertIn('unnamed_control', report['findings'])
             self.assertIn('dangling_aria_reference', report['findings'])
             self.assertIn('iframe_without_title', report['findings'])
+
+    def test_text_input_value_is_not_an_accessible_name(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = pathlib.Path(tmp)
+            public = base / 'public'
+            public.mkdir()
+            (public / 'index.html').write_text(
+                '<html lang="en"><body><main><input type="text" value="Not a label">'
+                '<input type="submit" value="Search"></main></body></html>')
+            ordinary = base / 'ordinary.json'
+            generated = base / 'generated.json'
+            ordinary.write_text(json.dumps({'upstream_sha': 'pinned', 'routes': []}))
+            generated.write_text(json.dumps({'upstream_sha': 'pinned', 'routes': []}))
+
+            report = accessibility_audit.audit(public, ordinary, generated)
+
+            self.assertEqual(1, len(report['findings']['unnamed_control'][0]['controls']))
+
+
+class TestBrowserCp9(unittest.TestCase):
+    def test_sample_is_digest_and_count_pinned(self):
+        routes = browser_cp9.load_sample_routes(ROOT / 'parity/cp8-sample.json')
+        self.assertEqual(browser_cp9.SAMPLE_ROUTE_COUNT, len(routes))
+        with tempfile.TemporaryDirectory() as tmp:
+            sample = pathlib.Path(tmp) / 'sample.json'
+            sample.write_text(json.dumps({'routes': [{'route': '/'}]}))
+            with self.assertRaisesRegex(RuntimeError, 'SHA-256 mismatch'):
+                browser_cp9.load_sample_routes(sample)
 
 
 class TestRouteVerification(unittest.TestCase):

@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import collections
 import json
+import re
 import sys
 import xml.etree.ElementTree as ET
 from html.parser import HTMLParser
@@ -160,8 +161,18 @@ def audit(public, ordinary_manifest, generated_manifest):
         expected_page_url = ORIGIN + route
         if required_meta['og:url'] != [expected_page_url]:
             findings['og_url'].append({'route': route, 'values': required_meta['og:url']})
-        robots_noindex = _values(parsed.meta, 'name', 'robots') == ['noindex']
-        noindex = robots_noindex and not parsed.json_ld
+        robots_values = _values(parsed.meta, 'name', 'robots')
+        robots_tokens = {
+            token.lower()
+            for value in robots_values
+            for token in re.split(r'[\s,]+', value)
+            if token
+        }
+        noindex = 'noindex' in robots_tokens
+        if len(robots_values) > 1:
+            findings['robots_metadata'].append({'route': route, 'values': robots_values})
+        if noindex and parsed.json_ld:
+            findings['noindex_json_ld'].append(route)
         if noindex:
             totals['noindex_pages'] += 1
         else:

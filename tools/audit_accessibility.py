@@ -80,14 +80,19 @@ class AccessibilityParser(HTMLParser):
             is_link = node_tag == 'a' and bool(attrs.get('href'))
             if node_tag in {'button', 'input', 'select', 'textarea'} or is_link or role == 'button':
                 text = re.sub(r'\s+', ' ', ''.join(node['text'])).strip()
+                input_type = attrs.get('type', '').lower()
+                value_name = (attrs.get('value', '') if node_tag == 'input' and
+                              input_type in {'button', 'submit', 'reset'} else '')
+                alt_name = (attrs.get('alt', '') if node_tag == 'input' and
+                            input_type == 'image' else '')
                 self.controls.append({
                     'tag': node_tag,
                     'role': role,
                     'id': attrs.get('id'),
-                    'type': attrs.get('type', '').lower(),
+                    'type': input_type,
                     'href': attrs.get('href'),
                     'name': (attrs.get('aria-label') or attrs.get('title') or
-                             attrs.get('value') or text).strip(),
+                             value_name or alt_name or text).strip(),
                     'labelledby': attrs.get('aria-labelledby'),
                     'wrapped_label': node['wrapped_label'],
                     'tabindex': attrs.get('tabindex'),

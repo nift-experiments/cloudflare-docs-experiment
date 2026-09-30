@@ -16,24 +16,39 @@ from certification import validate_deployment
 
 AXE_CORE_VERSION = '4.10.3'
 AXE_SCRIPT_SHA256 = '880970c081707360e64f34cea25ff91892f5bc95675b0776925b9709dd8a68bb'
+SAMPLE_SHA256 = '27b4a4d415e584bbc8836f4aebc39371278d3ac76455ecb0e2c0c98e3eabb20a'
+SAMPLE_ROUTE_COUNT = 41
 
 
 def executable_identity(path):
     executable = pathlib.Path(path).absolute()
-    digest = hashlib.sha256(executable.read_bytes()).hexdigest()
+    payload = pathlib.Path('/snap/chromium/current/usr/lib/chromium-browser/chrome')
+    if executable != pathlib.Path('/snap/bin/chromium') or not payload.is_file():
+        payload = executable.resolve()
     version = subprocess.check_output([str(executable), '--version'], text=True).strip()
     return {'path': str(executable), 'resolvedPath': str(executable.resolve()),
-            'version': version, 'sha256': digest}
+            'version': version,
+            'launcherSha256': hashlib.sha256(executable.read_bytes()).hexdigest(),
+            'payloadPath': str(payload),
+            'sha256': hashlib.sha256(payload.read_bytes()).hexdigest()}
+
+
+def load_sample_routes(sample_path):
+    raw = sample_path.read_bytes()
+    if hashlib.sha256(raw).hexdigest() != SAMPLE_SHA256:
+        raise RuntimeError('accessibility sample SHA-256 mismatch')
+    sample = json.loads(raw)
+    routes = [entry['route'] for entry in sample['routes']]
+    if len(routes) != SAMPLE_ROUTE_COUNT or len(set(routes)) != SAMPLE_ROUTE_COUNT:
+        raise RuntimeError('accessibility sample route count or uniqueness mismatch')
+    return routes
 
 
 def run(base, sample_path, axe_script, chromium_executable, provenance=None,
         attestation=None):
     from playwright.sync_api import expect, sync_playwright
 
-    sample = json.loads(sample_path.read_text())
-    routes = [entry['route'] for entry in sample['routes']]
-    if not routes:
-        raise RuntimeError('accessibility sample has no routes')
+    routes = load_sample_routes(sample_path)
     axe_source = axe_script.read_text()
     if 'axe.run' not in axe_source:
         raise RuntimeError('axe script does not contain axe.run')
@@ -98,14 +113,15 @@ def run(base, sample_path, axe_script, chromium_executable, provenance=None,
         page.goto(base + '/sandbox/', wait_until='networkidle')
         tabs = page.locator('[data-nb-tabs]').first
         tab_items = tabs.locator('[role="tab"]')
-        if tab_items.count() > 1:
-            tab_items.first.focus()
-            tab_items.first.press('End')
-            expect(tab_items.last).to_be_focused()
-            tab_items.last.press('Home')
-            expect(tab_items.first).to_be_focused()
-            tab_items.first.press('ArrowLeft')
-            expect(tab_items.last).to_be_focused()
+        if tab_items.count() < 2:
+            raise AssertionError('/sandbox/: expected a tablist with at least two tabs')
+        tab_items.first.focus()
+        tab_items.first.press('End')
+        expect(tab_items.last).to_be_focused()
+        tab_items.last.press('Home')
+        expect(tab_items.first).to_be_focused()
+        tab_items.first.press('ArrowLeft')
+        expect(tab_items.last).to_be_focused()
         checks.append('tablist Home/End/Arrow keyboard behavior')
 
         for width in (639, 640, 700, 701, 1023, 1024, 1439, 1440):
@@ -123,8 +139,12 @@ def run(base, sample_path, axe_script, chromium_executable, provenance=None,
                 raise AssertionError(f'horizontal overflow at {width}px')
             if width <= 700 and state['topNav'] != 'none':
                 raise AssertionError(f'top navigation visible at {width}px')
+            if width <= 700 and state['menu'] == 'none':
+                raise AssertionError(f'mobile menu hidden at {width}px')
             if 701 <= width <= 1023 and state['topNav'] == 'none':
                 raise AssertionError(f'top navigation hidden at {width}px')
+            if width > 700 and state['menu'] != 'none':
+                raise AssertionError(f'mobile menu visible at {width}px')
             if width < 1024 and state['sidebar'] != 'none':
                 raise AssertionError(f'desktop sidebar visible at {width}px')
             if width >= 1024 and state['sidebar'] == 'none':
