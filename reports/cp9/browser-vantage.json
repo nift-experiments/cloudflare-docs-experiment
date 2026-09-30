@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 1,
+  "base": "http://172.105.161.70:8000",
+  "candidateProvenance": {
+    "schemaVersion": 2,
+    "generatedAt": "2026-09-30T13:59:26.034480+00:00",
+    "upstreamSha": "bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf",
+    "upstreamTree": "289e5331c2e6f257f37b40fa2910b434c906d3e9",
+    "experimentHead": "b83c5686c48849e9b82c3b3ac9de00e33d61a747",
+    "shellHead": "b6a90044d8eb4874bb03da5e11373c8b4bb9978e",
+    "publicTreeSha256": "afb40cd4f348479246102bc20a4eee6607fd8aec407bf3f0abbb1e8a27c484ed",
+    "publicFileCount": 18843
+  },
+  "deploymentAttestation": {
+    "schemaVersion": 1,
+    "candidateProvenance": {
+      "schemaVersion": 2,
+      "generatedAt": "2026-09-30T13:59:26.034480+00:00",
+      "upstreamSha": "bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf",
+      "upstreamTree": "289e5331c2e6f257f37b40fa2910b434c906d3e9",
+      "experimentHead": "b83c5686c48849e9b82c3b3ac9de00e33d61a747",
+      "shellHead": "b6a90044d8eb4874bb03da5e11373c8b4bb9978e",
+      "publicTreeSha256": "afb40cd4f348479246102bc20a4eee6607fd8aec407bf3f0abbb1e8a27c484ed",
+      "publicFileCount": 18843
+    },
+    "remote": "root@172.105.161.70:/srv/cloudflare-docs-experiment/public",
+    "url": "http://172.105.161.70:8000",
+    "rsyncChecksumDifferences": [],
+    "serverProcesses": [
+      {
+        "pid": 327865,
+        "command": "python3 /srv/cloudflare-docs-experiment/serve_candidate.py --root /srv/cloudflare-docs-experiment/public --bind 0.0.0.0 --port 8000",
+        "root": "/srv/cloudflare-docs-experiment/public",
+        "bind": "0.0.0.0",
+        "port": 8000
+      }
+    ],
+    "serverScript": {
+      "path": "/srv/cloudflare-docs-experiment/serve_candidate.py",
+      "localSha256": "e86ba3cca1e613ff83de8256478ee9dff6b83cfbc36b9f267ea64ec366574175",
+      "remoteSha256": "e86ba3cca1e613ff83de8256478ee9dff6b83cfbc36b9f267ea64ec366574175",
+      "matches": true
+    },
+    "listenerPids": [
+      327865
+    ],
+    "listenerLines": [
+      "LISTEN 0      5            0.0.0.0:8000      0.0.0.0:*    users:((\"python3\",pid=327865,fd=3))"
+    ],
+    "httpProbes": [
+      {
+        "path": "/index.html",
+        "status": 200,
+        "localSha256": "39bc1c45f563db718866236ab19698a50d824c3ea99cf97b14134395040c6c75",
+        "servedSha256": "39bc1c45f563db718866236ab19698a50d824c3ea99cf97b14134395040c6c75",
+        "matches": true
+      },
+      {
+        "path": "/fundamentals/index.html",
+        "status": 200,
+        "localSha256": "bf8836e77fe45ffc755a48fb3588b69ceac34479056f3f5c93ddcd44f353ef5b",
+        "servedSha256": "bf8836e77fe45ffc755a48fb3588b69ceac34479056f3f5c93ddcd44f353ef5b",
+        "matches": true
+      },
+      {
+        "path": "/assets/cf-design.css",
+        "status": 200,
+        "localSha256": "b65ca75c6a2b038d8f38b3543cd72ef0d51f0f165040d46b87a714227b11fb92",
+        "servedSha256": "b65ca75c6a2b038d8f38b3543cd72ef0d51f0f165040d46b87a714227b11fb92",
+        "matches": true
+      },
+      {
+        "path": "/assets/cf-shell.js",
+        "status": 200,
+        "localSha256": "0f968626b25f435c02ebce1b527da9d52fb14d404b6b438fbb58f12279316154",
+        "servedSha256": "0f968626b25f435c02ebce1b527da9d52fb14d404b6b438fbb58f12279316154",
+        "matches": true
+      },
+      {
+        "path": "/assets/navigation.json",
+        "status": 200,
+        "localSha256": "34de5ca38d0e6f432d3a6d46d612ef24c7d04520afb06a0ad6f03fd406025c81",
+        "servedSha256": "34de5ca38d0e6f432d3a6d46d612ef24c7d04520afb06a0ad6f03fd406025c81",
+        "matches": true
+      }
+    ],
+    "deniedMetadata": [
+      {
+        "path": "/.git/HEAD",
+        "status": 404
+      },
+      {
+        "path": "/CP6.md",
+        "status": 404
+      }
+    ],
+    "verified": true
+  },
+  "browser": {
+    "protocol": 1,
+    "vantage": "0.1.11",
+    "native": "GTK 4.22.4; WebKitGTK 2.52.6",
+    "path": "/tmp/opencode/vantage-0.1.11/build/vant",
+    "sha256": "ab64f74b2b3d1ff68722321f67f1913c8e1faf1874c95cb881abcf7a07b58b4b"
+  },
+  "capabilities": {
+    "protocol": 1,
+    "stability": "stable",
+    "namespaces": [
+      "browser",
+      "page",
+      "net",
+      "webkit",
+      "downloads",
+      "bookmarks",
+      "history",
+      "permissions",
+      "events"
+    ],
+    "features": [
+      "api-fetch",
+      "live-session",
+      "stable-ids",
+      "javascript",
+      "semantic-snapshot",
+      "semantic-interaction",
+      "content-inspection",
+      "webkit-introspection",
+      "browser-data",
+      "diagnostics",
+      "event-sequence",
+      "multi-controller"
+    ]
+  },
+  "routes": 4,
+  "pages": [
+    {
+      "url": "http://172.105.161.70:8000/workers/get-started/guide/",
+      "title": "Get started - CLI \u00b7 Cloudflare Workers docs",
+      "canonical": "https://developers.cloudflare.com/workers/get-started/guide/",
+      "mainCount": 1,
+      "h1Count": 1,
+      "overflow": false,
+      "unnamedVisibleLinks": 0,
+      "unfocusableScrollRegions": 0,
+      "search": {
+        "open": true,
+        "inputFocused": true,
+        "focusReturned": true
+      },
+      "fontFamily": "\"Inter Variable\", Inter, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "semanticRoles": {
+        "button": 79,
+        "combobox": 1,
+        "link": 403,
+        "main": 1,
+        "pre": 4,
+        "search": 1,
+        "status": 2,
+        "tab": 3,
+        "tablist": 1,
+        "tabpanel": 3,
+        "textbox": 2
+      },
+      "diagnostics": {
+        "events": [],
+        "dropped": 0
+      },
+      "route": "/workers/get-started/guide/",
+      "failures": []
+    },
+    {
+      "url": "http://172.105.161.70:8000/changelog/",
+      "title": "Changelog | Cloudflare Docs",
+      "canonical": "https://developers.cloudflare.com/changelog/",
+      "mainCount": 1,
+      "h1Count": 1,
+      "overflow": false,
+      "unnamedVisibleLinks": 0,
+      "unfocusableScrollRegions": 0,
+      "search": {
+        "open": true,
+        "inputFocused": true,
+        "focusReturned": true
+      },
+      "fontFamily": "\"Inter Variable\", Inter, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "semanticRoles": {
+        "button": 10,
+        "link": 108,
+        "main": 1,
+        "pre": 20,
+        "search": 1,
+        "status": 1,
+        "tab": 4,
+        "tablist": 1,
+        "tabpanel": 4,
+        "textbox": 1
+      },
+      "diagnostics": {
+        "events": [],
+        "dropped": 0
+      },
+      "route": "/changelog/",
+      "failures": []
+    },
+    {
+      "url": "http://172.105.161.70:8000/glossary/",
+      "title": "Glossary | Cloudflare Docs",
+      "canonical": "https://developers.cloudflare.com/glossary/",
+      "mainCount": 1,
+      "h1Count": 1,
+      "overflow": false,
+      "unnamedVisibleLinks": 0,
+      "unfocusableScrollRegions": 0,
+      "search": {
+        "open": true,
+        "inputFocused": true,
+        "focusReturned": true
+      },
+      "fontFamily": "\"Inter Variable\", Inter, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "semanticRoles": {
+        "button": 7,
+        "link": 121,
+        "main": 1,
+        "search": 1,
+        "status": 1,
+        "textbox": 2
+      },
+      "diagnostics": {
+        "events": [],
+        "dropped": 0
+      },
+      "route": "/glossary/",
+      "failures": []
+    },
+    {
+      "url": "http://172.105.161.70:8000/sandbox/",
+      "title": "Overview \u00b7 Cloudflare Sandbox SDK docs",
+      "canonical": "https://developers.cloudflare.com/sandbox/",
+      "mainCount": 1,
+      "h1Count": 1,
+      "overflow": false,
+      "unnamedVisibleLinks": 0,
+      "unfocusableScrollRegions": 0,
+      "search": {
+        "open": true,
+        "inputFocused": true,
+        "focusReturned": true
+      },
+      "fontFamily": "\"Inter Variable\", Inter, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "semanticRoles": {
+        "button": 23,
+        "combobox": 1,
+        "link": 147,
+        "main": 1,
+        "pre": 6,
+        "search": 1,
+        "status": 3,
+        "tab": 6,
+        "tablist": 1,
+        "tabpanel": 6,
+        "textbox": 2
+      },
+      "diagnostics": {
+        "events": [],
+        "dropped": 0
+      },
+      "route": "/sandbox/",
+      "failures": []
+    }
+  ],
+  "fatalFindingCount": 0,
+  "fatalFindings": []
+}

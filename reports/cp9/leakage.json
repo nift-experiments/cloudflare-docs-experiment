@@ -1,0 +1,23 @@
+{
+  "scanned_html": 8803,
+  "REAL_leakage": {},
+  "REAL_leakage_files_affected": 0,
+  "REAL_leakage_examples": {},
+  "INTENTIONAL_text": {
+    "code-import": 48,
+    "prose-placeholder": 15,
+    "code-fence": 5,
+    "ts-type-name": 2
+  },
+  "upstreamSha": "bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf",
+  "candidateProvenance": {
+    "schemaVersion": 2,
+    "generatedAt": "2026-09-30T13:59:26.034480+00:00",
+    "upstreamSha": "bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf",
+    "upstreamTree": "289e5331c2e6f257f37b40fa2910b434c906d3e9",
+    "experimentHead": "b83c5686c48849e9b82c3b3ac9de00e33d61a747",
+    "shellHead": "b6a90044d8eb4874bb03da5e11373c8b4bb9978e",
+    "publicTreeSha256": "afb40cd4f348479246102bc20a4eee6607fd8aec407bf3f0abbb1e8a27c484ed",
+    "publicFileCount": 18843
+  }
+}
