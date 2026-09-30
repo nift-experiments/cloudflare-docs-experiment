@@ -2,7 +2,7 @@
 
 Status: **FROZEN BEFORE FORMAL RESULTS**
 
-Methodology version: 3
+Methodology version: 4
 
 Frozen: 2026-10-01
 
@@ -78,8 +78,9 @@ change.
 - pnpm: 12.4.2, matching the prior frozen-source setup; its exact version and
   executable hash are recorded.
 - Astro: repository-pinned 7.3.2 from the frozen lockfile install.
-- GNU `/usr/bin/time -v` supplies process wall, user, system, CPU percentage,
-  and peak RSS measurements.
+- GNU `/usr/bin/time` with `LC_ALL=C` and an explicit `-f` field format supplies
+  process wall, user, system, CPU percentage, and peak RSS measurements without
+  locale-dependent parsing.
 
 Qualification first attempts one clean Astro build with Node's default heap. If
 it succeeds, all formal runs use the default. If it fails specifically from
