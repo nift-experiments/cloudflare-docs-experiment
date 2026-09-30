@@ -4,46 +4,55 @@
   "routes": {
     "/agent-setup/bionic/": {
       "reasons": ["upstream-word-coverage-below-70-percent"],
+      "required": false,
       "classification": "non-frozen-live-input",
       "evidence": "The upstream page includes Skills and MCP server collections downloaded from middlecache plus build-time randomized prompts; those values are not present in the pinned Git tree."
     },
     "/agent-setup/claude-code/": {
       "reasons": ["upstream-word-coverage-below-70-percent"],
+      "required": false,
       "classification": "non-frozen-live-input",
       "evidence": "The upstream page includes Skills and MCP server collections downloaded from middlecache plus build-time randomized prompts; those values are not present in the pinned Git tree."
     },
     "/agent-setup/codex/": {
       "reasons": ["upstream-word-coverage-below-70-percent"],
+      "required": false,
       "classification": "non-frozen-live-input",
       "evidence": "The upstream page includes Skills and MCP server collections downloaded from middlecache plus build-time randomized prompts; those values are not present in the pinned Git tree."
     },
     "/agent-setup/command-code/": {
       "reasons": ["upstream-word-coverage-below-70-percent"],
+      "required": false,
       "classification": "non-frozen-live-input",
       "evidence": "The upstream page includes Skills and MCP server collections downloaded from middlecache plus build-time randomized prompts; those values are not present in the pinned Git tree."
     },
     "/agent-setup/cursor/": {
       "reasons": ["upstream-word-coverage-below-70-percent"],
+      "required": false,
       "classification": "non-frozen-live-input",
       "evidence": "The upstream page includes Skills and MCP server collections downloaded from middlecache plus build-time randomized prompts; those values are not present in the pinned Git tree."
     },
     "/agent-setup/github-copilot/": {
       "reasons": ["upstream-word-coverage-below-70-percent"],
+      "required": false,
       "classification": "non-frozen-live-input",
       "evidence": "The upstream page includes Skills and MCP server collections downloaded from middlecache plus build-time randomized prompts; those values are not present in the pinned Git tree."
     },
     "/agent-setup/opencode/": {
       "reasons": ["upstream-word-coverage-below-70-percent"],
+      "required": false,
       "classification": "non-frozen-live-input",
       "evidence": "The upstream page includes Skills and MCP server collections downloaded from middlecache plus build-time randomized prompts; those values are not present in the pinned Git tree."
     },
     "/agent-setup/visual-studio-code/": {
       "reasons": ["upstream-word-coverage-below-70-percent"],
+      "required": false,
       "classification": "non-frozen-live-input",
       "evidence": "The upstream page includes Skills and MCP server collections downloaded from middlecache plus build-time randomized prompts; those values are not present in the pinned Git tree."
     },
     "/agent-setup/windsurf/": {
       "reasons": ["upstream-word-coverage-below-70-percent"],
+      "required": false,
       "classification": "non-frozen-live-input",
       "evidence": "The upstream page includes Skills and MCP server collections downloaded from middlecache plus build-time randomized prompts; those values are not present in the pinned Git tree."
     },
@@ -66,6 +75,7 @@
     },
     "/style-guide/build-the-page/components/usage/": {
       "reasons": ["word-precision-below-70-percent"],
+      "required": false,
       "classification": "reference-runtime-nondeterminism",
       "evidence": "The Astro ComponentsUsage inventory is process-local and changed across fresh runs at the same frozen SHA, exposing 22 headings, then approximately 110 headings, then a different partial inventory. The deterministic candidate inventory is derived from frozen imported component usage; the final full-run reason is classified exactly rather than chasing mutable reference initialization state."
     }

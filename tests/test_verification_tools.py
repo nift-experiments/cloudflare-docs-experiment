@@ -250,6 +250,17 @@ class TestParityPolicy(unittest.TestCase):
 
 
 class TestCorpusParityPolicy(unittest.TestCase):
+    def test_only_required_absent_classifications_are_stale(self):
+        classifications = {
+            '/deterministic/': {'reasons': ['difference']},
+            '/live/': {'reasons': ['difference'], 'required': False},
+            '/observed/': {'reasons': ['difference']},
+        }
+        self.assertEqual(
+            ['/deterministic/'],
+            corpus_parity.stale_classification_routes(classifications, {'/observed/'}),
+        )
+
     def page(self, words=None, headings=None, elements=None):
         return {
             'status': 200,

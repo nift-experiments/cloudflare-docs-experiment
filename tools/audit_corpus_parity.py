@@ -227,6 +227,12 @@ def load_routes(ordinary_manifest, generated_manifest):
     return sorted(set(ordinary) | {'/'} | set(generated) | set(text_routes))
 
 
+def stale_classification_routes(classifications, finding_routes):
+    return sorted(
+        route for route, disposition in classifications.items()
+        if route not in finding_routes and disposition.get('required', True))
+
+
 def check_route(route, upstream_base, nift_base, timeout):
     upstream = fetch(upstream_base, route, timeout)
     nift = fetch(nift_base, route, timeout)
@@ -412,7 +418,7 @@ def main(argv=None):
             finding['disposition'] = disposition
             classified_count += 1
     finding_routes = {finding['route'] for finding in report['findings']}
-    stale_classifications = sorted(set(classifications) - finding_routes)
+    stale_classifications = stale_classification_routes(classifications, finding_routes)
     report['classifiedFindingCount'] = classified_count
     report['unclassifiedFindingCount'] = len(findings) - classified_count
     report['staleClassificationRoutes'] = stale_classifications
