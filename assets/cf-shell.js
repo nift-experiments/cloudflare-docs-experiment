@@ -565,6 +565,12 @@
     });
   }
 
+  function initScrollableRegions() {
+    document.querySelectorAll("pre, .home-card code, .mermaid, .video-transcript").forEach(function (region) {
+      if (!region.hasAttribute("tabindex")) region.tabIndex = 0;
+    });
+  }
+
   function initSearch() {
     var dialog = document.querySelector("[data-search-dialog]");
     var input = dialog && dialog.querySelector("[data-search-input]");
@@ -606,6 +612,7 @@
     initArticleTools();
     initCopy();
     initStreamChapters();
+    initScrollableRegions();
     initTables();
     initTOC();
     initSearch();
