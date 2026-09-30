@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "upstreamSha": "bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf",
+  "expectedPages": 8803,
+  "totals": {
+    "pages": 8803,
+    "images": 22583,
+    "tables": 6385,
+    "interactive_component_shells": 1773,
+    "data_component_shells": 273
+  },
+  "shellCoverage": {
+    "header": 8803,
+    "footer": 8803,
+    "nav": 8803
+  },
+  "fatalFindingCount": 0,
+  "findings": {
+    "article_count": [],
+    "duplicate_ids": [],
+    "h1_count": [],
+    "headings_without_ids": [],
+    "images_without_alt": [],
+    "main_count": [],
+    "missing_footer": [],
+    "missing_header": [],
+    "missing_html": [],
+    "missing_local_resources": [],
+    "parse_errors": [],
+    "placeholder_links": [
+      {
+        "route": "/sandbox/concepts/preview-urls/",
+        "count": 1
+      },
+      {
+        "route": "/vectorize/",
+        "count": 1
+      },
+      {
+        "route": "/videos/china-network-acceleration/",
+        "count": 5
+      },
+      {
+        "route": "/videos/china-network-inside-china/",
+        "count": 4
+      },
+      {
+        "route": "/videos/load-balancing/",
+        "count": 7
+      },
+      {
+        "route": "/videos/onboard-domain-cf/",
+        "count": 4
+      },
+      {
+        "route": "/videos/sase-1-evolution-corp-networks/",
+        "count": 6
+      },
+      {
+        "route": "/videos/sase-2-stop-your-own-vpn/",
+        "count": 6
+      },
+      {
+        "route": "/videos/sase-3-secure-remote-access/",
+        "count": 6
+      },
+      {
+        "route": "/videos/sase-4-connect-secure/",
+        "count": 5
+      },
+      {
+        "route": "/videos/sase-5-protect-users/",
+        "count": 6
+      },
+      {
+        "route": "/videos/warp-1-basics/",
+        "count": 6
+      },
+      {
+        "route": "/videos/warp-2-diagnostic-logs/",
+        "count": 8
+      }
+    ]
+  },
+  "candidateProvenance": {
+    "schemaVersion": 2,
+    "generatedAt": "2026-09-30T05:12:08.918097+00:00",
+    "upstreamSha": "bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf",
+    "upstreamTree": "289e5331c2e6f257f37b40fa2910b434c906d3e9",
+    "experimentHead": "b2c1fc57165947872a72e3f08a8dcf254642f4db",
+    "shellHead": "b6dd64dbb39cf3ae6cb96bf03172d7cf6d328235",
+    "publicTreeSha256": "e5489e215549de0a0a5d13c9765526f7d59c6bfe4ee36c3aacb91c7f2436c4f5",
+    "publicFileCount": 18841
+  }
+}

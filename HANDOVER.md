@@ -590,11 +590,11 @@ state before any comparative claim.
   details, theme behavior, copy controls, generated TOC, raw Markdown endpoints,
   and an honest hosted-search fallback. See
   `reports/CP7-CLIENT-FUNCTIONAL-FIDELITY.md`.
-- **CP8 — full-corpus visual/structural parity (next).** Use `tools/parity.py` +
-  golden routes, then systematic corpus sampling: DOM structure, typography,
-  spacing/layout, navigation/sidebar, code blocks, tables, cards/callouts,
-  responsive states, screenshots/pixel diffs. Fix systemic causes before
-  individual pages.
+- **CP8 — full-corpus visual/structural parity (complete).** Certified 8,986
+  corpus endpoints, 8,803 structural pages, complete HTML/static/navigation
+  closure, zero real leakage, 11 browser checks, and 164 visual comparisons for
+  public digest `e5489e215549de0a0a5d13c9765526f7d59c6bfe4ee36c3aacb91c7f2436c4f5`.
+  See `reports/CP8-VISUAL-STRUCTURAL-PARITY.md`.
 - **CP9 — metadata/accessibility/browser verification.** Titles/meta,
   canonical/OG metadata, headings/landmarks, keyboard behaviour, responsive
   behaviour, accessibility, Chromium/Vantage verification where useful.
@@ -613,7 +613,7 @@ state before any comparative claim.
 
 The intended resume state is:
 
-**CP0–CP7 complete and certified. Next work: CP8. Performance comparison remains
+**CP0–CP8 complete and certified. Next work: CP9. Performance comparison remains
 provisional until CP10 same-hardware benchmarking.**
 
 1. Read this HANDOVER.md (especially Sections 4-10).
@@ -630,5 +630,5 @@ provisional until CP10 same-hardware benchmarking.**
    semantic fixture green. Expected baseline numbers above make any
    regression immediately obvious.
 7. Investigate any regression before proceeding.
-8. Verify the CP7 gates in `reports/CP7-CLIENT-FUNCTIONAL-FIDELITY.md`, then begin
-   **CP8**. Do not skip ahead to benchmarking.
+8. Verify the CP8 gates in `reports/CP8-VISUAL-STRUCTURAL-PARITY.md`, then begin
+   **CP9**. Do not skip ahead to benchmarking.

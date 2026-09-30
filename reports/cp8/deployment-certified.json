@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "candidateProvenance": {
+    "schemaVersion": 2,
+    "generatedAt": "2026-09-30T05:12:08.918097+00:00",
+    "upstreamSha": "bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf",
+    "upstreamTree": "289e5331c2e6f257f37b40fa2910b434c906d3e9",
+    "experimentHead": "b2c1fc57165947872a72e3f08a8dcf254642f4db",
+    "shellHead": "b6dd64dbb39cf3ae6cb96bf03172d7cf6d328235",
+    "publicTreeSha256": "e5489e215549de0a0a5d13c9765526f7d59c6bfe4ee36c3aacb91c7f2436c4f5",
+    "publicFileCount": 18841
+  },
+  "remote": "root@172.105.161.70:/srv/cloudflare-docs-experiment/public",
+  "url": "http://172.105.161.70:8000",
+  "rsyncChecksumDifferences": [],
+  "serverProcesses": [
+    {
+      "pid": 327865,
+      "command": "python3 /srv/cloudflare-docs-experiment/serve_candidate.py --root /srv/cloudflare-docs-experiment/public --bind 0.0.0.0 --port 8000",
+      "root": "/srv/cloudflare-docs-experiment/public",
+      "bind": "0.0.0.0",
+      "port": 8000
+    }
+  ],
+  "serverScript": {
+    "path": "/srv/cloudflare-docs-experiment/serve_candidate.py",
+    "localSha256": "e86ba3cca1e613ff83de8256478ee9dff6b83cfbc36b9f267ea64ec366574175",
+    "remoteSha256": "e86ba3cca1e613ff83de8256478ee9dff6b83cfbc36b9f267ea64ec366574175",
+    "matches": true
+  },
+  "listenerPids": [
+    327865
+  ],
+  "listenerLines": [
+    "LISTEN 0      5            0.0.0.0:8000      0.0.0.0:*    users:((\"python3\",pid=327865,fd=3))"
+  ],
+  "httpProbes": [
+    {
+      "path": "/index.html",
+      "status": 200,
+      "localSha256": "804fcc08273e5fc99848dc2aa50b8ad42c0e26c97e4999a893ed11b02d60a622",
+      "servedSha256": "804fcc08273e5fc99848dc2aa50b8ad42c0e26c97e4999a893ed11b02d60a622",
+      "matches": true
+    },
+    {
+      "path": "/fundamentals/index.html",
+      "status": 200,
+      "localSha256": "23345b02cf719727f17c59f09f5c5dbb3c6f4b57eb5ecadef1b891227ebe05d4",
+      "servedSha256": "23345b02cf719727f17c59f09f5c5dbb3c6f4b57eb5ecadef1b891227ebe05d4",
+      "matches": true
+    },
+    {
+      "path": "/assets/cf-design.css",
+      "status": 200,
+      "localSha256": "e0e59051da7eb905b618032ea06b6ae603e2921d8a09ecb5e223a2ab374f3ae6",
+      "servedSha256": "e0e59051da7eb905b618032ea06b6ae603e2921d8a09ecb5e223a2ab374f3ae6",
+      "matches": true
+    },
+    {
+      "path": "/assets/cf-shell.js",
+      "status": 200,
+      "localSha256": "4ab12fdfe843d7fc6f0213f29f0f856a19cdaef80f1cb278cb0bdb70ed38a821",
+      "servedSha256": "4ab12fdfe843d7fc6f0213f29f0f856a19cdaef80f1cb278cb0bdb70ed38a821",
+      "matches": true
+    },
+    {
+      "path": "/assets/navigation.json",
+      "status": 200,
+      "localSha256": "34de5ca38d0e6f432d3a6d46d612ef24c7d04520afb06a0ad6f03fd406025c81",
+      "servedSha256": "34de5ca38d0e6f432d3a6d46d612ef24c7d04520afb06a0ad6f03fd406025c81",
+      "matches": true
+    }
+  ],
+  "deniedMetadata": [
+    {
+      "path": "/.git/HEAD",
+      "status": 404
+    },
+    {
+      "path": "/CP6.md",
+      "status": 404
+    }
+  ],
+  "verified": true
+}
