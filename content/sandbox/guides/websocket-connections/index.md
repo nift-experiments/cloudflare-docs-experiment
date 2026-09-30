@@ -1,20 +1,31 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/sandbox/guides/websocket-connections/
+  description: Connect to WebSocket servers running in sandboxes.
+  full_title: WebSocket connections · Cloudflare Sandbox SDK docs
+  head_html: <title>WebSocket connections · Cloudflare Sandbox SDK docs</title><meta name="generator" content="Nift"><meta name="description" content="Connect to WebSocket servers running in sandboxes."><link rel="canonical" href="https://developers.cloudflare.com/sandbox/guides/websocket-connections/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/sandbox/guides/websocket-connections/index.md"><meta property="og:title" content="WebSocket connections · Cloudflare Sandbox SDK docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Connect to WebSocket servers running in sandboxes."><meta property="og:url" content="https://developers.cloudflare.com/sandbox/guides/websocket-connections/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Sandbox SDK"><meta name="algolia_product_filter" content="Sandbox SDK"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Sandbox SDK"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/sandbox/guides/websocket-connections/#page","headline":"WebSocket connections \u00b7 Cloudflare Sandbox SDK docs","description":"Connect to WebSocket servers running in sandboxes.","url":"https://developers.cloudflare.com/sandbox/guides/websocket-connections/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /sandbox/guides/websocket-connections/
+  schema: 1
+---
 <p>This guide shows you how to work with WebSocket servers running in your sandboxes.</p>
 <h2 id="choose-your-approach">Choose your approach</h2>
 <p><strong>Expose via preview URL</strong> - Get a public URL for external clients to connect to. Best for public chat rooms, multiplayer games, or real-time dashboards.</p>
 <p><strong>Connect with wsConnect()</strong> - Your Worker establishes the WebSocket connection. Best for custom routing logic, authentication gates, or when your Worker needs real-time data from sandbox services.</p>
 <h2 id="connect-to-websocket-echo-server">Connect to WebSocket echo server</h2>
 <p><strong>Create the echo server:</strong></p>
-<pre><code class="language-typescript">Bun.serve({&#10;	port: 8080,&#10;	hostname: &quot;0.0.0.0&quot;,&#10;	fetch(req, server) {&#10;		if (server.upgrade(req)) {&#10;			return;&#10;		}&#10;		return new Response(&quot;WebSocket echo server&quot;);&#10;	},&#10;	websocket: {&#10;		message(ws, message) {&#10;			ws.send(`Echo: ${message}`);&#10;		},&#10;		open(ws) {&#10;			console.log(&quot;Client connected&quot;);&#10;		},&#10;		close(ws) {&#10;			console.log(&quot;Client disconnected&quot;);&#10;		},&#10;	},&#10;});&#10;&#10;console.log(&quot;WebSocket server listening on port 8080&quot;);&#10;</code></pre>
+<pre tabindex="0"><code class="language-typescript">Bun.serve({&#10;	port: 8080,&#10;	hostname: &quot;0.0.0.0&quot;,&#10;	fetch(req, server) {&#10;		if (server.upgrade(req)) {&#10;			return;&#10;		}&#10;		return new Response(&quot;WebSocket echo server&quot;);&#10;	},&#10;	websocket: {&#10;		message(ws, message) {&#10;			ws.send(`Echo: ${message}`);&#10;		},&#10;		open(ws) {&#10;			console.log(&quot;Client connected&quot;);&#10;		},&#10;		close(ws) {&#10;			console.log(&quot;Client disconnected&quot;);&#10;		},&#10;	},&#10;});&#10;&#10;console.log(&quot;WebSocket server listening on port 8080&quot;);&#10;</code></pre>
 <p><strong>Extend the Dockerfile:</strong></p>
-<pre><code class="language-dockerfile">FROM docker.io/cloudflare/sandbox:0.3.3&#10;&#10;&#35; Copy echo server into the container&#10;COPY echo-server.ts /workspace/echo-server.ts&#10;&#10;&#35; Create custom startup script&#10;COPY startup.sh /container-server/startup.sh&#10;RUN chmod +x /container-server/startup.sh&#10;</code></pre>
+<pre tabindex="0"><code class="language-dockerfile">FROM docker.io/cloudflare/sandbox:0.3.3&#10;&#10;&#35; Copy echo server into the container&#10;COPY echo-server.ts /workspace/echo-server.ts&#10;&#10;&#35; Create custom startup script&#10;COPY startup.sh /container-server/startup.sh&#10;RUN chmod +x /container-server/startup.sh&#10;</code></pre>
 <p><strong>Create startup script:</strong></p>
-<pre><code class="language-bash">&#35;!/bin/bash&#10;&#35; Start your WebSocket server in the background&#10;bun /workspace/echo-server.ts &amp;&#10;&#35; Start SDK&#x27;s control plane (needed for the SDK to work)&#10;exec bun dist/index.js&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">&#35;!/bin/bash&#10;&#35; Start your WebSocket server in the background&#10;bun /workspace/echo-server.ts &amp;&#10;&#35; Start SDK&#x27;s control plane (needed for the SDK to work)&#10;exec bun dist/index.js&#10;</code></pre>
 <p><strong>Connect from your Worker:</strong></p>
 <div class="nb-type-script-example">
 @markup("md", "content/.markup/bodies/13348.md")
 </div>
 <p><strong>Client connects:</strong></p>
-<pre><code class="language-javascript">const ws = new WebSocket(&#x27;wss://your-worker.com&#x27;);&#10;ws.onmessage = (event) =&gt; console.log(event.data);&#10;ws.send(&#x27;Hello!&#x27;); // Receives: &quot;Echo: Hello!&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-javascript">const ws = new WebSocket(&#x27;wss://your-worker.com&#x27;);&#10;ws.onmessage = (event) =&gt; console.log(event.data);&#10;ws.send(&#x27;Hello!&#x27;); // Receives: &quot;Echo: Hello!&quot;&#10;</code></pre>
 <h2 id="expose-websocket-service-via-preview-url">Expose WebSocket service via preview URL</h2>
 <p>Get a public URL for your WebSocket server:</p>
 <div class="nb-type-script-example">
@@ -25,7 +36,7 @@
 @markup("md", "content/.markup/bodies/13347.md")
 </aside>
 <p><strong>Client connects to preview URL:</strong></p>
-<pre><code class="language-javascript">// Get the preview URL&#10;const response = await fetch(&#x27;https://your-worker.com/ws-url&#x27;);&#10;const { url } = await response.json();&#10;&#10;// Connect&#10;const ws = new WebSocket(url);&#10;ws.onmessage = (event) =&gt; console.log(event.data);&#10;ws.send(&#x27;Hello!&#x27;); // Receives: &quot;Echo: Hello!&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-javascript">// Get the preview URL&#10;const response = await fetch(&#x27;https://your-worker.com/ws-url&#x27;);&#10;const { url } = await response.json();&#10;&#10;// Connect&#10;const ws = new WebSocket(url);&#10;ws.onmessage = (event) =&gt; console.log(event.data);&#10;ws.send(&#x27;Hello!&#x27;); // Receives: &quot;Echo: Hello!&quot;&#10;</code></pre>
 <h2 id="connect-from-worker-to-get-real-time-data">Connect from Worker to get real-time data</h2>
 <p>Your Worker can connect to a WebSocket service to get real-time data, even when the incoming request isn't a WebSocket:</p>
 <div class="nb-type-script-example">
@@ -40,7 +51,7 @@
 </div>
 <h3 id="local-development">Local development</h3>
 <p>Expose ports in Dockerfile for <code>wrangler dev</code>:</p>
-<pre><code class="language-dockerfile">FROM docker.io/cloudflare/sandbox:0.3.3&#10;&#10;COPY echo-server.ts /workspace/echo-server.ts&#10;COPY startup.sh /container-server/startup.sh&#10;RUN chmod +x /container-server/startup.sh&#10;&#10;&#35; Required for local development&#10;EXPOSE 8080&#10;</code></pre>
+<pre tabindex="0"><code class="language-dockerfile">FROM docker.io/cloudflare/sandbox:0.3.3&#10;&#10;COPY echo-server.ts /workspace/echo-server.ts&#10;COPY startup.sh /container-server/startup.sh&#10;RUN chmod +x /container-server/startup.sh&#10;&#10;&#35; Required for local development&#10;EXPOSE 8080&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/13346.md")
 </aside>

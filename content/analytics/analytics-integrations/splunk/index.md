@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/analytics/analytics-integrations/splunk/
+  description: This tutorial explains how to analyze Cloudflare Logs using the Cloudflare App for Splunk.
+  full_title: Splunk · Cloudflare Analytics docs
+  head_html: <title>Splunk · Cloudflare Analytics docs</title><meta name="generator" content="Nift"><meta name="description" content="This tutorial explains how to analyze Cloudflare Logs using the Cloudflare App for Splunk."><link rel="canonical" href="https://developers.cloudflare.com/analytics/analytics-integrations/splunk/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/analytics/analytics-integrations/splunk/index.md"><meta property="og:title" content="Splunk · Cloudflare Analytics docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="This tutorial explains how to analyze Cloudflare Logs using the Cloudflare App for Splunk."><meta property="og:url" content="https://developers.cloudflare.com/analytics/analytics-integrations/splunk/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Analytics"><meta name="algolia_product_filter" content="Analytics"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_content_type" content="Tutorial"><meta name="algolia_content_type" content="Tutorial"><meta name="pcx_additional_products" content="Analytics,Logs"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/analytics/analytics-integrations/splunk/#page","headline":"Splunk \u00b7 Cloudflare Analytics docs","description":"This tutorial explains how to analyze Cloudflare Logs using the Cloudflare App for Splunk.","url":"https://developers.cloudflare.com/analytics/analytics-integrations/splunk/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /analytics/analytics-integrations/splunk/
+  schema: 1
+---
 <p>This tutorial explains how to analyze <a href="https://www.cloudflare.com/products/cloudflare-logs/">Cloudflare Logs</a> using the <a href="https://splunkbase.splunk.com/app/4501/">Cloudflare App for Splunk</a>.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <p>Before sending your Cloudflare log data to Splunk, ensure that you:</p>
@@ -64,7 +75,7 @@
 <p>Determine the endpoint to use to send the data to. The endpoint should be:</p>
 </li>
 </ol>
-<pre><code class="language-sql">&quot;&lt;protocol&gt;://input-&lt;host&gt;:&lt;port&gt;/&lt;endpoint&gt;&quot; or &quot;&lt;protocol&gt;://http-inputs-&lt;host&gt;:&lt;port&gt;/&lt;endpoint&gt;&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">&quot;&lt;protocol&gt;://input-&lt;host&gt;:&lt;port&gt;/&lt;endpoint&gt;&quot; or &quot;&lt;protocol&gt;://http-inputs-&lt;host&gt;:&lt;port&gt;/&lt;endpoint&gt;&quot;&#10;</code></pre>
 <p>Where:</p>
 <ul>
 <li><code>protocol</code>: HTTP or HTTPS</li>
@@ -101,7 +112,7 @@
 </ul>
 <p>Under <strong>Send the following fields</strong>, keep the defaults or refer to the <a href="#task-3---view-the-dashboards">Dashboard section</a> to select the fields required to fully populate the Cloudflare App for Splunk dashboards.</p>
 <p>After you create the job, enable it to start sending logs. To confirm end-to-end delivery, run the following search in Splunk:</p>
-<pre><code class="language-txt">index=&quot;cloudflare&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">index=&quot;cloudflare&quot;&#10;</code></pre>
 <p>Cloudflare sends two system confirmation events to verify connectivity and delivery setup as soon as you enable the job. Regular Cloudflare logs start streaming shortly afterward. Data can take a few minutes to appear.</p>
 <h2 id="task-3-view-the-dashboards">Task 3 - View the Dashboards</h2>
 <p>You can analyze Cloudflare logs with the thirteen (13) dashboards listed below.</p>

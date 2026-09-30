@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/changelog/product-group/core-platform/4/
+  description: '2026-03-25'
+  full_title: Core platform changelog - page 4 | Cloudflare Docs
+  head_html: <title>Core platform changelog - page 4 | Cloudflare Docs</title><meta name="generator" content="Nift"><meta name="description" content="2026-03-25"><link rel="canonical" href="https://developers.cloudflare.com/changelog/product-group/core-platform/4/"><link rel="sitemap" href="/sitemap-index.xml"><meta property="og:title" content="Core platform changelog - page 4"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="2026-03-25"><meta property="og:url" content="https://developers.cloudflare.com/changelog/product-group/core-platform/4/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/changelog/product-group/core-platform/4/#page","headline":"Core platform changelog - page 4 | Cloudflare Docs","description":"2026-03-25","url":"https://developers.cloudflare.com/changelog/product-group/core-platform/4/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: false
+  noindex: false
+  route: /changelog/product-group/core-platform/4/
+  schema: 1
+---
 <h1 id="changelog">Changelog</h1>
 
 <h2 id="new-mtls-certificate-fields-for-transform-rules"><a href="/changelog/post/2026-03-25-rfc9440-mtls-fields/">New mTLS certificate fields for Transform Rules</a></h2>
@@ -40,7 +51,7 @@
 <h4 id="2026-03-25-rfc9440-mtls-fields-example-forwarding-client-certificate-headers-to-your-origin-server">Example: Forwarding client certificate headers to your origin server</h4>
 <p>Add a request header transform rule to set the <code>Client-Cert</code> and <code>Client-Cert-Chain</code> headers on requests forwarded to your origin server. For example, to forward headers for verified, non-revoked certificates:</p>
 <p><strong>Rule expression:</strong></p>
-<pre><code class="language-txt">cf.tls_client_auth.cert_verified and not cf.tls_client_auth.cert_revoked&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">cf.tls_client_auth.cert_verified and not cf.tls_client_auth.cert_revoked&#10;</code></pre>
 <p><strong>Header modifications:</strong></p>
 <table>
 <thead>
@@ -199,7 +210,7 @@
 </tbody>
 </table>
 <p>Example filter expression:</p>
-<pre><code>cf.timings.worker_msec &gt; 500&#10;</code></pre>
+<pre tabindex="0"><code>cf.timings.worker_msec &gt; 500&#10;</code></pre>
 <p>For more information, refer to the <a href="/ruleset-engine/rules-language/fields/reference/cf.timings.worker_msec/">Fields reference</a>.</p>
 
 
@@ -260,7 +271,7 @@
 <p>Available for all zones on all plans.</p>
 <h4 id="2026-03-12-retry-after-header-for-1xxx-errors-verify">Verify</h4>
 <p>Check for the header on any retryable error:</p>
-<pre><code class="language-bash">curl -s --compressed -D - -o /dev/null -H &quot;Accept: application/json&quot; -A &quot;TestAgent/1.0&quot; -H &quot;Accept-Encoding: gzip, deflate&quot; &quot;&lt;YOUR_DOMAIN&gt;/cdn-cgi/error/1015&quot; | grep -i retry-after&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl -s --compressed -D - -o /dev/null -H &quot;Accept: application/json&quot; -A &quot;TestAgent/1.0&quot; -H &quot;Accept-Encoding: gzip, deflate&quot; &quot;&lt;YOUR_DOMAIN&gt;/cdn-cgi/error/1015&quot; | grep -i retry-after&#10;</code></pre>
 <p>References:</p>
 <ul>
 <li><a href="https://www.rfc-editor.org/rfc/rfc9110#section-10.2.3">RFC 9110 section 10.2.3 - Retry-After</a></li>
@@ -327,8 +338,8 @@
 <h4 id="2026-03-11-json-rfc9457-responses-for-1xxx-errors-availability">Availability</h4>
 <p>Available now for Cloudflare-generated 1xxx errors.</p>
 <h4 id="2026-03-11-json-rfc9457-responses-for-1xxx-errors-get-started">Get started</h4>
-<pre><code class="language-bash">curl -s --compressed -H &quot;Accept: application/json&quot; -A &quot;TestAgent/1.0&quot; -H &quot;Accept-Encoding: gzip, deflate&quot; &quot;&lt;YOUR_DOMAIN&gt;/cdn-cgi/error/1015&quot; | jq .&#10;</code></pre>
-<pre><code class="language-bash">curl -s --compressed -H &quot;Accept: application/problem+json&quot; -A &quot;TestAgent/1.0&quot; -H &quot;Accept-Encoding: gzip, deflate&quot; &quot;&lt;YOUR_DOMAIN&gt;/cdn-cgi/error/1015&quot; | jq .&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl -s --compressed -H &quot;Accept: application/json&quot; -A &quot;TestAgent/1.0&quot; -H &quot;Accept-Encoding: gzip, deflate&quot; &quot;&lt;YOUR_DOMAIN&gt;/cdn-cgi/error/1015&quot; | jq .&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl -s --compressed -H &quot;Accept: application/problem+json&quot; -A &quot;TestAgent/1.0&quot; -H &quot;Accept-Encoding: gzip, deflate&quot; &quot;&lt;YOUR_DOMAIN&gt;/cdn-cgi/error/1015&quot; | jq .&#10;</code></pre>
 <p>References:</p>
 <ul>
 <li><a href="https://www.rfc-editor.org/rfc/rfc9457">RFC 9457 — Problem Details for HTTP APIs</a></li>
@@ -349,7 +360,7 @@
 </ul>
 <h4 id="2026-03-11-ingest-field-selection-example-configuration">Example configuration</h4>
 <p>When configuring a dataset via the dashboard or API, you can define a specific set of fields. The <code>Timestamp</code> field remains mandatory to ensure data indexability.</p>
-<pre><code class="language-json">{&#10;  &quot;dataset&quot;: &quot;firewall_events&quot;,&#10;  &quot;enabled&quot;: true,&#10;  &quot;fields&quot;: [&#10;    &quot;Timestamp&quot;,&#10;    &quot;ClientRequestHost&quot;,&#10;    &quot;ClientIP&quot;,&#10;    &quot;Action&quot;,&#10;    &quot;EdgeResponseStatus&quot;,&#10;    &quot;OriginResponseStatus&quot;&#10;  ]&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;  &quot;dataset&quot;: &quot;firewall_events&quot;,&#10;  &quot;enabled&quot;: true,&#10;  &quot;fields&quot;: [&#10;    &quot;Timestamp&quot;,&#10;    &quot;ClientRequestHost&quot;,&#10;    &quot;ClientIP&quot;,&#10;    &quot;Action&quot;,&#10;    &quot;EdgeResponseStatus&quot;,&#10;    &quot;OriginResponseStatus&quot;&#10;  ]&#10;}&#10;</code></pre>
 <p>For more information, refer to the <a href="/log-explorer/">Log Explorer documentation</a>.</p>
 
 
@@ -430,7 +441,7 @@
 <h4 id="2026-02-26-markdown-responses-for-1xxx-errors-availability">Availability</h4>
 <p>Available now for Cloudflare-generated 1xxx errors.</p>
 <h4 id="2026-02-26-markdown-responses-for-1xxx-errors-get-started">Get started</h4>
-<pre><code class="language-bash">curl -H &quot;Accept: text/markdown&quot; https://&lt;your-domain&gt;/cdn-cgi/error/1015&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl -H &quot;Accept: text/markdown&quot; https://&lt;your-domain&gt;/cdn-cgi/error/1015&#10;</code></pre>
 <p>Reference: <a href="/support/troubleshooting/http-status-codes/cloudflare-1xxx-errors/">Cloudflare 1xxx error documentation</a></p>
 
 
@@ -489,7 +500,7 @@
 </tbody>
 </table>
 <h4 id="2026-02-18-cfworker-server-timing-example-response">Example response</h4>
-<pre><code class="language-txt">Server-Timing: cdn-cache; desc=DYNAMIC, edge; dur=20, origin; dur=100, cfWorker; dur=7&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">Server-Timing: cdn-cache; desc=DYNAMIC, edge; dur=20, origin; dur=100, cfWorker; dur=7&#10;</code></pre>
 <p>In this example, the edge took 20ms, the origin took 100ms, and the Worker added just 7ms of processing time.</p>
 <h4 id="2026-02-18-cfworker-server-timing-availability">Availability</h4>
 <p>The <code>cfWorker</code> metric is enabled by default if you have <a href="/web-analytics/">Real User Monitoring (RUM)</a> enabled. Otherwise, you can enable it using <a href="/rules/">Rules</a>.</p>
@@ -682,9 +693,9 @@ will help you understand any down or upstream issues it may cause to your enviro
 <p><em>2026-02-12</em></p>
 <p>Cloudflare's network now supports real-time content conversion at the source, for enabled zones using <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Content_negotiation">content negotiation</a> headers. When AI systems request pages from any website that uses Cloudflare and has Markdown for Agents enabled, they can express the preference for <code>text/markdown</code> in the request: our network will automatically and efficiently convert the HTML to markdown, when possible, on the fly.</p>
 <p>Here is a curl example with the <code>Accept</code> negotiation header requesting this page from our developer documentation:</p>
-<pre><code class="language-bash">curl https://developers.cloudflare.com/fundamentals/reference/markdown-for-agents/ \&#10;  &#45;H &quot;Accept: text/markdown&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl https://developers.cloudflare.com/fundamentals/reference/markdown-for-agents/ \&#10;  &#45;H &quot;Accept: text/markdown&quot;&#10;</code></pre>
 <p>The response to this request is now formatted in markdown:</p>
-<pre><code class="language-http">HTTP/2 200&#10;date: Wed, 11 Feb 2026 11:44:48 GMT&#10;content-type: text/markdown; charset=utf-8&#10;content-length: 2899&#10;vary: accept&#10;x-markdown-tokens: 725&#10;content-signal: ai-train=yes, search=yes, ai-input=yes&#10;&#10;&#45;--&#10;title: Markdown for Agents · Cloudflare Agents docs&#10;&#45;--&#10;&#10;&#35;# What is Markdown for Agents&#10;&#10;Markdown has quickly become the lingua franca for agents and AI systems&#10;as a whole. The format’s explicit structure makes it ideal for AI processing,&#10;ultimately resulting in better results while minimizing token waste.&#10;...&#10;</code></pre>
+<pre tabindex="0"><code class="language-http">HTTP/2 200&#10;date: Wed, 11 Feb 2026 11:44:48 GMT&#10;content-type: text/markdown; charset=utf-8&#10;content-length: 2899&#10;vary: accept&#10;x-markdown-tokens: 725&#10;content-signal: ai-train=yes, search=yes, ai-input=yes&#10;&#10;&#45;--&#10;title: Markdown for Agents · Cloudflare Agents docs&#10;&#45;--&#10;&#10;&#35;# What is Markdown for Agents&#10;&#10;Markdown has quickly become the lingua franca for agents and AI systems&#10;as a whole. The format’s explicit structure makes it ideal for AI processing,&#10;ultimately resulting in better results while minimizing token waste.&#10;...&#10;</code></pre>
 <p>Refer to our <a href="/fundamentals/reference/markdown-for-agents/">developer documentation</a> and our <a href="https://blog.cloudflare.com/markdown-for-agents/">blog announcement</a> for more details.</p>
 
 

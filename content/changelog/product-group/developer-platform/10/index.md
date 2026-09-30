@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/changelog/product-group/developer-platform/10/
+  description: '2026-04-14'
+  full_title: Developer platform changelog - page 10 | Cloudflare Docs
+  head_html: <title>Developer platform changelog - page 10 | Cloudflare Docs</title><meta name="generator" content="Nift"><meta name="description" content="2026-04-14"><link rel="canonical" href="https://developers.cloudflare.com/changelog/product-group/developer-platform/10/"><link rel="sitemap" href="/sitemap-index.xml"><meta property="og:title" content="Developer platform changelog - page 10"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="2026-04-14"><meta property="og:url" content="https://developers.cloudflare.com/changelog/product-group/developer-platform/10/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/changelog/product-group/developer-platform/10/#page","headline":"Developer platform changelog - page 10 | Cloudflare Docs","description":"2026-04-14","url":"https://developers.cloudflare.com/changelog/product-group/developer-platform/10/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: false
+  noindex: false
+  route: /changelog/product-group/developer-platform/10/
+  schema: 1
+---
 <h1 id="changelog">Changelog</h1>
 
 <h2 id="vpc-networks-and-cloudflare-mesh-support-now-in-public-beta"><a href="/changelog/post/2026-04-14-vpc-networks/">VPC Networks and Cloudflare Mesh support now in public beta</a></h2>
@@ -7,7 +18,7 @@
 <div class="nb-wrangler-config">
 @markup("md", "content/.markup/bodies/17822.md")</div>
 <p>At runtime, <code>fetch()</code> routes through the network to reach the service at the IP and port you specify:</p>
-<pre><code class="language-js">const response = await env.MESH.fetch(&quot;http://10.0.1.50:8080/api/data&quot;);&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">const response = await env.MESH.fetch(&quot;http://10.0.1.50:8080/api/data&quot;);&#10;</code></pre>
 <p>For configuration options and examples, refer to <a href="/workers-vpc/configuration/vpc-networks/">VPC Networks</a> and <a href="/workers-vpc/examples/connect-to-cloudflare-mesh/">Connect Workers to Cloudflare Mesh</a>.</p>
 
 
@@ -41,10 +52,10 @@
 <p>Because outbound handlers run in the Workers runtime, outside the sandbox, they can hold secrets the sandbox never sees. A sandboxed workload can make a plain request, and credentials are transparently attached before a request is forwarded upstream.</p>
 <p>For instance, you could run an agent in a sandbox and ensure that any requests it makes to Github are authenticated.
 But it will never be able to access the credentials:</p>
-<pre><code class="language-ts">export class MySandbox extends Sandbox {}&#10;&#10;MySandbox.outboundByHost = {&#10;	&quot;github.com&quot;: (request: Request, env: Env, ctx: OutboundHandlerContext) =&gt; {&#10;		const requestWithAuth = new Request(request);&#10;		requestWithAuth.headers.set(&quot;x-auth-token&quot;, env.SECRET);&#10;		return fetch(requestWithAuth);&#10;	},&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">export class MySandbox extends Sandbox {}&#10;&#10;MySandbox.outboundByHost = {&#10;	&quot;github.com&quot;: (request: Request, env: Env, ctx: OutboundHandlerContext) =&gt; {&#10;		const requestWithAuth = new Request(request);&#10;		requestWithAuth.headers.set(&quot;x-auth-token&quot;, env.SECRET);&#10;		return fetch(requestWithAuth);&#10;	},&#10;};&#10;</code></pre>
 <p>You can easily inject unique credentials for different instances
 by using <code>ctx.containerId</code>:</p>
-<pre><code class="language-ts">MySandbox.outboundByHost = {&#10;	&quot;my-internal-vcs.dev&quot;: async (&#10;		request: Request,&#10;		env: Env,&#10;		ctx: OutboundHandlerContext,&#10;	) =&gt; {&#10;		const authKey = await env.KEYS.get(ctx.containerId);&#10;&#10;		const requestWithAuth = new Request(request);&#10;		requestWithAuth.headers.set(&quot;x-auth-token&quot;, authKey);&#10;		return fetch(requestWithAuth);&#10;	},&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">MySandbox.outboundByHost = {&#10;	&quot;my-internal-vcs.dev&quot;: async (&#10;		request: Request,&#10;		env: Env,&#10;		ctx: OutboundHandlerContext,&#10;	) =&gt; {&#10;		const authKey = await env.KEYS.get(ctx.containerId);&#10;&#10;		const requestWithAuth = new Request(request);&#10;		requestWithAuth.headers.set(&quot;x-auth-token&quot;, authKey);&#10;		return fetch(requestWithAuth);&#10;	},&#10;};&#10;</code></pre>
 <p>No token is ever passed into the sandbox. You can rotate secrets in the Worker environment
 and every request will pick them up immediately.</p>
 <h4 id="2026-04-13-sandbox-outbound-workers-tls-auth-tls-interception">TLS interception</h4>
@@ -52,12 +63,12 @@ and every request will pick them up immediately.</p>
 <p>With TLS interception active, outbound Workers can act as a transparent proxy for both HTTP and HTTPS traffic.</p>
 <h4 id="2026-04-13-sandbox-outbound-workers-tls-auth-allow-and-deny-hosts">Allow and deny hosts</h4>
 <p>Easily filter outbound traffic with <code>allowedHosts</code> and <code>deniedHosts</code>. When <code>allowedHosts</code> is set, it becomes a deny-by-default allowlist. Both properties support glob patterns.</p>
-<pre><code class="language-ts">export class MySandbox extends Sandbox {&#10;	allowedHosts = [&quot;github.com&quot;, &quot;npmjs.org&quot;];&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">export class MySandbox extends Sandbox {&#10;	allowedHosts = [&quot;github.com&quot;, &quot;npmjs.org&quot;];&#10;}&#10;</code></pre>
 <h4 id="2026-04-13-sandbox-outbound-workers-tls-auth-dynamic-outbound-handlers">Dynamic outbound handlers</h4>
 <p>Define named outbound handlers then apply or remove them at runtime using <code>setOutboundHandler()</code> or <code>setOutboundByHost()</code>. This lets you change egress policy for a running sandbox without restarting it.</p>
-<pre><code class="language-ts">export class MySandbox extends Sandbox {}&#10;&#10;MySandbox.outboundHandlers = {&#10;	allowHosts: async (req: Request, env: Env, ctx: OutboundHandlerContext ) =&gt; {&#10;		const url = new URL(req.url);&#10;		if (ctx.params.allowedHostnames.includes(url.hostname)) {&#10;			return fetch(req);&#10;		}&#10;		return new Response(null, { status: 403 });&#10;	},&#10;&#10;	noHttp: async () =&gt; {&#10;		return new Response(null, { status: 403 });&#10;	},&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">export class MySandbox extends Sandbox {}&#10;&#10;MySandbox.outboundHandlers = {&#10;	allowHosts: async (req: Request, env: Env, ctx: OutboundHandlerContext ) =&gt; {&#10;		const url = new URL(req.url);&#10;		if (ctx.params.allowedHostnames.includes(url.hostname)) {&#10;			return fetch(req);&#10;		}&#10;		return new Response(null, { status: 403 });&#10;	},&#10;&#10;	noHttp: async () =&gt; {&#10;		return new Response(null, { status: 403 });&#10;	},&#10;};&#10;</code></pre>
 <p>Apply handlers programmatically from your Worker:</p>
-<pre><code class="language-ts">const sandbox = getSandbox(env.Sandbox, userId);&#10;&#10;// Open network for setup&#10;await sandbox.setOutboundHandler(&quot;allowHosts&quot;, {&#10;	allowedHostnames: [&quot;github.com&quot;, &quot;npmjs.org&quot;],&#10;});&#10;await sandbox.exec(&quot;npm install&quot;);&#10;&#10;// Lock down after setup&#10;await sandbox.setOutboundHandler(&quot;noHttp&quot;);&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const sandbox = getSandbox(env.Sandbox, userId);&#10;&#10;// Open network for setup&#10;await sandbox.setOutboundHandler(&quot;allowHosts&quot;, {&#10;	allowedHostnames: [&quot;github.com&quot;, &quot;npmjs.org&quot;],&#10;});&#10;await sandbox.exec(&quot;npm install&quot;);&#10;&#10;// Lock down after setup&#10;await sandbox.setOutboundHandler(&quot;noHttp&quot;);&#10;</code></pre>
 <p>Handlers accept <code>params</code>, so you can customize behavior per instance without defining separate handler functions.</p>
 <h4 id="2026-04-13-sandbox-outbound-workers-tls-auth-get-started">Get started</h4>
 <p>Upgrade to <code>@cloudflare/containers@0.3.0</code> or <code>@cloudflare/sandbox@0.8.9</code> to use these features.</p>
@@ -79,7 +90,7 @@ and every request will pick them up immediately.</p>
 </ul>
 <h4 id="2026-04-13-local-explorer-openapi-powered-rest-api">OpenAPI-powered REST API</h4>
 <p>Local Explorer exposes a REST API at <code>/cdn-cgi/local/explorer/api</code> that provides programmatic access to the same operations available in the browser. The root endpoint returns an <a href="https://www.openapis.org/">OpenAPI specification</a> describing all available endpoints, parameters, and response formats.</p>
-<pre><code class="language-sh">curl http://localhost:8787/cdn-cgi/local/explorer/api&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">curl http://localhost:8787/cdn-cgi/local/explorer/api&#10;</code></pre>
 <p>Point an AI coding agent at <code>/cdn-cgi/local/explorer/api</code> and it can discover and interact with your local resources without manual setup. This enables iterative development loops where an agent can populate test data in KV or D1, inspect Durable Object state, trigger Workflow runs, or upload files to R2.</p>
 <p>For more details, refer to the <a href="/workers/local-development/local-explorer/">Local Explorer documentation</a>.</p>
 
@@ -89,10 +100,10 @@ and every request will pick them up immediately.</p>
 <p><a href="/browser-run/">Browser Rendering</a> now exposes the <a href="/browser-run/cdp/">Chrome DevTools Protocol (CDP)</a>, the low-level protocol that powers browser automation. The growing ecosystem of CDP-based agent tools, along with existing CDP automation scripts, can now use Browser Rendering directly.</p>
 <p>Any CDP-compatible client, including <a href="/browser-run/cdp/puppeteer/">Puppeteer</a> and <a href="/browser-run/cdp/playwright/">Playwright</a>, can connect from any environment, whether that is <a href="/workers/">Cloudflare Workers</a>, your local machine, or a cloud environment. All you need is your Cloudflare API key.</p>
 <p>For any existing CDP script, switching to Browser Rendering is a one-line change:</p>
-<pre><code class="language-js">const puppeteer = require(&quot;puppeteer-core&quot;);&#10;&#10;const browser = await puppeteer.connect({&#10;	browserWSEndpoint: `wss://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/browser-rendering/devtools/browser?keep_alive=600000`,&#10;	headers: { Authorization: `Bearer ${API_TOKEN}` },&#10;});&#10;&#10;const page = await browser.newPage();&#10;await page.goto(&quot;https://example.com&quot;);&#10;console.log(await page.title());&#10;await browser.close();&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">const puppeteer = require(&quot;puppeteer-core&quot;);&#10;&#10;const browser = await puppeteer.connect({&#10;	browserWSEndpoint: `wss://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/browser-rendering/devtools/browser?keep_alive=600000`,&#10;	headers: { Authorization: `Bearer ${API_TOKEN}` },&#10;});&#10;&#10;const page = await browser.newPage();&#10;await page.goto(&quot;https://example.com&quot;);&#10;console.log(await page.title());&#10;await browser.close();&#10;</code></pre>
 <p>Additionally, MCP clients like Claude Desktop, Claude Code, Cursor, and OpenCode can now use Browser Rendering as their remote browser via the <a href="https://github.com/ChromeDevTools/chrome-devtools-mcp">chrome-devtools-mcp</a> package.</p>
 <p>Here is an example of how to configure Browser Rendering for Claude Desktop:</p>
-<pre><code class="language-json">{&#10;	&quot;mcpServers&quot;: {&#10;		&quot;browser-rendering&quot;: {&#10;			&quot;command&quot;: &quot;npx&quot;,&#10;			&quot;args&quot;: [&#10;				&quot;-y&quot;,&#10;				&quot;chrome-devtools-mcp@latest&quot;,&#10;				&quot;--wsEndpoint=wss://api.cloudflare.com/client/v4/accounts/&lt;ACCOUNT_ID&gt;/browser-rendering/devtools/browser?keep_alive=600000&quot;,&#10;				&quot;--wsHeaders={\&quot;Authorization\&quot;:\&quot;Bearer &lt;API_TOKEN&gt;\&quot;}&quot;&#10;			]&#10;		}&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;mcpServers&quot;: {&#10;		&quot;browser-rendering&quot;: {&#10;			&quot;command&quot;: &quot;npx&quot;,&#10;			&quot;args&quot;: [&#10;				&quot;-y&quot;,&#10;				&quot;chrome-devtools-mcp@latest&quot;,&#10;				&quot;--wsEndpoint=wss://api.cloudflare.com/client/v4/accounts/&lt;ACCOUNT_ID&gt;/browser-rendering/devtools/browser?keep_alive=600000&quot;,&#10;				&quot;--wsHeaders={\&quot;Authorization\&quot;:\&quot;Bearer &lt;API_TOKEN&gt;\&quot;}&quot;&#10;			]&#10;		}&#10;	}&#10;}&#10;</code></pre>
 <p>To get started, refer to the <a href="/browser-run/cdp/">CDP documentation</a>.</p>
 
 
@@ -116,7 +127,7 @@ and every request will pick them up immediately.</p>
 <p><a href="/ai-search/">AI Search</a> now supports <a href="/ai-search/configuration/data-source/website/content-selectors/">CSS content selectors</a> for website data sources. You can now define which parts of a crawled page are extracted and indexed by specifying CSS selectors paired with URL glob patterns.</p>
 <p>Content selectors solve the problem of indexing only relevant content while ignoring navigation, sidebars, footers, and other boilerplate. When a page URL matches a glob pattern, only elements matching the corresponding CSS selector are extracted and converted to Markdown for indexing.</p>
 <p>Configure content selectors via the dashboard or API:</p>
-<pre><code class="language-bash">curl &quot;https://api.cloudflare.com/client/v4/accounts/{account_id}/ai-search/instances&quot; \&#10;  &#45;H &quot;Authorization: Bearer {api_token}&quot; \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;id&quot;: &quot;my-ai-search&quot;,&#10;    &quot;source&quot;: &quot;https://example.com&quot;,&#10;    &quot;type&quot;: &quot;web-crawler&quot;,&#10;    &quot;source_params&quot;: {&#10;      &quot;web_crawler&quot;: {&#10;        &quot;parse_options&quot;: {&#10;          &quot;content_selector&quot;: [&#10;            {&#10;              &quot;path&quot;: &quot;**/blog/**&quot;,&#10;              &quot;selector&quot;: &quot;article .post-body&quot;&#10;            }&#10;          ]&#10;        }&#10;      }&#10;    }&#10;  }&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl &quot;https://api.cloudflare.com/client/v4/accounts/{account_id}/ai-search/instances&quot; \&#10;  &#45;H &quot;Authorization: Bearer {api_token}&quot; \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;id&quot;: &quot;my-ai-search&quot;,&#10;    &quot;source&quot;: &quot;https://example.com&quot;,&#10;    &quot;type&quot;: &quot;web-crawler&quot;,&#10;    &quot;source_params&quot;: {&#10;      &quot;web_crawler&quot;: {&#10;        &quot;parse_options&quot;: {&#10;          &quot;content_selector&quot;: [&#10;            {&#10;              &quot;path&quot;: &quot;**/blog/**&quot;,&#10;              &quot;selector&quot;: &quot;article .post-body&quot;&#10;            }&#10;          ]&#10;        }&#10;      }&#10;    }&#10;  }&#x27;&#10;</code></pre>
 <p>Selectors are evaluated in order, and the first matching pattern wins. You can define up to 10 content selector entries per instance.</p>
 <p>For configuration details and examples, refer to the <a href="/ai-search/configuration/data-source/website/content-selectors/">content selectors documentation</a>.</p>
 
@@ -178,10 +189,10 @@ and every request will pick them up immediately.</p>
 <p><em>2026-04-07</em></p>
 <p>The Workers runtime now automatically sends a reciprocal Close frame when it receives a Close frame from the peer. The <code>readyState</code> transitions to <code>CLOSED</code> before the <code>close</code> event fires. This matches the <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/close_event">WebSocket specification</a> and standard browser behavior.</p>
 <p>This change is enabled by default for Workers using compatibility dates on or after <code>2026-04-07</code> (via the <a href="/workers/configuration/compatibility-flags/#websocket-auto-reply-to-close"><code>web_socket_auto_reply_to_close</code></a> compatibility flag). Existing code that manually calls <code>close()</code> inside the <code>close</code> event handler will continue to work — the call is silently ignored when the WebSocket is already closed.</p>
-<pre><code class="language-js">const [client, server] = Object.values(new WebSocketPair());&#10;server.accept();&#10;&#10;server.addEventListener(&quot;close&quot;, (event) =&gt; {&#10;	// readyState is already CLOSED — no need to call server.close().&#10;	console.log(server.readyState); // WebSocket.CLOSED&#10;	console.log(event.code); // 1000&#10;	console.log(event.wasClean); // true&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">const [client, server] = Object.values(new WebSocketPair());&#10;server.accept();&#10;&#10;server.addEventListener(&quot;close&quot;, (event) =&gt; {&#10;	// readyState is already CLOSED — no need to call server.close().&#10;	console.log(server.readyState); // WebSocket.CLOSED&#10;	console.log(event.code); // 1000&#10;	console.log(event.wasClean); // true&#10;});&#10;</code></pre>
 <h4 id="2026-04-07-websocket-auto-reply-to-close-half-open-mode-for-websocket-proxying">Half-open mode for WebSocket proxying</h4>
 <p>The automatic close behavior can interfere with WebSocket proxying, where a Worker sits between a client and a backend and needs to coordinate the close on both sides independently. To support this use case, pass <code>{ allowHalfOpen: true }</code> to <code>accept()</code>:</p>
-<pre><code class="language-js">const [client, server] = Object.values(new WebSocketPair());&#10;&#10;server.accept({ allowHalfOpen: true });&#10;&#10;server.addEventListener(&quot;close&quot;, (event) =&gt; {&#10;	// readyState is still CLOSING here, giving you time&#10;	// to coordinate the close on the other side.&#10;	console.log(server.readyState); // WebSocket.CLOSING&#10;&#10;	// Manually close when ready.&#10;	server.close(event.code, &quot;done&quot;);&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">const [client, server] = Object.values(new WebSocketPair());&#10;&#10;server.accept({ allowHalfOpen: true });&#10;&#10;server.addEventListener(&quot;close&quot;, (event) =&gt; {&#10;	// readyState is still CLOSING here, giving you time&#10;	// to coordinate the close on the other side.&#10;	console.log(server.readyState); // WebSocket.CLOSING&#10;&#10;	// Manually close when ready.&#10;	server.close(event.code, &quot;done&quot;);&#10;});&#10;</code></pre>
 <p>For more information, refer to <a href="/workers/runtime-apis/websockets/#close-behavior">WebSockets Close behavior</a>.</p>
 
 
@@ -244,7 +255,7 @@ and every request will pick them up immediately.</p>
 <p><em>2026-04-01 12:00:00 UTC</em></p>
 <p>All <code>wrangler workflows</code> commands now accept a <code>--local</code> flag to target a Workflow running in a local <code>wrangler dev</code> session instead of the production API.</p>
 <p>You can now manage the full Workflow lifecycle locally, including triggering Workflows, listing instances, pausing, resuming, restarting, terminating, and sending events:</p>
-<pre><code class="language-sh">npx wrangler workflows list --local&#10;npx wrangler workflows trigger my-workflow --local&#10;npx wrangler workflows instances list my-workflow --local&#10;npx wrangler workflows instances pause my-workflow &lt;INSTANCE_ID&gt; --local&#10;npx wrangler workflows instances send-event my-workflow &lt;INSTANCE_ID&gt; --type my-event --local&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler workflows list --local&#10;npx wrangler workflows trigger my-workflow --local&#10;npx wrangler workflows instances list my-workflow --local&#10;npx wrangler workflows instances pause my-workflow &lt;INSTANCE_ID&gt; --local&#10;npx wrangler workflows instances send-event my-workflow &lt;INSTANCE_ID&gt; --type my-event --local&#10;</code></pre>
 <p>All commands also accept <code>--port</code> to target a specific <code>wrangler dev</code> session (defaults to <code>8787</code>).</p>
 <p>For more information, refer to <a href="/workflows/build/local-development/">Workflows local development</a>.</p>
 
@@ -292,9 +303,9 @@ and every request will pick them up immediately.</p>
 </tbody>
 </table>
 <p>The <code>create</code> command guides you through setup, choosing a name, source type (<code>r2</code> or <code>web</code>), and data source. You can also pass all options as flags for non-interactive use:</p>
-<pre><code class="language-sh">wrangler ai-search create my-instance --type r2 --source my-bucket&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">wrangler ai-search create my-instance --type r2 --source my-bucket&#10;</code></pre>
 <p>Use <code>wrangler ai-search search</code> to query an instance directly from the CLI:</p>
-<pre><code class="language-sh">wrangler ai-search search my-instance --query &quot;how do I configure caching?&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">wrangler ai-search search my-instance --query &quot;how do I configure caching?&quot;&#10;</code></pre>
 <p>All commands support <code>--json</code> for structured output that scripts and AI agents can parse directly.</p>
 <p>For full usage details, refer to the <a href="/ai-search/wrangler-commands/">Wrangler commands documentation</a>.</p>
 
@@ -303,7 +314,7 @@ and every request will pick them up immediately.</p>
 <p><em>2026-04-01</em></p>
 <p><a href="/workers/ci-cd/builds/">Workers Builds</a> now supports Deploy Hooks — trigger builds from your headless CMS, a Cron Trigger, a Slack bot, or any system that can send an HTTP request.</p>
 <p>Each Deploy Hook is a unique URL tied to a specific branch. Send it a <code>POST</code> and your Worker builds and deploys.</p>
-<pre><code class="language-sh">curl -X POST &quot;https://api.cloudflare.com/client/v4/workers/builds/deploy_hooks/&lt;DEPLOY_HOOK_ID&gt;&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">curl -X POST &quot;https://api.cloudflare.com/client/v4/workers/builds/deploy_hooks/&lt;DEPLOY_HOOK_ID&gt;&quot;&#10;</code></pre>
 <p>To create one, go to <strong>Workers &amp; Pages</strong> &gt; your Worker &gt; <strong>Settings</strong> &gt; <strong>Builds</strong> &gt; <strong>Deploy Hooks</strong>.</p>
 <p>Since a Deploy Hook is a URL, you can also call it from another Worker. For example, a Worker with a <a href="/workers/configuration/cron-triggers/">Cron Trigger</a> can rebuild your project on a schedule:</p>
 <div class="nb-type-script-example">
@@ -351,7 +362,7 @@ and every request will pick them up immediately.</p>
 </tbody>
 </table>
 <h4 id="2026-04-01-l4-transport-telemetry-fields-example-log-connection-quality-metrics">Example: Log connection quality metrics</h4>
-<pre><code class="language-js">export default {&#10;  async fetch(request) {&#10;    const cf = request.cf;&#10;&#10;    const rtt = cf.clientTcpRtt ?? cf.clientQuicRtt ?? 0;&#10;    const deliveryRate = cf.edgeL4?.deliveryRate ?? 0;&#10;    const transport = cf.clientTcpRtt ? &quot;TCP&quot; : &quot;QUIC&quot;;&#10;&#10;    console.log(`Transport: ${transport}, RTT: ${rtt}ms, Delivery rate: ${deliveryRate} B/s`);&#10;&#10;    const headers = new Headers(request.headers);&#10;    headers.set(&quot;X-Client-RTT&quot;, String(rtt));&#10;    headers.set(&quot;X-Delivery-Rate&quot;, String(deliveryRate));&#10;&#10;    return fetch(new Request(request, { headers }));&#10;  },&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">export default {&#10;  async fetch(request) {&#10;    const cf = request.cf;&#10;&#10;    const rtt = cf.clientTcpRtt ?? cf.clientQuicRtt ?? 0;&#10;    const deliveryRate = cf.edgeL4?.deliveryRate ?? 0;&#10;    const transport = cf.clientTcpRtt ? &quot;TCP&quot; : &quot;QUIC&quot;;&#10;&#10;    console.log(`Transport: ${transport}, RTT: ${rtt}ms, Delivery rate: ${deliveryRate} B/s`);&#10;&#10;    const headers = new Headers(request.headers);&#10;    headers.set(&quot;X-Client-RTT&quot;, String(rtt));&#10;    headers.set(&quot;X-Delivery-Rate&quot;, String(deliveryRate));&#10;&#10;    return fetch(new Request(request, { headers }));&#10;  },&#10;};&#10;</code></pre>
 <p>For more information, refer to <a href="/workers/runtime-apis/request/">Workers Runtime APIs: Request</a>.</p>
 
 
@@ -391,7 +402,7 @@ and every request will pick them up immediately.</p>
 </tbody>
 </table>
 <h4 id="2026-03-27-rfc9440-mtls-fields-example-forwarding-client-certificate-headers-to-your-origin">Example: forwarding client certificate headers to your origin</h4>
-<pre><code class="language-js">export default {&#10;  async fetch(request) {&#10;    const tls = request.cf.tlsClientAuth;&#10;&#10;    // Only forward if cert was verified and chain is complete&#10;    if (!tls || !tls.certVerified || tls.certRevoked || tls.certChainRFC9440TooLarge) {&#10;      return new Response(&quot;Unauthorized&quot;, { status: 401 });&#10;    }&#10;&#10;    const headers = new Headers(request.headers);&#10;    headers.set(&quot;Client-Cert&quot;, tls.certRFC9440);&#10;    headers.set(&quot;Client-Cert-Chain&quot;, tls.certChainRFC9440);&#10;&#10;    return fetch(new Request(request, { headers }));&#10;  },&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">export default {&#10;  async fetch(request) {&#10;    const tls = request.cf.tlsClientAuth;&#10;&#10;    // Only forward if cert was verified and chain is complete&#10;    if (!tls || !tls.certVerified || tls.certRevoked || tls.certChainRFC9440TooLarge) {&#10;      return new Response(&quot;Unauthorized&quot;, { status: 401 });&#10;    }&#10;&#10;    const headers = new Headers(request.headers);&#10;    headers.set(&quot;Client-Cert&quot;, tls.certRFC9440);&#10;    headers.set(&quot;Client-Cert-Chain&quot;, tls.certChainRFC9440);&#10;&#10;    return fetch(new Request(request, { headers }));&#10;  },&#10;};&#10;</code></pre>
 <p>For more information, refer to <a href="/ssl/client-certificates/client-certificate-variables/#workers-variables">Client certificate variables</a> and <a href="/cloudflare-one/access-controls/service-credentials/mutual-tls-authentication/">Mutual TLS authentication</a>.</p>
 
 
@@ -401,18 +412,18 @@ and every request will pick them up immediately.</p>
 functions and <a href="/workers/runtime-apis/bindings/">bindings</a>, like <a href="/kv">KV</a> or <a href="/r2/">R2</a>, from within the container at specific hostnames.</p>
 <h4 id="2026-03-26-outbound-workers-run-worker-code">Run Worker code</h4>
 <p>Define an <code>outbound</code> handler to capture any HTTP request or use <code>outboundByHost</code> to capture requests to individual hostnames and IPs.</p>
-<pre><code class="language-js">export class MyApp extends Sandbox {}&#10;&#10;MyApp.outbound = async (request, env, ctx) =&gt; {&#10;	// you can run arbitrary functions defined in your Worker on any HTTP request&#10;	return await someWorkersFunction(request.body);&#10;};&#10;&#10;MyApp.outboundByHost = {&#10;	&quot;my.worker&quot;: async (request, env, ctx) =&gt; {&#10;		return await anotherFunction(request.body);&#10;	},&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">export class MyApp extends Sandbox {}&#10;&#10;MyApp.outbound = async (request, env, ctx) =&gt; {&#10;	// you can run arbitrary functions defined in your Worker on any HTTP request&#10;	return await someWorkersFunction(request.body);&#10;};&#10;&#10;MyApp.outboundByHost = {&#10;	&quot;my.worker&quot;: async (request, env, ctx) =&gt; {&#10;		return await anotherFunction(request.body);&#10;	},&#10;};&#10;</code></pre>
 <p>In this example, requests from the container to <code>http://my.worker</code> will run the function defined within <code>outboundByHost</code>,
 and any other HTTP requests will run the <code>outbound</code> handler. These handlers run entirely inside the Workers runtime,
 outside of the container sandbox.</p>
 <h4 id="2026-03-26-outbound-workers-access-workers-bindings">Access Workers bindings</h4>
 <p>Each handler has access to <code>env</code>, so it can call any binding set in <a href="/workers/wrangler/configuration/#bindings">Wrangler config</a>.
 Code inside the container makes a standard HTTP request to that hostname and the outbound Worker translates it into a binding call.</p>
-<pre><code class="language-js">export class MyApp extends Sandbox {}&#10;&#10;MyApp.outboundByHost = {&#10;	&quot;my.kv&quot;: async (request, env, ctx) =&gt; {&#10;		const key = new URL(request.url).pathname.slice(1);&#10;		const value = await env.KV.get(key);&#10;		return new Response(value ?? &quot;&quot;, { status: value ? 200 : 404 });&#10;	},&#10;	&quot;my.r2&quot;: async (request, env, ctx) =&gt; {&#10;		const key = new URL(request.url).pathname.slice(1);&#10;		const object = await env.BUCKET.get(key);&#10;		return new Response(object?.body ?? &quot;&quot;, { status: object ? 200 : 404 });&#10;	},&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">export class MyApp extends Sandbox {}&#10;&#10;MyApp.outboundByHost = {&#10;	&quot;my.kv&quot;: async (request, env, ctx) =&gt; {&#10;		const key = new URL(request.url).pathname.slice(1);&#10;		const value = await env.KV.get(key);&#10;		return new Response(value ?? &quot;&quot;, { status: value ? 200 : 404 });&#10;	},&#10;	&quot;my.r2&quot;: async (request, env, ctx) =&gt; {&#10;		const key = new URL(request.url).pathname.slice(1);&#10;		const object = await env.BUCKET.get(key);&#10;		return new Response(object?.body ?? &quot;&quot;, { status: object ? 200 : 404 });&#10;	},&#10;};&#10;</code></pre>
 <p>Now, from inside the container sandbox, <code>curl http://my.kv/some-key</code> will access <a href="/kv">Workers KV</a> and <code>curl http://my.r2/some-object</code> will access <a href="/r2/">R2</a>.</p>
 <h4 id="2026-03-26-outbound-workers-access-durable-object-state">Access Durable Object state</h4>
 <p>Use <code>ctx.containerId</code> to reference the container's automatically provisioned <a href="/durable-objects">Durable Object</a>.</p>
-<pre><code class="language-js">export class MyContainer extends Container {}&#10;&#10;MyContainer.outboundByHost = {&#10;	&quot;get-state.do&quot;: async (request, env, ctx) =&gt; {&#10;		const id = env.MY_CONTAINER.idFromString(ctx.containerId);&#10;		const stub = env.MY_CONTAINER.get(id);&#10;		return stub.getStateForKey(request.body);&#10;	},&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">export class MyContainer extends Container {}&#10;&#10;MyContainer.outboundByHost = {&#10;	&quot;get-state.do&quot;: async (request, env, ctx) =&gt; {&#10;		const id = env.MY_CONTAINER.idFromString(ctx.containerId);&#10;		const stub = env.MY_CONTAINER.get(id);&#10;		return stub.getStateForKey(request.body);&#10;	},&#10;};&#10;</code></pre>
 <p>This provides an easy way to associate state with any container instance, and includes a <a href="/durable-objects/get-started/#2-write-a-durable-object-class-using-sql-api">built-in SQLite database</a>.</p>
 <h4 id="2026-03-26-outbound-workers-get-started-today">Get Started Today</h4>
 <p>Upgrade to <code>@cloudflare/containers</code> version 0.2.0 or later, or <code>@cloudflare/sandbox</code> version 0.8.0 or later to use outbound Workers.</p>
@@ -422,7 +433,7 @@ Code inside the container makes a standard HTTP request to that hostname and the
 <h2 id="access-durable-object-jurisdiction-via-ctx-id-jurisdiction"><a href="/changelog/post/2026-03-26-durable-object-id-jurisdiction/">Access Durable Object jurisdiction via `ctx.id.jurisdiction`</a></h2>
 <p><em>2026-03-26</em></p>
 <p><code>ctx.id.jurisdiction</code> inside a Durable Object now reports the <a href="/durable-objects/reference/data-location/#restrict-durable-objects-to-a-jurisdiction">jurisdiction</a> the object was created in — for example <code>&quot;eu&quot;</code> when accessed through <code>env.MY_DURABLE_OBJECT.jurisdiction(&quot;eu&quot;)</code> — so you can make region-aware decisions without passing the jurisdiction through method arguments or persisting it in storage. For the full list of ID-construction paths that preserve <code>jurisdiction</code>, refer to the <a href="/durable-objects/api/id/#jurisdiction">Durable Object ID documentation</a>.</p>
-<pre><code class="language-js">export class RegionalRoom extends DurableObject {&#10;	async fetch(request) {&#10;		// &quot;eu&quot; when accessed through env.MY_DURABLE_OBJECT.jurisdiction(&quot;eu&quot;)&#10;		const region = this.ctx.id.jurisdiction;&#10;		return new Response(`Hello from ${region ?? &quot;the default region&quot;}!`);&#10;	}&#10;}&#10;&#10;// Worker&#10;export default {&#10;	async fetch(request, env) {&#10;		const stub = env.MY_DURABLE_OBJECT.jurisdiction(&quot;eu&quot;).getByName(&quot;general&quot;);&#10;		return stub.fetch(request);&#10;	},&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">export class RegionalRoom extends DurableObject {&#10;	async fetch(request) {&#10;		// &quot;eu&quot; when accessed through env.MY_DURABLE_OBJECT.jurisdiction(&quot;eu&quot;)&#10;		const region = this.ctx.id.jurisdiction;&#10;		return new Response(`Hello from ${region ?? &quot;the default region&quot;}!`);&#10;	}&#10;}&#10;&#10;// Worker&#10;export default {&#10;	async fetch(request, env) {&#10;		const stub = env.MY_DURABLE_OBJECT.jurisdiction(&quot;eu&quot;).getByName(&quot;general&quot;);&#10;		return stub.fetch(request);&#10;	},&#10;};&#10;</code></pre>
 <p><code>ctx.id.jurisdiction</code> is <code>undefined</code> for Durable Objects that were not created in a jurisdiction-restricted namespace. Alarms scheduled before 2026-03-15 also do not have <code>jurisdiction</code> stored; to backfill the value, reschedule the alarm from a <code>fetch()</code> or RPC handler.</p>
 
 
@@ -525,7 +536,7 @@ Code inside the container makes a standard HTTP request to that hostname and the
 <p><em>2026-03-23 12:00:00 UTC</em></p>
 <p>Workflow instance methods <code>pause()</code>, <code>resume()</code>, <code>restart()</code>, and <code>terminate()</code> are now available in local development when using <code>wrangler dev</code>.</p>
 <p>You can now test the full Workflow instance lifecycle locally:</p>
-<pre><code class="language-ts">const instance = await env.MY_WORKFLOW.create({&#10;	id: &quot;my-instance-id&quot;,&#10;});&#10;&#10;await instance.pause(); // pauses a running workflow instance&#10;await instance.resume(); // resumes a paused instance&#10;await instance.restart(); // restarts the instance from the beginning&#10;await instance.terminate(); // terminates the instance immediately&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const instance = await env.MY_WORKFLOW.create({&#10;	id: &quot;my-instance-id&quot;,&#10;});&#10;&#10;await instance.pause(); // pauses a running workflow instance&#10;await instance.resume(); // resumes a paused instance&#10;await instance.restart(); // restarts the instance from the beginning&#10;await instance.terminate(); // terminates the instance immediately&#10;</code></pre>
 
 
 <h2 id="agents-sdk-v0-8-0-readable-state-idempotent-schedules-typed-agentclient-and-zod-4"><a href="/changelog/post/2026-03-23-agents-sdk-v0.8.0/">Agents SDK v0.8.0: readable state, idempotent schedules, typed AgentClient, and Zod 4</a></h2>
@@ -575,7 +586,7 @@ Code inside the container makes a standard HTTP request to that hostname and the
 @markup("md", "content/.markup/bodies/17660.md")</div>
 <h4 id="2026-03-23-agents-sdk-v0.8.0-upgrade">Upgrade</h4>
 <p>To update to the latest version:</p>
-<pre><code class="language-sh">npm i agents@latest @cloudflare/ai-chat@latest&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npm i agents@latest @cloudflare/ai-chat@latest&#10;</code></pre>
 
 
 <h2 id="new-ai-search-rest-api-endpoints-for-search-and-chat-completions"><a href="/changelog/post/2026-03-23-ai-search-new-rest-api/">New AI Search REST API endpoints for /search and /chat/completions</a></h2>
@@ -600,7 +611,7 @@ Code inside the container makes a standard HTTP request to that hostname and the
 </tbody>
 </table>
 <p>Here is an example request to the Chat Completions endpoint using the new <code>messages</code> array format:</p>
-<pre><code class="language-bash">curl https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai-search/instances/{NAME}/chat/completions \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;H &quot;Authorization: Bearer {API_TOKEN}&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;messages&quot;: [&#10;      {&#10;        &quot;role&quot;: &quot;system&quot;,&#10;        &quot;content&quot;: &quot;You are a helpful documentation assistant.&quot;&#10;      },&#10;      {&#10;        &quot;role&quot;: &quot;user&quot;,&#10;        &quot;content&quot;: &quot;How do I get started?&quot;&#10;      }&#10;    ]&#10;  }&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai-search/instances/{NAME}/chat/completions \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;H &quot;Authorization: Bearer {API_TOKEN}&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;messages&quot;: [&#10;      {&#10;        &quot;role&quot;: &quot;system&quot;,&#10;        &quot;content&quot;: &quot;You are a helpful documentation assistant.&quot;&#10;      },&#10;      {&#10;        &quot;role&quot;: &quot;user&quot;,&#10;        &quot;content&quot;: &quot;How do I get started?&quot;&#10;      }&#10;    ]&#10;  }&#x27;&#10;</code></pre>
 <p>For more details, refer to the <a href="/ai-search/api/search/rest-api/">AI Search REST API guide</a>.</p>
 <h4 id="2026-03-23-ai-search-new-rest-api-migration-from-existing-autorag-api-recommended">Migration from existing AutoRAG API (recommended)</h4>
 <p>If you are using the previous AutoRAG API endpoints (<code>/autorag/rags/</code>), we recommend migrating to the new endpoints. The previous AutoRAG API endpoints will continue to be fully supported.</p>

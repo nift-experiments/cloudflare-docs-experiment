@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/kv/api/read-key-value-pairs/
+  description: Retrieve values from a Workers KV namespace using the get() method, with support for types, caching, and metadata.
+  full_title: Read key-value pairs · Cloudflare Workers KV docs
+  head_html: <title>Read key-value pairs · Cloudflare Workers KV docs</title><meta name="generator" content="Nift"><meta name="description" content="Retrieve values from a Workers KV namespace using the get() method, with support for types, caching, and metadata."><link rel="canonical" href="https://developers.cloudflare.com/kv/api/read-key-value-pairs/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/kv/api/read-key-value-pairs/index.md"><meta property="og:title" content="Read key-value pairs · Cloudflare Workers KV docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Retrieve values from a Workers KV namespace using the get() method, with support for types, caching, and metadata."><meta property="og:url" content="https://developers.cloudflare.com/kv/api/read-key-value-pairs/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="KV"><meta name="algolia_product_filter" content="KV"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="KV"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/kv/api/read-key-value-pairs/#page","headline":"Read key-value pairs \u00b7 Cloudflare Workers KV docs","description":"Retrieve values from a Workers KV namespace using the get() method, with support for types, caching, and metadata.","url":"https://developers.cloudflare.com/kv/api/read-key-value-pairs/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /kv/api/read-key-value-pairs/
+  schema: 1
+---
 <p>To get the value for a given key, call the <code>get()</code> method of the <a href="/kv/concepts/kv-bindings/">KV binding</a> on any <a href="/kv/concepts/kv-namespaces/">KV namespace</a> you have bound to your Worker code:</p>
 <div class="nb-tabs" data-nb-tabs data-nb-sync-key="workersExamples"><div role="tablist" aria-label="Options" data-nb-tabs-list></div><div data-nb-tabs-panels>
 @input("content/.markup/bodies/9557.md")
@@ -210,9 +221,9 @@ with keys not found having <code>null</code> values.</p>
 <p>If you have a set of related key-value pairs that have a mixed usage pattern (some hot keys and some cold keys), consider coalescing them. By coalescing cold keys with hot keys, cold keys will be cached alongside hot keys which can provide faster reads than if they were uncached as individual keys.</p>
 <h4 id="merging-into-a-super-kv-entry">Merging into a &quot;super&quot; KV entry</h4>
 <p>One coalescing technique is to make all the keys and values part of a super key-value object. An example is shown below.</p>
-<pre><code>key1: value1&#10;key2: value2&#10;key3: value3&#10;</code></pre>
+<pre tabindex="0"><code>key1: value1&#10;key2: value2&#10;key3: value3&#10;</code></pre>
 <p>becomes</p>
-<pre><code>coalesced: {&#10;  key1: value1,&#10;  key2: value2,&#10;  key3: value3,&#10;}&#10;</code></pre>
+<pre tabindex="0"><code>coalesced: {&#10;  key1: value1,&#10;  key2: value2,&#10;  key3: value3,&#10;}&#10;</code></pre>
 <p>By coalescing the values, the cold keys benefit from being kept warm in the cache because of access patterns of the warmer keys.</p>
 <p>This works best if you are not expecting the need to update the values independently of each other, which can pose race conditions.</p>
 <ul>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/changelog/23/
+  description: New updates and improvements at Cloudflare.
+  full_title: Changelog - page 23 | Cloudflare Docs
+  head_html: <title>Changelog - page 23 | Cloudflare Docs</title><meta name="generator" content="Nift"><meta name="description" content="New updates and improvements at Cloudflare."><link rel="canonical" href="https://developers.cloudflare.com/changelog/23/"><link rel="sitemap" href="/sitemap-index.xml"><meta property="og:title" content="Changelog - page 23"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="New updates and improvements at Cloudflare."><meta property="og:url" content="https://developers.cloudflare.com/changelog/23/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/changelog/23/#page","headline":"Changelog - page 23 | Cloudflare Docs","description":"New updates and improvements at Cloudflare.","url":"https://developers.cloudflare.com/changelog/23/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: false
+  noindex: false
+  route: /changelog/23/
+  schema: 1
+---
 <div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
 <div class="changelog-tools"><span>All products</span><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
 <section class="changelog-feed" aria-label="Changelog entries">
@@ -25,7 +36,7 @@
 <h2 id="post-2026-03-15-durable-object-id-name"><a href="/changelog/post/2026-03-15-durable-object-id-name/">Access Durable Object name via `ctx.id.name`</a></h2>
 <div class="changelog-badges"><span>durable-objects</span><span>workers</span></div><div class="changelog-body"><p>When your Worker accesses a Durable Object via <code>idFromName()</code> or <code>getByName()</code>, the same name is now available on <code>ctx.id.name</code> inside the object — no need to pass it through method arguments or persist it in storage. This brings the runtime behavior in line with the <a href="/workers/languages/typescript/">Workers runtime types</a>.</p>
 <p>This is especially useful for <a href="/durable-objects/api/alarms/">alarms</a>, where there is no calling client to pass the name as an argument. When an alarm handler runs, <code>ctx.id.name</code> will hold the same name the object was originally accessed with.</p>
-<pre><code class="language-js">import { DurableObject } from &quot;cloudflare:workers&quot;;&#10;&#10;export class ChatRoom extends DurableObject {&#10;  async getRoomName() {&#10;    // ctx.id.name returns the name passed to getByName() or idFromName()&#10;    return this.ctx.id.name;&#10;  }&#10;}&#10;&#10;// Worker&#10;export default {&#10;  async fetch(request, env) {&#10;    const stub = env.CHAT_ROOM.getByName(&quot;general&quot;);&#10;    const roomName = await stub.getRoomName();&#10;    return new Response(`Welcome to ${roomName}!`);&#10;  },&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">import { DurableObject } from &quot;cloudflare:workers&quot;;&#10;&#10;export class ChatRoom extends DurableObject {&#10;  async getRoomName() {&#10;    // ctx.id.name returns the name passed to getByName() or idFromName()&#10;    return this.ctx.id.name;&#10;  }&#10;}&#10;&#10;// Worker&#10;export default {&#10;  async fetch(request, env) {&#10;    const stub = env.CHAT_ROOM.getByName(&quot;general&quot;);&#10;    const roomName = await stub.getRoomName();&#10;    return new Response(`Welcome to ${roomName}!`);&#10;  },&#10;};&#10;</code></pre>
 <p><code>ctx.id.name</code> is <code>undefined</code> in the following cases:</p>
 <ul>
 <li>For Durable Objects created with <code>newUniqueId()</code>.</li>
@@ -44,9 +55,9 @@
 <div class="nb-wrangler-config">
 @markup("md", "content/.markup/bodies/17709.md")</div>
 <p>Then connect with:</p>
-<pre><code class="language-sh">wrangler containers ssh &lt;INSTANCE_ID&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">wrangler containers ssh &lt;INSTANCE_ID&gt;&#10;</code></pre>
 <p>You can also run a single command without opening an interactive shell:</p>
-<pre><code class="language-sh">wrangler containers ssh &lt;INSTANCE_ID&gt; -- ls -al&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">wrangler containers ssh &lt;INSTANCE_ID&gt; -- ls -al&#10;</code></pre>
 <p>Use <code>wrangler containers instances &lt;APPLICATION&gt;</code> to find the instance ID for a running Container.</p>
 <p>For more information, refer to the <a href="/containers/guides/ssh/">SSH documentation</a>.</p>
 </div>
@@ -56,7 +67,7 @@
 <h2 id="post-2026-03-12-wrangler-containers-instances"><a href="/changelog/post/2026-03-12-wrangler-containers-instances/">List Container instances with `wrangler containers instances`</a></h2>
 <div class="changelog-badges"><span>containers</span></div><div class="changelog-body"><p>A new <a href="/workers/wrangler/commands/containers/#containers-instances"><code>wrangler containers instances</code></a> command lists all instances for a given Container application. This mirrors the instances view in the Cloudflare dashboard.</p>
 <p>The command displays each instance's ID, name, state, location, version, and creation time:</p>
-<pre><code class="language-sh">wrangler containers instances &lt;APPLICATION_ID&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">wrangler containers instances &lt;APPLICATION_ID&gt;&#10;</code></pre>
 <p>Use the <code>--json</code> flag for machine-readable output, which is also the default format in non-interactive environments such as CI pipelines.</p>
 <p>For the full list of options, refer to the <a href="/workers/wrangler/commands/containers/#containers-instances"><code>containers instances</code> command reference</a>.</p>
 </div>
@@ -119,7 +130,7 @@
 <p>Available for all zones on all plans.</p>
 <h4 id="2026-03-12-retry-after-header-for-1xxx-errors-verify">Verify</h4>
 <p>Check for the header on any retryable error:</p>
-<pre><code class="language-bash">curl -s --compressed -D - -o /dev/null -H &quot;Accept: application/json&quot; -A &quot;TestAgent/1.0&quot; -H &quot;Accept-Encoding: gzip, deflate&quot; &quot;&lt;YOUR_DOMAIN&gt;/cdn-cgi/error/1015&quot; | grep -i retry-after&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl -s --compressed -D - -o /dev/null -H &quot;Accept: application/json&quot; -A &quot;TestAgent/1.0&quot; -H &quot;Accept-Encoding: gzip, deflate&quot; &quot;&lt;YOUR_DOMAIN&gt;/cdn-cgi/error/1015&quot; | grep -i retry-after&#10;</code></pre>
 <p>References:</p>
 <ul>
 <li><a href="https://www.rfc-editor.org/rfc/rfc9110#section-10.2.3">RFC 9110 section 10.2.3 - Retry-After</a></li>
@@ -237,8 +248,8 @@
 <h4 id="2026-03-11-json-rfc9457-responses-for-1xxx-errors-availability">Availability</h4>
 <p>Available now for Cloudflare-generated 1xxx errors.</p>
 <h4 id="2026-03-11-json-rfc9457-responses-for-1xxx-errors-get-started">Get started</h4>
-<pre><code class="language-bash">curl -s --compressed -H &quot;Accept: application/json&quot; -A &quot;TestAgent/1.0&quot; -H &quot;Accept-Encoding: gzip, deflate&quot; &quot;&lt;YOUR_DOMAIN&gt;/cdn-cgi/error/1015&quot; | jq .&#10;</code></pre>
-<pre><code class="language-bash">curl -s --compressed -H &quot;Accept: application/problem+json&quot; -A &quot;TestAgent/1.0&quot; -H &quot;Accept-Encoding: gzip, deflate&quot; &quot;&lt;YOUR_DOMAIN&gt;/cdn-cgi/error/1015&quot; | jq .&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl -s --compressed -H &quot;Accept: application/json&quot; -A &quot;TestAgent/1.0&quot; -H &quot;Accept-Encoding: gzip, deflate&quot; &quot;&lt;YOUR_DOMAIN&gt;/cdn-cgi/error/1015&quot; | jq .&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl -s --compressed -H &quot;Accept: application/problem+json&quot; -A &quot;TestAgent/1.0&quot; -H &quot;Accept-Encoding: gzip, deflate&quot; &quot;&lt;YOUR_DOMAIN&gt;/cdn-cgi/error/1015&quot; | jq .&#10;</code></pre>
 <p>References:</p>
 <ul>
 <li><a href="https://www.rfc-editor.org/rfc/rfc9457">RFC 9457 — Problem Details for HTTP APIs</a></li>
@@ -260,7 +271,7 @@
 </ul>
 <h4 id="2026-03-11-ingest-field-selection-example-configuration">Example configuration</h4>
 <p>When configuring a dataset via the dashboard or API, you can define a specific set of fields. The <code>Timestamp</code> field remains mandatory to ensure data indexability.</p>
-<pre><code class="language-json">{&#10;  &quot;dataset&quot;: &quot;firewall_events&quot;,&#10;  &quot;enabled&quot;: true,&#10;  &quot;fields&quot;: [&#10;    &quot;Timestamp&quot;,&#10;    &quot;ClientRequestHost&quot;,&#10;    &quot;ClientIP&quot;,&#10;    &quot;Action&quot;,&#10;    &quot;EdgeResponseStatus&quot;,&#10;    &quot;OriginResponseStatus&quot;&#10;  ]&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;  &quot;dataset&quot;: &quot;firewall_events&quot;,&#10;  &quot;enabled&quot;: true,&#10;  &quot;fields&quot;: [&#10;    &quot;Timestamp&quot;,&#10;    &quot;ClientRequestHost&quot;,&#10;    &quot;ClientIP&quot;,&#10;    &quot;Action&quot;,&#10;    &quot;EdgeResponseStatus&quot;,&#10;    &quot;OriginResponseStatus&quot;&#10;  ]&#10;}&#10;</code></pre>
 <p>For more information, refer to the <a href="/log-explorer/">Log Explorer documentation</a>.</p>
 </div>
 </div></article>
@@ -384,7 +395,7 @@ To work around this issue, reconnect the client by selecting <strong>Disconnect<
 <div class="changelog-badges"><span>browser-run</span></div><div class="changelog-body"><p><em>Edit: this post has been edited to clarify crawling behavior with respect to site guidance.</em></p>
 <p>You can now crawl an entire website with a single API call using <a href="/browser-run/">Browser Rendering</a>'s new <a href="/browser-run/quick-actions/crawl-endpoint/"><code>/crawl</code> endpoint</a>, available in open beta. Submit a starting URL, and pages are automatically discovered, rendered in a headless browser, and returned in multiple formats, including HTML, Markdown, and structured JSON. The endpoint is a <a href="/bots/concepts/bot/verified-bots/">verified bot (intermediary agent)</a> that respects robots.txt and <a href="https://www.cloudflare.com/ai-crawl-control/">AI Crawl Control</a> by default, making it easy for developers to comply with website rules, and making it less likely for crawlers to ignore web-owner guidance. This is great for training models, building RAG pipelines, and researching or monitoring content across a site.</p>
 <p>Crawl jobs run asynchronously. You submit a URL, receive a job ID, and check back for results as pages are processed.</p>
-<pre><code class="language-sh">&#35; Initiate a crawl&#10;curl -X POST &#x27;https://api.cloudflare.com/client/v4/accounts/{account_id}/browser-rendering/crawl&#x27; \&#10;  &#45;H &#x27;Authorization: Bearer &lt;apiToken&gt;&#x27; \&#10;  &#45;H &#x27;Content-Type: application/json&#x27; \&#10;  &#45;d &#x27;{&#10;    &quot;url&quot;: &quot;https://blog.cloudflare.com/&quot;&#10;  }&#x27;&#10;&#10;&#35; Check results&#10;curl -X GET &#x27;https://api.cloudflare.com/client/v4/accounts/{account_id}/browser-rendering/crawl/{job_id}&#x27; \&#10;  &#45;H &#x27;Authorization: Bearer &lt;apiToken&gt;&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">&#35; Initiate a crawl&#10;curl -X POST &#x27;https://api.cloudflare.com/client/v4/accounts/{account_id}/browser-rendering/crawl&#x27; \&#10;  &#45;H &#x27;Authorization: Bearer &lt;apiToken&gt;&#x27; \&#10;  &#45;H &#x27;Content-Type: application/json&#x27; \&#10;  &#45;d &#x27;{&#10;    &quot;url&quot;: &quot;https://blog.cloudflare.com/&quot;&#10;  }&#x27;&#10;&#10;&#35; Check results&#10;curl -X GET &#x27;https://api.cloudflare.com/client/v4/accounts/{account_id}/browser-rendering/crawl/{job_id}&#x27; \&#10;  &#45;H &#x27;Authorization: Bearer &lt;apiToken&gt;&#x27;&#10;</code></pre>
 <p>Key features:</p>
 <ul>
 <li><strong>Multiple output formats</strong> - Return crawled content as HTML, Markdown, and structured JSON (powered by <a href="/workers-ai/">Workers AI</a>)</li>
@@ -439,7 +450,7 @@ If you are setting up your own site to be crawled, review the <a href="/browser-
 <time datetime="2026-03-06">Mar 6, 2026</time><div>
 <h2 id="post-2026-03-06-step-context-available"><a href="/changelog/post/2026-03-06-step-context-available/">Workflow steps now expose retry attempt number via step context</a></h2>
 <div class="changelog-badges"><span>workflows</span><span>workers</span></div><div class="changelog-body"><p>Cloudflare Workflows allows you to configure specific retry logic for each step in your workflow execution. Now, you can access <strong>which</strong> retry attempt is currently executing for calls to <code>step.do()</code>:</p>
-<pre><code class="language-ts">await step.do(&quot;my-step&quot;, async (ctx) =&gt; {&#10;	// ctx.attempt is 1 on first try, 2 on first retry, etc.&#10;	console.log(`Attempt ${ctx.attempt}`);&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">await step.do(&quot;my-step&quot;, async (ctx) =&gt; {&#10;	// ctx.attempt is 1 on first try, 2 on first retry, etc.&#10;	console.log(`Attempt ${ctx.attempt}`);&#10;});&#10;</code></pre>
 <p>You can use the step context for improved logging &amp; observability, progressive backoff, or conditional logic in your workflow definition.</p>
 <p>Note that the current attempt number is 1-indexed. For more information on retry behavior, refer to <a href="/workflows/build/sleeping-and-retrying/">Sleeping and Retrying</a>.</p>
 </div>
@@ -466,7 +477,7 @@ If you are setting up your own site to be crawled, review the <a href="/browser-
 <div class="changelog-badges"><span>workers-ai</span><span>realtime</span></div><div class="changelog-body"><p><a href="/realtime/realtimekit/ai/transcription/">Real-time transcription</a> in RealtimeKit now supports 10 languages with regional variants, powered by <a href="/workers-ai/models/nova-3/">Deepgram Nova-3</a> running on <a href="/workers-ai/">Workers AI</a>.</p>
 <p>During a meeting, participant audio is routed through <a href="/ai-gateway/">AI Gateway</a> to Nova-3 on Workers AI — so transcription runs on Cloudflare's network end-to-end, reducing latency compared to routing through external speech-to-text services.</p>
 <p>Set the language when <a href="/realtime/realtimekit/concepts/meeting/">creating a meeting</a> via <code>ai_config.transcription.language</code>:</p>
-<pre><code class="language-json">{&#10;	&quot;ai_config&quot;: {&#10;		&quot;transcription&quot;: {&#10;			&quot;language&quot;: &quot;fr&quot;&#10;		}&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;ai_config&quot;: {&#10;		&quot;transcription&quot;: {&#10;			&quot;language&quot;: &quot;fr&quot;&#10;		}&#10;	}&#10;}&#10;</code></pre>
 <p>Supported languages include English, Spanish, French, German, Hindi, Russian, Portuguese, Japanese, Italian, and Dutch — with regional variants like <code>en-AU</code>, <code>en-GB</code>, <code>en-IN</code>, <code>en-NZ</code>, <code>es-419</code>, <code>fr-CA</code>, <code>de-CH</code>, <code>pt-BR</code>, and <code>pt-PT</code>. Use <code>multi</code> for automatic multilingual detection.</p>
 <p>If you are building voice agents or real-time translation workflows, your agent can now transcribe in the caller's language natively — no extra services or routing logic needed.</p>
 <ul>
@@ -561,7 +572,7 @@ If you are setting up your own site to be crawled, review the <a href="/browser-
 <div class="nb-type-script-example">
 @markup("md", "content/.markup/bodies/17817.md")</div>
 <p>Or call the REST API:</p>
-<pre><code class="language-bash">curl https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai/tomarkdown \&#10;  &#45;H &#x27;Authorization: Bearer {API_TOKEN}&#x27; \&#10;  &#45;F &#x27;files=@index.html&#x27; \&#10;  &#45;F &#x27;conversionOptions={&quot;html&quot;: {&quot;cssSelector&quot;: &quot;article.content&quot;}}&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai/tomarkdown \&#10;  &#45;H &#x27;Authorization: Bearer {API_TOKEN}&#x27; \&#10;  &#45;F &#x27;files=@index.html&#x27; \&#10;  &#45;F &#x27;conversionOptions={&quot;html&quot;: {&quot;cssSelector&quot;: &quot;article.content&quot;}}&#x27;&#10;</code></pre>
 <p>For more details, refer to <a href="/workers-ai/features/markdown-conversion/conversion-options/">Conversion Options</a>.</p>
 </div>
 </div></article>
@@ -569,7 +580,7 @@ If you are setting up your own site to be crawled, review the <a href="/browser-
 <time datetime="2026-03-03">Mar 3, 2026</time><div>
 <h2 id="post-2026-03-03-step-limits-to-25k"><a href="/changelog/post/2026-03-03-step-limits-to-25k/">Workflows step limit increased to 25,000 steps per instance</a></h2>
 <div class="changelog-badges"><span>workflows</span><span>workers</span></div><div class="changelog-body"><p>Each Workflow on Workers Paid now supports 10,000 steps by default, configurable up to 25,000 steps in your <code>wrangler.jsonc</code> file:</p>
-<pre><code class="language-json">{&#10;	&quot;workflows&quot;: [&#10;		{&#10;			&quot;name&quot;: &quot;my-workflow&quot;,&#10;			&quot;binding&quot;: &quot;MY_WORKFLOW&quot;,&#10;			&quot;class_name&quot;: &quot;MyWorkflow&quot;,&#10;			&quot;limits&quot;: {&#10;				&quot;steps&quot;: 25000&#10;			}&#10;		}&#10;	]&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;workflows&quot;: [&#10;		{&#10;			&quot;name&quot;: &quot;my-workflow&quot;,&#10;			&quot;binding&quot;: &quot;MY_WORKFLOW&quot;,&#10;			&quot;class_name&quot;: &quot;MyWorkflow&quot;,&#10;			&quot;limits&quot;: {&#10;				&quot;steps&quot;: 25000&#10;			}&#10;		}&#10;	]&#10;}&#10;</code></pre>
 <p>Previously, each instance was limited to 1,024 steps. Now, Workflows can support more complex, long-running executions without the additional complexity of recursive or child workflow calls.</p>
 <p>Note that the maximum persisted state limit per Workflow instance remains <strong>100 MB</strong> for Workers Free and <strong>1 GB</strong> for Workers Paid. Refer to <a href="/workflows/reference/limits/">Workflows limits</a> for more information.</p>
 </div>
@@ -611,7 +622,7 @@ If you are setting up your own site to be crawled, review the <a href="/browser-
 </table>
 <h4 id="2026-03-03-sandbox-watch-file-events-upgrade">Upgrade</h4>
 <p>To update to the latest version:</p>
-<pre><code class="language-sh">npm i @cloudflare/sandbox@latest&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npm i @cloudflare/sandbox@latest&#10;</code></pre>
 <p>For full API details, refer to the <a href="/sandbox/api/file-watching/">Sandbox file watching reference</a>.</p>
 </div>
 </div></article>

@@ -1,6 +1,15 @@
-<p>As your content changes (and it will change), <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/14605.md")
-</div> preserve continuity for your users and (friendly) bots.
+---
+cp9:
+  canonical: https://developers.cloudflare.com/style-guide/how-we-docs/redirects/
+  description: Manage URL redirects for documentation.
+  full_title: Redirects · Cloudflare Style Guide
+  head_html: <title>Redirects · Cloudflare Style Guide</title><meta name="generator" content="Nift"><meta name="description" content="Manage URL redirects for documentation."><link rel="canonical" href="https://developers.cloudflare.com/style-guide/how-we-docs/redirects/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/style-guide/how-we-docs/redirects/index.md"><meta property="og:title" content="Redirects · Cloudflare Style Guide"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Manage URL redirects for documentation."><meta property="og:url" content="https://developers.cloudflare.com/style-guide/how-we-docs/redirects/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Style Guide"><meta name="algolia_product_filter" content="Style Guide"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Style Guide"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/style-guide/how-we-docs/redirects/#page","headline":"Redirects \u00b7 Cloudflare Style Guide","description":"Manage URL redirects for documentation.","url":"https://developers.cloudflare.com/style-guide/how-we-docs/redirects/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /style-guide/how-we-docs/redirects/
+  schema: 1
+---
+<p>As your content changes (and it will change), <span class="nb-glossary-tooltip" title="redirect">redirects</span> preserve continuity for your users and (friendly) bots.</p>
 <p>The most obvious part of this is the user experience. If you click a link in the dashboard or use a bookmarked URL, you trust that it's taking you to the right place. Not a <code>404</code> page or the wrong page, but the right page. Redirects help direct users to the right place.</p>
 <p>The same applies to the automated experience. If you move a page without redirects, you are losing the historical search authority that Google and other search engines use to rank your page.</p>
 <hr />
@@ -56,7 +65,7 @@
 <h3 id="avoid-redirect-chains">Avoid redirect chains</h3>
 <p>If possible, have all redirects send your users directly to their destination instead of chaining together redirects.</p>
 <p>Otherwise, you can have the following situation:</p>
-<pre><code class="language-txt">Page 1 --Redirect-&gt; Page 2 --Redirect-&gt; Page 3 --Redirect-&gt; Page 4&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">Page 1 --Redirect-&gt; Page 2 --Redirect-&gt; Page 3 --Redirect-&gt; Page 4&#10;</code></pre>
 <p>Redirect chains are bad because they:</p>
 <ul>
 <li>Slow down the user experience.</li>
@@ -64,4 +73,4 @@
 </ul>
 <p>A way to avoid this outcome is by continually updating the destinations of previous redirects. For example, let's say you changed the name of this page to <code>/style-guide/how-we-docs/redirect-guidance/</code>.</p>
 <p>In the pull request to update your redirects file, you would want to update the existing redirect as well as adding a new redirect:</p>
-<pre><code class="language-diff">&#45; /style-guide/redirects/ /style-guide/how-we-docs/redirects/ 301&#10;&#43; /style-guide/redirects/ /style-guide/how-we-docs/redirect-guidance/ 301&#10;&#43; /style-guide/how-we-docs/redirects/ /style-guide/how-we-docs/redirect-guidance/ 301&#10;</code></pre>
+<pre tabindex="0"><code class="language-diff">&#45; /style-guide/redirects/ /style-guide/how-we-docs/redirects/ 301&#10;&#43; /style-guide/redirects/ /style-guide/how-we-docs/redirect-guidance/ 301&#10;&#43; /style-guide/how-we-docs/redirects/ /style-guide/how-we-docs/redirect-guidance/ 301&#10;</code></pre>

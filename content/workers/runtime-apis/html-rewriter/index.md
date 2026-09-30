@@ -1,9 +1,20 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/workers/runtime-apis/html-rewriter/
+  description: Build comprehensive and expressive HTML parsers inside of a Worker application.
+  full_title: HTMLRewriter · Cloudflare Workers docs
+  head_html: <title>HTMLRewriter · Cloudflare Workers docs</title><meta name="generator" content="Nift"><meta name="description" content="Build comprehensive and expressive HTML parsers inside of a Worker application."><link rel="canonical" href="https://developers.cloudflare.com/workers/runtime-apis/html-rewriter/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/workers/runtime-apis/html-rewriter/index.md"><meta property="og:title" content="HTMLRewriter · Cloudflare Workers docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Build comprehensive and expressive HTML parsers inside of a Worker application."><meta property="og:url" content="https://developers.cloudflare.com/workers/runtime-apis/html-rewriter/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Workers"><meta name="algolia_product_filter" content="Workers"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Configuration"><meta name="algolia_content_type" content="Configuration"><meta name="pcx_additional_products" content="Workers"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/workers/runtime-apis/html-rewriter/#page","headline":"HTMLRewriter \u00b7 Cloudflare Workers docs","description":"Build comprehensive and expressive HTML parsers inside of a Worker application.","url":"https://developers.cloudflare.com/workers/runtime-apis/html-rewriter/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /workers/runtime-apis/html-rewriter/
+  schema: 1
+---
 <h2 id="background">Background</h2>
 <p>The <code>HTMLRewriter</code> class allows developers to build comprehensive and expressive HTML parsers inside of a Cloudflare Workers application. It can be thought of as a jQuery-like experience directly inside of your Workers application. Leaning on a powerful JavaScript API to parse and transform HTML, <code>HTMLRewriter</code> allows developers to build deeply functional applications.</p>
 <p>The <code>HTMLRewriter</code> class should be instantiated once in your Workers script, with a number of handlers attached using the <code>on</code> and <code>onDocument</code> functions.</p>
 <hr />
 <h2 id="constructor">Constructor</h2>
-<pre><code class="language-js">new HTMLRewriter()&#10;	.on(&quot;*&quot;, new ElementHandler())&#10;	.onDocument(new DocumentHandler());&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">new HTMLRewriter()&#10;	.on(&quot;*&quot;, new ElementHandler())&#10;	.onDocument(new DocumentHandler());&#10;</code></pre>
 <hr />
 <h2 id="global-types">Global types</h2>
 <p>Throughout the <code>HTMLRewriter</code> API, there are a few consistent types that many properties and methods use:</p>
@@ -26,13 +37,13 @@
 <p>There are two handler types that can be used with <code>HTMLRewriter</code>: element handlers and document handlers.</p>
 <h3 id="element-handlers">Element Handlers</h3>
 <p>An element handler responds to any incoming element, when attached using the <code>.on</code> function of an <code>HTMLRewriter</code> instance. The element handler should respond to <code>element</code>, <code>comments</code>, and <code>text</code>. The example processes <code>div</code> elements with an <code>ElementHandler</code> class.</p>
-<pre><code class="language-js">class ElementHandler {&#10;	element(element) {&#10;		// An incoming element, such as `div`&#10;		console.log(`Incoming element: ${element.tagName}`);&#10;	}&#10;&#10;	comments(comment) {&#10;		// An incoming comment&#10;	}&#10;&#10;	text(text) {&#10;		// An incoming piece of text&#10;	}&#10;}&#10;&#10;async function handleRequest(req) {&#10;	const res = await fetch(req);&#10;&#10;	return new HTMLRewriter().on(&quot;div&quot;, new ElementHandler()).transform(res);&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">class ElementHandler {&#10;	element(element) {&#10;		// An incoming element, such as `div`&#10;		console.log(`Incoming element: ${element.tagName}`);&#10;	}&#10;&#10;	comments(comment) {&#10;		// An incoming comment&#10;	}&#10;&#10;	text(text) {&#10;		// An incoming piece of text&#10;	}&#10;}&#10;&#10;async function handleRequest(req) {&#10;	const res = await fetch(req);&#10;&#10;	return new HTMLRewriter().on(&quot;div&quot;, new ElementHandler()).transform(res);&#10;}&#10;</code></pre>
 <h3 id="document-handlers">Document Handlers</h3>
 <p>A document handler represents the incoming HTML document. A number of functions can be defined on a document handler to query and manipulate a document’s <code>doctype</code>, <code>comments</code>, <code>text</code>, and <code>end</code>. Unlike an element handler, a document handler’s <code>doctype</code>, <code>comments</code>, <code>text</code>, and <code>end</code> functions are not scoped by a particular selector. A document handler's functions are called for all the content on the page including the content outside of the top-level HTML tag:</p>
-<pre><code class="language-js">class DocumentHandler {&#10;	doctype(doctype) {&#10;		// An incoming doctype, such as &lt;!DOCTYPE html&gt;&#10;	}&#10;&#10;	comments(comment) {&#10;		// An incoming comment&#10;	}&#10;&#10;	text(text) {&#10;		// An incoming piece of text&#10;	}&#10;&#10;	end(end) {&#10;		// The end of the document&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">class DocumentHandler {&#10;	doctype(doctype) {&#10;		// An incoming doctype, such as &lt;!DOCTYPE html&gt;&#10;	}&#10;&#10;	comments(comment) {&#10;		// An incoming comment&#10;	}&#10;&#10;	text(text) {&#10;		// An incoming piece of text&#10;	}&#10;&#10;	end(end) {&#10;		// The end of the document&#10;	}&#10;}&#10;</code></pre>
 <h4 id="async-handlers">Async Handlers</h4>
 <p>All functions defined on both element and document handlers can return either <code>void</code> or a <code>Promise&lt;void&gt;</code>. Making your handler function <code>async</code> allows you to access external resources such as an API via fetch, Workers KV, Durable Objects, or the cache.</p>
-<pre><code class="language-js">class UserElementHandler {&#10;	async element(element) {&#10;		let response = await fetch(new Request(&quot;/user&quot;));&#10;&#10;		// fill in user info using response&#10;	}&#10;}&#10;&#10;async function handleRequest(req) {&#10;	const res = await fetch(req);&#10;&#10;	// run the user element handler via HTMLRewriter on a div with ID `user_info`&#10;	return new HTMLRewriter()&#10;		.on(&quot;div#user_info&quot;, new UserElementHandler())&#10;		.transform(res);&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">class UserElementHandler {&#10;	async element(element) {&#10;		let response = await fetch(new Request(&quot;/user&quot;));&#10;&#10;		// fill in user info using response&#10;	}&#10;}&#10;&#10;async function handleRequest(req) {&#10;	const res = await fetch(req);&#10;&#10;	// run the user element handler via HTMLRewriter on a div with ID `user_info`&#10;	return new HTMLRewriter()&#10;		.on(&quot;div#user_info&quot;, new UserElementHandler())&#10;		.transform(res);&#10;}&#10;</code></pre>
 <h3 id="element">Element</h3>
 <p>The <code>element</code> argument, used only in element handlers, is a representation of a DOM element. A number of methods exist on an element to query and manipulate it:</p>
 <h4 id="properties">Properties</h4>
@@ -245,7 +256,7 @@ Hey. How are you?</p>
 </ul>
 <h3 id="comments">Comments</h3>
 <p>The <code>comments</code> function on an element handler allows developers to query and manipulate HTML comment tags.</p>
-<pre><code class="language-js">class ElementHandler {&#10;	comments(comment) {&#10;		// An incoming comment element, such as &lt;!-- My comment --&gt;&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">class ElementHandler {&#10;	comments(comment) {&#10;		// An incoming comment element, such as &lt;!-- My comment --&gt;&#10;	}&#10;}&#10;</code></pre>
 <h4 id="properties-3">Properties</h4>
 <ul>
 <li>
@@ -295,7 +306,7 @@ Hey. How are you?</p>
 </ul>
 <h3 id="doctype">Doctype</h3>
 <p>The <code>doctype</code> function on a document handler allows developers to query a document's <a href="https://developer.mozilla.org/en-US/docs/Glossary/Doctype">doctype</a>.</p>
-<pre><code class="language-js">class DocumentHandler {&#10;	doctype(doctype) {&#10;		// An incoming doctype element, such as&#10;		// &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">class DocumentHandler {&#10;	doctype(doctype) {&#10;		// An incoming doctype element, such as&#10;		// &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;&#10;	}&#10;}&#10;</code></pre>
 <h4 id="properties-4">Properties</h4>
 <ul>
 <li>
@@ -319,7 +330,7 @@ Hey. How are you?</p>
 </ul>
 <h3 id="end">End</h3>
 <p>The <code>end</code> function on a document handler allows developers to append content to the end of a document.</p>
-<pre><code class="language-js">class DocumentHandler {&#10;	end(end) {&#10;		// The end of the document&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">class DocumentHandler {&#10;	end(end) {&#10;		// The end of the document&#10;	}&#10;}&#10;</code></pre>
 <h4 id="methods-4">Methods</h4>
 <ul>
 <li><code>append(content <span class="nb-type">Content</span>, contentOptions <span class="nb-type">ContentOptions</span> <span class="nb-metainfo">optional</span>)</code> : <span class="nb-type">DocumentEnd</span>
@@ -460,7 +471,7 @@ Hey. How are you?</p>
 <hr />
 <h2 id="errors">Errors</h2>
 <p>If a handler throws an exception, parsing is immediately halted, the transformed response body is errored with the thrown exception, and the untransformed response body is canceled (closed). If the transformed response body was already partially streamed back to the client, the client will see a truncated response.</p>
-<pre><code class="language-js">async function handle(request) {&#10;	let oldResponse = await fetch(request);&#10;	let newResponse = new HTMLRewriter()&#10;		.on(&quot;*&quot;, {&#10;			element(element) {&#10;				throw new Error(&quot;A really bad error.&quot;);&#10;			},&#10;		})&#10;		.transform(oldResponse);&#10;&#10;	// At this point, an expression like `await newResponse.text()`&#10;	// will throw `new Error(&quot;A really bad error.&quot;)`.&#10;	// Thereafter, any use of `newResponse.body` will throw the same error,&#10;	// and `oldResponse.body` will be closed.&#10;&#10;	// Alternatively, this will produce a truncated response to the client:&#10;	return newResponse;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">async function handle(request) {&#10;	let oldResponse = await fetch(request);&#10;	let newResponse = new HTMLRewriter()&#10;		.on(&quot;*&quot;, {&#10;			element(element) {&#10;				throw new Error(&quot;A really bad error.&quot;);&#10;			},&#10;		})&#10;		.transform(oldResponse);&#10;&#10;	// At this point, an expression like `await newResponse.text()`&#10;	// will throw `new Error(&quot;A really bad error.&quot;)`.&#10;	// Thereafter, any use of `newResponse.body` will throw the same error,&#10;	// and `oldResponse.body` will be closed.&#10;&#10;	// Alternatively, this will produce a truncated response to the client:&#10;	return newResponse;&#10;}&#10;</code></pre>
 <hr />
 <h2 id="related-resources">Related resources</h2>
 <ul>

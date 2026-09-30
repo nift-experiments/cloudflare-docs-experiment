@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/changelog/26/
+  description: New updates and improvements at Cloudflare.
+  full_title: Changelog - page 26 | Cloudflare Docs
+  head_html: <title>Changelog - page 26 | Cloudflare Docs</title><meta name="generator" content="Nift"><meta name="description" content="New updates and improvements at Cloudflare."><link rel="canonical" href="https://developers.cloudflare.com/changelog/26/"><link rel="sitemap" href="/sitemap-index.xml"><meta property="og:title" content="Changelog - page 26"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="New updates and improvements at Cloudflare."><meta property="og:url" content="https://developers.cloudflare.com/changelog/26/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/changelog/26/#page","headline":"Changelog - page 26 | Cloudflare Docs","description":"New updates and improvements at Cloudflare.","url":"https://developers.cloudflare.com/changelog/26/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: false
+  noindex: false
+  route: /changelog/26/
+  schema: 1
+---
 <div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
 <div class="changelog-tools"><span>All products</span><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
 <section class="changelog-feed" aria-label="Changelog entries">
@@ -114,7 +125,7 @@ limit can be increased up to 10 million by setting the new <code>subrequests</co
 <p>A <code>childEnvironments</code> option has been added to the plugin config to enable using multiple environments within a single Worker.
 The parent environment can then import modules from a child environment in order to access a separate module graph.
 For a typical RSC use case, the plugin might be configured as in the following example:</p>
-<pre><code class="language-ts">export default defineConfig({&#10;	plugins: [&#10;		cloudflare({&#10;			viteEnvironment: {&#10;				name: &quot;rsc&quot;,&#10;				childEnvironments: [&quot;ssr&quot;],&#10;			},&#10;		}),&#10;	],&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">export default defineConfig({&#10;	plugins: [&#10;		cloudflare({&#10;			viteEnvironment: {&#10;				name: &quot;rsc&quot;,&#10;				childEnvironments: [&quot;ssr&quot;],&#10;			},&#10;		}),&#10;	],&#10;});&#10;</code></pre>
 <p><code>@vitejs/plugin-rsc</code> provides the lower level functionality that frameworks, such as <a href="https://reactrouter.com/how-to/react-server-components">React Router</a>, build upon.
 The GitHub repository includes a <a href="https://github.com/vitejs/vite-plugin-react/tree/f066114c3e6bf18f5209ff3d3ef6bf1ab46d3866/packages/plugin-rsc/examples/starter-cf-single">basic Cloudflare example</a>.</p>
 </div>
@@ -178,9 +189,9 @@ The GitHub repository includes a <a href="https://github.com/vitejs/vite-plugin-
 <li><code>PaymentRequirements</code> type now uses v2 fields (e.g. <code>amount</code> instead of <code>maxAmountRequired</code>)</li>
 <li><code>X402ClientConfig.account</code> type changed from <code>viem.Account</code> to <code>ClientEvmSigner</code> (structurally compatible with <code>privateKeyToAccount()</code>)</li>
 </ul>
-<pre><code class="language-bash">npm uninstall x402&#10;npm install @x402/core @x402/evm&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">npm uninstall x402&#10;npm install @x402/core @x402/evm&#10;</code></pre>
 <p>Network identifiers now accept both legacy names and CAIP-2 format:</p>
-<pre><code class="language-ts">// Legacy name (auto-converted)&#10;{&#10;	network: &quot;base-sepolia&quot;,&#10;}&#10;&#10;// CAIP-2 format (preferred)&#10;{&#10;	network: &quot;eip155:84532&quot;,&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// Legacy name (auto-converted)&#10;{&#10;	network: &quot;base-sepolia&quot;,&#10;}&#10;&#10;// CAIP-2 format (preferred)&#10;{&#10;	network: &quot;eip155:84532&quot;,&#10;}&#10;</code></pre>
 <p><strong>Other x402 changes:</strong></p>
 <ul>
 <li><code>X402ClientConfig.network</code> is now optional — the client auto-selects from available payment requirements</li>
@@ -197,7 +208,7 @@ The GitHub repository includes a <a href="https://github.com/vitejs/vite-plugin-
 </ul>
 <h4 id="2026-02-09-agents-sdk-v0.4.0-upgrade">Upgrade</h4>
 <p>To update to the latest version:</p>
-<pre><code class="language-sh">npm i agents@latest&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npm i agents@latest&#10;</code></pre>
 </div>
 </div></article>
 <article class="changelog-entry">
@@ -218,7 +229,7 @@ The GitHub repository includes a <a href="https://github.com/vitejs/vite-plugin-
 @markup("md", "content/.markup/bodies/17634.md")</div>
 <h4 id="2026-02-09-pty-terminal-support-upgrade">Upgrade</h4>
 <p>To update to the latest version:</p>
-<pre><code class="language-sh">npm i @cloudflare/sandbox@latest&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npm i @cloudflare/sandbox@latest&#10;</code></pre>
 </div>
 </div></article>
 <article class="changelog-entry">
@@ -291,11 +302,11 @@ The GitHub repository includes a <a href="https://github.com/vitejs/vite-plugin-
 </ul>
 <p>All functions support <code>WHERE</code> filters. All except <code>APPROX_TOP_K</code> support <code>GROUP BY</code>.</p>
 <h4 id="2026-02-09-approximate-aggregation-functions-examples">Examples</h4>
-<pre><code class="language-sql">&#45;- Percentile analysis on revenue data&#10;SELECT approx_percentile_cont(total_amount, 0.25),&#10;       approx_percentile_cont(total_amount, 0.5),&#10;       approx_percentile_cont(total_amount, 0.75)&#10;FROM my_namespace.sales_data&#10;</code></pre>
-<pre><code class="language-sql">&#45;- Median per department&#10;SELECT department, approx_median(total_amount)&#10;FROM my_namespace.sales_data&#10;GROUP BY department&#10;</code></pre>
-<pre><code class="language-sql">&#45;- Approximate distinct customers by region&#10;SELECT region, approx_distinct(customer_id)&#10;FROM my_namespace.sales_data&#10;GROUP BY region&#10;</code></pre>
-<pre><code class="language-sql">&#45;- Top 5 most frequent departments&#10;SELECT approx_top_k(department, 5)&#10;FROM my_namespace.sales_data&#10;</code></pre>
-<pre><code class="language-sql">&#45;- Combine approximate and standard aggregations&#10;SELECT COUNT(*),&#10;       AVG(total_amount),&#10;       approx_percentile_cont(total_amount, 0.5),&#10;       approx_distinct(customer_id)&#10;FROM my_namespace.sales_data&#10;WHERE region = &#x27;North&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">&#45;- Percentile analysis on revenue data&#10;SELECT approx_percentile_cont(total_amount, 0.25),&#10;       approx_percentile_cont(total_amount, 0.5),&#10;       approx_percentile_cont(total_amount, 0.75)&#10;FROM my_namespace.sales_data&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">&#45;- Median per department&#10;SELECT department, approx_median(total_amount)&#10;FROM my_namespace.sales_data&#10;GROUP BY department&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">&#45;- Approximate distinct customers by region&#10;SELECT region, approx_distinct(customer_id)&#10;FROM my_namespace.sales_data&#10;GROUP BY region&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">&#45;- Top 5 most frequent departments&#10;SELECT approx_top_k(department, 5)&#10;FROM my_namespace.sales_data&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">&#45;- Combine approximate and standard aggregations&#10;SELECT COUNT(*),&#10;       AVG(total_amount),&#10;       approx_percentile_cont(total_amount, 0.5),&#10;       approx_distinct(customer_id)&#10;FROM my_namespace.sales_data&#10;WHERE region = &#x27;North&#x27;&#10;</code></pre>
 <p>For the full syntax and additional examples, refer to the <a href="/r2-sql/sql-reference/">SQL reference</a>.</p>
 </div>
 </div></article>
@@ -399,7 +410,7 @@ The GitHub repository includes a <a href="https://github.com/vitejs/vite-plugin-
 @markup("md", "content/.markup/bodies/17629.md")</div>
 <h4 id="2026-02-03-agents-workflows-integration-upgrade">Upgrade</h4>
 <p>To update to the latest version:</p>
-<pre><code class="language-sh">npm i agents@latest&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npm i agents@latest&#10;</code></pre>
 <p>For the complete Workflows API reference and patterns, see <a href="/agents/runtime/execution/run-workflows/">Run Workflows</a>.</p>
 </div>
 </div></article>
@@ -416,7 +427,7 @@ The GitHub repository includes a <a href="https://github.com/vitejs/vite-plugin-
 <li>You want to optimize write performance without changing your bucket's primary location</li>
 </ul>
 <p>To enable Local Uploads on your bucket, find <strong>Local Uploads</strong> in your bucket settings in the <a href="https://dash.cloudflare.com/?to=/:account/r2/overview">Cloudflare Dashboard</a>, or run:</p>
-<pre><code class="language-sh">npx wrangler r2 bucket local-uploads enable &lt;BUCKET_NAME&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler r2 bucket local-uploads enable &lt;BUCKET_NAME&gt;&#10;</code></pre>
 <p>Enabling Local Uploads on a bucket is seamless: existing uploads will complete as expected and there’s no interruption to traffic. There is no additional cost to enable Local Uploads. Upload requests incur the standard <a href="/r2/pricing/">Class A operation costs</a> same as upload requests made without Local Uploads.</p>
 <p>For more information, refer to <a href="/r2/buckets/local-uploads/">Local Uploads</a>.</p>
 </div>
@@ -525,7 +536,7 @@ The GitHub repository includes a <a href="https://github.com/vitejs/vite-plugin-
 <div class="changelog-badges"><span>kv</span></div><div class="changelog-body"><p>The minimum <code>cacheTtl</code> parameter for Workers KV has been reduced from 60 seconds to 30 seconds. This change applies to both <code>get()</code> and <code>getWithMetadata()</code> methods.</p>
 <p>This reduction allows you to maintain more up-to-date cached data and have finer-grained control over cache behavior. Applications requiring faster data refresh rates can now configure cache durations as low as 30 seconds instead of the previous 60-second minimum.</p>
 <p>The <code>cacheTtl</code> parameter defines how long a KV result is cached at the global network location it is accessed from:</p>
-<pre><code class="language-js">// Read with custom cache TTL&#10;const value = await env.NAMESPACE.get(&quot;my-key&quot;, {&#10;	cacheTtl: 30, // Cache for minimum 30 seconds (previously 60)&#10;});&#10;&#10;// getWithMetadata also supports the reduced cache TTL&#10;const valueWithMetadata = await env.NAMESPACE.getWithMetadata(&quot;my-key&quot;, {&#10;	cacheTtl: 30, // Cache for minimum 30 seconds&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">// Read with custom cache TTL&#10;const value = await env.NAMESPACE.get(&quot;my-key&quot;, {&#10;	cacheTtl: 30, // Cache for minimum 30 seconds (previously 60)&#10;});&#10;&#10;// getWithMetadata also supports the reduced cache TTL&#10;const valueWithMetadata = await env.NAMESPACE.getWithMetadata(&quot;my-key&quot;, {&#10;	cacheTtl: 30, // Cache for minimum 30 seconds&#10;});&#10;</code></pre>
 <p>The default cache TTL remains unchanged at 60 seconds. Upgrade to the latest version of Wrangler to be able to use 30 seconds <code>cacheTtl</code>.</p>
 <p>This change affects all KV read operations using the binding API. For more information, consult the <a href="/kv/api/read-key-value-pairs/#cachettl-parameter">Workers KV cache TTL documentation</a>.</p>
 </div>
@@ -561,9 +572,9 @@ The GitHub repository includes a <a href="https://github.com/vitejs/vite-plugin-
 <h4 id="2026-01-28-flux-2-klein-9b-workers-ai-workers-ai-platform-specifics">Workers AI platform specifics</h4>
 <p>The model hosted on Workers AI is optimized for speed with a <strong>fixed 4-step inference process</strong> and supports up to 4 image inputs. Since this is a distilled model, the <code>steps</code> parameter is fixed at 4 and cannot be adjusted. Like FLUX.2 [dev] and FLUX.2 [klein] 4B, this image model uses multipart form data inputs, even if you just have a prompt.</p>
 <p>With the REST API, the multipart form data input looks like this:</p>
-<pre><code class="language-bash">curl --request POST \&#10;  &#45;-url &#x27;https://api.cloudflare.com/client/v4/accounts/{ACCOUNT}/ai/run/@cf/black-forest-labs/flux-2-klein-9b&#x27; \&#10;  &#45;-header &#x27;Authorization: Bearer {TOKEN}&#x27; \&#10;  &#45;-header &#x27;Content-Type: multipart/form-data&#x27; \&#10;  &#45;-form &#x27;prompt=a sunset at the alps&#x27; \&#10;  &#45;-form width=1024 \&#10;  &#45;-form height=1024&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl --request POST \&#10;  &#45;-url &#x27;https://api.cloudflare.com/client/v4/accounts/{ACCOUNT}/ai/run/@cf/black-forest-labs/flux-2-klein-9b&#x27; \&#10;  &#45;-header &#x27;Authorization: Bearer {TOKEN}&#x27; \&#10;  &#45;-header &#x27;Content-Type: multipart/form-data&#x27; \&#10;  &#45;-form &#x27;prompt=a sunset at the alps&#x27; \&#10;  &#45;-form width=1024 \&#10;  &#45;-form height=1024&#10;</code></pre>
 <p>With the Workers AI binding, you can use it as such:</p>
-<pre><code class="language-javascript">const form = new FormData();&#10;form.append(&quot;prompt&quot;, &quot;a sunset with a dog&quot;);&#10;form.append(&quot;width&quot;, &quot;1024&quot;);&#10;form.append(&quot;height&quot;, &quot;1024&quot;);&#10;&#10;// FormData doesn&#x27;t expose its serialized body or boundary. Passing it to a&#10;// Request (or Response) constructor serializes it and generates the Content-Type&#10;// header with the boundary, which is required for the server to parse the multipart fields.&#10;const formResponse = new Response(form);&#10;const formStream = formResponse.body;&#10;const formContentType = formResponse.headers.get(&#x27;content-type&#x27;);&#10;&#10;const resp = await env.AI.run(&quot;@cf/black-forest-labs/flux-2-klein-9b&quot;, {&#10;	multipart: {&#10;		body: formStream,&#10;		contentType: formContentType,&#10;	},&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-javascript">const form = new FormData();&#10;form.append(&quot;prompt&quot;, &quot;a sunset with a dog&quot;);&#10;form.append(&quot;width&quot;, &quot;1024&quot;);&#10;form.append(&quot;height&quot;, &quot;1024&quot;);&#10;&#10;// FormData doesn&#x27;t expose its serialized body or boundary. Passing it to a&#10;// Request (or Response) constructor serializes it and generates the Content-Type&#10;// header with the boundary, which is required for the server to parse the multipart fields.&#10;const formResponse = new Response(form);&#10;const formStream = formResponse.body;&#10;const formContentType = formResponse.headers.get(&#x27;content-type&#x27;);&#10;&#10;const resp = await env.AI.run(&quot;@cf/black-forest-labs/flux-2-klein-9b&quot;, {&#10;	multipart: {&#10;		body: formStream,&#10;		contentType: formContentType,&#10;	},&#10;});&#10;</code></pre>
 <p>The parameters you can send to the model are detailed here:</p>
 <details>
   <summary>JSON Schema for Model</summary>
@@ -588,9 +599,9 @@ The GitHub repository includes a <a href="https://github.com/vitejs/vite-plugin-
 <p>The FLUX.2 klein-9b model supports generating images based on reference images, just like FLUX.2 [dev] and FLUX.2 [klein] 4B. You can use this feature to apply the style of one image to another, add a new character to an image, or iterate on past generated images. You would use it with the same multipart form data structure, with the input images in binary. The model supports up to 4 input images.</p>
 <p>For the prompt, you can reference the images based on the index, like <code>take the subject of image 1 and style it like image 0</code> or even use natural language like <code>place the dog beside the woman</code>.</p>
 <p>You must name the input parameter as <code>input_image_0</code>, <code>input_image_1</code>, <code>input_image_2</code>, <code>input_image_3</code> for it to work correctly. All input images must be smaller than 512x512.</p>
-<pre><code class="language-bash">curl --request POST \&#10;  &#45;-url &#x27;https://api.cloudflare.com/client/v4/accounts/{ACCOUNT}/ai/run/@cf/black-forest-labs/flux-2-klein-9b&#x27; \&#10;  &#45;-header &#x27;Authorization: Bearer {TOKEN}&#x27; \&#10;  &#45;-header &#x27;Content-Type: multipart/form-data&#x27; \&#10;  &#45;-form &#x27;prompt=take the subject of image 1 and style it like image 0&#x27; \&#10;  &#45;-form input_image_0=@/Users/johndoe/Desktop/icedoutkeanu.png \&#10;  &#45;-form input_image_1=@/Users/johndoe/Desktop/me.png \&#10;  &#45;-form width=1024 \&#10;  &#45;-form height=1024&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl --request POST \&#10;  &#45;-url &#x27;https://api.cloudflare.com/client/v4/accounts/{ACCOUNT}/ai/run/@cf/black-forest-labs/flux-2-klein-9b&#x27; \&#10;  &#45;-header &#x27;Authorization: Bearer {TOKEN}&#x27; \&#10;  &#45;-header &#x27;Content-Type: multipart/form-data&#x27; \&#10;  &#45;-form &#x27;prompt=take the subject of image 1 and style it like image 0&#x27; \&#10;  &#45;-form input_image_0=@/Users/johndoe/Desktop/icedoutkeanu.png \&#10;  &#45;-form input_image_1=@/Users/johndoe/Desktop/me.png \&#10;  &#45;-form width=1024 \&#10;  &#45;-form height=1024&#10;</code></pre>
 <p>Through Workers AI Binding:</p>
-<pre><code class="language-javascript">//helper function to convert ReadableStream to Blob&#10;async function streamToBlob(stream: ReadableStream, contentType: string): Promise&lt;Blob&gt; {&#10;  const reader = stream.getReader();&#10;  const chunks = [];&#10;&#10;  while (true) {&#10;    const { done, value } = await reader.read();&#10;    if (done) break;&#10;    chunks.push(value);&#10;  }&#10;&#10;  return new Blob(chunks, { type: contentType });&#10;}&#10;&#10;const image0 = await fetch(&quot;http://image-url&quot;);&#10;const image1 = await fetch(&quot;http://image-url&quot;);&#10;const form = new FormData();&#10;&#10;const image_blob0 = await streamToBlob(image0.body, &quot;image/png&quot;);&#10;const image_blob1 = await streamToBlob(image1.body, &quot;image/png&quot;);&#10;form.append(&#x27;input_image_0&#x27;, image_blob0)&#10;form.append(&#x27;input_image_1&#x27;, image_blob1)&#10;form.append(&#x27;prompt&#x27;, &#x27;take the subject of image 1 and style it like image 0&#x27;)&#10;&#10;// FormData doesn&#x27;t expose its serialized body or boundary. Passing it to a&#10;// Request (or Response) constructor serializes it and generates the Content-Type&#10;// header with the boundary, which is required for the server to parse the multipart fields.&#10;const formResponse = new Response(form);&#10;const formStream = formResponse.body;&#10;const formContentType = formResponse.headers.get(&#x27;content-type&#x27;);&#10;&#10;const resp = await env.AI.run(&quot;@cf/black-forest-labs/flux-2-klein-9b&quot;, {&#10;    multipart: {&#10;        body: formStream,&#10;        contentType: formContentType&#10;    }&#10;})&#10;</code></pre>
+<pre tabindex="0"><code class="language-javascript">//helper function to convert ReadableStream to Blob&#10;async function streamToBlob(stream: ReadableStream, contentType: string): Promise&lt;Blob&gt; {&#10;  const reader = stream.getReader();&#10;  const chunks = [];&#10;&#10;  while (true) {&#10;    const { done, value } = await reader.read();&#10;    if (done) break;&#10;    chunks.push(value);&#10;  }&#10;&#10;  return new Blob(chunks, { type: contentType });&#10;}&#10;&#10;const image0 = await fetch(&quot;http://image-url&quot;);&#10;const image1 = await fetch(&quot;http://image-url&quot;);&#10;const form = new FormData();&#10;&#10;const image_blob0 = await streamToBlob(image0.body, &quot;image/png&quot;);&#10;const image_blob1 = await streamToBlob(image1.body, &quot;image/png&quot;);&#10;form.append(&#x27;input_image_0&#x27;, image_blob0)&#10;form.append(&#x27;input_image_1&#x27;, image_blob1)&#10;form.append(&#x27;prompt&#x27;, &#x27;take the subject of image 1 and style it like image 0&#x27;)&#10;&#10;// FormData doesn&#x27;t expose its serialized body or boundary. Passing it to a&#10;// Request (or Response) constructor serializes it and generates the Content-Type&#10;// header with the boundary, which is required for the server to parse the multipart fields.&#10;const formResponse = new Response(form);&#10;const formStream = formResponse.body;&#10;const formContentType = formResponse.headers.get(&#x27;content-type&#x27;);&#10;&#10;const resp = await env.AI.run(&quot;@cf/black-forest-labs/flux-2-klein-9b&quot;, {&#10;    multipart: {&#10;        body: formStream,&#10;        contentType: formContentType&#10;    }&#10;})&#10;</code></pre>
 </div>
 </div></article>
 <article class="changelog-entry">

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/changelog/product-group/developer-platform/6/
+  description: '2026-06-24'
+  full_title: Developer platform changelog - page 6 | Cloudflare Docs
+  head_html: <title>Developer platform changelog - page 6 | Cloudflare Docs</title><meta name="generator" content="Nift"><meta name="description" content="2026-06-24"><link rel="canonical" href="https://developers.cloudflare.com/changelog/product-group/developer-platform/6/"><link rel="sitemap" href="/sitemap-index.xml"><meta property="og:title" content="Developer platform changelog - page 6"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="2026-06-24"><meta property="og:url" content="https://developers.cloudflare.com/changelog/product-group/developer-platform/6/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/changelog/product-group/developer-platform/6/#page","headline":"Developer platform changelog - page 6 | Cloudflare Docs","description":"2026-06-24","url":"https://developers.cloudflare.com/changelog/product-group/developer-platform/6/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: false
+  noindex: false
+  route: /changelog/product-group/developer-platform/6/
+  schema: 1
+---
 <h1 id="changelog">Changelog</h1>
 
 <h2 id="control-ai-search-similarity-cache-freshness"><a href="/changelog/post/2026-06-24-ai-search-similarity-cache-controls/">Control AI Search similarity cache freshness</a></h2>
@@ -9,11 +20,11 @@
 <p>You can set <code>cache_ttl</code> when creating or updating an instance to choose a cache duration from 10 minutes to 6 days.</p>
 <p>Use a shorter TTL when your source content changes frequently and freshness is more important. Use a longer TTL when your content is stable and you want more cache reuse.</p>
 <p>For example, set <code>cache_ttl</code> to <code>518400</code> to retain cached responses for 6 days:</p>
-<pre><code class="language-json">{&#10;	&quot;cache_ttl&quot;: 518400&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;cache_ttl&quot;: 518400&#10;}&#10;</code></pre>
 <h4 id="2026-06-24-ai-search-similarity-cache-controls-purge-cached-responses">Purge cached responses</h4>
 <p>You can also purge all cached responses for an instance on demand. Purging cached responses does not delete indexed content or source files.</p>
 <p>It prevents AI Search from reusing previous cached responses, so subsequent similar queries generate fresh answers and repopulate the cache.</p>
-<pre><code class="language-bash">curl -X POST &quot;https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/ai-search/instances/$INSTANCE_NAME/purge_cache&quot; \&#10;  &#45;H &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl -X POST &quot;https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/ai-search/instances/$INSTANCE_NAME/purge_cache&quot; \&#10;  &#45;H &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot;&#10;</code></pre>
 <p>You can also purge cached responses from the instance settings page in the Cloudflare dashboard.</p>
 <p>Refer to <a href="/ai-search/configuration/retrieval/cache/">similarity cache</a> for the full list of supported <code>cache_ttl</code> values and more details about cache behavior.</p>
 
@@ -22,7 +33,7 @@
 <p><em>2026-06-23 12:00:00 UTC</em></p>
 <p><a href="/workflows/">Workflows</a> makes it easier to build reliable multi-step applications that can recover when downstream systems fail. Rollback handlers now receive the original <a href="/workflows/build/step-context/">step context</a> via a <code>ctx</code> object for the step being rolled back. This includes <code>ctx.step.name</code>, <code>ctx.step.count</code>, <code>ctx.attempt</code>, and the step <code>config</code> with defaults applied.</p>
 <p>The <a href="/workflows/build/workers-api/#workflowstepconfig">step configuration</a> includes the retry and timeout settings used for that step, so you can customize your step recovery logic according to those fields.</p>
-<pre><code class="language-ts">await step.do(&#10;	&quot;create charge&quot;,&#10;	async () =&gt; {&#10;		const charge = await createCharge();&#10;		return { chargeId: charge.id };&#10;	},&#10;	{&#10;		rollback: async ({ ctx, output, error }) =&gt; {&#10;			// `output` is the value returned by the step being rolled back.&#10;			const { chargeId } = output as { chargeId: string };&#10;			await refundCharge(chargeId, {&#10;				// `ctx` is the original step context, including step name, count, attempt, and config.&#10;				reason: `${ctx.step.name}: ${error.message}`,&#10;			});&#10;		},&#10;		rollbackConfig: {&#10;			// `rollbackConfig` controls retries and timeout for the rollback handler.&#10;			retries: { limit: 3, delay: &quot;30 seconds&quot;, backoff: &quot;linear&quot; },&#10;			timeout: &quot;5 minutes&quot;,&#10;		},&#10;	},&#10;);&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">await step.do(&#10;	&quot;create charge&quot;,&#10;	async () =&gt; {&#10;		const charge = await createCharge();&#10;		return { chargeId: charge.id };&#10;	},&#10;	{&#10;		rollback: async ({ ctx, output, error }) =&gt; {&#10;			// `output` is the value returned by the step being rolled back.&#10;			const { chargeId } = output as { chargeId: string };&#10;			await refundCharge(chargeId, {&#10;				// `ctx` is the original step context, including step name, count, attempt, and config.&#10;				reason: `${ctx.step.name}: ${error.message}`,&#10;			});&#10;		},&#10;		rollbackConfig: {&#10;			// `rollbackConfig` controls retries and timeout for the rollback handler.&#10;			retries: { limit: 3, delay: &quot;30 seconds&quot;, backoff: &quot;linear&quot; },&#10;			timeout: &quot;5 minutes&quot;,&#10;		},&#10;	},&#10;);&#10;</code></pre>
 <p>Refer to <a href="/workflows/build/workers-api/#rollback-options">rollback options</a> to learn more.</p>
 
 
@@ -49,11 +60,11 @@
 </ul>
 <h4 id="2026-06-21-window-functions-distinct-set-operations-examples">Examples</h4>
 <h4 id="2026-06-21-window-functions-distinct-set-operations-rank-rows-with-a-window-function">Rank rows with a window function</h4>
-<pre><code class="language-sql">SELECT customer_id, region,&#10;       ROW_NUMBER() OVER (PARTITION BY region ORDER BY total_amount DESC) AS rank_in_region&#10;FROM my_namespace.sales_data&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">SELECT customer_id, region,&#10;       ROW_NUMBER() OVER (PARTITION BY region ORDER BY total_amount DESC) AS rank_in_region&#10;FROM my_namespace.sales_data&#10;</code></pre>
 <h4 id="2026-06-21-window-functions-distinct-set-operations-filter-with-qualify">Filter with QUALIFY</h4>
-<pre><code class="language-sql">SELECT customer_id, region, total_amount&#10;FROM my_namespace.sales_data&#10;QUALIFY ROW_NUMBER() OVER (PARTITION BY region ORDER BY total_amount DESC) &lt;= 3&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">SELECT customer_id, region, total_amount&#10;FROM my_namespace.sales_data&#10;QUALIFY ROW_NUMBER() OVER (PARTITION BY region ORDER BY total_amount DESC) &lt;= 3&#10;</code></pre>
 <h4 id="2026-06-21-window-functions-distinct-set-operations-combine-tables-with-a-set-operation">Combine tables with a set operation</h4>
-<pre><code class="language-sql">SELECT customer_id FROM my_namespace.sales_data&#10;EXCEPT&#10;SELECT customer_id FROM my_namespace.archived_sales&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">SELECT customer_id FROM my_namespace.sales_data&#10;EXCEPT&#10;SELECT customer_id FROM my_namespace.archived_sales&#10;</code></pre>
 <p>The named <code>WINDOW</code> clause is not supported — inline the <code>OVER (...)</code> specification at each call site. For the full syntax reference, refer to the <a href="/r2-sql/sql-reference/">SQL reference</a>. For supported features and performance guidance, refer to <a href="/r2-sql/reference/limitations-best-practices/">Limitations and best practices</a>.</p>
 
 
@@ -78,7 +89,7 @@
 <p><em>2026-06-19</em></p>
 <p>Durable Objects now supports two new location hints for Asia-Pacific: <code>apac-ne</code> (Northeast Asia-Pacific) and <code>apac-se</code> (Southeast Asia-Pacific). Use <code>apac-ne</code> or <code>apac-se</code> when you want finer-grained placement within Asia-Pacific rather than the broader <code>apac</code> hint.</p>
 <p>Use the new hints the same way as any other <code>locationHint</code>:</p>
-<pre><code class="language-js">// Northeast Asia-Pacific (Japan, Korea, etc.)&#10;const stubNE = env.MY_DURABLE_OBJECT.get(id, { locationHint: &quot;apac-ne&quot; });&#10;&#10;// Southeast Asia-Pacific (Singapore, Indonesia, etc.)&#10;const stubSE = env.MY_DURABLE_OBJECT.get(id, { locationHint: &quot;apac-se&quot; });&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">// Northeast Asia-Pacific (Japan, Korea, etc.)&#10;const stubNE = env.MY_DURABLE_OBJECT.get(id, { locationHint: &quot;apac-ne&quot; });&#10;&#10;// Southeast Asia-Pacific (Singapore, Indonesia, etc.)&#10;const stubSE = env.MY_DURABLE_OBJECT.get(id, { locationHint: &quot;apac-se&quot; });&#10;</code></pre>
 <p>If your users are spread across all of Asia-Pacific, the existing <code>apac</code> hint remains the right choice. Only reach for <code>apac-ne</code> or <code>apac-se</code> when your traffic is clearly concentrated in one sub-region and you want to minimize round-trip time to that audience. The default behavior and what we generally recommended is not adding a location hint unless absolutely needed, this will create the Durable Object as close to the initializing request as possible to reduce latency.</p>
 <p>As with all location hints, these are best-effort suggestions. Cloudflare will place the Durable Object in a nearby data center, not necessarily the exact hinted location.</p>
 <p>For the full list of supported hints, refer to <a href="/durable-objects/reference/data-location/#provide-a-location-hint">Data location — Provide a location hint</a>.</p>
@@ -106,7 +117,7 @@
 <p>AI agents can now deploy Workers to Cloudflare without first requiring a user to sign up, open a browser-based OAuth flow, click through the dashboard, or create an API token. When an agent tries to deploy without Cloudflare credentials, Wrangler can tell it to rerun with <code>--temporary</code>, then deploy the Worker to a temporary preview account.</p>
 <p>To try this with your agent, update to Wrangler 4.102.0 or later, make sure you are logged out (<code>wrangler logout</code>), and then ask your agent to build something and deploy it to Cloudflare. The agent should follow Wrangler's output and deploy using the <code>--temporary</code> flag.</p>
 <p><img src="/assets/upstream/images/workers/claim-deployments-flow.png" alt="Diagram showing an AI agent deploying, verifying, and redeploying a Worker to a temporary account, then claiming it after authentication and moving it to a permanent account" /></p>
-<pre><code class="language-sh">wrangler deploy --temporary&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">wrangler deploy --temporary&#10;</code></pre>
 <p>The temporary deployment stays live for 60 minutes. During that window, the agent can verify the Worker, redeploy changes, and return both the live Worker URL and claim URL. Opening the claim URL lets you sign in to or create a Cloudflare account and make the temporary account permanent.</p>
 <p>Temporary preview accounts currently support a limited set of products, including Workers, Workers Static Assets, Workers KV, D1, Durable Objects, Hyperdrive, Queues, and SSL/TLS certificates. For supported products, limits, and claim behavior, refer to <a href="/workers/platform/claim-deployments/">Claim deployments (temporary accounts)</a>.</p>
 <p>For more context, refer to <a href="https://blog.cloudflare.com/temporary-accounts/">Temporary Cloudflare Accounts for Agents</a>.</p>
@@ -188,7 +199,7 @@
 </ul>
 <h4 id="2026-06-16-agents-sdk-v0.16.1-upgrade">Upgrade</h4>
 <p>To update to the latest version:</p>
-<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">bun</button></div><div role="tabpanel" data-nb-pm-panel><pre><code data-nb-pm-code>npm i agents@latest @cloudflare/think@latest @cloudflare/codemode@latest @cloudflare/ai-chat@latest @cloudflare/voice@latest</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm i agents@latest @cloudflare/think@latest @cloudflare/codemode@latest @cloudflare/ai-chat@latest @cloudflare/voice@latest" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>yarn add agents@latest @cloudflare/think@latest @cloudflare/codemode@latest @cloudflare/ai-chat@latest @cloudflare/voice@latest</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn add agents@latest @cloudflare/think@latest @cloudflare/codemode@latest @cloudflare/ai-chat@latest @cloudflare/voice@latest" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>pnpm add agents@latest @cloudflare/think@latest @cloudflare/codemode@latest @cloudflare/ai-chat@latest @cloudflare/voice@latest</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm add agents@latest @cloudflare/think@latest @cloudflare/codemode@latest @cloudflare/ai-chat@latest @cloudflare/voice@latest" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>bun add agents@latest @cloudflare/think@latest @cloudflare/codemode@latest @cloudflare/ai-chat@latest @cloudflare/voice@latest</code></pre><button type="button" data-nb-pm-copy data-nb-command="bun add agents@latest @cloudflare/think@latest @cloudflare/codemode@latest @cloudflare/ai-chat@latest @cloudflare/voice@latest" aria-label="Copy to clipboard">Copy</button></div></div>
+<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">bun</button></div><div role="tabpanel" data-nb-pm-panel><pre tabindex="0"><code data-nb-pm-code>npm i agents@latest @cloudflare/think@latest @cloudflare/codemode@latest @cloudflare/ai-chat@latest @cloudflare/voice@latest</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm i agents@latest @cloudflare/think@latest @cloudflare/codemode@latest @cloudflare/ai-chat@latest @cloudflare/voice@latest" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>yarn add agents@latest @cloudflare/think@latest @cloudflare/codemode@latest @cloudflare/ai-chat@latest @cloudflare/voice@latest</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn add agents@latest @cloudflare/think@latest @cloudflare/codemode@latest @cloudflare/ai-chat@latest @cloudflare/voice@latest" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>pnpm add agents@latest @cloudflare/think@latest @cloudflare/codemode@latest @cloudflare/ai-chat@latest @cloudflare/voice@latest</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm add agents@latest @cloudflare/think@latest @cloudflare/codemode@latest @cloudflare/ai-chat@latest @cloudflare/voice@latest" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>bun add agents@latest @cloudflare/think@latest @cloudflare/codemode@latest @cloudflare/ai-chat@latest @cloudflare/voice@latest</code></pre><button type="button" data-nb-pm-copy data-nb-command="bun add agents@latest @cloudflare/think@latest @cloudflare/codemode@latest @cloudflare/ai-chat@latest @cloudflare/voice@latest" aria-label="Copy to clipboard">Copy</button></div></div>
 <p>Refer to the <a href="/agents/tools/codemode/">Code Mode documentation</a>, <a href="/agents/tools/browser/">Browser tools documentation</a>, <a href="/agents/harnesses/think/tools/">Think tools documentation</a>, and <a href="/agents/communication-channels/voice/">Voice documentation</a> for more information.</p>
 
 
@@ -207,7 +218,7 @@
 <p><em>2026-06-16</em></p>
 <p>You can now create custom trace spans in your Workers code using <code>tracing.enterSpan()</code>. Custom spans appear alongside the automatic platform instrumentation (fetch calls, KV reads, D1 queries, and other platform operations) in your traces and OpenTelemetry exports, with correct parent-child nesting.</p>
 <p>The API is available via <code>import { tracing } from &quot;cloudflare:workers&quot;</code> or through the handler context as <code>ctx.tracing</code>:</p>
-<pre><code class="language-ts">import { tracing } from &quot;cloudflare:workers&quot;;&#10;&#10;export default {&#10;  async fetch(request, env, ctx) {&#10;    return tracing.enterSpan(&quot;handleRequest&quot;, async (span) =&gt; {&#10;      span.setAttribute(&quot;url.path&quot;, new URL(request.url).pathname);&#10;      const data = await env.MY_KV.get(&quot;key&quot;);&#10;      return new Response(data);&#10;    });&#10;  },&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { tracing } from &quot;cloudflare:workers&quot;;&#10;&#10;export default {&#10;  async fetch(request, env, ctx) {&#10;    return tracing.enterSpan(&quot;handleRequest&quot;, async (span) =&gt; {&#10;      span.setAttribute(&quot;url.path&quot;, new URL(request.url).pathname);&#10;      const data = await env.MY_KV.get(&quot;key&quot;);&#10;      return new Response(data);&#10;    });&#10;  },&#10;};&#10;</code></pre>
 <p>Spans nest automatically based on the JavaScript async context, and are auto-ended when the callback returns or its returned promise settles. The <code>Span</code> object provides <code>setAttribute(key, value)</code> for attaching metadata and an <code>isTraced</code> property to check whether the current request is being sampled.</p>
 <p><img src="/assets/upstream/images/workers-observability/wobs_custom_spans_screenshot.png" alt="Trace waterfall showing custom spans nested alongside automatic KV and fetch instrumentation" /></p>
 <p><a href="/workers/observability/traces/#how-to-enable-tracing">Tracing must be enabled</a> in your Wrangler configuration for spans to be recorded.</p>
@@ -236,7 +247,7 @@
 <div class="nb-wrangler-config">
 @markup("md", "content/.markup/bodies/17828.md")</div>
 <p>At runtime, use <code>connect()</code> on the binding to open a TCP socket to a private destination:</p>
-<pre><code class="language-ts">export default {&#10;	async fetch(request: Request, env: Env) {&#10;		// Open a TCP connection to a private Redis instance&#10;		const socket = await env.PRIVATE_NETWORK.connect(&quot;10.0.1.50:6379&quot;);&#10;&#10;		// Write a Redis PING command&#10;		const writer = socket.writable.getWriter();&#10;		await writer.write(new TextEncoder().encode(&quot;PING\r\n&quot;));&#10;		await writer.close();&#10;&#10;		return new Response(socket.readable);&#10;	},&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">export default {&#10;	async fetch(request: Request, env: Env) {&#10;		// Open a TCP connection to a private Redis instance&#10;		const socket = await env.PRIVATE_NETWORK.connect(&quot;10.0.1.50:6379&quot;);&#10;&#10;		// Write a Redis PING command&#10;		const writer = socket.writable.getWriter();&#10;		await writer.write(new TextEncoder().encode(&quot;PING\r\n&quot;));&#10;		await writer.close();&#10;&#10;		return new Response(socket.readable);&#10;	},&#10;};&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/17827.md")</aside>
 <p>For more details, refer to <a href="/workers-vpc/configuration/vpc-networks/">VPC Networks</a> and the <a href="/workers-vpc/api/">Workers Binding API</a>.</p>
@@ -391,9 +402,9 @@
 <p>Customers can now view the number of <a href="/dynamic-workers/">Dynamic Workers</a> invoked during their billing period from the Workers overview page in the Cloudflare dashboard.</p>
 <p>This count reflects the number of Dynamic Workers that Cloudflare would bill for during the selected billing period. Dynamic Workers usage data only goes back to June 1, 2026.</p>
 <p>You can also query this count through the <a href="/analytics/graphql-api/">GraphQL Analytics API</a> by using <code>workersInvocationsByOwnerAndScriptGroups</code> and selecting <code>distinctDynamicWorkerCount</code>:</p>
-<pre><code class="language-graphql">query getDynamicWorkersCount(&#10;	$accountTag: string!&#10;	$filter: AccountWorkersInvocationsByOwnerAndScriptGroupsFilter_InputObject&#10;) {&#10;	viewer {&#10;		accounts(filter: { accountTag: $accountTag }) {&#10;			workersInvocationsByOwnerAndScriptGroups(limit: 10000, filter: $filter) {&#10;				uniq {&#10;					distinctDynamicWorkerCount&#10;				}&#10;			}&#10;		}&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-graphql">query getDynamicWorkersCount(&#10;	$accountTag: string!&#10;	$filter: AccountWorkersInvocationsByOwnerAndScriptGroupsFilter_InputObject&#10;) {&#10;	viewer {&#10;		accounts(filter: { accountTag: $accountTag }) {&#10;			workersInvocationsByOwnerAndScriptGroups(limit: 10000, filter: $filter) {&#10;				uniq {&#10;					distinctDynamicWorkerCount&#10;				}&#10;			}&#10;		}&#10;	}&#10;}&#10;</code></pre>
 <p>Use variables to set the account and billing-period date range:</p>
-<pre><code class="language-json">{&#10;	&quot;accountTag&quot;: &quot;&lt;ACCOUNT_ID&gt;&quot;,&#10;	&quot;filter&quot;: {&#10;		&quot;date_geq&quot;: &quot;2026-06-01&quot;,&#10;		&quot;date_leq&quot;: &quot;2026-06-30&quot;&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;accountTag&quot;: &quot;&lt;ACCOUNT_ID&gt;&quot;,&#10;	&quot;filter&quot;: {&#10;		&quot;date_geq&quot;: &quot;2026-06-01&quot;,&#10;		&quot;date_leq&quot;: &quot;2026-06-30&quot;&#10;	}&#10;}&#10;</code></pre>
 <p>For more information, refer to <a href="/dynamic-workers/pricing/">Dynamic Workers pricing</a>.</p>
 
 
@@ -432,12 +443,12 @@
 </tbody>
 </table>
 <p>Create a namespace for a new application or tenant directly from the CLI:</p>
-<pre><code class="language-sh">wrangler ai-search namespace create docs-production --description &quot;Production documentation search&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">wrangler ai-search namespace create docs-production --description &quot;Production documentation search&quot;&#10;</code></pre>
 <p>List namespaces with pagination or filter by name or description:</p>
-<pre><code class="language-sh">wrangler ai-search namespace list --search docs --page 1 --per-page 10&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">wrangler ai-search namespace list --search docs --page 1 --per-page 10&#10;</code></pre>
 <p>Use <code>--json</code> with <code>list</code>, <code>create</code>, <code>get</code>, and <code>update</code> to return structured output that automation and AI agents can parse directly.</p>
 <p>Instance-level commands also now support a <code>--namespace</code> flag, so you can interact with instances inside a specific namespace from the CLI:</p>
-<pre><code class="language-sh">wrangler ai-search list --namespace docs-production&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">wrangler ai-search list --namespace docs-production&#10;</code></pre>
 <p>For full usage details, refer to the <a href="/ai-search/wrangler-commands/">AI Search Wrangler commands documentation</a>.</p>
 
 
@@ -445,7 +456,7 @@
 <p><em>2026-06-10</em></p>
 <p>The <strong><a href="/api/resources/flagship/">Flagship API reference</a></strong> is now available. You can use the Cloudflare API to create and update apps, and to create, update, delete, and list feature flags without using the dashboard.</p>
 <p>For example, create a new boolean flag with the API:</p>
-<pre><code class="language-bash">curl https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/flagship/apps/$APP_ID/flags \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;H &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;key&quot;: &quot;new-checkout&quot;,&#10;    &quot;enabled&quot;: true,&#10;    &quot;default_variation&quot;: &quot;off&quot;,&#10;    &quot;variations&quot;: {&#10;      &quot;off&quot;: false,&#10;      &quot;on&quot;: true&#10;    },&#10;    &quot;rules&quot;: []&#10;  }&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/flagship/apps/$APP_ID/flags \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;H &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;key&quot;: &quot;new-checkout&quot;,&#10;    &quot;enabled&quot;: true,&#10;    &quot;default_variation&quot;: &quot;off&quot;,&#10;    &quot;variations&quot;: {&#10;      &quot;off&quot;: false,&#10;      &quot;on&quot;: true&#10;    },&#10;    &quot;rules&quot;: []&#10;  }&#x27;&#10;</code></pre>
 <p>To create an API token, go to <a href="https://dash.cloudflare.com/?to=/:account/api-tokens">Account API Tokens</a> in the Cloudflare dashboard and search for Flagship.</p>
 <p>The API reference includes endpoints for Flagship apps, flags, changelog entries, and flag evaluation. Agents can also use the <a href="https://github.com/cloudflare/skills/tree/main/skills/cloudflare/references/flagship">Flagship reference in the Cloudflare skill</a> to create and manage Flagship resources.</p>
 <p>Refer to the <a href="/flagship/">Flagship documentation</a> to learn more about evaluating feature flags from your applications.</p>
@@ -464,9 +475,9 @@
 <li><a href="/images/storage/binding/#imageimageiddelete"><code>.image(imageId).delete()</code></a> — Delete an image.</li>
 </ul>
 <p>For example, you can upload an image from a request body and return its metadata:</p>
-<pre><code class="language-ts">const image = await env.IMAGES.hosted.upload(request.body, {&#10;	filename: &quot;upload.jpg&quot;,&#10;	metadata: { source: &quot;worker&quot; },&#10;});&#10;&#10;return Response.json(image);&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const image = await env.IMAGES.hosted.upload(request.body, {&#10;	filename: &quot;upload.jpg&quot;,&#10;	metadata: { source: &quot;worker&quot; },&#10;});&#10;&#10;return Response.json(image);&#10;</code></pre>
 <p>Or retrieve and serve the original bytes of a hosted image:</p>
-<pre><code class="language-ts">const bytes = await env.IMAGES.hosted.image(&quot;IMAGE_ID&quot;).bytes();&#10;return new Response(bytes);&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const bytes = await env.IMAGES.hosted.image(&quot;IMAGE_ID&quot;).bytes();&#10;return new Response(bytes);&#10;</code></pre>
 <p>For more information, refer to the <a href="/images/storage/binding/">Images binding</a>.</p>
 
 

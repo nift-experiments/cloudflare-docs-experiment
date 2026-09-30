@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/support/troubleshooting/general-troubleshooting/gathering-information-for-troubleshooting-sites/
+  description: Collect diagnostic data for Cloudflare support tickets.
+  full_title: Gathering information for troubleshooting sites · Cloudflare Support docs
+  head_html: <title>Gathering information for troubleshooting sites · Cloudflare Support docs</title><meta name="generator" content="Nift"><meta name="description" content="Collect diagnostic data for Cloudflare support tickets."><link rel="canonical" href="https://developers.cloudflare.com/support/troubleshooting/general-troubleshooting/gathering-information-for-troubleshooting-sites/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/support/troubleshooting/general-troubleshooting/gathering-information-for-troubleshooting-sites/index.md"><meta property="og:title" content="Gathering information for troubleshooting sites · Cloudflare Support docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Collect diagnostic data for Cloudflare support tickets."><meta property="og:url" content="https://developers.cloudflare.com/support/troubleshooting/general-troubleshooting/gathering-information-for-troubleshooting-sites/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Support"><meta name="algolia_product_filter" content="Support"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_content_type" content="Troubleshooting"><meta name="algolia_content_type" content="Troubleshooting"><meta name="pcx_additional_products" content="Support"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/support/troubleshooting/general-troubleshooting/gathering-information-for-troubleshooting-sites/#page","headline":"Gathering information for troubleshooting sites \u00b7 Cloudflare Support docs","description":"Collect diagnostic data for Cloudflare support tickets.","url":"https://developers.cloudflare.com/support/troubleshooting/general-troubleshooting/gathering-information-for-troubleshooting-sites/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /support/troubleshooting/general-troubleshooting/gathering-information-for-troubleshooting-sites/
+  schema: 1
+---
 <h2 id="about-this-guide">About this guide</h2>
 <p>It is important to capture as much information as possible to diagnose an issue and to <a href="/support/contacting-cloudflare-support/">provide adequate details to Cloudflare support</a>. This article explains how to gather troubleshooting information commonly requested by Cloudflare Support.</p>
 <aside class="nb-aside note">
@@ -281,7 +292,7 @@ Determine the Cloudflare data center serving requests for your browser by visiti
 @markup("md", "content/.markup/bodies/14712.md")
 </aside>
 <p>Run the following command to send a standard HTTP GET request to your website (replace <code>www.example.com</code> with your hostname):</p>
-<pre><code class="language-bash">curl -svo /dev/null http://www.example.com/&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl -svo /dev/null http://www.example.com/&#10;</code></pre>
 <p>This example curl command returns output detailing the HTTP response and request headers but discards the page body output. curl output confirms the HTTP response and whether Cloudflare is currently proxying traffic for the site.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/14711.md")
@@ -289,13 +300,13 @@ Determine the Cloudflare data center serving requests for your browser by visiti
 <p>View the sections below for tips on troubleshooting HTTP errors, performance, caching, and SSL/TLS certificates:</p>
 <h4 id="http-errors">HTTP errors</h4>
 <p>When troubleshooting HTTP errors in responses from Cloudflare, test whether your origin caused the errors by sending requests directly to your origin web server. To troubleshoot HTTP errors, run a curl directly to your origin web server IP address (bypassing Cloudflare’s proxy):</p>
-<pre><code class="language-bash">curl -svo /dev/null http://example.com --connect-to ::203.0.113.34&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl -svo /dev/null http://example.com --connect-to ::203.0.113.34&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/14710.md")
 </aside>
 <h4 id="performance">Performance</h4>
 <p>curl measures latency or performance degradation for HTTP/HTTPS requests via the <a href="https://curl.haxx.se/docs/manpage.html#-w"><code>-w</code> or <code>--write-out</code> curl option</a>. The example curl below measures several performance vectors in the request transaction such as duration of the TLS handshake, DNS lookup, redirects, transfers, etc:</p>
-<pre><code class="language-bash">curl -svo /dev/null https://example.com/ -w &quot;\nContent Type: %{content_type} \&#10;\nHTTP Code: %{http_code} \&#10;\nHTTP Connect:%{http_connect} \&#10;\nNumber Connects: %{num_connects} \&#10;\nNumber Redirects: %{num_redirects} \&#10;\nRedirect URL: %{redirect_url} \&#10;\nSize Download: %{size_download} \&#10;\nSize Upload: %{size_upload} \&#10;\nSSL Verify: %{ssl_verify_result} \&#10;\nTime Handshake: %{time_appconnect} \&#10;\nTime Connect: %{time_connect} \&#10;\nName Lookup Time: %{time_namelookup} \&#10;\nTime Pretransfer: %{time_pretransfer} \&#10;\nTime Redirect: %{time_redirect} \&#10;\nTime Start Transfer: %{time_starttransfer} \&#10;\nTime Total: %{time_total} \&#10;\nEffective URL: %{url_effective}\n&quot; 2&gt;&amp;1&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl -svo /dev/null https://example.com/ -w &quot;\nContent Type: %{content_type} \&#10;\nHTTP Code: %{http_code} \&#10;\nHTTP Connect:%{http_connect} \&#10;\nNumber Connects: %{num_connects} \&#10;\nNumber Redirects: %{num_redirects} \&#10;\nRedirect URL: %{redirect_url} \&#10;\nSize Download: %{size_download} \&#10;\nSize Upload: %{size_upload} \&#10;\nSSL Verify: %{ssl_verify_result} \&#10;\nTime Handshake: %{time_appconnect} \&#10;\nTime Connect: %{time_connect} \&#10;\nName Lookup Time: %{time_namelookup} \&#10;\nTime Pretransfer: %{time_pretransfer} \&#10;\nTime Redirect: %{time_redirect} \&#10;\nTime Start Transfer: %{time_starttransfer} \&#10;\nTime Total: %{time_total} \&#10;\nEffective URL: %{url_effective}\n&quot; 2&gt;&amp;1&#10;</code></pre>
 <p><a href="https://blog.cloudflare.com/a-question-of-timing/">Explanation of this timing output</a> is found on the Cloudflare blog.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/14709.md")
@@ -315,12 +326,12 @@ Determine the Cloudflare data center serving requests for your browser by visiti
 <h4 id="ssl-tls-certificates">SSL/TLS certificates</h4>
 <h4 id="reviewing-certificates-with-curl">Reviewing Certificates with curl</h4>
 <p>The following curl command shows the SSL certificate served by Cloudflare during an HTTPS request (replace <code>www.example.com</code> with your hostname):</p>
-<pre><code class="language-sh">curl -svo /dev/null https://www.example.com/ 2&gt;&amp;1 | egrep -v &quot;^{.*$|^}.*$|^* http.*$&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">curl -svo /dev/null https://www.example.com/ 2&gt;&amp;1 | egrep -v &quot;^{.*$|^}.*$|^* http.*$&quot;&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/14707.md")
 </aside>
 <p>To display the origin certificate (assuming one is installed), replace <code>203.0.113.34</code> below with the actual IP address of your origin web server and replace <code>www.example.com</code> with your domain and hostname:</p>
-<pre><code class="language-sh">curl -svo /dev/null https://www.example.com --connect-to ::203.0.113.34 2&gt;&amp;1 | egrep -v &quot;^{.*$|^}.*$|^* http.*$&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">curl -svo /dev/null https://www.example.com --connect-to ::203.0.113.34 2&gt;&amp;1 | egrep -v &quot;^{.*$|^}.*$|^* http.*$&quot;&#10;</code></pre>
 <h4 id="testing-tls-versions">Testing TLS Versions</h4>
 <p>If troubleshooting browser support or confirming what TLS versions are supported, curl allows you to test a specific TLS version by adding the <a href="https://curl.se/docs/manpage.html#--tlsv10">--tlsv1.X</a> and <a href="https://curl.se/docs/manpage.html#--tls-max">--tls-max</a> options to your curl:</p>
 <ul>
@@ -364,9 +375,9 @@ Determine the Cloudflare data center serving requests for your browser by visiti
 </li>
 </ol>
 <p>For IPv4 -</p>
-<pre><code class="language-sh">tracert www.example.com&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">tracert www.example.com&#10;</code></pre>
 <p>For IPv6 -</p>
-<pre><code class="language-sh">tracert -6 www.example.com&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">tracert -6 www.example.com&#10;</code></pre>
 <ol start="5">
 <li>
 <p>Press <strong>Enter</strong>.</p>
@@ -385,9 +396,9 @@ Determine the Cloudflare data center serving requests for your browser by visiti
 </li>
 </ol>
 <p>For IPv4 -</p>
-<pre><code class="language-sh">traceroute www.example.com&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">traceroute www.example.com&#10;</code></pre>
 <p>For IPv6 -</p>
-<pre><code class="language-sh">traceroute -6 www.example.com&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">traceroute -6 www.example.com&#10;</code></pre>
 <ol start="3">
 <li>You can copy the results to save in a file or paste in another program.</li>
 </ol>
@@ -406,9 +417,9 @@ Determine the Cloudflare data center serving requests for your browser by visiti
 </aside>
 <p>The <strong>CF-RAY</strong> header traces a website request through Cloudflare's network. Provide the <strong>CF-RAY</strong> of a web request to Cloudflare support when troubleshooting an issue. You can also add <strong>CF-RAY</strong> to your logs by editing your origin web server configuration with the snippet below that corresponds to your brand of web server:</p>
 <h4 id="for-apache-web-servers-add-cf-ray-i-to-logformat">For Apache web servers, add <code>%{CF-Ray}i</code> to LogFormat</h4>
-<pre><code>LogFormat &quot;%h %l %u %t \&quot;%r\&quot; %&gt;s %b \&quot;%{Referer}i\&quot; \&quot;%{User-agent}i\&quot; %{CF-Ray}i&quot; cf_custom&#10;</code></pre>
+<pre tabindex="0"><code>LogFormat &quot;%h %l %u %t \&quot;%r\&quot; %&gt;s %b \&quot;%{Referer}i\&quot; \&quot;%{User-agent}i\&quot; %{CF-Ray}i&quot; cf_custom&#10;</code></pre>
 <h4 id="for-nginx-web-servers-add-http-cf-ray-to-log-format">For Nginx web servers, add '$http_cf_ray' to log_format</h4>
-<pre><code>log_format cf_custom &#x27;$remote_addr - $remote_user [$time_local] &#x27;&#10;&#x27;&quot;$request&quot; $status $body_bytes_sent &#x27;&#10;&#x27;&quot;$http_referer&quot; &quot;$http_user_agent&quot; &#x27;&#10;&#x27;$http_cf_ray&#x27;;&#10;</code></pre>
+<pre tabindex="0"><code>log_format cf_custom &#x27;$remote_addr - $remote_user [$time_local] &#x27;&#10;&#x27;&quot;$request&quot; $status $body_bytes_sent &#x27;&#10;&#x27;&quot;$http_referer&quot; &quot;$http_user_agent&quot; &#x27;&#10;&#x27;$http_cf_ray&#x27;;&#10;</code></pre>
 <h3 id="perform-a-mtr">Perform a MTR</h3>
 <aside class="nb-aside tip">
 <h3 class="nb-aside-title" id="when-to-use-8">When to use</h3>
@@ -423,11 +434,11 @@ Determine the Cloudflare data center serving requests for your browser by visiti
 <h4 id="how-do-i-use-mtr-to-generate-network-path-report">How do I use MTR to generate network path report?</h4>
 <p><strong>Using MTR on NIX based machines</strong></p>
 <p>Generally, we'd use MTR as the following:</p>
-<pre><code class="language-sh">mtr -rw &lt;dest_hostname&gt; e.g.: mtr -rw one.one.one.one&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">mtr -rw &lt;dest_hostname&gt; e.g.: mtr -rw one.one.one.one&#10;</code></pre>
 <p>or with destination IP:</p>
-<pre><code class="language-sh">mtr -rw &lt;dest_IP&gt; e.g.: mtr -rw 1.1.1.1&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">mtr -rw &lt;dest_IP&gt; e.g.: mtr -rw 1.1.1.1&#10;</code></pre>
 <p>with TCP port</p>
-<pre><code class="language-sh">mtr -P &lt;tcp port&gt; -T &lt;destination ip&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">mtr -P &lt;tcp port&gt; -T &lt;destination ip&gt;&#10;</code></pre>
 <p>Please refer to this documentation, which explains more about analysing MTR: <a href="https://www.cloudflare.com/en-gb/learning/network-layer/what-is-mtr/">How to read MTR</a>.</p>
 <h3 id="run-packet-captures">Run Packet Captures</h3>
 <aside class="nb-aside tip">

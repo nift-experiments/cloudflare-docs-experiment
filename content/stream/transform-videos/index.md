@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/stream/transform-videos/
+  description: Optimize and manipulate videos stored outside Cloudflare Stream with Media Transformations.
+  full_title: Transform videos · Cloudflare Stream docs
+  head_html: <title>Transform videos · Cloudflare Stream docs</title><meta name="generator" content="Nift"><meta name="description" content="Optimize and manipulate videos stored outside Cloudflare Stream with Media Transformations."><link rel="canonical" href="https://developers.cloudflare.com/stream/transform-videos/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/stream/transform-videos/index.md"><meta property="og:title" content="Transform videos · Cloudflare Stream docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Optimize and manipulate videos stored outside Cloudflare Stream with Media Transformations."><meta property="og:url" content="https://developers.cloudflare.com/stream/transform-videos/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Stream"><meta name="algolia_product_filter" content="Stream"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Stream"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/stream/transform-videos/#page","headline":"Transform videos \u00b7 Cloudflare Stream docs","description":"Optimize and manipulate videos stored outside Cloudflare Stream with Media Transformations.","url":"https://developers.cloudflare.com/stream/transform-videos/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /stream/transform-videos/
+  schema: 1
+---
 <p>You can optimize and manipulate videos stored <em>outside</em> of Cloudflare Stream with Media Transformations. Transformed videos and images are served from one of your zones on Cloudflare.</p>
 <p>To transform a video or image, you must <a href="/stream/transform-videos/#getting-started">enable transformations</a> for your zone. If your zone already has Image Transformations enabled, you can also optimize videos with Media Transformations.</p>
 <h2 id="getting-started">Getting started</h2>
@@ -14,7 +25,7 @@
 </ol>
 <h2 id="transform-a-video-by-url">Transform a video by URL</h2>
 <p>You can convert and resize videos by requesting them via a specially-formatted URL, without writing any code. The URL format is:</p>
-<pre><code>https://example.com/cdn-cgi/media/&lt;OPTIONS&gt;/&lt;SOURCE-VIDEO&gt;&#10;</code></pre>
+<pre tabindex="0"><code>https://example.com/cdn-cgi/media/&lt;OPTIONS&gt;/&lt;SOURCE-VIDEO&gt;&#10;</code></pre>
 <ul>
 <li><code>example.com</code>: Your website or zone on Cloudflare, with Transformations enabled.</li>
 <li><code>/cdn-cgi/media/</code>: A prefix that identifies a special path handled by Cloudflare's built-in media transformation service.</li>
@@ -22,7 +33,7 @@
 <li><code>&lt;SOURCE-VIDEO&gt;</code>: A full URL (starting with <code>https://</code> or <code>http://</code>) of the original asset to resize.</li>
 </ul>
 <p>For example, this URL will source an HD video from an R2 bucket, shorten it, crop and resize it as a square, and remove the audio.</p>
-<pre><code>https://example.com/cdn-cgi/media/mode=video,time=5s,duration=5s,width=500,height=500,fit=crop,audio=false/https://pub-8613b7f94d6146408add8fefb52c52e8.r2.dev/aus-mobile-demo.mp4&#10;</code></pre>
+<pre tabindex="0"><code>https://example.com/cdn-cgi/media/mode=video,time=5s,duration=5s,width=500,height=500,fit=crop,audio=false/https://pub-8613b7f94d6146408add8fefb52c52e8.r2.dev/aus-mobile-demo.mp4&#10;</code></pre>
 <p>The result is an MP4 that can be used in an HTML video element without a player library.</p>
 <h2 id="options">Options</h2>
 <h3 id="mode"><code>mode</code></h3>

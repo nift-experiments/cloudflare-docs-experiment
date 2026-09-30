@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/changelog/product-group/developer-platform/22/
+  description: '2025-03-07'
+  full_title: Developer platform changelog - page 22 | Cloudflare Docs
+  head_html: <title>Developer platform changelog - page 22 | Cloudflare Docs</title><meta name="generator" content="Nift"><meta name="description" content="2025-03-07"><link rel="canonical" href="https://developers.cloudflare.com/changelog/product-group/developer-platform/22/"><link rel="sitemap" href="/sitemap-index.xml"><meta property="og:title" content="Developer platform changelog - page 22"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="2025-03-07"><meta property="og:url" content="https://developers.cloudflare.com/changelog/product-group/developer-platform/22/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/changelog/product-group/developer-platform/22/#page","headline":"Developer platform changelog - page 22 | Cloudflare Docs","description":"2025-03-07","url":"https://developers.cloudflare.com/changelog/product-group/developer-platform/22/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: false
+  noindex: false
+  route: /changelog/product-group/developer-platform/22/
+  schema: 1
+---
 <h1 id="changelog">Changelog</h1>
 
 <h2 id="hyperdrive-reduces-query-latency-by-up-to-90-and-now-supports-ip-access-control-lists"><a href="/changelog/post/2025-03-04-hyperdrive-pooling-near-database-and-ip-range-egress/">Hyperdrive reduces query latency by up to 90% and now supports IP access control lists</a></h2>
@@ -22,9 +33,9 @@
 <p>Buckets can have up to 1,000 <a href="/r2/buckets/">bucket lock rules</a>. Each rule specifies which objects it covers (via prefix) and how long those objects must remain retained.</p>
 <p>Here are a couple of examples showing how you can configure bucket lock rules using <a href="/workers/wrangler/">Wrangler</a>:</p>
 <h4 id="2025-03-06-r2-bucket-locks-ensure-all-objects-in-a-bucket-are-retained-for-at-least-180-days">Ensure all objects in a bucket are retained for at least 180 days</h4>
-<pre><code class="language-sh">npx wrangler r2 bucket lock add &lt;bucket&gt; --name 180-days-all --retention-days 180&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler r2 bucket lock add &lt;bucket&gt; --name 180-days-all --retention-days 180&#10;</code></pre>
 <h4 id="2025-03-06-r2-bucket-locks-prevent-deletion-or-overwriting-of-all-logs-indefinitely-via-prefix">Prevent deletion or overwriting of all logs indefinitely (via prefix)</h4>
-<pre><code class="language-sh">npx wrangler r2 bucket lock add &lt;bucket&gt; --name indefinite-logs --prefix logs/ --retention-indefinite&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler r2 bucket lock add &lt;bucket&gt; --name indefinite-logs --prefix logs/ --retention-indefinite&#10;</code></pre>
 <p>For more information on bucket locks and how to set retention policies for objects in your R2 buckets, refer to our <a href="/r2/buckets/bucket-locks/">documentation</a>.</p>
 
 
@@ -46,14 +57,14 @@ zone, then make a simple request with a specially formatted URL. The result is
 an MP4 that can be used in an HTML video element without a player library.
 If your zone already has Image Transformations enabled, then it is ready to
 optimize videos with Media Transformations, too.</p>
-<pre><code class="language-text">https://example.com/cdn-cgi/media/&lt;OPTIONS&gt;/&lt;SOURCE-VIDEO&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-text">https://example.com/cdn-cgi/media/&lt;OPTIONS&gt;/&lt;SOURCE-VIDEO&gt;&#10;</code></pre>
 <p>For example, we have a short video of the mobile in Austin's office. The
 original is nearly 30 megabytes and wider than necessary for this layout.
 Consider a simple width adjustment:</p>
 <video controls>
 	<source src="https://developers.cloudflare.com/cdn-cgi/media/width=640/https://middlecache.ced.cloudflare.com/v1/aus-mobile/aus-mobile.mp4" />
 </video>
-<pre><code class="language-text">https://example.com/cdn-cgi/media/width=640/&lt;SOURCE-VIDEO&gt;&#10;https://developers.cloudflare.com/cdn-cgi/media/width=640/https://middlecache.ced.cloudflare.com/v1/aus-mobile/aus-mobile.mp4&#10;</code></pre>
+<pre tabindex="0"><code class="language-text">https://example.com/cdn-cgi/media/width=640/&lt;SOURCE-VIDEO&gt;&#10;https://developers.cloudflare.com/cdn-cgi/media/width=640/https://middlecache.ced.cloudflare.com/v1/aus-mobile/aus-mobile.mp4&#10;</code></pre>
 <p>The result is less than 3 megabytes, properly sized, and delivered dynamically
 so that customers do not have to manage the creation and storage of these
 transformed assets.</p>
@@ -64,16 +75,16 @@ transformed assets.</p>
 <p><em>2025-02-28</em></p>
 <p>We've released a release candidate of the next major version of <a href="/workers/wrangler/">Wrangler</a>, the CLI for Cloudflare Workers — <code>wrangler@4.0.0-rc.0</code>.</p>
 <p>You can run the following command to install it and be one of the first to try it out:</p>
-<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">bun</button></div><div role="tabpanel" data-nb-pm-panel><pre><code data-nb-pm-code>npm i wrangler@v4-rc</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm i wrangler@v4-rc" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>yarn add wrangler@v4-rc</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn add wrangler@v4-rc" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>pnpm add wrangler@v4-rc</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm add wrangler@v4-rc" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>bun add wrangler@v4-rc</code></pre><button type="button" data-nb-pm-copy data-nb-command="bun add wrangler@v4-rc" aria-label="Copy to clipboard">Copy</button></div></div>
+<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">bun</button></div><div role="tabpanel" data-nb-pm-panel><pre tabindex="0"><code data-nb-pm-code>npm i wrangler@v4-rc</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm i wrangler@v4-rc" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>yarn add wrangler@v4-rc</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn add wrangler@v4-rc" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>pnpm add wrangler@v4-rc</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm add wrangler@v4-rc" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>bun add wrangler@v4-rc</code></pre><button type="button" data-nb-pm-copy data-nb-command="bun add wrangler@v4-rc" aria-label="Copy to clipboard">Copy</button></div></div>
 <p>Unlike previous major versions of Wrangler, which were <a href="https://blog.cloudflare.com/wrangler-v2-beta/">foundational rewrites</a> and <a href="https://blog.cloudflare.com/wrangler3/">rearchitectures</a> — Version 4 of Wrangler includes a much smaller set of changes. If you use Wrangler today, your workflow is very unlikely to change. Before we release Wrangler v4 and advance past the release candidate stage, we'll share a detailed migration guide in the Workers developer docs. But for the vast majority of cases, you won't need to do anything to migrate — things will just work as they do today. We are sharing this release candidate in advance of the official release of v4, so that you can try it out early and share feedback.</p>
 <h4 id="2025-02-28-wrangler-v4-rc-new-javascript-language-features-that-you-can-now-use-with-wrangler-v4">New JavaScript language features that you can now use with Wrangler v4</h4>
 <p>Version 4 of Wrangler updates the version of <a href="https://esbuild.github.io/">esbuild</a> that Wrangler uses internally, allowing you to use modern JavaScript language features, including:</p>
 <h5 id="2025-02-28-wrangler-v4-rc-the-using-keyword-from-explicit-resource-management">The <code>using</code> keyword from Explicit Resource Management</h5>
 <p>The <a href="/workers/runtime-apis/rpc/lifecycle/#explicit-resource-management"><code>using</code> keyword from the Explicit Resource Management standard</a> makes it easier to work with the <a href="/workers/runtime-apis/rpc/">JavaScript-native RPC system built into Workers</a>. This means that when you obtain a stub, you can ensure that it is automatically disposed when you exit scope it was created in:</p>
-<pre><code class="language-js">function sendEmail(id, message) {&#10;  using user = await env.USER_SERVICE.findUser(id);&#10;  await user.sendEmail(message);&#10;&#10;  // user[Symbol.dispose]() is implicitly called at the end of the scope.&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">function sendEmail(id, message) {&#10;  using user = await env.USER_SERVICE.findUser(id);&#10;  await user.sendEmail(message);&#10;&#10;  // user[Symbol.dispose]() is implicitly called at the end of the scope.&#10;}&#10;</code></pre>
 <h5 id="2025-02-28-wrangler-v4-rc-import-attributes">Import attributes</h5>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import/with">Import attributes</a> allow you to denote the type or other attributes of the module that your code imports. For example, you can import a JSON module, using the following syntax:</p>
-<pre><code class="language-js">import data from &quot;./data.json&quot; with { type: &quot;json&quot; };&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">import data from &quot;./data.json&quot; with { type: &quot;json&quot; };&#10;</code></pre>
 <h4 id="2025-02-28-wrangler-v4-rc-other-changes">Other changes</h4>
 <h5 id="2025-02-28-wrangler-v4-rc-local-is-now-the-default-for-all-cli-commands"><code>--local</code> is now the default for all CLI commands</h5>
 <p>All commands that access resources (for example, <code>wrangler kv</code>, <code>wrangler r2</code>, <code>wrangler d1</code>) now access local datastores by default, ensuring consistent behavior.</p>
@@ -103,7 +114,7 @@ transformed assets.</p>
 <li><strong>Scrape Web Elements</strong> – Use <code>/scrape</code> to extract specific elements from a page.</li>
 </ul>
 <p>For example, to capture a screenshot:</p>
-<pre><code class="language-bash">curl -X POST &#x27;https://api.cloudflare.com/client/v4/accounts/&lt;accountId&gt;/browser-rendering/screenshot&#x27; \&#10;  &#45;H &#x27;Authorization: Bearer &lt;apiToken&gt;&#x27; \&#10;  &#45;H &#x27;Content-Type: application/json&#x27; \&#10;  &#45;d &#x27;{&#10;    &quot;html&quot;: &quot;Hello World!&quot;,&#10;    &quot;screenshotOptions&quot;: {&#10;      &quot;type&quot;: &quot;webp&quot;,&#10;      &quot;omitBackground&quot;: true&#10;    }&#10;  }&#x27; \&#10;  &#45;-output &quot;screenshot.webp&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl -X POST &#x27;https://api.cloudflare.com/client/v4/accounts/&lt;accountId&gt;/browser-rendering/screenshot&#x27; \&#10;  &#45;H &#x27;Authorization: Bearer &lt;apiToken&gt;&#x27; \&#10;  &#45;H &#x27;Content-Type: application/json&#x27; \&#10;  &#45;d &#x27;{&#10;    &quot;html&quot;: &quot;Hello World!&quot;,&#10;    &quot;screenshotOptions&quot;: {&#10;      &quot;type&quot;: &quot;webp&quot;,&#10;      &quot;omitBackground&quot;: true&#10;    }&#10;  }&#x27; \&#10;  &#45;-output &quot;screenshot.webp&quot;&#10;</code></pre>
 <p>Learn more in our <a href="/browser-run/quick-actions/">documentation</a>.</p>
 
 
@@ -124,11 +135,11 @@ transformed assets.</p>
 <p><em>2025-02-25</em></p>
 <p>We've released the <a href="http://blog.cloudflare.com/build-ai-agents-on-cloudflare/">Agents SDK</a>, a package and set of tools that help you build and ship AI Agents.</p>
 <p>You can get up and running with a <a href="https://github.com/cloudflare/agents-starter">chat-based AI Agent</a> (and deploy it to Workers) that uses the Agents SDK, tool calling, and state syncing with a React-based front-end by running the following command:</p>
-<pre><code class="language-sh">npm create cloudflare@latest agents-starter -- --template=&quot;cloudflare/agents-starter&quot;&#10;&#35; open up README.md and follow the instructions&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npm create cloudflare@latest agents-starter -- --template=&quot;cloudflare/agents-starter&quot;&#10;&#35; open up README.md and follow the instructions&#10;</code></pre>
 <p>You can also add an Agent to any existing Workers application by installing the <code>agents</code> package directly</p>
-<pre><code class="language-sh">npm i agents&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npm i agents&#10;</code></pre>
 <p>... and then define your first Agent:</p>
-<pre><code class="language-ts">import { Agent } from &quot;agents&quot;;&#10;&#10;export class YourAgent extends Agent&lt;Env&gt; {&#10;	// Build it out&#10;	// Access state on this.state or query the Agent&#x27;s database via this.sql&#10;	// Handle WebSocket events with onConnect and onMessage&#10;	// Run tasks on a schedule with this.schedule&#10;	// Call AI models&#10;	// ... and/or call other Agents.&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { Agent } from &quot;agents&quot;;&#10;&#10;export class YourAgent extends Agent&lt;Env&gt; {&#10;	// Build it out&#10;	// Access state on this.state or query the Agent&#x27;s database via this.sql&#10;	// Handle WebSocket events with onConnect and onMessage&#10;	// Run tasks on a schedule with this.schedule&#10;	// Call AI models&#10;	// ... and/or call other Agents.&#10;}&#10;</code></pre>
 <p>Head over to the <a href="/agents/">Agents documentation</a> to learn more about the Agents SDK, the SDK APIs, as well as how to test and deploying agents to production.</p>
 
 
@@ -157,7 +168,7 @@ transformed assets.</p>
 @markup("md", "content/.markup/bodies/17735.md")</div>
 <p>Within your Worker code, you can interact with this binding by using <code>env.IMAGES</code>.</p>
 <p>Here's how you can rotate, resize, and blur an image, then output the image as AVIF:</p>
-<pre><code class="language-ts">const info = await env.IMAGES.info(stream);&#10;// stream contains a valid image, and width/height is available on the info object&#10;&#10;const response = (&#10;	await env.IMAGES.input(stream)&#10;		.transform({ rotate: 90 })&#10;		.transform({ width: 128 })&#10;		.transform({ blur: 20 })&#10;		.output({ format: &quot;image/avif&quot; })&#10;).response();&#10;&#10;return response;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const info = await env.IMAGES.info(stream);&#10;// stream contains a valid image, and width/height is available on the info object&#10;&#10;const response = (&#10;	await env.IMAGES.input(stream)&#10;		.transform({ rotate: 90 })&#10;		.transform({ width: 128 })&#10;		.transform({ blur: 20 })&#10;		.output({ format: &quot;image/avif&quot; })&#10;).response();&#10;&#10;return response;&#10;</code></pre>
 <p>For more information, refer to <a href="/images/optimization/binding/">Images Bindings</a>.</p>
 
 
@@ -220,7 +231,7 @@ transformed assets.</p>
 <p>You can now customize a queue's message retention period, from a minimum of 60 seconds to a maximum of 14 days. Previously, it was fixed to the default of 4 days.</p>
 <p><img src="/assets/upstream/images/queues/customize-retention-period.png" alt="Customize a queue's message retention period" /></p>
 <p>You can customize the retention period on the settings page for your queue, or using Wrangler:</p>
-<pre><code class="language-bash">$ wrangler queues update my-queue --message-retention-period-secs 600&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">$ wrangler queues update my-queue --message-retention-period-secs 600&#10;</code></pre>
 <p>This feature is available on all new and existing queues. If you haven't used Cloudflare Queues before, <a href="/queues/get-started">get started with the Cloudflare Queues guide</a>.</p>
 
 
@@ -228,7 +239,7 @@ transformed assets.</p>
 <p><em>2025-02-14</em></p>
 <p>We've added an <a href="/workers/get-started/prompting/">example prompt</a> to help you get started with building AI agents and applications on Cloudflare <a href="/workers/">Workers</a>, including <a href="/workflows/">Workflows</a>, <a href="/durable-objects/">Durable Objects</a>, and <a href="/kv/">Workers KV</a>.</p>
 <p>You can use this prompt with your favorite AI model, including Claude 3.5 Sonnet, OpenAI's o3-mini, Gemini 2.0 Flash, or Llama 3.3 on Workers AI. Models with large context windows will allow you to paste the prompt directly: provide your own prompt within the <code>&lt;user_prompt&gt;&lt;/user_prompt&gt;</code> tags.</p>
-<pre><code class="language-sh">{paste_prompt_here}&#10;&lt;user_prompt&gt;&#10;user: Build an AI agent using Cloudflare Workflows. The Workflow should run when a new GitHub issue is opened on a specific project with the label &#x27;help&#x27; or &#x27;bug&#x27;, and attempt to help the user troubleshoot the issue by calling the OpenAI API with the issue title and description, and a clear, structured prompt that asks the model to suggest 1-3 possible solutions to the issue. Any code snippets should be formatted in Markdown code blocks. Documentation and sources should be referenced at the bottom of the response. The agent should then post the response to the GitHub issue. The agent should run as the provided GitHub bot account.&#10;&lt;/user_prompt&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">{paste_prompt_here}&#10;&lt;user_prompt&gt;&#10;user: Build an AI agent using Cloudflare Workflows. The Workflow should run when a new GitHub issue is opened on a specific project with the label &#x27;help&#x27; or &#x27;bug&#x27;, and attempt to help the user troubleshoot the issue by calling the OpenAI API with the issue title and description, and a clear, structured prompt that asks the model to suggest 1-3 possible solutions to the issue. Any code snippets should be formatted in Markdown code blocks. Documentation and sources should be referenced at the bottom of the response. The agent should then post the response to the GitHub issue. The agent should run as the provided GitHub bot account.&#10;&lt;/user_prompt&gt;&#10;</code></pre>
 <p>This prompt is still experimental, but we encourage you to try it out and <a href="https://github.com/cloudflare/cloudflare-docs/issues/new?template=content.edit.yml">provide feedback</a>.</p>
 
 
@@ -277,7 +288,7 @@ For more information, refer to <a href="/stream/stream-live/dvr-for-live/">DVR f
 <p><strong>Request timeouts</strong>
 A <a href="/ai-gateway/configuration/request-handling/#request-timeouts">request timeout</a> allows you to trigger <a href="/ai-gateway/configuration/fallbacks/">fallbacks</a> or a retry if a provider takes too long to respond.</p>
 <p>To set a request timeout directly to a provider, add a <code>cf-aig-request-timeout</code> header.</p>
-<pre><code class="language-bash">curl https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/workers-ai/@cf/meta/llama-3.1-8b-instruct \&#10; &#45;-header &#x27;Authorization: Bearer {cf_api_token}&#x27; \&#10; &#45;-header &#x27;Content-Type: application/json&#x27; \&#10; &#45;-header &#x27;cf-aig-request-timeout: 5000&#x27;&#10; &#45;-data &#x27;{&quot;prompt&quot;: &quot;What is Cloudflare?&quot;}&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/workers-ai/@cf/meta/llama-3.1-8b-instruct \&#10; &#45;-header &#x27;Authorization: Bearer {cf_api_token}&#x27; \&#10; &#45;-header &#x27;Content-Type: application/json&#x27; \&#10; &#45;-header &#x27;cf-aig-request-timeout: 5000&#x27;&#10; &#45;-data &#x27;{&quot;prompt&quot;: &quot;What is Cloudflare?&quot;}&#x27;&#10;</code></pre>
 <p><strong>Request retries</strong>
 A <a href="/ai-gateway/configuration/request-handling/#request-retries">request retry</a> automatically retries failed requests, so you can recover from temporary issues without intervening.</p>
 <p>To set up request retries directly to a provider, add the following headers:</p>
@@ -298,7 +309,7 @@ A <a href="/ai-gateway/configuration/request-handling/#request-retries">request 
 </ul>
 <p><img src="/assets/upstream/images/ai-gateway/cerebras2.png" alt="Example of Cerebras log in AI Gateway" /></p>
 <p>To get started with AI Gateway, just update the base URL. Here's how you can send a request to <a href="/ai-gateway/usage/providers/cerebras/">Cerebras</a> using cURL:</p>
-<pre><code class="language-bash">curl -X POST https://gateway.ai.cloudflare.com/v1/ACCOUNT_TAG/GATEWAY/cerebras/chat/completions \&#10; &#45;-header &#x27;content-type: application/json&#x27; \&#10; &#45;-header &#x27;Authorization: Bearer CEREBRAS_TOKEN&#x27; \&#10; &#45;-data &#x27;{&#10;    &quot;model&quot;: &quot;llama-3.3-70b&quot;,&#10;    &quot;messages&quot;: [&#10;        {&#10;            &quot;role&quot;: &quot;user&quot;,&#10;            &quot;content&quot;: &quot;What is Cloudflare?&quot;&#10;        }&#10;    ]&#10;}&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl -X POST https://gateway.ai.cloudflare.com/v1/ACCOUNT_TAG/GATEWAY/cerebras/chat/completions \&#10; &#45;-header &#x27;content-type: application/json&#x27; \&#10; &#45;-header &#x27;Authorization: Bearer CEREBRAS_TOKEN&#x27; \&#10; &#45;-data &#x27;{&#10;    &quot;model&quot;: &quot;llama-3.3-70b&quot;,&#10;    &quot;messages&quot;: [&#10;        {&#10;            &quot;role&quot;: &quot;user&quot;,&#10;            &quot;content&quot;: &quot;What is Cloudflare?&quot;&#10;        }&#10;    ]&#10;}&#x27;&#10;</code></pre>
 
 
 <h2 id="terraform-v5-provider-is-now-generally-available"><a href="/changelog/post/2025-02-03-terraform-v5-provider/">Terraform v5 Provider is now generally available</a></h2>

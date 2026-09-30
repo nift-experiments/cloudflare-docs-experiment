@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/integrations/identity-providers/generic-oidc/
+  description: Generic OIDC in Zero Trust integrations.
+  full_title: Generic OIDC · Cloudflare One docs
+  head_html: <title>Generic OIDC · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="Generic OIDC in Zero Trust integrations."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/integrations/identity-providers/generic-oidc/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/integrations/identity-providers/generic-oidc/index.md"><meta property="og:title" content="Generic OIDC · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Generic OIDC in Zero Trust integrations."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/integrations/identity-providers/generic-oidc/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Cloudflare One"><meta name="pcx_tags" content="SSO"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/integrations/identity-providers/generic-oidc/#page","headline":"Generic OIDC \u00b7 Cloudflare One docs","description":"Generic OIDC in Zero Trust integrations.","url":"https://developers.cloudflare.com/cloudflare-one/integrations/identity-providers/generic-oidc/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["SSO"]}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/integrations/identity-providers/generic-oidc/
+  schema: 1
+---
 <p>Cloudflare Access has a generic OpenID Connect (OIDC) connector to help you integrate IdPs not already set in Access.</p>
 <h2 id="1-create-an-application-in-your-identity-provider"><ol>
 <li>Create an application in your identity provider</li>
@@ -10,7 +21,7 @@
 <p>When creating a client/app, your IdP may request an <strong>authorized redirect URI</strong>. Enter the following URL:</p>
 </li>
 </ol>
-<pre><code class="language-txt">https://&lt;your-team-name&gt;.cloudflareaccess.com/cdn-cgi/access/callback&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://&lt;your-team-name&gt;.cloudflareaccess.com/cdn-cgi/access/callback&#10;</code></pre>
 <p>You can find your team name in the <a href="https://dash.cloudflare.com">Cloudflare dashboard</a> under <strong>Settings</strong> &gt; <strong>Team name and domain</strong> &gt; <strong>Team name</strong>.</p>
 <ol start="3">
 <li>
@@ -108,7 +119,7 @@
 <li>Select <strong>Save</strong>.</li>
 <li>Select <strong>Test</strong> and verify that the custom claim appears in <code>oidc_fields</code>. For example,</li>
 </ol>
-<pre><code class="language-json">	&quot;oidc_fields&quot;: {&#10;		&quot;oid&quot;: &quot;54eb1ed2-7150-44e6-bbe4-ead24c132fd4&quot;&#10;	},&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">	&quot;oidc_fields&quot;: {&#10;		&quot;oid&quot;: &quot;54eb1ed2-7150-44e6-bbe4-ead24c132fd4&quot;&#10;	},&#10;</code></pre>
 <p>You can now build an Access policy for the custom claim using the <strong>OIDC Claim</strong> or <strong>IdP OIDC Claim</strong> selector. You can also use custom OIDC claims as <a href="/cloudflare-one/traffic-policies/identity-selectors/#oidc-claims">identity-based selectors in Gateway policies</a>. The custom claim will be passed to origins behind Access in a <a href="/cloudflare-one/access-controls/applications/http-apps/authorization-cookie/application-token/#custom-saml-attributes-and-oidc-claims">JWT</a>.</p>
 <h4 id="email-claim">Email claim</h4>
 <p>You can specify a custom <strong>Email claim</strong> name that Access will use to identify user emails. This is useful if your IdP does not return the standard <code>email</code> claim in the OIDC ID token.</p>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/workers-vpc/get-started/
+  description: Create your first Workers VPC Service and connect a Worker to your private network.
+  full_title: Get started · Cloudflare Workers VPC
+  head_html: <title>Get started · Cloudflare Workers VPC</title><meta name="generator" content="Nift"><meta name="description" content="Create your first Workers VPC Service and connect a Worker to your private network."><link rel="canonical" href="https://developers.cloudflare.com/workers-vpc/get-started/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/workers-vpc/get-started/index.md"><meta property="og:title" content="Get started · Cloudflare Workers VPC"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Create your first Workers VPC Service and connect a Worker to your private network."><meta property="og:url" content="https://developers.cloudflare.com/workers-vpc/get-started/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Workers VPC"><meta name="algolia_product_filter" content="Workers VPC"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Get started"><meta name="algolia_content_type" content="Get started"><meta name="pcx_additional_products" content="Workers VPC"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/workers-vpc/get-started/#page","headline":"Get started \u00b7 Cloudflare Workers VPC","description":"Create your first Workers VPC Service and connect a Worker to your private network.","url":"https://developers.cloudflare.com/workers-vpc/get-started/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /workers-vpc/get-started/
+  schema: 1
+---
 <p>This guide will walk you through creating your first Workers VPC Service, allowing your Worker to access resources in your private network.</p>
 <p>You will create a Workers application, create a Tunnel in your private network to connect it to Cloudflare, and then configure VPC Services for the services on your private network you want to access from Workers.</p>
 <aside class="nb-aside note">
@@ -22,7 +33,7 @@
 <li>Create a new Worker project</li>
 </ol></h2>
 <p>Create a new Worker project using Wrangler:</p>
-<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre><code data-nb-pm-code>npm create cloudflare@latest -- workers-vpc-app</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm create cloudflare@latest -- workers-vpc-app" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>yarn create cloudflare workers-vpc-app</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn create cloudflare workers-vpc-app" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>pnpm create cloudflare@latest workers-vpc-app</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm create cloudflare@latest workers-vpc-app" aria-label="Copy to clipboard">Copy</button></div></div>
+<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre tabindex="0"><code data-nb-pm-code>npm create cloudflare@latest -- workers-vpc-app</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm create cloudflare@latest -- workers-vpc-app" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>yarn create cloudflare workers-vpc-app</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn create cloudflare workers-vpc-app" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>pnpm create cloudflare@latest workers-vpc-app</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm create cloudflare@latest workers-vpc-app" aria-label="Copy to clipboard">Copy</button></div></div>
 <p>For setup, select the following options:</p>
 <ul>
 <li>For <em>What would you like to start with?</em>, choose <code>Hello World example</code>.</li>
@@ -32,7 +43,7 @@
 <li>For <em>Do you want to deploy your application?</em>, choose <code>No</code> (we will be making some changes before deploying).</li>
 </ul>
 <p>Navigate to your project directory:</p>
-<pre><code class="language-sh">cd workers-vpc-app&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cd workers-vpc-app&#10;</code></pre>
 <h2 id="2-set-up-cloudflare-tunnel"><ol start="2">
 <li>Set up Cloudflare Tunnel</li>
 </ol></h2>
@@ -66,18 +77,18 @@
 <li>Write your Worker code</li>
 </ol></h2>
 <p>Update your Worker to use the VPC Service binding. The following example:</p>
-<pre><code class="language-ts">export default {&#10;	async fetch(request, env, ctx): Promise&lt;Response&gt; {&#10;		const url = new URL(request.url);&#10;&#10;		// This is a simple proxy scenario.&#10;		// In this case, you will need to replace the URL with the proper protocol (http vs. https), hostname and port of the service.&#10;		// For example, this could be &quot;http://localhost:1111&quot;, &quot;http://192.0.0.1:3000&quot;, &quot;https://my-internal-api.example.com&quot;&#10;		const targetUrl = new URL(&#10;			`http://&lt;ENTER_SERVICE_HOST&gt;:&lt;ENTER_SERVICE_PORT&gt;${url.pathname}${url.search}`,&#10;		);&#10;&#10;		// Create new request with the target URL but preserve all other properties&#10;		const proxyRequest = new Request(targetUrl, {&#10;			method: request.method,&#10;			headers: request.headers,&#10;			body: request.body,&#10;		});&#10;&#10;		const response = await env.VPC_SERVICE.fetch(proxyRequest);&#10;&#10;		return response;&#10;	},&#10;} satisfies ExportedHandler&lt;Env&gt;;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">export default {&#10;	async fetch(request, env, ctx): Promise&lt;Response&gt; {&#10;		const url = new URL(request.url);&#10;&#10;		// This is a simple proxy scenario.&#10;		// In this case, you will need to replace the URL with the proper protocol (http vs. https), hostname and port of the service.&#10;		// For example, this could be &quot;http://localhost:1111&quot;, &quot;http://192.0.0.1:3000&quot;, &quot;https://my-internal-api.example.com&quot;&#10;		const targetUrl = new URL(&#10;			`http://&lt;ENTER_SERVICE_HOST&gt;:&lt;ENTER_SERVICE_PORT&gt;${url.pathname}${url.search}`,&#10;		);&#10;&#10;		// Create new request with the target URL but preserve all other properties&#10;		const proxyRequest = new Request(targetUrl, {&#10;			method: request.method,&#10;			headers: request.headers,&#10;			body: request.body,&#10;		});&#10;&#10;		const response = await env.VPC_SERVICE.fetch(proxyRequest);&#10;&#10;		return response;&#10;	},&#10;} satisfies ExportedHandler&lt;Env&gt;;&#10;</code></pre>
 <h2 id="6-test-locally"><ol start="6">
 <li>Test locally</li>
 </ol></h2>
 <p>Test your Worker locally. You must use remote VPC Services, using either <a href="/workers/local-development/#remote-bindings">Workers remote bindings</a> as was configured in your <code>wrangler.jsonc</code> configuration file, or using <code>npx wrangler dev --remote</code>:</p>
-<pre><code class="language-sh">npx wrangler dev&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler dev&#10;</code></pre>
 <p>Visit <code>http://localhost:8787</code> to test your Worker's connection to your private network.</p>
 <h2 id="7-deploy-your-worker"><ol start="7">
 <li>Deploy your Worker</li>
 </ol></h2>
 <p>Once testing is complete, deploy your Worker:</p>
-<pre><code class="language-sh">npx wrangler deploy&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler deploy&#10;</code></pre>
 <p>Your Worker is now deployed and can access your private network resources securely through the Cloudflare Tunnel. If you encounter permission errors, refer to <a href="/workers-vpc/configuration/vpc-services/#required-roles">Required roles</a>.</p>
 <h2 id="next-steps">Next steps</h2>
 <ul>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/access-controls/applications/http-apps/saas-apps/salesforce-saas-oidc/
+  description: Integrate Salesforce (OIDC) with Access.
+  full_title: Salesforce (OIDC) · Cloudflare One docs
+  head_html: <title>Salesforce (OIDC) · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="Integrate Salesforce (OIDC) with Access."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/access-controls/applications/http-apps/saas-apps/salesforce-saas-oidc/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/access-controls/applications/http-apps/saas-apps/salesforce-saas-oidc/index.md"><meta property="og:title" content="Salesforce (OIDC) · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Integrate Salesforce (OIDC) with Access."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/access-controls/applications/http-apps/saas-apps/salesforce-saas-oidc/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="Integration guide"><meta name="algolia_content_type" content="Integration guide"><meta name="pcx_additional_products" content="Cloudflare One"><meta name="pcx_tags" content="Salesforce"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/access-controls/applications/http-apps/saas-apps/salesforce-saas-oidc/#page","headline":"Salesforce (OIDC) \u00b7 Cloudflare One docs","description":"Integrate Salesforce (OIDC) with Access.","url":"https://developers.cloudflare.com/cloudflare-one/access-controls/applications/http-apps/saas-apps/salesforce-saas-oidc/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["Salesforce"]}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/access-controls/applications/http-apps/saas-apps/salesforce-saas-oidc/
+  schema: 1
+---
 <p>This guide covers how to configure <a href="https://help.salesforce.com/s/articleView?id=sf.sso_provider_openid_connect.htm&amp;type=5">Salesforce</a> as an OpenID Connect (OIDC) application in Cloudflare One.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <ul>
@@ -53,7 +64,7 @@
 <li>Select <strong>Save</strong>.</li>
 <li>Copy the <strong>Callback URL</strong>:</li>
 </ol>
-<pre><code class="language-txt">https://&lt;your-domain&gt;.my.salesforce.com/services/authcallback/&lt;URL Suffix&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://&lt;your-domain&gt;.my.salesforce.com/services/authcallback/&lt;URL Suffix&gt;&#10;</code></pre>
 <ol start="11">
 <li>In Cloudflare One, paste the Callback URL into the <strong>Redirect URL</strong> field.</li>
 </ol>

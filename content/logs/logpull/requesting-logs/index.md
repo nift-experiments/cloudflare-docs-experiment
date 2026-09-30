@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/logs/logpull/requesting-logs/
+  description: Use Logpull API endpoints to request log data.
+  full_title: Requesting logs · Cloudflare Logs docs
+  head_html: <title>Requesting logs · Cloudflare Logs docs</title><meta name="generator" content="Nift"><meta name="description" content="Use Logpull API endpoints to request log data."><link rel="canonical" href="https://developers.cloudflare.com/logs/logpull/requesting-logs/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/logs/logpull/requesting-logs/index.md"><meta property="og:title" content="Requesting logs · Cloudflare Logs docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Use Logpull API endpoints to request log data."><meta property="og:url" content="https://developers.cloudflare.com/logs/logpull/requesting-logs/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Logs"><meta name="algolia_product_filter" content="Logs"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Logs"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/logs/logpull/requesting-logs/#page","headline":"Requesting logs \u00b7 Cloudflare Logs docs","description":"Use Logpull API endpoints to request log data.","url":"https://developers.cloudflare.com/logs/logpull/requesting-logs/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /logs/logpull/requesting-logs/
+  schema: 1
+---
 <h2 id="endpoints">Endpoints</h2>
 <p>The three endpoints supported by the Logpull API are:</p>
 <ul>
@@ -18,9 +29,9 @@
 <h2 id="parameters">Parameters</h2>
 <p>The API expects endpoint parameters in the GET request query string. The following are example formats:</p>
 <p><code>logs/received</code></p>
-<pre><code class="language-bash">https://api.cloudflare.com/client/v4/zones/{zone_id}/logs/received?start=&lt;unix|rfc3339&gt;&amp;end=&lt;unix|rfc3339&gt;[&amp;count=&lt;int&gt;][&amp;sample=&lt;float&gt;][&amp;fields=&lt;FIELDS&gt;][&amp;timestamps=&lt;string&gt;][&amp;CVE-2021-44228=&lt;boolean&gt;]&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">https://api.cloudflare.com/client/v4/zones/{zone_id}/logs/received?start=&lt;unix|rfc3339&gt;&amp;end=&lt;unix|rfc3339&gt;[&amp;count=&lt;int&gt;][&amp;sample=&lt;float&gt;][&amp;fields=&lt;FIELDS&gt;][&amp;timestamps=&lt;string&gt;][&amp;CVE-2021-44228=&lt;boolean&gt;]&#10;</code></pre>
 <p><code>logs/rayids/{ray_id}</code></p>
-<pre><code class="language-bash">https://api.cloudflare.com/client/v4/zones/{zone_id}/logs/rayids/{ray_id}?[&amp;fields=&lt;FIELDS&gt;][&amp;timestamps=&lt;string&gt;]&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">https://api.cloudflare.com/client/v4/zones/{zone_id}/logs/rayids/{ray_id}?[&amp;fields=&lt;FIELDS&gt;][&amp;timestamps=&lt;string&gt;]&#10;</code></pre>
 <p>The following table describes the parameters available:</p>
 <table>
 <thead>
@@ -82,9 +93,9 @@
 </aside>
 <h2 id="example-api-requests-using-curl">Example API requests using cURL</h2>
 <p><code>logs/received</code></p>
-<pre><code class="language-bash">curl &quot;https://api.cloudflare.com/client/v4/zones/{zone_id}/logs/received?start=2017-07-18T22:00:00Z&amp;end=2017-07-18T22:01:00Z&amp;count=1&amp;fields=ClientIP,ClientRequestHost,ClientRequestMethod,ClientRequestURI,EdgeEndTimestamp,EdgeResponseBytes,EdgeResponseStatus,EdgeStartTimestamp,RayID&quot; \&#10;&#45;-header &quot;X-Auth-Email: &lt;EMAIL&gt;&quot; \&#10;&#45;-header &quot;X-Auth-Key: &lt;API_KEY&gt;&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl &quot;https://api.cloudflare.com/client/v4/zones/{zone_id}/logs/received?start=2017-07-18T22:00:00Z&amp;end=2017-07-18T22:01:00Z&amp;count=1&amp;fields=ClientIP,ClientRequestHost,ClientRequestMethod,ClientRequestURI,EdgeEndTimestamp,EdgeResponseBytes,EdgeResponseStatus,EdgeStartTimestamp,RayID&quot; \&#10;&#45;-header &quot;X-Auth-Email: &lt;EMAIL&gt;&quot; \&#10;&#45;-header &quot;X-Auth-Key: &lt;API_KEY&gt;&quot;&#10;</code></pre>
 <p><code>logs/rayids/{ray_id}</code></p>
-<pre><code class="language-bash">curl &quot;https://api.cloudflare.com/client/v4/zones/{zone_id}/logs/rayids/{ray_id}}?timestamps=rfc3339&quot; \&#10;&#45;-header &quot;X-Auth-Email: &lt;EMAIL&gt;&quot; \&#10;&#45;-header &quot;X-Auth-Key: &lt;API_KEY&gt;&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl &quot;https://api.cloudflare.com/client/v4/zones/{zone_id}/logs/rayids/{ray_id}}?timestamps=rfc3339&quot; \&#10;&#45;-header &quot;X-Auth-Email: &lt;EMAIL&gt;&quot; \&#10;&#45;-header &quot;X-Auth-Key: &lt;API_KEY&gt;&quot;&#10;</code></pre>
 <aside class="nb-aside note">
 <h3 class="nb-aside-title" id="note-1">Note</h3>
 @markup("md", "content/.markup/bodies/10477.md")
@@ -94,6 +105,6 @@
 <p><code>https://api.cloudflare.com/client/v4/zones/{zone_id}/logs/received/fields</code></p>
 <p>The order in which fields are specified does not matter, and the order of fields in the response is not specified.</p>
 <p>Using bash subshell and <code>jq</code>, you can download the logs with all available fields without manually copying and pasting the fields into the request. For example:</p>
-<pre><code class="language-bash">FIELDS=$(curl https://api.cloudflare.com/client/v4/zones/{zone_id}/logs/received/fields \&#10;&#45;-header &quot;X-Auth-Email: &lt;EMAIL&gt;&quot; \&#10;&#45;-header &quot;X-Auth-Key: &lt;API_KEY&gt;&quot; \&#10;| jq &#x27;. | to_entries[] | .key&#x27; -r | paste -sd &quot;,&quot; -)&#10;&#10;curl &quot;https://api.cloudflare.com/client/v4/zones/{zone_id}/logs/received?start=2017-07-18T22:00:00Z&amp;end=2017-07-18T22:01:00Z&amp;count=1&amp;fields=$FIELDS&quot; \&#10;&#45;-header &quot;X-Auth-Email: &lt;EMAIL&gt;&quot; \&#10;&#45;-header &quot;X-Auth-Key: &lt;API_KEY&gt;&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">FIELDS=$(curl https://api.cloudflare.com/client/v4/zones/{zone_id}/logs/received/fields \&#10;&#45;-header &quot;X-Auth-Email: &lt;EMAIL&gt;&quot; \&#10;&#45;-header &quot;X-Auth-Key: &lt;API_KEY&gt;&quot; \&#10;| jq &#x27;. | to_entries[] | .key&#x27; -r | paste -sd &quot;,&quot; -)&#10;&#10;curl &quot;https://api.cloudflare.com/client/v4/zones/{zone_id}/logs/received?start=2017-07-18T22:00:00Z&amp;end=2017-07-18T22:01:00Z&amp;count=1&amp;fields=$FIELDS&quot; \&#10;&#45;-header &quot;X-Auth-Email: &lt;EMAIL&gt;&quot; \&#10;&#45;-header &quot;X-Auth-Key: &lt;API_KEY&gt;&quot;&#10;</code></pre>
 <p>Refer to <a href="https://jqlang.github.io/jq/download/">Download jq</a> for more information on obtaining and installing <code>jq</code>.</p>
 <p>Refer to <a href="/logs/logpush/logpush-job/datasets/zone/http_requests">HTTP request fields</a> for the currently available fields.</p>

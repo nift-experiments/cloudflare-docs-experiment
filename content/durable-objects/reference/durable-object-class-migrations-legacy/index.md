@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/durable-objects/reference/durable-object-class-migrations-legacy/
+  description: Use the legacy Wrangler `migrations` array to create, rename, delete, or transfer Durable Object classes.
+  full_title: Durable Object class migrations (legacy) · Cloudflare Durable Objects docs
+  head_html: <title>Durable Object class migrations (legacy) · Cloudflare Durable Objects docs</title><meta name="generator" content="Nift"><meta name="description" content="Use the legacy Wrangler `migrations` array to create, rename, delete, or transfer Durable Object classes."><link rel="canonical" href="https://developers.cloudflare.com/durable-objects/reference/durable-object-class-migrations-legacy/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/durable-objects/reference/durable-object-class-migrations-legacy/index.md"><meta property="og:title" content="Durable Object class migrations (legacy) · Cloudflare Durable Objects docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Use the legacy Wrangler `migrations` array to create, rename, delete, or transfer Durable Object classes."><meta property="og:url" content="https://developers.cloudflare.com/durable-objects/reference/durable-object-class-migrations-legacy/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Durable Objects"><meta name="algolia_product_filter" content="Durable Objects"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Durable Objects"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/durable-objects/reference/durable-object-class-migrations-legacy/#page","headline":"Durable Object class migrations (legacy) \u00b7 Cloudflare Durable Objects docs","description":"Use the legacy Wrangler migrations array to create, rename, delete, or transfer Durable Object classes.","url":"https://developers.cloudflare.com/durable-objects/reference/durable-object-class-migrations-legacy/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /durable-objects/reference/durable-object-class-migrations-legacy/
+  schema: 1
+---
 <aside class="nb-aside note">
 <h3 class="nb-aside-title" id="prefer-declarative-exports-for-new-workers">Prefer declarative exports for new Workers</h3>
 @markup("md", "content/.markup/bodies/8134.md")
@@ -10,13 +21,11 @@
 </ol>
 <p>You must initiate a migration process when you:</p>
 <ul>
-<li>Create a new <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></li>
+<li>Create a new <span class="nb-glossary-tooltip" title="Durable Object class">Durable Object class</span>.</li>
+<li>Rename a Durable Object class.</li>
+<li>Delete a Durable Object class.</li>
+<li>Transfer an existing Durable Objects class.</li>
 </ul>
-@markup("md", "content/.markup/bodies/8135.md")
-</div>.
-- Rename a Durable Object class.
-- Delete a Durable Object class.
-- Transfer an existing Durable Objects class.
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/8133.md")
 </aside>
@@ -103,7 +112,7 @@
 </ul>
 </li>
 </ul>
-<pre><code class="language-jsonc">{&#10;  // top-level default migrations&#10;  &quot;migrations&quot;: [&#10;    { &quot;tag&quot;: &quot;v1&quot;, &quot;new_sqlite_classes&quot;: [&quot;MyDurableObject&quot;] },&#10;  ],&#10;  &quot;env&quot;: {&#10;    &quot;staging&quot;: {&#10;      // migration override for staging&#10;      &quot;migrations&quot;: [&#10;        { &quot;tag&quot;: &quot;v1-staging&quot;, &quot;new_sqlite_classes&quot;: [&quot;MyDurableObject&quot;] },&#10;      ],&#10;    },&#10;  },&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-jsonc">{&#10;  // top-level default migrations&#10;  &quot;migrations&quot;: [&#10;    { &quot;tag&quot;: &quot;v1&quot;, &quot;new_sqlite_classes&quot;: [&quot;MyDurableObject&quot;] },&#10;  ],&#10;  &quot;env&quot;: {&#10;    &quot;staging&quot;: {&#10;      // migration override for staging&#10;      &quot;migrations&quot;: [&#10;        { &quot;tag&quot;: &quot;v1-staging&quot;, &quot;new_sqlite_classes&quot;: [&quot;MyDurableObject&quot;] },&#10;      ],&#10;    },&#10;  },&#10;}&#10;</code></pre>
 <ul>
 <li>
 <p>If a migration is only specified at the top-level, but not at the environment-level, the environment will inherit the top-level migration.</p>

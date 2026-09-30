@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/dns/zone-setups/troubleshooting/cannot-add-domain/
+  description: Troubleshoot issues when adding a domain to Cloudflare, including DNSSEC conflicts, registrar errors, and restriction codes.
+  full_title: Cannot add domain to Cloudflare · Cloudflare DNS docs
+  head_html: <title>Cannot add domain to Cloudflare · Cloudflare DNS docs</title><meta name="generator" content="Nift"><meta name="description" content="Troubleshoot issues when adding a domain to Cloudflare, including DNSSEC conflicts, registrar errors, and restriction codes."><link rel="canonical" href="https://developers.cloudflare.com/dns/zone-setups/troubleshooting/cannot-add-domain/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/dns/zone-setups/troubleshooting/cannot-add-domain/index.md"><meta property="og:title" content="Cannot add domain to Cloudflare · Cloudflare DNS docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Troubleshoot issues when adding a domain to Cloudflare, including DNSSEC conflicts, registrar errors, and restriction codes."><meta property="og:url" content="https://developers.cloudflare.com/dns/zone-setups/troubleshooting/cannot-add-domain/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="DNS"><meta name="algolia_product_filter" content="DNS"><meta name="pcx_content_group" content="Application performance"><meta name="pcx_content_type" content="Troubleshooting"><meta name="algolia_content_type" content="Troubleshooting"><meta name="pcx_additional_products" content="DNS"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/dns/zone-setups/troubleshooting/cannot-add-domain/#page","headline":"Cannot add domain to Cloudflare \u00b7 Cloudflare DNS docs","description":"Troubleshoot issues when adding a domain to Cloudflare, including DNSSEC conflicts, registrar errors, and restriction codes.","url":"https://developers.cloudflare.com/dns/zone-setups/troubleshooting/cannot-add-domain/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /dns/zone-setups/troubleshooting/cannot-add-domain/
+  schema: 1
+---
 <p>If you encounter issues <a href="/fundamentals/manage-domains/add-site/">adding a domain</a> to Cloudflare, follow these troubleshooting steps.</p>
 <h2 id="disable-dnssec">Disable DNSSEC</h2>
 <p>Cloudflare cannot provide authoritative DNS resolution for a domain — a <a href="/dns/zone-setups/full-setup/">domain on a primary setup (full)</a> — when <strong>DNSSEC</strong> is enabled at your domain registrar.</p>
@@ -25,11 +36,11 @@
 <hr />
 <h2 id="resolve-dns-for-apex-domain">Resolve DNS for apex domain</h2>
 <p>Before a domain can be added to Cloudflare, the domain must return <code>NS</code> records for valid, working nameservers. <code>NS</code> records can be checked via third-party online tools such as <a href="https://www.whatsmydns.net/">https://www.whatsmydns.net</a> or via a command-line terminal using a dig command:</p>
-<pre><code class="language-sh">dig +short ns cloudflare.com&#10;</code></pre>
-<pre><code class="language-sh">&#10;ns3.cloudflare.com.&#10;ns4.cloudflare.com.&#10;ns5.cloudflare.com.&#10;ns6.cloudflare.com.&#10;ns7.cloudflare.com.&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">dig +short ns cloudflare.com&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">&#10;ns3.cloudflare.com.&#10;ns4.cloudflare.com.&#10;ns5.cloudflare.com.&#10;ns6.cloudflare.com.&#10;ns7.cloudflare.com.&#10;</code></pre>
 <p>Additionally, the domain must return a valid <code>SOA</code> record when queried. <code>SOA</code> records can be checked via third-party online tools such as <a href="https://www.whatsmydns.net/">https://www.whatsmydns.net</a> or via a command-line terminal:</p>
-<pre><code class="language-sh">dig +short soa cloudflare.com&#10;</code></pre>
-<pre><code class="language-sh">&#10;ns3.cloudflare.com. dns.cloudflare.com. 2029202248 10000 2400 604800 300&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">dig +short soa cloudflare.com&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">&#10;ns3.cloudflare.com. dns.cloudflare.com. 2029202248 10000 2400 604800 300&#10;</code></pre>
 <hr />
 <h2 id="check-if-the-domain-is-restricted-at-cloudflare">Check if the domain is restricted at Cloudflare</h2>
 <p>If Cloudflare has temporary or permanent restrictions on a domain, you will receive the following errors:</p>
@@ -65,7 +76,7 @@
 <h2 id="contact-the-zone-owner-in-case-of-zone-hold-error">Contact the zone owner in case of zone hold error</h2>
 <p>Enterprise customers can use the <a href="/fundamentals/account/account-security/zone-holds/">zone hold</a> feature to prevent domains to be added in any other account.
 If you get the following error when adding your domain, it means that a zone hold is active:</p>
-<pre><code>The zone name provided is subject to a hold which disallows the creation of this zone.&#10;Please contact the owner of the Cloudflare account that manages this domain to have this hold removed.&#10;</code></pre>
+<pre tabindex="0"><code>The zone name provided is subject to a hold which disallows the creation of this zone.&#10;Please contact the owner of the Cloudflare account that manages this domain to have this hold removed.&#10;</code></pre>
 <p>In this case, you need to remove the zone hold if you own the Cloudflare account in which the zone is active, or contact the owner of the Cloudflare account that has the zone active.</p>
 <p>If you are not the owner of the Cloudflare account that has the hold on the zone, using an online WHOIS tool might help you finding the owner of a website.</p>
 <p>See this <a href="https://www.godaddy.com/whois">external WHOIS tool</a> or this <a href="https://www.whois.com/whois/">other external tool</a>.</p>

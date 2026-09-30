@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/traffic-policies/get-started/http/
+  description: HTTP filtering in Gateway.
+  full_title: Set up HTTP filtering · Cloudflare One docs
+  head_html: <title>Set up HTTP filtering · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="HTTP filtering in Gateway."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/traffic-policies/get-started/http/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/traffic-policies/get-started/http/index.md"><meta property="og:title" content="Set up HTTP filtering · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="HTTP filtering in Gateway."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/traffic-policies/get-started/http/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Cloudflare One"><meta name="pcx_tags" content="TLS"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/traffic-policies/get-started/http/#page","headline":"Set up HTTP filtering \u00b7 Cloudflare One docs","description":"HTTP filtering in Gateway.","url":"https://developers.cloudflare.com/cloudflare-one/traffic-policies/get-started/http/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["TLS"]}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/traffic-policies/get-started/http/
+  schema: 1
+---
 <p>Secure Web Gateway allows you to inspect HTTP traffic and control which websites users can visit. DNS filtering can only block or allow entire domains (for example, all of <code>dropbox.com</code>). HTTP filtering goes deeper — it inspects full URLs and request content, so you can block a specific page like <code>dropbox.com/shared-folder</code>, scan file uploads for sensitive data, or enforce acceptable use policies based on what users are actually doing on a site.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/6603.md")
@@ -10,13 +21,11 @@
 <ol>
 <li><a href="/cloudflare-one/team-and-resources/devices/user-side-certificates/">Install the Cloudflare root certificate</a> on your device.</li>
 <li><a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/deployment/">Install the Cloudflare One Client</a> on your device.</li>
-<li>In the Cloudflare One Client Settings, log in to your organization's <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></li>
+<li>In the Cloudflare One Client Settings, log in to your organization's <span class="nb-glossary-tooltip" title="team name">Cloudflare One instance</span>.</li>
+<li><a href="/cloudflare-one/traffic-policies/proxy/#turn-on-the-gateway-proxy">Enable the Gateway proxy</a> for TCP. Optionally, enable the UDP proxy to also inspect QUIC traffic on port 443 — this covers HTTP/3, a newer protocol some browsers use by default.</li>
+<li>To inspect HTTPS traffic, <a href="/cloudflare-one/traffic-policies/http-policies/tls-decryption/#turn-on-tls-decryption">enable TLS decryption</a>. TLS decryption allows Gateway to read encrypted requests. Without it, Gateway can see that a user visited <code>example.com</code> but not which specific page or what they uploaded.</li>
+<li>(Optional) To scan file uploads and downloads for malware, <a href="/cloudflare-one/traffic-policies/http-policies/antivirus-scanning/">enable anti-virus scanning</a>.</li>
 </ol>
-@markup("md", "content/.markup/bodies/6604.md")
-</div>.
-4. [Enable the Gateway proxy](/cloudflare-one/traffic-policies/proxy/#turn-on-the-gateway-proxy) for TCP. Optionally, enable the UDP proxy to also inspect QUIC traffic on port 443 — this covers HTTP/3, a newer protocol some browsers use by default.
-5. To inspect HTTPS traffic, [enable TLS decryption](/cloudflare-one/traffic-policies/http-policies/tls-decryption/#turn-on-tls-decryption). TLS decryption allows Gateway to read encrypted requests. Without it, Gateway can see that a user visited `example.com` but not which specific page or what they uploaded.
-6. (Optional) To scan file uploads and downloads for malware, [enable anti-virus scanning](/cloudflare-one/traffic-policies/http-policies/antivirus-scanning/).
 <h2 id="2-verify-device-connectivity"><ol start="2">
 <li>Verify device connectivity</li>
 </ol></h2>

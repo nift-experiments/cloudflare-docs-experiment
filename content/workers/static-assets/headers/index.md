@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/workers/static-assets/headers/
+  description: Learn about default and custom headers for Workers static assets, including Cache-Control, ETag, and Content-Type behavior.
+  full_title: Headers · Cloudflare Workers docs
+  head_html: <title>Headers · Cloudflare Workers docs</title><meta name="generator" content="Nift"><meta name="description" content="Learn about default and custom headers for Workers static assets, including Cache-Control, ETag, and Content-Type behavior."><link rel="canonical" href="https://developers.cloudflare.com/workers/static-assets/headers/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/workers/static-assets/headers/index.md"><meta property="og:title" content="Headers · Cloudflare Workers docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Learn about default and custom headers for Workers static assets, including Cache-Control, ETag, and Content-Type behavior."><meta property="og:url" content="https://developers.cloudflare.com/workers/static-assets/headers/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Workers"><meta name="algolia_product_filter" content="Workers"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Workers"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/workers/static-assets/headers/#page","headline":"Headers \u00b7 Cloudflare Workers docs","description":"Learn about default and custom headers for Workers static assets, including Cache-Control, ETag, and Content-Type behavior.","url":"https://developers.cloudflare.com/workers/static-assets/headers/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /workers/static-assets/headers/
+  schema: 1
+---
 <h2 id="default-headers">Default headers</h2>
 <p>When serving static assets, Workers will attach some headers to the response by default. These are:</p>
 <ul>
@@ -28,10 +39,10 @@
 </aside>
 <h3 id="attach-a-header">Attach a header</h3>
 <p>Header rules are defined in multi-line blocks. The first line of a block is the URL or URL pattern where the rule's headers should be applied. On the next line, an indented list of header names and header values must be written:</p>
-<pre><code class="language-txt">[url]&#10;  [name]: [value]&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">[url]&#10;  [name]: [value]&#10;</code></pre>
 <p>Using absolute URLs is supported, though be aware that absolute URLs must begin with <code>https</code> and specifying a port is not supported. <code>_headers</code> rules ignore the incoming request's port and protocol when matching against an incoming request. For example, a rule like <code>https://example.com/path</code> would match against requests to <code>other://example.com:1234/path</code>.</p>
 <p>You can define as many <code>[name]: [value]</code> pairs as you require on subsequent lines. For example:</p>
-<pre><code class="language-txt">`# This is a comment\n/secure/page\n\tX-Frame-Options: DENY\n\tX-Content-Type-Options: nosniff\n\tReferrer-Policy: no-referrer\n\n/static/*\n\tAccess-Control-Allow-Origin: *\n\tX-Robots-Tag: nosnippet\n\nhttps://myworker.mysubdomain.workers.dev/*\n\tX-Robots-Tag: noindex`</code></pre>
+<pre tabindex="0"><code class="language-txt">`# This is a comment\n/secure/page\n\tX-Frame-Options: DENY\n\tX-Content-Type-Options: nosniff\n\tReferrer-Policy: no-referrer\n\n/static/*\n\tAccess-Control-Allow-Origin: *\n\tX-Robots-Tag: nosnippet\n\nhttps://myworker.mysubdomain.workers.dev/*\n\tX-Robots-Tag: noindex`</code></pre>
 <p>An incoming request which matches multiple rules' URL patterns will inherit all rules' headers. Using the previous <code>_headers</code> file, the following requests will have the following headers applied:</p>
 <table>
 <thead>
@@ -67,7 +78,7 @@
 <p>If a header is applied twice in the <code>_headers</code> file, the values are joined with a comma separator.</p>
 <h3 id="detach-a-header">Detach a header</h3>
 <p>You may wish to remove a default header or a header which has been added by a more pervasive rule. This can be done by prepending the header name with an exclamation mark and space (<code>! </code>).</p>
-<pre><code class="language-txt">/*&#10;  Content-Security-Policy: default-src &#x27;self&#x27;;&#10;&#10;/*.jpg&#10;  ! Content-Security-Policy&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">/*&#10;  Content-Security-Policy: default-src &#x27;self&#x27;;&#10;&#10;/*.jpg&#10;  ! Content-Security-Policy&#10;</code></pre>
 <h3 id="match-a-path">Match a path</h3>
 <p>The same URL matching features that <a href="/workers/static-assets/redirects/"><code>_redirects</code></a> offers is also available to the <code>_headers</code> file. Note, however, that redirects are applied before headers, so when a request matches both a redirect and a header, the redirect takes priority.</p>
 <h4 id="splats">Splats</h4>
@@ -76,19 +87,19 @@
 <h4 id="placeholders">Placeholders</h4>
 <p>A placeholder can be defined with <code>:placeholder_name</code>. A colon (<code>:</code>) followed by a letter indicates the start of a placeholder and the placeholder name that follows must be composed of alphanumeric characters and underscores (<code>:[A-Za-z]\w*</code>). Every named placeholder can only be referenced once. Placeholders match all characters apart from the delimiter, which when part of the host, is a period (<code>.</code>) or a forward-slash (<code>/</code>) and may only be a forward-slash (<code>/</code>) when part of the path.</p>
 <p>Similarly, the matched value can be used in the header values with <code>:placeholder_name</code>.</p>
-<pre><code class="language-txt">/movies/:title&#10;  x-movie-name: You are watching &quot;:title&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">/movies/:title&#10;  x-movie-name: You are watching &quot;:title&quot;&#10;</code></pre>
 <h4 id="examples">Examples</h4>
 <h5 id="cross-origin-resource-sharing-cors">Cross-Origin Resource Sharing (CORS)</h5>
 <p>To enable other domains to fetch every static asset from your Worker, the following can be added to the <code>_headers</code> file:</p>
-<pre><code class="language-txt">/*&#10;  Access-Control-Allow-Origin: *&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">/*&#10;  Access-Control-Allow-Origin: *&#10;</code></pre>
 <p>This applies the <code>Access-Control-Allow-Origin</code> header to any incoming URL. Note that the CORS specification only allows <code>*</code>, <code>null</code>, or an exact origin as valid <code>Access-Control-Allow-Origin</code> values — wildcard patterns within origins are not supported. To allow CORS from specific <a href="/workers/versions-and-deployments/preview-urls/">preview URLs</a>, you will need to handle this dynamically in your Worker code rather than through the <code>_headers</code> file.</p>
 <h5 id="prevent-your-workers-dev-urls-showing-in-search-results">Prevent your workers.dev URLs showing in search results</h5>
 <p><a href="https://developers.google.com/search/docs/advanced/robots/robots_meta_tag#directives">Google</a> and other search engines often support the <code>X-Robots-Tag</code> header to instruct its crawlers how your website should be indexed.</p>
 <p>For example, to prevent your <code>*.*.workers.dev</code> URLs from being indexed, add the following to your <code>_headers</code> file:</p>
-<pre><code class="language-txt">`https://:version.:subdomain.workers.dev/*\n\tX-Robots-Tag: noindex`</code></pre>
+<pre tabindex="0"><code class="language-txt">`https://:version.:subdomain.workers.dev/*\n\tX-Robots-Tag: noindex`</code></pre>
 <h5 id="configure-custom-browser-cache-behavior">Configure custom browser cache behavior</h5>
 <p>If you have a folder of fingerprinted assets (assets which have a hash in their filename), you can configure more aggressive caching behavior in the browser to improve performance for repeat visitors:</p>
-<pre><code class="language-txt">/static/*&#10;  Cache-Control: public, max-age=31556952, immutable&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">/static/*&#10;  Cache-Control: public, max-age=31556952, immutable&#10;</code></pre>
 <h5 id="harden-security-for-an-application">Harden security for an application</h5>
 <aside class="nb-aside caution">
 @markup("md", "content/.markup/bodies/16095.md")
@@ -98,5 +109,5 @@
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy"><code>Referrer-Policy</code></a> allows you to customize how much information visitors give about where they are coming from when they navigate away from your page.</p>
 <p>Browser features can be disabled to varying degrees with the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Permissions-Policy"><code>Permissions-Policy</code></a> header (recently renamed from <code>Feature-Policy</code>).</p>
 <p>If you need fine-grained control over your application's content, the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy"><code>Content-Security-Policy</code></a> header allows you to configure a number of security settings, including similar controls to the <code>X-Frame-Options</code> header.</p>
-<pre><code class="language-txt">/app/*&#10;  X-Frame-Options: DENY&#10;  X-Content-Type-Options: nosniff&#10;  Referrer-Policy: no-referrer&#10;  Permissions-Policy: document-domain=()&#10;  Content-Security-Policy: script-src &#x27;self&#x27;; frame-ancestors &#x27;none&#x27;;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">/app/*&#10;  X-Frame-Options: DENY&#10;  X-Content-Type-Options: nosniff&#10;  Referrer-Policy: no-referrer&#10;  Permissions-Policy: document-domain=()&#10;  Content-Security-Policy: script-src &#x27;self&#x27;; frame-ancestors &#x27;none&#x27;;&#10;</code></pre>
 <section class="footnotes"><h2 id="footnotes">Footnotes</h2><ol><li id="footnote-1">Due to a technical limitation that we hope to address in the future, the `CF-Cache-Status` header is not always entirely accurate. It is possible for false-positives and false-negatives to occur. This should be rare. In the meantime, this header should be considered as returning a "probabilistic" result.</li></ol></section>

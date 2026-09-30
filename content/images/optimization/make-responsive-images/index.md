@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/images/optimization/make-responsive-images/
+  description: Automatically resize images for optimal display on every device.
+  full_title: Make responsive images · Cloudflare Images docs
+  head_html: <title>Make responsive images · Cloudflare Images docs</title><meta name="generator" content="Nift"><meta name="description" content="Automatically resize images for optimal display on every device."><link rel="canonical" href="https://developers.cloudflare.com/images/optimization/make-responsive-images/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/images/optimization/make-responsive-images/index.md"><meta property="og:title" content="Make responsive images · Cloudflare Images docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Automatically resize images for optimal display on every device."><meta property="og:url" content="https://developers.cloudflare.com/images/optimization/make-responsive-images/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare Images"><meta name="algolia_product_filter" content="Cloudflare Images"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Cloudflare Images"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/images/optimization/make-responsive-images/#page","headline":"Make responsive images \u00b7 Cloudflare Images docs","description":"Automatically resize images for optimal display on every device.","url":"https://developers.cloudflare.com/images/optimization/make-responsive-images/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /images/optimization/make-responsive-images/
+  schema: 1
+---
 <p>Responsive design scales media elements to fit the screen they are displayed on.</p>
 <p>Without it, images can overflow their container and break the layout on small screens, look blurry on high-density displays, and waste bandwidth by forcing every device to download the same oversized file.</p>
 <p>You can use Images to automatically resize images for optimal display on every device. Cloudflare supports two ways to serve responsive images on request:</p>
@@ -49,20 +60,20 @@
 <p>When you embed an image using an <code>&lt;img&gt;</code> element, you can use its <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img#srcset"><code>srcset</code></a> attribute to give the browser a list of the same image at different sizes.</p>
 <p>The browser evaluates screen size, pixel density, and network conditions, then selects the single best match.</p>
 <p>The snippet below shows how <code>srcset</code> can be used within an <code>&lt;img&gt;</code> tag to serve one of two possible sizes, depending on the user's device pixel ratio:</p>
-<pre><code class="language-html">&lt;img&#10;	src=&quot;portrait-800w.jpg&quot;&#10;	srcset=&quot;&#10;		portrait-1600.jpg 2x,&#10;	&quot;&#10;/&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;img&#10;	src=&quot;portrait-800w.jpg&quot;&#10;	srcset=&quot;&#10;		portrait-1600.jpg 2x,&#10;	&quot;&#10;/&gt;&#10;</code></pre>
 <p>Instead of pre-generating each size, use Images to point every <code>srcset</code> entry at the same source image with a different <code>width</code> parameter and pixel density descriptor (for example, <code>2x</code>). Once the browser selects the right width for the user's device pixel ratio, Cloudflare dynamically generates the resized version on request:</p>
-<pre><code class="language-html">&lt;img&#10;	src=&quot;/cdn-cgi/image/fit=contain,width=960/assets/product.jpg&quot;&#10;	srcset=&quot;/cdn-cgi/image/fit=contain,width=1920/assets/product.jpg 2x&quot;&#10;/&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;img&#10;	src=&quot;/cdn-cgi/image/fit=contain,width=960/assets/product.jpg&quot;&#10;	srcset=&quot;/cdn-cgi/image/fit=contain,width=1920/assets/product.jpg 2x&quot;&#10;/&gt;&#10;</code></pre>
 <p>In the example above, the <code>src</code> attribute contains the image for 1x displays (for example, HD/1080p monitors). The <code>srcset</code> attribute adds a larger, high-DPI image for 2x displays (for example, most mobile devices, 4K desktop displays). Use high-resolution source images, as scaling a low-resolution image increases file size without improving quality.</p>
 <h3 id="create-responsive-layouts">Create responsive layouts</h3>
 <p>Pixel density descriptors are used when the image has a fixed CSS size (e.g. a 960px product photo) and the viewport width doesn't matter. Here, you know exactly how many CSS pixels the image will be, and you want to provide higher-resolution versions for high-DPI screens.</p>
 <p>However, if the image scales with the viewport — that is, its CSS size changes based on the screen width (for example, <code>width: 100%</code>, <code>width: 50vw</code>) — then use the width descriptor (<code>w</code>) instead to provide a range of widths:</p>
-<pre><code class="language-html">&lt;img&#10;	width=&quot;100%&quot;&#10;	srcset=&quot;&#10;		/cdn-cgi/image/fit=contain,width=320/assets/hero.jpg   320w,&#10;		/cdn-cgi/image/fit=contain,width=640/assets/hero.jpg   640w,&#10;		/cdn-cgi/image/fit=contain,width=960/assets/hero.jpg   960w,&#10;		/cdn-cgi/image/fit=contain,width=1280/assets/hero.jpg 1280w,&#10;		/cdn-cgi/image/fit=contain,width=2560/assets/hero.jpg 2560w&#10;	&quot;&#10;	src=&quot;/cdn-cgi/image/width=960/assets/hero.jpg&quot;&#10;/&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;img&#10;	width=&quot;100%&quot;&#10;	srcset=&quot;&#10;		/cdn-cgi/image/fit=contain,width=320/assets/hero.jpg   320w,&#10;		/cdn-cgi/image/fit=contain,width=640/assets/hero.jpg   640w,&#10;		/cdn-cgi/image/fit=contain,width=960/assets/hero.jpg   960w,&#10;		/cdn-cgi/image/fit=contain,width=1280/assets/hero.jpg 1280w,&#10;		/cdn-cgi/image/fit=contain,width=2560/assets/hero.jpg 2560w&#10;	&quot;&#10;	src=&quot;/cdn-cgi/image/width=960/assets/hero.jpg&quot;&#10;/&gt;&#10;</code></pre>
 <p>The <code>w</code> values tell the browser the pixel width of each option. The browser factors in both viewport width and display density to choose the best match.</p>
 <h4 id="use-the-sizes-attribute">Use the <code>sizes</code> attribute</h4>
 <p>By default, the browser assumes the image fills the full viewport. If the image only occupies part of the screen, then you can use <code>sizes</code> to tell the browser how wide it actually is:</p>
-<pre><code class="language-html">&lt;!-- Image fills 50% of the viewport --&gt;&#10;&lt;img style=&quot;width: 50vw&quot; srcset=&quot;...&quot; sizes=&quot;50vw&quot; /&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;!-- Image fills 50% of the viewport --&gt;&#10;&lt;img style=&quot;width: 50vw&quot; srcset=&quot;...&quot; sizes=&quot;50vw&quot; /&gt;&#10;</code></pre>
 <p>If the image can have a different size depending on media queries or other CSS properties (for example, <code>max-width</code>), then specify all the conditions in the <code>sizes</code> attribute:</p>
-<pre><code class="language-html">&lt;img&#10;	style=&quot;max-width: 640px&quot;&#10;	srcset=&quot;&#10;		/cdn-cgi/image/fit=contain,width=320/assets/hero.jpg   320w,&#10;		/cdn-cgi/image/fit=contain,width=480/assets/hero.jpg   480w,&#10;		/cdn-cgi/image/fit=contain,width=640/assets/hero.jpg   640w,&#10;		/cdn-cgi/image/fit=contain,width=1280/assets/hero.jpg 1280w&#10;	&quot;&#10;	sizes=&quot;(max-width: 640px) 100vw, 640px&quot;&#10;/&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;img&#10;	style=&quot;max-width: 640px&quot;&#10;	srcset=&quot;&#10;		/cdn-cgi/image/fit=contain,width=320/assets/hero.jpg   320w,&#10;		/cdn-cgi/image/fit=contain,width=480/assets/hero.jpg   480w,&#10;		/cdn-cgi/image/fit=contain,width=640/assets/hero.jpg   640w,&#10;		/cdn-cgi/image/fit=contain,width=1280/assets/hero.jpg 1280w&#10;	&quot;&#10;	sizes=&quot;(max-width: 640px) 100vw, 640px&quot;&#10;/&gt;&#10;</code></pre>
 <p>In the example above:</p>
 <ul>
 <li>If the screen size is below 640px, then the image fills the entire viewport.</li>
@@ -72,7 +83,7 @@
 <h2 id="use-width-auto">Use <code>width=auto</code></h2>
 <p>With <code>srcset</code>, you control exactly which sizes are available, which requires updating your HTML for every image.</p>
 <p>On the other hand, <code>width=auto</code> takes a different approach, where Cloudflare determines the right width for each request from a single URL:</p>
-<pre><code class="language-html">/cdn-cgi/image/width=auto/assets/hero.jpg&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">/cdn-cgi/image/width=auto/assets/hero.jpg&#10;</code></pre>
 <p>This is especially useful when optimizing remote images with <a href="/images/optimization/transformations/flows/">transformation flows</a>, where you can apply <code>width=auto</code> across your entire zone without modifying any markup.</p>
 <p>When a request includes <code>width=auto</code>, Cloudflare determines the width based on screen size using client hints, if sent, or user-agent detection as a fallback.</p>
 <h3 id="client-hints-preferred">Client hints (preferred)</h3>
@@ -112,10 +123,10 @@
 <p>You can enable client hints using one of the following methods:</p>
 <p><strong>HTML <code>&lt;meta&gt;</code> tag</strong></p>
 <p>Add the following in the <code>&lt;head&gt;</code> of your page before any other elements:</p>
-<pre><code class="language-html">&lt;meta&#10;	http-equiv=&quot;Delegate-CH&quot;&#10;	content=&quot;sec-ch-dpr {ZONE}; sec-ch-viewport-width {ZONE}&quot;&#10;/&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;meta&#10;	http-equiv=&quot;Delegate-CH&quot;&#10;	content=&quot;sec-ch-dpr {ZONE}; sec-ch-viewport-width {ZONE}&quot;&#10;/&gt;&#10;</code></pre>
 <p><strong>HTTP response headers</strong></p>
 <p>Add these headers to your HTML response:</p>
-<pre><code class="language-txt">critical-ch: sec-ch-viewport-width, sec-ch-dpr&#10;permissions-policy: ch-dpr=(&quot;{ZONE}&quot;), ch-viewport-width=(&quot;{ZONE}&quot;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">critical-ch: sec-ch-viewport-width, sec-ch-dpr&#10;permissions-policy: ch-dpr=(&quot;{ZONE}&quot;), ch-viewport-width=(&quot;{ZONE}&quot;)&#10;</code></pre>
 <h3 id="user-agent-detection-fallback">User-agent detection (fallback)</h3>
 <p>When client hints are not available, Cloudflare classifies the device as mobile or desktop based on the user-agent string and selects the corresponding size.</p>
 <p>The default sizes for user-agent detection are:</p>

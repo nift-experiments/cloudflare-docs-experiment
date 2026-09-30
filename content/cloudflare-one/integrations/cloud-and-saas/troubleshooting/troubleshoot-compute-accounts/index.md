@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/integrations/cloud-and-saas/troubleshooting/troubleshoot-compute-accounts/
+  description: Troubleshoot Troubleshoot compute accounts issues in Zero Trust integrations.
+  full_title: Troubleshoot compute accounts · Cloudflare One docs
+  head_html: <title>Troubleshoot compute accounts · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="Troubleshoot Troubleshoot compute accounts issues in Zero Trust integrations."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/integrations/cloud-and-saas/troubleshooting/troubleshoot-compute-accounts/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/integrations/cloud-and-saas/troubleshooting/troubleshoot-compute-accounts/index.md"><meta property="og:title" content="Troubleshoot compute accounts · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Troubleshoot Troubleshoot compute accounts issues in Zero Trust integrations."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/integrations/cloud-and-saas/troubleshooting/troubleshoot-compute-accounts/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="Troubleshooting"><meta name="algolia_content_type" content="Troubleshooting"><meta name="pcx_additional_products" content="Cloudflare One"><meta name="pcx_tags" content="AWS,GCP,Debugging"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/integrations/cloud-and-saas/troubleshooting/troubleshoot-compute-accounts/#page","headline":"Troubleshoot compute accounts \u00b7 Cloudflare One docs","description":"Troubleshoot Troubleshoot compute accounts issues in Zero Trust integrations.","url":"https://developers.cloudflare.com/cloudflare-one/integrations/cloud-and-saas/troubleshooting/troubleshoot-compute-accounts/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["AWS","GCP","Debugging"]}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/integrations/cloud-and-saas/troubleshooting/troubleshoot-compute-accounts/
+  schema: 1
+---
 <p>Cloudflare CASB detects when compute accounts are unhealthy or outdated. Common compute account issues include security or functionality updates and API token misconfigurations.</p>
 <h2 id="identify-unhealthy-compute-accounts">Identify unhealthy compute accounts</h2>
 <p>To identify unhealthy compute accounts:</p>
@@ -21,11 +32,11 @@
 <li>Under <strong>Step 2: Deploy Terraform Configuration</strong>, copy the template to your local configuration. This template will be the most up to date version of the integration's Terraform configuration.</li>
 <li>In a local terminal, update the cached version of the CDS Terraform modules:</li>
 </ol>
-<pre><code class="language-bash">terraform init --upgrade&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">terraform init --upgrade&#10;</code></pre>
 <ol start="7">
 <li>Apply the upgraded Terraform configuration to your compute account:</li>
 </ol>
-<pre><code class="language-bash">terraform apply&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">terraform apply&#10;</code></pre>
 <h2 id="roll-api-tokens">Roll API tokens</h2>
 <aside class="nb-aside caution">
 @markup("md", "content/.markup/bodies/5100.md")

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/changelog/product/workers/5/
+  description: '2026-02-11'
+  full_title: workers changelog - page 5 | Cloudflare Docs
+  head_html: <title>workers changelog - page 5 | Cloudflare Docs</title><meta name="generator" content="Nift"><meta name="description" content="2026-02-11"><link rel="canonical" href="https://developers.cloudflare.com/changelog/product/workers/5/"><link rel="sitemap" href="/sitemap-index.xml"><meta property="og:title" content="workers changelog - page 5"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="2026-02-11"><meta property="og:url" content="https://developers.cloudflare.com/changelog/product/workers/5/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/changelog/product/workers/5/#page","headline":"workers changelog - page 5 | Cloudflare Docs","description":"2026-02-11","url":"https://developers.cloudflare.com/changelog/product/workers/5/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: false
+  noindex: false
+  route: /changelog/product/workers/5/
+  schema: 1
+---
 <h1 id="changelog">Changelog</h1>
 
 <h2 id="improved-react-server-components-support-in-the-cloudflare-vite-plugin"><a href="/changelog/post/2026-02-11-vite-plugin-child-environments/">Improved React Server Components support in the Cloudflare Vite plugin</a></h2>
@@ -6,7 +17,7 @@
 <p>A <code>childEnvironments</code> option has been added to the plugin config to enable using multiple environments within a single Worker.
 The parent environment can then import modules from a child environment in order to access a separate module graph.
 For a typical RSC use case, the plugin might be configured as in the following example:</p>
-<pre><code class="language-ts">export default defineConfig({&#10;	plugins: [&#10;		cloudflare({&#10;			viteEnvironment: {&#10;				name: &quot;rsc&quot;,&#10;				childEnvironments: [&quot;ssr&quot;],&#10;			},&#10;		}),&#10;	],&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">export default defineConfig({&#10;	plugins: [&#10;		cloudflare({&#10;			viteEnvironment: {&#10;				name: &quot;rsc&quot;,&#10;				childEnvironments: [&quot;ssr&quot;],&#10;			},&#10;		}),&#10;	],&#10;});&#10;</code></pre>
 <p><code>@vitejs/plugin-rsc</code> provides the lower level functionality that frameworks, such as <a href="https://reactrouter.com/how-to/react-server-components">React Router</a>, build upon.
 The GitHub repository includes a <a href="https://github.com/vitejs/vite-plugin-react/tree/f066114c3e6bf18f5209ff3d3ef6bf1ab46d3866/packages/plugin-rsc/examples/starter-cf-single">basic Cloudflare example</a>.</p>
 
@@ -37,9 +48,9 @@ The GitHub repository includes a <a href="https://github.com/vitejs/vite-plugin-
 <li><code>PaymentRequirements</code> type now uses v2 fields (e.g. <code>amount</code> instead of <code>maxAmountRequired</code>)</li>
 <li><code>X402ClientConfig.account</code> type changed from <code>viem.Account</code> to <code>ClientEvmSigner</code> (structurally compatible with <code>privateKeyToAccount()</code>)</li>
 </ul>
-<pre><code class="language-bash">npm uninstall x402&#10;npm install @x402/core @x402/evm&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">npm uninstall x402&#10;npm install @x402/core @x402/evm&#10;</code></pre>
 <p>Network identifiers now accept both legacy names and CAIP-2 format:</p>
-<pre><code class="language-ts">// Legacy name (auto-converted)&#10;{&#10;	network: &quot;base-sepolia&quot;,&#10;}&#10;&#10;// CAIP-2 format (preferred)&#10;{&#10;	network: &quot;eip155:84532&quot;,&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// Legacy name (auto-converted)&#10;{&#10;	network: &quot;base-sepolia&quot;,&#10;}&#10;&#10;// CAIP-2 format (preferred)&#10;{&#10;	network: &quot;eip155:84532&quot;,&#10;}&#10;</code></pre>
 <p><strong>Other x402 changes:</strong></p>
 <ul>
 <li><code>X402ClientConfig.network</code> is now optional — the client auto-selects from available payment requirements</li>
@@ -56,7 +67,7 @@ The GitHub repository includes a <a href="https://github.com/vitejs/vite-plugin-
 </ul>
 <h4 id="2026-02-09-agents-sdk-v0.4.0-upgrade">Upgrade</h4>
 <p>To update to the latest version:</p>
-<pre><code class="language-sh">npm i agents@latest&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npm i agents@latest&#10;</code></pre>
 
 
 <h2 id="visualize-data-share-links-and-create-exports-with-the-new-workers-observability-dashboard"><a href="/changelog/post/2026-02-06-observability-ui-refresh/">Visualize data, share links, and create exports with the new Workers Observability dashboard</a></h2>
@@ -114,7 +125,7 @@ They are included alongside the framework's build output in the build output dir
 Note that this feature requires Vite 7 or above.</p>
 <p>Auxiliary Workers are additional Workers that can be called via <a href="/workers/runtime-apis/bindings/service-bindings/">service bindings</a> from your main (entry) Worker.
 They are defined in the plugin config, as in the example below:</p>
-<pre><code class="language-ts">import { defineConfig } from &quot;vite&quot;;&#10;import { tanstackStart } from &quot;@tanstack/react-start/plugin/vite&quot;;&#10;import { cloudflare } from &quot;@cloudflare/vite-plugin&quot;;&#10;&#10;export default defineConfig({&#10;	plugins: [&#10;		tanstackStart(),&#10;		cloudflare({&#10;			viteEnvironment: { name: &quot;ssr&quot; },&#10;			auxiliaryWorkers: [{ configPath: &quot;./wrangler.aux.jsonc&quot; }],&#10;		}),&#10;	],&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { defineConfig } from &quot;vite&quot;;&#10;import { tanstackStart } from &quot;@tanstack/react-start/plugin/vite&quot;;&#10;import { cloudflare } from &quot;@cloudflare/vite-plugin&quot;;&#10;&#10;export default defineConfig({&#10;	plugins: [&#10;		tanstackStart(),&#10;		cloudflare({&#10;			viteEnvironment: { name: &quot;ssr&quot; },&#10;			auxiliaryWorkers: [{ configPath: &quot;./wrangler.aux.jsonc&quot; }],&#10;		}),&#10;	],&#10;});&#10;</code></pre>
 <p>See the Vite plugin <a href="/workers/vite-plugin/reference/api/">API docs</a> for more info.</p>
 
 
@@ -123,7 +134,7 @@ They are defined in the plugin config, as in the example below:</p>
 <p>The <code>.sql</code> file extension is now automatically configured to be importable in your Worker code when using <a href="/workers/wrangler/bundling/#including-non-javascript-modules">Wrangler</a> or the <a href="/workers/vite-plugin/reference/non-javascript-modules/">Cloudflare Vite plugin</a>.
 This is particular useful for importing migrations in Durable Objects and means you no longer need to configure custom rules when using <a href="https://orm.drizzle.team/docs/connect-cloudflare-do">Drizzle</a>.</p>
 <p>SQL files are imported as JavaScript strings:</p>
-<pre><code class="language-ts">// `example` will be a JavaScript string&#10;import example from &quot;./example.sql&quot;;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// `example` will be a JavaScript string&#10;import example from &quot;./example.sql&quot;;&#10;</code></pre>
 
 
 <h2 id="wrangler-types-now-generates-types-for-all-environments"><a href="/changelog/post/2026-01-13-wrangler-types-multi-environment/">`wrangler types` now generates types for all environments</a></h2>
@@ -133,7 +144,7 @@ This is particular useful for importing migrations in Durable Objects and means 
 <p>Now, running <code>wrangler types</code> collects bindings from all environments and includes them in the generated <code>Env</code> type. This ensures your types are complete regardless of which environment you deploy to.</p>
 <h4 id="2026-01-13-wrangler-types-multi-environment-generating-types-for-a-specific-environment">Generating types for a specific environment</h4>
 <p>If you want the previous behavior of generating types for only a specific environment, you can use the <code>--env</code> flag:</p>
-<pre><code class="language-sh">wrangler types --env production&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">wrangler types --env production&#10;</code></pre>
 <p>Learn more about <a href="/workers/wrangler/commands/general/#types">generating types for your Worker</a> in the Wrangler documentation.</p>
 
 
@@ -141,7 +152,7 @@ This is particular useful for importing migrations in Durable Objects and means 
 <p><em>2026-01-12</em></p>
 <p>Wrangler now supports a <code>--check</code> flag for the <code>wrangler types</code> command. This flag validates that your generated types are up to date without writing any changes to disk.</p>
 <p>This is useful in CI/CD pipelines where you want to ensure that developers have regenerated their types after making changes to their Wrangler configuration. If the types are out of date, the command will exit with a non-zero status code.</p>
-<pre><code class="language-sh">npx wrangler types --check&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler types --check&#10;</code></pre>
 <p>If your types are up to date, the command will succeed silently. If they are out of date, you'll see an error message indicating which files need to be regenerated.</p>
 <p>For more information, see the <a href="/workers/wrangler/commands/general/#types">Wrangler types documentation</a>.</p>
 
@@ -168,9 +179,9 @@ This is particular useful for importing migrations in Durable Objects and means 
 <p>Tab completions are supported for Bash, Zsh, Fish, and PowerShell.</p>
 <h4 id="2026-01-09-wrangler-tab-completion-setup">Setup</h4>
 <p>Generate the completion script for your shell and add it to your configuration file:</p>
-<pre><code class="language-sh">&#35; Bash&#10;wrangler complete bash &gt;&gt; ~/.bashrc&#10;&#10;&#35; Zsh&#10;wrangler complete zsh &gt;&gt; ~/.zshrc&#10;&#10;&#35; Fish&#10;wrangler complete fish &gt;&gt; ~/.config/fish/config.fish&#10;&#10;&#35; PowerShell&#10;wrangler complete powershell &gt;&gt; $PROFILE&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">&#35; Bash&#10;wrangler complete bash &gt;&gt; ~/.bashrc&#10;&#10;&#35; Zsh&#10;wrangler complete zsh &gt;&gt; ~/.zshrc&#10;&#10;&#35; Fish&#10;wrangler complete fish &gt;&gt; ~/.config/fish/config.fish&#10;&#10;&#35; PowerShell&#10;wrangler complete powershell &gt;&gt; $PROFILE&#10;</code></pre>
 <p>After adding the script, restart your terminal or source your configuration file for the changes to take effect. Then you can simply press Tab to see available completions:</p>
-<pre><code class="language-sh">wrangler d&lt;TAB&gt;          # completes to &#x27;deploy&#x27;, &#x27;dev&#x27;, &#x27;d1&#x27;, etc.&#10;wrangler kv &lt;TAB&gt;        # shows subcommands: namespace, key, bulk&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">wrangler d&lt;TAB&gt;          # completes to &#x27;deploy&#x27;, &#x27;dev&#x27;, &#x27;d1&#x27;, etc.&#10;wrangler kv &lt;TAB&gt;        # shows subcommands: namespace, key, bulk&#10;</code></pre>
 <p>Tab completions are dynamically generated from Wrangler's command registry, so they stay up-to-date as new commands and options are added. This feature is powered by <a href="https://github.com/bombshell-dev/tab/"><code>@bomb.sh/tab</code></a>.</p>
 <p>See the <a href="/workers/wrangler/commands/general/#complete"><code>wrangler complete</code> documentation</a> for more details.</p>
 
@@ -182,9 +193,9 @@ This is particular useful for importing migrations in Durable Objects and means 
 <h4 id="2026-01-07-analytics-engine-support-for-like-and-having-filtering-using-having">Filtering using <code>HAVING</code></h4>
 <p>The <code>HAVING</code> clause complements the <code>WHERE</code> clause by enabling you to filter groups based on aggregate values. While <code>WHERE</code> filters rows before aggregation, <code>HAVING</code> filters groups after aggregation is complete.</p>
 <p>You can use <code>HAVING</code> to filter groups where the average exceeds a threshold:</p>
-<pre><code class="language-sql">SELECT&#10;    blob1 AS probe_name,&#10;    avg(double1) AS average_temp&#10;FROM temperature_readings&#10;GROUP BY probe_name&#10;HAVING average_temp &gt; 10&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">SELECT&#10;    blob1 AS probe_name,&#10;    avg(double1) AS average_temp&#10;FROM temperature_readings&#10;GROUP BY probe_name&#10;HAVING average_temp &gt; 10&#10;</code></pre>
 <p>You can also filter groups based on aggregates such as the number of items in the group:</p>
-<pre><code class="language-sql">SELECT&#10;    blob1 AS probe_name,&#10;    count() AS num_readings&#10;FROM temperature_readings&#10;GROUP BY probe_name&#10;HAVING num_readings &gt; 100&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">SELECT&#10;    blob1 AS probe_name,&#10;    count() AS num_readings&#10;FROM temperature_readings&#10;GROUP BY probe_name&#10;HAVING num_readings &gt; 100&#10;</code></pre>
 <h4 id="2026-01-07-analytics-engine-support-for-like-and-having-pattern-matching-using-like">Pattern matching using <code>LIKE</code></h4>
 <p>The new pattern matching operators enable you to search for strings that match specific patterns using wildcard characters:</p>
 <ul>
@@ -195,11 +206,11 @@ This is particular useful for importing migrations in Durable Objects and means 
 </ul>
 <p>Pattern matching supports two wildcard characters: <code>%</code> (matches zero or more characters) and <code>_</code> (matches exactly one character).</p>
 <p>You can match strings starting with a prefix:</p>
-<pre><code class="language-sql">SELECT *&#10;FROM logs&#10;WHERE blob1 LIKE &#x27;error%&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">SELECT *&#10;FROM logs&#10;WHERE blob1 LIKE &#x27;error%&#x27;&#10;</code></pre>
 <p>You can also match file extensions (case-insensitive):</p>
-<pre><code class="language-sql">SELECT *&#10;FROM requests&#10;WHERE blob2 ILIKE &#x27;%.jpg&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">SELECT *&#10;FROM requests&#10;WHERE blob2 ILIKE &#x27;%.jpg&#x27;&#10;</code></pre>
 <p>Another example is excluding strings containing specific text:</p>
-<pre><code class="language-sql">SELECT *&#10;FROM events&#10;WHERE blob3 NOT ILIKE &#x27;%debug%&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">SELECT *&#10;FROM events&#10;WHERE blob3 NOT ILIKE &#x27;%debug%&#x27;&#10;</code></pre>
 <h4 id="2026-01-07-analytics-engine-support-for-like-and-having-ready-to-get-started">Ready to get started?</h4>
 <p>Learn more about the <a href="/analytics/analytics-engine/sql-reference/statements/#having-clause"><code>HAVING</code> clause</a> or <a href="/analytics/analytics-engine/sql-reference/operators/#pattern-matching-operators">pattern matching operators</a> in the Workers Analytics Engine SQL reference documentation.</p>
 
@@ -230,9 +241,9 @@ This is particular useful for importing migrations in Durable Objects and means 
 <h4 id="2025-12-22-agents-sdk-ai-sdk-v6-unified-tool-pattern">Unified Tool Pattern</h4>
 <p>AI SDK v6 introduces a unified tool pattern where all tools are defined on the server using the <code>tool()</code> function. This replaces the previous client-side <code>AITool</code> pattern.</p>
 <h4 id="2025-12-22-agents-sdk-ai-sdk-v6-server-side-tool-definition">Server-Side Tool Definition</h4>
-<pre><code class="language-ts">import { tool } from &quot;ai&quot;;&#10;import { z } from &quot;zod&quot;;&#10;&#10;// Server: Define ALL tools on the server&#10;const tools = {&#10;	// Server-executed tool&#10;	getWeather: tool({&#10;		description: &quot;Get weather for a city&quot;,&#10;		inputSchema: z.object({ city: z.string() }),&#10;		execute: async ({ city }) =&gt; fetchWeather(city)&#10;	}),&#10;&#10;	// Client-executed tool (no execute = client handles via onToolCall)&#10;	getLocation: tool({&#10;		description: &quot;Get user location from browser&quot;,&#10;		inputSchema: z.object({})&#10;		// No execute function&#10;	}),&#10;&#10;	// Tool requiring approval (dynamic based on input)&#10;	processPayment: tool({&#10;		description: &quot;Process a payment&quot;,&#10;		inputSchema: z.object({ amount: z.number() }),&#10;		needsApproval: async ({ amount }) =&gt; amount &gt; 100,&#10;		execute: async ({ amount }) =&gt; charge(amount)&#10;	})&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { tool } from &quot;ai&quot;;&#10;import { z } from &quot;zod&quot;;&#10;&#10;// Server: Define ALL tools on the server&#10;const tools = {&#10;	// Server-executed tool&#10;	getWeather: tool({&#10;		description: &quot;Get weather for a city&quot;,&#10;		inputSchema: z.object({ city: z.string() }),&#10;		execute: async ({ city }) =&gt; fetchWeather(city)&#10;	}),&#10;&#10;	// Client-executed tool (no execute = client handles via onToolCall)&#10;	getLocation: tool({&#10;		description: &quot;Get user location from browser&quot;,&#10;		inputSchema: z.object({})&#10;		// No execute function&#10;	}),&#10;&#10;	// Tool requiring approval (dynamic based on input)&#10;	processPayment: tool({&#10;		description: &quot;Process a payment&quot;,&#10;		inputSchema: z.object({ amount: z.number() }),&#10;		needsApproval: async ({ amount }) =&gt; amount &gt; 100,&#10;		execute: async ({ amount }) =&gt; charge(amount)&#10;	})&#10;};&#10;</code></pre>
 <h4 id="2025-12-22-agents-sdk-ai-sdk-v6-client-side-tool-handling">Client-Side Tool Handling</h4>
-<pre><code class="language-ts">// Client: Handle client-side tools via onToolCall callback&#10;import { useAgentChat } from &quot;agents/ai-react&quot;;&#10;&#10;const { messages, sendMessage, addToolOutput } = useAgentChat({&#10;	agent,&#10;	onToolCall: async ({ toolCall, addToolOutput }) =&gt; {&#10;		if (toolCall.toolName === &quot;getLocation&quot;) {&#10;			const position = await new Promise((resolve, reject) =&gt; {&#10;				navigator.geolocation.getCurrentPosition(resolve, reject);&#10;			});&#10;			addToolOutput({&#10;				toolCallId: toolCall.toolCallId,&#10;				output: {&#10;					lat: position.coords.latitude,&#10;					lng: position.coords.longitude&#10;				}&#10;			});&#10;		}&#10;	}&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// Client: Handle client-side tools via onToolCall callback&#10;import { useAgentChat } from &quot;agents/ai-react&quot;;&#10;&#10;const { messages, sendMessage, addToolOutput } = useAgentChat({&#10;	agent,&#10;	onToolCall: async ({ toolCall, addToolOutput }) =&gt; {&#10;		if (toolCall.toolName === &quot;getLocation&quot;) {&#10;			const position = await new Promise((resolve, reject) =&gt; {&#10;				navigator.geolocation.getCurrentPosition(resolve, reject);&#10;			});&#10;			addToolOutput({&#10;				toolCallId: toolCall.toolCallId,&#10;				output: {&#10;					lat: position.coords.latitude,&#10;					lng: position.coords.longitude&#10;				}&#10;			});&#10;		}&#10;	}&#10;});&#10;</code></pre>
 <p><strong>Key benefits of the unified tool pattern:</strong></p>
 <ul>
 <li><strong>Server-defined tools</strong>: All tools are defined in one place on the server</li>
@@ -242,27 +253,27 @@ This is particular useful for importing migrations in Durable Objects and means 
 </ul>
 <h4 id="2025-12-22-agents-sdk-ai-sdk-v6-useagentchat-options">useAgentChat(options)</h4>
 <p>Creates a new chat interface with enhanced v6 capabilities.</p>
-<pre><code class="language-ts">// Basic chat setup with onToolCall&#10;const { messages, sendMessage, addToolOutput } = useAgentChat({&#10;	agent,&#10;	onToolCall: async ({ toolCall, addToolOutput }) =&gt; {&#10;		// Handle client-side tool execution&#10;		await addToolOutput({&#10;			toolCallId: toolCall.toolCallId,&#10;			output: { result: &quot;success&quot; }&#10;		});&#10;	}&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// Basic chat setup with onToolCall&#10;const { messages, sendMessage, addToolOutput } = useAgentChat({&#10;	agent,&#10;	onToolCall: async ({ toolCall, addToolOutput }) =&gt; {&#10;		// Handle client-side tool execution&#10;		await addToolOutput({&#10;			toolCallId: toolCall.toolCallId,&#10;			output: { result: &quot;success&quot; }&#10;		});&#10;	}&#10;});&#10;</code></pre>
 <h4 id="2025-12-22-agents-sdk-ai-sdk-v6-dynamic-tool-approval">Dynamic Tool Approval</h4>
 <p>Use <code>needsApproval</code> on server tools to conditionally require user confirmation:</p>
-<pre><code class="language-ts">const paymentTool = tool({&#10;	description: &quot;Process a payment&quot;,&#10;	inputSchema: z.object({&#10;		amount: z.number(),&#10;		recipient: z.string()&#10;	}),&#10;	needsApproval: async ({ amount }) =&gt; amount &gt; 1000,&#10;	execute: async ({ amount, recipient }) =&gt; {&#10;		return await processPayment(amount, recipient);&#10;	}&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const paymentTool = tool({&#10;	description: &quot;Process a payment&quot;,&#10;	inputSchema: z.object({&#10;		amount: z.number(),&#10;		recipient: z.string()&#10;	}),&#10;	needsApproval: async ({ amount }) =&gt; amount &gt; 1000,&#10;	execute: async ({ amount, recipient }) =&gt; {&#10;		return await processPayment(amount, recipient);&#10;	}&#10;});&#10;</code></pre>
 <h4 id="2025-12-22-agents-sdk-ai-sdk-v6-tool-confirmation-detection">Tool Confirmation Detection</h4>
 <p>The <code>isToolUIPart</code> and <code>getToolName</code> functions now check both static and dynamic tool parts:</p>
-<pre><code class="language-ts">import { isToolUIPart, getToolName } from &quot;ai&quot;;&#10;&#10;const pendingToolCallConfirmation = messages.some((m) =&gt;&#10;	m.parts?.some(&#10;		(part) =&gt; isToolUIPart(part) &amp;&amp; part.state === &quot;input-available&quot;,&#10;	),&#10;);&#10;&#10;// Handle tool confirmation&#10;if (pendingToolCallConfirmation) {&#10;	await addToolOutput({&#10;		toolCallId: part.toolCallId,&#10;		output: &quot;User approved the action&quot;&#10;	});&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { isToolUIPart, getToolName } from &quot;ai&quot;;&#10;&#10;const pendingToolCallConfirmation = messages.some((m) =&gt;&#10;	m.parts?.some(&#10;		(part) =&gt; isToolUIPart(part) &amp;&amp; part.state === &quot;input-available&quot;,&#10;	),&#10;);&#10;&#10;// Handle tool confirmation&#10;if (pendingToolCallConfirmation) {&#10;	await addToolOutput({&#10;		toolCallId: part.toolCallId,&#10;		output: &quot;User approved the action&quot;&#10;	});&#10;}&#10;</code></pre>
 <p>If you need the v5 behavior (static-only checks), use the new functions:</p>
-<pre><code class="language-ts">import { isStaticToolUIPart, getStaticToolName } from &quot;ai&quot;;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { isStaticToolUIPart, getStaticToolName } from &quot;ai&quot;;&#10;</code></pre>
 <h4 id="2025-12-22-agents-sdk-ai-sdk-v6-converttomodelmessages-is-now-async">convertToModelMessages() is now async</h4>
 <p>The <code>convertToModelMessages()</code> function is now asynchronous. Update all calls to await the result:</p>
-<pre><code class="language-ts">import { convertToModelMessages } from &quot;ai&quot;;&#10;&#10;const result = streamText({&#10;	messages: await convertToModelMessages(this.messages),&#10;	model: openai(&quot;gpt-4o&quot;)&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { convertToModelMessages } from &quot;ai&quot;;&#10;&#10;const result = streamText({&#10;	messages: await convertToModelMessages(this.messages),&#10;	model: openai(&quot;gpt-4o&quot;)&#10;});&#10;</code></pre>
 <h4 id="2025-12-22-agents-sdk-ai-sdk-v6-modelmessage-type">ModelMessage type</h4>
 <p>The <code>CoreMessage</code> type has been removed. Use <code>ModelMessage</code> instead:</p>
-<pre><code class="language-ts">import { convertToModelMessages, type ModelMessage } from &quot;ai&quot;;&#10;&#10;const modelMessages: ModelMessage[] = await convertToModelMessages(messages);&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { convertToModelMessages, type ModelMessage } from &quot;ai&quot;;&#10;&#10;const modelMessages: ModelMessage[] = await convertToModelMessages(messages);&#10;</code></pre>
 <h4 id="2025-12-22-agents-sdk-ai-sdk-v6-generateobject-mode-option-removed">generateObject mode option removed</h4>
 <p>The <code>mode</code> option for <code>generateObject</code> has been removed:</p>
-<pre><code class="language-ts">// Before (v5)&#10;const result = await generateObject({&#10;	mode: &quot;json&quot;,&#10;	model,&#10;	schema,&#10;	prompt&#10;});&#10;&#10;// After (v6)&#10;const result = await generateObject({&#10;	model,&#10;	schema,&#10;	prompt&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// Before (v5)&#10;const result = await generateObject({&#10;	mode: &quot;json&quot;,&#10;	model,&#10;	schema,&#10;	prompt&#10;});&#10;&#10;// After (v6)&#10;const result = await generateObject({&#10;	model,&#10;	schema,&#10;	prompt&#10;});&#10;</code></pre>
 <h4 id="2025-12-22-agents-sdk-ai-sdk-v6-structured-output-with-generatetext">Structured Output with generateText</h4>
 <p>While <code>generateObject</code> and <code>streamObject</code> are still functional, the recommended approach is to use <code>generateText</code>/<code>streamText</code> with the <code>Output.object()</code> helper:</p>
-<pre><code class="language-ts">import { generateText, Output, stepCountIs } from &quot;ai&quot;;&#10;&#10;const { output } = await generateText({&#10;	model: openai(&quot;gpt-4&quot;),&#10;	output: Output.object({&#10;		schema: z.object({ name: z.string() })&#10;	}),&#10;	stopWhen: stepCountIs(2),&#10;	prompt: &quot;Generate a name&quot;&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { generateText, Output, stepCountIs } from &quot;ai&quot;;&#10;&#10;const { output } = await generateText({&#10;	model: openai(&quot;gpt-4&quot;),&#10;	output: Output.object({&#10;		schema: z.object({ name: z.string() })&#10;	}),&#10;	stopWhen: stepCountIs(2),&#10;	prompt: &quot;Generate a name&quot;&#10;});&#10;</code></pre>
 <blockquote>
 <p><strong>Note</strong>: When using structured output with <code>generateText</code>, you must configure multiple steps with <code>stopWhen</code> because generating the structured output is itself a step.</p>
 </blockquote>
@@ -270,18 +281,18 @@ This is particular useful for importing migrations in Durable Objects and means 
 <p>Seamless integration with Cloudflare Workers AI models through the updated workers-ai-provider v3.0.0 with AI SDK v6 support.</p>
 <h4 id="2025-12-22-agents-sdk-ai-sdk-v6-model-setup-with-workers-ai">Model Setup with Workers AI</h4>
 <p>Use Cloudflare Workers AI models directly in your agent workflows:</p>
-<pre><code class="language-ts">import { createWorkersAI } from &quot;workers-ai-provider&quot;;&#10;import { useAgentChat } from &quot;agents/ai-react&quot;;&#10;&#10;// Create Workers AI model (v3.0.0 - enhanced v6 internals)&#10;const model = createWorkersAI({&#10;	binding: env.AI,&#10;})(&quot;@cf/meta/llama-3.2-3b-instruct&quot;);&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { createWorkersAI } from &quot;workers-ai-provider&quot;;&#10;import { useAgentChat } from &quot;agents/ai-react&quot;;&#10;&#10;// Create Workers AI model (v3.0.0 - enhanced v6 internals)&#10;const model = createWorkersAI({&#10;	binding: env.AI,&#10;})(&quot;@cf/meta/llama-3.2-3b-instruct&quot;);&#10;</code></pre>
 <h4 id="2025-12-22-agents-sdk-ai-sdk-v6-enhanced-file-and-image-support">Enhanced File and Image Support</h4>
 <p>Workers AI models now support v6 file handling with automatic conversion:</p>
-<pre><code class="language-ts">// Send images and files to Workers AI models&#10;sendMessage({&#10;	role: &quot;user&quot;,&#10;	parts: [&#10;		{ type: &quot;text&quot;, text: &quot;Analyze this image:&quot; },&#10;		{&#10;			type: &quot;file&quot;,&#10;			data: imageBuffer,&#10;			mediaType: &quot;image/jpeg&quot;,&#10;		},&#10;	],&#10;});&#10;&#10;// Workers AI provider automatically converts to proper format&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// Send images and files to Workers AI models&#10;sendMessage({&#10;	role: &quot;user&quot;,&#10;	parts: [&#10;		{ type: &quot;text&quot;, text: &quot;Analyze this image:&quot; },&#10;		{&#10;			type: &quot;file&quot;,&#10;			data: imageBuffer,&#10;			mediaType: &quot;image/jpeg&quot;,&#10;		},&#10;	],&#10;});&#10;&#10;// Workers AI provider automatically converts to proper format&#10;</code></pre>
 <h4 id="2025-12-22-agents-sdk-ai-sdk-v6-streaming-with-workers-ai">Streaming with Workers AI</h4>
 <p>Enhanced streaming support with automatic warning detection:</p>
-<pre><code class="language-ts">// Streaming with Workers AI models&#10;const result = await streamText({&#10;	model: createWorkersAI({ binding: env.AI })(&quot;@cf/meta/llama-3.2-3b-instruct&quot;),&#10;	messages: await convertToModelMessages(messages),&#10;	onChunk: (chunk) =&gt; {&#10;		// Enhanced streaming with warning handling&#10;		console.log(chunk);&#10;	},&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// Streaming with Workers AI models&#10;const result = await streamText({&#10;	model: createWorkersAI({ binding: env.AI })(&quot;@cf/meta/llama-3.2-3b-instruct&quot;),&#10;	messages: await convertToModelMessages(messages),&#10;	onChunk: (chunk) =&gt; {&#10;		// Enhanced streaming with warning handling&#10;		console.log(chunk);&#10;	},&#10;});&#10;</code></pre>
 <h4 id="2025-12-22-agents-sdk-ai-sdk-v6-ai-gateway-provider-v3-0-0">ai-gateway-provider v3.0.0</h4>
 <p>The ai-gateway-provider v3.0.0 now supports AI SDK v6, enabling you to use Cloudflare AI Gateway with multiple AI providers including Anthropic, Azure, AWS Bedrock, Google Vertex, and Perplexity.</p>
 <h4 id="2025-12-22-agents-sdk-ai-sdk-v6-ai-gateway-setup">AI Gateway Setup</h4>
 <p>Use Cloudflare AI Gateway to add analytics, caching, and rate limiting to your AI applications:</p>
-<pre><code class="language-ts">import { createAIGateway } from &quot;ai-gateway-provider&quot;;&#10;&#10;// Create AI Gateway provider (v3.0.0 - enhanced v6 internals)&#10;const model = createAIGateway({&#10;	gatewayUrl: &quot;https://gateway.ai.cloudflare.com/v1/your-account-id/gateway&quot;,&#10;	headers: {&#10;		&quot;Authorization&quot;: `Bearer ${env.AI_GATEWAY_TOKEN}`&#10;	}&#10;})({&#10;	provider: &quot;openai&quot;,&#10;	model: &quot;gpt-4o&quot;&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { createAIGateway } from &quot;ai-gateway-provider&quot;;&#10;&#10;// Create AI Gateway provider (v3.0.0 - enhanced v6 internals)&#10;const model = createAIGateway({&#10;	gatewayUrl: &quot;https://gateway.ai.cloudflare.com/v1/your-account-id/gateway&quot;,&#10;	headers: {&#10;		&quot;Authorization&quot;: `Bearer ${env.AI_GATEWAY_TOKEN}`&#10;	}&#10;})({&#10;	provider: &quot;openai&quot;,&#10;	model: &quot;gpt-4o&quot;&#10;});&#10;</code></pre>
 <h4 id="2025-12-22-agents-sdk-ai-sdk-v6-migration-from-v5">Migration from v5</h4>
 <h4 id="2025-12-22-agents-sdk-ai-sdk-v6-deprecated-apis">Deprecated APIs</h4>
 <p>The following APIs are deprecated in favor of the unified tool pattern:</p>
@@ -333,7 +344,7 @@ This is particular useful for importing migrations in Durable Objects and means 
 </ol>
 <h4 id="2025-12-22-agents-sdk-ai-sdk-v6-installation">Installation</h4>
 <p>Update your dependencies to use the latest versions:</p>
-<pre><code class="language-bash">npm install agents@^0.3.0 workers-ai-provider@^3.0.0 ai-gateway-provider@^3.0.0 ai@^6.0.0 @ai-sdk/react@^3.0.0 @ai-sdk/openai@^3.0.0&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">npm install agents@^0.3.0 workers-ai-provider@^3.0.0 ai-gateway-provider@^3.0.0 ai@^6.0.0 @ai-sdk/react@^3.0.0 @ai-sdk/openai@^3.0.0&#10;</code></pre>
 <h4 id="2025-12-22-agents-sdk-ai-sdk-v6-resources">Resources</h4>
 <ul>
 <li><a href="https://github.com/cloudflare/agents/blob/main/docs/migration-to-ai-sdk-v6.md">Migration Guide</a> - Comprehensive migration documentation from v5 to v6</li>
@@ -356,7 +367,7 @@ This is particular useful for importing migrations in Durable Objects and means 
 <p><em>2025-12-19</em></p>
 <p><a href="https://tanstack.com/start/">TanStack Start</a> apps can now prerender routes to static HTML at build time with access to build time environment variables
 and bindings,  and serve them as <a href="/workers/static-assets/">static assets</a>. To enable prerendering, configure the <code>prerender</code> option of the TanStack Start plugin in your Vite config:</p>
-<pre><code class="language-ts">import { defineConfig } from &quot;vite&quot;;&#10;import { cloudflare } from &quot;@cloudflare/vite-plugin&quot;;&#10;import { tanstackStart } from &quot;@tanstack/react-start/plugin/vite&quot;;&#10;&#10;export default defineConfig({&#10;  plugins: [&#10;    cloudflare({ viteEnvironment: { name: &quot;ssr&quot; } }),&#10;    tanstackStart({&#10;      prerender: {&#10;        enabled: true,&#10;      },&#10;    }),&#10;  ],&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { defineConfig } from &quot;vite&quot;;&#10;import { cloudflare } from &quot;@cloudflare/vite-plugin&quot;;&#10;import { tanstackStart } from &quot;@tanstack/react-start/plugin/vite&quot;;&#10;&#10;export default defineConfig({&#10;  plugins: [&#10;    cloudflare({ viteEnvironment: { name: &quot;ssr&quot; } }),&#10;    tanstackStart({&#10;      prerender: {&#10;        enabled: true,&#10;      },&#10;    }),&#10;  ],&#10;});&#10;</code></pre>
 <p>This feature requires <code>@tanstack/react-start</code> v1.138.0 or later. See the <a href="/workers/framework-guides/web-apps/tanstack-start/#static-prerendering">TanStack Start framework guide</a> for more details.</p>
 
 
@@ -374,12 +385,12 @@ and bindings,  and serve them as <a href="/workers/static-assets/">static assets
 <h2 id="retrieve-your-authentication-token-with-wrangler-auth-token"><a href="/changelog/post/2025-12-18-wrangler-auth-token/">Retrieve your authentication token with `wrangler auth token`</a></h2>
 <p><em>2025-12-18</em></p>
 <p>Wrangler now includes a new <a href="/workers/wrangler/commands/general/#auth-token"><code>wrangler auth token</code></a> command that retrieves your current authentication token or credentials for use with other tools and scripts.</p>
-<pre><code class="language-sh">wrangler auth token&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">wrangler auth token&#10;</code></pre>
 <p>The command returns whichever authentication method is currently configured, in priority order: API token from <code>CLOUDFLARE_API_TOKEN</code>, or OAuth token from <code>wrangler login</code> (automatically refreshed if expired).</p>
 <p>Use the <code>--json</code> flag to get structured output including the token type:</p>
-<pre><code class="language-sh">wrangler auth token --json&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">wrangler auth token --json&#10;</code></pre>
 <p>The JSON output includes the authentication type:</p>
-<pre><code class="language-jsonc">// API token&#10;{ &quot;type&quot;: &quot;api_token&quot;, &quot;token&quot;: &quot;...&quot; }&#10;&#10;// OAuth token&#10;{ &quot;type&quot;: &quot;oauth&quot;, &quot;token&quot;: &quot;...&quot; }&#10;&#10;// API key/email (only available with --json)&#10;{ &quot;type&quot;: &quot;api_key&quot;, &quot;key&quot;: &quot;...&quot;, &quot;email&quot;: &quot;...&quot; }&#10;</code></pre>
+<pre tabindex="0"><code class="language-jsonc">// API token&#10;{ &quot;type&quot;: &quot;api_token&quot;, &quot;token&quot;: &quot;...&quot; }&#10;&#10;// OAuth token&#10;{ &quot;type&quot;: &quot;oauth&quot;, &quot;token&quot;: &quot;...&quot; }&#10;&#10;// API key/email (only available with --json)&#10;{ &quot;type&quot;: &quot;api_key&quot;, &quot;key&quot;: &quot;...&quot;, &quot;email&quot;: &quot;...&quot; }&#10;</code></pre>
 <p>API key/email credentials from <code>CLOUDFLARE_API_KEY</code> and <code>CLOUDFLARE_EMAIL</code> require the <code>--json</code> flag since this method uses two values instead of a single token.</p>
 
 
@@ -387,9 +398,9 @@ and bindings,  and serve them as <a href="/workers/static-assets/">static assets
 <p><em>2025-12-16</em></p>
 <p>The <a href="/workers/testing/vitest-integration/"><code>@cloudflare/vitest-pool-workers</code></a> package now supports the <a href="/workers/runtime-apis/context/#exports"><code>ctx.exports</code> API</a>, allowing you to access your Worker's top-level exports during tests.</p>
 <p>You can access <code>ctx.exports</code> in unit tests by calling <code>createExecutionContext()</code>:</p>
-<pre><code class="language-ts">import { createExecutionContext } from &quot;cloudflare:test&quot;;&#10;import { it, expect } from &quot;vitest&quot;;&#10;&#10;it(&quot;can access ctx.exports&quot;, async () =&gt; {&#10;  const ctx = createExecutionContext();&#10;  const result = await ctx.exports.MyEntryPoint.myMethod();&#10;  expect(result).toBe(&quot;expected value&quot;);&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { createExecutionContext } from &quot;cloudflare:test&quot;;&#10;import { it, expect } from &quot;vitest&quot;;&#10;&#10;it(&quot;can access ctx.exports&quot;, async () =&gt; {&#10;  const ctx = createExecutionContext();&#10;  const result = await ctx.exports.MyEntryPoint.myMethod();&#10;  expect(result).toBe(&quot;expected value&quot;);&#10;});&#10;</code></pre>
 <p>Alternatively, you can import <code>exports</code> directly from <code>cloudflare:workers</code>:</p>
-<pre><code class="language-ts">import { exports } from &quot;cloudflare:workers&quot;;&#10;import { it, expect } from &quot;vitest&quot;;&#10;&#10;it(&quot;can access imported exports&quot;, async () =&gt; {&#10;  const result = await exports.MyEntryPoint.myMethod();&#10;  expect(result).toBe(&quot;expected value&quot;);&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { exports } from &quot;cloudflare:workers&quot;;&#10;import { it, expect } from &quot;vitest&quot;;&#10;&#10;it(&quot;can access imported exports&quot;, async () =&gt; {&#10;  const result = await exports.MyEntryPoint.myMethod();&#10;  expect(result).toBe(&quot;expected value&quot;);&#10;});&#10;</code></pre>
 <p>See the <a href="https://github.com/cloudflare/workers-sdk/tree/main/fixtures/vitest-plugin-examples/context-exports">context-exports fixture</a> for a complete example.</p>
 
 
@@ -484,9 +495,9 @@ to see how Python Workers stack up against other platforms:</p>
 <p>We are introducing a brand new tool called Pywrangler, which simplifies package management in Python Workers by
 automatically installing Workers-compatible Python packages into your project.</p>
 <p>With Pywrangler, you specify your Worker's Python dependencies in your <code>pyproject.toml</code> file:</p>
-<pre><code class="language-toml">[project]&#10;name = &quot;python-beautifulsoup-worker&quot;&#10;version = &quot;0.1.0&quot;&#10;description = &quot;A simple Worker using beautifulsoup4&quot;&#10;requires-python = &quot;&gt;=3.12&quot;&#10;dependencies = [&#10;    &quot;beautifulsoup4&quot;&#10;]&#10;&#10;[dependency-groups]&#10;dev = [&#10;  &quot;workers-py&quot;,&#10;  &quot;workers-runtime-sdk&quot;&#10;]&#10;</code></pre>
+<pre tabindex="0"><code class="language-toml">[project]&#10;name = &quot;python-beautifulsoup-worker&quot;&#10;version = &quot;0.1.0&quot;&#10;description = &quot;A simple Worker using beautifulsoup4&quot;&#10;requires-python = &quot;&gt;=3.12&quot;&#10;dependencies = [&#10;    &quot;beautifulsoup4&quot;&#10;]&#10;&#10;[dependency-groups]&#10;dev = [&#10;  &quot;workers-py&quot;,&#10;  &quot;workers-runtime-sdk&quot;&#10;]&#10;</code></pre>
 <p>You can then develop and deploy your Worker using the following commands:</p>
-<pre><code class="language-bash">uv run pywrangler dev&#10;uv run pywrangler deploy&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">uv run pywrangler dev&#10;uv run pywrangler deploy&#10;</code></pre>
 <p>Pywrangler automatically downloads and vendors the necessary packages for your Worker, and these packages are bundled with the Worker when you deploy.</p>
 <p>Consult the <a href="/workers/languages/python/packages/">Python packages documentation</a> for full details on Pywrangler and Python package management in Workers.</p>
 
@@ -504,15 +515,15 @@ automatically installing Workers-compatible Python packages into your project.</
 <p>The Vite plugin's new <code>config</code> option accepts either a partial configuration object or a function that receives the current configuration and returns overrides. This option is applied after any config file is loaded, allowing the plugin to override specific values or define Worker configuration entirely in code.</p>
 <h4 id="2025-12-08-vite-programmatic-config-example-usage">Example usage</h4>
 <p>Setting <code>config</code> to an object to provide configuration values that merge with defaults and config file settings:</p>
-<pre><code class="language-ts">import { defineConfig } from &quot;vite&quot;;&#10;import { cloudflare } from &quot;@cloudflare/vite-plugin&quot;;&#10;&#10;export default defineConfig({&#10;	plugins: [&#10;		cloudflare({&#10;			config: {&#10;				name: &quot;my-worker&quot;,&#10;				compatibility_flags: [&quot;nodejs_compat&quot;],&#10;				send_email: [&#10;					{&#10;						name: &quot;EMAIL&quot;,&#10;					},&#10;				],&#10;			},&#10;		}),&#10;	],&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { defineConfig } from &quot;vite&quot;;&#10;import { cloudflare } from &quot;@cloudflare/vite-plugin&quot;;&#10;&#10;export default defineConfig({&#10;	plugins: [&#10;		cloudflare({&#10;			config: {&#10;				name: &quot;my-worker&quot;,&#10;				compatibility_flags: [&quot;nodejs_compat&quot;],&#10;				send_email: [&#10;					{&#10;						name: &quot;EMAIL&quot;,&#10;					},&#10;				],&#10;			},&#10;		}),&#10;	],&#10;});&#10;</code></pre>
 <p>Use a function to modify the existing configuration:</p>
-<pre><code class="language-ts">import { defineConfig } from &quot;vite&quot;;&#10;import { cloudflare } from &quot;@cloudflare/vite-plugin&quot;;&#10;export default defineConfig({&#10;	plugins: [&#10;		cloudflare({&#10;			config: (userConfig) =&gt; {&#10;				delete userConfig.compatibility_flags;&#10;			},&#10;		}),&#10;	],&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { defineConfig } from &quot;vite&quot;;&#10;import { cloudflare } from &quot;@cloudflare/vite-plugin&quot;;&#10;export default defineConfig({&#10;	plugins: [&#10;		cloudflare({&#10;			config: (userConfig) =&gt; {&#10;				delete userConfig.compatibility_flags;&#10;			},&#10;		}),&#10;	],&#10;});&#10;</code></pre>
 <p>Return an object with values to merge:</p>
-<pre><code class="language-ts">import { defineConfig } from &quot;vite&quot;;&#10;import { cloudflare } from &quot;@cloudflare/vite-plugin&quot;;&#10;&#10;export default defineConfig({&#10;	plugins: [&#10;		cloudflare({&#10;			config: (userConfig) =&gt; {&#10;				if (!userConfig.compatibility_flags.includes(&quot;no_nodejs_compat&quot;)) {&#10;					return { compatibility_flags: [&quot;nodejs_compat&quot;] };&#10;				}&#10;			},&#10;		}),&#10;	],&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { defineConfig } from &quot;vite&quot;;&#10;import { cloudflare } from &quot;@cloudflare/vite-plugin&quot;;&#10;&#10;export default defineConfig({&#10;	plugins: [&#10;		cloudflare({&#10;			config: (userConfig) =&gt; {&#10;				if (!userConfig.compatibility_flags.includes(&quot;no_nodejs_compat&quot;)) {&#10;					return { compatibility_flags: [&quot;nodejs_compat&quot;] };&#10;				}&#10;			},&#10;		}),&#10;	],&#10;});&#10;</code></pre>
 <h4 id="2025-12-08-vite-programmatic-config-auxiliary-workers">Auxiliary Workers</h4>
 <p>Auxiliary Workers also support the <code>config</code> option, enabling multi-Worker architectures without config files.</p>
 <p>Define auxiliary Workers without config files using <code>config</code> inside the <code>auxiliaryWorkers</code> array:</p>
-<pre><code class="language-ts">import { defineConfig } from &quot;vite&quot;;&#10;import { cloudflare } from &quot;@cloudflare/vite-plugin&quot;;&#10;&#10;export default defineConfig({&#10;	plugins: [&#10;		cloudflare({&#10;			config: {&#10;				name: &quot;entry-worker&quot;,&#10;				main: &quot;./src/entry.ts&quot;,&#10;				services: [{ binding: &quot;API&quot;, service: &quot;api-worker&quot; }],&#10;			},&#10;			auxiliaryWorkers: [&#10;				{&#10;					config: {&#10;						name: &quot;api-worker&quot;,&#10;						main: &quot;./src/api.ts&quot;,&#10;					},&#10;				},&#10;			],&#10;		}),&#10;	],&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { defineConfig } from &quot;vite&quot;;&#10;import { cloudflare } from &quot;@cloudflare/vite-plugin&quot;;&#10;&#10;export default defineConfig({&#10;	plugins: [&#10;		cloudflare({&#10;			config: {&#10;				name: &quot;entry-worker&quot;,&#10;				main: &quot;./src/entry.ts&quot;,&#10;				services: [{ binding: &quot;API&quot;, service: &quot;api-worker&quot; }],&#10;			},&#10;			auxiliaryWorkers: [&#10;				{&#10;					config: {&#10;						name: &quot;api-worker&quot;,&#10;						main: &quot;./src/api.ts&quot;,&#10;					},&#10;				},&#10;			],&#10;		}),&#10;	],&#10;});&#10;</code></pre>
 <p>For more details and examples, see <a href="/workers/vite-plugin/reference/programmatic-configuration/">Programmatic configuration</a>.</p>
 
 

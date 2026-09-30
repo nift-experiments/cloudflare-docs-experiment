@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/hyperdrive/get-started/
+  description: Create your first Hyperdrive configuration and connect a Cloudflare Worker to your database.
+  full_title: Getting started · Cloudflare Hyperdrive docs
+  head_html: <title>Getting started · Cloudflare Hyperdrive docs</title><meta name="generator" content="Nift"><meta name="description" content="Create your first Hyperdrive configuration and connect a Cloudflare Worker to your database."><link rel="canonical" href="https://developers.cloudflare.com/hyperdrive/get-started/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/hyperdrive/get-started/index.md"><meta property="og:title" content="Getting started · Cloudflare Hyperdrive docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Create your first Hyperdrive configuration and connect a Cloudflare Worker to your database."><meta property="og:url" content="https://developers.cloudflare.com/hyperdrive/get-started/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Hyperdrive"><meta name="algolia_product_filter" content="Hyperdrive"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Get started"><meta name="algolia_content_type" content="Get started"><meta name="pcx_additional_products" content="Hyperdrive"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/hyperdrive/get-started/#page","headline":"Getting started \u00b7 Cloudflare Hyperdrive docs","description":"Create your first Hyperdrive configuration and connect a Cloudflare Worker to your database.","url":"https://developers.cloudflare.com/hyperdrive/get-started/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /hyperdrive/get-started/
+  schema: 1
+---
 <p>Hyperdrive accelerates access to your existing databases from Cloudflare Workers, making even single-region databases feel globally distributed.</p>
 <p>By maintaining a connection pool to your database within Cloudflare's network, Hyperdrive reduces seven round-trips to your database before you can even send a query: the TCP handshake (1x), TLS negotiation (3x), and database authentication (3x).</p>
 <p>Hyperdrive understands the difference between read and write queries to your database, and caches the most common read queries, improving performance and reducing load on your origin database.</p>
@@ -21,7 +32,7 @@
 <li>Log in</li>
 </ol></h2>
 <p>Before creating your Hyperdrive binding, log in with your Cloudflare account by running:</p>
-<pre><code class="language-sh">npx wrangler login&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler login&#10;</code></pre>
 <p>You will be directed to a web page asking you to log in to the Cloudflare dashboard. After you have logged in, you will be asked if Wrangler can make changes to your Cloudflare account. Scroll down and select <strong>Allow</strong> to continue.</p>
 <h2 id="2-create-a-worker"><ol start="2">
 <li>Create a Worker</li>
@@ -31,7 +42,7 @@
 @markup("md", "content/.markup/bodies/972.md")
 </aside>
 <p>Create a new project named <code>hyperdrive-tutorial</code> by running:</p>
-<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre><code data-nb-pm-code>npm create cloudflare@latest -- hyperdrive-tutorial</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm create cloudflare@latest -- hyperdrive-tutorial" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>yarn create cloudflare hyperdrive-tutorial</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn create cloudflare hyperdrive-tutorial" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>pnpm create cloudflare@latest hyperdrive-tutorial</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm create cloudflare@latest hyperdrive-tutorial" aria-label="Copy to clipboard">Copy</button></div></div>
+<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre tabindex="0"><code data-nb-pm-code>npm create cloudflare@latest -- hyperdrive-tutorial</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm create cloudflare@latest -- hyperdrive-tutorial" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>yarn create cloudflare hyperdrive-tutorial</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn create cloudflare hyperdrive-tutorial" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>pnpm create cloudflare@latest hyperdrive-tutorial</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm create cloudflare@latest hyperdrive-tutorial" aria-label="Copy to clipboard">Copy</button></div></div>
 <p>For setup, select the following options:</p>
 <ul>
 <li>For <em>What would you like to start with?</em>, choose <code>Hello World example</code>.</li>
@@ -60,7 +71,7 @@
 <p>It will provide a secure connection string that is only accessible from your Worker which you can use to connect to your database through Hyperdrive.
 This means that you can use the Hyperdrive connection string with your existing drivers or ORM libraries without needing significant changes to your code.</p>
 <p>To create your first Hyperdrive database configuration, change into the directory you just created for your Workers project:</p>
-<pre><code class="language-sh">cd hyperdrive-tutorial&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cd hyperdrive-tutorial&#10;</code></pre>
 <p>To create your first Hyperdrive, you will need:</p>
 <ul>
 <li>The IP address (or hostname) and port of your database.</li>
@@ -77,7 +88,7 @@ This means that you can use the Hyperdrive connection string with your existing 
 @markup("md", "content/.markup/bodies/971.md")
 </aside>
 <p>If successful, the command will output your new Hyperdrive configuration:</p>
-<pre><code class="language-json">{&#10;	&quot;hyperdrive&quot;: [&#10;		{&#10;			&quot;binding&quot;: &quot;HYPERDRIVE&quot;,&#10;			&quot;id&quot;: &quot;&lt;example id: 57b7076f58be42419276f058a8968187&gt;&quot;&#10;		}&#10;	]&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;hyperdrive&quot;: [&#10;		{&#10;			&quot;binding&quot;: &quot;HYPERDRIVE&quot;,&#10;			&quot;id&quot;: &quot;&lt;example id: 57b7076f58be42419276f058a8968187&gt;&quot;&#10;		}&#10;	]&#10;}&#10;</code></pre>
 <p>Copy the <code>id</code> field: you will use this in the next step to make Hyperdrive accessible from your Worker script.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/970.md")
@@ -119,11 +130,11 @@ This means that you can use the Hyperdrive connection string with your existing 
 <p>You can test your Worker locally before deploying by running <code>wrangler dev</code>. This runs your Worker code on your machine while connecting to your database.</p>
 <p>The <code>localConnectionString</code> field works with both local and remote databases and allows you to connect directly to your database from your Worker project running locally. You must specify the SSL/TLS mode if required (<code>sslmode=require</code> for Postgres, <code>sslMode=REQUIRED</code> for MySQL).</p>
 <p>To connect to a database during local development, configure <code>localConnectionString</code> in your <code>wrangler.jsonc</code>:</p>
-<pre><code class="language-jsonc">{&#10;	&quot;hyperdrive&quot;: [&#10;		{&#10;			&quot;binding&quot;: &quot;HYPERDRIVE&quot;,&#10;			&quot;id&quot;: &quot;your-hyperdrive-id&quot;,&#10;			&quot;localConnectionString&quot;: &quot;postgres://user:password@your-database-host:5432/database&quot;,&#10;		},&#10;	],&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-jsonc">{&#10;	&quot;hyperdrive&quot;: [&#10;		{&#10;			&quot;binding&quot;: &quot;HYPERDRIVE&quot;,&#10;			&quot;id&quot;: &quot;your-hyperdrive-id&quot;,&#10;			&quot;localConnectionString&quot;: &quot;postgres://user:password@your-database-host:5432/database&quot;,&#10;		},&#10;	],&#10;}&#10;</code></pre>
 <p>Or set an environment variable:</p>
-<pre><code class="language-sh">export CLOUDFLARE_HYPERDRIVE_LOCAL_CONNECTION_STRING_HYPERDRIVE=&quot;postgres://user:password@your-database-host:5432/database&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">export CLOUDFLARE_HYPERDRIVE_LOCAL_CONNECTION_STRING_HYPERDRIVE=&quot;postgres://user:password@your-database-host:5432/database&quot;&#10;</code></pre>
 <p>Then start local development:</p>
-<pre><code class="language-sh">npx wrangler dev&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler dev&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/968.md")
 </aside>
@@ -131,7 +142,7 @@ This means that you can use the Hyperdrive connection string with your existing 
 <li>Deploy your Worker</li>
 </ol></h2>
 <p>You can now deploy your Worker to make your project accessible on the Internet. To deploy your Worker, run:</p>
-<pre><code class="language-sh">npx wrangler deploy&#10;&#35; Outputs: https://hyperdrive-tutorial.&lt;YOUR_SUBDOMAIN&gt;.workers.dev&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler deploy&#10;&#35; Outputs: https://hyperdrive-tutorial.&lt;YOUR_SUBDOMAIN&gt;.workers.dev&#10;</code></pre>
 <p>You can now visit the URL for your newly created project to query your live database.</p>
 <p>For example, if the URL of your new Worker is <code>hyperdrive-tutorial.&lt;YOUR_SUBDOMAIN&gt;.workers.dev</code>, accessing <code>https://hyperdrive-tutorial.&lt;YOUR_SUBDOMAIN&gt;.workers.dev/</code> will send a request to your Worker that queries your database directly.</p>
 <p>By finishing this tutorial, you have created a Hyperdrive configuration, a Worker to access that database and deployed your project globally.</p>

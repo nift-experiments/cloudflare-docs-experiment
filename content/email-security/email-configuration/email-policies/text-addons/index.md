@@ -1,6 +1,15 @@
-<p>When a message receives a specific <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/8561.md")
-</div> from Email security (formerly Area 1), you can add additional information to the subject and body of each message.
+---
+cp9:
+  canonical: https://developers.cloudflare.com/email-security/email-configuration/email-policies/text-addons/
+  description: Add subject and body prefixes to emails based on Email security dispositions for inline deployments.
+  full_title: Text add-ons · Cloudflare Email security (formerly Area 1) docs
+  head_html: <title>Text add-ons · Cloudflare Email security (formerly Area 1) docs</title><meta name="generator" content="Nift"><meta name="description" content="Add subject and body prefixes to emails based on Email security dispositions for inline deployments."><meta name="robots" content="noindex"><link rel="canonical" href="https://developers.cloudflare.com/email-security/email-configuration/email-policies/text-addons/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/email-security/email-configuration/email-policies/text-addons/index.md"><meta property="og:title" content="Text add-ons · Cloudflare Email security (formerly Area 1) docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Add subject and body prefixes to emails based on Email security dispositions for inline deployments."><meta property="og:url" content="https://developers.cloudflare.com/email-security/email-configuration/email-policies/text-addons/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Email security (formerly Area 1)"><meta name="algolia_product_filter" content="Email security (formerly Area 1)"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Email security (formerly Area 1)">
+  markdown: true
+  noindex: true
+  route: /email-security/email-configuration/email-policies/text-addons/
+  schema: 1
+---
+<p>When a message receives a specific <span class="nb-glossary-tooltip" title="disposition">disposition</span> from Email security (formerly Area 1), you can add additional information to the subject and body of each message.</p>
 <p>This information provides additional context to your employees, which can help them make better decisions if you choose to have a more permissive email policy:</p>
 <ul>
 <li><strong>Subject prefixes</strong>: Can tell recipients which category the message is in. Subject prefixes always state the final <a href="/email-security/reference/dispositions-and-attributes/">disposition</a> of the message.</li>

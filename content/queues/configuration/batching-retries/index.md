@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/queues/configuration/batching-retries/
+  description: Configure message batching, retry behavior, and delivery delays for Cloudflare Queues.
+  full_title: Batching, Retries and Delays · Cloudflare Queues docs
+  head_html: <title>Batching, Retries and Delays · Cloudflare Queues docs</title><meta name="generator" content="Nift"><meta name="description" content="Configure message batching, retry behavior, and delivery delays for Cloudflare Queues."><link rel="canonical" href="https://developers.cloudflare.com/queues/configuration/batching-retries/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/queues/configuration/batching-retries/index.md"><meta property="og:title" content="Batching, Retries and Delays · Cloudflare Queues docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Configure message batching, retry behavior, and delivery delays for Cloudflare Queues."><meta property="og:url" content="https://developers.cloudflare.com/queues/configuration/batching-retries/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Queues"><meta name="algolia_product_filter" content="Queues"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Queues"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/queues/configuration/batching-retries/#page","headline":"Batching, Retries and Delays \u00b7 Cloudflare Queues docs","description":"Configure message batching, retry behavior, and delivery delays for Cloudflare Queues.","url":"https://developers.cloudflare.com/queues/configuration/batching-retries/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /queues/configuration/batching-retries/
+  schema: 1
+---
 <h2 id="batching">Batching</h2>
 <p>When configuring a <a href="/queues/reference/how-queues-works#consumers">consumer Worker</a> for a queue, you can also define how messages are batched as they are delivered.</p>
 <p>Batching can:</p>
@@ -94,7 +105,7 @@
 @input("content/.markup/bodies/11298.md")
 </div></div>
 <p>You can also configure a default, global delay on a per-queue basis by passing <code>--delivery-delay-secs</code> when creating a queue via the <code>wrangler</code> CLI:</p>
-<pre><code class="language-sh">&#35; Delay all messages by 5 minutes as a default&#10;npx wrangler queues create $QUEUE-NAME --delivery-delay-secs=300&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">&#35; Delay all messages by 5 minutes as a default&#10;npx wrangler queues create $QUEUE-NAME --delivery-delay-secs=300&#10;</code></pre>
 <h3 id="delay-on-retry">Delay on retry</h3>
 <p>When <a href="/queues/reference/how-queues-works/#consumers">consuming messages from a queue</a>, you can choose to <a href="#explicit-acknowledgement-and-retries">explicitly mark messages to be retried</a>. Messages can be retried and delayed individually, or as an entire batch.</p>
 <p>To delay an individual message within a batch:</p>
@@ -107,7 +118,7 @@
 </div></div>
 <p>You can also choose to set a default retry delay to any messages that are retried due to either implicit failure or when calling <code>retry()</code> explicitly. This is set at the consumer level, and is supported in both push-based (Worker) and pull-based (HTTP) consumers.</p>
 <p>Delays can be configured via the <code>wrangler</code> CLI:</p>
-<pre><code class="language-sh">&#35; Push-based consumers&#10;&#35; Delay any messages that are retried by 60 seconds (1 minute) by default.&#10;npx wrangler@latest queues consumer worker add $QUEUE-NAME $WORKER_SCRIPT_NAME --retry-delay-secs=60&#10;&#10;&#35; Pull-based consumers&#10;&#35; Delay any messages that are retried by 60 seconds (1 minute) by default.&#10;npx wrangler@latest queues consumer http add $QUEUE-NAME --retry-delay-secs=60&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">&#35; Push-based consumers&#10;&#35; Delay any messages that are retried by 60 seconds (1 minute) by default.&#10;npx wrangler@latest queues consumer worker add $QUEUE-NAME $WORKER_SCRIPT_NAME --retry-delay-secs=60&#10;&#10;&#35; Pull-based consumers&#10;&#35; Delay any messages that are retried by 60 seconds (1 minute) by default.&#10;npx wrangler@latest queues consumer http add $QUEUE-NAME --retry-delay-secs=60&#10;</code></pre>
 <p>Delays can also be configured in the <a href="/workers/wrangler/configuration/#queues">Wrangler configuration file</a> with the <code>delivery_delay</code> setting for producers (when sending) and/or the <code>retry_delay</code> (when retrying) per-consumer:</p>
 <div class="nb-wrangler-config">
 @markup("md", "content/.markup/bodies/11305.md")

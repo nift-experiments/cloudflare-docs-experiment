@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/access-controls/applications/non-http/short-lived-certificates-legacy/
+  description: Short-lived certificates (legacy) in Access.
+  full_title: Short-lived certificates (legacy) · Cloudflare One docs
+  head_html: <title>Short-lived certificates (legacy) · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="Short-lived certificates (legacy) in Access."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/access-controls/applications/non-http/short-lived-certificates-legacy/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/access-controls/applications/non-http/short-lived-certificates-legacy/index.md"><meta property="og:title" content="Short-lived certificates (legacy) · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Short-lived certificates (legacy) in Access."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/access-controls/applications/non-http/short-lived-certificates-legacy/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Cloudflare One"><meta name="pcx_tags" content="SSH"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/access-controls/applications/non-http/short-lived-certificates-legacy/#page","headline":"Short-lived certificates (legacy) \u00b7 Cloudflare One docs","description":"Short-lived certificates (legacy) in Access.","url":"https://developers.cloudflare.com/cloudflare-one/access-controls/applications/non-http/short-lived-certificates-legacy/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["SSH"]}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/access-controls/applications/non-http/short-lived-certificates-legacy/
+  schema: 1
+---
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/4780.md")
 </aside>
@@ -17,7 +28,7 @@
 <p>Cloudflare Access will take the identity from a token and, using short-lived certificates, authorize the user on the target infrastructure.</p>
 <p>The simplest setup is one where a user's Unix username matches their email address prefix. Issued short-lived certificates will be valid for the user's email address prefix. For example, if a user in your Okta or GSuite organization is registered as <code>jdoe@example.com</code>, they would log in to the SSH server as <code>jdoe</code>.</p>
 <p>For testing purposes, you can run the following command to generate a Unix user on the machine:</p>
-<pre><code class="language-sh">sudo adduser jdoe&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">sudo adduser jdoe&#10;</code></pre>
 <details class="nb-details"><summary>Advanced setup: Differing usernames</summary><div class="nb-details-body">
 @markup("md", "content/.markup/bodies/4781.md")
 </div></details>
@@ -55,20 +66,20 @@
 <p>Use the following command to change directories to the SSH configuration directory on the remote target machine:</p>
 </li>
 </ol>
-<pre><code class="language-sh">cd /etc/ssh&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cd /etc/ssh&#10;</code></pre>
 <ol start="2">
 <li>Once there, you can use the following command to both generate the file and open a text editor to input/paste the public key.</li>
 </ol>
-<pre><code class="language-sh">vim ca.pub&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">vim ca.pub&#10;</code></pre>
 <ol start="3">
 <li>In the <code>ca.pub</code> file, paste the public key without any modifications.</li>
 </ol>
-<pre><code class="language-txt">ecdsa-sha2-nistp256 &lt;redacted&gt; open-ssh-ca@cloudflareaccess.org&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">ecdsa-sha2-nistp256 &lt;redacted&gt; open-ssh-ca@cloudflareaccess.org&#10;</code></pre>
 <p>The <code>ca.pub</code> file can hold multiple keys, listed one per line. Empty lines and comments starting with <code>#</code> are also allowed.</p>
 <ol start="4">
 <li>Save the <code>ca.pub</code> file. In some systems, you may need to use the following command to force the file to save depending on your permissions:</li>
 </ol>
-<pre><code class="language-bash">:w !sudo tee %&#10;:q!&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">:w !sudo tee %&#10;:q!&#10;</code></pre>
 <h2 id="5-modify-your-sshd-config-file"><ol start="5">
 <li>Modify your <code>sshd_config</code> file</li>
 </ol></h2>
@@ -76,11 +87,11 @@
 <ol>
 <li>While in the <code>/etc/ssh</code> directory on the remote machine, open the <code>sshd_config</code> file.</li>
 </ol>
-<pre><code class="language-sh"> sudo vim /etc/ssh/sshd_config&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh"> sudo vim /etc/ssh/sshd_config&#10;</code></pre>
 <ol start="2">
 <li>Press <code>i</code> to enter insert mode, then add the following lines at the top of the file, above all other directives:</li>
 </ol>
-<pre><code class="language-txt">PubkeyAuthentication yes&#10;TrustedUserCAKeys /etc/ssh/ca.pub&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">PubkeyAuthentication yes&#10;TrustedUserCAKeys /etc/ssh/ca.pub&#10;</code></pre>
 <aside class="nb-aside caution">
 <h3 class="nb-aside-title" id="be-aware-of-your-include-statements">Be aware of your include statements</h3>
 @markup("md", "content/.markup/bodies/4778.md")
@@ -101,9 +112,9 @@
 <h3 id="configure-your-client-ssh-config">Configure your client SSH config</h3>
 <p>On the client side, <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/ssh/">configure your device</a> to use Cloudflare Access to reach the protected machine. To use short-lived certificates, you must include the following settings in your SSH config file (<code>~/.ssh/config</code>).</p>
 <p>To save time, you can use the following cloudflared command to print the required configuration command:</p>
-<pre><code class="language-sh">cloudflared access ssh-config --hostname vm.example.com --short-lived-cert&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared access ssh-config --hostname vm.example.com --short-lived-cert&#10;</code></pre>
 <p>If you prefer to configure manually, this is an example of the generated SSH config:</p>
-<pre><code class="language-txt">Match host vm.example.com exec &quot;/usr/local/bin/cloudflared access ssh-gen --hostname %h&quot;&#10;    HostName vm.example.com&#10;    ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h&#10;    IdentityFile ~/.cloudflared/vm.example.com-cf_key&#10;    CertificateFile ~/.cloudflared/vm.example.com-cf_key-cert.pub&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">Match host vm.example.com exec &quot;/usr/local/bin/cloudflared access ssh-gen --hostname %h&quot;&#10;    HostName vm.example.com&#10;    ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h&#10;    IdentityFile ~/.cloudflared/vm.example.com-cf_key&#10;    CertificateFile ~/.cloudflared/vm.example.com-cf_key-cert.pub&#10;</code></pre>
 <h3 id="connect-through-a-browser-based-terminal">Connect through a browser-based terminal</h3>
 <p>End users can connect to the SSH session without any configuration by using Cloudflare's browser-based terminal. To enable, refer to <a href="/cloudflare-one/access-controls/applications/non-http/browser-rendering/">Browser-rendered terminal</a>.</p>
 <p>By default, the browser-based terminal prompts the user for a username/password login. If you would like to use certificate based authentication, make sure you have <a href="#3-generate-a-short-lived-certificate-public-key">created a short-lived certificate</a> for the specific Access application configured for browser-rendered SSH.</p>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/web-analytics/faq/
+  description: Answers to common questions about Cloudflare Web Analytics.
+  full_title: FAQs · Cloudflare Web Analytics docs
+  head_html: <title>FAQs · Cloudflare Web Analytics docs</title><meta name="generator" content="Nift"><meta name="description" content="Answers to common questions about Cloudflare Web Analytics."><link rel="canonical" href="https://developers.cloudflare.com/web-analytics/faq/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/web-analytics/faq/index.md"><meta property="og:title" content="FAQs · Cloudflare Web Analytics docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Answers to common questions about Cloudflare Web Analytics."><meta property="og:url" content="https://developers.cloudflare.com/web-analytics/faq/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare Web Analytics"><meta name="algolia_product_filter" content="Cloudflare Web Analytics"><meta name="pcx_content_group" content="Application performance"><meta name="pcx_content_type" content="Faq"><meta name="algolia_content_type" content="Faq"><meta name="pcx_additional_products" content="Cloudflare Web Analytics"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/web-analytics/faq/#page","headline":"FAQs \u00b7 Cloudflare Web Analytics docs","description":"Answers to common questions about Cloudflare Web Analytics.","url":"https://developers.cloudflare.com/web-analytics/faq/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /web-analytics/faq/
+  schema: 1
+---
 <p>Below you will find answers to our most commonly asked questions. If you cannot find the answer you are looking for, refer to the <a href="https://community.cloudflare.com/">community page</a> to explore more resources.</p>
 <ul>
 <li><a href="#errors">Errors</a></li>
@@ -40,20 +51,20 @@
 <p>Using a domain proxied through Cloudflare with <a href="/web-analytics/get-started/#sites-proxied-through-cloudflare">automatic setup</a> will report stats back to your own domain's <code>/cdn-cgi/rum</code> endpoint. If you have installed JS snippet yourself (a <a href="/web-analytics/get-started/#sites-not-proxied-through-cloudflare">manual setup</a>), it will report back to <code>cloudflareinsights.com/cdn-cgi/rum</code> endpoint.</p>
 <h3 id="can-i-add-web-analytics-to-my-site-using-a-tag-manager-like-google-tag-manager-gtm">Can I add Web Analytics to my site using a tag manager like Google Tag Manager (GTM)?</h3>
 <p>Yes. Instead of embedding the script using a tag manager as shown here:</p>
-<pre><code class="language-html">&lt;script&#10;	type=&quot;module&quot;&#10;	src=&quot;https://static.cloudflareinsights.com/beacon.min.js&quot;&#10;	data-cf-beacon=&#x27;{&quot;token&quot;: &quot;$SITE_TOKEN&quot;}&#x27;&#10;&gt;&lt;/script&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;script&#10;	type=&quot;module&quot;&#10;	src=&quot;https://static.cloudflareinsights.com/beacon.min.js&quot;&#10;	data-cf-beacon=&#x27;{&quot;token&quot;: &quot;$SITE_TOKEN&quot;}&#x27;&#10;&gt;&lt;/script&gt;&#10;</code></pre>
 <p>Add the following script:</p>
-<pre><code class="language-html">&lt;script&#10;	type=&quot;module&quot;&#10;	src=&quot;https://static.cloudflareinsights.com/beacon.min.js?token=$SITE_TOKEN&quot;&#10;&gt;&lt;/script&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;script&#10;	type=&quot;module&quot;&#10;	src=&quot;https://static.cloudflareinsights.com/beacon.min.js?token=$SITE_TOKEN&quot;&#10;&gt;&lt;/script&gt;&#10;</code></pre>
 <h3 id="what-do-i-need-to-add-to-my-content-security-policy-csp">What do I need to add to my Content Security Policy (CSP)?</h3>
 <p>If your site implements a Content Security Policy (CSP), you'll need to add some entries to this HTTP header to allow browsers to download the beacon script and transmit beacons to Cloudflare.</p>
 <p><strong>Warning:</strong> be sure to validate any CSP changes on a test environment before releasing an update to your production environment. You may wish to use <a href="https://developers.cloudflare.com/client-side-security/rules/">Content Security Rules</a> or trial with <code>Content-Security-Policy-Report-Only</code> first.</p>
 <p>You'll first need to permit our script to execute by adding it to your <code>script-src</code> directive:</p>
-<pre><code>script-src [...existing values...] https://static.cloudflareinsights.com/beacon.min.js&#10;</code></pre>
+<pre tabindex="0"><code>script-src [...existing values...] https://static.cloudflareinsights.com/beacon.min.js&#10;</code></pre>
 <p><em>Note: if you have a query string in the script as per the example above for Google Tag Manager, then you'll need to include this in the URL too, e.g. <code>script-src [...existing values...] https://static.cloudflareinsights.com/beacon.min.js?token=$SITE_TOKEN</code></em></p>
 <p>Secondly, you'll need to permit the endpoint we transmit the beacon data to.</p>
 <p>For automatic injection, this will be the same domain, so ensure your <code>connect-src</code> includes <code>'self'</code>:</p>
-<pre><code>connect-src [...existing values...] &#x27;self&#x27;&#10;</code></pre>
+<pre tabindex="0"><code>connect-src [...existing values...] &#x27;self&#x27;&#10;</code></pre>
 <p>For manual embedding, this script instead connects to <code>cloudflareinsights.com</code>, so ensure that's included instead:</p>
-<pre><code>connect-src [...existing values...] cloudflareinsights.com&#10;</code></pre>
+<pre tabindex="0"><code>connect-src [...existing values...] cloudflareinsights.com&#10;</code></pre>
 <h3 id="how-can-i-enforce-subresource-integrity-sri-with-the-js-beacon">How can I enforce Subresource Integrity (SRI) with the JS beacon?</h3>
 <p>If you're using the automated injection (i.e. not the manually-embedded script approach mentioned above), Cloudflare automatically includes an <code>integrity</code> attribute in the <code>&lt;script&gt;</code>. This ensures the script will only execute if a local hash of its downloaded contents match the integrity hash supplied in the HTML.</p>
 <p>Unfortunately, if you're using the manually-embedded script approach, there is no current way to safely apply an <code>integrity</code> attribute because we do not support version-pinning our beacon script. We do this because it ensures we can release periodic updates to maintain security, address bugs and ensure</p>
@@ -65,9 +76,9 @@
 <h3 id="what-prevents-the-js-snippet-from-being-added-to-a-page">What prevents the JS Snippet from being added to a page?</h3>
 <p>For Cloudflare to automatically add the JavaScript snippet, your pages need to have valid HTML.</p>
 <p>For example, Cloudflare would not be able to enable Web Analytics on a page like this:</p>
-<pre><code class="language-html">Hello world.&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">Hello world.&#10;</code></pre>
 <p>For Web Analytics to correctly insert the JavaScript snippet, you would need valid HTML output, such as:</p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;&#10;&lt;html&gt;&#10;	&lt;head&gt;&#10;		&lt;title&gt;Title&lt;/title&gt;&#10;	&lt;/head&gt;&#10;	&lt;body&gt;&#10;&#10;		&lt;p&gt;Hello world.&lt;/p&gt;&#10;&#10;	&lt;/body&gt;&#10;&lt;/html&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;!DOCTYPE html&gt;&#10;&lt;html&gt;&#10;	&lt;head&gt;&#10;		&lt;title&gt;Title&lt;/title&gt;&#10;	&lt;/head&gt;&#10;	&lt;body&gt;&#10;&#10;		&lt;p&gt;Hello world.&lt;/p&gt;&#10;&#10;	&lt;/body&gt;&#10;&lt;/html&gt;&#10;</code></pre>
 <h3 id="can-i-use-real-user-monitoring-rum-with-cloudflare-workers">Can I use Real User Monitoring (RUM) with Cloudflare Workers?</h3>
 <p>Cloudflare's Real User Monitoring (RUM) operates exclusively on the initial client request and cannot collect metrics from Worker subrequests. This is a fundamental architectural limitation designed to ensure accurate performance measurements and prevent duplicate or misleading analytics data.</p>
 <hr />

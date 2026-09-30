@@ -1,7 +1,18 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/agents/runtime/operations/configuration/
+  description: Configure Wrangler bindings, environment variables, and type generation for a project using the Agents SDK.
+  full_title: Configuration · Cloudflare Agents docs
+  head_html: <title>Configuration · Cloudflare Agents docs</title><meta name="generator" content="Nift"><meta name="description" content="Configure Wrangler bindings, environment variables, and type generation for a project using the Agents SDK."><link rel="canonical" href="https://developers.cloudflare.com/agents/runtime/operations/configuration/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/agents/runtime/operations/configuration/index.md"><meta property="og:title" content="Configuration · Cloudflare Agents docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Configure Wrangler bindings, environment variables, and type generation for a project using the Agents SDK."><meta property="og:url" content="https://developers.cloudflare.com/agents/runtime/operations/configuration/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Agents"><meta name="algolia_product_filter" content="Agents"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Agents"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/agents/runtime/operations/configuration/#page","headline":"Configuration \u00b7 Cloudflare Agents docs","description":"Configure Wrangler bindings, environment variables, and type generation for a project using the Agents SDK.","url":"https://developers.cloudflare.com/agents/runtime/operations/configuration/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /agents/runtime/operations/configuration/
+  schema: 1
+---
 <p>This guide covers everything you need to configure agents for local development and production deployment, including Wrangler configuration file setup, type generation, environment variables, and the Cloudflare dashboard.</p>
 <h2 id="project-structure">Project structure</h2>
 <p>The typical file structure for an Agent project created from <code>npm create cloudflare@latest agents-starter -- --template cloudflare/agents-starter</code> follows:</p>
-<pre class="nb-file-tree">&#10;&#10;&#10;@markup("md", "content/.markup/bodies/2311.md")&#10;&#10;&#10;</pre>
+<pre tabindex="0" class="nb-file-tree">&#10;&#10;&#10;@markup("md", "content/.markup/bodies/2311.md")&#10;&#10;&#10;</pre>
 <h2 id="wrangler-configuration-file">Wrangler configuration file</h2>
 <p>The <code>wrangler.jsonc</code> file configures your Cloudflare Worker and its bindings. Here is a complete example for an agents project:</p>
 <div class="nb-wrangler-config">
@@ -86,11 +97,11 @@
 <h2 id="typescript-configuration">TypeScript configuration</h2>
 <p>The Agents SDK ships a shared <code>tsconfig.json</code> that sets all the compiler options needed for agents projects — including the <code>ES2021</code> target required for <code>@callable()</code> decorators, strict mode, bundler module resolution, and Workers types.</p>
 <p>Extend it in your <code>tsconfig.json</code>:</p>
-<pre><code class="language-json">{&#10;	&quot;extends&quot;: &quot;agents/tsconfig&quot;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;extends&quot;: &quot;agents/tsconfig&quot;&#10;}&#10;</code></pre>
 <p>This is equivalent to:</p>
-<pre><code class="language-json">{&#10;	&quot;compilerOptions&quot;: {&#10;		&quot;target&quot;: &quot;ES2021&quot;,&#10;		&quot;lib&quot;: [&quot;ES2022&quot;, &quot;DOM&quot;, &quot;DOM.Iterable&quot;],&#10;		&quot;jsx&quot;: &quot;react-jsx&quot;,&#10;		&quot;module&quot;: &quot;ES2022&quot;,&#10;		&quot;moduleResolution&quot;: &quot;bundler&quot;,&#10;		&quot;types&quot;: [&quot;node&quot;, &quot;@cloudflare/workers-types&quot;, &quot;vite/client&quot;],&#10;		&quot;allowImportingTsExtensions&quot;: true,&#10;		&quot;noEmit&quot;: true,&#10;		&quot;isolatedModules&quot;: true,&#10;		&quot;verbatimModuleSyntax&quot;: true,&#10;		&quot;esModuleInterop&quot;: true,&#10;		&quot;forceConsistentCasingInFileNames&quot;: true,&#10;		&quot;strict&quot;: true,&#10;		&quot;skipLibCheck&quot;: true&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;compilerOptions&quot;: {&#10;		&quot;target&quot;: &quot;ES2021&quot;,&#10;		&quot;lib&quot;: [&quot;ES2022&quot;, &quot;DOM&quot;, &quot;DOM.Iterable&quot;],&#10;		&quot;jsx&quot;: &quot;react-jsx&quot;,&#10;		&quot;module&quot;: &quot;ES2022&quot;,&#10;		&quot;moduleResolution&quot;: &quot;bundler&quot;,&#10;		&quot;types&quot;: [&quot;node&quot;, &quot;@cloudflare/workers-types&quot;, &quot;vite/client&quot;],&#10;		&quot;allowImportingTsExtensions&quot;: true,&#10;		&quot;noEmit&quot;: true,&#10;		&quot;isolatedModules&quot;: true,&#10;		&quot;verbatimModuleSyntax&quot;: true,&#10;		&quot;esModuleInterop&quot;: true,&#10;		&quot;forceConsistentCasingInFileNames&quot;: true,&#10;		&quot;strict&quot;: true,&#10;		&quot;skipLibCheck&quot;: true&#10;	}&#10;}&#10;</code></pre>
 <p>You can override individual options as needed:</p>
-<pre><code class="language-json">{&#10;	&quot;extends&quot;: &quot;agents/tsconfig&quot;,&#10;	&quot;compilerOptions&quot;: {&#10;		&quot;jsx&quot;: &quot;preserve&quot;&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;extends&quot;: &quot;agents/tsconfig&quot;,&#10;	&quot;compilerOptions&quot;: {&#10;		&quot;jsx&quot;: &quot;preserve&quot;&#10;	}&#10;}&#10;</code></pre>
 <aside class="nb-aside caution">
 @markup("md", "content/.markup/bodies/2308.md")
 </aside>
@@ -106,17 +117,17 @@
 <p>Wrangler can generate TypeScript types for your bindings.</p>
 <h3 id="automatic-generation">Automatic generation</h3>
 <p>Run the types command:</p>
-<pre><code class="language-sh">npx wrangler types&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler types&#10;</code></pre>
 <p>This creates or updates <code>worker-configuration.d.ts</code> with your <code>Env</code> type.</p>
 <h3 id="custom-output-path">Custom output path</h3>
 <p>Specify a custom path:</p>
-<pre><code class="language-sh">npx wrangler types env.d.ts&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler types env.d.ts&#10;</code></pre>
 <h3 id="without-runtime-types">Without runtime types</h3>
 <p>For cleaner output (recommended for agents):</p>
-<pre><code class="language-sh">npx wrangler types env.d.ts --include-runtime false&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler types env.d.ts --include-runtime false&#10;</code></pre>
 <p>This generates just your bindings without Cloudflare runtime types.</p>
 <h3 id="example-generated-output">Example generated output</h3>
-<pre><code class="language-ts">// env.d.ts (generated)&#10;declare namespace Cloudflare {&#10;	interface Env {&#10;		OPENAI_API_KEY: string;&#10;		Counter: DurableObjectNamespace;&#10;		ChatAgent: DurableObjectNamespace;&#10;	}&#10;}&#10;interface Env extends Cloudflare.Env {}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// env.d.ts (generated)&#10;declare namespace Cloudflare {&#10;	interface Env {&#10;		OPENAI_API_KEY: string;&#10;		Counter: DurableObjectNamespace;&#10;		ChatAgent: DurableObjectNamespace;&#10;	}&#10;}&#10;interface Env extends Cloudflare.Env {}&#10;</code></pre>
 <h3 id="manual-type-definition">Manual type definition</h3>
 <p>You can also define types manually:</p>
 <div class="nb-type-script-example">
@@ -124,18 +135,18 @@
 </div>
 <h3 id="adding-to-package-json">Adding to package.json</h3>
 <p>Add a script for easy regeneration:</p>
-<pre><code class="language-json">{&#10;	&quot;scripts&quot;: {&#10;		&quot;types&quot;: &quot;wrangler types env.d.ts --include-runtime false&quot;&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;scripts&quot;: {&#10;		&quot;types&quot;: &quot;wrangler types env.d.ts --include-runtime false&quot;&#10;	}&#10;}&#10;</code></pre>
 <h2 id="environment-variables-and-secrets">Environment variables and secrets</h2>
 <h3 id="local-development-env">Local development (<code>.env</code>)</h3>
 <p>Create a <code>.env</code> file for local secrets (add to <code>.gitignore</code>):</p>
-<pre><code class="language-sh">&#35; .env&#10;OPENAI_API_KEY=sk-...&#10;GITHUB_WEBHOOK_SECRET=whsec_...&#10;DATABASE_URL=postgres://...&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">&#35; .env&#10;OPENAI_API_KEY=sk-...&#10;GITHUB_WEBHOOK_SECRET=whsec_...&#10;DATABASE_URL=postgres://...&#10;</code></pre>
 <p>Access in your agent:</p>
 <div class="nb-type-script-example">
 @markup("md", "content/.markup/bodies/2322.md")
 </div>
 <h3 id="production-secrets">Production secrets</h3>
 <p>Use <code>wrangler secret</code> for production:</p>
-<pre><code class="language-sh">&#35; Add a secret&#10;npx wrangler secret put OPENAI_API_KEY&#10;&#35; Enter value when prompted&#10;&#10;&#35; List secrets&#10;npx wrangler secret list&#10;&#10;&#35; Delete a secret&#10;npx wrangler secret delete OPENAI_API_KEY&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">&#35; Add a secret&#10;npx wrangler secret put OPENAI_API_KEY&#10;&#35; Enter value when prompted&#10;&#10;&#35; List secrets&#10;npx wrangler secret list&#10;&#10;&#35; Delete a secret&#10;npx wrangler secret delete OPENAI_API_KEY&#10;</code></pre>
 <h3 id="non-secret-variables">Non-secret variables</h3>
 <p>For non-sensitive configuration, use <code>vars</code> in the Wrangler configuration file:</p>
 <div class="nb-wrangler-config">
@@ -151,24 +162,24 @@
 @markup("md", "content/.markup/bodies/2325.md")
 </div>
 <p>Deploy to specific environment:</p>
-<pre><code class="language-sh">npx wrangler deploy --env staging&#10;npx wrangler deploy --env production&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler deploy --env staging&#10;npx wrangler deploy --env production&#10;</code></pre>
 <h2 id="local-development">Local development</h2>
 <h3 id="starting-the-dev-server">Starting the dev server</h3>
 <p>With Vite (recommended for full stack apps):</p>
-<pre><code class="language-sh">npx vite dev&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx vite dev&#10;</code></pre>
 <p>Without Vite:</p>
-<pre><code class="language-sh">npx wrangler dev&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler dev&#10;</code></pre>
 <h3 id="local-state-persistence">Local state persistence</h3>
 <p>Durable Object state is persisted locally in <code>.wrangler/state/</code>:</p>
-<pre class="nb-file-tree">&#10;&#10;&#10;@markup("md", "content/.markup/bodies/2326.md")&#10;&#10;&#10;</pre>
+<pre tabindex="0" class="nb-file-tree">&#10;&#10;&#10;@markup("md", "content/.markup/bodies/2326.md")&#10;&#10;&#10;</pre>
 <h3 id="clearing-local-state">Clearing local state</h3>
 <p>To reset all local Durable Object state:</p>
-<pre><code class="language-sh">rm -rf .wrangler/state&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">rm -rf .wrangler/state&#10;</code></pre>
 <p>Or restart with fresh state:</p>
-<pre><code class="language-sh">npx wrangler dev --persist-to=&quot;&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler dev --persist-to=&quot;&quot;&#10;</code></pre>
 <h3 id="inspecting-local-sqlite">Inspecting local SQLite</h3>
 <p>You can inspect agent state directly:</p>
-<pre><code class="language-sh">&#35; Find the SQLite file&#10;ls .wrangler/state/v3/d1/&#10;&#10;&#35; Open with sqlite3&#10;sqlite3 .wrangler/state/v3/d1/miniflare-D1DatabaseObject/*.sqlite&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">&#35; Find the SQLite file&#10;ls .wrangler/state/v3/d1/&#10;&#10;&#35; Open with sqlite3&#10;sqlite3 .wrangler/state/v3/d1/miniflare-D1DatabaseObject/*.sqlite&#10;</code></pre>
 <h2 id="dashboard-setup">Dashboard setup</h2>
 <h3 id="automatic-resources">Automatic resources</h3>
 <p>When you deploy, Cloudflare automatically creates:</p>
@@ -189,7 +200,7 @@
 </ul>
 <h3 id="real-time-logs">Real-time logs</h3>
 <p>View live logs from your agents:</p>
-<pre><code class="language-sh">npx wrangler tail&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler tail&#10;</code></pre>
 <p>Or in the dashboard:</p>
 <ol>
 <li>Go to your Worker.</li>
@@ -204,7 +215,7 @@
 </ul>
 <h2 id="production-deployment">Production deployment</h2>
 <h3 id="basic-deploy">Basic deploy</h3>
-<pre><code class="language-sh">npx wrangler deploy&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler deploy&#10;</code></pre>
 <p>This:</p>
 <ol>
 <li>Bundles your code</li>
@@ -223,10 +234,10 @@
 </div>
 <h3 id="preview-deployments">Preview deployments</h3>
 <p>Deploy without affecting production:</p>
-<pre><code class="language-sh">npx wrangler deploy --dry-run    # See what would be uploaded&#10;npx wrangler versions upload     # Upload new version&#10;npx wrangler versions deploy     # Gradually roll out&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler deploy --dry-run    # See what would be uploaded&#10;npx wrangler versions upload     # Upload new version&#10;npx wrangler versions deploy     # Gradually roll out&#10;</code></pre>
 <h3 id="rollbacks">Rollbacks</h3>
 <p>Roll back to a previous version:</p>
-<pre><code class="language-sh">npx wrangler rollback&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler rollback&#10;</code></pre>
 <h2 id="multi-environment-setup">Multi-environment setup</h2>
 <h3 id="environment-configuration">Environment configuration</h3>
 <p>Define environments in the Wrangler configuration file:</p>
@@ -234,7 +245,7 @@
 @markup("md", "content/.markup/bodies/2329.md")
 </div>
 <h3 id="deploying-to-environments">Deploying to environments</h3>
-<pre><code class="language-sh">&#35; Deploy to staging&#10;npx wrangler deploy --env staging&#10;&#10;&#35; Deploy to production&#10;npx wrangler deploy --env production&#10;&#10;&#35; Set secrets per environment&#10;npx wrangler secret put OPENAI_API_KEY --env staging&#10;npx wrangler secret put OPENAI_API_KEY --env production&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">&#35; Deploy to staging&#10;npx wrangler deploy --env staging&#10;&#10;&#35; Deploy to production&#10;npx wrangler deploy --env production&#10;&#10;&#35; Set secrets per environment&#10;npx wrangler secret put OPENAI_API_KEY --env staging&#10;npx wrangler secret put OPENAI_API_KEY --env production&#10;</code></pre>
 <h3 id="separate-durable-objects">Separate Durable Objects</h3>
 <p>Named environments do not inherit Durable Object bindings. Repeat the bindings for each environment, as in the <a href="#multi-environment-setup">multi-environment setup</a>. Each environment gets its own Durable Objects. Staging agents do not share state with production agents.</p>
 <p>To explicitly separate:</p>
@@ -283,10 +294,10 @@
 </div>
 <h3 id="cannot-find-module-in-types">Cannot find module in types</h3>
 <p>Regenerate types:</p>
-<pre><code class="language-sh">npx wrangler types env.d.ts --include-runtime false&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler types env.d.ts --include-runtime false&#10;</code></pre>
 <h3 id="secrets-not-loading-locally">Secrets not loading locally</h3>
 <p>Check that <code>.env</code> exists and contains the variable:</p>
-<pre><code class="language-sh">cat .env&#10;&#35; Should show: MY_SECRET=value&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cat .env&#10;&#35; Should show: MY_SECRET=value&#10;</code></pre>
 <h3 id="migration-tag-conflict-legacy-migrations-only">Migration tag conflict (legacy <code>migrations</code> only)</h3>
 <p>If your Worker uses the legacy <a href="/durable-objects/reference/durable-object-class-migrations-legacy/"><code>migrations</code></a> array, each entry must have a unique <code>tag</code>:</p>
 <div class="nb-wrangler-config">
@@ -297,6 +308,6 @@
 </div>
 <p>Consider converting to the declarative <a href="/durable-objects/reference/durable-objects-migrations/"><code>exports</code></a> field.</p>
 <h2 id="next-steps">Next steps</h2>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/agents-api/"><h3 id="card-agents-api-agents-runtime-agents-api">Agents API</h3><p>Complete API reference for the Agents SDK.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/communication/routing/"><h3 id="card-routing-agents-runtime-communication-routing">Routing</h3><p>Route requests to your agent instances.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/execution/schedule-tasks/"><h3 id="card-schedule-tasks-agents-runtime-execution-schedule-tasks">Schedule tasks</h3><p>Background processing with delayed and cron-based tasks.</p></a></p>
+<div class="nb-card nb-link-card"><h3 id="card-agents-api-agents-runtime-agents-api"><a href="/agents/runtime/agents-api/">Agents API</a></h3><p>Complete API reference for the Agents SDK.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-routing-agents-runtime-communication-routing"><a href="/agents/runtime/communication/routing/">Routing</a></h3><p>Route requests to your agent instances.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-schedule-tasks-agents-runtime-execution-schedule-tasks"><a href="/agents/runtime/execution/schedule-tasks/">Schedule tasks</a></h3><p>Background processing with delayed and cron-based tasks.</p></div>

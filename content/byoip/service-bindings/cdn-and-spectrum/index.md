@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/byoip/service-bindings/cdn-and-spectrum/
+  description: Cloudflare allows users to use their Cloudflare prefix to route traffic to a different service. Service bindings must be created on the parent account of the prefix.
+  full_title: Use BYOIP with CDN and Spectrum · Cloudflare BYOIP docs
+  head_html: <title>Use BYOIP with CDN and Spectrum · Cloudflare BYOIP docs</title><meta name="generator" content="Nift"><meta name="description" content="Cloudflare allows users to use their Cloudflare prefix to route traffic to a different service. Service bindings must be created on the parent account of the prefix."><link rel="canonical" href="https://developers.cloudflare.com/byoip/service-bindings/cdn-and-spectrum/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/byoip/service-bindings/cdn-and-spectrum/index.md"><meta property="og:title" content="Use BYOIP with CDN and Spectrum · Cloudflare BYOIP docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Cloudflare allows users to use their Cloudflare prefix to route traffic to a different service. Service bindings must be created on the parent account of the prefix."><meta property="og:url" content="https://developers.cloudflare.com/byoip/service-bindings/cdn-and-spectrum/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="BYOIP"><meta name="algolia_product_filter" content="BYOIP"><meta name="pcx_content_group" content="Network security"><meta name="pcx_content_type" content="Tutorial"><meta name="algolia_content_type" content="Tutorial"><meta name="pcx_additional_products" content="BYOIP"><meta name="pcx_tags" content="DNS,Integration"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/byoip/service-bindings/cdn-and-spectrum/#page","headline":"Use BYOIP with CDN and Spectrum \u00b7 Cloudflare BYOIP docs","description":"Cloudflare allows users to use their Cloudflare prefix to route traffic to a different service. Service bindings must be created on the parent account of the prefix.","url":"https://developers.cloudflare.com/byoip/service-bindings/cdn-and-spectrum/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["DNS","Integration"]}</script>
+  markdown: true
+  noindex: false
+  route: /byoip/service-bindings/cdn-and-spectrum/
+  schema: 1
+---
 <p>With <a href="/byoip/service-bindings/">service bindings</a>, CDN<sup><a href="#footnote-1">1</a></sup> customers using BYOIP can take the same prefix they have onboarded to Cloudflare and use it to selectively route traffic on a per-IP address basis to <a href="/spectrum/">Spectrum</a><sup><a href="#footnote-2">2</a></sup>, or vice versa. This means:</p>
 <ul>
 <li>
@@ -54,7 +65,7 @@
 <li>Verify all service bindings</li>
 </ol></h3>
 <p>After the propagation time (four to six hours), the <a href="/api/resources/addressing/subresources/prefixes/subresources/service_bindings/methods/get/">List Service Bindings</a> endpoint should return all service bindings that are part of the prefix - in this case, CDN and Spectrum.</p>
-<pre class="nb-api-request"><code class="language-bash">curl --request GET \&#10;  --url https://api.cloudflare.com/client/v4/accounts/{account_id}/addressing/prefixes/{prefix_id}/bindings \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot;</code></pre>
+<pre tabindex="0" class="nb-api-request"><code class="language-bash">curl --request GET \&#10;  --url https://api.cloudflare.com/client/v4/accounts/{account_id}/addressing/prefixes/{prefix_id}/bindings \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot;</code></pre>
 <hr />
 <h2 id="set-up-your-cloudflare-services">Set up your Cloudflare services</h2>
 <h3 id="cdn">CDN</h3>
@@ -63,11 +74,7 @@
 @markup("md", "content/.markup/bodies/3753.md")
 </aside>
 <h4 id="address-maps">Address maps</h4>
-<p>Use <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/3760.md")
-</div> to specify which IPs should be used by Cloudflare in DNS responses when a record is <div class="nb-interactive-component" data-cf-component="GlossaryTooltip">
-@markup("md", "content/.markup/bodies/3761.md")
-</div>.
+<p>Use <span class="nb-glossary-tooltip" title="address map">address maps</span> to specify which IPs should be used by Cloudflare in DNS responses when a record is <span class="nb-glossary-tooltip" title="proxy status">proxied</span>.</p>
 <p>You can choose between two different scopes:</p>
 <ul>
 <li>Account-level: uses the address map for all proxied DNS records across all of the zones within an account.</li>
@@ -103,7 +110,7 @@
 </aside>
 <p>Configuring Spectrum to use your own IP address is only possible via the <a href="/api/resources/spectrum/">Cloudflare API</a>.</p>
 <p>The <code>origin_direct</code> field takes the origin IP address, while <code>edge_ips</code> allows you to define which IP address from your BYOIP prefix Cloudflare should use to process requests for your Spectrum application.</p>
-<pre class="nb-api-request"><code class="language-bash">curl --request POST \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/spectrum/apps \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;[&#10;  {&#10;    &quot;protocol&quot;: &quot;tcp/22&quot;,&#10;    &quot;dns&quot;: {&#10;      &quot;type&quot;: &quot;CNAME&quot;,&#10;      &quot;name&quot;: &quot;ssh.example.com&quot;&#10;    },&#10;    &quot;origin_direct&quot;: [&#10;      &quot;tcp://192.0.2.1:22&quot;&#10;    ],&#10;    &quot;proxy_protocol&quot;: &quot;off&quot;,&#10;    &quot;ip_firewall&quot;: true,&#10;    &quot;tls&quot;: &quot;full&quot;,&#10;    &quot;edge_ips&quot;: {&#10;      &quot;type&quot;: &quot;static&quot;,&#10;      &quot;ips&quot;: [&#10;        &quot;203.0.113.18&quot;&#10;      ]&#10;    },&#10;    &quot;traffic_type&quot;: &quot;direct&quot;&#10;  }&#10;]&#x27;</code></pre>
+<pre tabindex="0" class="nb-api-request"><code class="language-bash">curl --request POST \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/spectrum/apps \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;[&#10;  {&#10;    &quot;protocol&quot;: &quot;tcp/22&quot;,&#10;    &quot;dns&quot;: {&#10;      &quot;type&quot;: &quot;CNAME&quot;,&#10;      &quot;name&quot;: &quot;ssh.example.com&quot;&#10;    },&#10;    &quot;origin_direct&quot;: [&#10;      &quot;tcp://192.0.2.1:22&quot;&#10;    ],&#10;    &quot;proxy_protocol&quot;: &quot;off&quot;,&#10;    &quot;ip_firewall&quot;: true,&#10;    &quot;tls&quot;: &quot;full&quot;,&#10;    &quot;edge_ips&quot;: {&#10;      &quot;type&quot;: &quot;static&quot;,&#10;      &quot;ips&quot;: [&#10;        &quot;203.0.113.18&quot;&#10;      ]&#10;    },&#10;    &quot;traffic_type&quot;: &quot;direct&quot;&#10;  }&#10;]&#x27;</code></pre>
 <hr />
 <h2 id="optional-add-layer-7-functionality">(Optional) Add layer 7 functionality</h2>
 <p>Leverage other features according to your needs. For example:</p>

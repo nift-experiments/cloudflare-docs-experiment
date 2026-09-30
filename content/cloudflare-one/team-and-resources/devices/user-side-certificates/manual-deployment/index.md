@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/user-side-certificates/manual-deployment/
+  description: Manually add a Cloudflare certificate to mobile devices and individual applications.
+  full_title: Install certificate manually · Cloudflare One docs
+  head_html: <title>Install certificate manually · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="Manually add a Cloudflare certificate to mobile devices and individual applications."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/user-side-certificates/manual-deployment/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/user-side-certificates/manual-deployment/index.md"><meta property="og:title" content="Install certificate manually · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Manually add a Cloudflare certificate to mobile devices and individual applications."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/user-side-certificates/manual-deployment/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Cloudflare One"><meta name="pcx_tags" content="TLS"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/user-side-certificates/manual-deployment/#page","headline":"Install certificate manually \u00b7 Cloudflare One docs","description":"Manually add a Cloudflare certificate to mobile devices and individual applications.","url":"https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/user-side-certificates/manual-deployment/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["TLS"]}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/team-and-resources/devices/user-side-certificates/manual-deployment/
+  schema: 1
+---
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/5974.md")
 </aside>
@@ -30,15 +41,15 @@
 </ol></h2>
 <p>To verify your download, use a terminal to check that the downloaded certificate's hash matches the thumbprint listed under <strong>Certificate thumbprint</strong>. For example:</p>
 <h3 id="sha1">SHA1</h3>
-<pre><code class="language-sh">openssl x509 -noout -fingerprint -sha1 -inform der -in &lt;certificate.crt&gt;&#10;</code></pre>
-<pre><code class="language-sh">SHA1 Fingerprint=BB:2D:B6:3D:6B:DE:DA:06:4E:CA:CB:40:F6:F2:61:40:B7:10:F0:6C&#10;</code></pre>
-<pre><code class="language-sh">openssl x509 -noout -fingerprint -sha1 -inform pem -in &lt;certificate.pem&gt;&#10;</code></pre>
-<pre><code class="language-sh">SHA1 Fingerprint=BB:2D:B6:3D:6B:DE:DA:06:4E:CA:CB:40:F6:F2:61:40:B7:10:F0:6C&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">openssl x509 -noout -fingerprint -sha1 -inform der -in &lt;certificate.crt&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">SHA1 Fingerprint=BB:2D:B6:3D:6B:DE:DA:06:4E:CA:CB:40:F6:F2:61:40:B7:10:F0:6C&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">openssl x509 -noout -fingerprint -sha1 -inform pem -in &lt;certificate.pem&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">SHA1 Fingerprint=BB:2D:B6:3D:6B:DE:DA:06:4E:CA:CB:40:F6:F2:61:40:B7:10:F0:6C&#10;</code></pre>
 <h3 id="sha256">SHA256</h3>
-<pre><code class="language-sh">openssl x509 -noout -fingerprint -sha256 -inform der -in &lt;certificate.crt&gt;&#10;</code></pre>
-<pre><code class="language-sh">sha256 Fingerprint=F5:E1:56:C4:89:78:77:AD:79:3A:1E:83:FA:77:83:F1:9C:B0:C6:1B:58:2C:2F:50:11:B3:37:72:7C:62:3D:EF&#10;</code></pre>
-<pre><code class="language-sh">openssl x509 -noout -fingerprint -sha256 -inform pem -in &lt;certificate.pem&gt;&#10;</code></pre>
-<pre><code class="language-sh">sha256 Fingerprint=F5:E1:56:C4:89:78:77:AD:79:3A:1E:83:FA:77:83:F1:9C:B0:C6:1B:58:2C:2F:50:11:B3:37:72:7C:62:3D:EF&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">openssl x509 -noout -fingerprint -sha256 -inform der -in &lt;certificate.crt&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">sha256 Fingerprint=F5:E1:56:C4:89:78:77:AD:79:3A:1E:83:FA:77:83:F1:9C:B0:C6:1B:58:2C:2F:50:11:B3:37:72:7C:62:3D:EF&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">openssl x509 -noout -fingerprint -sha256 -inform pem -in &lt;certificate.pem&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">sha256 Fingerprint=F5:E1:56:C4:89:78:77:AD:79:3A:1E:83:FA:77:83:F1:9C:B0:C6:1B:58:2C:2F:50:11:B3:37:72:7C:62:3D:EF&#10;</code></pre>
 <h2 id="3-optional-convert-the-certificate"><ol start="3">
 <li>(Optional) Convert the certificate</li>
 </ol></h2>
@@ -266,12 +277,12 @@
 <li><a href="#download-a-cloudflare-root-certificate">Download a Cloudflare certificate</a> in <code>.pem</code> format.</li>
 <li>Set the <code>cafile</code> configuration to use the Cloudflare certificate:</li>
 </ol>
-<pre><code class="language-sh">npm config set cafile [PATH_TO_CLOUDFLARE_CERT.pem]&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npm config set cafile [PATH_TO_CLOUDFLARE_CERT.pem]&#10;</code></pre>
 <p>On some systems you may need to set the following in your path/export list:</p>
-<pre><code class="language-sh">export NODE_EXTRA_CA_CERTS=&#x27;[PATH_TO_CLOUDFLARE_CERT.pem]&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">export NODE_EXTRA_CA_CERTS=&#x27;[PATH_TO_CLOUDFLARE_CERT.pem]&#x27;&#10;</code></pre>
 <h4 id="php-composer">PHP Composer</h4>
 <p>The command below will set the <a href="https://getcomposer.org/doc/06-config.md#cafile"><code>cafile</code></a> configuration inside of <code>composer.json</code> to use the Cloudflare root certificate. Make sure to <a href="#download-a-cloudflare-root-certificate">download a certificate</a> in the <code>.pem</code> file type.</p>
-<pre><code class="language-sh">composer config cafile [PATH_TO_CLOUDFLARE_CERT.pem]&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">composer config cafile [PATH_TO_CLOUDFLARE_CERT.pem]&#10;</code></pre>
 <p>Alternatively, you can add this manually to your <code>composer.json</code> file under the <code>config</code> key.</p>
 <h4 id="docker">Docker</h4>
 <p>To install a certificate for use in a Docker container:</p>
@@ -279,11 +290,11 @@
 <li><a href="#download-a-cloudflare-root-certificate">Download a Cloudflare certificate</a> in <code>.pem</code> format.</li>
 <li>Create a directory for certificates in your Docker project:</li>
 </ol>
-<pre><code class="language-sh">cd docker-project&#10;mkdir certs&#10;mv /path/to/downloaded/certificate.pem certs/&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cd docker-project&#10;mkdir certs&#10;mv /path/to/downloaded/certificate.pem certs/&#10;</code></pre>
 <ol start="3">
 <li>Verify the certificate was moved to the directory correctly. Your project should have the following structure:</li>
 </ol>
-<pre><code class="language-sh">docker-project/&#10;├── Dockerfile&#10;└── certs/&#10;    └── certificate.pem&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">docker-project/&#10;├── Dockerfile&#10;└── certs/&#10;    └── certificate.pem&#10;</code></pre>
 <ol start="4">
 <li>Add the certificate to your Docker image:</li>
 </ol>
@@ -294,7 +305,7 @@
 <p>Command-line tools typically use the system certificate store but may require specific configuration.</p>
 <h4 id="curl">cURL</h4>
 <p>By default, cURL will use your operating system's native certificate store. To force cURL to use your default certificate, add the <code>--ca-native</code> flag to the command. For example:</p>
-<pre><code class="language-curl">curl --ca-native https://example.com&#10;</code></pre>
+<pre tabindex="0"><code class="language-curl">curl --ca-native https://example.com&#10;</code></pre>
 <div class="nb-tabs" data-nb-tabs><div role="tablist" aria-label="Options" data-nb-tabs-list></div><div data-nb-tabs-panels>
 @input("content/.markup/bodies/6009.md")
 </div></div>
@@ -319,7 +330,7 @@
 </ol>
 </li>
 </ol>
-<pre><code class="language-txt">/Applications/Android Studio.app/Contents/jbr/Contents/Home&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">/Applications/Android Studio.app/Contents/jbr/Contents/Home&#10;</code></pre>
 <ol start="3">
 <li>Add the Cloudflare certificate to Android Studio's JVM:</li>
 </ol>
@@ -356,7 +367,7 @@
 </ol>
 </li>
 </ol>
-<pre><code class="language-txt">&#42;** System properties:&#10;java.home=/Users/&lt;username&gt;/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.macosx.aarch64_17.0.8.v20230831-1047/jre&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">&#42;** System properties:&#10;java.home=/Users/&lt;username&gt;/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.macosx.aarch64_17.0.8.v20230831-1047/jre&#10;</code></pre>
 <ol start="4">
 <li>
 <p>Copy the full path after <code>java.home=</code>.</p>
@@ -377,16 +388,16 @@
 <ol>
 <li>Get curl's <code>cacert</code> bundle.</li>
 </ol>
-<pre><code class="language-sh">curl --remote-name https://curl.se/ca/cacert.pem&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">curl --remote-name https://curl.se/ca/cacert.pem&#10;</code></pre>
 <ol start="2">
 <li><a href="#download-a-cloudflare-root-certificate">Download a Cloudflare certificate</a> in <code>.pem</code> format.</li>
 <li>Combine the certs into a single <code>.pem</code> file.</li>
 </ol>
-<pre><code class="language-sh">cat cacert.pem certificate.pem &gt; ~/ca.pem&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cat cacert.pem certificate.pem &gt; ~/ca.pem&#10;</code></pre>
 <ol start="4">
 <li>Configure Google Cloud to use the combined <code>.pem</code>.</li>
 </ol>
-<pre><code class="language-sh">gcloud config set core/custom_ca_certs_file ~/ca.pem&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">gcloud config set core/custom_ca_certs_file ~/ca.pem&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/5968.md")
 </aside>
@@ -402,7 +413,7 @@
 <li>Locate and open your <a href="https://docs.aws.amazon.com/cli/v1/userguide/cli-configure-files.html#cli-configure-files-where">AWS configuration file</a>.</li>
 <li>Configure the <a href="https://docs.aws.amazon.com/cli/v1/userguide/cli-configure-files.html#cli-configure-files-settings"><code>ca_bundle</code> setting</a> with the location of your certificate. For example:</li>
 </ol>
-<pre><code class="language-diff">[default]&#10;region = us-west-1&#10;&#10;&#43;ca_bundle = /path/to/certificate.pem&#10;</code></pre>
+<pre tabindex="0"><code class="language-diff">[default]&#10;region = us-west-1&#10;&#10;&#43;ca_bundle = /path/to/certificate.pem&#10;</code></pre>
 <ol start="4">
 <li>Restart your terminal.</li>
 </ol>
@@ -432,7 +443,7 @@
 <li><a href="#download-a-cloudflare-root-certificate">Download a Cloudflare certificate</a> in <code>.pem</code> format.</li>
 <li>Set the <code>REQUESTS_CA_BUNDLE</code> environment variable when running the command:</li>
 </ol>
-<pre><code class="language-sh">REQUESTS_CA_BUNDLE=/path/to/certificate.pem az &lt;command&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">REQUESTS_CA_BUNDLE=/path/to/certificate.pem az &lt;command&gt;&#10;</code></pre>
 <p>For more information, refer to the <a href="https://learn.microsoft.com/cli/azure/use-cli-effectively#work-behind-a-proxy">Azure CLI documentation</a>.</p>
 <h4 id="boto3">Boto3</h4>
 <p>Boto3, the AWS SDK for Python, can be configured to use a Cloudflare certificate in several ways.</p>
@@ -455,14 +466,14 @@
 <li>Locate and open your <a href="https://docs.aws.amazon.com/cli/v1/userguide/cli-configure-files.html#cli-configure-files-where">AWS configuration file</a>.</li>
 <li>Configure the <a href="https://docs.aws.amazon.com/cli/v1/userguide/cli-configure-files.html#cli-configure-files-settings"><code>ca_bundle</code> setting</a> with the location of your certificate. For example:</li>
 </ol>
-<pre><code class="language-diff">[default]&#10;region = us-west-1&#10;&#10;&#43;ca_bundle = /path/to/certificate.pem&#10;</code></pre>
+<pre tabindex="0"><code class="language-diff">[default]&#10;region = us-west-1&#10;&#10;&#43;ca_bundle = /path/to/certificate.pem&#10;</code></pre>
 <h5 id="in-code">In code</h5>
 <p>To specify the certificate directly in your Python code:</p>
 <ol>
 <li><a href="#download-a-cloudflare-root-certificate">Download a Cloudflare certificate</a> in <code>.pem</code> format.</li>
 <li>Pass the certificate path when creating a Boto3 client or resource:</li>
 </ol>
-<pre><code class="language-python">import boto3&#10;&#10;client = boto3.client(&#10;    &#x27;s3&#x27;,&#10;    verify=&#x27;/path/to/certificate.pem&#x27;&#10;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-python">import boto3&#10;&#10;client = boto3.client(&#10;    &#x27;s3&#x27;,&#10;    verify=&#x27;/path/to/certificate.pem&#x27;&#10;)&#10;</code></pre>
 <p>For more information, refer to the <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html">Boto3 documentation</a>.</p>
 <h3 id="enterprise-applications">Enterprise applications</h3>
 <p>Enterprise desktop applications and specialized tools may require custom certificate configuration.</p>

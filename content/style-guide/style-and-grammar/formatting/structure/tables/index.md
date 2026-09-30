@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/style-guide/style-and-grammar/formatting/structure/tables/
+  description: Format tables consistently in documentation.
+  full_title: Tables · Cloudflare Style Guide
+  head_html: <title>Tables · Cloudflare Style Guide</title><meta name="generator" content="Nift"><meta name="description" content="Format tables consistently in documentation."><link rel="canonical" href="https://developers.cloudflare.com/style-guide/style-and-grammar/formatting/structure/tables/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/style-guide/style-and-grammar/formatting/structure/tables/index.md"><meta property="og:title" content="Tables · Cloudflare Style Guide"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Format tables consistently in documentation."><meta property="og:url" content="https://developers.cloudflare.com/style-guide/style-and-grammar/formatting/structure/tables/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Style Guide"><meta name="algolia_product_filter" content="Style Guide"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Style Guide"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/style-guide/style-and-grammar/formatting/structure/tables/#page","headline":"Tables \u00b7 Cloudflare Style Guide","description":"Format tables consistently in documentation.","url":"https://developers.cloudflare.com/style-guide/style-and-grammar/formatting/structure/tables/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /style-guide/style-and-grammar/formatting/structure/tables/
+  schema: 1
+---
 <p>Using tables to simplify content and data provides a comprehensive way to arrange design, structure, outlines, pattern, or order. It is a great tool for comparisons, breakdowns, lists, functions, and descriptions.</p>
 <aside class="nb-aside caution">
 @markup("md", "content/.markup/bodies/14683.md")
@@ -24,7 +35,7 @@
 <li>Do not end column headings with punctuation, including periods, ellipses, or colons.</li>
 <li>Use the <code>th</code> element for column headings in HTML tables. Include the <code>scope</code> attribute for accessibility.</li>
 </ul>
-<pre><code class="language-html">&lt;thead&gt;&#10;	&lt;tr&gt;&#10;		&lt;th scope=&quot;col&quot;&gt;Name&lt;/th&gt;&#10;		&lt;th scope=&quot;col&quot;&gt;Description&lt;/th&gt;&#10;	&lt;/tr&gt;&#10;&lt;/thead&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;thead&gt;&#10;	&lt;tr&gt;&#10;		&lt;th scope=&quot;col&quot;&gt;Name&lt;/th&gt;&#10;		&lt;th scope=&quot;col&quot;&gt;Description&lt;/th&gt;&#10;	&lt;/tr&gt;&#10;&lt;/thead&gt;&#10;</code></pre>
 <h2 id="table-placement">Table placement</h2>
 <ul>
 <li>Place each table directly after the sentence that introduces it.</li>
@@ -36,9 +47,9 @@
 <p>If a page contains more than one table in close proximity, add a caption to each table. Start the caption with a number in the form <strong>Table NUMBER.</strong> followed by a brief description. Use sentence case. Do not place a period at the end of the caption.</p>
 <p>When referring to a captioned table from text, refer to it by number — for example, &quot;as shown in table 2.&quot; Do not capitalize &quot;table&quot; unless it starts a sentence.</p>
 <p>In Markdown, place the caption as a bold line immediately before the table:</p>
-<pre><code class="language-markdown">&#42;*Table 1.** Supported DNS record types&#10;&#10;<table>&#10;&#10;<thead>&#10;<tr>&#10;<th>Type</th>&#10;<th>Description</th>&#10;</tr>&#10;</thead>&#10;<tbody>&#10;<tr>&#10;<td>A</td>&#10;<td>Maps a domain to an IPv4 address</td>&#10;</tr>&#10;<tr>&#10;<td>AAAA</td>&#10;<td>Maps a domain to an IPv6 address</td>&#10;</tr>&#10;</tbody>&#10;&#10;</table>&#10;</code></pre>
+<pre tabindex="0"><code class="language-markdown">&#42;*Table 1.** Supported DNS record types&#10;&#10;<table>&#10;&#10;<thead>&#10;<tr>&#10;<th>Type</th>&#10;<th>Description</th>&#10;</tr>&#10;</thead>&#10;<tbody>&#10;<tr>&#10;<td>A</td>&#10;<td>Maps a domain to an IPv4 address</td>&#10;</tr>&#10;<tr>&#10;<td>AAAA</td>&#10;<td>Maps a domain to an IPv6 address</td>&#10;</tr>&#10;</tbody>&#10;&#10;</table>&#10;</code></pre>
 <p>In HTML, use the <code>caption</code> element as the first child of the <code>table</code> element:</p>
-<pre><code class="language-html">&lt;table&gt;&#10;	&lt;caption&gt;&#10;		&lt;b&gt;Table 1.&lt;/b&gt;&#10;		Supported DNS record types&#10;	&lt;/caption&gt;&#10;	&lt;thead&gt;&#10;		&lt;tr&gt;&#10;			&lt;th scope=&quot;col&quot;&gt;Type&lt;/th&gt;&#10;			&lt;th scope=&quot;col&quot;&gt;Description&lt;/th&gt;&#10;		&lt;/tr&gt;&#10;	&lt;/thead&gt;&#10;	&lt;tbody&gt;&#10;		&lt;tr&gt;&#10;			&lt;td&gt;A&lt;/td&gt;&#10;			&lt;td&gt;Maps a domain to an IPv4 address&lt;/td&gt;&#10;		&lt;/tr&gt;&#10;	&lt;/tbody&gt;&#10;&lt;/table&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;table&gt;&#10;	&lt;caption&gt;&#10;		&lt;b&gt;Table 1.&lt;/b&gt;&#10;		Supported DNS record types&#10;	&lt;/caption&gt;&#10;	&lt;thead&gt;&#10;		&lt;tr&gt;&#10;			&lt;th scope=&quot;col&quot;&gt;Type&lt;/th&gt;&#10;			&lt;th scope=&quot;col&quot;&gt;Description&lt;/th&gt;&#10;		&lt;/tr&gt;&#10;	&lt;/thead&gt;&#10;	&lt;tbody&gt;&#10;		&lt;tr&gt;&#10;			&lt;td&gt;A&lt;/td&gt;&#10;			&lt;td&gt;Maps a domain to an IPv4 address&lt;/td&gt;&#10;		&lt;/tr&gt;&#10;	&lt;/tbody&gt;&#10;&lt;/table&gt;&#10;</code></pre>
 <h2 id="when-to-use-tables">When to use tables</h2>
 <p>The purpose of a table is to provide a scannable content experience. Tables display pieces of information that have some sort of relationship.</p>
 <p>Use tables for:</p>
@@ -61,7 +72,7 @@
 <h2 id="markdown-examples">Markdown examples</h2>
 <p><strong>Add a table</strong></p>
 <p>To add a table, use three or more hyphens (---) to create each column’s header, and use pipes (|) to separate each column. For compatibility, you should also add a pipe on either end of the row.</p>
-<pre><code>| Syntax      | Description |&#10;| ----------- | ----------- |&#10;| Header      | Title       |&#10;| Paragraph   | Text        |&#10;</code></pre>
+<pre tabindex="0"><code>| Syntax      | Description |&#10;| ----------- | ----------- |&#10;| Header      | Title       |&#10;| Paragraph   | Text        |&#10;</code></pre>
 <p>The rendered output looks like this:</p>
 <table>
 <thead>
@@ -84,7 +95,7 @@
 <p>Tip: Creating tables with hyphens and pipes can be tedious. To speed up the process, try using the <a href="https://www.tablesgenerator.com/markdown_tables">Markdown Tables Generator</a>.</p>
 <h2 id="alignment">Alignment</h2>
 <p>You can align text in the columns to the left, right, or center by adding a colon (:) to the left, right, or on both side of the hyphens within the header row.</p>
-<pre><code>| Syntax      | Description | Test Text     |&#10;| :---        |    :----:   |          ---: |&#10;| Header      | Title       | Here is this  |&#10;| Paragraph   | Text        | And more      |&#10;</code></pre>
+<pre tabindex="0"><code>| Syntax      | Description | Test Text     |&#10;| :---        |    :----:   |          ---: |&#10;| Header      | Title       | Here is this  |&#10;| Paragraph   | Text        | And more      |&#10;</code></pre>
 <p>The rendered output looks like this:</p>
 <table>
 <thead>
@@ -166,4 +177,4 @@
 </tbody>
 </table>
 </table-wrap>
-<pre><code class="language-txt">&lt;table-wrap&gt;&#10;&#10;<table>&#10;&#10;<thead>&#10;<tr>&#10;<th>Header 1</th>&#10;<th>Header 2</th>&#10;<th>Header 3</th>&#10;<th>Header 4</th>&#10;</tr>&#10;</thead>&#10;<tbody>&#10;<tr>&#10;<td>test</td>&#10;<td>test</td>&#10;<td>test</td>&#10;<td>test</td>&#10;</tr>&#10;</tbody>&#10;&#10;</table>&#10;&#10;&lt;/table-wrap&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">&lt;table-wrap&gt;&#10;&#10;<table>&#10;&#10;<thead>&#10;<tr>&#10;<th>Header 1</th>&#10;<th>Header 2</th>&#10;<th>Header 3</th>&#10;<th>Header 4</th>&#10;</tr>&#10;</thead>&#10;<tbody>&#10;<tr>&#10;<td>test</td>&#10;<td>test</td>&#10;<td>test</td>&#10;<td>test</td>&#10;</tr>&#10;</tbody>&#10;&#10;</table>&#10;&#10;&lt;/table-wrap&gt;&#10;</code></pre>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/r2/data-migration/sippy/
+  description: Incrementally migrate objects to R2 on-demand as they are requested, reducing egress fees.
+  full_title: Sippy · Cloudflare R2 docs
+  head_html: <title>Sippy · Cloudflare R2 docs</title><meta name="generator" content="Nift"><meta name="description" content="Incrementally migrate objects to R2 on-demand as they are requested, reducing egress fees."><link rel="canonical" href="https://developers.cloudflare.com/r2/data-migration/sippy/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/r2/data-migration/sippy/index.md"><meta property="og:title" content="Sippy · Cloudflare R2 docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Incrementally migrate objects to R2 on-demand as they are requested, reducing egress fees."><meta property="og:url" content="https://developers.cloudflare.com/r2/data-migration/sippy/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="R2"><meta name="algolia_product_filter" content="R2"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="R2"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/r2/data-migration/sippy/#page","headline":"Sippy \u00b7 Cloudflare R2 docs","description":"Incrementally migrate objects to R2 on-demand as they are requested, reducing egress fees.","url":"https://developers.cloudflare.com/r2/data-migration/sippy/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /r2/data-migration/sippy/
+  schema: 1
+---
 <p>Sippy is a data migration service that allows you to copy data from other cloud providers to R2 as the data is requested, without paying unnecessary cloud egress fees typically associated with moving large amounts of data.</p>
 <p>Migration-specific egress fees are reduced by leveraging requests within the flow of your application where you would already be paying egress fees to simultaneously copy objects to R2.</p>
 <h2 id="how-it-works">How it works</h2>
@@ -31,7 +42,7 @@
 <p>To begin, install <a href="https://docs.npmjs.com/getting-started"><code>npm</code></a>. Then <a href="/workers/wrangler/install-and-update/">install Wrangler, the Developer Platform CLI</a>.</p>
 <h4 id="enable-sippy-on-your-r2-bucket">Enable Sippy on your R2 bucket</h4>
 <p>Log in to Wrangler with the <a href="/workers/wrangler/commands/general/#login"><code>wrangler login</code> command</a>. Then run the <a href="/workers/wrangler/commands/r2/#r2-bucket-sippy-enable"><code>r2 bucket sippy enable</code> command</a>:</p>
-<pre><code class="language-sh">npx wrangler r2 bucket sippy enable &lt;BUCKET_NAME&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler r2 bucket sippy enable &lt;BUCKET_NAME&gt;&#10;</code></pre>
 <p>This will prompt you to select between supported object storage providers and lead you through setup.</p>
 <h3 id="enable-sippy-via-api">Enable Sippy via API</h3>
 <p>For information on required parameters and examples of how to enable Sippy, refer to the <a href="/api/resources/r2/subresources/buckets/subresources/sippy/methods/update/">API documentation</a>. For information about getting started with the Cloudflare API, refer to <a href="/fundamentals/api/how-to/make-api-calls/">Make API calls</a>.</p>
@@ -70,7 +81,7 @@
 </div>
 <h3 id="wrangler">Wrangler</h3>
 <p>To disable Sippy, run the <a href="/workers/wrangler/commands/r2/#r2-bucket-sippy-disable"><code>r2 bucket sippy disable</code> command</a>:</p>
-<pre><code class="language-sh">npx wrangler r2 bucket sippy disable &lt;BUCKET_NAME&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler r2 bucket sippy disable &lt;BUCKET_NAME&gt;&#10;</code></pre>
 <h3 id="api">API</h3>
 <p>For more information on required parameters and examples of how to disable Sippy, refer to the <a href="/api/resources/r2/subresources/buckets/subresources/sippy/methods/delete/">API documentation</a>.</p>
 <h2 id="supported-cloud-storage-providers">Supported cloud storage providers</h2>

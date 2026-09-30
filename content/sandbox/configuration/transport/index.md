@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/sandbox/configuration/transport/
+  description: Configure how Sandbox SDK communicates between Durable Objects and containers.
+  full_title: Transport modes · Cloudflare Sandbox SDK docs
+  head_html: <title>Transport modes · Cloudflare Sandbox SDK docs</title><meta name="generator" content="Nift"><meta name="description" content="Configure how Sandbox SDK communicates between Durable Objects and containers."><link rel="canonical" href="https://developers.cloudflare.com/sandbox/configuration/transport/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/sandbox/configuration/transport/index.md"><meta property="og:title" content="Transport modes · Cloudflare Sandbox SDK docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Configure how Sandbox SDK communicates between Durable Objects and containers."><meta property="og:url" content="https://developers.cloudflare.com/sandbox/configuration/transport/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Sandbox SDK"><meta name="algolia_product_filter" content="Sandbox SDK"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Configuration"><meta name="algolia_content_type" content="Configuration"><meta name="pcx_additional_products" content="Sandbox SDK,Durable Objects,Containers"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/sandbox/configuration/transport/#page","headline":"Transport modes \u00b7 Cloudflare Sandbox SDK docs","description":"Configure how Sandbox SDK communicates between Durable Objects and containers.","url":"https://developers.cloudflare.com/sandbox/configuration/transport/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /sandbox/configuration/transport/
+  schema: 1
+---
 <p>Configure how the Sandbox SDK communicates with containers using transport modes.</p>
 <aside class="nb-aside note">
 <h3 class="nb-aside-title" id="coming-soon-sandbox-sdk-1-0">Coming soon: Sandbox SDK 1.0</h3>
@@ -22,11 +33,11 @@
 <h3 id="how-rpc-transport-helps">How RPC transport helps</h3>
 <p>RPC transport establishes a single persistent connection to the container and multiplexes all SDK operations over it. The WebSocket upgrade counts as <strong>one subrequest</strong> regardless of how many operations you perform afterwards.</p>
 <p><strong>Example with HTTP transport (4 subrequests):</strong></p>
-<pre><code class="language-typescript">await sandbox.exec(&quot;python setup.py&quot;);&#10;await sandbox.writeFile(&quot;/app/config.json&quot;, config);&#10;await sandbox.exec(&quot;python process.py&quot;);&#10;const result = await sandbox.readFile(&quot;/app/output.txt&quot;);&#10;</code></pre>
+<pre tabindex="0"><code class="language-typescript">await sandbox.exec(&quot;python setup.py&quot;);&#10;await sandbox.writeFile(&quot;/app/config.json&quot;, config);&#10;await sandbox.exec(&quot;python process.py&quot;);&#10;const result = await sandbox.readFile(&quot;/app/output.txt&quot;);&#10;</code></pre>
 <p><strong>Same code with RPC transport (1 subrequest):</strong></p>
-<pre><code class="language-typescript">// Identical code - transport is configured via environment variable&#10;await sandbox.exec(&quot;python setup.py&quot;);&#10;await sandbox.writeFile(&quot;/app/config.json&quot;, config);&#10;await sandbox.exec(&quot;python process.py&quot;);&#10;const result = await sandbox.readFile(&quot;/app/output.txt&quot;);&#10;</code></pre>
+<pre tabindex="0"><code class="language-typescript">// Identical code - transport is configured via environment variable&#10;await sandbox.exec(&quot;python setup.py&quot;);&#10;await sandbox.writeFile(&quot;/app/config.json&quot;, config);&#10;await sandbox.exec(&quot;python process.py&quot;);&#10;const result = await sandbox.readFile(&quot;/app/output.txt&quot;);&#10;</code></pre>
 <p>RPC transport also removes the <a href="/workers/runtime-apis/rpc/#limitations">32 MiB limitation</a> that the HTTP transport has. Pass a <code>ReadableStream</code> instance to the <code>writeFile()</code> method.</p>
-<pre><code class="language-js">const req = await fetch(&quot;https://example.com/archive.tar.gz&quot;);&#10;await sandbox.writeFile(&quot;/archive.tar.gz&quot;, req.body);&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">const req = await fetch(&quot;https://example.com/archive.tar.gz&quot;);&#10;await sandbox.writeFile(&quot;/archive.tar.gz&quot;, req.body);&#10;</code></pre>
 <h2 id="configuration">Configuration</h2>
 <p>Set the <code>SANDBOX_TRANSPORT</code> environment variable in your Worker's configuration. The SDK reads this from the Worker environment bindings (not from inside the container).</p>
 <h3 id="http-transport-default">HTTP transport (default)</h3>
@@ -81,7 +92,7 @@
 @markup("md", "content/.markup/bodies/13536.md")
 </div>
 <p>Then deploy:</p>
-<pre><code class="language-bash">npx wrangler deploy&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">npx wrangler deploy&#10;</code></pre>
 <h3 id="switch-from-rpc-to-http">Switch from RPC to HTTP</h3>
 <p>Remove the <code>SANDBOX_TRANSPORT</code> variable (or set it to <code>&quot;http&quot;</code>):</p>
 <div class="nb-wrangler-config">

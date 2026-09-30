@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/security/web-assets/
+  description: Discover operations in applications proxied through Cloudflare and use that context to protect important traffic.
+  full_title: Web Assets · Security dashboard docs
+  head_html: <title>Web Assets · Security dashboard docs</title><meta name="generator" content="Nift"><meta name="description" content="Discover operations in applications proxied through Cloudflare and use that context to protect important traffic."><link rel="canonical" href="https://developers.cloudflare.com/security/web-assets/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/security/web-assets/index.md"><meta property="og:title" content="Web Assets · Security dashboard docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Discover operations in applications proxied through Cloudflare and use that context to protect important traffic."><meta property="og:url" content="https://developers.cloudflare.com/security/web-assets/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Security dashboard"><meta name="algolia_product_filter" content="Security dashboard"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Security dashboard"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/security/web-assets/#page","headline":"Web Assets \u00b7 Security dashboard docs","description":"Discover operations in applications proxied through Cloudflare and use that context to protect important traffic.","url":"https://developers.cloudflare.com/security/web-assets/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /security/web-assets/
+  schema: 1
+---
 <p>Web Assets automatically discovers operations in web applications proxied through Cloudflare. Operation context helps you define security protections against application-specific functionalities.</p>
 <p>For example, discovering operations that receive LLM prompts so <a href="/waf/detections/ai-security-for-apps/">AI Security for Apps</a> can help you define targeted protections such as deterring prompt injections.</p>
 <p>To access Web Assets in the Cloudflare dashboard, go to the <strong>Web Assets</strong> page.</p>
@@ -10,9 +21,9 @@
 <li>Path pattern</li>
 </ul>
 <p>For example, Web Assets can group requests to product detail pages into one operation:</p>
-<pre><code class="language-txt">GET example.com/products/{var1}&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">GET example.com/products/{var1}&#10;</code></pre>
 <p>The operation can match requests such as:</p>
-<pre><code class="language-txt">GET https://example.com/products/shoes&#10;GET https://example.com/products/hats&#10;GET https://example.com/products/jackets&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">GET https://example.com/products/shoes&#10;GET https://example.com/products/hats&#10;GET https://example.com/products/jackets&#10;</code></pre>
 <p>This lets Cloudflare identify requests that serve the same purpose in your application.</p>
 <h2 id="how-cloudflare-identifies-operations">How Cloudflare identifies operations</h2>
 <p>Operations can come from several sources:</p>

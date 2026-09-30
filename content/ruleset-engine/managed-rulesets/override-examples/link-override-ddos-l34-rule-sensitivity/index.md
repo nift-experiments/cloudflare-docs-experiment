@@ -1,1 +1,12 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/ruleset-engine/managed-rulesets/override-examples/link-override-ddos-l34-rule-sensitivity/
+  description: Adjust the sensitivity of a network-layer DDoS rule.
+  full_title: Adjust an L3/4 DDoS rule · Cloudflare Ruleset Engine docs
+  head_html: <title>Adjust an L3/4 DDoS rule · Cloudflare Ruleset Engine docs</title><meta name="generator" content="Nift"><meta name="description" content="Adjust the sensitivity of a network-layer DDoS rule."><meta name="robots" content="noindex"><link rel="canonical" href="https://developers.cloudflare.com/ruleset-engine/managed-rulesets/override-examples/link-override-ddos-l34-rule-sensitivity/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/ruleset-engine/managed-rulesets/override-examples/link-override-ddos-l34-rule-sensitivity/index.md"><meta property="og:title" content="Adjust an L3/4 DDoS rule · Cloudflare Ruleset Engine docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Adjust the sensitivity of a network-layer DDoS rule."><meta property="og:url" content="https://developers.cloudflare.com/ruleset-engine/managed-rulesets/override-examples/link-override-ddos-l34-rule-sensitivity/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Ruleset Engine"><meta name="algolia_product_filter" content="Ruleset Engine"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_content_type" content="Navigation"><meta name="algolia_content_type" content="Navigation"><meta name="pcx_additional_products" content="Ruleset Engine"><meta http-equiv="refresh" content="0; url=/ddos-protection/managed-rulesets/network/network-overrides/configure-api/#configure-an-override-for-the-network-layer-ddos-attack-protection-managed-ruleset">
+  markdown: true
+  noindex: true
+  route: /ruleset-engine/managed-rulesets/override-examples/link-override-ddos-l34-rule-sensitivity/
+  schema: 1
+---
 <p>Adjust the sensitivity of a network-layer DDoS rule.</p>

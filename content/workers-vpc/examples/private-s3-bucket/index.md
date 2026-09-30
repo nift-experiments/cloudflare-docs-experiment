@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/workers-vpc/examples/private-s3-bucket/
+  description: Use Workers VPC to read objects from a private S3-compatible bucket behind Cloudflare Tunnel.
+  full_title: Access a private S3 bucket · Cloudflare Workers VPC
+  head_html: <title>Access a private S3 bucket · Cloudflare Workers VPC</title><meta name="generator" content="Nift"><meta name="description" content="Use Workers VPC to read objects from a private S3-compatible bucket behind Cloudflare Tunnel."><link rel="canonical" href="https://developers.cloudflare.com/workers-vpc/examples/private-s3-bucket/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/workers-vpc/examples/private-s3-bucket/index.md"><meta property="og:title" content="Access a private S3 bucket · Cloudflare Workers VPC"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Use Workers VPC to read objects from a private S3-compatible bucket behind Cloudflare Tunnel."><meta property="og:url" content="https://developers.cloudflare.com/workers-vpc/examples/private-s3-bucket/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Workers VPC"><meta name="algolia_product_filter" content="Workers VPC"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Example"><meta name="algolia_content_type" content="Example"><meta name="pcx_additional_products" content="Workers VPC"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/workers-vpc/examples/private-s3-bucket/#page","headline":"Access a private S3 bucket \u00b7 Cloudflare Workers VPC","description":"Use Workers VPC to read objects from a private S3-compatible bucket behind Cloudflare Tunnel.","url":"https://developers.cloudflare.com/workers-vpc/examples/private-s3-bucket/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /workers-vpc/examples/private-s3-bucket/
+  schema: 1
+---
 <p>This example demonstrates how to access a private S3 bucket that is not exposed to the public internet. In this guide, we will configure a Workers VPC Service for an internal S3-compatible storage service, create a Worker that makes requests to that bucket, and deploy the Worker to validate our changes.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <ul>
@@ -31,18 +42,18 @@
 <li>Create the Workers VPC Service</li>
 </ol></h2>
 <p>First, create a Workers VPC Service for your internal S3 storage:</p>
-<pre><code class="language-bash">npx wrangler vpc service create s3-storage \&#10;  &#45;-type http \&#10;  &#45;-tunnel-id &lt;YOUR_TUNNEL_ID&gt; \&#10;  &#45;-hostname s3.us-west-2.amazonaws.com&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">npx wrangler vpc service create s3-storage \&#10;  &#45;-type http \&#10;  &#45;-tunnel-id &lt;YOUR_TUNNEL_ID&gt; \&#10;  &#45;-hostname s3.us-west-2.amazonaws.com&#10;</code></pre>
 <p>You can also create a Workers VPC Service using an IP address (for example, if using MinIO):</p>
-<pre><code class="language-bash">npx wrangler vpc service create s3-storage \&#10;  &#45;-type http \&#10;  &#45;-tunnel-id &lt;YOUR_TUNNEL_ID&gt; \&#10;  &#45;-ipv4 10.0.1.60 \&#10;  &#45;-http-port 9000&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">npx wrangler vpc service create s3-storage \&#10;  &#45;-type http \&#10;  &#45;-tunnel-id &lt;YOUR_TUNNEL_ID&gt; \&#10;  &#45;-ipv4 10.0.1.60 \&#10;  &#45;-http-port 9000&#10;</code></pre>
 <p>Note the service ID returned for the next step.</p>
 <h2 id="3-configure-s3-bucket-policy"><ol start="3">
 <li>Configure S3 bucket policy</li>
 </ol></h2>
 <p>Configure your S3 bucket to allow anonymous access from your VPC endpoint. This works for unencrypted S3 objects:</p>
-<pre><code class="language-json">{&#10;	&quot;Version&quot;: &quot;2012-10-17&quot;,&#10;	&quot;Statement&quot;: [&#10;		{&#10;			&quot;Sid&quot;: &quot;AllowAnonymousAccessFromVPCE&quot;,&#10;			&quot;Effect&quot;: &quot;Allow&quot;,&#10;			&quot;Principal&quot;: &quot;*&quot;,&#10;			&quot;Action&quot;: [&quot;s3:GetObject&quot;, &quot;s3:ListBucket&quot;],&#10;			&quot;Resource&quot;: [&#10;				&quot;arn:aws:s3:::your-bucket-name&quot;,&#10;				&quot;arn:aws:s3:::your-bucket-name/*&quot;&#10;			],&#10;			&quot;Condition&quot;: {&#10;				&quot;StringEquals&quot;: {&#10;					&quot;aws:sourceVpce&quot;: &quot;vpce-your-endpoint-id&quot;&#10;				}&#10;			}&#10;		}&#10;	]&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;Version&quot;: &quot;2012-10-17&quot;,&#10;	&quot;Statement&quot;: [&#10;		{&#10;			&quot;Sid&quot;: &quot;AllowAnonymousAccessFromVPCE&quot;,&#10;			&quot;Effect&quot;: &quot;Allow&quot;,&#10;			&quot;Principal&quot;: &quot;*&quot;,&#10;			&quot;Action&quot;: [&quot;s3:GetObject&quot;, &quot;s3:ListBucket&quot;],&#10;			&quot;Resource&quot;: [&#10;				&quot;arn:aws:s3:::your-bucket-name&quot;,&#10;				&quot;arn:aws:s3:::your-bucket-name/*&quot;&#10;			],&#10;			&quot;Condition&quot;: {&#10;				&quot;StringEquals&quot;: {&#10;					&quot;aws:sourceVpce&quot;: &quot;vpce-your-endpoint-id&quot;&#10;				}&#10;			}&#10;		}&#10;	]&#10;}&#10;</code></pre>
 <h3 id="testing-s3-access-directly">Testing S3 access directly</h3>
 <p>You can test S3 access directly from the VM where your Cloudflare Tunnel is running to verify the bucket policy is working correctly. These commands should work without any AWS credentials:</p>
-<pre><code class="language-bash">&#35; Test listing bucket contents&#10;curl -i https://s3.us-west-2.amazonaws.com/your-bucket-name/&#10;&#10;&#35; Test downloading a specific file&#10;curl -i https://your-bucket-name.s3.us-west-2.amazonaws.com/test-file.txt&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">&#35; Test listing bucket contents&#10;curl -i https://s3.us-west-2.amazonaws.com/your-bucket-name/&#10;&#10;&#35; Test downloading a specific file&#10;curl -i https://your-bucket-name.s3.us-west-2.amazonaws.com/test-file.txt&#10;</code></pre>
 <h2 id="4-configure-your-worker"><ol start="4">
 <li>Configure your Worker</li>
 </ol></h2>
@@ -54,14 +65,14 @@
 <li>Implement the Worker</li>
 </ol></h2>
 <p>In your Workers code, use the Workers VPC Service binding in order to send requests to the service:</p>
-<pre><code class="language-js">export default {&#10;	async fetch(request, env, ctx) {&#10;		try {&#10;			// Fetch a file from the private S3 bucket via VPC endpoint&#10;			const response = await env.S3_STORAGE.fetch(&quot;https://s3.us-west-2.amazonaws.com/my-bucket/data.json&quot;);&#10;&#10;			// Use the response from S3 to perform more logic in Workers, before returning the final response&#10;			return response;&#10;		} catch (error) {&#10;			return new Response(&quot;Storage unavailable&quot;, { status: 503 });&#10;		}&#10;	},&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">export default {&#10;	async fetch(request, env, ctx) {&#10;		try {&#10;			// Fetch a file from the private S3 bucket via VPC endpoint&#10;			const response = await env.S3_STORAGE.fetch(&quot;https://s3.us-west-2.amazonaws.com/my-bucket/data.json&quot;);&#10;&#10;			// Use the response from S3 to perform more logic in Workers, before returning the final response&#10;			return response;&#10;		} catch (error) {&#10;			return new Response(&quot;Storage unavailable&quot;, { status: 503 });&#10;		}&#10;	},&#10;};&#10;</code></pre>
 <p>This guide demonstrates how you could access private object storage from your Workers. You could use Workers VPC Services to fetch files directly and manipulate the responses to enable you to build more full-stack and backend functionality on Workers.</p>
 <h2 id="6-deploy-and-test"><ol start="6">
 <li>Deploy and test</li>
 </ol></h2>
 <p>Now, you can deploy and test your Worker that you have created:</p>
-<pre><code class="language-bash">npx wrangler deploy&#10;</code></pre>
-<pre><code class="language-bash">&#35; Test GET request&#10;curl https://private-s3-gateway.workers.dev&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">npx wrangler deploy&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">&#35; Test GET request&#10;curl https://private-s3-gateway.workers.dev&#10;</code></pre>
 <h2 id="next-steps">Next steps</h2>
 <ul>
 <li>Add <a href="/workers/examples/auth-with-headers/">authentication and authorization</a></li>

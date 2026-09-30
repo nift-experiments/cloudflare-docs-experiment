@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/waf/reference/legacy/firewall-rules-upgrade/
+  description: Upgrade deprecated Firewall Rules to WAF custom rules.
+  full_title: Firewall rules upgrade · Cloudflare Web Application Firewall (WAF) docs
+  head_html: <title>Firewall rules upgrade · Cloudflare Web Application Firewall (WAF) docs</title><meta name="generator" content="Nift"><meta name="description" content="Upgrade deprecated Firewall Rules to WAF custom rules."><link rel="canonical" href="https://developers.cloudflare.com/waf/reference/legacy/firewall-rules-upgrade/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/waf/reference/legacy/firewall-rules-upgrade/index.md"><meta property="og:title" content="Firewall rules upgrade · Cloudflare Web Application Firewall (WAF) docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Upgrade deprecated Firewall Rules to WAF custom rules."><meta property="og:url" content="https://developers.cloudflare.com/waf/reference/legacy/firewall-rules-upgrade/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="WAF"><meta name="algolia_product_filter" content="WAF"><meta name="pcx_content_group" content="Application security"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="WAF"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/waf/reference/legacy/firewall-rules-upgrade/#page","headline":"Firewall rules upgrade \u00b7 Cloudflare Web Application Firewall (WAF) docs","description":"Upgrade deprecated Firewall Rules to WAF custom rules.","url":"https://developers.cloudflare.com/waf/reference/legacy/firewall-rules-upgrade/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /waf/reference/legacy/firewall-rules-upgrade/
+  schema: 1
+---
 <p>Cloudflare upgraded existing <a href="/firewall/">firewall rules</a> into <a href="/waf/custom-rules/">custom rules</a>. With custom rules, you get the same level of protection and a few additional features. Custom rules are available in the Cloudflare dashboard in the following location:</p>
 <ul>
 <li>Old dashboard: <strong>Security</strong> &gt; <strong>WAF</strong> &gt; <strong>Custom rules</strong>.</li>
@@ -99,8 +110,8 @@
 <ol>
 <li>Run the following command to generate all ruleset configurations for a zone:</li>
 </ol>
-<pre><code class="language-sh">cf-terraforming generate --zone &lt;ZONE_ID&gt; --resource-type &quot;cloudflare_ruleset&quot;&#10;</code></pre>
-<pre><code class="language-txt">resource &quot;cloudflare_ruleset&quot; &quot;terraform_managed_resource_3c0b456bc2aa443089c5f40f45f51b31&quot; {&#10;  kind    = &quot;zone&quot;&#10;  name    = &quot;default&quot;&#10;  phase   = &quot;http_request_firewall_custom&quot;&#10;  zone_id = &quot;&lt;ZONE_ID&gt;&quot;&#10;  rules {&#10;    [...]&#10;  }&#10;  [...]&#10;}&#10;[...]&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cf-terraforming generate --zone &lt;ZONE_ID&gt; --resource-type &quot;cloudflare_ruleset&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">resource &quot;cloudflare_ruleset&quot; &quot;terraform_managed_resource_3c0b456bc2aa443089c5f40f45f51b31&quot; {&#10;  kind    = &quot;zone&quot;&#10;  name    = &quot;default&quot;&#10;  phase   = &quot;http_request_firewall_custom&quot;&#10;  zone_id = &quot;&lt;ZONE_ID&gt;&quot;&#10;  rules {&#10;    [...]&#10;  }&#10;  [...]&#10;}&#10;[...]&#10;</code></pre>
 <ol start="2">
 <li>
 <p>The previous command may return additional ruleset configurations for other Cloudflare products also based on the <a href="/ruleset-engine/">Ruleset Engine</a>. Since you are migrating firewall rules to custom rules, keep only the Terraform resource for the <code>http_request_firewall_custom</code> phase and save it to a <code>.tf</code> configuration file. You will need the full resource name in the next step.</p>
@@ -109,13 +120,13 @@
 <p>Import the <code>cloudflare_ruleset</code> resource you previously identified into Terraform state using the <code>terraform import</code> command. For example:</p>
 </li>
 </ol>
-<pre><code class="language-sh">terraform import cloudflare_ruleset.terraform_managed_resource_3c0b456bc2aa443089c5f40f45f51b31 zone/&lt;ZONE_ID&gt;/3c0b456bc2aa443089c5f40f45f51b31&#10;</code></pre>
-<pre><code class="language-txt">cloudflare_ruleset.terraform_managed_resource_3c0b456bc2aa443089c5f40f45f51b31: Importing from ID &quot;zone/&lt;ZONE_ID&gt;/3c0b456bc2aa443089c5f40f45f51b31&quot;...&#10;cloudflare_ruleset.terraform_managed_resource_3c0b456bc2aa443089c5f40f45f51b31: Import prepared!&#10;  Prepared cloudflare_ruleset for import&#10;cloudflare_ruleset.terraform_managed_resource_3c0b456bc2aa443089c5f40f45f51b31: Refreshing state... [id=3c0b456bc2aa443089c5f40f45f51b31]&#10;&#10;Import successful!&#10;&#10;The resources that were imported are shown above. These resources are now in&#10;your Terraform state and will henceforth be managed by Terraform.&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">terraform import cloudflare_ruleset.terraform_managed_resource_3c0b456bc2aa443089c5f40f45f51b31 zone/&lt;ZONE_ID&gt;/3c0b456bc2aa443089c5f40f45f51b31&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">cloudflare_ruleset.terraform_managed_resource_3c0b456bc2aa443089c5f40f45f51b31: Importing from ID &quot;zone/&lt;ZONE_ID&gt;/3c0b456bc2aa443089c5f40f45f51b31&quot;...&#10;cloudflare_ruleset.terraform_managed_resource_3c0b456bc2aa443089c5f40f45f51b31: Import prepared!&#10;  Prepared cloudflare_ruleset for import&#10;cloudflare_ruleset.terraform_managed_resource_3c0b456bc2aa443089c5f40f45f51b31: Refreshing state... [id=3c0b456bc2aa443089c5f40f45f51b31]&#10;&#10;Import successful!&#10;&#10;The resources that were imported are shown above. These resources are now in&#10;your Terraform state and will henceforth be managed by Terraform.&#10;</code></pre>
 <ol start="4">
 <li>Run <code>terraform plan</code> to validate that Terraform now checks the state of the new <code>cloudflare_ruleset</code> resource, in addition to other existing resources already managed by Terraform. For example:</li>
 </ol>
-<pre><code class="language-sh">terraform plan&#10;</code></pre>
-<pre><code class="language-txt">&#10;cloudflare_ruleset.terraform_managed_resource_3c0b456bc2aa443089c5f40f45f51b31: Refreshing state... [id=3c0b456bc2aa443089c5f40f45f51b31]&#10;[...]&#10;cloudflare_filter.my_filter: Refreshing state... [id=14a2524fd75c419f8d273116815b6349]&#10;cloudflare_firewall_rule.my_firewall_rule: Refreshing state... [id=0580eb5d92e344ddb2374979f74c3ddf]&#10;[...]&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">terraform plan&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">&#10;cloudflare_ruleset.terraform_managed_resource_3c0b456bc2aa443089c5f40f45f51b31: Refreshing state... [id=3c0b456bc2aa443089c5f40f45f51b31]&#10;[...]&#10;cloudflare_filter.my_filter: Refreshing state... [id=14a2524fd75c419f8d273116815b6349]&#10;cloudflare_firewall_rule.my_firewall_rule: Refreshing state... [id=0580eb5d92e344ddb2374979f74c3ddf]&#10;[...]&#10;</code></pre>
 <ol start="5">
 <li>Remove any state related to firewall rules and filters from your Terraform state:</li>
 </ol>
@@ -123,18 +134,18 @@
 @markup("md", "content/.markup/bodies/15673.md")
 </aside>
    1. Run the following command to find all resources related to firewall rules and filters:
-<pre><code class="language-sh">terraform state list | grep -E &#x27;^cloudflare_(filter|firewall_rule)\.&#x27;&#10;</code></pre>
-<pre><code class="language-txt">cloudflare_filter.my_filter&#10;cloudflare_firewall_rule.my_firewall_rule&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">terraform state list | grep -E &#x27;^cloudflare_(filter|firewall_rule)\.&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">cloudflare_filter.my_filter&#10;cloudflare_firewall_rule.my_firewall_rule&#10;</code></pre>
 <ol start="2">
 <li>Run the <code>terraform state rm ...</code> command in dry-run mode to understand the impact of removing those resources without performing any changes:</li>
 </ol>
-<pre><code class="language-sh">terraform state rm -dry-run cloudflare_filter.my_filter cloudflare_firewall_rule.my_firewall_rule&#10;</code></pre>
-<pre><code class="language-txt">Would remove cloudflare_filter.my_filter&#10;Would remove cloudflare_firewall_rule.my_firewall_rule&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">terraform state rm -dry-run cloudflare_filter.my_filter cloudflare_firewall_rule.my_firewall_rule&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">Would remove cloudflare_filter.my_filter&#10;Would remove cloudflare_firewall_rule.my_firewall_rule&#10;</code></pre>
 <ol start="3">
 <li>If the impact looks correct, run the same command without the <code>-dry-run</code> parameter to actually remove the resources from Terraform state:</li>
 </ol>
-<pre><code class="language-sh">terraform state rm cloudflare_filter.my_filter cloudflare_firewall_rule.my_firewall_rule&#10;</code></pre>
-<pre><code class="language-txt">Removed cloudflare_filter.my_filter&#10;Removed cloudflare_firewall_rule.my_firewall_rule&#10;Successfully removed 2 resource instance(s).&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">terraform state rm cloudflare_filter.my_filter cloudflare_firewall_rule.my_firewall_rule&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">Removed cloudflare_filter.my_filter&#10;Removed cloudflare_firewall_rule.my_firewall_rule&#10;Successfully removed 2 resource instance(s).&#10;</code></pre>
 <ol start="6">
 <li>
 <p>After removing firewall rules and filters resources from Terraform state, delete <code>cloudflare_filter</code> and <code>cloudflare_firewall_rule</code> resources from <code>.tf</code> configuration files.</p>
@@ -143,8 +154,8 @@
 <p>Run <code>terraform plan</code> to verify that the resources you deleted from configuration files no longer appear. You should not have any pending changes.</p>
 </li>
 </ol>
-<pre><code class="language-sh">terraform plan&#10;</code></pre>
-<pre><code class="language-txt">cloudflare_ruleset.terraform_managed_resource_3c0b456bc2aa443089c5f40f45f51b31: Refreshing state... [id=3c0b456bc2aa443089c5f40f45f51b31]&#10;[...]&#10;&#10;No changes. Your infrastructure matches the configuration.&#10;&#10;Terraform has compared your real infrastructure against your configuration and found no differences, so no changes are needed.&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">terraform plan&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">cloudflare_ruleset.terraform_managed_resource_3c0b456bc2aa443089c5f40f45f51b31: Refreshing state... [id=3c0b456bc2aa443089c5f40f45f51b31]&#10;[...]&#10;&#10;No changes. Your infrastructure matches the configuration.&#10;&#10;Terraform has compared your real infrastructure against your configuration and found no differences, so no changes are needed.&#10;</code></pre>
 <p>For details on importing Cloudflare resources to Terraform and using the <code>cf-terraforming</code> tool, refer to the following resources:</p>
 <ul>
 <li><a href="/terraform/advanced-topics/import-cloudflare-resources/">Import Cloudflare resources</a></li>

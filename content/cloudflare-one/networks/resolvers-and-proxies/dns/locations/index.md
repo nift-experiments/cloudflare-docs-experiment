@@ -1,30 +1,60 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/networks/resolvers-and-proxies/dns/locations/
+  description: Locations in Zero Trust networking.
+  full_title: Locations · Cloudflare One docs
+  head_html: <title>Locations · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="Locations in Zero Trust networking."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/networks/resolvers-and-proxies/dns/locations/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/networks/resolvers-and-proxies/dns/locations/index.md"><meta property="og:title" content="Locations · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Locations in Zero Trust networking."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/networks/resolvers-and-proxies/dns/locations/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Cloudflare One"><meta name="pcx_tags" content="IPv6"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/networks/resolvers-and-proxies/dns/locations/#page","headline":"Locations \u00b7 Cloudflare One docs","description":"Locations in Zero Trust networking.","url":"https://developers.cloudflare.com/cloudflare-one/networks/resolvers-and-proxies/dns/locations/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["IPv6"]}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/networks/resolvers-and-proxies/dns/locations/
+  schema: 1
+---
 <div class="nb-glossary-definition"><p>DNS locations are a collection of DNS endpoints which can be mapped to physical entities such as offices, homes, or data centers.</p></div>
 <p>The fastest way to start filtering DNS queries from a location is by changing the DNS resolvers at the router.</p>
 <h2 id="add-a-dns-location">Add a DNS location</h2>
 <p>To add a DNS location to Gateway:</p>
 <ol>
-<li>In the <a href="https://dash.cloudflare.com/">Cloudflare dashboard</a>, go to <strong>Zero Trust</strong> &gt; <strong>Networks</strong> &gt; <strong>Resolvers &amp; Proxies</strong> &gt; <strong>DNS locations</strong>.</li>
-<li>Select <strong>Add a location</strong>.</li>
-<li>Choose a name for your DNS location.</li>
-<li>Choose at least one <a href="/cloudflare-one/networks/resolvers-and-proxies/dns/locations/#dns-endpoints">DNS endpoint</a> to resolve your organization's DNS queries.</li>
-<li>(Optional) Toggle the following settings:
+<li>
+<p>In the <a href="https://dash.cloudflare.com/">Cloudflare dashboard</a>, go to <strong>Zero Trust</strong> &gt; <strong>Networks</strong> &gt; <strong>Resolvers &amp; Proxies</strong> &gt; <strong>DNS locations</strong>.</p>
+</li>
+<li>
+<p>Select <strong>Add a location</strong>.</p>
+</li>
+<li>
+<p>Choose a name for your DNS location.</p>
+</li>
+<li>
+<p>Choose at least one <a href="/cloudflare-one/networks/resolvers-and-proxies/dns/locations/#dns-endpoints">DNS endpoint</a> to resolve your organization's DNS queries.</p>
+</li>
+<li>
+<p>(Optional) Toggle the following settings:</p>
 <ul>
-<li><strong>Enable EDNS client subnet</strong> sends a user's IP geolocation to authoritative DNS nameservers. <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></li>
+<li><strong>Enable EDNS client subnet</strong> sends a user's IP geolocation to authoritative DNS nameservers. <span class="nb-glossary-tooltip" title="EDNS Client Subnet (ECS)">EDNS Client Subnet (ECS)</span> helps reduce latency by routing the user to the closest origin server. Cloudflare enables EDNS in a privacy preserving way by not sending the user's exact IP address but rather the first <code>/24</code> range of the larger range that contains their IP address. This <code>/24</code> range will share the same geographic location as the user's exact IP address.</li>
+<li><strong>Set as Default DNS Location</strong> sets this location as the default DoH endpoint for DNS queries.</li>
 </ul>
 </li>
-</ol>
-@markup("md", "content/.markup/bodies/5886.md")
-</div> helps reduce latency by routing the user to the closest origin server. Cloudflare enables EDNS in a privacy preserving way by not sending the user's exact IP address but rather the first `/24` range of the larger range that contains their IP address. This `/24` range will share the same geographic location as the user's exact IP address.
-   - **Set as Default DNS Location** sets this location as the default DoH endpoint for DNS queries.
-6. Select **Continue**.
-7. (Optional) Turn on source IP filtering for your configured endpoints, then add any source IPv4/IPv6 addresses to validate.
-   - Endpoint authentication is required for standard IPv4 addresses and optional for dedicated IPv4 addresses.
-   - **DoH endpoint filtering & authentication** lets you restrict DNS resolution to only valid identities or user tokens in addition to IPv4/IPv6 addresses.
-8. Select **Continue**.
-9. Review the settings for your DNS location, then choose **Done**.
-<ol start="10">
-<li>Change the DNS resolvers on your router, browser, or OS by following the setup instructions in the UI.</li>
-<li>Select <strong>Go to DNS Location</strong>. Your location will appear in your list of locations.</li>
+<li>
+<p>Select <strong>Continue</strong>.</p>
+</li>
+<li>
+<p>(Optional) Turn on source IP filtering for your configured endpoints, then add any source IPv4/IPv6 addresses to validate.</p>
+<ul>
+<li>Endpoint authentication is required for standard IPv4 addresses and optional for dedicated IPv4 addresses.</li>
+<li><strong>DoH endpoint filtering &amp; authentication</strong> lets you restrict DNS resolution to only valid identities or user tokens in addition to IPv4/IPv6 addresses.</li>
+</ul>
+</li>
+<li>
+<p>Select <strong>Continue</strong>.</p>
+</li>
+<li>
+<p>Review the settings for your DNS location, then choose <strong>Done</strong>.</p>
+</li>
+<li>
+<p>Change the DNS resolvers on your router, browser, or OS by following the setup instructions in the UI.</p>
+</li>
+<li>
+<p>Select <strong>Go to DNS Location</strong>. Your location will appear in your list of locations.</p>
+</li>
 </ol>
 <p>You can now apply <a href="/cloudflare-one/traffic-policies/dns-policies/">DNS policies</a> to your location using the <a href="/cloudflare-one/traffic-policies/dns-policies/#location">Location selector</a>.</p>
 <h2 id="dns-endpoints">DNS endpoints</h2>

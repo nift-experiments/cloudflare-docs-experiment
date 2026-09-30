@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/ai-search/api/items/workers-binding/
+  description: Upload, list, and manage documents in AI Search instances using the Items Workers binding.
+  full_title: Workers binding · Cloudflare AI Search docs
+  head_html: <title>Workers binding · Cloudflare AI Search docs</title><meta name="generator" content="Nift"><meta name="description" content="Upload, list, and manage documents in AI Search instances using the Items Workers binding."><link rel="canonical" href="https://developers.cloudflare.com/ai-search/api/items/workers-binding/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/ai-search/api/items/workers-binding/index.md"><meta property="og:title" content="Workers binding · Cloudflare AI Search docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Upload, list, and manage documents in AI Search instances using the Items Workers binding."><meta property="og:url" content="https://developers.cloudflare.com/ai-search/api/items/workers-binding/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="AI Search"><meta name="algolia_product_filter" content="AI Search"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="AI Search"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/ai-search/api/items/workers-binding/#page","headline":"Workers binding \u00b7 Cloudflare AI Search docs","description":"Upload, list, and manage documents in AI Search instances using the Items Workers binding.","url":"https://developers.cloudflare.com/ai-search/api/items/workers-binding/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /ai-search/api/items/workers-binding/
+  schema: 1
+---
 <p><a href="/workers/">Workers</a> provides a serverless execution environment that allows you to create new applications or augment existing ones. Use a <a href="/workers/runtime-apis/bindings/">Workers binding</a> to upload, list, and manage documents in your AI Search instances from a Cloudflare Worker. Access the Items API through the <code>items</code> property on an instance handle.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/3070.md")
@@ -81,13 +92,13 @@
 <h2 id="methods">Methods</h2>
 <p>The Items API methods are available on both the <code>ai_search_namespaces</code> and <code>ai_search</code> bindings. With the namespace binding, call methods on the handle returned by <code>get()</code>. With the instance binding, call methods directly on the binding (for example, <code>env.MY_SEARCH.items.upload()</code>).</p>
 <p>The examples below use the namespace binding.</p>
-<pre><code class="language-ts">const instance = env.AI_SEARCH.get(&quot;my-instance&quot;);&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const instance = env.AI_SEARCH.get(&quot;my-instance&quot;);&#10;</code></pre>
 <h3 id="items-upload"><code>items.upload()</code></h3>
 <p>Uploads a document for indexing. Returns immediately. The document is queued for processing.</p>
-<pre><code class="language-ts">// Upload from a string&#10;await instance.items.upload(&#10;	&quot;faq.md&quot;,&#10;	&quot;# FAQ\n\nQ: How do I reset my password?\nA: Go to Settings &gt; Security...&quot;,&#10;);&#10;&#10;// Upload from an ArrayBuffer&#10;const pdfResponse = await fetch(&quot;https://example.com/guide.pdf&quot;);&#10;const pdfBuffer = await pdfResponse.arrayBuffer();&#10;await instance.items.upload(&quot;guide.pdf&quot;, pdfBuffer);&#10;&#10;// Upload from a ReadableStream&#10;await instance.items.upload(&quot;doc.txt&quot;, request.body);&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// Upload from a string&#10;await instance.items.upload(&#10;	&quot;faq.md&quot;,&#10;	&quot;# FAQ\n\nQ: How do I reset my password?\nA: Go to Settings &gt; Security...&quot;,&#10;);&#10;&#10;// Upload from an ArrayBuffer&#10;const pdfResponse = await fetch(&quot;https://example.com/guide.pdf&quot;);&#10;const pdfBuffer = await pdfResponse.arrayBuffer();&#10;await instance.items.upload(&quot;guide.pdf&quot;, pdfBuffer);&#10;&#10;// Upload from a ReadableStream&#10;await instance.items.upload(&quot;doc.txt&quot;, request.body);&#10;</code></pre>
 <h4 id="upload-with-metadata">Upload with metadata</h4>
 <p>Attach <a href="/ai-search/configuration/indexing/metadata/">custom metadata</a> to a document for filtering in search queries. Custom metadata fields must be defined on the instance first using the <a href="/ai-search/api/instances/workers-binding/#update">update()</a> method or at creation time.</p>
-<pre><code class="language-ts">await instance.items.upload(&quot;guide.pdf&quot;, pdfBuffer, {&#10;	metadata: {&#10;		category: &quot;onboarding&quot;,&#10;		language: &quot;en&quot;,&#10;		version: &quot;2.0&quot;,&#10;	},&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">await instance.items.upload(&quot;guide.pdf&quot;, pdfBuffer, {&#10;	metadata: {&#10;		category: &quot;onboarding&quot;,&#10;		language: &quot;en&quot;,&#10;		version: &quot;2.0&quot;,&#10;	},&#10;});&#10;</code></pre>
 <h4 id="parameters">Parameters</h4>
 <table>
 <thead>
@@ -143,7 +154,7 @@
 </table>
 <h3 id="items-uploadandpoll"><code>items.uploadAndPoll()</code></h3>
 <p>Uploads a document and polls until processing completes or the timeout is reached. Use this when you need to search the document immediately after upload.</p>
-<pre><code class="language-ts">// Wait for a specific document to finish indexing before searching&#10;const item = await instance.items.uploadAndPoll(&#10;	&quot;handbook.txt&quot;,&#10;	handbookContent,&#10;);&#10;console.log(`handbook.txt status: ${item.status}`); // &quot;completed&quot;&#10;&#10;// Now search across all uploaded documents&#10;const results = await instance.search({&#10;	messages: [{ role: &quot;user&quot;, content: &quot;password reset policy&quot; }],&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// Wait for a specific document to finish indexing before searching&#10;const item = await instance.items.uploadAndPoll(&#10;	&quot;handbook.txt&quot;,&#10;	handbookContent,&#10;);&#10;console.log(`handbook.txt status: ${item.status}`); // &quot;completed&quot;&#10;&#10;// Now search across all uploaded documents&#10;const results = await instance.search({&#10;	messages: [{ role: &quot;user&quot;, content: &quot;password reset policy&quot; }],&#10;});&#10;</code></pre>
 <h4 id="parameters-1">Parameters</h4>
 <p>Same as <a href="#parameters"><code>items.upload()</code></a>, with additional polling options:</p>
 <table>
@@ -230,7 +241,7 @@
 </table>
 <h3 id="items-list"><code>items.list()</code></h3>
 <p>Returns a paginated list of items in the instance.</p>
-<pre><code class="language-ts">const { result, result_info } = await instance.items.list();&#10;&#10;for (const item of result) {&#10;	console.log(`${item.key} (${item.status})`);&#10;}&#10;// result_info.total_count contains the total number of items&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const { result, result_info } = await instance.items.list();&#10;&#10;for (const item of result) {&#10;	console.log(`${item.key} (${item.status})`);&#10;}&#10;// result_info.total_count contains the total number of items&#10;</code></pre>
 <h4 id="parameters-2">Parameters</h4>
 <table>
 <thead>
@@ -369,7 +380,7 @@
 </table>
 <h3 id="items-delete"><code>items.delete()</code></h3>
 <p>Deletes an item and its indexed chunks.</p>
-<pre><code class="language-ts">await instance.items.delete(&quot;item-id-123&quot;);&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">await instance.items.delete(&quot;item-id-123&quot;);&#10;</code></pre>
 <h4 id="parameters-3">Parameters</h4>
 <table>
 <thead>
@@ -395,7 +406,7 @@
 <p>Returns a handle to a specific item for retrieving its status or downloading the original file.</p>
 <h4 id="items-get-info"><code>items.get().info()</code></h4>
 <p>Returns the status and metadata of a specific item.</p>
-<pre><code class="language-ts">const itemInfo = await instance.items.get(&quot;item-id-123&quot;).info();&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const itemInfo = await instance.items.get(&quot;item-id-123&quot;).info();&#10;</code></pre>
 <h5 id="parameters-4">Parameters</h5>
 <table>
 <thead>
@@ -474,7 +485,7 @@
 </table>
 <h4 id="items-get-download"><code>items.get().download()</code></h4>
 <p>Downloads the original source file for an item.</p>
-<pre><code class="language-ts">const file = await instance.items.get(&quot;item-id-123&quot;).download();&#10;// file.body is a ReadableStream&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const file = await instance.items.get(&quot;item-id-123&quot;).download();&#10;// file.body is a ReadableStream&#10;</code></pre>
 <h5 id="parameters-5">Parameters</h5>
 <table>
 <thead>

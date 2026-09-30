@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/workers/wrangler/api/
+  description: A set of programmatic APIs that can be integrated with local Cloudflare Workers-related workflows.
+  full_title: API · Cloudflare Workers docs
+  head_html: <title>API · Cloudflare Workers docs</title><meta name="generator" content="Nift"><meta name="description" content="A set of programmatic APIs that can be integrated with local Cloudflare Workers-related workflows."><link rel="canonical" href="https://developers.cloudflare.com/workers/wrangler/api/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/workers/wrangler/api/index.md"><meta property="og:title" content="API · Cloudflare Workers docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="A set of programmatic APIs that can be integrated with local Cloudflare Workers-related workflows."><meta property="og:url" content="https://developers.cloudflare.com/workers/wrangler/api/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Workers"><meta name="algolia_product_filter" content="Workers"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Configuration"><meta name="algolia_content_type" content="Configuration"><meta name="pcx_additional_products" content="Workers"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/workers/wrangler/api/#page","headline":"API \u00b7 Cloudflare Workers docs","description":"A set of programmatic APIs that can be integrated with local Cloudflare Workers-related workflows.","url":"https://developers.cloudflare.com/workers/wrangler/api/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /workers/wrangler/api/
+  schema: 1
+---
 <p>Wrangler offers APIs to programmatically interact with your Cloudflare Workers.</p>
 <ul>
 <li><a href="#createtestharness"><code>createTestHarness</code></a> - Start one or more Workers for integration tests in any Node.js test runner.</li>
@@ -174,7 +185,7 @@
 @markup("md", "content/.markup/bodies/16007.md")
 </aside>
 <h3 id="syntax-1">Syntax</h3>
-<pre><code class="language-ts">import { experimental_generateTypes } from &quot;wrangler&quot;;&#10;&#10;const result = await experimental_generateTypes(options);&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { experimental_generateTypes } from &quot;wrangler&quot;;&#10;&#10;const result = await experimental_generateTypes(options);&#10;</code></pre>
 <h3 id="parameters-1">Parameters</h3>
 <ul>
 <li>
@@ -250,17 +261,17 @@
 </ul>
 <h3 id="usage-1">Usage</h3>
 <p>You can use <code>experimental_generateTypes</code> to generate types programmatically and write them to disk yourself, or pass them to other tools:</p>
-<pre><code class="language-ts">import { experimental_generateTypes } from &quot;wrangler&quot;;&#10;import * as fs from &quot;node:fs&quot;;&#10;&#10;const result = await experimental_generateTypes({&#10;	config: &quot;wrangler.json&quot;,&#10;	includeRuntime: true,&#10;	includeEnv: true,&#10;});&#10;&#10;// Write the combined content to the path specified in options&#10;fs.writeFileSync(result.path, result.content, &quot;utf-8&quot;);&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { experimental_generateTypes } from &quot;wrangler&quot;;&#10;import * as fs from &quot;node:fs&quot;;&#10;&#10;const result = await experimental_generateTypes({&#10;	config: &quot;wrangler.json&quot;,&#10;	includeRuntime: true,&#10;	includeEnv: true,&#10;});&#10;&#10;// Write the combined content to the path specified in options&#10;fs.writeFileSync(result.path, result.content, &quot;utf-8&quot;);&#10;</code></pre>
 <p>To generate only env types without runtime types:</p>
-<pre><code class="language-ts">const result = await experimental_generateTypes({&#10;	includeRuntime: false,&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const result = await experimental_generateTypes({&#10;	includeRuntime: false,&#10;});&#10;</code></pre>
 <p>To generate types for a specific environment with a custom interface name:</p>
-<pre><code class="language-ts">const result = await experimental_generateTypes({&#10;	env: &quot;staging&quot;,&#10;	envInterface: &quot;StagingEnv&quot;,&#10;	path: &quot;./types/staging.d.ts&quot;,&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const result = await experimental_generateTypes({&#10;	env: &quot;staging&quot;,&#10;	envInterface: &quot;StagingEnv&quot;,&#10;	path: &quot;./types/staging.d.ts&quot;,&#10;});&#10;</code></pre>
 <h2 id="unstable-startworker"><code>unstable_startWorker</code></h2>
 <aside class="nb-aside caution">
 @markup("md", "content/.markup/bodies/16006.md")
 </aside>
 <p>This API exposes the internals of Wrangler's dev server, and allows you to customise how it runs. For example, you could use <code>unstable_startWorker()</code> to run integration tests against your Worker. This example uses <code>node:test</code>, but should apply to any testing framework:</p>
-<pre><code class="language-js">import assert from &quot;node:assert&quot;;&#10;import test, { after, before, describe } from &quot;node:test&quot;;&#10;import { unstable_startWorker } from &quot;wrangler&quot;;&#10;&#10;describe(&quot;worker&quot;, () =&gt; {&#10;	let worker;&#10;&#10;	before(async () =&gt; {&#10;		worker = await unstable_startWorker({ config: &quot;wrangler.json&quot; });&#10;	});&#10;&#10;	test(&quot;hello world&quot;, async () =&gt; {&#10;		assert.strictEqual(&#10;			await (await worker.fetch(&quot;http://example.com&quot;)).text(),&#10;			&quot;Hello world&quot;,&#10;		);&#10;	});&#10;&#10;	after(async () =&gt; {&#10;		await worker.dispose();&#10;	});&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">import assert from &quot;node:assert&quot;;&#10;import test, { after, before, describe } from &quot;node:test&quot;;&#10;import { unstable_startWorker } from &quot;wrangler&quot;;&#10;&#10;describe(&quot;worker&quot;, () =&gt; {&#10;	let worker;&#10;&#10;	before(async () =&gt; {&#10;		worker = await unstable_startWorker({ config: &quot;wrangler.json&quot; });&#10;	});&#10;&#10;	test(&quot;hello world&quot;, async () =&gt; {&#10;		assert.strictEqual(&#10;			await (await worker.fetch(&quot;http://example.com&quot;)).text(),&#10;			&quot;Hello world&quot;,&#10;		);&#10;	});&#10;&#10;	after(async () =&gt; {&#10;		await worker.dispose();&#10;	});&#10;});&#10;</code></pre>
 <h2 id="unstable-dev"><code>unstable_dev</code></h2>
 <aside class="nb-aside caution">
 @markup("md", "content/.markup/bodies/16005.md")
@@ -269,7 +280,7 @@
 <p>Once called, <code>unstable_dev</code> will return a <code>fetch()</code> function for invoking your Worker without needing to know the address or port, as well as a <code>stop()</code> function to shut down the HTTP server.</p>
 <p>By default, <code>unstable_dev</code> will perform integration tests against a local server. If you wish to perform an e2e test against a preview Worker, pass <code>local: false</code> in the <code>options</code> object when calling the <code>unstable_dev()</code> function. Note that e2e tests can be significantly slower than integration tests.</p>
 <h3 id="constructor">Constructor</h3>
-<pre><code class="language-js">const worker = await unstable_dev(script, options);&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">const worker = await unstable_dev(script, options);&#10;</code></pre>
 <h3 id="parameters-2">Parameters</h3>
 <ul>
 <li>
@@ -331,7 +342,7 @@
 @markup("md", "content/.markup/bodies/16003.md")
 </aside>
 <h3 id="syntax-2">Syntax</h3>
-<pre><code class="language-js">const platform = await getPlatformProxy(options);&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">const platform = await getPlatformProxy(options);&#10;</code></pre>
 <h3 id="parameters-3">Parameters</h3>
 <ul>
 <li><code>options</code> <span class="nb-type">object</span> <span class="nb-metainfo">optional</span>
@@ -405,9 +416,9 @@
 @markup("md", "content/.markup/bodies/16018.md")
 </div>
 <p>You can access the bindings by importing <code>getPlatformProxy</code> like this:</p>
-<pre><code class="language-js">import { getPlatformProxy } from &quot;wrangler&quot;;&#10;&#10;const { env } = await getPlatformProxy();&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">import { getPlatformProxy } from &quot;wrangler&quot;;&#10;&#10;const { env } = await getPlatformProxy();&#10;</code></pre>
 <p>To access the value of the <code>MY_VARIABLE</code> binding add the following to your code:</p>
-<pre><code class="language-js">console.log(`MY_VARIABLE = ${env.MY_VARIABLE}`);&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">console.log(`MY_VARIABLE = ${env.MY_VARIABLE}`);&#10;</code></pre>
 <p>This will print the following output: <code>MY_VARIABLE = test</code>.</p>
 <h3 id="supported-bindings">Supported bindings</h3>
 <p>All supported bindings found in your <a href="/workers/wrangler/configuration/">Wrangler configuration file</a> are available to you via <code>env</code>.</p>
@@ -459,13 +470,13 @@
 <div class="nb-wrangler-config">
 @markup("md", "content/.markup/bodies/16019.md")
 </div>
-<pre><code>You will need to declare your Durable Object `&quot;MyDurableObject&quot;` in another Worker, called `external-do-worker` in this example.&#10;</code></pre>
-<pre><code class="language-ts">export class MyDurableObject extends DurableObject {&#10;	// Your DO code goes here&#10;}&#10;&#10;export default {&#10;	fetch() {&#10;		// Doesn&#x27;t have to do anything, but a DO cannot be the default export&#10;		return new Response(&quot;Hello, world!&quot;);&#10;	},&#10;};&#10;</code></pre>
-<pre><code>That Worker also needs a Wrangler configuration file that looks like this:&#10;</code></pre>
+<pre tabindex="0"><code>You will need to declare your Durable Object `&quot;MyDurableObject&quot;` in another Worker, called `external-do-worker` in this example.&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">export class MyDurableObject extends DurableObject {&#10;	// Your DO code goes here&#10;}&#10;&#10;export default {&#10;	fetch() {&#10;		// Doesn&#x27;t have to do anything, but a DO cannot be the default export&#10;		return new Response(&quot;Hello, world!&quot;);&#10;	},&#10;};&#10;</code></pre>
+<pre tabindex="0"><code>That Worker also needs a Wrangler configuration file that looks like this:&#10;</code></pre>
 <div class="nb-wrangler-config">
 @markup("md", "content/.markup/bodies/16020.md")
 </div>
-<pre><code>If you are not using RPC with your Durable Object, you can run a separate Wrangler dev session alongside your framework development server.&#10;&#10;Otherwise, you can build your application and run both Workers in the same Wrangler dev session.&#10;&#10;If you are using Pages run:&#10;</code></pre>
-<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre><code data-nb-pm-code>npx wrangler pages dev -c path/to/pages/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc</code></pre><button type="button" data-nb-pm-copy data-nb-command="npx wrangler pages dev -c path/to/pages/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>yarn wrangler pages dev -c path/to/pages/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn wrangler pages dev -c path/to/pages/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>pnpm wrangler pages dev -c path/to/pages/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm wrangler pages dev -c path/to/pages/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc" aria-label="Copy to clipboard">Copy</button></div></div>
-<pre><code>If you are using Workers with Assets run:&#10;</code></pre>
-<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre><code data-nb-pm-code>npx wrangler dev -c path/to/workers-assets/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc</code></pre><button type="button" data-nb-pm-copy data-nb-command="npx wrangler dev -c path/to/workers-assets/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>yarn wrangler dev -c path/to/workers-assets/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn wrangler dev -c path/to/workers-assets/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>pnpm wrangler dev -c path/to/workers-assets/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm wrangler dev -c path/to/workers-assets/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc" aria-label="Copy to clipboard">Copy</button></div></div>
+<pre tabindex="0"><code>If you are not using RPC with your Durable Object, you can run a separate Wrangler dev session alongside your framework development server.&#10;&#10;Otherwise, you can build your application and run both Workers in the same Wrangler dev session.&#10;&#10;If you are using Pages run:&#10;</code></pre>
+<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre tabindex="0"><code data-nb-pm-code>npx wrangler pages dev -c path/to/pages/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc</code></pre><button type="button" data-nb-pm-copy data-nb-command="npx wrangler pages dev -c path/to/pages/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>yarn wrangler pages dev -c path/to/pages/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn wrangler pages dev -c path/to/pages/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>pnpm wrangler pages dev -c path/to/pages/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm wrangler pages dev -c path/to/pages/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc" aria-label="Copy to clipboard">Copy</button></div></div>
+<pre tabindex="0"><code>If you are using Workers with Assets run:&#10;</code></pre>
+<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre tabindex="0"><code data-nb-pm-code>npx wrangler dev -c path/to/workers-assets/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc</code></pre><button type="button" data-nb-pm-copy data-nb-command="npx wrangler dev -c path/to/workers-assets/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>yarn wrangler dev -c path/to/workers-assets/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn wrangler dev -c path/to/workers-assets/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>pnpm wrangler dev -c path/to/workers-assets/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm wrangler dev -c path/to/workers-assets/wrangler.jsonc -c path/to/external-do-worker/wrangler.jsonc" aria-label="Copy to clipboard">Copy</button></div></div>

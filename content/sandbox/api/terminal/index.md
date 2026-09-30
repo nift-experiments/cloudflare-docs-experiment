@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/sandbox/api/terminal/
+  description: Connect browser-based terminal UIs to sandbox shells via WebSocket.
+  full_title: Terminal · Cloudflare Sandbox SDK docs
+  head_html: <title>Terminal · Cloudflare Sandbox SDK docs</title><meta name="generator" content="Nift"><meta name="description" content="Connect browser-based terminal UIs to sandbox shells via WebSocket."><link rel="canonical" href="https://developers.cloudflare.com/sandbox/api/terminal/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/sandbox/api/terminal/index.md"><meta property="og:title" content="Terminal · Cloudflare Sandbox SDK docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Connect browser-based terminal UIs to sandbox shells via WebSocket."><meta property="og:url" content="https://developers.cloudflare.com/sandbox/api/terminal/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Sandbox SDK"><meta name="algolia_product_filter" content="Sandbox SDK"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Sandbox SDK"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/sandbox/api/terminal/#page","headline":"Terminal \u00b7 Cloudflare Sandbox SDK docs","description":"Connect browser-based terminal UIs to sandbox shells via WebSocket.","url":"https://developers.cloudflare.com/sandbox/api/terminal/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /sandbox/api/terminal/
+  schema: 1
+---
 <p>Connect browser-based terminal UIs to sandbox shells via WebSocket. The server-side <code>terminal()</code> method proxies WebSocket connections to the container, and the client-side <code>SandboxAddon</code> integrates with xterm.js for terminal rendering.</p>
 <aside class="nb-aside note">
 <h3 class="nb-aside-title" id="sandbox-sdk-1-0-preview">Sandbox SDK 1.0 preview</h3>
@@ -6,7 +17,7 @@
 <h2 id="server-side-methods">Server-side methods</h2>
 <h3 id="terminal"><code>terminal()</code></h3>
 <p>Proxy a WebSocket upgrade request to create a terminal connection.</p>
-<pre><code class="language-ts">const response = await sandbox.terminal(request: Request, options?: PtyOptions): Promise&lt;Response&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const response = await sandbox.terminal(request: Request, options?: PtyOptions): Promise&lt;Response&gt;&#10;</code></pre>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>request</code> - WebSocket upgrade request from the browser (must include <code>Upgrade: websocket</code> header)</li>
@@ -28,7 +39,7 @@
 <h2 id="client-side-addon">Client-side addon</h2>
 <p>The <code>@cloudflare/sandbox/xterm</code> module provides <code>SandboxAddon</code> for xterm.js, which handles the WebSocket connection, reconnection, and terminal resize forwarding.</p>
 <h3 id="sandboxaddon"><code>SandboxAddon</code></h3>
-<pre><code class="language-ts">import { SandboxAddon } from &#x27;@cloudflare/sandbox/xterm&#x27;;&#10;&#10;const addon = new SandboxAddon(options: SandboxAddonOptions);&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { SandboxAddon } from &#x27;@cloudflare/sandbox/xterm&#x27;;&#10;&#10;const addon = new SandboxAddon(options: SandboxAddonOptions);&#10;</code></pre>
 <p><strong>Options</strong>:</p>
 <ul>
 <li><code>getWebSocketUrl(params)</code> - Build the WebSocket URL for each connection attempt. Receives:
@@ -46,7 +57,7 @@
 </div>
 <h3 id="connect"><code>connect()</code></h3>
 <p>Establish a connection to a sandbox terminal.</p>
-<pre><code class="language-ts">addon.connect(target: ConnectionTarget): void&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">addon.connect(target: ConnectionTarget): void&#10;</code></pre>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>target</code>:
@@ -59,7 +70,7 @@
 <p>Calling <code>connect()</code> with a new target disconnects from the current target and connects to the new one. Calling it with the same target while already connected is a no-op.</p>
 <h3 id="disconnect"><code>disconnect()</code></h3>
 <p>Close the connection and stop any reconnection attempts.</p>
-<pre><code class="language-ts">addon.disconnect(): void&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">addon.disconnect(): void&#10;</code></pre>
 <h3 id="properties">Properties</h3>
 <table>
 <thead>
@@ -100,17 +111,17 @@
 <h3 id="control-messages-client-to-server">Control messages (client to server)</h3>
 <p>Send JSON text frames to control the terminal.</p>
 <p><strong>Resize</strong> — update terminal dimensions (both <code>cols</code> and <code>rows</code> must be positive):</p>
-<pre><code class="language-json">{ &quot;type&quot;: &quot;resize&quot;, &quot;cols&quot;: 120, &quot;rows&quot;: 30 }&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{ &quot;type&quot;: &quot;resize&quot;, &quot;cols&quot;: 120, &quot;rows&quot;: 30 }&#10;</code></pre>
 <h3 id="status-messages-server-to-client">Status messages (server to client)</h3>
 <p>The server sends JSON text frames for lifecycle events.</p>
 <p><strong>Ready</strong> — the PTY is initialized. Buffered output (if any) has already been sent:</p>
-<pre><code class="language-json">{ &quot;type&quot;: &quot;ready&quot; }&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{ &quot;type&quot;: &quot;ready&quot; }&#10;</code></pre>
 <p><strong>Exit</strong> — the shell process has terminated:</p>
-<pre><code class="language-json">{ &quot;type&quot;: &quot;exit&quot;, &quot;code&quot;: 0, &quot;signal&quot;: &quot;SIGTERM&quot; }&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{ &quot;type&quot;: &quot;exit&quot;, &quot;code&quot;: 0, &quot;signal&quot;: &quot;SIGTERM&quot; }&#10;</code></pre>
 <p><strong>Error</strong> — an error occurred (for example, invalid control message or session not found):</p>
-<pre><code class="language-json">{ &quot;type&quot;: &quot;error&quot;, &quot;message&quot;: &quot;Session not found&quot; }&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{ &quot;type&quot;: &quot;error&quot;, &quot;message&quot;: &quot;Session not found&quot; }&#10;</code></pre>
 <h2 id="types">Types</h2>
-<pre><code class="language-ts">interface PtyOptions {&#10;	cols?: number;&#10;	rows?: number;&#10;}&#10;&#10;type ConnectionState = &quot;disconnected&quot; | &quot;connecting&quot; | &quot;connected&quot;;&#10;&#10;interface ConnectionTarget {&#10;	sandboxId: string;&#10;	sessionId?: string;&#10;}&#10;&#10;interface SandboxAddonOptions {&#10;	getWebSocketUrl: (params: {&#10;		sandboxId: string;&#10;		sessionId?: string;&#10;		origin: string;&#10;	}) =&gt; string;&#10;	reconnect?: boolean;&#10;	onStateChange?: (state: ConnectionState, error?: Error) =&gt; void;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">interface PtyOptions {&#10;	cols?: number;&#10;	rows?: number;&#10;}&#10;&#10;type ConnectionState = &quot;disconnected&quot; | &quot;connecting&quot; | &quot;connected&quot;;&#10;&#10;interface ConnectionTarget {&#10;	sandboxId: string;&#10;	sessionId?: string;&#10;}&#10;&#10;interface SandboxAddonOptions {&#10;	getWebSocketUrl: (params: {&#10;		sandboxId: string;&#10;		sessionId?: string;&#10;		origin: string;&#10;	}) =&gt; string;&#10;	reconnect?: boolean;&#10;	onStateChange?: (state: ConnectionState, error?: Error) =&gt; void;&#10;}&#10;</code></pre>
 <h2 id="related-resources">Related resources</h2>
 <ul>
 <li><a href="/sandbox/concepts/terminal/">Terminal connections</a> — How terminal connections work</li>

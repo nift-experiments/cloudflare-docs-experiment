@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/privacy-proxy/reference/client-libraries/
+  description: Open source libraries and tools for connecting to Privacy Proxy, including tokio-quiche, Chaussette, and privacypass-ts.
+  full_title: Client libraries · Cloudflare Privacy Proxy docs
+  head_html: <title>Client libraries · Cloudflare Privacy Proxy docs</title><meta name="generator" content="Nift"><meta name="description" content="Open source libraries and tools for connecting to Privacy Proxy, including tokio-quiche, Chaussette, and privacypass-ts."><link rel="canonical" href="https://developers.cloudflare.com/privacy-proxy/reference/client-libraries/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/privacy-proxy/reference/client-libraries/index.md"><meta property="og:title" content="Client libraries · Cloudflare Privacy Proxy docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Open source libraries and tools for connecting to Privacy Proxy, including tokio-quiche, Chaussette, and privacypass-ts."><meta property="og:url" content="https://developers.cloudflare.com/privacy-proxy/reference/client-libraries/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Privacy Proxy"><meta name="algolia_product_filter" content="Privacy Proxy"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Privacy Proxy"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/privacy-proxy/reference/client-libraries/#page","headline":"Client libraries \u00b7 Cloudflare Privacy Proxy docs","description":"Open source libraries and tools for connecting to Privacy Proxy, including tokio-quiche, Chaussette, and privacypass-ts.","url":"https://developers.cloudflare.com/privacy-proxy/reference/client-libraries/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /privacy-proxy/reference/client-libraries/
+  schema: 1
+---
 <p>This page lists open source libraries and tools you can use to connect to Privacy Proxy.</p>
 <h2 id="tokio-quiche">tokio-quiche</h2>
 <p><a href="https://github.com/cloudflare/quiche/tree/master/tokio-quiche">tokio-quiche</a> is Cloudflare's open source async QUIC and HTTP/3 library for Rust. It combines the <a href="https://github.com/cloudflare/quiche">quiche</a> QUIC implementation with the <a href="https://tokio.rs/">Tokio</a> async runtime.</p>
@@ -11,7 +22,7 @@
 </ul>
 <h3 id="installation">Installation</h3>
 <p>Add tokio-quiche to your <code>Cargo.toml</code>:</p>
-<pre><code class="language-toml">[dependencies]&#10;tokio-quiche = &quot;0.1&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-toml">[dependencies]&#10;tokio-quiche = &quot;0.1&quot;&#10;</code></pre>
 <h3 id="resources">Resources</h3>
 <ul>
 <li><a href="https://github.com/cloudflare/quiche/tree/master/tokio-quiche">GitHub repository</a></li>
@@ -40,7 +51,7 @@
 <li>Optional mTLS authentication</li>
 </ul>
 <h3 id="usage">Usage</h3>
-<pre><code class="language-sh">MASQUE_PRESHARED_KEY=&lt;YOUR_PSK&gt; chaussette \&#10;  &#45;-listen 127.0.0.1:1987 \&#10;  &#45;-proxy https://your-proxy.example.com:443 \&#10;  &#45;-geohash xn76c-JP&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">MASQUE_PRESHARED_KEY=&lt;YOUR_PSK&gt; chaussette \&#10;  &#45;-listen 127.0.0.1:1987 \&#10;  &#45;-proxy https://your-proxy.example.com:443 \&#10;  &#45;-geohash xn76c-JP&#10;</code></pre>
 <p>Then configure your application to use <code>socks5://127.0.0.1:1987</code> as its proxy.</p>
 <h3 id="resources-2">Resources</h3>
 <ul>
@@ -49,7 +60,7 @@
 <hr />
 <h2 id="curl">curl</h2>
 <p>For basic testing over HTTP/2, standard curl supports CONNECT proxying:</p>
-<pre><code class="language-sh">curl -v \&#10;  &#45;-proxy https://your-proxy.example.com \&#10;  &#45;-proxy-header &quot;Proxy-Authorization: Preshared &lt;YOUR_PSK&gt;&quot; \&#10;  https://example.com&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">curl -v \&#10;  &#45;-proxy https://your-proxy.example.com \&#10;  &#45;-proxy-header &quot;Proxy-Authorization: Preshared &lt;YOUR_PSK&gt;&quot; \&#10;  https://example.com&#10;</code></pre>
 <p>curl can also be <a href="https://github.com/curl/curl/blob/master/docs/HTTP3.md#quiche-version">built with quiche</a> for HTTP/3 support.</p>
 <hr />
 <h2 id="privacypass-ts">privacypass-ts</h2>
@@ -61,7 +72,7 @@
 <li>Compatible with browser and Node.js environments</li>
 </ul>
 <h3 id="installation-1">Installation</h3>
-<pre><code class="language-sh">npm install @cloudflare/privacypass-ts&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npm install @cloudflare/privacypass-ts&#10;</code></pre>
 <h3 id="resources-3">Resources</h3>
 <ul>
 <li><a href="https://github.com/cloudflare/privacypass-ts">GitHub repository</a></li>

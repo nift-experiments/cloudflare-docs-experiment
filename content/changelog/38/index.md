@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/changelog/38/
+  description: New updates and improvements at Cloudflare.
+  full_title: Changelog - page 38 | Cloudflare Docs
+  head_html: <title>Changelog - page 38 | Cloudflare Docs</title><meta name="generator" content="Nift"><meta name="description" content="New updates and improvements at Cloudflare."><link rel="canonical" href="https://developers.cloudflare.com/changelog/38/"><link rel="sitemap" href="/sitemap-index.xml"><meta property="og:title" content="Changelog - page 38"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="New updates and improvements at Cloudflare."><meta property="og:url" content="https://developers.cloudflare.com/changelog/38/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/changelog/38/#page","headline":"Changelog - page 38 | Cloudflare Docs","description":"New updates and improvements at Cloudflare.","url":"https://developers.cloudflare.com/changelog/38/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: false
+  noindex: false
+  route: /changelog/38/
+  schema: 1
+---
 <div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
 <div class="changelog-tools"><span>All products</span><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
 <section class="changelog-feed" aria-label="Changelog entries">
@@ -16,25 +27,25 @@
 <p>A resource should never show a plan diff if there isn't an actual change. This fix reduces unnecessary noise in your Terraform plan and is available in Cloudflare Terraform Provider 5.8.0.</p>
 <h4 id="2025-08-14-workers-terraform-and-sdk-improvements-improved-file-management">Improved File Management</h4>
 <p>You can now specify <code>content_file</code> and <code>content_sha256</code> instead of <code>content</code>. This prevents the Workers script content from being stored in the state file which greatly reduces plan diff size and noise. If your workflow synced plans remotely, this should now happen much faster since there is less data to sync. This is available in Cloudflare Terraform Provider 5.7.0.</p>
-<pre><code class="language-tf">resource &quot;cloudflare_workers_script&quot; &quot;my_worker&quot; {&#10;  account_id      = &quot;123456789&quot;&#10;  script_name     = &quot;my_worker&quot;&#10;  main_module     = &quot;worker.mjs&quot;&#10;  content_file    = &quot;worker.mjs&quot;&#10;  content_sha256  = filesha256(&quot;worker.mjs&quot;)&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-tf">resource &quot;cloudflare_workers_script&quot; &quot;my_worker&quot; {&#10;  account_id      = &quot;123456789&quot;&#10;  script_name     = &quot;my_worker&quot;&#10;  main_module     = &quot;worker.mjs&quot;&#10;  content_file    = &quot;worker.mjs&quot;&#10;  content_sha256  = filesha256(&quot;worker.mjs&quot;)&#10;}&#10;</code></pre>
 <h4 id="2025-08-14-workers-terraform-and-sdk-improvements-assets-headers-and-redirects-support">Assets Headers and Redirects Support</h4>
 <p>Fixed the <code>cloudflare_workers_script</code> resource to properly support headers and redirects for Assets:</p>
-<pre><code class="language-tf">resource &quot;cloudflare_workers_script&quot; &quot;my_worker&quot; {&#10;  account_id      = &quot;123456789&quot;&#10;  script_name     = &quot;my_worker&quot;&#10;  main_module     = &quot;worker.mjs&quot;&#10;  content_file    = &quot;worker.mjs&quot;&#10;  content_sha256  = filesha256(&quot;worker.mjs&quot;)&#10;  assets = {&#10;    config = {&#10;      headers = file(&quot;_headers&quot;)&#10;      redirects = file(&quot;_redirects&quot;)&#10;    }&#10;    &#35; Completion jwt from:&#10;    &#35; https://developers.cloudflare.com/api/resources/workers/subresources/assets/subresources/upload/&#10;    jwt = &quot;jwt&quot;&#10;  }&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-tf">resource &quot;cloudflare_workers_script&quot; &quot;my_worker&quot; {&#10;  account_id      = &quot;123456789&quot;&#10;  script_name     = &quot;my_worker&quot;&#10;  main_module     = &quot;worker.mjs&quot;&#10;  content_file    = &quot;worker.mjs&quot;&#10;  content_sha256  = filesha256(&quot;worker.mjs&quot;)&#10;  assets = {&#10;    config = {&#10;      headers = file(&quot;_headers&quot;)&#10;      redirects = file(&quot;_redirects&quot;)&#10;    }&#10;    &#35; Completion jwt from:&#10;    &#35; https://developers.cloudflare.com/api/resources/workers/subresources/assets/subresources/upload/&#10;    jwt = &quot;jwt&quot;&#10;  }&#10;}&#10;</code></pre>
 <p>Available in Cloudflare Terraform Provider 5.8.0.</p>
 <h4 id="2025-08-14-workers-terraform-and-sdk-improvements-python-workers-support">Python Workers Support</h4>
 <p>Added support for uploading <a href="/workers/languages/python/">Python Workers</a> (beta) in Terraform. You can now deploy Python Workers with:</p>
-<pre><code class="language-tf">resource &quot;cloudflare_workers_script&quot; &quot;my_worker&quot; {&#10;  account_id       = &quot;123456789&quot;&#10;  script_name      = &quot;my_worker&quot;&#10;  content_file     = &quot;worker.py&quot;&#10;  content_sha256   = filesha256(&quot;worker.py&quot;)&#10;  content_type     = &quot;text/x-python&quot;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-tf">resource &quot;cloudflare_workers_script&quot; &quot;my_worker&quot; {&#10;  account_id       = &quot;123456789&quot;&#10;  script_name      = &quot;my_worker&quot;&#10;  content_file     = &quot;worker.py&quot;&#10;  content_sha256   = filesha256(&quot;worker.py&quot;)&#10;  content_type     = &quot;text/x-python&quot;&#10;}&#10;</code></pre>
 <p>Available in Cloudflare Terraform Provider 5.8.0.</p>
 <h4 id="2025-08-14-workers-terraform-and-sdk-improvements-sdk-enhancements">SDK Enhancements</h4>
 <h4 id="2025-08-14-workers-terraform-and-sdk-improvements-improved-file-upload-api">Improved File Upload API</h4>
 <p>Fixed an issue where Workers script versions in the SDK did not allow uploading files. This now works, and also has an improved files upload interface:</p>
-<pre><code class="language-js">const scriptContent = `&#10;  export default {&#10;    async fetch(request, env, ctx) {&#10;      return new Response(&#x27;Hello World!&#x27;, { status: 200 });&#10;    }&#10;  };&#10;`;&#10;&#10;client.workers.scripts.versions.create(&#x27;my-worker&#x27;, {&#10;  account_id: &#x27;123456789&#x27;,&#10;  metadata: {&#10;    main_module: &#x27;my-worker.mjs&#x27;,&#10;  },&#10;  files: [&#10;    await toFile(&#10;      Buffer.from(scriptContent),&#10;      &#x27;my-worker.mjs&#x27;,&#10;      {&#10;        type: &quot;application/javascript+module&quot;,&#10;      }&#10;    )&#10;  ]&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">const scriptContent = `&#10;  export default {&#10;    async fetch(request, env, ctx) {&#10;      return new Response(&#x27;Hello World!&#x27;, { status: 200 });&#10;    }&#10;  };&#10;`;&#10;&#10;client.workers.scripts.versions.create(&#x27;my-worker&#x27;, {&#10;  account_id: &#x27;123456789&#x27;,&#10;  metadata: {&#10;    main_module: &#x27;my-worker.mjs&#x27;,&#10;  },&#10;  files: [&#10;    await toFile(&#10;      Buffer.from(scriptContent),&#10;      &#x27;my-worker.mjs&#x27;,&#10;      {&#10;        type: &quot;application/javascript+module&quot;,&#10;      }&#10;    )&#10;  ]&#10;});&#10;</code></pre>
 <p>Will be available in cloudflare-typescript 4.6.0. A similar change will be available in cloudflare-python 4.4.0.</p>
 <h4 id="2025-08-14-workers-terraform-and-sdk-improvements-fixed-updating-kv-values">Fixed updating KV values</h4>
 <p>Previously when creating a KV value like this:</p>
-<pre><code class="language-js">await cf.kv.namespaces.values.update(&quot;my-kv-namespace&quot;, &quot;key1&quot;, {&#10;  account_id: &quot;123456789&quot;,&#10;  metadata: &quot;my metadata&quot;,&#10;  value: JSON.stringify({&#10;    hello: &quot;world&quot;&#10;  })&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">await cf.kv.namespaces.values.update(&quot;my-kv-namespace&quot;, &quot;key1&quot;, {&#10;  account_id: &quot;123456789&quot;,&#10;  metadata: &quot;my metadata&quot;,&#10;  value: JSON.stringify({&#10;    hello: &quot;world&quot;&#10;  })&#10;});&#10;</code></pre>
 <p>...and recalling it in your Worker like this:</p>
-<pre><code class="language-ts">const value = await c.env.KV.get&lt;{hello: string}&gt;(&quot;key1&quot;, &quot;json&quot;);&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const value = await c.env.KV.get&lt;{hello: string}&gt;(&quot;key1&quot;, &quot;json&quot;);&#10;</code></pre>
 <p>You'd get back this: <code>{metadata:'my metadata', value:&quot;{'hello':'world'}&quot;}</code> instead of the correct value of <code>{hello: 'world'}</code></p>
 <p>This is fixed in cloudflare-typescript 4.5.0 and will be fixed in cloudflare-python 4.4.0.</p>
 </div>
@@ -55,7 +66,7 @@
 with any worker using a compatibility date of <code>2025-08-15</code> or later. It is also available
 using the <code>expose_global_message_channel</code> compatibility flag, or can be explicitly disabled
 using the <code>no_expose_global_message_channel</code> compatibility flag.</p>
-<pre><code class="language-js">const { port1, port2 } = new MessageChannel();&#10;&#10;port2.onmessage = (event) =&gt; {&#10;	console.log(&#x27;Received message:&#x27;, event.data);&#10;};&#10;&#10;port2.postMessage(&#x27;Hello from port2!&#x27;);&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">const { port1, port2 } = new MessageChannel();&#10;&#10;port2.onmessage = (event) =&gt; {&#10;	console.log(&#x27;Received message:&#x27;, event.data);&#10;};&#10;&#10;port2.postMessage(&#x27;Hello from port2!&#x27;);&#10;</code></pre>
 <p>Any value that can be used with the <code>structuredClone(...)</code> API can be sent over the port.</p>
 <h4 id="2025-08-11-messagechannel-differences">Differences</h4>
 <p>There are a number of key limitations to the <code>MessageChannel</code> API in Workers:</p>
@@ -359,16 +370,16 @@ This vulnerability in the Simple File List plugin for WordPress allows an unauth
 This is still supported, but you can now also use <code>.env</code> files, which are more familiar to many developers.</p>
 <h4 id="2025-08-08-dot-env-in-local-dev-using-env-files-in-local-development">Using <code>.env</code> files in local development</h4>
 <p>You can create a <code>.env</code> file in your project root to define environment variables that will be used when running <code>wrangler dev</code> or <code>vite dev</code>. The <code>.env</code> file should be formatted like a <code>dotenv</code> file, such as <code>KEY=&quot;VALUE&quot;</code>:</p>
-<pre><code class="language-bash">TITLE=&quot;My Worker&quot;&#10;API_TOKEN=&quot;dev-token&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">TITLE=&quot;My Worker&quot;&#10;API_TOKEN=&quot;dev-token&quot;&#10;</code></pre>
 <p>When you run <code>wrangler dev</code> or <code>vite dev</code>, the environment variables defined in the <code>.env</code> file will be available in your Worker code via the <code>env</code> object:</p>
-<pre><code class="language-javascript">export default {&#10;	async fetch(request, env) {&#10;		const title = env.TITLE; // &quot;My Worker&quot;&#10;		const apiToken = env.API_TOKEN; // &quot;dev-token&quot;&#10;		const response = await fetch(&#10;			`https://api.example.com/data?token=${apiToken}`,&#10;		);&#10;		return new Response(`Title: ${title} - ` + (await response.text()));&#10;	},&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-javascript">export default {&#10;	async fetch(request, env) {&#10;		const title = env.TITLE; // &quot;My Worker&quot;&#10;		const apiToken = env.API_TOKEN; // &quot;dev-token&quot;&#10;		const response = await fetch(&#10;			`https://api.example.com/data?token=${apiToken}`,&#10;		);&#10;		return new Response(`Title: ${title} - ` + (await response.text()));&#10;	},&#10;};&#10;</code></pre>
 <h4 id="2025-08-08-dot-env-in-local-dev-multiple-environments-with-env-files">Multiple environments with <code>.env</code> files</h4>
 <p>If your Worker defines multiple <a href="/workers/wrangler/environments/">environments</a>, you can set different variables for each environment (ex: production or staging) by creating files named <code>.env.&lt;environment-name&gt;</code>.</p>
 <p>When you use <code>wrangler &lt;command&gt; --env &lt;environment-name&gt;</code> or <code>CLOUDFLARE_ENV=&lt;environment-name&gt; vite dev</code>, the corresponding environment-specific file will also be loaded and merged with the <code>.env</code> file.</p>
 <p>For example, if you want to set different environment variables for the <code>staging</code> environment, you can create a file named <code>.env.staging</code>:</p>
-<pre><code class="language-bash">API_TOKEN=&quot;staging-token&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">API_TOKEN=&quot;staging-token&quot;&#10;</code></pre>
 <p>When you run <code>wrangler dev --env staging</code> or <code>CLOUDFLARE_ENV=staging vite dev</code>, the environment variables from <code>.env.staging</code> will be merged onto those from <code>.env</code>.</p>
-<pre><code class="language-javascript">export default {&#10;	async fetch(request, env) {&#10;		const title = env.TITLE; // &quot;My Worker&quot; (from `.env`)&#10;		const apiToken = env.API_TOKEN; // &quot;staging-token&quot; (from `.env.staging`, overriding the value from `.env`)&#10;		const response = await fetch(&#10;			`https://api.example.com/data?token=${apiToken}`,&#10;		);&#10;		return new Response(`Title: ${title} - ` + (await response.text()));&#10;	},&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-javascript">export default {&#10;	async fetch(request, env) {&#10;		const title = env.TITLE; // &quot;My Worker&quot; (from `.env`)&#10;		const apiToken = env.API_TOKEN; // &quot;staging-token&quot; (from `.env.staging`, overriding the value from `.env`)&#10;		const response = await fetch(&#10;			`https://api.example.com/data?token=${apiToken}`,&#10;		);&#10;		return new Response(`Title: ${title} - ` + (await response.text()));&#10;	},&#10;};&#10;</code></pre>
 <h4 id="2025-08-08-dot-env-in-local-dev-find-out-more">Find out more</h4>
 <p>For more information on how to use <code>.env</code> files with Wrangler and the Cloudflare Vite plugin, see the following documentation:</p>
 <ul>
@@ -400,14 +411,14 @@ issues.</p>
 <div class="changelog-badges"><span>workers</span></div><div class="changelog-body"><p>You can now import <a href="/workers/runtime-apis/context/#waituntil"><code>waitUntil</code></a> from <code>cloudflare:workers</code> to extend your Worker's execution beyond the request lifecycle from anywhere in your code.</p>
 <p>Previously, <code>waitUntil</code> could only be accessed through the <a href="/workers/runtime-apis/context/">execution context</a> (<code>ctx</code>) parameter passed to your Worker's handler functions. This meant that if you needed to schedule background tasks from deeply nested functions or utility modules, you had to pass the <code>ctx</code> object through multiple function calls to access <code>waitUntil</code>.</p>
 <p>Now, you can import <code>waitUntil</code> directly and use it anywhere in your Worker without needing to pass <code>ctx</code> as a parameter:</p>
-<pre><code class="language-js">import { waitUntil } from &quot;cloudflare:workers&quot;;&#10;&#10;export function trackAnalytics(eventData) {&#10;	const analyticsPromise = fetch(&quot;https://analytics.example.com/track&quot;, {&#10;		method: &quot;POST&quot;,&#10;		body: JSON.stringify(eventData),&#10;	});&#10;&#10;	// Extend execution to ensure analytics tracking completes&#10;	waitUntil(analyticsPromise);&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">import { waitUntil } from &quot;cloudflare:workers&quot;;&#10;&#10;export function trackAnalytics(eventData) {&#10;	const analyticsPromise = fetch(&quot;https://analytics.example.com/track&quot;, {&#10;		method: &quot;POST&quot;,&#10;		body: JSON.stringify(eventData),&#10;	});&#10;&#10;	// Extend execution to ensure analytics tracking completes&#10;	waitUntil(analyticsPromise);&#10;}&#10;</code></pre>
 <p>This is particularly useful when you want to:</p>
 <ul>
 <li>Schedule background tasks from utility functions or modules</li>
 <li>Extend execution for analytics, logging, or cleanup operations</li>
 <li>Avoid passing the execution context through multiple layers of function calls</li>
 </ul>
-<pre><code class="language-js">import { waitUntil } from &quot;cloudflare:workers&quot;;&#10;&#10;export default {&#10;	async fetch(request, env, ctx) {&#10;		// Background task that should complete even after response is sent&#10;		cleanupTempData(env.KV_NAMESPACE);&#10;		return new Response(&quot;Hello, World!&quot;);&#10;	}&#10;};&#10;&#10;function cleanupTempData(kvNamespace) {&#10;	// This function can now use waitUntil without needing ctx&#10;	const deletePromise = kvNamespace.delete(&quot;temp-key&quot;);&#10;	waitUntil(deletePromise);&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">import { waitUntil } from &quot;cloudflare:workers&quot;;&#10;&#10;export default {&#10;	async fetch(request, env, ctx) {&#10;		// Background task that should complete even after response is sent&#10;		cleanupTempData(env.KV_NAMESPACE);&#10;		return new Response(&quot;Hello, World!&quot;);&#10;	}&#10;};&#10;&#10;function cleanupTempData(kvNamespace) {&#10;	// This function can now use waitUntil without needing ctx&#10;	const deletePromise = kvNamespace.delete(&quot;temp-key&quot;);&#10;	waitUntil(deletePromise);&#10;}&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/17784.md")</aside>
 <p>For more information, see the <a href="/workers/runtime-apis/context/#waituntil"><code>waitUntil</code> documentation</a>.</p>
@@ -569,7 +580,7 @@ property on <code>Request</code> to <code>'no-cache'</code>, the Workers runtime
 <div class="changelog-badges"><span>agents</span><span>workers</span></div><div class="changelog-body"><p>The latest releases of <a href="https://github.com/cloudflare/agents">@cloudflare/agents</a> brings major improvements to MCP transport protocols support and agents connectivity. Key updates include:</p>
 <h4 id="2025-08-05-agents-MCP-update-mcp-elicitation-support">MCP elicitation support</h4>
 <p>MCP servers can now request user input during tool execution, enabling interactive workflows like confirmations, forms, and multi-step processes. This feature uses durable storage to preserve elicitation state even during agent hibernation, ensuring seamless user interactions across agent lifecycle events.</p>
-<pre><code class="language-ts">// Request user confirmation via elicitation&#10;const confirmation = await this.elicitInput({&#10;	message: `Are you sure you want to increment the counter by ${amount}?`,&#10;	requestedSchema: {&#10;		type: &quot;object&quot;,&#10;		properties: {&#10;			confirmed: {&#10;				type: &quot;boolean&quot;,&#10;				title: &quot;Confirm increment&quot;,&#10;				description: &quot;Check to confirm the increment&quot;,&#10;			},&#10;		},&#10;		required: [&quot;confirmed&quot;],&#10;	},&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// Request user confirmation via elicitation&#10;const confirmation = await this.elicitInput({&#10;	message: `Are you sure you want to increment the counter by ${amount}?`,&#10;	requestedSchema: {&#10;		type: &quot;object&quot;,&#10;		properties: {&#10;			confirmed: {&#10;				type: &quot;boolean&quot;,&#10;				title: &quot;Confirm increment&quot;,&#10;				description: &quot;Check to confirm the increment&quot;,&#10;			},&#10;		},&#10;		required: [&quot;confirmed&quot;],&#10;	},&#10;});&#10;</code></pre>
 <p>Check out our <a href="https://github.com/whoiskatrin/agents/tree/main/examples/mcp-elicitation-demo">demo</a> to see elicitation in action.</p>
 <h4 id="2025-08-05-agents-MCP-update-http-streamable-transport-for-mcp">HTTP streamable transport for MCP</h4>
 <p>MCP now supports HTTP streamable transport which is recommended over SSE. This transport type offers:</p>
@@ -577,7 +588,7 @@ property on <code>Request</code> to <code>'no-cache'</code>, the Workers runtime
 <li><strong>Better performance</strong>: More efficient data streaming and reduced overhead</li>
 <li><strong>Improved reliability</strong>: Enhanced connection stability and error recover- <strong>Automatic fallback</strong>: If streamable transport is not available, it gracefully falls back to SSE</li>
 </ul>
-<pre><code class="language-ts">export default MyMCP.serve(&quot;/mcp&quot;, {&#10;	binding: &quot;MyMCP&quot;,&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">export default MyMCP.serve(&quot;/mcp&quot;, {&#10;	binding: &quot;MyMCP&quot;,&#10;});&#10;</code></pre>
 <p>The SDK automatically selects the best available transport method, gracefully falling back from streamable-http to SSE when needed.</p>
 <h4 id="2025-08-05-agents-MCP-update-enhanced-mcp-connectivity">Enhanced MCP connectivity</h4>
 <p>Significant improvements to MCP server connections and transport reliability:</p>
@@ -588,17 +599,17 @@ property on <code>Request</code> to <code>'no-cache'</code>, the Workers runtime
 </ul>
 <h4 id="2025-08-05-agents-MCP-update-lightweight-queue-for-fast-task-deferral">Lightweight .queue for fast task deferral</h4>
 <p>You can use <code>.queue()</code> to enqueue background work — ideal for tasks like processing user messages, sending notifications etc.</p>
-<pre><code class="language-ts">class MyAgent extends Agent {&#10;	doSomethingExpensive(payload) {&#10;		// a long running process that you want to run in the background&#10;	}&#10;&#10;	queueSomething() {&#10;		await this.queue(&quot;doSomethingExpensive&quot;, somePayload); // this will NOT block further execution, and runs in the background&#10;		await this.queue(&quot;doSomethingExpensive&quot;, someOtherPayload); // the callback will NOT run until the previous callback is complete&#10;		// ... call as many times as you want&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">class MyAgent extends Agent {&#10;	doSomethingExpensive(payload) {&#10;		// a long running process that you want to run in the background&#10;	}&#10;&#10;	queueSomething() {&#10;		await this.queue(&quot;doSomethingExpensive&quot;, somePayload); // this will NOT block further execution, and runs in the background&#10;		await this.queue(&quot;doSomethingExpensive&quot;, someOtherPayload); // the callback will NOT run until the previous callback is complete&#10;		// ... call as many times as you want&#10;	}&#10;}&#10;</code></pre>
 <p>Want to try it yourself? Just define a method like processMessage in your agent, and you’re ready to scale.</p>
 <h4 id="2025-08-05-agents-MCP-update-new-email-adapter">New email adapter</h4>
 <p>Want to build an AI agent that can receive and respond to emails automatically? With the new email adapter and onEmail lifecycle method, now you can.</p>
-<pre><code class="language-ts">export class EmailAgent extends Agent {&#10;	async onEmail(email: AgentEmail) {&#10;		const raw = await email.getRaw();&#10;		const parsed = await PostalMime.parse(raw);&#10;&#10;		// create a response based on the email contents&#10;		// and then send a reply&#10;&#10;		await this.replyToEmail(email, {&#10;			fromName: &quot;Email Agent&quot;,&#10;			body: `Thanks for your email! You&#x27;ve sent us &quot;${parsed.subject}&quot;. We&#x27;ll process it shortly.`,&#10;		});&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">export class EmailAgent extends Agent {&#10;	async onEmail(email: AgentEmail) {&#10;		const raw = await email.getRaw();&#10;		const parsed = await PostalMime.parse(raw);&#10;&#10;		// create a response based on the email contents&#10;		// and then send a reply&#10;&#10;		await this.replyToEmail(email, {&#10;			fromName: &quot;Email Agent&quot;,&#10;			body: `Thanks for your email! You&#x27;ve sent us &quot;${parsed.subject}&quot;. We&#x27;ll process it shortly.`,&#10;		});&#10;	}&#10;}&#10;</code></pre>
 <p>You route incoming mail like this:</p>
-<pre><code class="language-ts">export default {&#10;	async email(email, env) {&#10;		await routeAgentEmail(email, env, {&#10;			resolver: createAddressBasedEmailResolver(&quot;EmailAgent&quot;),&#10;		});&#10;	},&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">export default {&#10;	async email(email, env) {&#10;		await routeAgentEmail(email, env, {&#10;			resolver: createAddressBasedEmailResolver(&quot;EmailAgent&quot;),&#10;		});&#10;	},&#10;};&#10;</code></pre>
 <p>You can find a full example <a href="https://github.com/cloudflare/agents/tree/main/examples/email-agent">here</a>.</p>
 <h4 id="2025-08-05-agents-MCP-update-automatic-context-wrapping-for-custom-methods">Automatic context wrapping for custom methods</h4>
 <p>Custom methods are now automatically wrapped with the agent's context, so calling <code>getCurrentAgent()</code> should work regardless of where in an agent's lifecycle it's called. Previously this would not work on RPC calls, but now just works out of the box.</p>
-<pre><code class="language-ts">export class MyAgent extends Agent {&#10;	async suggestReply(message) {&#10;		// getCurrentAgent() now correctly works, even when called inside an RPC method&#10;		const { agent } = getCurrentAgent()!;&#10;		return generateText({&#10;			prompt: `Suggest a reply to: &quot;${message}&quot; from &quot;${agent.name}&quot;`,&#10;			tools: [replyWithEmoji],&#10;		});&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">export class MyAgent extends Agent {&#10;	async suggestReply(message) {&#10;		// getCurrentAgent() now correctly works, even when called inside an RPC method&#10;		const { agent } = getCurrentAgent()!;&#10;		return generateText({&#10;			prompt: `Suggest a reply to: &quot;${message}&quot; from &quot;${agent.name}&quot;`,&#10;			tools: [replyWithEmoji],&#10;		});&#10;	}&#10;}&#10;</code></pre>
 <p>Try it out and tell us what you build!</p>
 </div>
 </div></article>
@@ -612,7 +623,7 @@ property on <code>Request</code> to <code>'no-cache'</code>, the Workers runtime
 <p>Create persistent code contexts with support for rich visual + structured outputs.</p>
 <h4 id="2025-08-05-sandbox-sdk-major-update-createcodecontext-options">createCodeContext(options)</h4>
 <p>Creates a new code execution context with persistent state.</p>
-<pre><code class="language-ts">// Create a Python context&#10;const pythonCtx = await sandbox.createCodeContext({ language: &quot;python&quot; });&#10;&#10;// Create a JavaScript context&#10;const jsCtx = await sandbox.createCodeContext({ language: &quot;javascript&quot; });&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// Create a Python context&#10;const pythonCtx = await sandbox.createCodeContext({ language: &quot;python&quot; });&#10;&#10;// Create a JavaScript context&#10;const jsCtx = await sandbox.createCodeContext({ language: &quot;javascript&quot; });&#10;</code></pre>
 <p>Options:</p>
 <ul>
 <li>language: Programming language ('python' | 'javascript' | 'typescript')</li>
@@ -621,7 +632,7 @@ property on <code>Request</code> to <code>'no-cache'</code>, the Workers runtime
 </ul>
 <h4 id="2025-08-05-sandbox-sdk-major-update-runcode-code-options">runCode(code, options)</h4>
 <p>Executes code with optional streaming callbacks.</p>
-<pre><code class="language-ts">// Simple execution&#10;const execution = await sandbox.runCode(&#x27;print(&quot;Hello World&quot;)&#x27;, {&#10;	context: pythonCtx,&#10;});&#10;&#10;// With streaming callbacks&#10;await sandbox.runCode(&#10;	`&#10;for i in range(5):&#10;    print(f&quot;Step {i}&quot;)&#10;    time.sleep(1)&#10;`,&#10;	{&#10;		context: pythonCtx,&#10;		onStdout: (output) =&gt; console.log(&quot;Real-time:&quot;, output.text),&#10;		onResult: (result) =&gt; console.log(&quot;Result:&quot;, result),&#10;	},&#10;);&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// Simple execution&#10;const execution = await sandbox.runCode(&#x27;print(&quot;Hello World&quot;)&#x27;, {&#10;	context: pythonCtx,&#10;});&#10;&#10;// With streaming callbacks&#10;await sandbox.runCode(&#10;	`&#10;for i in range(5):&#10;    print(f&quot;Step {i}&quot;)&#10;    time.sleep(1)&#10;`,&#10;	{&#10;		context: pythonCtx,&#10;		onStdout: (output) =&gt; console.log(&quot;Real-time:&quot;, output.text),&#10;		onResult: (result) =&gt; console.log(&quot;Result:&quot;, result),&#10;	},&#10;);&#10;</code></pre>
 <p>Options:</p>
 <ul>
 <li>language: Programming language ('python' | 'javascript' | 'typescript')</li>
@@ -630,7 +641,7 @@ property on <code>Request</code> to <code>'no-cache'</code>, the Workers runtime
 </ul>
 <h4 id="2025-08-05-sandbox-sdk-major-update-real-time-streaming-output">Real-time streaming output</h4>
 <p>Returns a streaming response for real-time processing.</p>
-<pre><code class="language-ts">const stream = await sandbox.runCodeStream(&#10;	&quot;import time; [print(i) for i in range(10)]&quot;,&#10;);&#10;// Process the stream as needed&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const stream = await sandbox.runCodeStream(&#10;	&quot;import time; [print(i) for i in range(10)]&quot;,&#10;);&#10;// Process the stream as needed&#10;</code></pre>
 <h4 id="2025-08-05-sandbox-sdk-major-update-rich-output-handling">Rich output handling</h4>
 <p>Interpreter outputs are auto-formatted and returned in multiple formats:</p>
 <ul>
@@ -640,13 +651,13 @@ property on <code>Request</code> to <code>'no-cache'</code>, the Workers runtime
 <li>json (structured data)</li>
 <li>chart (parsed visualizations)</li>
 </ul>
-<pre><code class="language-ts">const result = await sandbox.runCode(&#10;	`&#10;import seaborn as sns&#10;import matplotlib.pyplot as plt&#10;&#10;data = sns.load_dataset(&quot;flights&quot;)&#10;pivot = data.pivot(&quot;month&quot;, &quot;year&quot;, &quot;passengers&quot;)&#10;sns.heatmap(pivot, annot=True, fmt=&quot;d&quot;)&#10;plt.title(&quot;Flight Passengers&quot;)&#10;plt.show()&#10;&#10;pivot.to_dict()&#10;`,&#10;	{ context: pythonCtx },&#10;);&#10;&#10;if (result.png) {&#10;	console.log(&quot;Chart output:&quot;, result.png);&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const result = await sandbox.runCode(&#10;	`&#10;import seaborn as sns&#10;import matplotlib.pyplot as plt&#10;&#10;data = sns.load_dataset(&quot;flights&quot;)&#10;pivot = data.pivot(&quot;month&quot;, &quot;year&quot;, &quot;passengers&quot;)&#10;sns.heatmap(pivot, annot=True, fmt=&quot;d&quot;)&#10;plt.title(&quot;Flight Passengers&quot;)&#10;plt.show()&#10;&#10;pivot.to_dict()&#10;`,&#10;	{ context: pythonCtx },&#10;);&#10;&#10;if (result.png) {&#10;	console.log(&quot;Chart output:&quot;, result.png);&#10;}&#10;</code></pre>
 <h4 id="2025-08-05-sandbox-sdk-major-update-preview-urls-from-exposed-ports">Preview URLs from Exposed Ports</h4>
 <p>Start background processes and expose them with live URLs.</p>
-<pre><code class="language-ts">await sandbox.startProcess(&quot;python -m http.server 8000&quot;);&#10;const preview = await sandbox.exposePort(8000);&#10;&#10;console.log(&quot;Live preview at:&quot;, preview.url);&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">await sandbox.startProcess(&quot;python -m http.server 8000&quot;);&#10;const preview = await sandbox.exposePort(8000);&#10;&#10;console.log(&quot;Live preview at:&quot;, preview.url);&#10;</code></pre>
 <h4 id="2025-08-05-sandbox-sdk-major-update-full-process-lifecycle-control">Full process lifecycle control</h4>
 <p>Start, inspect, and terminate long-running background processes.</p>
-<pre><code class="language-ts">const process = await sandbox.startProcess(&quot;node server.js&quot;);&#10;console.log(`Started process ${process.id} with PID ${process.pid}`);&#10;&#10;// Monitor the process&#10;const logStream = await sandbox.streamProcessLogs(process.id);&#10;for await (const log of parseSSEStream&lt;LogEvent&gt;(logStream)) {&#10;	console.log(`Server: ${log.data}`);&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const process = await sandbox.startProcess(&quot;node server.js&quot;);&#10;console.log(`Started process ${process.id} with PID ${process.pid}`);&#10;&#10;// Monitor the process&#10;const logStream = await sandbox.streamProcessLogs(process.id);&#10;for await (const log of parseSSEStream&lt;LogEvent&gt;(logStream)) {&#10;	console.log(`Server: ${log.data}`);&#10;}&#10;</code></pre>
 <ul>
 <li>listProcesses() - List all running processes</li>
 <li>getProcess(id) - Get detailed process status</li>
@@ -657,7 +668,7 @@ property on <code>Request</code> to <code>'no-cache'</code>, the Workers runtime
 </ul>
 <h4 id="2025-08-05-sandbox-sdk-major-update-git-integration">Git integration</h4>
 <p>Clone Git repositories directly into the sandbox.</p>
-<pre><code class="language-ts">await sandbox.gitCheckout(&quot;https://github.com/user/repo&quot;, {&#10;	branch: &quot;main&quot;,&#10;	targetDir: &quot;my-project&quot;,&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">await sandbox.gitCheckout(&quot;https://github.com/user/repo&quot;, {&#10;	branch: &quot;main&quot;,&#10;	targetDir: &quot;my-project&quot;,&#10;});&#10;</code></pre>
 <p>Sandboxes are still experimental. We're using them to explore how isolated, container-like workloads might scale on Cloudflare — and to help define the developer experience around them.</p>
 </div>
 </div></article>
@@ -673,7 +684,7 @@ If you call the model through:
 - REST API on `/run` endpoint, it will accept/return Responses API – `https://api.cloudflare.com/client/v4/accounts/<account_id>/ai/run/@cf/openai/gpt-oss-120b`
 - REST API on new `/responses` endpoint, it will accept/return Responses API – `https://api.cloudflare.com/client/v4/accounts/<account_id>/ai/v1/responses`
 - REST API for OpenAI Compatible endpoint, it will return Chat Completions (coming soon) – `https://api.cloudflare.com/client/v4/accounts/<account_id>/ai/v1/chat/completions`
-<pre><code>curl https://api.cloudflare.com/client/v4/accounts/&lt;account_id&gt;/ai/v1/responses \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;H &quot;Authorization: Bearer $CLOUDFLARE_API_KEY&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;model&quot;: &quot;@cf/openai/gpt-oss-120b&quot;,&#10;    &quot;reasoning&quot;: {&quot;effort&quot;: &quot;medium&quot;},&#10;    &quot;input&quot;: [&#10;      {&#10;        &quot;role&quot;: &quot;user&quot;,&#10;        &quot;content&quot;: &quot;What are the benefits of open-source models?&quot;&#10;      }&#10;    ]&#10;  }&#x27;&#10;&#10;</code></pre>
+<pre tabindex="0"><code>curl https://api.cloudflare.com/client/v4/accounts/&lt;account_id&gt;/ai/v1/responses \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;H &quot;Authorization: Bearer $CLOUDFLARE_API_KEY&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;model&quot;: &quot;@cf/openai/gpt-oss-120b&quot;,&#10;    &quot;reasoning&quot;: {&quot;effort&quot;: &quot;medium&quot;},&#10;    &quot;input&quot;: [&#10;      {&#10;        &quot;role&quot;: &quot;user&quot;,&#10;        &quot;content&quot;: &quot;What are the benefits of open-source models?&quot;&#10;      }&#10;    ]&#10;  }&#x27;&#10;&#10;</code></pre>
 <h4 id="2025-08-05-openai-open-models-code-interpreter">Code Interpreter</h4>
 The model is natively trained to support stateful code execution, and we've implemented support for this feature using our [Sandbox SDK](https://github.com/cloudflare/sandbox-sdk) and [Containers](https://blog.cloudflare.com/containers-are-available-in-public-beta-for-simple-global-and-programmable/). Cloudflare's Developer Platform is uniquely positioned to support this feature, so we're very excited to bring our products together to support this new use case.
 <h4 id="2025-08-05-openai-open-models-web-search-coming-soon">Web Search (coming soon)</h4>
@@ -896,10 +907,10 @@ We are working to implement Web Search for the model, where users can bring thei
 @markup("md", "content/.markup/bodies/17782.md")</div>
 <h4 id="2025-08-01-containers-in-vite-dev-worker-code">Worker Code</h4>
 <p>Once your Worker and Containers are configured, you can access the Container instances from your Worker code:</p>
-<pre><code class="language-ts">import { Container, getContainer } from &quot;@cloudflare/containers&quot;;&#10;&#10;export class MyContainer extends Container {&#10;  defaultPort = 4000; // Port the container is listening on&#10;  sleepAfter = &quot;10m&quot;; // Stop the instance if requests not sent for 10 minutes&#10;}&#10;&#10;async fetch(request, env) {&#10;  const { &quot;session-id&quot;: sessionId } = await request.json();&#10;  // Get the container instance for the given session ID&#10;  const containerInstance = getContainer(env.MY_CONTAINER, sessionId)&#10;  // Pass the request to the container instance on its default port&#10;  return containerInstance.fetch(request);&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { Container, getContainer } from &quot;@cloudflare/containers&quot;;&#10;&#10;export class MyContainer extends Container {&#10;  defaultPort = 4000; // Port the container is listening on&#10;  sleepAfter = &quot;10m&quot;; // Stop the instance if requests not sent for 10 minutes&#10;}&#10;&#10;async fetch(request, env) {&#10;  const { &quot;session-id&quot;: sessionId } = await request.json();&#10;  // Get the container instance for the given session ID&#10;  const containerInstance = getContainer(env.MY_CONTAINER, sessionId)&#10;  // Pass the request to the container instance on its default port&#10;  return containerInstance.fetch(request);&#10;}&#10;</code></pre>
 <h4 id="2025-08-01-containers-in-vite-dev-local-development">Local development</h4>
 <p>To develop your Worker locally, start a local dev server by running</p>
-<pre><code class="language-sh">vite dev&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">vite dev&#10;</code></pre>
 <p>in your terminal.</p>
 <h4 id="2025-08-01-containers-in-vite-dev-resources">Resources</h4>
 <p>Learn more about <a href="https://developers.cloudflare.com/containers/">Cloudflare Containers</a> or the <a href="https://developers.cloudflare.com/workers/vite-plugin/">Cloudflare Vite plugin</a> in our developer docs.</p>
@@ -932,9 +943,9 @@ We are working to implement Web Search for the model, where users can bring thei
 <div class="nb-wrangler-config">
 @markup("md", "content/.markup/bodies/17781.md")</div>
 <p>Add secrets to a <code>.dev.vars.example</code> or <code>.env.example</code> file:</p>
-<pre><code class="language-ini">COOKIE_SIGNING_KEY=my-secret # comment&#10;</code></pre>
+<pre tabindex="0"><code class="language-ini">COOKIE_SIGNING_KEY=my-secret # comment&#10;</code></pre>
 <p>And optionally, you can add a description for these bindings in your template's <code>package.json</code> to help users understand how to configure each value:</p>
-<pre><code class="language-json">{&#10;	&quot;name&quot;: &quot;my-worker&quot;,&#10;	&quot;private&quot;: true,&#10;	&quot;cloudflare&quot;: {&#10;		&quot;bindings&quot;: {&#10;			&quot;API_KEY&quot;: {&#10;				&quot;description&quot;: &quot;Select your company&#x27;s API key for connecting to the example service.&quot;&#10;			},&#10;			&quot;COOKIE_SIGNING_KEY&quot;: {&#10;				&quot;description&quot;: &quot;Generate a random string using `openssl rand -hex 32`.&quot;&#10;			}&#10;		}&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;name&quot;: &quot;my-worker&quot;,&#10;	&quot;private&quot;: true,&#10;	&quot;cloudflare&quot;: {&#10;		&quot;bindings&quot;: {&#10;			&quot;API_KEY&quot;: {&#10;				&quot;description&quot;: &quot;Select your company&#x27;s API key for connecting to the example service.&quot;&#10;			},&#10;			&quot;COOKIE_SIGNING_KEY&quot;: {&#10;				&quot;description&quot;: &quot;Generate a random string using `openssl rand -hex 32`.&quot;&#10;			}&#10;		}&#10;	}&#10;}&#10;</code></pre>
 <p>These secrets and environment variables will be presented to users in the dashboard as they deploy this template, allowing them to configure each value. Additional information about creating templates and Deploy to Cloudflare buttons can be found in <a href="/workers/platform/deploy-buttons/">our documentation</a>.</p>
 </div>
 </div></article>

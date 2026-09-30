@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/agents/runtime/execution/schedule-tasks/
+  description: Schedule delayed, date-based, cron, and interval tasks on Agents with persistent SQLite-backed execution.
+  full_title: Schedule tasks · Cloudflare Agents docs
+  head_html: <title>Schedule tasks · Cloudflare Agents docs</title><meta name="generator" content="Nift"><meta name="description" content="Schedule delayed, date-based, cron, and interval tasks on Agents with persistent SQLite-backed execution."><link rel="canonical" href="https://developers.cloudflare.com/agents/runtime/execution/schedule-tasks/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/agents/runtime/execution/schedule-tasks/index.md"><meta property="og:title" content="Schedule tasks · Cloudflare Agents docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Schedule delayed, date-based, cron, and interval tasks on Agents with persistent SQLite-backed execution."><meta property="og:url" content="https://developers.cloudflare.com/agents/runtime/execution/schedule-tasks/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Agents"><meta name="algolia_product_filter" content="Agents"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Agents"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/agents/runtime/execution/schedule-tasks/#page","headline":"Schedule tasks \u00b7 Cloudflare Agents docs","description":"Schedule delayed, date-based, cron, and interval tasks on Agents with persistent SQLite-backed execution.","url":"https://developers.cloudflare.com/agents/runtime/execution/schedule-tasks/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /agents/runtime/execution/schedule-tasks/
+  schema: 1
+---
 <p>Schedule tasks to run in the future — whether that is seconds from now, at a specific date/time, or on a recurring cron schedule. Scheduled tasks survive agent restarts and are persisted to SQLite.</p>
 <p>Scheduled tasks can do anything a request or message from a user can: make requests, query databases, send emails, read and write state. Scheduled tasks can invoke any regular method on your Agent.</p>
 <h2 id="overview">Overview</h2>
@@ -167,7 +178,7 @@
 @markup("md", "content/.markup/bodies/2468.md")
 </div>
 <p>When a skip occurs, you will see a warning in logs:</p>
-<pre><code class="language-txt">Skipping interval schedule abc123: previous execution still running&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">Skipping interval schedule abc123: previous execution still running&#10;</code></pre>
 <p><strong>Error resilience:</strong></p>
 <p>If the callback throws an error, the interval continues — only that execution fails:</p>
 <div class="nb-type-script-example">
@@ -202,7 +213,7 @@
 </div>
 <h2 id="the-schedule-object">The Schedule object</h2>
 <p>When you create or retrieve a schedule, you get a <code>Schedule</code> object:</p>
-<pre><code class="language-ts">type Schedule&lt;T&gt; = {&#10;	id: string; // Unique identifier&#10;	callback: string; // Method name to call&#10;	payload: T; // Data passed to the callback&#10;	time: number; // Unix timestamp (seconds) of next execution&#10;} &amp; (&#10;	| { type: &quot;scheduled&quot; } // One-time at specific date&#10;	| { type: &quot;delayed&quot;; delayInSeconds: number } // One-time after delay&#10;	| { type: &quot;cron&quot;; cron: string } // Recurring (cron expression)&#10;	| { type: &quot;interval&quot;; intervalSeconds: number } // Recurring (fixed interval)&#10;);&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">type Schedule&lt;T&gt; = {&#10;	id: string; // Unique identifier&#10;	callback: string; // Method name to call&#10;	payload: T; // Data passed to the callback&#10;	time: number; // Unix timestamp (seconds) of next execution&#10;} &amp; (&#10;	| { type: &quot;scheduled&quot; } // One-time at specific date&#10;	| { type: &quot;delayed&quot;; delayInSeconds: number } // One-time after delay&#10;	| { type: &quot;cron&quot;; cron: string } // Recurring (cron expression)&#10;	| { type: &quot;interval&quot;; intervalSeconds: number } // Recurring (fixed interval)&#10;);&#10;</code></pre>
 <p><strong>Example:</strong></p>
 <div class="nb-type-script-example">
 @markup("md", "content/.markup/bodies/2474.md")
@@ -316,7 +327,7 @@
 </ul>
 <h2 id="api-reference">API reference</h2>
 <h3 id="schedule"><code>schedule()</code></h3>
-<pre><code class="language-ts">async schedule&lt;T&gt;(&#10;  when: Date | string | number,&#10;  callback: keyof this,&#10;  payload?: T,&#10;  options?: { retry?: RetryOptions; idempotent?: boolean }&#10;): Promise&lt;Schedule&lt;T&gt;&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">async schedule&lt;T&gt;(&#10;  when: Date | string | number,&#10;  callback: keyof this,&#10;  payload?: T,&#10;  options?: { retry?: RetryOptions; idempotent?: boolean }&#10;): Promise&lt;Schedule&lt;T&gt;&gt;&#10;</code></pre>
 <p>Schedule a task for future execution.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
@@ -337,7 +348,7 @@
 @markup("md", "content/.markup/bodies/2458.md")
 </aside>
 <h3 id="scheduleevery"><code>scheduleEvery()</code></h3>
-<pre><code class="language-ts">async scheduleEvery&lt;T&gt;(&#10;  intervalSeconds: number,&#10;  callback: keyof this,&#10;  payload?: T,&#10;  options?: { retry?: RetryOptions }&#10;): Promise&lt;Schedule&lt;T&gt;&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">async scheduleEvery&lt;T&gt;(&#10;  intervalSeconds: number,&#10;  callback: keyof this,&#10;  payload?: T,&#10;  options?: { retry?: RetryOptions }&#10;): Promise&lt;Schedule&lt;T&gt;&gt;&#10;</code></pre>
 <p>Schedule a task to run repeatedly at a fixed interval.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
@@ -355,29 +366,29 @@
 <li>Cancel with <code>cancelSchedule(id)</code> to stop the entire interval</li>
 </ul>
 <h3 id="getschedulebyid"><code>getScheduleById()</code></h3>
-<pre><code class="language-ts">async getScheduleById(id: string): Promise&lt;Schedule&lt;unknown&gt; | undefined&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">async getScheduleById(id: string): Promise&lt;Schedule&lt;unknown&gt; | undefined&gt;&#10;</code></pre>
 <p>Get a scheduled task by ID. Returns <code>undefined</code> if not found. This method works in both top-level agents and sub-agents.</p>
 <h3 id="listschedules"><code>listSchedules()</code></h3>
-<pre><code class="language-ts">async listSchedules(criteria?: {&#10;  id?: string;&#10;  type?: &quot;scheduled&quot; | &quot;delayed&quot; | &quot;cron&quot; | &quot;interval&quot;;&#10;  timeRange?: { start?: Date; end?: Date };&#10;}): Promise&lt;Schedule&lt;unknown&gt;[]&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">async listSchedules(criteria?: {&#10;  id?: string;&#10;  type?: &quot;scheduled&quot; | &quot;delayed&quot; | &quot;cron&quot; | &quot;interval&quot;;&#10;  timeRange?: { start?: Date; end?: Date };&#10;}): Promise&lt;Schedule&lt;unknown&gt;[]&gt;&#10;</code></pre>
 <p>Get scheduled tasks matching the criteria. This method works in both top-level agents and sub-agents.</p>
 <h3 id="getschedule"><code>getSchedule()</code></h3>
-<pre><code class="language-ts">getSchedule&lt;T&gt;(id: string): Schedule&lt;T&gt; | undefined&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">getSchedule&lt;T&gt;(id: string): Schedule&lt;T&gt; | undefined&#10;</code></pre>
 <p>Deprecated. Get a scheduled task by ID synchronously. This method only works in top-level agents. Use <code>await this.getScheduleById(id)</code> instead.</p>
 <h3 id="getschedules"><code>getSchedules()</code></h3>
-<pre><code class="language-ts">getSchedules&lt;T&gt;(criteria?: {&#10;  id?: string;&#10;  type?: &quot;scheduled&quot; | &quot;delayed&quot; | &quot;cron&quot; | &quot;interval&quot;;&#10;  timeRange?: { start?: Date; end?: Date };&#10;}): Schedule&lt;T&gt;[]&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">getSchedules&lt;T&gt;(criteria?: {&#10;  id?: string;&#10;  type?: &quot;scheduled&quot; | &quot;delayed&quot; | &quot;cron&quot; | &quot;interval&quot;;&#10;  timeRange?: { start?: Date; end?: Date };&#10;}): Schedule&lt;T&gt;[]&#10;</code></pre>
 <p>Deprecated. Get scheduled tasks matching the criteria synchronously. This method only works in top-level agents. Use <code>await this.listSchedules(criteria)</code> instead.</p>
 <h3 id="cancelschedule"><code>cancelSchedule()</code></h3>
-<pre><code class="language-ts">async cancelSchedule(id: string): Promise&lt;boolean&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">async cancelSchedule(id: string): Promise&lt;boolean&gt;&#10;</code></pre>
 <p>Cancel a scheduled task. Returns <code>true</code> if cancelled, <code>false</code> if not found.</p>
 <h3 id="keepalive"><code>keepAlive()</code></h3>
-<pre><code class="language-ts">async keepAlive(): Promise&lt;() =&gt; void&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">async keepAlive(): Promise&lt;() =&gt; void&gt;&#10;</code></pre>
 <p>Prevent the Durable Object from being evicted due to inactivity by holding a 30-second alarm-backed heartbeat reference. Returns a disposer function that releases the heartbeat when called. The disposer is idempotent — calling it multiple times is safe.</p>
 <p>Always call the disposer when the work is done — otherwise the heartbeat continues indefinitely.</p>
 <div class="nb-type-script-example">
 @markup("md", "content/.markup/bodies/2481.md")
 </div>
 <h3 id="keepalivewhile"><code>keepAliveWhile()</code></h3>
-<pre><code class="language-ts">async keepAliveWhile&lt;T&gt;(fn: () =&gt; Promise&lt;T&gt;): Promise&lt;T&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">async keepAliveWhile&lt;T&gt;(fn: () =&gt; Promise&lt;T&gt;): Promise&lt;T&gt;&#10;</code></pre>
 <p>Run an async function while keeping the Durable Object alive. The heartbeat is automatically started before the function runs and stopped when it completes (whether it succeeds or throws). Returns the value returned by the function.</p>
 <p>This is the recommended way to use <code>keepAlive</code> — it guarantees cleanup.</p>
 <div class="nb-type-script-example">
@@ -445,7 +456,7 @@
 <li><strong>Interval jobs:</strong> After execution, rescheduled for <code>now + intervalSeconds</code>; skipped if still running</li>
 </ul>
 <h2 id="next-steps">Next steps</h2>
-<p><a class="nb-card nb-link-card" href="/agents/communication-channels/webhooks/push-notifications/"><h3 id="card-push-notifications-agents-communication-channels-webhooks-push-notifications">Push notifications</h3><p>Send browser push notifications using scheduling and web-push.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/execution/queue-tasks/"><h3 id="card-queue-tasks-agents-runtime-execution-queue-tasks">Queue tasks</h3><p>Immediate background task processing.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/execution/run-workflows/"><h3 id="card-run-workflows-agents-runtime-execution-run-workflows">Run Workflows</h3><p>Durable multi-step background processing.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/agents-api/"><h3 id="card-agents-api-agents-runtime-agents-api">Agents API</h3><p>Complete API reference for the Agents SDK.</p></a></p>
+<div class="nb-card nb-link-card"><h3 id="card-push-notifications-agents-communication-channels-webhooks-push-notifications"><a href="/agents/communication-channels/webhooks/push-notifications/">Push notifications</a></h3><p>Send browser push notifications using scheduling and web-push.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-queue-tasks-agents-runtime-execution-queue-tasks"><a href="/agents/runtime/execution/queue-tasks/">Queue tasks</a></h3><p>Immediate background task processing.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-run-workflows-agents-runtime-execution-run-workflows"><a href="/agents/runtime/execution/run-workflows/">Run Workflows</a></h3><p>Durable multi-step background processing.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-agents-api-agents-runtime-agents-api"><a href="/agents/runtime/agents-api/">Agents API</a></h3><p>Complete API reference for the Agents SDK.</p></div>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/queues/configuration/javascript-apis/
+  description: Produce and consume Cloudflare Queues messages using the Workers JavaScript API.
+  full_title: Cloudflare Queues - JavaScript APIs · Cloudflare Queues docs
+  head_html: <title>Cloudflare Queues - JavaScript APIs · Cloudflare Queues docs</title><meta name="generator" content="Nift"><meta name="description" content="Produce and consume Cloudflare Queues messages using the Workers JavaScript API."><link rel="canonical" href="https://developers.cloudflare.com/queues/configuration/javascript-apis/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/queues/configuration/javascript-apis/index.md"><meta property="og:title" content="Cloudflare Queues - JavaScript APIs · Cloudflare Queues docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Produce and consume Cloudflare Queues messages using the Workers JavaScript API."><meta property="og:url" content="https://developers.cloudflare.com/queues/configuration/javascript-apis/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Queues"><meta name="algolia_product_filter" content="Queues"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Configuration"><meta name="algolia_content_type" content="Configuration"><meta name="pcx_additional_products" content="Queues"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/queues/configuration/javascript-apis/#page","headline":"Cloudflare Queues - JavaScript APIs \u00b7 Cloudflare Queues docs","description":"Produce and consume Cloudflare Queues messages using the Workers JavaScript API.","url":"https://developers.cloudflare.com/queues/configuration/javascript-apis/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /queues/configuration/javascript-apis/
+  schema: 1
+---
 <p>Cloudflare Queues is integrated with <a href="/workers">Cloudflare Workers</a>. To send and receive messages, you must use a Worker.</p>
 <p>A Worker that can send messages to a Queue is a producer Worker, while a Worker that can receive messages from a Queue is a consumer Worker. It is possible for the same Worker to be a producer and consumer, if desired.</p>
 <p>In the future, we expect to support other APIs, such as HTTP endpoints to send or receive messages. To report bugs or request features, go to the <a href="https://community.cloudflare.com/c/developers/workers/40">Cloudflare Community Forums</a>. To give feedback, go to the <a href="https://discord.cloudflare.com"><code>#queues</code></a> Discord channel.</p>
@@ -13,7 +24,7 @@
 </div></div>
 <h3 id="queue"><code>Queue</code></h3>
 <p>A binding that allows a producer to send messages to a Queue.</p>
-<pre><code class="language-ts">interface Queue&lt;Body = unknown&gt; {&#10;  send(body: Body, options?: QueueSendOptions): Promise&lt;QueueSendResult&gt;;&#10;  sendBatch(messages: Iterable&lt;MessageSendRequest&lt;Body&gt;&gt;, options?: QueueSendBatchOptions): Promise&lt;QueueSendResult&gt;;&#10;  metrics(): Promise&lt;QueueMetrics&gt;;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">interface Queue&lt;Body = unknown&gt; {&#10;  send(body: Body, options?: QueueSendOptions): Promise&lt;QueueSendResult&gt;;&#10;  sendBatch(messages: Iterable&lt;MessageSendRequest&lt;Body&gt;&gt;, options?: QueueSendBatchOptions): Promise&lt;QueueSendResult&gt;;&#10;  metrics(): Promise&lt;QueueMetrics&gt;;&#10;}&#10;</code></pre>
 <ul>
 <li>
 <p><code>send(body: unknown, options?: {contentType?: QueuesContentType })</code> <span class="nb-type">Promise&lt;QueueSendResult&gt;</span></p>
@@ -40,7 +51,7 @@
 </ul>
 <h3 id="messagesendrequest"><code>MessageSendRequest</code></h3>
 <p>A wrapper type used for sending message batches.</p>
-<pre><code class="language-ts">interface MessageSendRequest&lt;Body = unknown&gt; {&#10;  body: Body;&#10;  contentType?: QueueContentType;&#10;  delaySeconds?: number;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">interface MessageSendRequest&lt;Body = unknown&gt; {&#10;  body: Body;&#10;  contentType?: QueueContentType;&#10;  delaySeconds?: number;&#10;}&#10;</code></pre>
 <ul>
 <li>
 <p><code>body</code> <span class="nb-type">unknown</span></p>
@@ -96,7 +107,7 @@
 </ul>
 <h3 id="queuescontenttype"><code>QueuesContentType</code></h3>
 <p>A union type containing valid message content types.</p>
-<pre><code class="language-ts">// Default: json&#10;type QueuesContentType = &quot;text&quot; | &quot;bytes&quot; | &quot;json&quot; | &quot;v8&quot;;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// Default: json&#10;type QueuesContentType = &quot;text&quot; | &quot;bytes&quot; | &quot;json&quot; | &quot;v8&quot;;&#10;</code></pre>
 <ul>
 <li>Use <code>&quot;json&quot;</code> to send a JavaScript object that can be JSON-serialized. This content type can be previewed from the <a href="https://dash.cloudflare.com">Cloudflare dashboard</a>. The <code>json</code> content type is the default.</li>
 <li>Use <code>&quot;text&quot;</code> to send a <code>String</code>. This content type can be previewed with the <a href="/queues/examples/list-messages-from-dash/">List messages from the dashboard</a> feature.</li>
@@ -109,7 +120,7 @@
 <p>If you specify an invalid content type, or if your specified content type does not match the message content's type, the send operation will fail with an error.</p>
 <h3 id="queuesendresult"><code>QueueSendResult</code></h3>
 <p>The result of a successful send operation.</p>
-<pre><code class="language-ts">interface QueueSendResult {&#10;	metadata: {&#10;		metrics: QueueMetrics;&#10;	};&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">interface QueueSendResult {&#10;	metadata: {&#10;		metrics: QueueMetrics;&#10;	};&#10;}&#10;</code></pre>
 <ul>
 <li>
 <p><code>metadata</code> <span class="nb-type">object</span></p>
@@ -126,7 +137,7 @@
 </ul>
 <h3 id="queuemetrics"><code>QueueMetrics</code></h3>
 <p>Realtime metrics for a queue.</p>
-<pre><code class="language-ts">interface QueueMetrics {&#10;	backlogCount: number;&#10;	backlogBytes: number;&#10;	oldestMessageTimestamp: number;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">interface QueueMetrics {&#10;	backlogCount: number;&#10;	backlogBytes: number;&#10;	oldestMessageTimestamp: number;&#10;}&#10;</code></pre>
 <ul>
 <li>
 <p><code>backlogCount</code> <span class="nb-type">number</span></p>
@@ -166,17 +177,17 @@
 <p>The <code>env</code> and <code>ctx</code> fields are as <a href="/workers/reference/migrate-to-module-workers/">documented in the Workers documentation</a>.</p>
 <h3 id="typescript-message-types">TypeScript message types</h3>
 <p>You can type queue messages with <code>Queue&lt;T&gt;</code> on the producer and <code>ExportedHandler&lt;Env, T&gt;</code> on the consumer.</p>
-<pre><code class="language-ts">type MyMessage = {&#10;  id: string;&#10;};&#10;&#10;interface Env {&#10;  MY_QUEUE: Queue&lt;MyMessage&gt;;&#10;}&#10;&#10;export default {&#10;  async queue(batch) {&#10;    for (const message of batch.messages) {&#10;      console.log(message.body.id);&#10;    }&#10;  },&#10;} satisfies ExportedHandler&lt;Env, MyMessage&gt;;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">type MyMessage = {&#10;  id: string;&#10;};&#10;&#10;interface Env {&#10;  MY_QUEUE: Queue&lt;MyMessage&gt;;&#10;}&#10;&#10;export default {&#10;  async queue(batch) {&#10;    for (const message of batch.messages) {&#10;      console.log(message.body.id);&#10;    }&#10;  },&#10;} satisfies ExportedHandler&lt;Env, MyMessage&gt;;&#10;</code></pre>
 <p>For primitive messages, use <code>Queue&lt;number&gt;</code> or <code>satisfies ExportedHandler&lt;Env, number&gt;</code>. If you do not specify a type, <code>message.body</code> is <code>unknown</code>.</p>
 <p>Or alternatively, a queue consumer can be written using the (deprecated) service worker syntax:</p>
-<pre><code class="language-js">addEventListener(&#x27;queue&#x27;, (event) =&gt; {&#10;	event.waitUntil(handleMessages(event));&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">addEventListener(&#x27;queue&#x27;, (event) =&gt; {&#10;	event.waitUntil(handleMessages(event));&#10;});&#10;</code></pre>
 <p>In service worker syntax, <code>event</code> provides the same fields and methods as <code>MessageBatch</code>, as defined below, in addition to <a href="https://developer.mozilla.org/en-US/docs/Web/API/ExtendableEvent/waitUntil"><code>waitUntil()</code></a>.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/11265.md")
 </aside>
 <h3 id="messagebatch"><code>MessageBatch</code></h3>
 <p>A batch of messages that are sent to a consumer Worker.</p>
-<pre><code class="language-ts">interface MessageBatch&lt;Body = unknown&gt; {&#10;  readonly queue: string;&#10;  readonly messages: readonly Message&lt;Body&gt;[];&#10;  ackAll(): void;&#10;  retryAll(options?: QueueRetryOptions): void;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">interface MessageBatch&lt;Body = unknown&gt; {&#10;  readonly queue: string;&#10;  readonly messages: readonly Message&lt;Body&gt;[];&#10;  ackAll(): void;&#10;  retryAll(options?: QueueRetryOptions): void;&#10;}&#10;</code></pre>
 <ul>
 <li>
 <p><code>queue</code> <span class="nb-type">string</span></p>
@@ -206,7 +217,7 @@
 </ul>
 <h3 id="message"><code>Message</code></h3>
 <p>A message that is sent to a consumer Worker.</p>
-<pre><code class="language-ts">interface Message&lt;Body = unknown&gt; {&#10;  readonly id: string;&#10;  readonly timestamp: Date;&#10;  readonly body: Body;&#10;	readonly attempts: number;&#10;  ack(): void;&#10;  retry(options?: QueueRetryOptions): void;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">interface Message&lt;Body = unknown&gt; {&#10;  readonly id: string;&#10;  readonly timestamp: Date;&#10;  readonly body: Body;&#10;	readonly attempts: number;&#10;  ack(): void;&#10;  retry(options?: QueueRetryOptions): void;&#10;}&#10;</code></pre>
 <ul>
 <li>
 <p><code>id</code> <span class="nb-type">string</span></p>
@@ -249,7 +260,7 @@
 </ul>
 <h3 id="queueretryoptions"><code>QueueRetryOptions</code></h3>
 <p>Optional configuration when marking a message or a batch of messages for retry.</p>
-<pre><code class="language-ts">interface QueueRetryOptions {&#10;  delaySeconds?: number;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">interface QueueRetryOptions {&#10;  delaySeconds?: number;&#10;}&#10;</code></pre>
 <ul>
 <li>
 <p><code>delaySeconds</code> <span class="nb-type">number</span></p>

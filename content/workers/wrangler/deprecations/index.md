@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/workers/wrangler/deprecations/
+  description: The differences between Wrangler versions, specifically deprecations and breaking changes.
+  full_title: Deprecations · Cloudflare Workers docs
+  head_html: <title>Deprecations · Cloudflare Workers docs</title><meta name="generator" content="Nift"><meta name="description" content="The differences between Wrangler versions, specifically deprecations and breaking changes."><link rel="canonical" href="https://developers.cloudflare.com/workers/wrangler/deprecations/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/workers/wrangler/deprecations/index.md"><meta property="og:title" content="Deprecations · Cloudflare Workers docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="The differences between Wrangler versions, specifically deprecations and breaking changes."><meta property="og:url" content="https://developers.cloudflare.com/workers/wrangler/deprecations/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Workers"><meta name="algolia_product_filter" content="Workers"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Workers"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/workers/wrangler/deprecations/#page","headline":"Deprecations \u00b7 Cloudflare Workers docs","description":"The differences between Wrangler versions, specifically deprecations and breaking changes.","url":"https://developers.cloudflare.com/workers/wrangler/deprecations/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /workers/wrangler/deprecations/
+  schema: 1
+---
 <p>Review the difference between Wrangler versions, specifically deprecations and breaking changes.</p>
 <h2 id="wrangler-v4">Wrangler v4</h2>
 <h3 id="workers-sites">Workers Sites</h3>
@@ -51,7 +62,7 @@
 <li>Better configuration validation.</li>
 </ul>
 <p>The following video describes some of the major changes in Wrangler v2, and shows you how Wrangler v2 can help speed up your workflow.</p>
-<div style="position: relative; padding-top: 56.25%;"><iframe src="https://iframe.videodelivery.net/6ce3c7bd51288e1e8439f50ad63eda1d?poster=https%3A%2F%2Fcloudflarestream.com%2F6ce3c7bd51288e1e8439f50ad63eda1d%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600" style="border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe></div>
+<div style="position: relative; padding-top: 56.25%;"><iframe title="Embedded media" src="https://iframe.videodelivery.net/6ce3c7bd51288e1e8439f50ad63eda1d?poster=https%3A%2F%2Fcloudflarestream.com%2F6ce3c7bd51288e1e8439f50ad63eda1d%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600" style="border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe></div>
 <h3 id="common-deprecations">Common deprecations</h3>
 <p>Refer to the following list for common fields that are no longer required.</p>
 <ul>
@@ -155,11 +166,11 @@ Here are the Wrangler v1 commands that are no longer supported:</li>
 <p>Wrangler will no longer assume that bare specifiers are file names if they are not represented as a path. For example, in a folder like so:</p>
 </li>
 </ul>
-<pre><code>project&#10;├── index.js&#10;└── some-dependency.js&#10;</code></pre>
+<pre tabindex="0"><code>project&#10;├── index.js&#10;└── some-dependency.js&#10;</code></pre>
 <p>where the content of <code>index.js</code> is:</p>
-<pre><code class="language-js">import SomeDependency from &quot;some-dependency.js&quot;;&#10;&#10;addEventListener(&quot;fetch&quot;, (event) =&gt; {&#10;  // ...&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">import SomeDependency from &quot;some-dependency.js&quot;;&#10;&#10;addEventListener(&quot;fetch&quot;, (event) =&gt; {&#10;  // ...&#10;});&#10;</code></pre>
 <p>Wrangler v1 would resolve <code>import SomeDependency from &quot;some-dependency.js&quot;;</code> to the file <code>some-dependency.js</code>. This will also work in Wrangler v2, but will also log a deprecation warning. In the future, this will break with an error. Instead, you should rewrite the import to specify that it is a relative path, like so:</p>
-<pre><code class="language-diff">&#45; import SomeDependency from &quot;some-dependency.js&quot;;&#10;&#43; import SomeDependency from &quot;./some-dependency.js&quot;;&#10;</code></pre>
+<pre tabindex="0"><code class="language-diff">&#45; import SomeDependency from &quot;some-dependency.js&quot;;&#10;&#43; import SomeDependency from &quot;./some-dependency.js&quot;;&#10;</code></pre>
 <h3 id="wrangler-v1-and-v2-comparison-tables">Wrangler v1 and v2 comparison tables</h3>
 <h4 id="commands">Commands</h4>
 <table>

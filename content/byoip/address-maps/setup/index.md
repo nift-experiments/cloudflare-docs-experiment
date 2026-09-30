@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/byoip/address-maps/setup/
+  description: Create and configure address maps for your IP prefixes.
+  full_title: Set up address maps · Cloudflare BYOIP docs
+  head_html: <title>Set up address maps · Cloudflare BYOIP docs</title><meta name="generator" content="Nift"><meta name="description" content="Create and configure address maps for your IP prefixes."><link rel="canonical" href="https://developers.cloudflare.com/byoip/address-maps/setup/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/byoip/address-maps/setup/index.md"><meta property="og:title" content="Set up address maps · Cloudflare BYOIP docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Create and configure address maps for your IP prefixes."><meta property="og:url" content="https://developers.cloudflare.com/byoip/address-maps/setup/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="BYOIP"><meta name="algolia_product_filter" content="BYOIP"><meta name="pcx_content_group" content="Network security"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="BYOIP"><meta name="pcx_tags" content="DNS"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/byoip/address-maps/setup/#page","headline":"Set up address maps \u00b7 Cloudflare BYOIP docs","description":"Create and configure address maps for your IP prefixes.","url":"https://developers.cloudflare.com/byoip/address-maps/setup/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["DNS"]}</script>
+  markdown: true
+  noindex: false
+  route: /byoip/address-maps/setup/
+  schema: 1
+---
 <p>Consider the sections below to learn how to set up address maps.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/3778.md")
@@ -12,9 +23,7 @@
 @input("content/.markup/bodies/3784.md")
 </div></div>
 <h2 id="non-sni-support">Non-SNI support</h2>
-<p>If your visitors use devices that have not been updated since 2011, they may not have <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/3785.md")
-</div> support. For further context, refer to [browser compatibility](/ssl/reference/browser-compatibility/#non-sni-support).
+<p>If your visitors use devices that have not been updated since 2011, they may not have <span class="nb-glossary-tooltip" title="Server Name Indication (SNI)">Server Name Indication (SNI)</span> support. For further context, refer to <a href="/ssl/reference/browser-compatibility/#non-sni-support">browser compatibility</a>.</p>
 <p>Use address maps to specify a hostname as default SNI. This will be used whenever Cloudflare receives a non-SNI TLS handshake.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/3773.md")
@@ -28,4 +37,4 @@
 <h3 id="spectrum-https-applications">Spectrum HTTPS applications</h3>
 <p>Default SNI for Spectrum can only be created via API using the <a href="/api/resources/addressing/subresources/address_maps/methods/create/">Create Address Map</a> endpoint.</p>
 <p>Do not include any membership in your command. Your API command should resemble the following:</p>
-<pre class="nb-api-request"><code class="language-bash">curl --request POST \&#10;  --url https://api.cloudflare.com/client/v4/accounts/{account_id}/addressing/address_maps \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;description&quot;: &quot;default_sni&quot;,&#10;  &quot;default_sni&quot;: &quot;sni.example.com&quot;,&#10;  &quot;enabled&quot;: false,&#10;  &quot;ips&quot;: [&#10;    &quot;192.0.0.1&quot;&#10;  ],&#10;  &quot;memberships&quot;: []&#10;}&#x27;</code></pre>
+<pre tabindex="0" class="nb-api-request"><code class="language-bash">curl --request POST \&#10;  --url https://api.cloudflare.com/client/v4/accounts/{account_id}/addressing/address_maps \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;description&quot;: &quot;default_sni&quot;,&#10;  &quot;default_sni&quot;: &quot;sni.example.com&quot;,&#10;  &quot;enabled&quot;: false,&#10;  &quot;ips&quot;: [&#10;    &quot;192.0.0.1&quot;&#10;  ],&#10;  &quot;memberships&quot;: []&#10;}&#x27;</code></pre>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/email-security/email-configuration/retract-settings/office365-retraction/
+  description: Set up Email security email retraction for Microsoft Office 365 using the Graph API.
+  full_title: Retraction guide for Microsoft Office 365 · Cloudflare Email security (formerly Area 1) docs
+  head_html: <title>Retraction guide for Microsoft Office 365 · Cloudflare Email security (formerly Area 1) docs</title><meta name="generator" content="Nift"><meta name="description" content="Set up Email security email retraction for Microsoft Office 365 using the Graph API."><meta name="robots" content="noindex"><link rel="canonical" href="https://developers.cloudflare.com/email-security/email-configuration/retract-settings/office365-retraction/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/email-security/email-configuration/retract-settings/office365-retraction/index.md"><meta property="og:title" content="Retraction guide for Microsoft Office 365 · Cloudflare Email security (formerly Area 1) docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Set up Email security email retraction for Microsoft Office 365 using the Graph API."><meta property="og:url" content="https://developers.cloudflare.com/email-security/email-configuration/retract-settings/office365-retraction/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Email security (formerly Area 1)"><meta name="algolia_product_filter" content="Email security (formerly Area 1)"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Email security (formerly Area 1)">
+  markdown: true
+  noindex: true
+  route: /email-security/email-configuration/retract-settings/office365-retraction/
+  schema: 1
+---
 <p><img src="/assets/upstream/images/email-security/email-retraction/o365/opening_img-o365-retraction.png" alt="Email workflow for retracting emails with Microsoft Office 365" /></p>
 <p>In this tutorial you will learn how to set up email retraction for Microsoft Office 365.</p>
 <h2 id="1-authorize-email-security-with-office-365-for-retraction"><ol>
@@ -39,9 +50,7 @@
 <h2 id="2-configure-auto-retraction-actions"><ol start="2">
 <li>Configure auto-retraction actions</li>
 </ol></h2>
-<p>You can set up auto-retraction to automatically move messages matching certain <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/8545.md")
-</div> to specific folders within a user's mailbox.
+<p>You can set up auto-retraction to automatically move messages matching certain <span class="nb-glossary-tooltip" title="disposition">dispositions</span> to specific folders within a user's mailbox.</p>
 <p>To set up automatic retraction:</p>
 <ol>
 <li>
@@ -71,9 +80,7 @@
 </li>
 </ol>
 <h3 id="post-delivery-retractions-for-new-threats">Post delivery retractions for new threats</h3>
-<p>Email Security (formerly Area 1) is continuously gathering new information about <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/8546.md")
-</div> campaigns. Users might have email messages in their inboxes that were scanned by Email Security (formerly Area 1) but not retracted initially because, at the time of scan, these email messages had not been identified as a threat. To mitigate risk, Email Security (formerly Area 1) offers you tools to re-evaluate email messages at a fixed time interval based on knowledge Cloudflare may have acquired since initial delivery. Any email messages that fit this new threat knowledge will be retracted.
+<p>Email Security (formerly Area 1) is continuously gathering new information about <span class="nb-glossary-tooltip" title="phishing">phishing</span> campaigns. Users might have email messages in their inboxes that were scanned by Email Security (formerly Area 1) but not retracted initially because, at the time of scan, these email messages had not been identified as a threat. To mitigate risk, Email Security (formerly Area 1) offers you tools to re-evaluate email messages at a fixed time interval based on knowledge Cloudflare may have acquired since initial delivery. Any email messages that fit this new threat knowledge will be retracted.</p>
 <p>You can enable two options:</p>
 <ul>
 <li><strong>Post Delivery Response</strong>:  Email Security (formerly Area 1) will continue to re-evaluate emails already delivered to your users' inboxes at a fixed time interval in search for phishing sites or campaigns not previously known to Cloudflare. If any email messages fitting these new criteria are found, Email Security (formerly Area 1) retracts them. Rescans occur at a five minute, 12 hour, and 24 hour intervals.</li>

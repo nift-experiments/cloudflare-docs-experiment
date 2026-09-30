@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/workers/wrangler/configuration/
+  description: Use a configuration file to customize the development and deployment setup for your Worker project and other Developer Platform products.
+  full_title: Configuration - Wrangler · Cloudflare Workers docs
+  head_html: <title>Configuration - Wrangler · Cloudflare Workers docs</title><meta name="generator" content="Nift"><meta name="description" content="Use a configuration file to customize the development and deployment setup for your Worker project and other Developer Platform products."><link rel="canonical" href="https://developers.cloudflare.com/workers/wrangler/configuration/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/workers/wrangler/configuration/index.md"><meta property="og:title" content="Configuration - Wrangler · Cloudflare Workers docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Use a configuration file to customize the development and deployment setup for your Worker project and other Developer Platform products."><meta property="og:url" content="https://developers.cloudflare.com/workers/wrangler/configuration/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Workers"><meta name="algolia_product_filter" content="Workers"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Configuration"><meta name="algolia_content_type" content="Configuration"><meta name="pcx_additional_products" content="Workers"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/workers/wrangler/configuration/#page","headline":"Configuration - Wrangler \u00b7 Cloudflare Workers docs","description":"Use a configuration file to customize the development and deployment setup for your Worker project and other Developer Platform products.","url":"https://developers.cloudflare.com/workers/wrangler/configuration/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /workers/wrangler/configuration/
+  schema: 1
+---
 <p>Wrangler optionally uses a configuration file to customize the development and deployment setup for a Worker.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/15949.md")
@@ -1222,7 +1233,7 @@ The <code>rules</code> key will be an array of the below object.</p>
 </div>
 <h3 id="importing-modules-within-a-worker">Importing modules within a Worker</h3>
 <p>You can import and refer to these modules within your Worker, like so:</p>
-<pre><code class="language-js">import markdown from &quot;./example.md&quot;;&#10;&#10;export default {&#10;	async fetch() {&#10;		return new Response(markdown);&#10;	},&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">import markdown from &quot;./example.md&quot;;&#10;&#10;export default {&#10;	async fetch() {&#10;		return new Response(markdown);&#10;	},&#10;};&#10;</code></pre>
 <h3 id="find-additional-modules">Find additional modules</h3>
 <p>Normally Wrangler will only include additional modules that are statically imported in your source code as in the example above.
 By setting <code>find_additional_modules</code> to <code>true</code> in your configuration file, Wrangler will traverse the file tree below <code>base_dir</code>.
@@ -1316,7 +1327,7 @@ no reason.</p>
 @markup("md", "content/.markup/bodies/15935.md")
 </aside>
 <p>These files should be formatted using the <a href="https://hexdocs.pm/dotenvy/dotenv-file-format.html">dotenv</a> syntax. For example:</p>
-<pre><code class="language-bash">SECRET_KEY=&quot;value&quot;&#10;API_TOKEN=&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">SECRET_KEY=&quot;value&quot;&#10;API_TOKEN=&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9&quot;&#10;</code></pre>
 <aside class="nb-aside caution">
 <h3 class="nb-aside-title" id="do-not-commit-secrets-to-git">Do not commit secrets to git</h3>
 @markup("md", "content/.markup/bodies/15934.md")
@@ -1346,9 +1357,9 @@ no reason.</p>
 <div class="nb-wrangler-config">
 @markup("md", "content/.markup/bodies/15991.md")
 </div>
-<pre><code class="language-js">export const bar = &quot;baz&quot;;&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">export const bar = &quot;baz&quot;;&#10;</code></pre>
 <p>With the configuration above, any calls to <code>import</code> or <code>require()</code> the module <code>foo</code> will be aliased to point to your replacement module:</p>
-<pre><code class="language-js">import { bar } from &quot;foo&quot;;&#10;&#10;console.log(bar); // returns &quot;baz&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">import { bar } from &quot;foo&quot;;&#10;&#10;console.log(bar); // returns &quot;baz&quot;&#10;</code></pre>
 <h3 id="bundling-issues">Bundling issues</h3>
 <p>When Wrangler bundles your Worker, it might fail to resolve dependencies. Setting up an alias for such dependencies is a simple way to fix the issue.</p>
 <p>However, before doing so, verify that the package is correctly installed in your project, either as a direct dependency in <code>package.json</code> or as a transitive dependency.</p>
@@ -1366,14 +1377,14 @@ no reason.</p>
 <div class="nb-wrangler-config">
 @markup("md", "content/.markup/bodies/15992.md")
 </div>
-<pre><code class="language-js">export default fetch;&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">export default fetch;&#10;</code></pre>
 <h3 id="example-aliasing-node-js-apis">Example: Aliasing Node.js APIs</h3>
 <p>You can use module aliasing to provide your own polyfill implementation of a Node.js API that is not yet available in the Workers runtime.</p>
 <p>For example, let's say the NPM package you rely on calls <a href="https://nodejs.org/api/fs.html#fsreadfilepath-options-callback"><code>fs.readFile</code></a>. You can alias the fs module by adding the following to your Worker's Wrangler configuration file:</p>
 <div class="nb-wrangler-config">
 @markup("md", "content/.markup/bodies/15993.md")
 </div>
-<pre><code class="language-js">export function readFile() {&#10;	// ...&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">export function readFile() {&#10;	// ...&#10;}&#10;</code></pre>
 <p>In many cases, this allows you to work provide just enough of an API to make a dependency work. You can learn more about Cloudflare Workers' support for Node.js APIs on the <a href="/workers/runtime-apis/nodejs/">Cloudflare Workers Node.js API documentation page</a>.</p>
 <h2 id="source-maps">Source maps</h2>
 <p><a href="/workers/observability/source-maps/">Source maps</a> translate compiled and minified code back to the original code that you wrote. Source maps are combined with the stack trace returned by the JavaScript runtime to present you with a stack trace.</p>
@@ -1425,7 +1436,7 @@ no reason.</p>
 </ul>
 <p>To configure this on macOS, add <code>HTTP_PROXY=http://&lt;YOUR_PROXY_HOST&gt;:&lt;YOUR_PROXY_PORT&gt;</code> before your Wrangler commands.</p>
 <p>Example:</p>
-<pre><code class="language-sh">$ HTTP_PROXY=http://localhost:8080 wrangler dev&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">$ HTTP_PROXY=http://localhost:8080 wrangler dev&#10;</code></pre>
 <p>If your IT team has configured your computer's proxy settings, be aware that the first non-empty environment variable in this list will be used when Wrangler makes outgoing requests.</p>
 <p>For example, if both <code>https_proxy</code> and <code>http_proxy</code> are set, Wrangler will only use <code>https_proxy</code> for outgoing requests.</p>
 <h2 id="source-of-truth">Source of truth</h2>
@@ -1451,7 +1462,7 @@ In this case, the tool may also create a special <code>.wrangler/deploy/config.j
 </ul>
 <p>When running these commands, Wrangler looks up the directory tree from the current working directory for a file at the path <code>.wrangler/deploy/config.json</code>.
 This file must contain only a single JSON object of the form:</p>
-<pre><code class="language-json">{ &quot;configPath&quot;: &quot;../../path/to/wrangler.jsonc&quot; }&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{ &quot;configPath&quot;: &quot;../../path/to/wrangler.jsonc&quot; }&#10;</code></pre>
 <p>When this <code>config.json</code> file exists, Wrangler will follow the <code>configPath</code> (relative to the <code>.wrangler/deploy/config.json</code> file) to find the generated Wrangler configuration file to load and use in the current command.
 Wrangler will display messaging to the user to indicate that the configuration has been redirected to a different file than the user's configuration file.</p>
 <p>The generated configuration file should not include any <a href="#environments">environments</a>.
@@ -1468,15 +1479,15 @@ This is because such a file, when required, should be created as part of a build
 <ul>
 <li>Then, the user runs a custom build for a given environment (for example <code>staging</code>). This will read the user's Wrangler configuration file to find the source code entry-point and environment specific settings:</li>
 </ul>
-<pre><code class="language-bash">&gt; my-tool build --env=staging&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">&gt; my-tool build --env=staging&#10;</code></pre>
 <ul>
 <li>
 <p><code>my-tool</code> generates a <code>dist</code> directory that contains both compiled code and a new generated deployment configuration file, containing only the settings for the given environment.
 It also creates a <code>.wrangler/deploy/config.json</code> file that redirects Wrangler to the new, generated deployment configuration file:</p>
-<pre class="nb-file-tree">&#10;&#10;&#10;</li>&#10;</ul>&#10;@markup("md", "content/.markup/bodies/15997.md")&#10;</pre>
+<pre tabindex="0" class="nb-file-tree">&#10;&#10;&#10;</li>&#10;</ul>&#10;@markup("md", "content/.markup/bodies/15997.md")&#10;</pre>
 <p>The generated <code>dist/wrangler.jsonc</code> might contain:</p>
-<pre><code class="language-json">{&#10;	&quot;name&quot;: &quot;my-worker&quot;,&#10;	&quot;main&quot;: &quot;./index.js&quot;,&#10;	&quot;vars&quot;: {&#10;		&quot;MY_VARIABLE&quot;: &quot;staging variable&quot;&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;name&quot;: &quot;my-worker&quot;,&#10;	&quot;main&quot;: &quot;./index.js&quot;,&#10;	&quot;vars&quot;: {&#10;		&quot;MY_VARIABLE&quot;: &quot;staging variable&quot;&#10;	}&#10;}&#10;</code></pre>
 <p>Now, the <code>main</code> property points to the generated code entry-point, no environment is defined,
 and the <code>MY_VARIABLE</code> variable is resolved to the staging environment value.</p>
 <p>And the <code>.wrangler/deploy/config.json</code> contains the path to the generated configuration file:</p>
-<pre><code class="language-json">{&#10;	&quot;configPath&quot;: &quot;../../dist/wrangler.jsonc&quot;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;configPath&quot;: &quot;../../dist/wrangler.jsonc&quot;&#10;}&#10;</code></pre>

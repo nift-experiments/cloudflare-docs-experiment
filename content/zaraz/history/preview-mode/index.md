@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/zaraz/history/preview-mode/
+  description: Preview Zaraz configuration changes before publishing.
+  full_title: Preview changes before publishing · Cloudflare Zaraz docs
+  head_html: <title>Preview changes before publishing · Cloudflare Zaraz docs</title><meta name="generator" content="Nift"><meta name="description" content="Preview Zaraz configuration changes before publishing."><link rel="canonical" href="https://developers.cloudflare.com/zaraz/history/preview-mode/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/zaraz/history/preview-mode/index.md"><meta property="og:title" content="Preview changes before publishing · Cloudflare Zaraz docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Preview Zaraz configuration changes before publishing."><meta property="og:url" content="https://developers.cloudflare.com/zaraz/history/preview-mode/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Zaraz"><meta name="algolia_product_filter" content="Zaraz"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Zaraz"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/zaraz/history/preview-mode/#page","headline":"Preview changes before publishing \u00b7 Cloudflare Zaraz docs","description":"Preview Zaraz configuration changes before publishing.","url":"https://developers.cloudflare.com/zaraz/history/preview-mode/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /zaraz/history/preview-mode/
+  schema: 1
+---
 <p>Zaraz allows you to test your configurations before publishing them. This is helpful to avoid unintended consequences when deploying a new tool or trigger.</p>
 <p>After enabling Preview &amp; Publish you will also have access to <a href="/zaraz/history/versions/">Zaraz History</a>.</p>
 <h2 id="enable-preview-publish-mode">Enable Preview &amp; Publish mode</h2>
@@ -21,7 +32,7 @@
 <li>Access the browser’s developer tools. For example, to access developer tools in Google Chrome, select <strong>View</strong> &gt; <strong>Developer</strong> &gt; <strong>Developer Tools</strong>.</li>
 <li>Select the <strong>Console</strong> pane and enter the following command to start Zaraz’s preview mode:</li>
 </ol>
-<pre><code class="language-js">zaraz.preview(&quot;&lt;YOUR_DEBUG_KEY&gt;&quot;);&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">zaraz.preview(&quot;&lt;YOUR_DEBUG_KEY&gt;&quot;);&#10;</code></pre>
 <ol start="5">
 <li>Your website will reload along with Zaraz debugger, and Zaraz will use the most recent changes in preview mode.</li>
 <li>If you are satisfied with your changes, go back to the dashboard and select <strong>Publish</strong> to apply them to all users. If not, use the dashboard to continue adjusting your configuration.</li>

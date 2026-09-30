@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/workers-ai/get-started/workers-wrangler/
+  description: Deploy your first Cloudflare Workers AI project using the CLI.
+  full_title: Get started - Workers and Wrangler · Cloudflare Workers AI docs
+  head_html: <title>Get started - Workers and Wrangler · Cloudflare Workers AI docs</title><meta name="generator" content="Nift"><meta name="description" content="Deploy your first Cloudflare Workers AI project using the CLI."><link rel="canonical" href="https://developers.cloudflare.com/workers-ai/get-started/workers-wrangler/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/workers-ai/get-started/workers-wrangler/index.md"><meta property="og:title" content="Get started - Workers and Wrangler · Cloudflare Workers AI docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Deploy your first Cloudflare Workers AI project using the CLI."><meta property="og:url" content="https://developers.cloudflare.com/workers-ai/get-started/workers-wrangler/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Workers AI"><meta name="algolia_product_filter" content="Workers AI"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Get started"><meta name="algolia_content_type" content="Get started"><meta name="pcx_additional_products" content="Workers AI"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/workers-ai/get-started/workers-wrangler/#page","headline":"Get started - Workers and Wrangler \u00b7 Cloudflare Workers AI docs","description":"Deploy your first Cloudflare Workers AI project using the CLI.","url":"https://developers.cloudflare.com/workers-ai/get-started/workers-wrangler/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /workers-ai/get-started/workers-wrangler/
+  schema: 1
+---
 <p>This guide will instruct you through setting up and deploying your first Workers AI project. You will use <a href="/workers/">Workers</a>, a Workers AI binding, and a large language model (LLM) to deploy your first AI-powered application on the Cloudflare global network.</p>
 <ol>
 <li>Sign up for a <a href="https://dash.cloudflare.com/sign-up/workers-and-pages">Cloudflare account</a>.</li>
@@ -11,7 +22,7 @@
 </ol></h2>
 <p>You will create a new Worker project using the <code>create-cloudflare</code> CLI (C3). <a href="https://github.com/cloudflare/workers-sdk/tree/main/packages/create-cloudflare">C3</a> is a command-line tool designed to help you set up and deploy new applications to Cloudflare.</p>
 <p>Create a new project named <code>hello-ai</code> by running:</p>
-<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre><code data-nb-pm-code>npm create cloudflare@latest -- hello-ai</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm create cloudflare@latest -- hello-ai" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>yarn create cloudflare hello-ai</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn create cloudflare hello-ai" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>pnpm create cloudflare@latest hello-ai</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm create cloudflare@latest hello-ai" aria-label="Copy to clipboard">Copy</button></div></div>
+<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre tabindex="0"><code data-nb-pm-code>npm create cloudflare@latest -- hello-ai</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm create cloudflare@latest -- hello-ai" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>yarn create cloudflare hello-ai</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn create cloudflare hello-ai" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>pnpm create cloudflare@latest hello-ai</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm create cloudflare@latest hello-ai" aria-label="Copy to clipboard">Copy</button></div></div>
 <p>Running <code>npm create cloudflare@latest</code> will prompt you to install the <a href="https://www.npmjs.com/package/create-cloudflare"><code>create-cloudflare</code> package</a>, and lead you through setup. C3 will also install <a href="/workers/wrangler/">Wrangler</a>, the Cloudflare Developer Platform CLI.</p>
 <p>For setup, select the following options:</p>
 <ul>
@@ -27,7 +38,7 @@
 <li>A <a href="/workers/wrangler/configuration/"><code>wrangler.jsonc</code></a> configuration file.</li>
 </ul>
 <p>Go to your application directory:</p>
-<pre><code class="language-sh">cd hello-ai&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cd hello-ai&#10;</code></pre>
 <h2 id="2-connect-your-worker-to-workers-ai"><ol start="2">
 <li>Connect your Worker to Workers AI</li>
 </ol></h2>
@@ -51,22 +62,22 @@
 <li>Develop locally with Wrangler</li>
 </ol></h2>
 <p>While in your project directory, test Workers AI locally by running <a href="/workers/wrangler/commands/general/#dev"><code>wrangler dev</code></a>:</p>
-<pre><code class="language-sh">npx wrangler dev&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler dev&#10;</code></pre>
 <aside class="nb-aside note">
 <h3 class="nb-aside-title" id="workers-ai-local-development-usage-charges">Workers AI local development usage charges</h3>
 @markup("md", "content/.markup/bodies/15808.md")
 </aside>
 <p>You will be prompted to log in after you run <code>wrangler dev</code>. When you run <code>npx wrangler dev</code>, Wrangler will give you a URL (most likely <code>localhost:8787</code>) to review your Worker. After you go to the URL Wrangler provides, the response will have a shape similar to the following example:</p>
-<pre><code class="language-json">{&#10;	&quot;id&quot;: &quot;&lt;generated id&gt;&quot;,&#10;	&quot;object&quot;: &quot;chat.completion&quot;,&#10;	&quot;created&quot;: 0,&#10;	&quot;model&quot;: &quot;@cf/google/gemma-4-26b-a4b-it&quot;,&#10;	&quot;choices&quot;: [&#10;		{&#10;			&quot;index&quot;: 0,&#10;			&quot;message&quot;: {&#10;				&quot;role&quot;: &quot;assistant&quot;,&#10;				&quot;content&quot;: &quot;&lt;generated response&gt;&quot;,&#10;				&quot;refusal&quot;: null&#10;			},&#10;			&quot;finish_reason&quot;: &quot;stop&quot;,&#10;			&quot;logprobs&quot;: null&#10;		}&#10;	]&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;id&quot;: &quot;&lt;generated id&gt;&quot;,&#10;	&quot;object&quot;: &quot;chat.completion&quot;,&#10;	&quot;created&quot;: 0,&#10;	&quot;model&quot;: &quot;@cf/google/gemma-4-26b-a4b-it&quot;,&#10;	&quot;choices&quot;: [&#10;		{&#10;			&quot;index&quot;: 0,&#10;			&quot;message&quot;: {&#10;				&quot;role&quot;: &quot;assistant&quot;,&#10;				&quot;content&quot;: &quot;&lt;generated response&gt;&quot;,&#10;				&quot;refusal&quot;: null&#10;			},&#10;			&quot;finish_reason&quot;: &quot;stop&quot;,&#10;			&quot;logprobs&quot;: null&#10;		}&#10;	]&#10;}&#10;</code></pre>
 <h2 id="5-deploy-your-ai-worker"><ol start="5">
 <li>Deploy your AI Worker</li>
 </ol></h2>
 <p>Before deploying your AI Worker globally, log in with your Cloudflare account by running:</p>
-<pre><code class="language-sh">npx wrangler login&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler login&#10;</code></pre>
 <p>You will be directed to a web page asking you to log in to the Cloudflare dashboard. After you have logged in, you will be asked if Wrangler can make changes to your Cloudflare account. Scroll down and select <strong>Allow</strong> to continue.</p>
 <p>Finally, deploy your Worker to make your project accessible on the Internet. To deploy your Worker, run:</p>
-<pre><code class="language-sh">npx wrangler deploy&#10;</code></pre>
-<pre><code class="language-sh">https://hello-ai.&lt;YOUR_SUBDOMAIN&gt;.workers.dev&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler deploy&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">https://hello-ai.&lt;YOUR_SUBDOMAIN&gt;.workers.dev&#10;</code></pre>
 <p>Your Worker will be deployed to your custom <a href="/workers/configuration/routing/workers-dev/"><code>workers.dev</code></a> subdomain. You can now visit the URL to run your AI Worker.</p>
 <p>By finishing this tutorial, you have created a Worker, connected it to Workers AI through an AI binding, and run an inference task using the Gemma 4 26B A4B model.</p>
 <h2 id="related-resources">Related resources</h2>

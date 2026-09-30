@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/sandbox/api/ports/
+  description: Expose sandbox services via public preview URLs using the Sandbox SDK ports API.
+  full_title: Ports · Cloudflare Sandbox SDK docs
+  head_html: <title>Ports · Cloudflare Sandbox SDK docs</title><meta name="generator" content="Nift"><meta name="description" content="Expose sandbox services via public preview URLs using the Sandbox SDK ports API."><link rel="canonical" href="https://developers.cloudflare.com/sandbox/api/ports/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/sandbox/api/ports/index.md"><meta property="og:title" content="Ports · Cloudflare Sandbox SDK docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Expose sandbox services via public preview URLs using the Sandbox SDK ports API."><meta property="og:url" content="https://developers.cloudflare.com/sandbox/api/ports/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Sandbox SDK"><meta name="algolia_product_filter" content="Sandbox SDK"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Sandbox SDK"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/sandbox/api/ports/#page","headline":"Ports \u00b7 Cloudflare Sandbox SDK docs","description":"Expose sandbox services via public preview URLs using the Sandbox SDK ports API.","url":"https://developers.cloudflare.com/sandbox/api/ports/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /sandbox/api/ports/
+  schema: 1
+---
 <aside class="nb-aside note">
 <h3 class="nb-aside-title" id="coming-soon-sandbox-sdk-1-0">Coming soon: Sandbox SDK 1.0</h3>
 @markup("md", "content/.markup/bodies/13615.md")
@@ -14,7 +25,7 @@
 <h2 id="module-functions">Module functions</h2>
 <h3 id="proxytosandbox"><code>proxyToSandbox()</code></h3>
 <p>Route incoming HTTP and WebSocket requests to the correct sandbox container. Call this at the top of your Worker's <code>fetch</code> handler, before any application logic, so that it intercepts and forwards preview URL requests automatically.</p>
-<pre><code class="language-ts">proxyToSandbox(request: Request, env: Env): Promise&lt;Response | null&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">proxyToSandbox(request: Request, env: Env): Promise&lt;Response | null&gt;&#10;</code></pre>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>request</code> - The incoming <code>Request</code> object from the <code>fetch</code> handler.</li>
@@ -31,7 +42,7 @@
 <h2 id="methods">Methods</h2>
 <h3 id="exposeport"><code>exposePort()</code></h3>
 <p>Expose a port and get a preview URL for accessing services running in the sandbox.</p>
-<pre><code class="language-ts">const response = await sandbox.exposePort(port: number, options: ExposePortOptions): Promise&lt;ExposePortResponse&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const response = await sandbox.exposePort(port: number, options: ExposePortOptions): Promise&lt;ExposePortResponse&gt;&#10;</code></pre>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>port</code> - Port number to expose (1024-65535)</li>
@@ -69,7 +80,7 @@
 </div>
 <h3 id="validateporttoken"><code>validatePortToken()</code></h3>
 <p>Validate if a token is authorized to access a specific exposed port. Useful for custom authentication or routing logic.</p>
-<pre><code class="language-ts">const isValid = await sandbox.validatePortToken(port: number, token: string): Promise&lt;boolean&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const isValid = await sandbox.validatePortToken(port: number, token: string): Promise&lt;boolean&gt;&#10;</code></pre>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>port</code> - Port number to check</li>
@@ -81,7 +92,7 @@
 </div>
 <h3 id="unexposeport"><code>unexposePort()</code></h3>
 <p>Remove an exposed port and close its preview URL.</p>
-<pre><code class="language-ts">await sandbox.unexposePort(port: number): Promise&lt;void&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">await sandbox.unexposePort(port: number): Promise&lt;void&gt;&#10;</code></pre>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>port</code> - Port number to unexpose</li>
@@ -91,7 +102,7 @@
 </div>
 <h3 id="getexposedports"><code>getExposedPorts()</code></h3>
 <p>Get information about all currently exposed ports.</p>
-<pre><code class="language-ts">const response = await sandbox.getExposedPorts(): Promise&lt;GetExposedPortsResponse&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const response = await sandbox.getExposedPorts(): Promise&lt;GetExposedPortsResponse&gt;&#10;</code></pre>
 <p><strong>Returns</strong>: <code>Promise&lt;GetExposedPortsResponse&gt;</code> with <code>ports</code> array (containing <code>port</code>, <code>url</code>, <code>name</code>)</p>
 <div class="nb-type-script-example">
 @markup("md", "content/.markup/bodies/13621.md")
@@ -104,7 +115,7 @@
 <li>Connect from your Worker to get real-time data from sandbox services</li>
 </ul>
 <p>For exposing WebSocket services via public preview URLs, use <code>exposePort()</code> with <code>proxyToSandbox()</code> instead. See <a href="/sandbox/guides/websocket-connections/">WebSocket Connections guide</a> for examples.</p>
-<pre><code class="language-ts">const response = await sandbox.wsConnect(request: Request, port: number): Promise&lt;Response&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const response = await sandbox.wsConnect(request: Request, port: number): Promise&lt;Response&gt;&#10;</code></pre>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>request</code> - Incoming WebSocket upgrade request</li>
@@ -122,4 +133,4 @@
 <li><a href="/sandbox/api/commands/">Commands API</a> - Start background processes</li>
 <li><a href="/sandbox/api/tunnels/">Tunnels API</a> - Zero-config <code>*.trycloudflare.com</code> URLs for quick development</li>
 </ul>
-<pre><code>&#10;</code></pre>
+<pre tabindex="0"><code>&#10;</code></pre>

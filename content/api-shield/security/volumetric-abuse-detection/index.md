@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/api-shield/security/volumetric-abuse-detection/
+  description: Set up adaptive, per-session rate limiting for API endpoints with Volumetric Abuse Detection.
+  full_title: Volumetric Abuse Detection · Cloudflare API Shield docs
+  head_html: <title>Volumetric Abuse Detection · Cloudflare API Shield docs</title><meta name="generator" content="Nift"><meta name="description" content="Set up adaptive, per-session rate limiting for API endpoints with Volumetric Abuse Detection."><link rel="canonical" href="https://developers.cloudflare.com/api-shield/security/volumetric-abuse-detection/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/api-shield/security/volumetric-abuse-detection/index.md"><meta property="og:title" content="Volumetric Abuse Detection · Cloudflare API Shield docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Set up adaptive, per-session rate limiting for API endpoints with Volumetric Abuse Detection."><meta property="og:url" content="https://developers.cloudflare.com/api-shield/security/volumetric-abuse-detection/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="API Shield"><meta name="algolia_product_filter" content="API Shield"><meta name="pcx_content_group" content="Application security"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="API Shield"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/api-shield/security/volumetric-abuse-detection/#page","headline":"Volumetric Abuse Detection \u00b7 Cloudflare API Shield docs","description":"Set up adaptive, per-session rate limiting for API endpoints with Volumetric Abuse Detection.","url":"https://developers.cloudflare.com/api-shield/security/volumetric-abuse-detection/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /api-shield/security/volumetric-abuse-detection/
+  schema: 1
+---
 <p>Cloudflare Volumetric Abuse Detection generates per-endpoint, per-session rate limit recommendations that adjust automatically as your traffic patterns change.</p>
 <p>Cloudflare looks for endpoint abuse based on user traffic to individual endpoints.</p>
 <p>For example, your API might see different levels of traffic to a <code>/reset-password</code> endpoint than a <code>/login</code> endpoint. Additionally, your <code>/login</code> endpoint might see higher than average traffic after a successful marketing campaign.</p>
@@ -14,12 +25,8 @@
 <ul>
 <li>The endpoint must receive sufficient valid traffic (traffic that meets the <a href="/api-shield/security/api-discovery/#requirements">API Discovery</a> criteria). Intermittent or erratic traffic may prevent suggestions.</li>
 <li>The endpoint must be accessed by at least 50 distinct sessions in any 24-hour period during the last seven days.</li>
-<li>
-<div class="nb-interactive-component" data-cf-component="GlossaryTooltip">
-</li>
+<li><span class="nb-glossary-tooltip" title="session identifier">Session identifiers</span>, such as an authorization token available as a request header or cookie, must be configured to allow Cloudflare to accurately detect individual sessions and perform the required per-session rate analysis.</li>
 </ul>
-@markup("md", "content/.markup/bodies/3190.md")
-</div>, such as an authorization token available as a request header or cookie, must be configured to allow Cloudflare to accurately detect individual sessions and perform the required per-session rate analysis.
 <p>After adding a session identifier, allow 24 hours for rate limit recommendations to appear on endpoints in the Cloudflare dashboard.</p>
 <h3 id="rate-limiting-recommendation-calculation">Rate limiting recommendation calculation</h3>
 <p>Select an endpoint row in <strong>Endpoints</strong> to view its rate limit recommendation. The detail view shows the overall recommended value and percentile-based values (p50, p90, p99).</p>
@@ -35,7 +42,7 @@
 <p>Refer to the <a href="/waf/rate-limiting-rules/create-zone-dashboard/">Rules documentation</a> for more information on how to create an Advanced Rate Limiting rule.</p>
 <h2 id="api">API</h2>
 <p><a href="/api/resources/api_gateway/subresources/operations/methods/get/">Rate limit recommendations are available via the API</a> if you would like to dynamically update rate limits over time.</p>
-<pre class="nb-api-request"><code class="language-bash">curl --request GET \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/api_gateway/operations/{operation_id} \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot;</code></pre>
+<pre tabindex="0" class="nb-api-request"><code class="language-bash">curl --request GET \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/api_gateway/operations/{operation_id} \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot;</code></pre>
 <h2 id="special-cases">Special cases</h2>
 <h3 id="rate-limit-by-user-jwt-claim">Rate limit by user (JWT claim)</h3>
 <p>You can rate limit requests based on any claim inside of a JSON Web Token (JWT), such as:</p>
@@ -52,7 +59,7 @@
 <li>If <code>&quot;aud&quot;: &quot;premium-tier&quot;</code>, rate limit to 50 requests per minute.</li>
 </ul>
 <p>You can follow the rate limiting rule example below:</p>
-<pre><code class="language-txt">(http.request.method eq &quot;GET&quot; and&#10;http.host eq &quot;&lt;YOUR_DOMAIN&gt;&quot; and&#10;http.request.uri.path matches &quot;&lt;/EXAMPLE_PATH&gt;&quot; and&#10;lookup_json_string(http.request.jwt.claims[&quot;&lt;JWT_TOKEN_CONFIGURATION_ID&gt;&quot;][0], &quot;aud&quot;) eq &quot;free-tier&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">(http.request.method eq &quot;GET&quot; and&#10;http.host eq &quot;&lt;YOUR_DOMAIN&gt;&quot; and&#10;http.request.uri.path matches &quot;&lt;/EXAMPLE_PATH&gt;&quot; and&#10;lookup_json_string(http.request.jwt.claims[&quot;&lt;JWT_TOKEN_CONFIGURATION_ID&gt;&quot;][0], &quot;aud&quot;) eq &quot;free-tier&quot;&#10;</code></pre>
 <h2 id="limitations">Limitations</h2>
 <p>API Shield will always calculate recommendations when session identifiers are configured. To enable session-based rate limits, <a href="/waf/rate-limiting-rules/#availability">subscribe to Advanced Rate Limiting</a>.</p>
 <h2 id="availability">Availability</h2>

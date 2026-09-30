@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/agents/communication-channels/webhooks/
+  description: Receive and route webhook events from external services to dedicated Cloudflare Agent instances.
+  full_title: Webhooks · Cloudflare Agents docs
+  head_html: <title>Webhooks · Cloudflare Agents docs</title><meta name="generator" content="Nift"><meta name="description" content="Receive and route webhook events from external services to dedicated Cloudflare Agent instances."><link rel="canonical" href="https://developers.cloudflare.com/agents/communication-channels/webhooks/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/agents/communication-channels/webhooks/index.md"><meta property="og:title" content="Webhooks · Cloudflare Agents docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Receive and route webhook events from external services to dedicated Cloudflare Agent instances."><meta property="og:url" content="https://developers.cloudflare.com/agents/communication-channels/webhooks/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Agents"><meta name="algolia_product_filter" content="Agents"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Agents"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/agents/communication-channels/webhooks/#page","headline":"Webhooks \u00b7 Cloudflare Agents docs","description":"Receive and route webhook events from external services to dedicated Cloudflare Agent instances.","url":"https://developers.cloudflare.com/agents/communication-channels/webhooks/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /agents/communication-channels/webhooks/
+  schema: 1
+---
 <p>Receive webhook events from external services and route them to dedicated agent instances. Each webhook source (repository, customer, device) can have its own agent with isolated state, persistent storage, and real-time client connections.</p>
 <h2 id="quick-start">Quick start</h2>
 <div class="nb-type-script-example">
@@ -199,7 +210,7 @@
 @markup("md", "content/.markup/bodies/1995.md")
 </div>
 <p>On the client side:</p>
-<pre><code class="language-tsx">import { useAgent } from &quot;agents/react&quot;;&#10;&#10;function Dashboard() {&#10;	const [state, setState] = useState(null);&#10;&#10;	const agent = useAgent({&#10;		agent: &quot;webhook-agent&quot;,&#10;		name: &quot;my-entity-id&quot;,&#10;		onStateUpdate: (newState) =&gt; {&#10;			setState(newState); // Automatically updates when webhooks arrive&#10;		},&#10;	});&#10;&#10;	return &lt;div&gt;Last event: {state?.lastEvent?.type}&lt;/div&gt;;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-tsx">import { useAgent } from &quot;agents/react&quot;;&#10;&#10;function Dashboard() {&#10;	const [state, setState] = useState(null);&#10;&#10;	const agent = useAgent({&#10;		agent: &quot;webhook-agent&quot;,&#10;		name: &quot;my-entity-id&quot;,&#10;		onStateUpdate: (newState) =&gt; {&#10;			setState(newState); // Automatically updates when webhooks arrive&#10;		},&#10;	});&#10;&#10;	return &lt;div&gt;Last event: {state?.lastEvent?.type}&lt;/div&gt;;&#10;}&#10;</code></pre>
 <h2 id="patterns">Patterns</h2>
 <h3 id="event-deduplication">Event deduplication</h3>
 <p>Prevent processing duplicate events using event IDs:</p>
@@ -278,6 +289,6 @@
 </tbody>
 </table>
 <h2 id="next-steps">Next steps</h2>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/execution/queue-tasks/"><h3 id="card-queue-tasks-agents-runtime-execution-queue-tasks">Queue tasks</h3><p>Background task processing.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/communication-channels/email/"><h3 id="card-email-routing-agents-communication-channels-email">Email routing</h3><p>Handle inbound emails in your agent.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/agents-api/"><h3 id="card-agents-api-agents-runtime-agents-api">Agents API</h3><p>Complete API reference for the Agents SDK.</p></a></p>
+<div class="nb-card nb-link-card"><h3 id="card-queue-tasks-agents-runtime-execution-queue-tasks"><a href="/agents/runtime/execution/queue-tasks/">Queue tasks</a></h3><p>Background task processing.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-email-routing-agents-communication-channels-email"><a href="/agents/communication-channels/email/">Email routing</a></h3><p>Handle inbound emails in your agent.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-agents-api-agents-runtime-agents-api"><a href="/agents/runtime/agents-api/">Agents API</a></h3><p>Complete API reference for the Agents SDK.</p></div>

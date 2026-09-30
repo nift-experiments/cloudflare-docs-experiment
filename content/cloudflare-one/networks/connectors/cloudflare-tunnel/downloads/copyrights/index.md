@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/copyrights/
+  description: View associated copyrights.
+  full_title: Copyrights · Cloudflare One docs
+  head_html: <title>Copyrights · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="View associated copyrights."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/copyrights/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/copyrights/index.md"><meta property="og:title" content="Copyrights · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="View associated copyrights."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/copyrights/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Cloudflare One"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/copyrights/#page","headline":"Copyrights \u00b7 Cloudflare One docs","description":"View associated copyrights.","url":"https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/copyrights/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/copyrights/
+  schema: 1
+---
 <hr />
 <p><a href="https://github.com/BurntSushi/toml">https://github.com/BurntSushi/toml</a></p>
 <p>The MIT License (MIT)</p>
@@ -234,12 +245,12 @@ of your accepting any such warranty or additional liability.</p>
 </ol>
 <p>END OF TERMS AND CONDITIONS</p>
 <p>APPENDIX: How to apply the Apache License to your work.</p>
-<pre><code>  To apply the Apache License to your work, attach the following&#10;  boilerplate notice, with the fields enclosed by brackets &quot;{}&quot;&#10;  replaced with your own identifying information. (Don&#x27;t include&#10;  the brackets!)  The text should be enclosed in the appropriate&#10;  comment syntax for the file format. We also recommend that a&#10;  file or class name and description of purpose be included on the&#10;  same &quot;printed page&quot; as the copyright notice for easier&#10;  identification within third-party archives.&#10;</code></pre>
+<pre tabindex="0"><code>  To apply the Apache License to your work, attach the following&#10;  boilerplate notice, with the fields enclosed by brackets &quot;{}&quot;&#10;  replaced with your own identifying information. (Don&#x27;t include&#10;  the brackets!)  The text should be enclosed in the appropriate&#10;  comment syntax for the file format. We also recommend that a&#10;  file or class name and description of purpose be included on the&#10;  same &quot;printed page&quot; as the copyright notice for easier&#10;  identification within third-party archives.&#10;</code></pre>
 <p>Copyright [yyyy] [name of copyright owner]</p>
 <p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at</p>
-<pre><code>   http://www.apache.org/licenses/LICENSE-2.0&#10;</code></pre>
+<pre tabindex="0"><code>   http://www.apache.org/licenses/LICENSE-2.0&#10;</code></pre>
 <p>Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -333,7 +344,7 @@ THE SOFTWARE.</p>
 <p>Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
 met:</p>
-<pre><code>&#42; Redistributions of source code must retain the above copyright&#10;</code></pre>
+<pre tabindex="0"><code>&#42; Redistributions of source code must retain the above copyright&#10;</code></pre>
 <p>notice, this list of conditions and the following disclaimer. * Redistributions in binary form must reproduce the above
 copyright notice, this list of conditions and the following disclaimer
 in the documentation and/or other materials provided with the
@@ -360,7 +371,7 @@ Portions Copyright (C) 2011 Blake Mizerany</p>
 <p>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
 <hr />
 <p><a href="https://godoc.org/github.com/matttproud/golang%5C_protobuf%5C_extensions/pbutil">https://godoc.org/github.com/matttproud/golang\_protobuf\_extensions/pbutil</a></p>
-<pre><code>                             Apache License&#10;                       Version 2.0, January 2004&#10;                    http://www.apache.org/licenses/&#10;</code></pre>
+<pre tabindex="0"><code>                             Apache License&#10;                       Version 2.0, January 2004&#10;                    http://www.apache.org/licenses/&#10;</code></pre>
 <p>TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION</p>
 <ol>
 <li>
@@ -529,12 +540,12 @@ of your accepting any such warranty or additional liability.</p>
 </ol>
 <p>END OF TERMS AND CONDITIONS</p>
 <p>APPENDIX: How to apply the Apache License to your work.</p>
-<pre><code>  To apply the Apache License to your work, attach the following&#10;  boilerplate notice, with the fields enclosed by brackets &quot;{}&quot;&#10;  replaced with your own identifying information. (Don&#x27;t include&#10;  the brackets!)  The text should be enclosed in the appropriate&#10;  comment syntax for the file format. We also recommend that a&#10;  file or class name and description of purpose be included on the&#10;  same &quot;printed page&quot; as the copyright notice for easier&#10;  identification within third-party archives.&#10;</code></pre>
+<pre tabindex="0"><code>  To apply the Apache License to your work, attach the following&#10;  boilerplate notice, with the fields enclosed by brackets &quot;{}&quot;&#10;  replaced with your own identifying information. (Don&#x27;t include&#10;  the brackets!)  The text should be enclosed in the appropriate&#10;  comment syntax for the file format. We also recommend that a&#10;  file or class name and description of purpose be included on the&#10;  same &quot;printed page&quot; as the copyright notice for easier&#10;  identification within third-party archives.&#10;</code></pre>
 <p>Copyright [yyyy] [name of copyright owner]</p>
 <p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at</p>
-<pre><code>   http://www.apache.org/licenses/LICENSE-2.0&#10;</code></pre>
+<pre tabindex="0"><code>   http://www.apache.org/licenses/LICENSE-2.0&#10;</code></pre>
 <p>Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -591,7 +602,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 <a href="https://github.com/prometheus/client_model">https://github.com/prometheus/client_model</a>
 <a href="https://github.com/prometheus/common">https://github.com/prometheus/common</a>
 <a href="https://github.com/prometheus/procfs">https://github.com/prometheus/procfs</a></p>
-<pre><code>                             Apache License&#10;                       Version 2.0, January 2004&#10;                    http://www.apache.org/licenses/&#10;</code></pre>
+<pre tabindex="0"><code>                             Apache License&#10;                       Version 2.0, January 2004&#10;                    http://www.apache.org/licenses/&#10;</code></pre>
 <p>TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION</p>
 <ol>
 <li>
@@ -760,12 +771,12 @@ of your accepting any such warranty or additional liability.</p>
 </ol>
 <p>END OF TERMS AND CONDITIONS</p>
 <p>APPENDIX: How to apply the Apache License to your work.</p>
-<pre><code>  To apply the Apache License to your work, attach the following&#10;  boilerplate notice, with the fields enclosed by brackets &quot;[]&quot;&#10;  replaced with your own identifying information. (Don&#x27;t include&#10;  the brackets!)  The text should be enclosed in the appropriate&#10;  comment syntax for the file format. We also recommend that a&#10;  file or class name and description of purpose be included on the&#10;  same &quot;printed page&quot; as the copyright notice for easier&#10;  identification within third-party archives.&#10;</code></pre>
+<pre tabindex="0"><code>  To apply the Apache License to your work, attach the following&#10;  boilerplate notice, with the fields enclosed by brackets &quot;[]&quot;&#10;  replaced with your own identifying information. (Don&#x27;t include&#10;  the brackets!)  The text should be enclosed in the appropriate&#10;  comment syntax for the file format. We also recommend that a&#10;  file or class name and description of purpose be included on the&#10;  same &quot;printed page&quot; as the copyright notice for easier&#10;  identification within third-party archives.&#10;</code></pre>
 <p>Copyright [yyyy] [name of copyright owner]</p>
 <p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at</p>
-<pre><code>   http://www.apache.org/licenses/LICENSE-2.0&#10;</code></pre>
+<pre tabindex="0"><code>   http://www.apache.org/licenses/LICENSE-2.0&#10;</code></pre>
 <p>Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -792,7 +803,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.</p>
 <hr />
 <p><a href="https://github.com/go-yaml/yaml">https://github.com/go-yaml/yaml</a></p>
-<pre><code>                             Apache License&#10;                       Version 2.0, January 2004&#10;                    http://www.apache.org/licenses/&#10;</code></pre>
+<pre tabindex="0"><code>                             Apache License&#10;                       Version 2.0, January 2004&#10;                    http://www.apache.org/licenses/&#10;</code></pre>
 <p>TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION</p>
 <ol>
 <li>
@@ -961,12 +972,12 @@ of your accepting any such warranty or additional liability.</p>
 </ol>
 <p>END OF TERMS AND CONDITIONS</p>
 <p>APPENDIX: How to apply the Apache License to your work.</p>
-<pre><code>  To apply the Apache License to your work, attach the following&#10;  boilerplate notice, with the fields enclosed by brackets &quot;{}&quot;&#10;  replaced with your own identifying information. (Don&#x27;t include&#10;  the brackets!)  The text should be enclosed in the appropriate&#10;  comment syntax for the file format. We also recommend that a&#10;  file or class name and description of purpose be included on the&#10;  same &quot;printed page&quot; as the copyright notice for easier&#10;  identification within third-party archives.&#10;</code></pre>
+<pre tabindex="0"><code>  To apply the Apache License to your work, attach the following&#10;  boilerplate notice, with the fields enclosed by brackets &quot;{}&quot;&#10;  replaced with your own identifying information. (Don&#x27;t include&#10;  the brackets!)  The text should be enclosed in the appropriate&#10;  comment syntax for the file format. We also recommend that a&#10;  file or class name and description of purpose be included on the&#10;  same &quot;printed page&quot; as the copyright notice for easier&#10;  identification within third-party archives.&#10;</code></pre>
 <p>Copyright [yyyy] [name of copyright owner]</p>
 <p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at</p>
-<pre><code>   http://www.apache.org/licenses/LICENSE-2.0&#10;</code></pre>
+<pre tabindex="0"><code>   http://www.apache.org/licenses/LICENSE-2.0&#10;</code></pre>
 <p>Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.

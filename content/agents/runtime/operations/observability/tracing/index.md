@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/agents/runtime/operations/observability/tracing/
+  description: Trace model calls, tool runs, and approvals with Workers traces.
+  full_title: Tracing · Cloudflare Agents docs
+  head_html: <title>Tracing · Cloudflare Agents docs</title><meta name="generator" content="Nift"><meta name="description" content="Trace model calls, tool runs, and approvals with Workers traces."><link rel="canonical" href="https://developers.cloudflare.com/agents/runtime/operations/observability/tracing/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/agents/runtime/operations/observability/tracing/index.md"><meta property="og:title" content="Tracing · Cloudflare Agents docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Trace model calls, tool runs, and approvals with Workers traces."><meta property="og:url" content="https://developers.cloudflare.com/agents/runtime/operations/observability/tracing/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Agents"><meta name="algolia_product_filter" content="Agents"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Agents"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/agents/runtime/operations/observability/tracing/#page","headline":"Tracing \u00b7 Cloudflare Agents docs","description":"Trace model calls, tool runs, and approvals with Workers traces.","url":"https://developers.cloudflare.com/agents/runtime/operations/observability/tracing/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /agents/runtime/operations/observability/tracing/
+  schema: 1
+---
 <p>Agent tracing helps you understand what an agent did at every turn, including its model calls, tool runs, and approval requests. Use traces to investigate unexpected behavior, find slow operations, and review token usage.</p>
 <p>Agent activity appears alongside runtime events such as fetch calls, KV reads, and D1 queries in <a href="/workers/observability/traces/">Workers traces</a>.</p>
 <h2 id="enable-tracing">Enable tracing</h2>
@@ -18,7 +29,7 @@
 <p><img src="/assets/upstream/images/workers-observability/agent_tracing_waterfall.png" alt="Trace waterfall showing nested agent, model, tool, and D1 spans" /></p>
 <h2 id="trace-structure">Trace structure</h2>
 <p>Each turn produces a trace made of spans, one for each timed operation:</p>
-<pre><code class="language-txt">invoke_agent {agent class}&#10;├── chat {model}&#10;└── execute_tool {tool}&#10;    └── tool_approval {tool}&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">invoke_agent {agent class}&#10;├── chat {model}&#10;└── execute_tool {tool}&#10;    └── tool_approval {tool}&#10;</code></pre>
 <p>The <code>invoke_agent</code> span covers the turn. Model calls, tool runs, and approvals appear as nested spans. Subagent work appears under the operation that invoked it.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/2644.md")
@@ -150,6 +161,6 @@
 <li>Session replay does not display images.</li>
 </ul>
 <h2 id="next-steps">Next steps</h2>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/operations/observability/diagnostics-channels/"><h3 id="card-diagnostics-channels-agents-runtime-operations-observability-diagnostics-channels">Diagnostics channels</h3><p>Subscribe to structured agent events for state changes, schedules, workflows, and more.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/operations/configuration/"><h3 id="card-configuration-agents-runtime-operations-configuration">Configuration</h3><p>wrangler.jsonc setup and deployment.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/agents-api/"><h3 id="card-agents-api-agents-runtime-agents-api">Agents API</h3><p>Complete API reference for the Agents SDK.</p></a></p>
+<div class="nb-card nb-link-card"><h3 id="card-diagnostics-channels-agents-runtime-operations-observability-diagnostics-channels"><a href="/agents/runtime/operations/observability/diagnostics-channels/">Diagnostics channels</a></h3><p>Subscribe to structured agent events for state changes, schedules, workflows, and more.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-configuration-agents-runtime-operations-configuration"><a href="/agents/runtime/operations/configuration/">Configuration</a></h3><p>wrangler.jsonc setup and deployment.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-agents-api-agents-runtime-agents-api"><a href="/agents/runtime/agents-api/">Agents API</a></h3><p>Complete API reference for the Agents SDK.</p></div>

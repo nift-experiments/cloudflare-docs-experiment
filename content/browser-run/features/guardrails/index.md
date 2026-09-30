@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/browser-run/features/guardrails/
+  description: Restrict HTTP and HTTPS requests by destination hostname.
+  full_title: Guardrails · Cloudflare Browser Run docs
+  head_html: <title>Guardrails · Cloudflare Browser Run docs</title><meta name="generator" content="Nift"><meta name="description" content="Restrict HTTP and HTTPS requests by destination hostname."><link rel="canonical" href="https://developers.cloudflare.com/browser-run/features/guardrails/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/browser-run/features/guardrails/index.md"><meta property="og:title" content="Guardrails · Cloudflare Browser Run docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Restrict HTTP and HTTPS requests by destination hostname."><meta property="og:url" content="https://developers.cloudflare.com/browser-run/features/guardrails/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Browser Run"><meta name="algolia_product_filter" content="Browser Run"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Browser Run"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/browser-run/features/guardrails/#page","headline":"Guardrails \u00b7 Cloudflare Browser Run docs","description":"Restrict HTTP and HTTPS requests by destination hostname.","url":"https://developers.cloudflare.com/browser-run/features/guardrails/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /browser-run/features/guardrails/
+  schema: 1
+---
 <p>Guardrails limit a Browser Run session's HTTP and HTTPS requests to permitted hostnames.</p>
 <p>This allows you to:</p>
 <ul>
@@ -53,7 +64,7 @@
 <p><a href="/browser-run/playwright/">Playwright</a> accepts the same <code>guardrails</code> object through its <code>launch()</code> options.</p>
 <h3 id="rest-api">REST API</h3>
 <p>Use the REST API to acquire a guarded session outside Workers. This request assumes <code>$ACCOUNT_ID</code> is set and <code>$CLOUDFLARE_API_TOKEN</code> has Browser Rendering Write permission.</p>
-<pre><code class="language-bash">curl --request POST --url https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/browser-rendering/devtools/browser</code></pre>
+<pre tabindex="0"><code class="language-bash">curl --request POST --url https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/browser-rendering/devtools/browser</code></pre>
 <aside class="nb-aside caution">
 <h3 class="nb-aside-title" id="compatibility">Compatibility</h3>
 @markup("md", "content/.markup/bodies/3712.md")
@@ -105,13 +116,13 @@
 <p>Domain sets help you reuse shared hostname lists across sessions. The <code>allowedDomainSets</code> property accepts the <code>common-cdns</code> set name and HTTPS URLs.</p>
 <h3 id="allow-common-cdn-hostnames">Allow common CDN hostnames</h3>
 <p>Use the Cloudflare-maintained <code>common-cdns</code> set when your page depends on assets served by common content delivery network (CDN) hostnames:</p>
-<pre><code class="language-json">{&#10;	&quot;allowedDomains&quot;: [&quot;example.com&quot;],&#10;	&quot;allowedDomainSets&quot;: [&quot;common-cdns&quot;]&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;allowedDomains&quot;: [&quot;example.com&quot;],&#10;	&quot;allowedDomainSets&quot;: [&quot;common-cdns&quot;]&#10;}&#10;</code></pre>
 <p>Cloudflare maintains the <code>common-cdns</code> set and may change it over time. Use <code>allowedDomains</code> or a hosted hostname list when you need a fixed set of permitted hostnames.</p>
 <h3 id="use-a-hosted-hostname-list">Use a hosted hostname list</h3>
 <p>Use an HTTPS URL for hostname patterns specific to your pages and dependencies:</p>
-<pre><code class="language-json">{&#10;	&quot;allowedDomainSets&quot;: [&quot;https://example.com/browser-run-hostnames.txt&quot;]&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;allowedDomainSets&quot;: [&quot;https://example.com/browser-run-hostnames.txt&quot;]&#10;}&#10;</code></pre>
 <p>For example, <code>browser-run-hostnames.txt</code> could contain:</p>
-<pre><code class="language-txt">example.com&#10;&#42;.example.com&#10;&#10;&#35; Third-party API&#10;api.example.net&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">example.com&#10;&#42;.example.com&#10;&#10;&#35; Third-party API&#10;api.example.net&#10;</code></pre>
 <p>The hosted list must meet these requirements:</p>
 <table>
 <thead>
@@ -148,7 +159,7 @@
 <p>An empty <code>allowedDomains</code> array blocks all HTTP and HTTPS requests. Use it for self-contained pages, such as rendering inline HTML to a screenshot or PDF.</p>
 <p>Inline content can render, but the browser cannot request external APIs or assets. Do not include any domain sets with this policy.</p>
 <p>Use this policy object as the <code>guardrails</code> value across supported integrations:</p>
-<pre><code class="language-json">{&#10;	&quot;allowedDomains&quot;: []&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;allowedDomains&quot;: []&#10;}&#10;</code></pre>
 <h2 id="verify-blocked-requests">Verify blocked requests</h2>
 <p>Use Puppeteer to request a hostname outside the allowlist. This example checks the response status and guardrail headers.</p>
 <div class="nb-type-script-example">

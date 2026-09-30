@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/pages/framework-guides/deploy-a-jekyll-site/
+  description: Deploy a Jekyll site to Cloudflare Pages.
+  full_title: Jekyll · Cloudflare Pages docs
+  head_html: <title>Jekyll · Cloudflare Pages docs</title><meta name="generator" content="Nift"><meta name="description" content="Deploy a Jekyll site to Cloudflare Pages."><link rel="canonical" href="https://developers.cloudflare.com/pages/framework-guides/deploy-a-jekyll-site/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/pages/framework-guides/deploy-a-jekyll-site/index.md"><meta property="og:title" content="Jekyll · Cloudflare Pages docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Deploy a Jekyll site to Cloudflare Pages."><meta property="og:url" content="https://developers.cloudflare.com/pages/framework-guides/deploy-a-jekyll-site/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Pages"><meta name="algolia_product_filter" content="Pages"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Pages"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/pages/framework-guides/deploy-a-jekyll-site/#page","headline":"Jekyll \u00b7 Cloudflare Pages docs","description":"Deploy a Jekyll site to Cloudflare Pages.","url":"https://developers.cloudflare.com/pages/framework-guides/deploy-a-jekyll-site/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /pages/framework-guides/deploy-a-jekyll-site/
+  schema: 1
+---
 <p><a href="https://jekyllrb.com/">Jekyll</a> is an open-source framework for creating websites, based around Markdown with Liquid templates. In this guide, you will create a new Jekyll application and deploy it using Cloudflare Pages. You use the <code>jekyll</code> CLI to create a new Jekyll site.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/11043.md")
@@ -5,14 +16,14 @@
 <h2 id="installing-jekyll">Installing Jekyll</h2>
 <p>Jekyll is written in Ruby, meaning that you will need a functioning Ruby installation, like <code>rbenv</code>, to install Jekyll.</p>
 <p>To install Ruby on your computer, follow the <a href="https://github.com/rbenv/rbenv#installation"><code>rbenv</code> installation instructions</a> and select a recent version of Ruby by running the <code>rbenv</code> command in your terminal. The Ruby version you install will also be used to configure the Pages deployment for your application.</p>
-<pre><code class="language-sh">rbenv install &lt;RUBY_VERSION&gt; # For example, 3.1.3&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">rbenv install &lt;RUBY_VERSION&gt; # For example, 3.1.3&#10;</code></pre>
 <p>With Ruby installed, you can install the <code>jekyll</code> Ruby gem:</p>
-<pre><code class="language-sh">gem install jekyll&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">gem install jekyll&#10;</code></pre>
 <h2 id="creating-a-new-project">Creating a new project</h2>
 <p>With Jekyll installed, you can create a new project running the <code>jekyll new</code> in your terminal:</p>
-<pre><code class="language-sh">jekyll new my-jekyll-site&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">jekyll new my-jekyll-site&#10;</code></pre>
 <p>Create a base <code>index.html</code> in your newly created folder to give your site content:</p>
-<pre><code class="language-html">&lt;!doctype html&gt;&#10;&lt;html&gt;&#10;	&lt;head&gt;&#10;		&lt;meta charset=&quot;utf-8&quot; /&gt;&#10;		&lt;title&gt;Hello from Cloudflare Pages&lt;/title&gt;&#10;	&lt;/head&gt;&#10;	&lt;body&gt;&#10;		&lt;h1&gt;Hello from Cloudflare Pages&lt;/h1&gt;&#10;	&lt;/body&gt;&#10;&lt;/html&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;!doctype html&gt;&#10;&lt;html&gt;&#10;	&lt;head&gt;&#10;		&lt;meta charset=&quot;utf-8&quot; /&gt;&#10;		&lt;title&gt;Hello from Cloudflare Pages&lt;/title&gt;&#10;	&lt;/head&gt;&#10;	&lt;body&gt;&#10;		&lt;h1&gt;Hello from Cloudflare Pages&lt;/h1&gt;&#10;	&lt;/body&gt;&#10;&lt;/html&gt;&#10;</code></pre>
 <p>Optionally, you may use a theme with your new Jekyll site if you would like to start with great styling defaults. For example, the <a href="https://github.com/mmistakes/minimal-mistakes"><code>minimal-mistakes</code></a> theme has a <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/#starting-from-jekyll-new">&quot;Starting from <code>jekyll new</code>&quot;</a> section to help you add the theme to your new site.</p>
 <h2 id="before-you-continue">Before you continue</h2>
 <p>All of the framework guides assume you already have a fundamental understanding of <a href="https://git-scm.com/">Git</a>. If you are new to Git, refer to this <a href="https://guides.github.com/introduction/git-handbook/">summarized Git handbook</a> on how to set up Git on your local machine.</p>
@@ -20,7 +31,7 @@
 <p>Refer to the <a href="https://guides.github.com/introduction/git-handbook/">GitHub documentation</a> and <a href="https://git-scm.com/book/en/v2">Git documentation</a> for more information.</p>
 <h2 id="create-a-github-repository">Create a GitHub repository</h2>
 <p>Create a new GitHub repository by visiting <a href="https://repo.new">repo.new</a>. After creating a new repository, go to your newly created project directory to prepare and push your local application to GitHub by running the following commands in your terminal:</p>
-<pre><code class="language-sh">git remote add origin https://github.com/&lt;your-gh-username&gt;/&lt;repository-name&gt;&#10;git branch -M main&#10;git push -u origin main&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">git remote add origin https://github.com/&lt;your-gh-username&gt;/&lt;repository-name&gt;&#10;git branch -M main&#10;git push -u origin main&#10;</code></pre>
 <p>If you are migrating an existing Jekyll project to Pages, confirm that your <code>Gemfile</code> is committed as part of your codebase. Pages will look at your Gemfile and run <code>bundle install</code> to install the required dependencies for your project, including the <code>jekyll</code> gem.</p>
 <h2 id="deploy-with-cloudflare-pages">Deploy with Cloudflare Pages</h2>
 <p>To deploy your site to Pages:</p>

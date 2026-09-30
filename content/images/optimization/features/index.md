@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/images/optimization/features/
+  description: Available Cloudflare Images optimization parameters for resizing, cropping, format conversion, and visual effects.
+  full_title: Features · Cloudflare Images docs
+  head_html: <title>Features · Cloudflare Images docs</title><meta name="generator" content="Nift"><meta name="description" content="Available Cloudflare Images optimization parameters for resizing, cropping, format conversion, and visual effects."><link rel="canonical" href="https://developers.cloudflare.com/images/optimization/features/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/images/optimization/features/index.md"><meta property="og:title" content="Features · Cloudflare Images docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Available Cloudflare Images optimization parameters for resizing, cropping, format conversion, and visual effects."><meta property="og:url" content="https://developers.cloudflare.com/images/optimization/features/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare Images"><meta name="algolia_product_filter" content="Cloudflare Images"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Cloudflare Images"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/images/optimization/features/#page","headline":"Features \u00b7 Cloudflare Images docs","description":"Available Cloudflare Images optimization parameters for resizing, cropping, format conversion, and visual effects.","url":"https://developers.cloudflare.com/images/optimization/features/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /images/optimization/features/
+  schema: 1
+---
 <p>Cloudflare enables developers to optimize images at scale by dynamically generating different versions in real time.</p>
 <p>The guide describes all of the parameters that can be used to resize, crop, manipulate, and apply visual effects to images.</p>
 <h2 id="how-to-apply-optimization">How to apply optimization</h2>
@@ -97,7 +108,7 @@
       <strong>Original</strong>
 </td>
 <td style="border:none;">
-<pre><code>  &lt;code&gt;blur=50&lt;/code&gt;&#10;</code></pre>
+<pre tabindex="0"><code>  &lt;code&gt;blur=50&lt;/code&gt;&#10;</code></pre>
 </td>
 </tr>
 </table>
@@ -143,10 +154,10 @@
       <strong>Original</strong>
 </td>
 <td style="border:none;">
-<pre><code>  &lt;code&gt;brightness=0.5&lt;/code&gt;&#10;</code></pre>
+<pre tabindex="0"><code>  &lt;code&gt;brightness=0.5&lt;/code&gt;&#10;</code></pre>
 </td>
 <td style="border:none;">
-<pre><code>  &lt;code&gt;brightness=2&lt;/code&gt;&#10;</code></pre>
+<pre tabindex="0"><code>  &lt;code&gt;brightness=2&lt;/code&gt;&#10;</code></pre>
 </td>
 </tr>
 </table>
@@ -184,10 +195,10 @@
       <strong>Original</strong>
 </td>
 <td style="border:none;">
-<pre><code>  &lt;code&gt;contrast=0.5&lt;/code&gt;&#10;</code></pre>
+<pre tabindex="0"><code>  &lt;code&gt;contrast=0.5&lt;/code&gt;&#10;</code></pre>
 </td>
 <td style="border:none;">
-<pre><code>  &lt;code&gt;contrast=2&lt;/code&gt;&#10;</code></pre>
+<pre tabindex="0"><code>  &lt;code&gt;contrast=2&lt;/code&gt;&#10;</code></pre>
 </td>
 </tr>
 </table>
@@ -209,10 +220,10 @@
 </tr>
 <tr style="border:none; background:none">
 <td style="border:none;">
-<pre><code>  &lt;code&gt;width=300,height=200,dpr=1&lt;/code&gt;&#10;</code></pre>
+<pre tabindex="0"><code>  &lt;code&gt;width=300,height=200,dpr=1&lt;/code&gt;&#10;</code></pre>
 </td>
 <td style="border:none;">
-<pre><code>  &lt;code&gt;width=300,height=200,dpr=2&lt;/code&gt;&#10;</code></pre>
+<pre tabindex="0"><code>  &lt;code&gt;width=300,height=200,dpr=2&lt;/code&gt;&#10;</code></pre>
 </td>
 </tr>
 </table>
@@ -495,10 +506,10 @@ Resizes the image to fit within the specified dimensions while preserving its or
       <strong>Original</strong>
 </td>
 <td style="border:none;">
-<pre><code>  &lt;code&gt;flip=h&lt;/code&gt;&#10;</code></pre>
+<pre tabindex="0"><code>  &lt;code&gt;flip=h&lt;/code&gt;&#10;</code></pre>
 </td>
 <td style="border:none;">
-<pre><code>  &lt;code&gt;flip=v&lt;/code&gt;&#10;</code></pre>
+<pre tabindex="0"><code>  &lt;code&gt;flip=v&lt;/code&gt;&#10;</code></pre>
 </td>
 </tr>
 </table>
@@ -521,7 +532,7 @@ Resizes the image to fit within the specified dimensions while preserving its or
 @input("content/.markup/bodies/9399.md")
 </div></div>
 <p>To use <code>format=auto</code> with a custom Worker, you need to parse the <code>Accept</code> header. Refer to <a href="/images/optimization/transformations/transform-via-workers/#an-example-worker">this example Worker</a> for a complete overview of how to set up an image transformation Worker.</p>
-<pre><code class="language-js">const accept = request.headers.get(&quot;accept&quot;);&#10;let image = {};&#10;&#10;if (/image\/avif/.test(accept)) {&#10;	image.format = &quot;avif&quot;;&#10;} else if (/image\/webp/.test(accept)) {&#10;	image.format = &quot;webp&quot;;&#10;}&#10;&#10;return fetch(url, { cf: { image } });&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">const accept = request.headers.get(&quot;accept&quot;);&#10;let image = {};&#10;&#10;if (/image\/avif/.test(accept)) {&#10;	image.format = &quot;avif&quot;;&#10;} else if (/image\/webp/.test(accept)) {&#10;	image.format = &quot;webp&quot;;&#10;}&#10;&#10;return fetch(url, { cf: { image } });&#10;</code></pre>
 <h3 id="gamma"><code>gamma</code></h3>
 <p>Adjusts the exposure of an image using a multiplier. Gamma controls the midtone brightness without affecting the darkest or lightest parts of the image.</p>
 <ul>
@@ -546,10 +557,10 @@ Resizes the image to fit within the specified dimensions while preserving its or
       <strong>Original</strong>
 </td>
 <td style="border:none;">
-<pre><code>  &lt;code&gt;gamma=0.5&lt;/code&gt;&#10;</code></pre>
+<pre tabindex="0"><code>  &lt;code&gt;gamma=0.5&lt;/code&gt;&#10;</code></pre>
 </td>
 <td style="border:none;">
-<pre><code>  &lt;code&gt;gamma=2&lt;/code&gt;&#10;</code></pre>
+<pre tabindex="0"><code>  &lt;code&gt;gamma=2&lt;/code&gt;&#10;</code></pre>
 </td>
 </tr>
 </table>
@@ -752,7 +763,7 @@ Sets the focal point (X,Y) so that the relative coordinates of the output image 
       <strong>Original</strong>
 </td>
 <td style="border:none;">
-<pre><code>  &lt;code&gt;rotate=180&lt;/code&gt;&#10;</code></pre>
+<pre tabindex="0"><code>  &lt;code&gt;rotate=180&lt;/code&gt;&#10;</code></pre>
 </td>
 </tr>
 </table>
@@ -784,10 +795,10 @@ Sets the focal point (X,Y) so that the relative coordinates of the output image 
       <strong>Original</strong>
 </td>
 <td style="border:none;">
-<pre><code>  &lt;code&gt;saturation=0&lt;/code&gt;&#10;</code></pre>
+<pre tabindex="0"><code>  &lt;code&gt;saturation=0&lt;/code&gt;&#10;</code></pre>
 </td>
 <td style="border:none;">
-<pre><code>  &lt;code&gt;saturation=2&lt;/code&gt;&#10;</code></pre>
+<pre tabindex="0"><code>  &lt;code&gt;saturation=2&lt;/code&gt;&#10;</code></pre>
 </td>
 </tr>
 </table>
@@ -811,7 +822,7 @@ Sets the focal point (X,Y) so that the relative coordinates of the output image 
       <strong>Original</strong>
 </td>
 <td style="border:none;">
-<pre><code>  &lt;code&gt;segment=foreground&lt;/code&gt;&#10;</code></pre>
+<pre tabindex="0"><code>  &lt;code&gt;segment=foreground&lt;/code&gt;&#10;</code></pre>
 </td>
 </tr>
 </table>
@@ -834,7 +845,7 @@ Sets the focal point (X,Y) so that the relative coordinates of the output image 
       <strong>Original</strong>
 </td>
 <td style="border:none;">
-<pre><code>  &lt;code&gt;sharpen=5&lt;/code&gt;&#10;</code></pre>
+<pre tabindex="0"><code>  &lt;code&gt;sharpen=5&lt;/code&gt;&#10;</code></pre>
 </td>
 </tr>
 </table>
@@ -848,7 +859,7 @@ Sets the focal point (X,Y) so that the relative coordinates of the output image 
 @markup("md", "content/.markup/bodies/9359.md")
 </aside>
 <p>To detect slow connections, enable any of the following client hints via HTTP in a header:</p>
-<pre><code class="language-txt">accept-ch: rtt, save-data, ect, downlink&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">accept-ch: rtt, save-data, ect, downlink&#10;</code></pre>
 <p><code>slow-connection-quality</code> applies when the client hint is present and any of the following conditions are met:</p>
 <ul>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/RTT">rtt</a>: Greater than 150ms.</li>

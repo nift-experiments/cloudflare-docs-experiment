@@ -1,10 +1,19 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/email-security/email-configuration/phish-submissions/
+  description: Submit missed phishing samples to Email security to improve detection models and threat coverage.
+  full_title: Phish submissions · Cloudflare Email security (formerly Area 1) docs
+  head_html: <title>Phish submissions · Cloudflare Email security (formerly Area 1) docs</title><meta name="generator" content="Nift"><meta name="description" content="Submit missed phishing samples to Email security to improve detection models and threat coverage."><meta name="robots" content="noindex"><link rel="canonical" href="https://developers.cloudflare.com/email-security/email-configuration/phish-submissions/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/email-security/email-configuration/phish-submissions/index.md"><meta property="og:title" content="Phish submissions · Cloudflare Email security (formerly Area 1) docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Submit missed phishing samples to Email security to improve detection models and threat coverage."><meta property="og:url" content="https://developers.cloudflare.com/email-security/email-configuration/phish-submissions/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Email security (formerly Area 1)"><meta name="algolia_product_filter" content="Email security (formerly Area 1)"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Email security (formerly Area 1)">
+  markdown: true
+  noindex: true
+  route: /email-security/email-configuration/phish-submissions/
+  schema: 1
+---
 <aside class="nb-aside caution">
 <h3 class="nb-aside-title" id="access-to-area-1">Access to Area 1</h3>
 @markup("md", "content/.markup/bodies/8555.md")
 </aside>
-<p>As part of your continuous email security posture, administrators and security analysts need to submit missed <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/8556.md")
-</div> samples to [Email security (formerly Area 1) Service Addresses](https://horizon.area1security.com/support/service-addresses/) so Cloudflare can process them and take necessary action.
+<p>As part of your continuous email security posture, administrators and security analysts need to submit missed <span class="nb-glossary-tooltip" title="phishing">phish</span> samples to <a href="https://horizon.area1security.com/support/service-addresses/">Email security (formerly Area 1) Service Addresses</a> so Cloudflare can process them and take necessary action.</p>
 <p>Sometimes phish is missed as Email security uses several techniques to make a detection. These include preemptively crawling the web to identify campaigns, machine learning, custom signatures, among others. In order for Email security to identify why phish was missed, we need to run the original samples through our module and identify why some of our modules did not score the sample high enough to elevate it to malicious.</p>
 <p>Submitting missed phish samples to Cloudflare is of paramount importance and necessary for continuous protection. Submitting missed phish samples helps Cloudflare improve our machine learning (ML) models, and alerts us of new attack vectors before they become prevalent.</p>
 <h2 id="how-to-submit-phish">How to submit phish</h2>

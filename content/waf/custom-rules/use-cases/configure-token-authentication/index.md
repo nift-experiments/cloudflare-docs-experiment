@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/waf/custom-rules/use-cases/configure-token-authentication/
+  description: Configure token-based authentication with custom rules.
+  full_title: Configure token authentication · Cloudflare Web Application Firewall (WAF) docs
+  head_html: <title>Configure token authentication · Cloudflare Web Application Firewall (WAF) docs</title><meta name="generator" content="Nift"><meta name="description" content="Configure token-based authentication with custom rules."><link rel="canonical" href="https://developers.cloudflare.com/waf/custom-rules/use-cases/configure-token-authentication/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/waf/custom-rules/use-cases/configure-token-authentication/index.md"><meta property="og:title" content="Configure token authentication · Cloudflare Web Application Firewall (WAF) docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Configure token-based authentication with custom rules."><meta property="og:url" content="https://developers.cloudflare.com/waf/custom-rules/use-cases/configure-token-authentication/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="WAF"><meta name="algolia_product_filter" content="WAF"><meta name="pcx_content_group" content="Application security"><meta name="pcx_content_type" content="Troubleshooting"><meta name="algolia_content_type" content="Troubleshooting"><meta name="pcx_additional_products" content="WAF"><meta name="pcx_tags" content="Authentication,Python"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/waf/custom-rules/use-cases/configure-token-authentication/#page","headline":"Configure token authentication \u00b7 Cloudflare Web Application Firewall (WAF) docs","description":"Configure token-based authentication with custom rules.","url":"https://developers.cloudflare.com/waf/custom-rules/use-cases/configure-token-authentication/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["Authentication","Python"]}</script>
+  markdown: true
+  noindex: false
+  route: /waf/custom-rules/use-cases/configure-token-authentication/
+  schema: 1
+---
 <p>Token authentication allows you to restrict access to documents, files, and media to select users without requiring them to register. This helps protect paid/restricted content from leeching and unauthorized sharing.</p>
 <p>There are two options to configure token authentication: via Cloudflare Workers or via custom rules.</p>
 <h2 id="option-1-configure-using-cloudflare-workers">Option 1: Configure using Cloudflare Workers</h2>
@@ -25,7 +36,7 @@
 <li>The token lifetime in seconds (for example, 3 hours = 10,800 seconds)</li>
 </ul>
 <p>Consider the following example URL:</p>
-<pre><code class="language-txt">downloads.example.com/images/cat.jpg?verify=1484063787-9JQB8vP1z0yc5DEBnH6JGWM3mBmvIeMrnnxFi3WtJLE%3D&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">downloads.example.com/images/cat.jpg?verify=1484063787-9JQB8vP1z0yc5DEBnH6JGWM3mBmvIeMrnnxFi3WtJLE%3D&#10;</code></pre>
 <p>Where:</p>
 <ul>
 <li><code>/images/cat.jpg</code> represents the path to the asset — the HMAC message to authenticate.</li>
@@ -37,7 +48,7 @@
 @markup("md", "content/.markup/bodies/15460.md")
 </aside>
 <p>The expression for the custom rule would be similar to the following:</p>
-<pre><code class="language-txt">(http.host eq &quot;downloads.example.com&quot; and not is_timed_hmac_valid_v0(&quot;mysecrettoken&quot;, http.request.uri, 10800, http.request.timestamp.sec, 8))&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">(http.host eq &quot;downloads.example.com&quot; and not is_timed_hmac_valid_v0(&quot;mysecrettoken&quot;, http.request.uri, 10800, http.request.timestamp.sec, 8))&#10;</code></pre>
 <p>The components of this example custom rule (using the previous example URL) include:</p>
 <ul>
 <li>Token secret key = <code>mysecrettoken</code></li>
@@ -48,7 +59,7 @@
 </ul>
 <p>The <a href="/ruleset-engine/rules-language/functions/#hmac-validation"><code>is_timed_hmac_valid_v0()</code></a> function compares the value of a MAC generated using the <code>mysecrettoken</code> secret key to the value encoded in <code>http.request.uri</code>.</p>
 <p>If the MAC values match and if the token has not expired yet, according to the following formula:</p>
-<pre><code class="language-txt">http.request.timestamp.sec &lt; (&lt;TIMESTAMP_ISSUED&gt; + 10800)&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">http.request.timestamp.sec &lt; (&lt;TIMESTAMP_ISSUED&gt; + 10800)&#10;</code></pre>
 <p>Then the token is valid and the <code>is_timed_hmac_valid_v0()</code> function returns <code>true</code>.</p>
 <hr />
 <h2 id="hmac-token-generation">HMAC token generation</h2>
@@ -57,9 +68,9 @@
 @input("content/.markup/bodies/15468.md")
 </div></div>
 <p>This will generate a URL parameter such as the following:</p>
-<pre><code class="language-txt">verify=1484063787-9JQB8vP1z0yc5DEBnH6JGWM3mBmvIeMrnnxFi3WtJLE%3D&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">verify=1484063787-9JQB8vP1z0yc5DEBnH6JGWM3mBmvIeMrnnxFi3WtJLE%3D&#10;</code></pre>
 <p>You will need to append this parameter to the URL you are protecting:</p>
-<pre><code class="language-txt">/images/cat.jpg?verify=1484063787-9JQB8vP1z0yc5DEBnH6JGWM3mBmvIeMrnnxFi3WtJLE%3D&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">/images/cat.jpg?verify=1484063787-9JQB8vP1z0yc5DEBnH6JGWM3mBmvIeMrnnxFi3WtJLE%3D&#10;</code></pre>
 <aside class="nb-aside caution">
 @markup("md", "content/.markup/bodies/15459.md")
 </aside>
@@ -79,13 +90,13 @@
 <p>You can protect an entire fixed-length URI path prefix with a single HMAC signature (it would also use the same secret). To achieve this, supply a URI path prefix (instead of the full URI path) and the original query string as the <a href="/ruleset-engine/rules-language/functions/#messagemac"><code>MessageMAC</code></a> argument for the <a href="/ruleset-engine/rules-language/functions/#hmac-validation"><code>is_timed_hmac_valid_v0()</code></a> function.</p>
 <p>Use the <a href="/ruleset-engine/rules-language/functions/#substring"><code>substring()</code></a> function to obtain the prefix from the full URI path.</p>
 <p>In the following example, the URI path prefix requiring a single HMAC signature is always 51 characters long (<code>x</code> is a character placeholder):</p>
-<pre><code class="language-txt">/case-studies/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">/case-studies/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/&#10;</code></pre>
 <p>In this case, you would need to use a different HMAC signature for every different URI path prefix of length 51.</p>
 <p>If you wanted to block requests for case study files failing the HMAC validation, you could create a custom rule similar to the following:</p>
 <div class="nb-example"><h3 class="nb-component-title" id="example">Example</h3>
 @markup("md", "content/.markup/bodies/15469.md")
 </div>
 <p>Example URI paths of valid incoming requests:</p>
-<pre><code class="language-txt">/case-studies/12345678-90ab-4cde-f012-3456789abcde/foobar-report.pdf?1755877101-5WOroVcDINdl2%2BQZxZFHJcJ6l%2Fep4HGIrX3DtSXzWO0%3D&#10;/case-studies/12345678-90ab-4cde-f012-3456789abcde/acme-corp.pdf?1755877101-5WOroVcDINdl2%2BQZxZFHJcJ6l%2Fep4HGIrX3DtSXzWO0%3D&#10;/case-studies/768bf477-22d5-4545-857d-b155510119ff/another-company-report.pdf?1755878057-jeMS5S1F3MIgxvL61UmiX4vODiWtuLfcPV6q%2B0Y3Rig%3D&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">/case-studies/12345678-90ab-4cde-f012-3456789abcde/foobar-report.pdf?1755877101-5WOroVcDINdl2%2BQZxZFHJcJ6l%2Fep4HGIrX3DtSXzWO0%3D&#10;/case-studies/12345678-90ab-4cde-f012-3456789abcde/acme-corp.pdf?1755877101-5WOroVcDINdl2%2BQZxZFHJcJ6l%2Fep4HGIrX3DtSXzWO0%3D&#10;/case-studies/768bf477-22d5-4545-857d-b155510119ff/another-company-report.pdf?1755878057-jeMS5S1F3MIgxvL61UmiX4vODiWtuLfcPV6q%2B0Y3Rig%3D&#10;</code></pre>
 <p>The first two URI paths can use the same HMAC signature because they share the same 51-character prefix (<code>/case-studies/12345678-90ab-4cde-f012-3456789abcde/</code>) that is validated by the custom rule.</p>
 <p>The third URI path needs a different HMAC signature, since the prefix is different.</p>

@@ -34,7 +34,7 @@ class TestImporter(unittest.TestCase):
   _,out=mod.convert(src,'fixture'); self.assertIn('nb-package-managers',out); self.assertIn('npm create vike@latest',out); self.assertIn('yarn create vike',out)
  def test_space_in_closing_tag(self):
   src='<GlossaryTooltip term="CAA record">CAA records</ GlossaryTooltip> end.\n'
-  _,out=mod.convert(src,'fixture'); self.assertIn('data-cf-component="GlossaryTooltip"',out)
+  _,out=mod.convert(src,'fixture'); self.assertIn('<span class="nb-glossary-tooltip"',out)
  def test_multiline_import_stripped(self):
   src='import {\n\tCardGrid,\n\tDescription,\n} from "~/components";\nimport { Foo } from "@cloudflare/realtimekit";\n\n<div class="nb-description">Body.</div>\n'
   _,out=mod.convert(src,'fixture'); self.assertNotIn('~/components',out); self.assertNotIn('realtimekit',out); self.assertIn('nb-description',out)
@@ -53,6 +53,13 @@ class TestImporter(unittest.TestCase):
  def test_video_components_materialize_iframes(self):
   src='import { YouTube, Stream } from "~/components";\n<YouTube id="abc" />\n<Stream id="def" title="Demo" thumbnail="https://example.com/poster.jpg" />\n'
   _,out=mod.convert(src,'fixture'); self.assertIn('<iframe src="https://www.youtube-nocookie.com/embed/abc"',out); self.assertIn('<iframe src="https://customer-1mwganm1ma0xgnmj.cloudflarestream.com/def/iframe',out); self.assertIn('title="Demo"',out)
+ def test_raw_iframe_gets_accessible_title(self):
+  _,out=mod.convert('<iframe src="https://example.com/embed"></iframe>','fixture')
+  self.assertIn('<iframe title="Embedded media" src="https://example.com/embed">',out)
+ def test_glossary_tooltip_preserves_inline_accessible_text(self):
+  src='import { GlossaryTooltip } from "~/components";\n<a href="/target/"><GlossaryTooltip term="LLM">language model</GlossaryTooltip></a>\n'
+  _,out=mod.convert(src,'fixture')
+  self.assertIn('<a href="/target/"><span class="nb-glossary-tooltip" title="LLM">language model</span></a>',out)
  def test_plan_materializes_availability_label(self):
   _,out=mod.convert('<Plan type="all" />\n','fixture'); self.assertIn('<div class="nb-plan">',out); self.assertIn('Available on all plans',out)
  def test_stream_timestamp_becomes_remote_thumbnail(self):
@@ -107,11 +114,11 @@ class TestImporter(unittest.TestCase):
  def test_nested_link_card_html_is_not_indented_code(self):
   src='<CardGrid>\n      <LinkCard title="Example" href="/example/" />\n</CardGrid>\n'
   _,_,bodies=self._conv(src); combined='\n'.join(bodies)
-  self.assertIn('\n<a class="nb-card nb-link-card"',combined)
-  self.assertNotIn('\n      <a class="nb-card nb-link-card"',combined)
+  self.assertIn('\n<div class="nb-card nb-link-card"',combined)
+  self.assertNotIn('\n      <div class="nb-card nb-link-card"',combined)
  def test_api_request_materializes_code_example(self):
   src='import { APIRequest } from "~/components";\n<APIRequest path="/accounts/{account_id}/access/groups" method="POST" />\n'
-  _,out=mod.convert(src,'fixture'); self.assertIn('<pre class="nb-api-request"><code class="language-bash">',out); self.assertIn('curl --request POST',out); self.assertIn('/accounts/{account_id}/access/groups',out)
+  _,out=mod.convert(src,'fixture'); self.assertIn('<pre tabindex="0" class="nb-api-request"><code class="language-bash">',out); self.assertIn('curl --request POST',out); self.assertIn('/accounts/{account_id}/access/groups',out)
  def test_unclosed_directive_auto_closes(self):
   src=':::caution[Warning]\nContent here without closing delimiter.\n'
   _,out=mod.convert(src,'fixture'); self.assertIn('nb-aside caution',out); self.assertNotIn(':::',out)
@@ -172,7 +179,7 @@ class TestImporter(unittest.TestCase):
   # closing fence indented deeper than the opener is not a CommonMark closer;
   # it must be pre-rendered so it cannot swallow following component HTML
   src='  ```txt ins="database_name"\n  postgres://USERNAME:PASSWORD@HOST\n   ```   \n\n<Details>\ncontent\n</Details>\n'
-  _,out,bodies=self._conv(src); self.assertIn('<pre><code class="language-txt">',out); self.assertIn('nb-details',out); self.assertIn('postgres://USERNAME',out)
+  _,out,bodies=self._conv(src); self.assertIn('<pre tabindex="0"><code class="language-txt">',out); self.assertIn('nb-details',out); self.assertIn('postgres://USERNAME',out)
  def test_multiline_html_tag_joined(self):
   src='<a\n\thref="https://x/"\n\ttarget="_blank"\n>\n\t<InlineBadge text="beta" />\n</a>\n'
   _,out,bodies=self._conv(src); self.assertIn('nb-badge',out); self.assertNotIn('&lt;a',out)
@@ -322,5 +329,5 @@ class TestImporter(unittest.TestCase):
  def test_wrangler_namespace_renders_commands_and_arguments(self):
   mod.configure_wrangler_commands({'d1': [{'command':'wrangler d1 create','metadata':{'description':'Create a database'},'args':{'name':{'description':'Database name','demandOption':True}},'positionalArgs':['name']}]})
   _,out,_=self._conv('<WranglerNamespace namespace="d1" />')
-  self.assertIn('d1 create',out); self.assertIn('<pre>',out); self.assertIn('Database name',out)
+  self.assertIn('d1 create',out); self.assertIn('<pre tabindex="0">',out); self.assertIn('Database name',out)
 if __name__=='__main__': unittest.main()

@@ -2787,6 +2787,8 @@
     "/security/llms-full.txt",
     "/security/llms.txt",
     "/security/overview/llms.txt",
+    "/sitemap-0.xml",
+    "/sitemap-index.xml",
     "/smart-shield/configuration/dedicated-egress-ips/llms.txt",
     "/smart-shield/llms-full.txt",
     "/smart-shield/llms.txt",

@@ -1,8 +1,15 @@
-<p>Cloudflare Snippets allow you to run short pieces of JavaScript code on Cloudflare's network to customize how requests and responses are handled for your website or application. With Snippets, you can modify HTTP response headers, implement <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/12781.md")
-</div> validation, perform complex <div class="nb-interactive-component" data-cf-component="GlossaryTooltip">
-@markup("md", "content/.markup/bodies/12782.md")
-</div>, and more.
+---
+cp9:
+  canonical: https://developers.cloudflare.com/rules/snippets/
+  description: Run lightweight JavaScript at the edge to modify requests and responses.
+  full_title: Cloudflare Snippets · Cloudflare Rules docs
+  head_html: <title>Cloudflare Snippets · Cloudflare Rules docs</title><meta name="generator" content="Nift"><meta name="description" content="Run lightweight JavaScript at the edge to modify requests and responses."><link rel="canonical" href="https://developers.cloudflare.com/rules/snippets/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/rules/snippets/index.md"><meta property="og:title" content="Cloudflare Snippets · Cloudflare Rules docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Run lightweight JavaScript at the edge to modify requests and responses."><meta property="og:url" content="https://developers.cloudflare.com/rules/snippets/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Rules"><meta name="algolia_product_filter" content="Rules"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Rules"><meta name="pcx_tags" content="Request modification,Response modification,Middleware"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/rules/snippets/#page","headline":"Cloudflare Snippets \u00b7 Cloudflare Rules docs","description":"Run lightweight JavaScript at the edge to modify requests and responses.","url":"https://developers.cloudflare.com/rules/snippets/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["Request modification","Response modification","Middleware"]}</script>
+  markdown: true
+  noindex: false
+  route: /rules/snippets/
+  schema: 1
+---
+<p>Cloudflare Snippets allow you to run short pieces of JavaScript code on Cloudflare's network to customize how requests and responses are handled for your website or application. With Snippets, you can modify HTTP response headers, implement <span class="nb-glossary-tooltip" title="JSON web token (JWT)">JWT</span> validation, perform complex <span class="nb-glossary-tooltip" title="redirect">redirects</span>, and more.</p>
 <p>For code samples addressing common use cases, refer to the <a href="/rules/snippets/examples/">Examples</a> section.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/12780.md")
@@ -62,9 +69,7 @@
 </tr>
 </tbody>
 </table>
-<p>Each <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/12783.md")
-</div> in a redirect chain counts against the subrequest limit. This means that if a subrequest was redirected it would count as two subrequests. To avoid issues, ensure that you make a subrequest to the end location of the redirect chain.
+<p>Each <span class="nb-glossary-tooltip" title="Snippets subrequest">subrequest</span> in a redirect chain counts against the subrequest limit. This means that if a subrequest was redirected it would count as two subrequests. To avoid issues, ensure that you make a subrequest to the end location of the redirect chain.</p>
 <p>Currently, <a href="/version-management/">Version Management</a> does not support Snippets.</p>
 <h2 id="limits">Limits</h2>
 <p>Cloudflare Snippets are designed for fast, lightweight logic that runs on the Cloudflare network. The following limits apply:</p>

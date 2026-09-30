@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/agents/runtime/agents-api/
+  description: Reference for the Agent base class, lifecycle hooks, SQL storage, and error handling in the Agents SDK.
+  full_title: Agents API · Cloudflare Agents docs
+  head_html: <title>Agents API · Cloudflare Agents docs</title><meta name="generator" content="Nift"><meta name="description" content="Reference for the Agent base class, lifecycle hooks, SQL storage, and error handling in the Agents SDK."><link rel="canonical" href="https://developers.cloudflare.com/agents/runtime/agents-api/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/agents/runtime/agents-api/index.md"><meta property="og:title" content="Agents API · Cloudflare Agents docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Reference for the Agent base class, lifecycle hooks, SQL storage, and error handling in the Agents SDK."><meta property="og:url" content="https://developers.cloudflare.com/agents/runtime/agents-api/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Agents"><meta name="algolia_product_filter" content="Agents"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Agents"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/agents/runtime/agents-api/#page","headline":"Agents API \u00b7 Cloudflare Agents docs","description":"Reference for the Agent base class, lifecycle hooks, SQL storage, and error handling in the Agents SDK.","url":"https://developers.cloudflare.com/agents/runtime/agents-api/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /agents/runtime/agents-api/
+  schema: 1
+---
 <p>This page provides an overview of the Agents SDK. For detailed documentation on each feature, refer to the linked reference pages.</p>
 <h2 id="overview">Overview</h2>
 <p>The Agents SDK provides two main APIs:</p>
@@ -24,13 +35,13 @@
 </aside>
 <h2 id="agent-class">Agent class</h2>
 <p>An Agent is a class that extends the base <code>Agent</code> class:</p>
-<pre><code class="language-ts">import { Agent, routeAgentRequest } from &quot;agents&quot;;&#10;&#10;export class MyAgent extends Agent&lt;Env, State&gt; {&#10;	// Your agent logic&#10;}&#10;&#10;export default {&#10;	async fetch(request: Request, env: Env) {&#10;		return (&#10;			(await routeAgentRequest(request, env)) ||&#10;			new Response(&quot;Not found&quot;, { status: 404 })&#10;		);&#10;	},&#10;} satisfies ExportedHandler&lt;Env&gt;;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { Agent, routeAgentRequest } from &quot;agents&quot;;&#10;&#10;export class MyAgent extends Agent&lt;Env, State&gt; {&#10;	// Your agent logic&#10;}&#10;&#10;export default {&#10;	async fetch(request: Request, env: Env) {&#10;		return (&#10;			(await routeAgentRequest(request, env)) ||&#10;			new Response(&quot;Not found&quot;, { status: 404 })&#10;		);&#10;	},&#10;} satisfies ExportedHandler&lt;Env&gt;;&#10;</code></pre>
 <p>Each Agent can have millions of instances. Each instance is a separate micro-server that runs independently, allowing horizontal scaling. Instances are addressed by a unique identifier (user ID, email, ticket number, etc.).</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/1858.md")
 </aside>
 <h2 id="lifecycle">Lifecycle</h2>
-<pre><code class="language-mermaid">flowchart TD&#10;    A[&quot;onStart&lt;br/&gt;(instance wakes up)&quot;] --&gt; B[&quot;onRequest&lt;br/&gt;(HTTP)&quot;]&#10;    A --&gt; C[&quot;onConnect&lt;br/&gt;(WebSocket)&quot;]&#10;    A --&gt; D[&quot;onEmail&quot;]&#10;    C --&gt; E[&quot;onMessage ↔ send()&lt;br/&gt;onError (on failure)&quot;]&#10;    E --&gt; F[&quot;onClose&quot;]&#10;</code></pre>
+<pre tabindex="0"><code class="language-mermaid">flowchart TD&#10;    A[&quot;onStart&lt;br/&gt;(instance wakes up)&quot;] --&gt; B[&quot;onRequest&lt;br/&gt;(HTTP)&quot;]&#10;    A --&gt; C[&quot;onConnect&lt;br/&gt;(WebSocket)&quot;]&#10;    A --&gt; D[&quot;onEmail&quot;]&#10;    C --&gt; E[&quot;onMessage ↔ send()&lt;br/&gt;onError (on failure)&quot;]&#10;    E --&gt; F[&quot;onClose&quot;]&#10;</code></pre>
 <table>
 <thead>
 <tr>
@@ -224,7 +235,7 @@
 </table>
 <h2 id="sql-api">SQL API</h2>
 <p>Each Agent instance has an embedded SQLite database accessed via <code>this.sql</code>:</p>
-<pre><code class="language-ts">// Create tables&#10;this.sql`CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, name TEXT)`;&#10;&#10;// Insert data&#10;this.sql`INSERT INTO users (id, name) VALUES (${id}, ${name})`;&#10;&#10;// Query data&#10;const users = this.sql&lt;User&gt;`SELECT * FROM users WHERE id = ${id}`;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// Create tables&#10;this.sql`CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, name TEXT)`;&#10;&#10;// Insert data&#10;this.sql`INSERT INTO users (id, name) VALUES (${id}, ${name})`;&#10;&#10;// Query data&#10;const users = this.sql&lt;User&gt;`SELECT * FROM users WHERE id = ${id}`;&#10;</code></pre>
 <p>For state that needs to sync with clients, use the <a href="/agents/runtime/lifecycle/state/">State API</a> instead.</p>
 <h2 id="client-side-api-reference">Client-side API reference</h2>
 <table>
@@ -265,10 +276,10 @@
 </table>
 <p>Module-level helper exports include <code>agentTool()</code> from <code>agents/agent-tools</code>, which converts a Think or <code>AIChatAgent</code> subclass into an AI SDK tool definition.</p>
 <h3 id="quick-example">Quick example</h3>
-<pre><code class="language-ts">import { useAgent } from &quot;agents/react&quot;;&#10;import type { MyAgent } from &quot;./server&quot;;&#10;&#10;function App() {&#10;	const agent = useAgent&lt;MyAgent, State&gt;({&#10;		agent: &quot;my-agent&quot;,&#10;		name: &quot;user-123&quot;,&#10;	});&#10;&#10;	// Call methods on the agent&#10;	agent.stub.someMethod();&#10;&#10;	// Update state (syncs to server and all clients)&#10;	agent.setState({ count: 1 });&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { useAgent } from &quot;agents/react&quot;;&#10;import type { MyAgent } from &quot;./server&quot;;&#10;&#10;function App() {&#10;	const agent = useAgent&lt;MyAgent, State&gt;({&#10;		agent: &quot;my-agent&quot;,&#10;		name: &quot;user-123&quot;,&#10;	});&#10;&#10;	// Call methods on the agent&#10;	agent.stub.someMethod();&#10;&#10;	// Update state (syncs to server and all clients)&#10;	agent.setState({ count: 1 });&#10;}&#10;</code></pre>
 <h2 id="chat-agents">Chat agents</h2>
 <p>For AI chat applications, extend <code>AIChatAgent</code> instead of <code>Agent</code>:</p>
-<pre><code class="language-ts">import { AIChatAgent } from &quot;@cloudflare/ai-chat&quot;;&#10;&#10;class ChatAgent extends AIChatAgent {&#10;	async onChatMessage(onFinish) {&#10;		// this.messages contains the conversation history&#10;		// Return a streaming response&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { AIChatAgent } from &quot;@cloudflare/ai-chat&quot;;&#10;&#10;class ChatAgent extends AIChatAgent {&#10;	async onChatMessage(onFinish) {&#10;		// this.messages contains the conversation history&#10;		// Return a streaming response&#10;	}&#10;}&#10;</code></pre>
 <p>Features include:</p>
 <ul>
 <li>Built-in message persistence</li>
@@ -278,12 +289,12 @@
 <p>Refer to <a href="/agents/examples/chat-agent/">Build a chat agent</a> for a complete tutorial.</p>
 <h2 id="routing">Routing</h2>
 <p>Agents are accessed via URL patterns:</p>
-<pre><code class="language-txt">https://your-worker.workers.dev/agents/:agent-name/:instance-name&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://your-worker.workers.dev/agents/:agent-name/:instance-name&#10;</code></pre>
 <p>Use <code>routeAgentRequest()</code> in your Worker to route requests:</p>
-<pre><code class="language-ts">import { routeAgentRequest } from &quot;agents&quot;;&#10;&#10;export default {&#10;	async fetch(request: Request, env: Env) {&#10;		return (&#10;			routeAgentRequest(request, env) ||&#10;			new Response(&quot;Not found&quot;, { status: 404 })&#10;		);&#10;	},&#10;} satisfies ExportedHandler&lt;Env&gt;;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { routeAgentRequest } from &quot;agents&quot;;&#10;&#10;export default {&#10;	async fetch(request: Request, env: Env) {&#10;		return (&#10;			routeAgentRequest(request, env) ||&#10;			new Response(&quot;Not found&quot;, { status: 404 })&#10;		);&#10;	},&#10;} satisfies ExportedHandler&lt;Env&gt;;&#10;</code></pre>
 <p>Refer to <a href="/agents/runtime/communication/routing/">Routing</a> for custom paths, CORS, and instance naming patterns.</p>
 <h2 id="next-steps">Next steps</h2>
-<p><a class="nb-card nb-link-card" href="/agents/getting-started/quick-start/"><h3 id="card-quick-start-agents-getting-started-quick-start">Quick start</h3><p>Build your first agent in about 10 minutes.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/operations/configuration/"><h3 id="card-configuration-agents-runtime-operations-configuration">Configuration</h3><p>Learn about wrangler.jsonc setup and deployment.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/communication/websockets/"><h3 id="card-websockets-agents-runtime-communication-websockets">WebSockets</h3><p>Real-time bidirectional communication with clients.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/examples/chat-agent/"><h3 id="card-build-a-chat-agent-agents-examples-chat-agent">Build a chat agent</h3><p>Build AI applications with AIChatAgent.</p></a></p>
+<div class="nb-card nb-link-card"><h3 id="card-quick-start-agents-getting-started-quick-start"><a href="/agents/getting-started/quick-start/">Quick start</a></h3><p>Build your first agent in about 10 minutes.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-configuration-agents-runtime-operations-configuration"><a href="/agents/runtime/operations/configuration/">Configuration</a></h3><p>Learn about wrangler.jsonc setup and deployment.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-websockets-agents-runtime-communication-websockets"><a href="/agents/runtime/communication/websockets/">WebSockets</a></h3><p>Real-time bidirectional communication with clients.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-build-a-chat-agent-agents-examples-chat-agent"><a href="/agents/examples/chat-agent/">Build a chat agent</a></h3><p>Build AI applications with AIChatAgent.</p></div>

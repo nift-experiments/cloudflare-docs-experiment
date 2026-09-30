@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/email-security/reference/how-we-detect-phish/
+  description: Learn how Email security uses web crawling, machine learning, and other techniques to detect phishing threats.
+  full_title: How we detect phish · Cloudflare Email security (formerly Area 1) docs
+  head_html: <title>How we detect phish · Cloudflare Email security (formerly Area 1) docs</title><meta name="generator" content="Nift"><meta name="description" content="Learn how Email security uses web crawling, machine learning, and other techniques to detect phishing threats."><meta name="robots" content="noindex"><link rel="canonical" href="https://developers.cloudflare.com/email-security/reference/how-we-detect-phish/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/email-security/reference/how-we-detect-phish/index.md"><meta property="og:title" content="How we detect phish · Cloudflare Email security (formerly Area 1) docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Learn how Email security uses web crawling, machine learning, and other techniques to detect phishing threats."><meta property="og:url" content="https://developers.cloudflare.com/email-security/reference/how-we-detect-phish/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Email security (formerly Area 1)"><meta name="algolia_product_filter" content="Email security (formerly Area 1)"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Email security (formerly Area 1)">
+  markdown: true
+  noindex: true
+  route: /email-security/reference/how-we-detect-phish/
+  schema: 1
+---
 <aside class="nb-aside note">
 <h3 class="nb-aside-title" id="area-1-has-been-renamed">Area 1 has been renamed</h3>
 @markup("md", "content/.markup/bodies/8466.md")
@@ -6,11 +17,7 @@
 <h3 class="nb-aside-title" id="access-to-area-1">Access to Area 1</h3>
 @markup("md", "content/.markup/bodies/8465.md")
 </aside>
-<p>Email Security (formerly Area 1) uses a variety of factors to determine whether a given email message, a web domain or URL, or specific network traffic is part of a <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/8467.md")
-</div> campaign (marked with a `Malicious` <div class="nb-interactive-component" data-cf-component="GlossaryTooltip">
-@markup("md", "content/.markup/bodies/8468.md")
-</div>) or other common campaigns (for example, `Spam`).
+<p>Email Security (formerly Area 1) uses a variety of factors to determine whether a given email message, a web domain or URL, or specific network traffic is part of a <span class="nb-glossary-tooltip" title="phishing">phishing</span> campaign (marked with a <code>Malicious</code> <span class="nb-glossary-tooltip" title="disposition">disposition</span>) or other common campaigns (for example, <code>Spam</code>).</p>
 <p>These small pattern assessments are dynamic in nature and — in many cases — no single one in and of itself will determine the final verdict. Instead, our automated systems use a combination of factors and non-factors to clearly distinguish between a valid phishing campaign and benign traffic.</p>
 <h2 id="activesensors">ActiveSensors</h2>
 <p>ActiveSensors is a proprietary sensor network that discovers emergent campaign infrastructure, and aggregates attack data from relay points that actors use to launch their threat campaign. Cloudflare's <a href="/directory/?product-group=Network+security">Network</a> and <a href="/directory/?product-group=Application+security">Application Security</a> provide early detection on phishing attacks, malware, URLs, domains, IPs, and ASNs from across the Internet.</p>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/tunnel/platform/system-requirements/
+  description: System requirements for running cloudflared.
+  full_title: System requirements · Cloudflare Docs
+  head_html: <title>System requirements · Cloudflare Docs</title><meta name="generator" content="Nift"><meta name="description" content="System requirements for running cloudflared."><link rel="canonical" href="https://developers.cloudflare.com/tunnel/platform/system-requirements/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/tunnel/platform/system-requirements/index.md"><meta property="og:title" content="System requirements · Cloudflare Docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="System requirements for running cloudflared."><meta property="og:url" content="https://developers.cloudflare.com/tunnel/platform/system-requirements/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare Tunnel"><meta name="algolia_product_filter" content="Cloudflare Tunnel"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Cloudflare Tunnel"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/tunnel/platform/system-requirements/#page","headline":"System requirements \u00b7 Cloudflare Docs","description":"System requirements for running cloudflared.","url":"https://developers.cloudflare.com/tunnel/platform/system-requirements/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /tunnel/platform/system-requirements/
+  schema: 1
+---
 <p><code>cloudflared</code> is lightweight enough to run on a Raspberry Pi or a data center server. Tunnel throughput is primarily limited by the number of ports configured in system software, not hardware.</p>
 <h2 id="baseline-recommendations">Baseline recommendations</h2>
 <p>Run a <code>cloudflared</code> <a href="/tunnel/configuration/#replicas-and-high-availability">replica</a> on two dedicated hosts per location with a minimum of 4 GB RAM and 4 CPU cores. Allocate 50,000 ports per host.</p>
@@ -28,9 +39,9 @@
 </tbody>
 </table>
 <p>To view your current ulimits, open a terminal and run:</p>
-<pre><code class="language-sh">ulimit -a&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">ulimit -a&#10;</code></pre>
 <p>To set the open files <code>ulimit</code>:</p>
-<pre><code class="language-sh">ulimit -n 70000&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">ulimit -n 70000&#10;</code></pre>
 <p>The command above sets the open files limit only for the current terminal session and will not persist after a reboot or new login. To apply this limit permanently, configure it using the persistent method appropriate for your operating system.</p>
 <h2 id="capacity-calculator">Capacity calculator</h2>
 <p>To estimate tunnel capacity requirements for your deployment:</p>

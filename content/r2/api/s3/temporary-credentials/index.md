@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/r2/api/s3/temporary-credentials/
+  description: Learn about temporary credentials in r2.
+  full_title: Temporary credentials · Cloudflare R2 docs
+  head_html: <title>Temporary credentials · Cloudflare R2 docs</title><meta name="generator" content="Nift"><meta name="description" content="Learn about temporary credentials in r2."><link rel="canonical" href="https://developers.cloudflare.com/r2/api/s3/temporary-credentials/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/r2/api/s3/temporary-credentials/index.md"><meta property="og:title" content="Temporary credentials · Cloudflare R2 docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Learn about temporary credentials in r2."><meta property="og:url" content="https://developers.cloudflare.com/r2/api/s3/temporary-credentials/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="R2"><meta name="algolia_product_filter" content="R2"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="R2"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/r2/api/s3/temporary-credentials/#page","headline":"Temporary credentials \u00b7 Cloudflare R2 docs","description":"Learn about temporary credentials in r2.","url":"https://developers.cloudflare.com/r2/api/s3/temporary-credentials/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /r2/api/s3/temporary-credentials/
+  schema: 1
+---
 <p>Temporary credentials are short-lived, scoped S3 credentials derived from an existing <a href="/r2/api/tokens/">R2 API token</a>. They authenticate with AWS Signature Version 4, the same as a long-lived token, but include a session token and expire automatically. The session token is sent with every request via the <code>X-Amz-Security-Token</code> header; all S3-compatible clients expose this as a standard session token credential field.</p>
 <p>Use temporary credentials to delegate access without issuing a long-lived token. For example, granting a mobile client read access to a single prefix for 15 minutes, or issuing per-request upload credentials scoped to one object.</p>
 <h2 id="choosing-an-approach">Choosing an approach</h2>
@@ -111,9 +122,9 @@
 <h3 id="paths">Paths</h3>
 <p>Restrict access to specific prefixes or objects within the bucket. Omit these fields to grant access to the entire bucket, subject to the permitted operations.</p>
 <p><strong>Temporary Credentials API:</strong> pass <code>prefixes</code> and <code>objects</code> as top-level fields on the request body.</p>
-<pre><code class="language-jsonc">{&#10;  &quot;prefixes&quot;: [&quot;uploads/user-123/&quot;],&#10;  &quot;objects&quot;: [&quot;shared/manifest.json&quot;]&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-jsonc">{&#10;  &quot;prefixes&quot;: [&quot;uploads/user-123/&quot;],&#10;  &quot;objects&quot;: [&quot;shared/manifest.json&quot;]&#10;}&#10;</code></pre>
 <p><strong>Local signing:</strong> set <code>paths.prefixPaths</code> and <code>paths.objectPaths</code> on the JWT payload.</p>
-<pre><code class="language-jsonc">{&#10;  &quot;paths&quot;: {&#10;    &quot;prefixPaths&quot;: [&quot;uploads/user-123/&quot;],&#10;    &quot;objectPaths&quot;: [&quot;shared/manifest.json&quot;]&#10;  }&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-jsonc">{&#10;  &quot;paths&quot;: {&#10;    &quot;prefixPaths&quot;: [&quot;uploads/user-123/&quot;],&#10;    &quot;objectPaths&quot;: [&quot;shared/manifest.json&quot;]&#10;  }&#10;}&#10;</code></pre>
 <ul>
 <li><code>prefixes</code> / <code>prefixPaths</code>: keys starting with any listed prefix.</li>
 <li><code>objects</code> / <code>objectPaths</code>: exact object keys.</li>
@@ -132,7 +143,7 @@
 <li><strong>Never ship your parent secret access key to a client.</strong> Local signing must happen in a trusted environment (such as your backend or a Worker).</li>
 </ul>
 <h2 id="related-resources">Related resources</h2>
-<p><a class="nb-card nb-link-card" href="/r2/examples/authenticate-r2-temp-credentials/"><h3 id="card-authenticate-against-r2-with-temporary-credentials-r2-examples-authenticate-r2-temp-credentials">Authenticate against R2 with temporary credentials</h3><p>End-to-end examples for both the Temporary Credentials API and local JWT signing.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/r2/api/s3/presigned-urls/"><h3 id="card-presigned-urls-r2-api-s3-presigned-urls">Presigned URLs</h3><p>Grant single-operation access to a specific object without issuing credentials.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/r2/api/tokens/"><h3 id="card-r2-api-tokens-r2-api-tokens">R2 API tokens</h3><p>Create the parent token that temporary credentials derive from.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/r2/api/error-codes/"><h3 id="card-error-codes-r2-api-error-codes">Error codes</h3><p>Authentication and authorization error codes returned by R2.</p></a></p>
+<div class="nb-card nb-link-card"><h3 id="card-authenticate-against-r2-with-temporary-credentials-r2-examples-authenticate-r2-temp-credentials"><a href="/r2/examples/authenticate-r2-temp-credentials/">Authenticate against R2 with temporary credentials</a></h3><p>End-to-end examples for both the Temporary Credentials API and local JWT signing.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-presigned-urls-r2-api-s3-presigned-urls"><a href="/r2/api/s3/presigned-urls/">Presigned URLs</a></h3><p>Grant single-operation access to a specific object without issuing credentials.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-r2-api-tokens-r2-api-tokens"><a href="/r2/api/tokens/">R2 API tokens</a></h3><p>Create the parent token that temporary credentials derive from.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-error-codes-r2-api-error-codes"><a href="/r2/api/error-codes/">Error codes</a></h3><p>Authentication and authorization error codes returned by R2.</p></div>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/fundamentals/api/how-to/account-owned-token-template/
+  description: Generate Cloudflare API tokens with pre-configured permissions using template URLs. Learn how to create and customize template URLs for any use case.
+  full_title: API token template URLs · Cloudflare Fundamentals docs
+  head_html: <title>API token template URLs · Cloudflare Fundamentals docs</title><meta name="generator" content="Nift"><meta name="description" content="Generate Cloudflare API tokens with pre-configured permissions using template URLs. Learn how to create and customize template URLs for any use case."><link rel="canonical" href="https://developers.cloudflare.com/fundamentals/api/how-to/account-owned-token-template/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/fundamentals/api/how-to/account-owned-token-template/index.md"><meta property="og:title" content="API token template URLs · Cloudflare Fundamentals docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Generate Cloudflare API tokens with pre-configured permissions using template URLs. Learn how to create and customize template URLs for any use case."><meta property="og:url" content="https://developers.cloudflare.com/fundamentals/api/how-to/account-owned-token-template/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare Fundamentals"><meta name="algolia_product_filter" content="Cloudflare Fundamentals"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_additional_products" content="Cloudflare Fundamentals,API documentation"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/fundamentals/api/how-to/account-owned-token-template/#page","headline":"API token template URLs \u00b7 Cloudflare Fundamentals docs","description":"Generate Cloudflare API tokens with pre-configured permissions using template URLs. Learn how to create and customize template URLs for any use case.","url":"https://developers.cloudflare.com/fundamentals/api/how-to/account-owned-token-template/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /fundamentals/api/how-to/account-owned-token-template/
+  schema: 1
+---
 <p>Use template URLs to generate Cloudflare API tokens with pre-configured permissions. Template URLs allow you to share token requirements with users without manually selecting permissions in the dashboard.</p>
 <p>Template URLs use query parameters to pre-fill the API token creation page in the Cloudflare dashboard. When a user opens a template URL, the dashboard automatically configures the specified permissions and settings.</p>
 <p>Cloudflare supports template URLs for both <a href="#user-token-url-format">user API tokens</a> and <a href="#account-token-url-format">account API tokens</a>. For more information on the difference between these token types, refer to <a href="/fundamentals/api/get-started/account-owned-tokens/">Account API tokens</a>.</p>
@@ -7,7 +18,7 @@
 <h2 id="user-token-url-format">User token URL format</h2>
 <p>User token template URLs open the token creation form at the user profile level (<code>/profile/api-tokens</code>). Tokens created this way are owned by the user.</p>
 <p>The basic template URL structure is:</p>
-<pre><code class="language-txt">https://dash.cloudflare.com/profile/api-tokens?permissionGroupKeys=[ENCODED_PERMISSIONS]&amp;accountId=*&amp;zoneId=all&amp;name=[TOKEN_NAME]&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://dash.cloudflare.com/profile/api-tokens?permissionGroupKeys=[ENCODED_PERMISSIONS]&amp;accountId=*&amp;zoneId=all&amp;name=[TOKEN_NAME]&#10;</code></pre>
 <h3 id="url-components">URL components</h3>
 <table>
 <thead>
@@ -43,7 +54,7 @@
 <h2 id="account-token-url-format">Account token URL format</h2>
 <p>Account token template URLs open the token creation form at the account level. Tokens created this way are owned by the account (service principal tokens) and are not tied to any individual user. Creating account tokens requires Super Administrator or Administrator permissions.</p>
 <p>The basic template URL structure is:</p>
-<pre><code class="language-txt">https://dash.cloudflare.com/?to=/:account/api-tokens&amp;permissionGroupKeys=[ENCODED_PERMISSIONS]&amp;name=[TOKEN_NAME]&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://dash.cloudflare.com/?to=/:account/api-tokens&amp;permissionGroupKeys=[ENCODED_PERMISSIONS]&amp;name=[TOKEN_NAME]&#10;</code></pre>
 <p>The <code>:account</code> segment is a placeholder. When a user opens the URL, the dashboard prompts them to select an account if they have access to more than one.</p>
 <h3 id="url-components-1">URL components</h3>
 <table>
@@ -72,7 +83,7 @@
 </aside>
 <h2 id="permission-format">Permission format</h2>
 <p>Both user token and account token template URLs use the same permission encoding. Permissions are encoded as a JSON array with the following structure:</p>
-<pre><code class="language-json">[{ &quot;key&quot;: &quot;permission_name&quot;, &quot;type&quot;: &quot;read|edit|revoke|run|purge&quot; }]&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">[{ &quot;key&quot;: &quot;permission_name&quot;, &quot;type&quot;: &quot;read|edit|revoke|run|purge&quot; }]&#10;</code></pre>
 <h3 id="permission-types">Permission types</h3>
 <table>
 <thead>
@@ -113,19 +124,19 @@
 <li>Create the permission JSON</li>
 </ol></h3>
 <p>Format your permissions as a JSON array:</p>
-<pre><code class="language-json">[&#10;	{ &quot;key&quot;: &quot;dns&quot;, &quot;type&quot;: &quot;edit&quot; },&#10;	{ &quot;key&quot;: &quot;analytics&quot;, &quot;type&quot;: &quot;read&quot; }&#10;]&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">[&#10;	{ &quot;key&quot;: &quot;dns&quot;, &quot;type&quot;: &quot;edit&quot; },&#10;	{ &quot;key&quot;: &quot;analytics&quot;, &quot;type&quot;: &quot;read&quot; }&#10;]&#10;</code></pre>
 <h3 id="3-url-encode-the-json"><ol start="3">
 <li>URL-encode the JSON</li>
 </ol></h3>
 <p>Use a URL encoder to convert the JSON string:</p>
-<pre><code class="language-text">%5B%7B%22key%22%3A%22dns%22%2C%22type%22%3A%22edit%22%7D%2C%7B%22key%22%3A%22analytics%22%2C%22type%22%3A%22read%22%7D%5D&#10;</code></pre>
+<pre tabindex="0"><code class="language-text">%5B%7B%22key%22%3A%22dns%22%2C%22type%22%3A%22edit%22%7D%2C%7B%22key%22%3A%22analytics%22%2C%22type%22%3A%22read%22%7D%5D&#10;</code></pre>
 <h3 id="4-build-the-complete-url"><ol start="4">
 <li>Build the complete URL</li>
 </ol></h3>
 <p>For a <strong>user token</strong>, combine all components into the final template URL:</p>
-<pre><code class="language-txt">https://dash.cloudflare.com/profile/api-tokens?permissionGroupKeys=[ENCODED_JSON]&amp;accountId=*&amp;zoneId=all&amp;name=Custom%20Token&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://dash.cloudflare.com/profile/api-tokens?permissionGroupKeys=[ENCODED_JSON]&amp;accountId=*&amp;zoneId=all&amp;name=Custom%20Token&#10;</code></pre>
 <p>For an <strong>account token</strong>, use the account-level path instead:</p>
-<pre><code class="language-txt">https://dash.cloudflare.com/?to=/:account/api-tokens&amp;permissionGroupKeys=[ENCODED_JSON]&amp;name=Custom%20Token&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://dash.cloudflare.com/?to=/:account/api-tokens&amp;permissionGroupKeys=[ENCODED_JSON]&amp;name=Custom%20Token&#10;</code></pre>
 <h2 id="permission-reference">Permission reference</h2>
 <p>Use this table to find permission keys for your custom templates.</p>
 <h3 id="account-permissions">Account permissions</h3>

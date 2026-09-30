@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/d1/reference/time-travel/
+  description: Restore a D1 database to any minute within the last 30 days using Time Travel point-in-time recovery.
+  full_title: Time Travel and backups · Cloudflare D1 docs
+  head_html: <title>Time Travel and backups · Cloudflare D1 docs</title><meta name="generator" content="Nift"><meta name="description" content="Restore a D1 database to any minute within the last 30 days using Time Travel point-in-time recovery."><link rel="canonical" href="https://developers.cloudflare.com/d1/reference/time-travel/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/d1/reference/time-travel/index.md"><meta property="og:title" content="Time Travel and backups · Cloudflare D1 docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Restore a D1 database to any minute within the last 30 days using Time Travel point-in-time recovery."><meta property="og:url" content="https://developers.cloudflare.com/d1/reference/time-travel/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="D1"><meta name="algolia_product_filter" content="D1"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="D1"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/d1/reference/time-travel/#page","headline":"Time Travel and backups \u00b7 Cloudflare D1 docs","description":"Restore a D1 database to any minute within the last 30 days using Time Travel point-in-time recovery.","url":"https://developers.cloudflare.com/d1/reference/time-travel/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /d1/reference/time-travel/
+  schema: 1
+---
 <p>Time Travel is D1's approach to backups and point-in-time-recovery, and allows you to restore a database to any minute within the last 30 days.</p>
 <ul>
 <li>You do not need to enable Time Travel. It is always on.</li>
@@ -10,9 +21,7 @@
 @markup("md", "content/.markup/bodies/7332.md")
 </aside>
 <h2 id="bookmarks">Bookmarks</h2>
-<p>Time Travel leverages D1's concept of a <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/7333.md")
-</div> to restore to a point in time.
+<p>Time Travel leverages D1's concept of a <span class="nb-glossary-tooltip" title="bookmark">bookmark</span> to restore to a point in time.</p>
 <ul>
 <li>Bookmarks older than 30 days are invalid and cannot be used as a restore point.</li>
 <li>Restoring a database to a specific bookmark does not remove or delete older bookmarks. For example, if you restore to a bookmark representing the state of your database 10 minutes ago, and determine that you needed to restore to an earlier point in time, you can still do so.</li>
@@ -33,17 +42,17 @@
 </ul>
 <h2 id="retrieve-a-bookmark">Retrieve a bookmark</h2>
 <p>You can retrieve a bookmark for the current timestamp by calling the <code>d1 info</code> command, which defaults to returning the current bookmark:</p>
-<pre><code class="language-sh">wrangler d1 time-travel info YOUR_DATABASE&#10;</code></pre>
-<pre><code class="language-sh">🚧 Time Traveling...&#10;⚠️ The current bookmark is &#x27;00000085-0000024c-00004c6d-8e61117bf38d7adb71b934ebbf891683&#x27;&#10;⚡️ To restore to this specific bookmark, run:&#10; `wrangler d1 time-travel restore YOUR_DATABASE --bookmark=00000085-0000024c-00004c6d-8e61117bf38d7adb71b934ebbf891683`&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">wrangler d1 time-travel info YOUR_DATABASE&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">🚧 Time Traveling...&#10;⚠️ The current bookmark is &#x27;00000085-0000024c-00004c6d-8e61117bf38d7adb71b934ebbf891683&#x27;&#10;⚡️ To restore to this specific bookmark, run:&#10; `wrangler d1 time-travel restore YOUR_DATABASE --bookmark=00000085-0000024c-00004c6d-8e61117bf38d7adb71b934ebbf891683`&#10;</code></pre>
 <p>To retrieve the bookmark for a timestamp in the past, pass the <code>--timestamp</code> flag with a valid Unix or RFC3339 timestamp:</p>
-<pre><code class="language-sh">wrangler d1 time-travel info YOUR_DATABASE --timestamp=&quot;2023-07-09T17:31:11+00:00&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">wrangler d1 time-travel info YOUR_DATABASE --timestamp=&quot;2023-07-09T17:31:11+00:00&quot;&#10;</code></pre>
 <h2 id="restore-a-database">Restore a database</h2>
 <p>To restore a database to a specific point-in-time:</p>
 <aside class="nb-aside caution">
 @markup("md", "content/.markup/bodies/7331.md")
 </aside>
-<pre><code class="language-sh">wrangler d1 time-travel restore YOUR_DATABASE --timestamp=UNIX_TIMESTAMP&#10;</code></pre>
-<pre><code class="language-sh">🚧 Restoring database YOUR_DATABASE from bookmark 00000080-ffffffff-00004c60-390376cb1c4dd679b74a19d19f5ca5be&#10;&#10;⚠️ This will overwrite all data in database YOUR_DATABASE.&#10;In-flight queries and transactions will be cancelled.&#10;&#10;✔ OK to proceed (y/N) … yes&#10;⚡️ Time travel in progress...&#10;✅ Database YOUR_DATABASE restored back to bookmark 00000080-ffffffff-00004c60-390376cb1c4dd679b74a19d19f5ca5be&#10;&#10;↩️ To undo this operation, you can restore to the previous bookmark: 00000085-ffffffff-00004c6d-2510c8b03a2eb2c48b2422bb3b33fad5&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">wrangler d1 time-travel restore YOUR_DATABASE --timestamp=UNIX_TIMESTAMP&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">🚧 Restoring database YOUR_DATABASE from bookmark 00000080-ffffffff-00004c60-390376cb1c4dd679b74a19d19f5ca5be&#10;&#10;⚠️ This will overwrite all data in database YOUR_DATABASE.&#10;In-flight queries and transactions will be cancelled.&#10;&#10;✔ OK to proceed (y/N) … yes&#10;⚡️ Time travel in progress...&#10;✅ Database YOUR_DATABASE restored back to bookmark 00000080-ffffffff-00004c60-390376cb1c4dd679b74a19d19f5ca5be&#10;&#10;↩️ To undo this operation, you can restore to the previous bookmark: 00000085-ffffffff-00004c6d-2510c8b03a2eb2c48b2422bb3b33fad5&#10;</code></pre>
 <p>Note that:</p>
 <ul>
 <li>Timestamps are converted to a deterministic, stable bookmark. The same timestamp will always represent the same bookmark.</li>
@@ -57,8 +66,8 @@
 <li>Restoring directly to a bookmark in the past, prior to your last restore.</li>
 </ul>
 <p>To fetch a bookmark from an earlier state:</p>
-<pre><code class="language-sh">wrangler d1 time-travel info YOUR_DATABASE&#10;</code></pre>
-<pre><code class="language-sh">🚧 Time Traveling...&#10;⚠️ The current bookmark is &#x27;00000085-0000024c-00004c6d-8e61117bf38d7adb71b934ebbf891683&#x27;&#10;⚡️ To restore to this specific bookmark, run:&#10; `wrangler d1 time-travel restore YOUR_DATABASE --bookmark=00000085-0000024c-00004c6d-8e61117bf38d7adb71b934ebbf891683`&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">wrangler d1 time-travel info YOUR_DATABASE&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">🚧 Time Traveling...&#10;⚠️ The current bookmark is &#x27;00000085-0000024c-00004c6d-8e61117bf38d7adb71b934ebbf891683&#x27;&#10;⚡️ To restore to this specific bookmark, run:&#10; `wrangler d1 time-travel restore YOUR_DATABASE --bookmark=00000085-0000024c-00004c6d-8e61117bf38d7adb71b934ebbf891683`&#10;</code></pre>
 <h2 id="export-d1-into-r2-using-workflows">Export D1 into R2 using Workflows</h2>
 <p>You can automatically export your D1 database into R2 storage via REST API and Cloudflare Workflows. This may be useful if you wish to store a state of your D1 database for longer than 30 days.</p>
 <p>Refer to the guide <a href="/workflows/examples/backup-d1/">Export and save D1 database</a>.</p>

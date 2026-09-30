@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/changelog/product/cache/
+  description: '2026-09-02'
+  full_title: cache changelog | Cloudflare Docs
+  head_html: <title>cache changelog | Cloudflare Docs</title><meta name="generator" content="Nift"><meta name="description" content="2026-09-02"><link rel="canonical" href="https://developers.cloudflare.com/changelog/product/cache/"><link rel="sitemap" href="/sitemap-index.xml"><meta property="og:title" content="cache changelog"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="2026-09-02"><meta property="og:url" content="https://developers.cloudflare.com/changelog/product/cache/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/changelog/product/cache/#page","headline":"cache changelog | Cloudflare Docs","description":"2026-09-02","url":"https://developers.cloudflare.com/changelog/product/cache/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: false
+  noindex: false
+  route: /changelog/product/cache/
+  schema: 1
+---
 <h1 id="changelog">Changelog</h1>
 
 <h2 id="configure-origin-range-requests-with-the-rulesets-api"><a href="/changelog/post/2026-09-02-origin-range-requests-rulesets-api/">Configure Origin Range Requests with the Rulesets API</a></h2>
@@ -5,7 +16,7 @@
 <p>The Rulesets API now supports Origin Range Requests in Cache Rules. This setting lets Cloudflare fetch large files from your origin in cache-aligned byte ranges. Cloudflare may expand a client range and issue several single-range origin requests.</p>
 <p>Set <code>origin_range_requests.mode</code> to <code>on</code>, <code>off</code>, or <code>default</code> for any traffic matched by a Cache Rule.</p>
 <p>To override Cloudflare's default Origin Range Requests behavior, set the mode to <code>off</code>. The following rule turns off generated origin range requests for all traffic without changing cache eligibility:</p>
-<pre><code class="language-json">{&#10;  &quot;expression&quot;: &quot;true&quot;,&#10;  &quot;action&quot;: &quot;set_cache_settings&quot;,&#10;  &quot;action_parameters&quot;: {&#10;    &quot;origin_range_requests&quot;: {&#10;      &quot;mode&quot;: &quot;off&quot;&#10;    }&#10;  }&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;  &quot;expression&quot;: &quot;true&quot;,&#10;  &quot;action&quot;: &quot;set_cache_settings&quot;,&#10;  &quot;action_parameters&quot;: {&#10;    &quot;origin_range_requests&quot;: {&#10;      &quot;mode&quot;: &quot;off&quot;&#10;    }&#10;  }&#10;}&#10;</code></pre>
 <p>Origin Range Requests do not make otherwise ineligible content cacheable. If your origin ignores <code>Range</code> and returns a complete <code>200 OK</code>, Cloudflare can use the response but must download the complete file. Origins should honor <code>Accept-Encoding: identity</code> and return consistent, unencoded partial responses.</p>
 <p>For configuration details and mode behavior, refer to <a href="/cache/how-to/cache-rules/settings/#origin-range-requests">Origin Range Requests in Cache Rules</a>. For client responses and the complete origin contract, refer to <a href="/cache/reference/range-requests/">Range request behavior</a>.</p>
 
@@ -189,7 +200,7 @@
 </ul>
 <h4 id="2025-11-25-audit-logs-for-cache-purge-events-example">Example</h4>
 <p>The detailed audit payload is visible within the Cloudflare Dashboard (under <strong>Manage Account</strong> &gt; <strong>Audit Logs</strong>) and via the API. Below is an example of the Audit Logs v2 payload structure:</p>
-<pre><code class="language-json">{&#10;  &quot;action&quot;: {&#10;    &quot;result&quot;: &quot;success&quot;,&#10;    &quot;type&quot;: &quot;create&quot;&#10;  },&#10;  &quot;actor&quot;: {&#10;    &quot;id&quot;: &quot;1234567890abcdef&quot;,&#10;    &quot;email&quot;: &quot;user@example.com&quot;,&#10;    &quot;type&quot;: &quot;user&quot;&#10;  },&#10;  &quot;resource&quot;: {&#10;    &quot;product&quot;: &quot;purge_cache&quot;,&#10;    &quot;request&quot;: {&#10;      &quot;files&quot;: [&#10;        &quot;https://example.com/images/logo.png&quot;,&#10;        &quot;https://example.com/css/styles.css&quot;&#10;      ]&#10;    }&#10;  },&#10;  &quot;zone&quot;: {&#10;    &quot;id&quot;: &quot;023e105f4ecef8ad9ca31a8372d0c353&quot;,&#10;    &quot;name&quot;: &quot;example.com&quot;&#10;  }&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;  &quot;action&quot;: {&#10;    &quot;result&quot;: &quot;success&quot;,&#10;    &quot;type&quot;: &quot;create&quot;&#10;  },&#10;  &quot;actor&quot;: {&#10;    &quot;id&quot;: &quot;1234567890abcdef&quot;,&#10;    &quot;email&quot;: &quot;user@example.com&quot;,&#10;    &quot;type&quot;: &quot;user&quot;&#10;  },&#10;  &quot;resource&quot;: {&#10;    &quot;product&quot;: &quot;purge_cache&quot;,&#10;    &quot;request&quot;: {&#10;      &quot;files&quot;: [&#10;        &quot;https://example.com/images/logo.png&quot;,&#10;        &quot;https://example.com/css/styles.css&quot;&#10;      ]&#10;    }&#10;  },&#10;  &quot;zone&quot;: {&#10;    &quot;id&quot;: &quot;023e105f4ecef8ad9ca31a8372d0c353&quot;,&#10;    &quot;name&quot;: &quot;example.com&quot;&#10;  }&#10;}&#10;</code></pre>
 <h4 id="2025-11-25-audit-logs-for-cache-purge-events-get-started">Get started</h4>
 <p>To get started, refer to the <a href="/fundamentals/account/account-security/audit-logs/">Audit Logs documentation</a>.</p>
 
@@ -202,7 +213,7 @@
 <h4 id="2025-11-07-cache-keys-for-cloudflare-trace-example-scenario">Example scenario</h4>
 <p>If you have a Cache Rule that segments content based on a specific cookie (for example, <code>user_region</code>), run a Trace with that cookie present to confirm the <code>user_region</code> value appears in the resulting cache key.</p>
 <p>The Trace response includes the cache key in the <code>cache</code> object:</p>
-<pre><code class="language-json">{&#10;  &quot;step_name&quot;: &quot;request&quot;,&#10;  &quot;type&quot;: &quot;cache&quot;,&#10;  &quot;matched&quot;: true,&#10;  &quot;public_name&quot;: &quot;Cache Parameters&quot;,&#10;  &quot;cache&quot;: {&#10;    &quot;key&quot;: {&#10;      &quot;zone_id&quot;: &quot;023e105f4ecef8ad9ca31a8372d0c353&quot;,&#10;      &quot;scheme&quot;: &quot;https&quot;,&#10;      &quot;host&quot;: &quot;example.com&quot;,&#10;      &quot;uri&quot;: &quot;/images/hero.jpg&quot;&#10;    },&#10;    &quot;key_string&quot;: &quot;023e105f4ecef8ad9ca31a8372d0c353::::https://example.com/images/hero.jpg:::::&quot;&#10;  }&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;  &quot;step_name&quot;: &quot;request&quot;,&#10;  &quot;type&quot;: &quot;cache&quot;,&#10;  &quot;matched&quot;: true,&#10;  &quot;public_name&quot;: &quot;Cache Parameters&quot;,&#10;  &quot;cache&quot;: {&#10;    &quot;key&quot;: {&#10;      &quot;zone_id&quot;: &quot;023e105f4ecef8ad9ca31a8372d0c353&quot;,&#10;      &quot;scheme&quot;: &quot;https&quot;,&#10;      &quot;host&quot;: &quot;example.com&quot;,&#10;      &quot;uri&quot;: &quot;/images/hero.jpg&quot;&#10;    },&#10;    &quot;key_string&quot;: &quot;023e105f4ecef8ad9ca31a8372d0c353::::https://example.com/images/hero.jpg:::::&quot;&#10;  }&#10;}&#10;</code></pre>
 <h4 id="2025-11-07-cache-keys-for-cloudflare-trace-get-started">Get started</h4>
 <p>To learn more, refer to the <a href="/rules/trace-request/">Trace documentation</a> and our guide on <a href="/cache/how-to/cache-keys/">Custom Cache Keys</a>.</p>
 
@@ -329,7 +340,7 @@
 <li><strong>Improved performance</strong>: Faster response times for cache HITs.</li>
 </ul>
 <h4 id="2025-01-08-smart-tiered-cache-for-load-balancing-example-workflow">Example workflow</h4>
-<pre><code class="language-txt">Load Balancing Pool: api-pool&#10;├── Origin 1: api-1.example.com&#10;├── Origin 2: api-2.example.com&#10;└── Origin 3: api-3.example.com&#10;    ↓&#10;Selected Upper Tier: [Optimal data center based on pool performance]&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">Load Balancing Pool: api-pool&#10;├── Origin 1: api-1.example.com&#10;├── Origin 2: api-2.example.com&#10;└── Origin 3: api-3.example.com&#10;    ↓&#10;Selected Upper Tier: [Optimal data center based on pool performance]&#10;</code></pre>
 <h4 id="2025-01-08-smart-tiered-cache-for-load-balancing-get-started">Get started</h4>
 <p>To get started, enable <a href="/cache/how-to/tiered-cache/">Smart Tiered Cache</a> on your zone and configure your <a href="/load-balancing/">Load Balancing Pool</a>.</p>
 
@@ -398,7 +409,7 @@
 <li>Referrer-specific content optimization is needed.</li>
 </ul>
 <h4 id="2024-11-07-shard-cache-by-cache-key-example-configuration">Example configuration</h4>
-<pre><code class="language-json">{&#10;  &quot;cache_key&quot;: {&#10;    &quot;custom_key&quot;: {&#10;      &quot;header&quot;: {&#10;        &quot;include&quot;: [&quot;accept-language&quot;, &quot;user-agent&quot;],&#10;        &quot;check_presence&quot;: [&quot;referer&quot;]&#10;      }&#10;    }&#10;  }&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;  &quot;cache_key&quot;: {&#10;    &quot;custom_key&quot;: {&#10;      &quot;header&quot;: {&#10;        &quot;include&quot;: [&quot;accept-language&quot;, &quot;user-agent&quot;],&#10;        &quot;check_presence&quot;: [&quot;referer&quot;]&#10;      }&#10;    }&#10;  }&#10;}&#10;</code></pre>
 <p>This configuration creates separate cache entries based on the <code>accept-language</code> and <code>user-agent</code> headers, while also considering whether the <code>referer</code> header is present.</p>
 <h4 id="2024-11-07-shard-cache-by-cache-key-get-started">Get started</h4>
 <p>To get started, refer to the <a href="/cache/how-to/cache-keys/">custom cache keys documentation</a>.</p>

@@ -1,7 +1,18 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/ssl/keyless-ssl/reference/metrics/
+  description: Prometheus metrics exposed by the gokeyless key server.
+  full_title: Key server metrics · Cloudflare SSL/TLS docs
+  head_html: <title>Key server metrics · Cloudflare SSL/TLS docs</title><meta name="generator" content="Nift"><meta name="description" content="Prometheus metrics exposed by the gokeyless key server."><link rel="canonical" href="https://developers.cloudflare.com/ssl/keyless-ssl/reference/metrics/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/ssl/keyless-ssl/reference/metrics/index.md"><meta property="og:title" content="Key server metrics · Cloudflare SSL/TLS docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Prometheus metrics exposed by the gokeyless key server."><meta property="og:url" content="https://developers.cloudflare.com/ssl/keyless-ssl/reference/metrics/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="SSL/TLS"><meta name="algolia_product_filter" content="SSL/TLS"><meta name="pcx_content_group" content="Application performance"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="SSL/TLS"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/ssl/keyless-ssl/reference/metrics/#page","headline":"Key server metrics \u00b7 Cloudflare SSL/TLS docs","description":"Prometheus metrics exposed by the gokeyless key server.","url":"https://developers.cloudflare.com/ssl/keyless-ssl/reference/metrics/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /ssl/keyless-ssl/reference/metrics/
+  schema: 1
+---
 <p>The gokeyless key server exposes a <a href="https://prometheus.io/">Prometheus</a> metrics endpoint that you can use to monitor signing performance, error rates, connection health, and certificate expiry. This endpoint can also be scraped by the OpenTelemetry Collector Prometheus receiver, making the metrics available to any OpenTelemetry-compatible backend.</p>
 <h2 id="metrics-endpoint">Metrics endpoint</h2>
 <p>By default, metrics are served at:</p>
-<pre><code class="language-txt">http://&lt;host&gt;:2406/metrics&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">http://&lt;host&gt;:2406/metrics&#10;</code></pre>
 <p>The port is configurable via the <code>metrics_port</code> key in your configuration file, the <code>--metrics-port</code> flag, or the <code>KEYLESS_METRICS_PORT</code> environment variable.</p>
 <p>The endpoint serves only <code>/metrics</code>. There are no additional HTTP endpoints such as <code>/health</code> or <code>/debug</code>.</p>
 <hr />
@@ -376,7 +387,7 @@
 <p><strong>Type:</strong> Histogram<br />
 <strong>Labels:</strong> <code>type</code>, <code>error</code> (same values as <a href="#keyless_request_exec_duration_per_opcode"><code>keyless_request_exec_duration_per_opcode</code></a>)</p>
 <p>Measures the total time to satisfy a request, from when the request packet is read off the wire to when the response bytes are written back to the client.</p>
-<pre><code class="language-txt">total_duration = exec_duration + response_write_time&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">total_duration = exec_duration + response_write_time&#10;</code></pre>
 <p>Both timestamps are captured after the connection semaphore is already held, so semaphore queue wait time is not included in either histogram. Under normal load, total duration and exec duration are approximately equal. A growing gap between them indicates slow writes back to the client — for example, network backpressure between the key server and the Cloudflare edge.</p>
 <hr />
 <h3 id="keyless-key-load-duration"><code>keyless_key_load_duration</code></h3>
@@ -490,17 +501,17 @@
 <hr />
 <h2 id="example-promql-queries">Example PromQL queries</h2>
 <h3 id="signing-throughput-by-key-type">Signing throughput by key type</h3>
-<pre><code class="language-txt">sum by (opcode) (rate(keyless_requests[1m]))&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">sum by (opcode) (rate(keyless_requests[1m]))&#10;</code></pre>
 <h3 id="error-rate-by-error-type">Error rate by error type</h3>
-<pre><code class="language-txt">sum by (error) (&#10;  rate(keyless_request_exec_duration_per_opcode_count{error!=&quot;no error&quot;}[5m])&#10;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">sum by (error) (&#10;  rate(keyless_request_exec_duration_per_opcode_count{error!=&quot;no error&quot;}[5m])&#10;)&#10;</code></pre>
 <h3 id="99th-percentile-signing-latency-for-rsa">99th percentile signing latency for RSA</h3>
-<pre><code class="language-txt">histogram_quantile(&#10;  0.99,&#10;  rate(keyless_request_exec_duration_per_opcode_bucket{type=&quot;rsa&quot;}[5m])&#10;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">histogram_quantile(&#10;  0.99,&#10;  rate(keyless_request_exec_duration_per_opcode_bucket{type=&quot;rsa&quot;}[5m])&#10;)&#10;</code></pre>
 <p>A value approaching 10 seconds indicates PKCS#11 session pool exhaustion. Refer to <a href="/ssl/keyless-ssl/reference/scaling-and-benchmarking/">Scaling and benchmarking</a> and your HSM documentation for guidance on increasing the session pool size.</p>
 <h3 id="99th-percentile-key-load-latency">99th percentile key load latency</h3>
-<pre><code class="language-txt">histogram_quantile(0.99, rate(keyless_key_load_duration_bucket[5m]))&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">histogram_quantile(0.99, rate(keyless_key_load_duration_bucket[5m]))&#10;</code></pre>
 <p>A spike here without a corresponding spike in exec duration suggests the keystore lookup itself is slow — a possible disk I/O issue or PKCS#11 object enumeration delay.</p>
 <h3 id="connection-failure-rate">Connection failure rate</h3>
-<pre><code class="language-txt">rate(keyless_failed_connection_total[5m])&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">rate(keyless_failed_connection_total[5m])&#10;</code></pre>
 <p>A sustained non-zero rate indicates network or TLS problems between the Cloudflare network and your key server.</p>
 <h3 id="alert-on-certificate-expiry-within-30-days">Alert on certificate expiry within 30 days</h3>
-<pre><code class="language-txt">(certificate_expiration_timestamp_seconds - time()) / 86400 &lt; 30&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">(certificate_expiration_timestamp_seconds - time()) / 86400 &lt; 30&#10;</code></pre>

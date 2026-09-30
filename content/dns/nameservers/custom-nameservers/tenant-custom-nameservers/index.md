@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/dns/nameservers/custom-nameservers/tenant-custom-nameservers/
+  description: With tenant-level custom nameservers, you can use the same custom nameservers for different zones and across different accounts, as long as the accounts are part of the [tenant](/tenant/). The domain or domains that provide the nameservers names do not have to exist as zones in Cloudflare.
+  full_title: Tenant custom nameservers · Cloudflare DNS docs
+  head_html: <title>Tenant custom nameservers · Cloudflare DNS docs</title><meta name="generator" content="Nift"><meta name="description" content="With tenant-level custom nameservers, you can use the same custom nameservers for different zones and across different accounts, as long as the accounts are part of the [tenant](/tenant/). The domain or domains that provide the nameservers names do not have to exist as zones in Cloudflare."><link rel="canonical" href="https://developers.cloudflare.com/dns/nameservers/custom-nameservers/tenant-custom-nameservers/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/dns/nameservers/custom-nameservers/tenant-custom-nameservers/index.md"><meta property="og:title" content="Tenant custom nameservers · Cloudflare DNS docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="With tenant-level custom nameservers, you can use the same custom nameservers for different zones and across different accounts, as long as the accounts are part of the [tenant](/tenant/). The domain or domains that provide the nameservers names do not have to exist as zones in Cloudflare."><meta property="og:url" content="https://developers.cloudflare.com/dns/nameservers/custom-nameservers/tenant-custom-nameservers/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="DNS"><meta name="algolia_product_filter" content="DNS"><meta name="pcx_content_group" content="Application performance"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="DNS"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/dns/nameservers/custom-nameservers/tenant-custom-nameservers/#page","headline":"Tenant custom nameservers \u00b7 Cloudflare DNS docs","description":"With tenant-level custom nameservers, you can use the same custom nameservers for different zones and across different accounts, as long as the accounts are part of the tenant. The domain or domains that provide the nameservers names do not have to exist as zones in Cloudflare.","url":"https://developers.cloudflare.com/dns/nameservers/custom-nameservers/tenant-custom-nameservers/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /dns/nameservers/custom-nameservers/tenant-custom-nameservers/
+  schema: 1
+---
 <p>Tenant custom nameservers (TCNS) allow you to define tenant-level custom nameservers and use them for different accounts within a Cloudflare tenant.</p>
 <p>TCNS are organized in different sets (<code>ns_set</code>) and TCNS names can be provided by any domain, even if the domain does not exist as a zone in Cloudflare.</p>
 <p>For instance, if the TCNS are <code>ns1.example.com</code> and <code>ns2.vanity.test</code>, the domains <code>example.com</code> and <code>vanity.test</code> are not required to be zones in Cloudflare.</p>
@@ -18,7 +29,7 @@
 <ol>
 <li>Use the endpoint <a href="/api/resources/dns/subresources/settings/subresources/zone/methods/edit/">Update DNS Settings for a Zone</a> and configure the <code>nameservers</code> object accordingly.</li>
 </ol>
-<pre><code class="language-txt">  &quot;nameservers&quot;: {&#10;    &quot;type&quot;: &quot;custom.tenant&quot;&#10;  }&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">  &quot;nameservers&quot;: {&#10;    &quot;type&quot;: &quot;custom.tenant&quot;&#10;  }&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/7869.md")
 </aside>
@@ -26,7 +37,7 @@
 <li>If you are <strong>not</strong> using <a href="/registrar/">Cloudflare Registrar</a>, update the nameservers at your registrar to use the TCNS names. If you are using <a href="/registrar/">Cloudflare Registrar</a>, no further action is needed.</li>
 </ol>
 <p>To make these TCNS the default namerservers for all new zones added to your account from now on, use the endpoint <a href="/api/resources/dns/subresources/settings/subresources/account/methods/edit/">Update DNS Settings for an Account</a>. Within the <code>zone_defaults</code> object, set the following:</p>
-<pre><code class="language-txt">&quot;zone_defaults&quot;: {&#10;  &quot;nameservers&quot;: {&#10;    &quot;type&quot;: &quot;custom.tenant&quot;&#10;  }&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">&quot;zone_defaults&quot;: {&#10;  &quot;nameservers&quot;: {&#10;    &quot;type&quot;: &quot;custom.tenant&quot;&#10;  }&#10;}&#10;</code></pre>
 <h3 id="disable-tenant-custom-nameservers-on-a-zone">Disable tenant custom nameservers on a zone</h3>
 <ul>
 <li>
@@ -42,7 +53,7 @@
 <ol>
 <li>Observe the <a href="#configuration-conditions">conditions</a> for <code>ns_name</code> and <code>ns_set</code>, and create TCNS in your tenant by using the following POST command:</li>
 </ol>
-<pre><code class="language-bash">curl https://api.cloudflare.com/client/v4/tenants/{tenant_id}/custom_ns \&#10;&#45;-header &quot;X-Auth-Email: &lt;EMAIL&gt;&quot; \&#10;&#45;-header &quot;X-Auth-Key: &lt;API_KEY&gt;&quot; \&#10;&#45;-header &quot;Content-Type: application/json&quot; \&#10;&#45;-data &#x27;{&#10;  &quot;ns_name&quot;: &quot;&lt;NS_NAME&gt;&quot;,&#10;  &quot;ns_set&quot;: &lt;SET&gt;&#10;}&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl https://api.cloudflare.com/client/v4/tenants/{tenant_id}/custom_ns \&#10;&#45;-header &quot;X-Auth-Email: &lt;EMAIL&gt;&quot; \&#10;&#45;-header &quot;X-Auth-Key: &lt;API_KEY&gt;&quot; \&#10;&#45;-header &quot;Content-Type: application/json&quot; \&#10;&#45;-data &#x27;{&#10;  &quot;ns_name&quot;: &quot;&lt;NS_NAME&gt;&quot;,&#10;  &quot;ns_set&quot;: &lt;SET&gt;&#10;}&#x27;&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/7868.md")
 </aside>
@@ -59,4 +70,4 @@
 </div>
 <h3 id="get-a-list-of-all-tcns-names">Get a list of all TCNS names</h3>
 <p>To get a list of all TCNS names in your tenant account, use the following API request:</p>
-<pre><code class="language-bash">curl https://api.cloudflare.com/client/v4/tenants/{tenant_id}/custom_ns \&#10;&#45;-header &quot;X-Auth-Email: &lt;EMAIL&gt;&quot; \&#10;&#45;-header &quot;X-Auth-Key: &lt;API_KEY&gt;&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl https://api.cloudflare.com/client/v4/tenants/{tenant_id}/custom_ns \&#10;&#45;-header &quot;X-Auth-Email: &lt;EMAIL&gt;&quot; \&#10;&#45;-header &quot;X-Auth-Key: &lt;API_KEY&gt;&quot;&#10;</code></pre>

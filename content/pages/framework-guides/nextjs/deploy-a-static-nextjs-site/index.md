@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/pages/framework-guides/nextjs/deploy-a-static-nextjs-site/
+  description: Deploy a static site built using Next.js to Cloudflare Pages
+  full_title: Get started · Cloudflare Pages docs
+  head_html: <title>Get started · Cloudflare Pages docs</title><meta name="generator" content="Nift"><meta name="description" content="Deploy a static site built using Next.js to Cloudflare Pages"><link rel="canonical" href="https://developers.cloudflare.com/pages/framework-guides/nextjs/deploy-a-static-nextjs-site/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/pages/framework-guides/nextjs/deploy-a-static-nextjs-site/index.md"><meta property="og:title" content="Get started · Cloudflare Pages docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Deploy a static site built using Next.js to Cloudflare Pages"><meta property="og:url" content="https://developers.cloudflare.com/pages/framework-guides/nextjs/deploy-a-static-nextjs-site/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Pages"><meta name="algolia_product_filter" content="Pages"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Pages"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/pages/framework-guides/nextjs/deploy-a-static-nextjs-site/#page","headline":"Get started \u00b7 Cloudflare Pages docs","description":"Deploy a static site built using Next.js to Cloudflare Pages","url":"https://developers.cloudflare.com/pages/framework-guides/nextjs/deploy-a-static-nextjs-site/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /pages/framework-guides/nextjs/deploy-a-static-nextjs-site/
+  schema: 1
+---
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/11087.md")
 </aside>
@@ -9,12 +20,12 @@
 <p>Refer to the <a href="https://guides.github.com/introduction/git-handbook/">GitHub documentation</a> and <a href="https://git-scm.com/book/en/v2">Git documentation</a> for more information.</p>
 <h2 id="select-your-next-js-project">Select your Next.js project</h2>
 <p>If you already have a Next.js project that you wish to deploy, ensure that it is <a href="https://nextjs.org/docs/app/building-your-application/deploying/static-exports">configured for static exports</a>, change to its directory, and proceed to the next step. Otherwise, use <code>create-next-app</code> to create a new Next.js project.</p>
-<pre><code class="language-sh">npx create-next-app --example with-static-export my-app&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx create-next-app --example with-static-export my-app&#10;</code></pre>
 <p>After creating your project, a new <code>my-app</code> directory will be generated using the official <a href="https://github.com/vercel/next.js/tree/canary/examples/with-static-export"><code>with-static-export</code></a> example as a template. Change to this directory to continue.</p>
-<pre><code class="language-sh">cd my-app&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cd my-app&#10;</code></pre>
 <h3 id="create-a-github-repository">Create a GitHub repository</h3>
 <p>Create a new GitHub repository by visiting <a href="https://repo.new">repo.new</a>. After creating a new repository, prepare and push your local application to GitHub by running the following commands in your terminal:</p>
-<pre><code class="language-sh">git remote add origin https://github.com/&lt;GH_USERNAME&gt;/&lt;REPOSITORY_NAME&gt;.git&#10;git branch -M main&#10;git push -u origin main&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">git remote add origin https://github.com/&lt;GH_USERNAME&gt;/&lt;REPOSITORY_NAME&gt;.git&#10;git branch -M main&#10;git push -u origin main&#10;</code></pre>
 <h3 id="deploy-your-application-to-cloudflare-pages">Deploy your application to Cloudflare Pages</h3>
 <p>To deploy your site to Pages:</p>
 <ol>

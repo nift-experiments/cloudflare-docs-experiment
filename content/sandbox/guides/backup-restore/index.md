@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/sandbox/guides/backup-restore/
+  description: Snapshot a sandbox directory to R2 and restore it later.
+  full_title: Backup and restore · Cloudflare Sandbox SDK docs
+  head_html: <title>Backup and restore · Cloudflare Sandbox SDK docs</title><meta name="generator" content="Nift"><meta name="description" content="Snapshot a sandbox directory to R2 and restore it later."><link rel="canonical" href="https://developers.cloudflare.com/sandbox/guides/backup-restore/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/sandbox/guides/backup-restore/index.md"><meta property="og:title" content="Backup and restore · Cloudflare Sandbox SDK docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Snapshot a sandbox directory to R2 and restore it later."><meta property="og:url" content="https://developers.cloudflare.com/sandbox/guides/backup-restore/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Sandbox SDK"><meta name="algolia_product_filter" content="Sandbox SDK"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Sandbox SDK"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/sandbox/guides/backup-restore/#page","headline":"Backup and restore \u00b7 Cloudflare Sandbox SDK docs","description":"Snapshot a sandbox directory to R2 and restore it later.","url":"https://developers.cloudflare.com/sandbox/guides/backup-restore/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /sandbox/guides/backup-restore/
+  schema: 1
+---
 <p>This guide shows you how to snapshot a sandbox directory to R2 and restore it later.</p>
 <p>Use backup and restore when a project directory such as <code>/workspace</code> should come back after the sandbox sleeps. For a separate persisted storage path, mount a bucket instead. If you mount a bucket over <code>/workspace</code>, the mount overlays files seeded by your image in production.</p>
 <p>For why production restore uses an overlay, refer to <a href="/sandbox/concepts/backup-restore/">Directory backups</a>.</p>
@@ -5,7 +16,7 @@
 <ol>
 <li>Create an R2 bucket:</li>
 </ol>
-<pre><code class="language-sh">npx wrangler r2 bucket create my-backup-bucket&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler r2 bucket create my-backup-bucket&#10;</code></pre>
 <ol start="2">
 <li>Add the <code>BACKUP_BUCKET</code> R2 binding and presigned URL settings to your Wrangler configuration:</li>
 </ol>
@@ -16,7 +27,7 @@
 <ol start="3">
 <li>Store R2 API credentials as secrets:</li>
 </ol>
-<pre><code class="language-sh">npx wrangler secret put R2_ACCESS_KEY_ID&#10;npx wrangler secret put R2_SECRET_ACCESS_KEY&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler secret put R2_ACCESS_KEY_ID&#10;npx wrangler secret put R2_SECRET_ACCESS_KEY&#10;</code></pre>
 <p>Create the token in the <a href="https://dash.cloudflare.com/">Cloudflare dashboard</a> under <strong>R2</strong> &gt; <strong>Overview</strong> &gt; <strong>Manage R2 API Tokens</strong>. Grant <strong>Object Read &amp; Write</strong> on the backup bucket.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/13488.md")
@@ -87,9 +98,9 @@
 <h2 id="fix-path-permissions">Fix path permissions</h2>
 <p><code>createBackup()</code> must read every file under the target directory. Files with mode <code>0600</code> or directories owned by another user cause <code>BackupCreateError</code>.</p>
 <p>Set permissions in the image when you can. <code>a+rX</code> adds read permission on files and execute permission on directories:</p>
-<pre><code class="language-dockerfile">RUN mkdir -p /home/sandbox &amp;&amp; chmod -R a+rX /home/sandbox&#10;</code></pre>
+<pre tabindex="0"><code class="language-dockerfile">RUN mkdir -p /home/sandbox &amp;&amp; chmod -R a+rX /home/sandbox&#10;</code></pre>
 <p>If a process creates restrictive files at runtime, fix them before the backup:</p>
-<pre><code class="language-ts">await sandbox.exec(&quot;chmod -R a+rX /home/sandbox/.claude&quot;);&#10;const backup = await sandbox.createBackup({ dir: &quot;/home/sandbox&quot; });&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">await sandbox.exec(&quot;chmod -R a+rX /home/sandbox/.claude&quot;);&#10;const backup = await sandbox.createBackup({ dir: &quot;/home/sandbox&quot; });&#10;</code></pre>
 <h2 id="handle-errors">Handle errors</h2>
 <div class="nb-type-script-example">
 @markup("md", "content/.markup/bodies/13502.md")

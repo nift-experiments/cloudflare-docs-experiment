@@ -1,16 +1,23 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/learning-paths/data-center-protection/configure-tunnels-routes/configure-tunnels/
+  description: Create GRE or IPsec tunnels for Magic Transit.
+  full_title: Configure tunnels · Cloudflare Learning Paths
+  head_html: <title>Configure tunnels · Cloudflare Learning Paths</title><meta name="generator" content="Nift"><meta name="description" content="Create GRE or IPsec tunnels for Magic Transit."><link rel="canonical" href="https://developers.cloudflare.com/learning-paths/data-center-protection/configure-tunnels-routes/configure-tunnels/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/learning-paths/data-center-protection/configure-tunnels-routes/configure-tunnels/index.md"><meta property="og:title" content="Configure tunnels · Cloudflare Learning Paths"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Create GRE or IPsec tunnels for Magic Transit."><meta property="og:url" content="https://developers.cloudflare.com/learning-paths/data-center-protection/configure-tunnels-routes/configure-tunnels/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Learning Paths"><meta name="algolia_product_filter" content="Learning Paths"><meta name="pcx_content_group" content="Docs collections"><meta name="pcx_content_type" content="Learning unit"><meta name="algolia_content_type" content="Learning unit"><meta name="pcx_additional_products" content="Magic Transit,DDoS Protection"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/learning-paths/data-center-protection/configure-tunnels-routes/configure-tunnels/#page","headline":"Configure tunnels \u00b7 Cloudflare Learning Paths","description":"Create GRE or IPsec tunnels for Magic Transit.","url":"https://developers.cloudflare.com/learning-paths/data-center-protection/configure-tunnels-routes/configure-tunnels/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /learning-paths/data-center-protection/configure-tunnels-routes/configure-tunnels/
+  schema: 1
+---
 <p>Cloudflare assigns an IPv4 anycast address to your account for use as the tunnel destination for your network's routers. You can find this address in the Cloudflare dashboard under <strong>Address Space</strong> &gt; <a href="https://dash.cloudflare.com/?to=/:account/ip-addresses/address-space"><strong>Leased IPs</strong></a>. To request additional endpoint addresses, contact your account team.</p>
 <p>Cloudflare handles failures on its network automatically by advertising your endpoint IP from multiple nodes across many globally distributed data centers. To handle failures on your network, configure two tunnels from separate routers.</p>
 <h2 id="before-you-begin">Before you begin</h2>
 <p>Before creating a tunnel, make sure you have the following information:</p>
 <ul>
 <li><strong>Cloudflare endpoint address</strong>: The anycast IP address assigned to your account. You can find it in the Cloudflare dashboard under <strong>Address Space</strong> &gt; <a href="https://dash.cloudflare.com/?to=/:account/ip-addresses/address-space"><strong>Leased IPs</strong></a>.</li>
-<li><strong>Customer endpoint IP</strong>: A public Internet routable IP address outside of the prefixes Cloudflare will advertise on your behalf (typically provided by your ISP). Not required if using <a href="/network-interconnect/">Cloudflare Network Interconnect</a> or for <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></li>
+<li><strong>Customer endpoint IP</strong>: A public Internet routable IP address outside of the prefixes Cloudflare will advertise on your behalf (typically provided by your ISP). Not required if using <a href="/network-interconnect/">Cloudflare Network Interconnect</a> or for <span class="nb-glossary-tooltip" title="IPsec tunnel">IPsec</span> tunnels (unless your router uses an <span class="nb-glossary-tooltip" title="Internet key exchange (IKE)">IKE</span> ID of type <code>ID_IPV4_ADDR</code>).</li>
+<li><strong>Interface address</strong>: A <code>/31</code> (recommended) or <code>/30</code> subnet from RFC 1918 private IP space (<code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code>) or <code>169.254.240.0/20</code>.</li>
 </ul>
-@markup("md", "content/.markup/bodies/9725.md")
-</div> tunnels (unless your router uses an <div class="nb-interactive-component" data-cf-component="GlossaryTooltip">
-@markup("md", "content/.markup/bodies/9726.md")
-</div> ID of type `ID_IPV4_ADDR`).
-- **Interface address**: A `/31` (recommended) or `/30` subnet from RFC 1918 private IP space (`10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) or `169.254.240.0/20`.
 <aside class="nb-aside caution">
 @markup("md", "content/.markup/bodies/9724.md")
 </aside>
@@ -57,9 +64,7 @@
 <h4 id="ipsec-supported-ciphers">IPsec supported ciphers</h4>
 <p>Refer to <a href="/magic-transit/reference/gre-ipsec-tunnels/#supported-configuration-parameters">supported ciphers for IPsec</a> for a complete list. IPsec tunnels only support Internet Key Exchange version 2 (IKEv2).</p>
 <h4 id="anti-replay-protection">Anti-replay protection</h4>
-<p>If you use Magic Transit and <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/9727.md")
-</div> IPsec tunnels, we recommend disabling anti-replay protection. Cloudflare disables this setting by default. However, you can enable it through the API or the Cloudflare dashboard for devices that do not support disabling it, including Cisco Meraki, Velocloud, and AWS VPN Gateway.
+<p>If you use Magic Transit and <span class="nb-glossary-tooltip" title="anycast">anycast</span> IPsec tunnels, we recommend disabling anti-replay protection. Cloudflare disables this setting by default. However, you can enable it through the API or the Cloudflare dashboard for devices that do not support disabling it, including Cisco Meraki, Velocloud, and AWS VPN Gateway.</p>
 <p>Refer to <a href="/magic-transit/reference/anti-replay-protection/">Anti-replay protection</a> for more information on this topic, or <a href="#add-ipsec-tunnel">Add IPsec tunnels</a> to learn how to enable this feature.</p>
 <h3 id="network-interconnect-cni">Network Interconnect (CNI)</h3>
 <p>Beyond GRE and IPsec tunnels, you can also use Network Interconnect (CNI) to onboard your traffic to Magic Transit. Refer to <a href="/magic-transit/network-interconnect/">Network Interconnect (CNI)</a> for more information.</p>

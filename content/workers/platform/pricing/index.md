@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/workers/platform/pricing/
+  description: Workers plans and pricing information.
+  full_title: Pricing · Cloudflare Workers docs
+  head_html: <title>Pricing · Cloudflare Workers docs</title><meta name="generator" content="Nift"><meta name="description" content="Workers plans and pricing information."><link rel="canonical" href="https://developers.cloudflare.com/workers/platform/pricing/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/workers/platform/pricing/index.md"><meta property="og:title" content="Pricing · Cloudflare Workers docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Workers plans and pricing information."><meta property="og:url" content="https://developers.cloudflare.com/workers/platform/pricing/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Workers"><meta name="algolia_product_filter" content="Workers"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Workers"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/workers/platform/pricing/#page","headline":"Pricing \u00b7 Cloudflare Workers docs","description":"Workers plans and pricing information.","url":"https://developers.cloudflare.com/workers/platform/pricing/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /workers/platform/pricing/
+  schema: 1
+---
 <p>By default, users have access to the Workers Free plan. The Workers Free plan includes limited usage of Workers, Pages Functions, Workers KV and Hyperdrive. Read more about the <a href="/workers/platform/limits/#account-plan-limits">Free plan limits</a>.</p>
 <p>The Workers Paid plan includes Workers, Pages Functions, Workers KV, Hyperdrive, and Durable Objects usage for a minimum charge of $5 USD per month for an account. The plan includes increased initial usage allotments, with clear charges for usage that exceeds the base plan. There are no additional charges for data transfer (egress) or throughput (bandwidth).</p>
 <p>All included usage is on a monthly basis.</p>
@@ -411,7 +422,7 @@ operations of that type will fail with an error.</p>
 </tbody>
 </table>
 <p>In most cases, it takes 3 operations to deliver a message: 1 write, 1 read, and 1 delete. Therefore, you can use the following formula to estimate your monthly bill:</p>
-<pre><code class="language-txt">((Number of Messages * 3) - 1,000,000) / 1,000,000  * $0.40&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">((Number of Messages * 3) - 1,000,000) / 1,000,000  * $0.40&#10;</code></pre>
 <p>Additionally:</p>
 <ul>
 <li>Each retry incurs a read operation. A batch of 10 messages that is retried would incur 10 operations for each retry.</li>

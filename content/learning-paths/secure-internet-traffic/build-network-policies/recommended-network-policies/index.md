@@ -1,17 +1,24 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/learning-paths/secure-internet-traffic/build-network-policies/recommended-network-policies/
+  description: Deploy recommended network security policies.
+  full_title: Recommended network policies · Cloudflare Learning Paths
+  head_html: <title>Recommended network policies · Cloudflare Learning Paths</title><meta name="generator" content="Nift"><meta name="description" content="Deploy recommended network security policies."><link rel="canonical" href="https://developers.cloudflare.com/learning-paths/secure-internet-traffic/build-network-policies/recommended-network-policies/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/learning-paths/secure-internet-traffic/build-network-policies/recommended-network-policies/index.md"><meta property="og:title" content="Recommended network policies · Cloudflare Learning Paths"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Deploy recommended network security policies."><meta property="og:url" content="https://developers.cloudflare.com/learning-paths/secure-internet-traffic/build-network-policies/recommended-network-policies/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Learning Paths"><meta name="algolia_product_filter" content="Learning Paths"><meta name="pcx_content_group" content="Docs collections"><meta name="pcx_content_type" content="Learning unit"><meta name="algolia_content_type" content="Learning unit"><meta name="pcx_additional_products" content="Gateway,Cloudflare One,Data Loss Prevention,CASB,Browser Isolation"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/learning-paths/secure-internet-traffic/build-network-policies/recommended-network-policies/#page","headline":"Recommended network policies \u00b7 Cloudflare Learning Paths","description":"Deploy recommended network security policies.","url":"https://developers.cloudflare.com/learning-paths/secure-internet-traffic/build-network-policies/recommended-network-policies/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /learning-paths/secure-internet-traffic/build-network-policies/recommended-network-policies/
+  schema: 1
+---
 <p>We recommend you add the following network policies to build an Internet and SaaS app security strategy for your organization.</p>
 <p>For additional commonly used network policy examples, refer to <a href="/cloudflare-one/traffic-policies/network-policies/common-policies/">Common network policies</a>. For more information on building network policies, refer to <a href="/cloudflare-one/traffic-policies/network-policies/">Network policies</a>.</p>
 <h2 id="quarantined-users-net-restricted-access">Quarantined-Users-NET-Restricted-Access</h2>
-<p>Restrict access for users included in an <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/10098.md")
-</div> user group for risky users. This policy ensures your security team can restrict traffic for users of whom malicious or suspicious activity was detected.
+<p>Restrict access for users included in an <span class="nb-glossary-tooltip" title="identity provider">identity provider (IdP)</span> user group for risky users. This policy ensures your security team can restrict traffic for users of whom malicious or suspicious activity was detected.</p>
 <div class="nb-tabs" data-nb-tabs data-nb-sync-key="dashPlusAPI"><div role="tablist" aria-label="Options" data-nb-tabs-list></div><div data-nb-tabs-panels>
 @input("content/.markup/bodies/10102.md")
 </div></div>
 <h2 id="posture-fail-net-restricted-access">Posture-Fail-NET-Restricted-Access</h2>
 <p>Restrict access for devices where baseline posture checks have not passed. If posture checks are integrated with service providers such as Crowdstrike or Intune via the API, this policy dynamically blocks access for devices that do not meet predetermined security requirements.</p>
-<p>Restrict access for users included in an <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/10103.md")
-</div> user group for risky users. This policy ensures your security team can restrict traffic for users of whom malicious or suspicious activity was detected.
+<p>Restrict access for users included in an <span class="nb-glossary-tooltip" title="identity provider">identity provider (IdP)</span> user group for risky users. This policy ensures your security team can restrict traffic for users of whom malicious or suspicious activity was detected.</p>
 <div class="nb-tabs" data-nb-tabs data-nb-sync-key="dashPlusAPI"><div role="tablist" aria-label="Options" data-nb-tabs-list></div><div data-nb-tabs-panels>
 @input("content/.markup/bodies/10107.md")
 </div></div>
@@ -22,9 +29,7 @@
 @input("content/.markup/bodies/10111.md")
 </div></div>
 <h2 id="all-net-internet-blocklist">All-NET-Internet-Blocklist</h2>
-<p>Block traffic to destination IPs, <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/10112.md")
-</div>, and SNI domains that are malicious or pose a threat to your organization.
+<p>Block traffic to destination IPs, <span class="nb-glossary-tooltip" title="Server Name Indication (SNI)">SNIs</span>, and SNI domains that are malicious or pose a threat to your organization.</p>
 <p>You can implement this policy by either creating custom blocklists or by using blocklists provided by threat intelligence partners or regional Computer Emergency and Response Teams (CERTs). Ideally, your CERTs can update the blocklist with an <a href="/security-center/intel-apis/">API automation</a> to provide real-time threat protection.</p>
 <div class="nb-tabs" data-nb-tabs data-nb-sync-key="dashPlusAPI"><div role="tablist" aria-label="Options" data-nb-tabs-list></div><div data-nb-tabs-panels>
 @input("content/.markup/bodies/10116.md")

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/durable-objects/best-practices/rules-of-durable-objects/
+  description: Design guidelines for building correct and effective Durable Objects applications, covering when and how to use them.
+  full_title: Rules of Durable Objects · Cloudflare Durable Objects docs
+  head_html: <title>Rules of Durable Objects · Cloudflare Durable Objects docs</title><meta name="generator" content="Nift"><meta name="description" content="Design guidelines for building correct and effective Durable Objects applications, covering when and how to use them."><link rel="canonical" href="https://developers.cloudflare.com/durable-objects/best-practices/rules-of-durable-objects/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/durable-objects/best-practices/rules-of-durable-objects/index.md"><meta property="og:title" content="Rules of Durable Objects · Cloudflare Durable Objects docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Design guidelines for building correct and effective Durable Objects applications, covering when and how to use them."><meta property="og:url" content="https://developers.cloudflare.com/durable-objects/best-practices/rules-of-durable-objects/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Durable Objects"><meta name="algolia_product_filter" content="Durable Objects"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Durable Objects"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/durable-objects/best-practices/rules-of-durable-objects/#page","headline":"Rules of Durable Objects \u00b7 Cloudflare Durable Objects docs","description":"Design guidelines for building correct and effective Durable Objects applications, covering when and how to use them.","url":"https://developers.cloudflare.com/durable-objects/best-practices/rules-of-durable-objects/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /durable-objects/best-practices/rules-of-durable-objects/
+  schema: 1
+---
 <p>Durable Objects provide a powerful primitive for building stateful, coordinated applications. Each Durable Object is a single-threaded, globally-unique instance with its own persistent storage. Understanding how to design around these properties is essential for building effective applications.</p>
 <p>This is a guidebook on how to build more effective and correct Durable Object applications.</p>
 <h2 id="when-to-use-durable-objects">When to use Durable Objects</h2>
@@ -62,7 +73,7 @@
 <p>When modeling your &quot;atom,&quot; factor in the expected request rate. If your use case exceeds these limits, shard your workload across multiple Durable Objects.</p>
 <p>For example, consider a real-time game with 50,000 concurrent players sending 10 updates per second. This generates 500,000 requests per second total. You would need 500-1,000 game session Durable Objects—not one global coordinator.</p>
 <p>Calculate your sharding requirements:</p>
-<pre><code>&#10;Required DOs = (Total requests/second) / (Requests per DO capacity)&#10;</code></pre>
+<pre tabindex="0"><code>&#10;Required DOs = (Total requests/second) / (Requests per DO capacity)&#10;</code></pre>
 <h3 id="use-deterministic-ids-for-predictable-routing">Use deterministic IDs for predictable routing</h3>
 <p>Use <code>getByName()</code> with meaningful, deterministic strings for consistent routing. The same input always produces the same Durable Object ID, ensuring requests for the same logical entity always reach the same instance.</p>
 <div class="nb-type-script-example">
@@ -266,7 +277,7 @@
 <p>Shutdown hooks or lifecycle callbacks that run before shutdown are not provided because Cloudflare cannot guarantee these hooks would execute in all cases, and external software may rely too heavily on these (unreliable) hooks.</p>
 <p>Instead of relying on shutdown hooks, you can regularly write to storage to recover gracefully from shutdowns.</p>
 <p>For example, if you are processing a stream of data and need to save your progress, write your position to storage as you go rather than waiting to persist it at the end:</p>
-<pre><code class="language-js">// Good: Write progress as you go&#10;async processData(data) {&#10;  data.forEach(async (item, index) =&gt; {&#10;    await this.processItem(item);&#10;    // Save progress frequently&#10;    await this.ctx.storage.put(&quot;lastProcessedIndex&quot;, index);&#10;  });&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">// Good: Write progress as you go&#10;async processData(data) {&#10;  data.forEach(async (item, index) =&gt; {&#10;    await this.processItem(item);&#10;    // Save progress frequently&#10;    await this.ctx.storage.put(&quot;lastProcessedIndex&quot;, index);&#10;  });&#10;}&#10;</code></pre>
 <p>While this may feel unintuitive, Durable Object storage writes are fast and synchronous, so you can persist state with minimal performance concerns.</p>
 <p>This approach ensures your Durable Object can safely resume from any point, even if it shuts down unexpectedly.</p>
 <h2 id="anti-patterns-to-avoid">Anti-patterns to avoid</h2>
@@ -284,7 +295,7 @@
 @markup("md", "content/.markup/bodies/8289.md")
 </div>
 <p>Configure Vitest in your <code>vitest.config.ts</code>:</p>
-<pre><code class="language-ts">import { cloudflareTest } from &quot;@cloudflare/vitest-plugin&quot;;&#10;import { defineConfig } from &quot;vitest/config&quot;;&#10;&#10;export default defineConfig({&#10;	plugins: [&#10;		cloudflareTest({&#10;			wrangler: { configPath: &quot;./wrangler.jsonc&quot; },&#10;		}),&#10;	],&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { cloudflareTest } from &quot;@cloudflare/vitest-plugin&quot;;&#10;import { defineConfig } from &quot;vitest/config&quot;;&#10;&#10;export default defineConfig({&#10;	plugins: [&#10;		cloudflareTest({&#10;			wrangler: { configPath: &quot;./wrangler.jsonc&quot; },&#10;		}),&#10;	],&#10;});&#10;</code></pre>
 <p>For data-schema changes, run schema migrations in the constructor using <code>blockConcurrencyWhile()</code>. For class renames or deletions, change the class entry in the <a href="/durable-objects/reference/durable-objects-migrations/"><code>exports</code></a> field of your Wrangler configuration file:</p>
 <div class="nb-wrangler-config">
 @markup("md", "content/.markup/bodies/8290.md")

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/bots/additional-configurations/sequence-rules/
+  description: Detect and mitigate bot traffic based on cookie-based request sequences.
+  full_title: Sequence rules · Cloudflare bot solutions docs
+  head_html: <title>Sequence rules · Cloudflare bot solutions docs</title><meta name="generator" content="Nift"><meta name="description" content="Detect and mitigate bot traffic based on cookie-based request sequences."><link rel="canonical" href="https://developers.cloudflare.com/bots/additional-configurations/sequence-rules/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/bots/additional-configurations/sequence-rules/index.md"><meta property="og:title" content="Sequence rules · Cloudflare bot solutions docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Detect and mitigate bot traffic based on cookie-based request sequences."><meta property="og:url" content="https://developers.cloudflare.com/bots/additional-configurations/sequence-rules/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Bots"><meta name="algolia_product_filter" content="Bots"><meta name="pcx_content_group" content="Application security"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Bots"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/bots/additional-configurations/sequence-rules/#page","headline":"Sequence rules \u00b7 Cloudflare bot solutions docs","description":"Detect and mitigate bot traffic based on cookie-based request sequences.","url":"https://developers.cloudflare.com/bots/additional-configurations/sequence-rules/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /bots/additional-configurations/sequence-rules/
+  schema: 1
+---
 <p><a href="/bots/additional-configurations/sequence-rules/">Sequence rules</a> uses cookies to track the order of requests a user has made and the time between requests and makes them available via <a href="/rules/">Cloudflare Rules</a>. This allows you to write rules that match valid or invalid sequences. The specific cookies used to validate sequences are called sequence cookies.</p>
 <aside class="nb-aside caution">
 <h3 class="nb-aside-title" id="431-error">`431` error</h3>
@@ -67,7 +78,7 @@
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/3530.md")
 </aside>
-<pre><code class="language-bash">curl --request PUT \&#10;https://api.cloudflare.com/client/v4/zones/{zone_id}/fraud_detection/sequence_cookies \&#10;&#45;-header &quot;Authorization: Bearer &lt;API_TOKEN&gt;&quot; \&#10;&#45;-header &quot;Content-Type: application/json&quot; \&#10;&#45;-data &#x27;{&quot;enabled&quot;: true}&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl --request PUT \&#10;https://api.cloudflare.com/client/v4/zones/{zone_id}/fraud_detection/sequence_cookies \&#10;&#45;-header &quot;Authorization: Bearer &lt;API_TOKEN&gt;&quot; \&#10;&#45;-header &quot;Content-Type: application/json&quot; \&#10;&#45;-data &#x27;{&quot;enabled&quot;: true}&#x27;&#10;</code></pre>
 <ol start="5">
 <li>Use the expression editor to write sequence or timing based rules via <a href="/waf/custom-rules/">custom rules</a>, <a href="/waf/rate-limiting-rules/">rate limiting rules</a>, or <a href="/rules/transform/">transform rules</a>. You can put these rules in log only mode to monitor.</li>
 </ol>
@@ -84,18 +95,18 @@
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/3528.md")
 </aside>
-<pre><code class="language-bash">curl --request PUT https://api.cloudflare.com/client/v4/zones/{zone_id}/fraud_detection/sequence_cookies \&#10;&#45;-header &quot;Authorization: Bearer &lt;API_TOKEN&gt;&quot; \&#10;&#45;-data &#x27;{&quot;enabled&quot;: false}&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl --request PUT https://api.cloudflare.com/client/v4/zones/{zone_id}/fraud_detection/sequence_cookies \&#10;&#45;-header &quot;Authorization: Bearer &lt;API_TOKEN&gt;&quot; \&#10;&#45;-data &#x27;{&quot;enabled&quot;: false}&#x27;&#10;</code></pre>
 <hr />
 <h2 id="rules-fields">Rules fields</h2>
 <p>Sequence rules introduces three new fields to Cloudflare Rules. All of these fields reference operations by their short ID. Accounts that have the Fraud Detection subscription can refer to the short ID by viewing the endpoint details via <strong>API Shield</strong> &gt; <strong>Endpoint Management</strong> in the Cloudflare dashboard. Accounts without Fraud Detection do not have access to this field.</p>
 <p>Cloudflare only stores up to the 10 most recent operations in a sequence for up to one hour. If there are more than 10 operations in the sequence, older operations will be dropped and will not be included in the following fields. Similarly, if an operation happened more than one hour ago, it will also not be included in the following fields.</p>
 <h3 id="example-rules">Example rules</h3>
 <p>The customer must request endpoint A before endpoint B.</p>
-<pre><code class="language-txt">cf.sequence.current_op eq &quot;bbbbbbbb&quot; and&#10;any(cf.sequence.previous_ops[*] == &quot;aaaaaaaa&quot;)&#10;</code></pre>
-<pre><code class="language-txt">cf.sequence.current_op eq &quot;bbbbbbbb&quot; and&#10;not any(cf.sequence.previous_ops[*] == &quot;aaaaaaaa&quot;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">cf.sequence.current_op eq &quot;bbbbbbbb&quot; and&#10;any(cf.sequence.previous_ops[*] == &quot;aaaaaaaa&quot;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">cf.sequence.current_op eq &quot;bbbbbbbb&quot; and&#10;not any(cf.sequence.previous_ops[*] == &quot;aaaaaaaa&quot;)&#10;</code></pre>
 <p>Customer must request endpoint A at least one second before endpoint B.</p>
-<pre><code class="language-txt">cf.sequence.current_op eq &quot;bbbbbbbb&quot; and&#10;cf.sequence.msec_since_op[&quot;aaaaaaaa&quot;] ge 1000&#10;</code></pre>
-<pre><code class="language-txt">cf.sequence.current_op eq &quot;bbbbbbbb&quot; and&#10;not cf.sequence.msec_since_op[&quot;aaaaaaaa&quot;] ge 1000&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">cf.sequence.current_op eq &quot;bbbbbbbb&quot; and&#10;cf.sequence.msec_since_op[&quot;aaaaaaaa&quot;] ge 1000&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">cf.sequence.current_op eq &quot;bbbbbbbb&quot; and&#10;not cf.sequence.msec_since_op[&quot;aaaaaaaa&quot;] ge 1000&#10;</code></pre>
 <hr />
 <h2 id="limitations">Limitations</h2>
 <p>Cloudflare only supports HTTPS requests since our cookies set the <code>Secure</code> attribute.</p>

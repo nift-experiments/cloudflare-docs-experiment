@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/load-balancing/additional-options/load-balancing-rules/reference/
+  description: Fields and operators for load balancing rule expressions.
+  full_title: Supported fields and operators · Cloudflare Load Balancing docs
+  head_html: <title>Supported fields and operators · Cloudflare Load Balancing docs</title><meta name="generator" content="Nift"><meta name="description" content="Fields and operators for load balancing rule expressions."><link rel="canonical" href="https://developers.cloudflare.com/load-balancing/additional-options/load-balancing-rules/reference/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/load-balancing/additional-options/load-balancing-rules/reference/index.md"><meta property="og:title" content="Supported fields and operators · Cloudflare Load Balancing docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Fields and operators for load balancing rule expressions."><meta property="og:url" content="https://developers.cloudflare.com/load-balancing/additional-options/load-balancing-rules/reference/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Load Balancing"><meta name="algolia_product_filter" content="Load Balancing"><meta name="pcx_content_group" content="Application performance"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Load Balancing"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/load-balancing/additional-options/load-balancing-rules/reference/#page","headline":"Supported fields and operators \u00b7 Cloudflare Load Balancing docs","description":"Fields and operators for load balancing rule expressions.","url":"https://developers.cloudflare.com/load-balancing/additional-options/load-balancing-rules/reference/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /load-balancing/additional-options/load-balancing-rules/reference/
+  schema: 1
+---
 <p>The fields that are supported by load balancing rules depend on whether Cloudflare proxies the traffic going through your load balancer or not.</p>
 <p>If you use the wrong set of fields, you might see unexpected behaviors. For best results, use the fields associated with your traffic's <a href="/load-balancing/understand-basics/proxy-modes/">proxy status</a>.</p>
 <p>Also, some Load Balancing rules fields are available on the Expression Builder - as described in <a href="/load-balancing/additional-options/load-balancing-rules/expressions/#working-with-expressions">Load Balancing expressions</a> - while others can only be configured manually, via API or <a href="/load-balancing/additional-options/load-balancing-rules/expressions/#expression-editor">Expression Editor</a></p>
@@ -341,7 +352,7 @@
         <p>
         Example Values:
             <ul>
-<pre><code>          &lt;li&gt;&lt;code class=&quot;InlineCode&quot;&gt;HTTP/1.1&lt;/code&gt;&lt;/li&gt;&#10;          &lt;li&gt;&lt;code class=&quot;InlineCode&quot;&gt;HTTP/3&lt;/code&gt;&lt;/li&gt;&#10;&#10;        &lt;/ul&gt;&#10;    &lt;/p&gt;&#10;</code></pre>
+<pre tabindex="0"><code>          &lt;li&gt;&lt;code class=&quot;InlineCode&quot;&gt;HTTP/1.1&lt;/code&gt;&lt;/li&gt;&#10;          &lt;li&gt;&lt;code class=&quot;InlineCode&quot;&gt;HTTP/3&lt;/code&gt;&lt;/li&gt;&#10;&#10;        &lt;/ul&gt;&#10;    &lt;/p&gt;&#10;</code></pre>
 </td>
 </tr>
 </tbody>
@@ -428,7 +439,7 @@
 				</p>
 				<p>Example Values:</p>
 				<ul>
-<pre><code>				&lt;li&gt;&#10;					&lt;code class=&quot;InlineCode&quot;&gt;1&lt;/code&gt;&amp;nbsp;(A record)&#10;				&lt;/li&gt;&#10;				&lt;li&gt;&#10;					&lt;code class=&quot;InlineCode&quot;&gt;28&lt;/code&gt;&amp;nbsp;(AAAA record)&#10;				&lt;/li&gt;&#10;&#10;			&lt;/ul&gt;&#10;</code></pre>
+<pre tabindex="0"><code>				&lt;li&gt;&#10;					&lt;code class=&quot;InlineCode&quot;&gt;1&lt;/code&gt;&amp;nbsp;(A record)&#10;				&lt;/li&gt;&#10;				&lt;li&gt;&#10;					&lt;code class=&quot;InlineCode&quot;&gt;28&lt;/code&gt;&amp;nbsp;(AAAA record)&#10;				&lt;/li&gt;&#10;&#10;			&lt;/ul&gt;&#10;</code></pre>
 </td>
 </tr>
 <tr id="field-dns-rr-opt-client">

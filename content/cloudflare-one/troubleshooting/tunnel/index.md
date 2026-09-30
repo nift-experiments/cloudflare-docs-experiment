@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/troubleshooting/tunnel/
+  description: Tunnel for Zero Trust.
+  full_title: Tunnel · Cloudflare One docs
+  head_html: <title>Tunnel · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="Tunnel for Zero Trust."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/troubleshooting/tunnel/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/troubleshooting/tunnel/index.md"><meta property="og:title" content="Tunnel · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Tunnel for Zero Trust."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/troubleshooting/tunnel/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="Navigation"><meta name="algolia_content_type" content="Navigation"><meta name="pcx_additional_products" content="Cloudflare One"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://developers.cloudflare.com/cloudflare-one/troubleshooting/tunnel/#page","headline":"Tunnel \u00b7 Cloudflare One docs","description":"Tunnel for Zero Trust.","url":"https://developers.cloudflare.com/cloudflare-one/troubleshooting/tunnel/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/troubleshooting/tunnel/
+  schema: 1
+---
 <p>Explore common issues and solutions for Cloudflare Tunnel.</p>
 <h2 id="i-see-cloudflared-service-is-already-installed">I see <code>cloudflared service is already installed</code>.</h2>
 <p>If you see this error when installing a remotely-managed tunnel, ensure that no other <code>cloudflared</code> instances are running as a service on this machine. Only a single instance of <code>cloudflared</code> may run as a service on any given machine. Instead, add additional routes to your existing tunnel. Alternatively, you can run <code>sudo cloudflared service uninstall</code> to uninstall <code>cloudflared</code>.</p>
@@ -5,8 +16,8 @@
 <p>If you are unable to save your tunnel's public hostname, choose a different hostname or delete the existing DNS record. <a href="/dns/manage-dns-records/how-to/create-dns-records/">Check the DNS records</a> for your domain from the <a href="https://dash.cloudflare.com">Cloudflare dashboard</a>.</p>
 <h2 id="tunnel-credentials-file-does-not-exist-or-is-not-a-file">Tunnel credentials file does not exist or is not a file.</h2>
 <p>If you encounter the following error when running a tunnel, double check your <code>config.yml</code> file and ensure that the <code>credentials-file</code> points to the correct location. You may need to change <code>/root/</code> to your home directory.</p>
-<pre><code class="language-sh">cloudflared tunnel run&#10;</code></pre>
-<pre><code class="language-sh">2021-06-04T06:21:16Z INF Starting tunnel tunnelID=928655cc-7f95-43f2-8539-2aba6cf3592d&#10;Tunnel credentials file &#x27;/root/.cloudflared/928655cc-7f95-43f2-8539-2aba6cf3592d.json&#x27; doesn&#x27;t exist or is not a file&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel run&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">2021-06-04T06:21:16Z INF Starting tunnel tunnelID=928655cc-7f95-43f2-8539-2aba6cf3592d&#10;Tunnel credentials file &#x27;/root/.cloudflared/928655cc-7f95-43f2-8539-2aba6cf3592d.json&#x27; doesn&#x27;t exist or is not a file&#10;</code></pre>
 <h2 id="my-tunnel-fails-to-authenticate">My tunnel fails to authenticate.</h2>
 <p>To start using Cloudflare Tunnel, a super administrator in the Cloudflare account must first log in through <code>cloudflared login</code>. The client will launch a browser window and prompt the user to select a hostname in their Cloudflare account. Once selected, Cloudflare generates a certificate that consists of three components:</p>
 <ul>
@@ -64,33 +75,33 @@
 <p>To identify the specific cause, review your <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/monitor-tunnels/logs/">Tunnel logs</a> for <code>error</code>-level messages. Common causes include:</p>
 <h4 id="origin-service-is-not-running">Origin service is not running</h4>
 <p>If the origin service has stopped or never started, <code>cloudflared</code> logs will show an error similar to:</p>
-<pre><code class="language-txt">error=&quot;dial tcp [::1]:8080: connect: connection refused&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">error=&quot;dial tcp [::1]:8080: connect: connection refused&quot;&#10;</code></pre>
 <p>To resolve, verify the service is running and listening on the expected port:</p>
-<pre><code class="language-sh">curl -v http://localhost:8080&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">curl -v http://localhost:8080&#10;</code></pre>
 <p>If the service is not running, start or restart it. You can confirm the service is listening by running <code>ss -tlnp | grep &lt;PORT&gt;</code> (Linux) or <code>lsof -iTCP -sTCP:LISTEN -nP | grep &lt;PORT&gt;</code> (macOS).</p>
 <h4 id="origin-service-url-uses-the-wrong-protocol">Origin service URL uses the wrong protocol</h4>
 <p>If the origin expects HTTPS but the tunnel route specifies <code>http://</code>, or vice versa, <code>cloudflared</code> logs will show an error similar to:</p>
-<pre><code class="language-txt">error=&quot;net/http: HTTP/1.x transport connection broken: malformed HTTP response \&quot;\x15\x03\x01\x00\x02\x02\&quot;&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">error=&quot;net/http: HTTP/1.x transport connection broken: malformed HTTP response \&quot;\x15\x03\x01\x00\x02\x02\&quot;&quot;&#10;</code></pre>
 <p>To resolve, update the service URL in your tunnel route to match the <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/routing-to-tunnel/protocols/">protocol</a> your origin expects. For example, change <code>http://localhost:8080</code> to <code>https://localhost:8080</code>. If you are using a locally-managed tunnel, update your ingress rule in the <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/local-management/configuration-file/">configuration file</a>.</p>
 <h4 id="origin-service-url-points-to-the-wrong-port">Origin service URL points to the wrong port</h4>
 <p>If the port in your tunnel route does not match the port your service is listening on, <code>cloudflared</code> will log a <code>connection refused</code> error for that port. Double-check the service URL in your ingress rule and compare it against the port your application is bound to.</p>
 <h4 id="cloudflared-cannot-validate-the-origin-certificate"><code>cloudflared</code> cannot validate the origin certificate</h4>
 <p>If the origin presents a TLS certificate that <code>cloudflared</code> cannot verify, the logs will show an error similar to:</p>
-<pre><code class="language-txt">error=&quot;x509: certificate is valid for example.com, not localhost&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">error=&quot;x509: certificate is valid for example.com, not localhost&quot;&#10;</code></pre>
 <p>This error indicates that the certificate does not cover the service hostname. An <code>x509: certificate signed by unknown authority</code> error instead indicates that <code>cloudflared</code> does not trust the certificate authority.</p>
 <p>To resolve, use one of the following approaches:</p>
 <ul>
 <li>Set <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/configure-tunnels/origin-parameters/"><code>originServerName</code></a> to the hostname on the origin certificate in your tunnel route. If you are using a locally-managed tunnel, here is an example of a <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/local-management/configuration-file/">configuration file</a>:</li>
 </ul>
-<pre><code class="language-yml">ingress:&#10;  &#45; hostname: app.example.com&#10;    service: https://localhost:443&#10;    originRequest:&#10;      originServerName: app.example.com&#10;</code></pre>
+<pre tabindex="0"><code class="language-yml">ingress:&#10;  &#45; hostname: app.example.com&#10;    service: https://localhost:443&#10;    originRequest:&#10;      originServerName: app.example.com&#10;</code></pre>
 <ul>
 <li>Provide the CA certificate using <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/configure-tunnels/origin-parameters/"><code>caPool</code></a>:</li>
 </ul>
-<pre><code class="language-yml">ingress:&#10;  &#45; hostname: app.example.com&#10;    service: https://localhost:443&#10;    originRequest:&#10;      caPool: /path/to/ca-cert.pem&#10;</code></pre>
+<pre tabindex="0"><code class="language-yml">ingress:&#10;  &#45; hostname: app.example.com&#10;    service: https://localhost:443&#10;    originRequest:&#10;      caPool: /path/to/ca-cert.pem&#10;</code></pre>
 <ul>
 <li>As a temporary last resort, disable TLS verification with <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/configure-tunnels/origin-parameters/"><code>noTLSVerify</code></a>. Turn it off after resolving the certificate issue.</li>
 </ul>
-<pre><code class="language-yml">ingress:&#10;  &#45; hostname: app.example.com&#10;    service: https://localhost:443&#10;    originRequest:&#10;      noTLSVerify: true&#10;</code></pre>
+<pre tabindex="0"><code class="language-yml">ingress:&#10;  &#45; hostname: app.example.com&#10;    service: https://localhost:443&#10;    originRequest:&#10;      noTLSVerify: true&#10;</code></pre>
 <h2 id="a-published-application-returns-err-too-many-redirects">A published application returns <code>ERR_TOO_MANY_REDIRECTS</code>.</h2>
 <p>This error can occur when the origin redirects HTTP requests to HTTPS but the published application route uses an <code>http://</code> <code>Service URL</code>. Each request reaches the origin over HTTP and receives the same redirect.</p>
 <p>To choose the correct service URL and origin settings, refer to <a href="/tunnel/troubleshooting/https-origins/">Troubleshoot HTTPS origins</a>. If the redirect chain alternates between HTTP and HTTPS, also refer to <a href="/ssl/troubleshooting/too-many-redirects/">ERR_TOO_MANY_REDIRECTS</a>.</p>
@@ -115,11 +126,11 @@
 <ol>
 <li>Create a new file under <code>/etc/sysctl.d/</code>:</li>
 </ol>
-<pre><code class="language-sh">sudo vi 98-core-rmem-max.conf&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">sudo vi 98-core-rmem-max.conf&#10;</code></pre>
 <ol start="2">
 <li>In the file, define the desired buffer size:</li>
 </ol>
-<pre><code class="language-txt">net.core.rmem_max=2500000&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">net.core.rmem_max=2500000&#10;</code></pre>
 <ol start="3">
 <li>
 <p>Reboot the host machine running <code>cloudflared</code>.</p>
@@ -128,8 +139,8 @@
 <p>To validate that these changes have taken effect, use the <code>grep</code> command:</p>
 </li>
 </ol>
-<pre><code class="language-sh">sudo sysctl -a | grep net.core.rmem_max&#10;</code></pre>
-<pre><code class="language-sh">net.core.rmem_max = 2500000&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">sudo sysctl -a | grep net.core.rmem_max&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">net.core.rmem_max = 2500000&#10;</code></pre>
 <h2 id="cloudflare-tunnel-is-buffering-my-streaming-response-instead-of-streaming-it-live">Cloudflare Tunnel is buffering my streaming response instead of streaming it live.</h2>
 <p>Proxied traffic through Cloudflare Tunnel is buffered by default unless the origin server includes the <code>Content-Type: text/event-stream</code> response header. This header tells <code>cloudflared</code> to stream data as it arrives instead of buffering the entire response.</p>
 <hr />

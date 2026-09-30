@@ -1,10 +1,21 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/agents/getting-started/quick-start/
+  description: Build your first agent in 10 minutes — a counter with persistent state that syncs to a React frontend in real-time.
+  full_title: Quick start · Cloudflare Agents docs
+  head_html: <title>Quick start · Cloudflare Agents docs</title><meta name="generator" content="Nift"><meta name="description" content="Build your first agent in 10 minutes — a counter with persistent state that syncs to a React frontend in real-time."><link rel="canonical" href="https://developers.cloudflare.com/agents/getting-started/quick-start/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/agents/getting-started/quick-start/index.md"><meta property="og:title" content="Quick start · Cloudflare Agents docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Build your first agent in 10 minutes — a counter with persistent state that syncs to a React frontend in real-time."><meta property="og:url" content="https://developers.cloudflare.com/agents/getting-started/quick-start/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Agents"><meta name="algolia_product_filter" content="Agents"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Get started"><meta name="algolia_content_type" content="Get started"><meta name="pcx_additional_products" content="Agents"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/agents/getting-started/quick-start/#page","headline":"Quick start \u00b7 Cloudflare Agents docs","description":"Build your first agent in 10 minutes \u2014 a counter with persistent state that syncs to a React frontend in real-time.","url":"https://developers.cloudflare.com/agents/getting-started/quick-start/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /agents/getting-started/quick-start/
+  schema: 1
+---
 <p>Build AI agents that persist, think, and act. Agents run on Cloudflare's global network, maintain state across requests, and connect to clients in real-time via WebSockets.</p>
 <p><strong>What you will build:</strong> A counter agent with persistent state that syncs to a React frontend in real-time.</p>
 <p><strong>Time:</strong> ~10 minutes</p>
 <h2 id="create-a-new-project">Create a new project</h2>
-<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre><code data-nb-pm-code>npm create cloudflare@latest -- --template cloudflare/agents-starter</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm create cloudflare@latest -- --template cloudflare/agents-starter" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>yarn create cloudflare --template cloudflare/agents-starter</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn create cloudflare --template cloudflare/agents-starter" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>pnpm create cloudflare@latest --template cloudflare/agents-starter</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm create cloudflare@latest --template cloudflare/agents-starter" aria-label="Copy to clipboard">Copy</button></div></div>
+<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre tabindex="0"><code data-nb-pm-code>npm create cloudflare@latest -- --template cloudflare/agents-starter</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm create cloudflare@latest -- --template cloudflare/agents-starter" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>yarn create cloudflare --template cloudflare/agents-starter</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn create cloudflare --template cloudflare/agents-starter" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>pnpm create cloudflare@latest --template cloudflare/agents-starter</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm create cloudflare@latest --template cloudflare/agents-starter" aria-label="Copy to clipboard">Copy</button></div></div>
 <p>Then install dependencies and start the dev server:</p>
-<pre><code class="language-sh">cd agents-starter&#10;npm install&#10;npm run dev&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cd agents-starter&#10;npm install&#10;npm run dev&#10;</code></pre>
 <p>This creates a project with:</p>
 <ul>
 <li><code>src/server.ts</code> — Your agent code</li>
@@ -15,9 +26,9 @@
 </ul>
 <p>The starter template includes two important SDK integrations. If you are setting up a project manually, add both:</p>
 <p><strong>tsconfig.json</strong> — extends <code>agents/tsconfig</code>, which sets <code>target: &quot;ES2021&quot;</code> and other recommended options:</p>
-<pre><code class="language-json">{&#10;	&quot;extends&quot;: &quot;agents/tsconfig&quot;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;extends&quot;: &quot;agents/tsconfig&quot;&#10;}&#10;</code></pre>
 <p><strong>vite.config.ts</strong> — includes the <code>agents()</code> plugin, which handles TC39 decorator transforms (required for <code>@callable()</code> in Vite 8):</p>
-<pre><code class="language-ts">import { cloudflare } from &quot;@cloudflare/vite-plugin&quot;;&#10;import react from &quot;@vitejs/plugin-react&quot;;&#10;import agents from &quot;agents/vite&quot;;&#10;import { defineConfig } from &quot;vite&quot;;&#10;&#10;export default defineConfig({&#10;	plugins: [agents(), react(), cloudflare()],&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { cloudflare } from &quot;@cloudflare/vite-plugin&quot;;&#10;import react from &quot;@vitejs/plugin-react&quot;;&#10;import agents from &quot;agents/vite&quot;;&#10;import { defineConfig } from &quot;vite&quot;;&#10;&#10;export default defineConfig({&#10;	plugins: [agents(), react(), cloudflare()],&#10;});&#10;</code></pre>
 <p>Open <a href="http://localhost:5173">http://localhost:5173</a> to see your agent in action.</p>
 <h2 id="your-first-agent">Your first agent</h2>
 <p>Build a simple counter agent from scratch. Replace <code>src/server.ts</code>:</p>
@@ -37,7 +48,7 @@
 </ul>
 <h2 id="connect-from-react">Connect from React</h2>
 <p>Replace <code>src/client.tsx</code>:</p>
-<pre><code class="language-tsx">import &quot;./styles.css&quot;;&#10;import { createRoot } from &quot;react-dom/client&quot;;&#10;import { useState } from &quot;react&quot;;&#10;import { useAgent } from &quot;agents/react&quot;;&#10;import type { CounterAgent, CounterState } from &quot;./server&quot;;&#10;&#10;export default function App() {&#10;	const [count, setCount] = useState(0);&#10;&#10;	// Connect to the Counter agent&#10;	const agent = useAgent&lt;CounterAgent, CounterState&gt;({&#10;		agent: &quot;CounterAgent&quot;,&#10;		onStateUpdate: (state) =&gt; setCount(state.count),&#10;	});&#10;&#10;	return (&#10;		&lt;div style={{ padding: &quot;2rem&quot;, fontFamily: &quot;system-ui&quot; }}&gt;&#10;			&lt;h1&gt;Counter Agent&lt;/h1&gt;&#10;			&lt;p style={{ fontSize: &quot;3rem&quot; }}&gt;{count}&lt;/p&gt;&#10;			&lt;div style={{ display: &quot;flex&quot;, gap: &quot;1rem&quot; }}&gt;&#10;				&lt;button onClick={() =&gt; agent.stub.decrement()}&gt;-&lt;/button&gt;&#10;				&lt;button onClick={() =&gt; agent.stub.reset()}&gt;Reset&lt;/button&gt;&#10;				&lt;button onClick={() =&gt; agent.stub.increment()}&gt;+&lt;/button&gt;&#10;			&lt;/div&gt;&#10;		&lt;/div&gt;&#10;	);&#10;}&#10;&#10;const root = createRoot(document.getElementById(&quot;root&quot;)!);&#10;root.render(&lt;App /&gt;);&#10;</code></pre>
+<pre tabindex="0"><code class="language-tsx">import &quot;./styles.css&quot;;&#10;import { createRoot } from &quot;react-dom/client&quot;;&#10;import { useState } from &quot;react&quot;;&#10;import { useAgent } from &quot;agents/react&quot;;&#10;import type { CounterAgent, CounterState } from &quot;./server&quot;;&#10;&#10;export default function App() {&#10;	const [count, setCount] = useState(0);&#10;&#10;	// Connect to the Counter agent&#10;	const agent = useAgent&lt;CounterAgent, CounterState&gt;({&#10;		agent: &quot;CounterAgent&quot;,&#10;		onStateUpdate: (state) =&gt; setCount(state.count),&#10;	});&#10;&#10;	return (&#10;		&lt;div style={{ padding: &quot;2rem&quot;, fontFamily: &quot;system-ui&quot; }}&gt;&#10;			&lt;h1&gt;Counter Agent&lt;/h1&gt;&#10;			&lt;p style={{ fontSize: &quot;3rem&quot; }}&gt;{count}&lt;/p&gt;&#10;			&lt;div style={{ display: &quot;flex&quot;, gap: &quot;1rem&quot; }}&gt;&#10;				&lt;button onClick={() =&gt; agent.stub.decrement()}&gt;-&lt;/button&gt;&#10;				&lt;button onClick={() =&gt; agent.stub.reset()}&gt;Reset&lt;/button&gt;&#10;				&lt;button onClick={() =&gt; agent.stub.increment()}&gt;+&lt;/button&gt;&#10;			&lt;/div&gt;&#10;		&lt;/div&gt;&#10;	);&#10;}&#10;&#10;const root = createRoot(document.getElementById(&quot;root&quot;)!);&#10;root.render(&lt;App /&gt;);&#10;</code></pre>
 <p>Key points:</p>
 <ul>
 <li><code>useAgent</code> connects to your agent via WebSocket</li>
@@ -53,7 +64,7 @@
 <li><strong>Broadcast</strong> sent to all connected clients</li>
 <li><strong>React</strong> updated via <code>onStateUpdate</code></li>
 </ol>
-<pre><code class="language-mermaid">flowchart LR&#10;    A[&quot;Browser&lt;br/&gt;(React)&quot;] &lt;--&gt;|WebSocket| B[&quot;Agent&lt;br/&gt;(Counter)&quot;]&#10;    B --&gt; C[&quot;SQLite&lt;br/&gt;(State)&quot;]&#10;</code></pre>
+<pre tabindex="0"><code class="language-mermaid">flowchart LR&#10;    A[&quot;Browser&lt;br/&gt;(React)&quot;] &lt;--&gt;|WebSocket| B[&quot;Agent&lt;br/&gt;(Counter)&quot;]&#10;    B --&gt; C[&quot;SQLite&lt;br/&gt;(State)&quot;]&#10;</code></pre>
 <h3 id="key-concepts">Key concepts</h3>
 <table>
 <thead>
@@ -87,7 +98,7 @@
 @markup("md", "content/.markup/bodies/1867.md")
 </div>
 <h2 id="deploy-to-cloudflare">Deploy to Cloudflare</h2>
-<pre><code class="language-sh">npm run deploy&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npm run deploy&#10;</code></pre>
 <p>Your agent is now live on Cloudflare's global network, running close to your users.</p>
 <h2 id="common-integration-patterns">Common integration patterns</h2>
 <h3 id="agents-behind-authentication">Agents behind authentication</h3>
@@ -157,7 +168,7 @@
 </div>
 <h3 id="syntaxerror-invalid-or-unexpected-token-with-callable"><code>SyntaxError: Invalid or unexpected token</code> with <code>@callable()</code></h3>
 <p>If your dev server fails with <code>SyntaxError: Invalid or unexpected token</code>, set <code>&quot;target&quot;: &quot;ES2021&quot;</code> in your <code>tsconfig.json</code>. This ensures that Vite's esbuild transpiler downlevels TC39 decorators instead of passing them through as native syntax.</p>
-<pre><code class="language-json">{&#10;	&quot;compilerOptions&quot;: {&#10;		&quot;target&quot;: &quot;ES2021&quot;&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;compilerOptions&quot;: {&#10;		&quot;target&quot;: &quot;ES2021&quot;&#10;	}&#10;}&#10;</code></pre>
 <aside class="nb-aside caution">
 @markup("md", "content/.markup/bodies/1864.md")
 </aside>
@@ -195,9 +206,9 @@
 </tbody>
 </table>
 <h3 id="explore-more">Explore more</h3>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/lifecycle/state/"><h3 id="card-state-management-agents-runtime-lifecycle-state">State management</h3><p>Deep dive into setState(), initialState, and onStateChanged().</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/communication-channels/chat/client-sdk/"><h3 id="card-client-sdk-agents-communication-channels-chat-client-sdk">Client SDK</h3><p>Full useAgent and AgentClient API reference.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/lifecycle/callable-methods/"><h3 id="card-callable-methods-agents-runtime-lifecycle-callable-methods">Callable methods</h3><p>Expose methods to clients with @callable().</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/execution/schedule-tasks/"><h3 id="card-schedule-tasks-agents-runtime-execution-schedule-tasks">Schedule tasks</h3><p>Run tasks on a delay, schedule, or cron.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/lifecycle/agent-class/"><h3 id="card-agent-class-internals-agents-runtime-lifecycle-agent-class">Agent class internals</h3><p>Full lifecycle and methods reference.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/agents-api/"><h3 id="card-agents-api-agents-runtime-agents-api">Agents API</h3><p>Complete API reference for the Agents SDK.</p></a></p>
+<div class="nb-card nb-link-card"><h3 id="card-state-management-agents-runtime-lifecycle-state"><a href="/agents/runtime/lifecycle/state/">State management</a></h3><p>Deep dive into setState(), initialState, and onStateChanged().</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-client-sdk-agents-communication-channels-chat-client-sdk"><a href="/agents/communication-channels/chat/client-sdk/">Client SDK</a></h3><p>Full useAgent and AgentClient API reference.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-callable-methods-agents-runtime-lifecycle-callable-methods"><a href="/agents/runtime/lifecycle/callable-methods/">Callable methods</a></h3><p>Expose methods to clients with @callable().</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-schedule-tasks-agents-runtime-execution-schedule-tasks"><a href="/agents/runtime/execution/schedule-tasks/">Schedule tasks</a></h3><p>Run tasks on a delay, schedule, or cron.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-agent-class-internals-agents-runtime-lifecycle-agent-class"><a href="/agents/runtime/lifecycle/agent-class/">Agent class internals</a></h3><p>Full lifecycle and methods reference.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-agents-api-agents-runtime-agents-api"><a href="/agents/runtime/agents-api/">Agents API</a></h3><p>Complete API reference for the Agents SDK.</p></div>

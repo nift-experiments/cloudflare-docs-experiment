@@ -1,1 +1,12 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/ddos-protection/managed-rulesets/http/http-overrides/link-configure-terraform/
+  description: Configure HTTP DDoS Attack Protection overrides with Terraform.
+  full_title: Configure using Terraform · Cloudflare DDoS Protection docs
+  head_html: <title>Configure using Terraform · Cloudflare DDoS Protection docs</title><meta name="generator" content="Nift"><meta name="description" content="Configure HTTP DDoS Attack Protection overrides with Terraform."><meta name="robots" content="noindex"><link rel="canonical" href="https://developers.cloudflare.com/ddos-protection/managed-rulesets/http/http-overrides/link-configure-terraform/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/ddos-protection/managed-rulesets/http/http-overrides/link-configure-terraform/index.md"><meta property="og:title" content="Configure using Terraform · Cloudflare DDoS Protection docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Configure HTTP DDoS Attack Protection overrides with Terraform."><meta property="og:url" content="https://developers.cloudflare.com/ddos-protection/managed-rulesets/http/http-overrides/link-configure-terraform/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="DDoS Protection"><meta name="algolia_product_filter" content="DDoS Protection"><meta name="pcx_content_group" content="Application security"><meta name="pcx_content_type" content="Navigation"><meta name="algolia_content_type" content="Navigation"><meta name="pcx_additional_products" content="DDoS Protection"><meta http-equiv="refresh" content="0; url=/terraform/additional-configurations/ddos-managed-rulesets/#example-configure-http-ddos-attack-protection">
+  markdown: true
+  noindex: true
+  route: /ddos-protection/managed-rulesets/http/http-overrides/link-configure-terraform/
+  schema: 1
+---
 <p>Configure HTTP DDoS Attack Protection overrides with Terraform.</p>

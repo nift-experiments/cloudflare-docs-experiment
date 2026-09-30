@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/agents/harnesses/think/lifecycle-hooks/
+  description: Hooks at each stage of a Think chat turn — beforeTurn, beforeStep, beforeToolCall, afterToolCall, onStepFinish, onChunk, onChatResponse, and onChatError.
+  full_title: Lifecycle hooks · Cloudflare Agents docs
+  head_html: <title>Lifecycle hooks · Cloudflare Agents docs</title><meta name="generator" content="Nift"><meta name="description" content="Hooks at each stage of a Think chat turn — beforeTurn, beforeStep, beforeToolCall, afterToolCall, onStepFinish, onChunk, onChatResponse, and onChatError."><link rel="canonical" href="https://developers.cloudflare.com/agents/harnesses/think/lifecycle-hooks/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/agents/harnesses/think/lifecycle-hooks/index.md"><meta property="og:title" content="Lifecycle hooks · Cloudflare Agents docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Hooks at each stage of a Think chat turn — beforeTurn, beforeStep, beforeToolCall, afterToolCall, onStepFinish, onChunk, onChatResponse, and onChatError."><meta property="og:url" content="https://developers.cloudflare.com/agents/harnesses/think/lifecycle-hooks/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Agents"><meta name="algolia_product_filter" content="Agents"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Agents"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/agents/harnesses/think/lifecycle-hooks/#page","headline":"Lifecycle hooks \u00b7 Cloudflare Agents docs","description":"Hooks at each stage of a Think chat turn \u2014 beforeTurn, beforeStep, beforeToolCall, afterToolCall, onStepFinish, onChunk, onChatResponse, and onChatError.","url":"https://developers.cloudflare.com/agents/harnesses/think/lifecycle-hooks/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /agents/harnesses/think/lifecycle-hooks/
+  schema: 1
+---
 <p>Think owns the <code>streamText</code> call and provides hooks at each stage of the chat turn. Hooks fire on every turn regardless of entry path — WebSocket chat, sub-agent <code>chat()</code>, <code>saveMessages()</code>, durable <code>submitMessages()</code> execution, <code>continueLastTurn()</code>, and auto-continuation after tool results.</p>
 <h2 id="hook-summary">Hook summary</h2>
 <table>
@@ -74,10 +85,10 @@
 </table>
 <h2 id="execution-order">Execution order</h2>
 <p>For a turn with two tool calls:</p>
-<pre><code class="language-mermaid">flowchart TD&#10;    cfg[&quot;configureSession() — once at startup, not per-turn&quot;] --&gt; bt[&quot;beforeTurn() — inspect context, override model/tools/prompt&quot;]&#10;    bt --&gt; bs&#10;&#10;    subgraph loop [&quot;streamText (repeats per step)&quot;]&#10;        bs[&quot;beforeStep()&quot;] --&gt; chunk[&quot;onChunk() — per streaming chunk&quot;]&#10;        chunk --&gt; btc[&quot;beforeToolCall()&quot;]&#10;        btc --&gt; exec[&quot;tool executes&quot;]&#10;        exec --&gt; atc[&quot;afterToolCall()&quot;]&#10;        atc --&gt; sf[&quot;onStepFinish()&quot;]&#10;        sf --&gt;|&quot;more steps&quot;| bs&#10;    end&#10;&#10;    sf --&gt;|&quot;turn complete&quot;| ocr[&quot;onChatResponse() — message persisted, turn lock released&quot;]&#10;</code></pre>
+<pre tabindex="0"><code class="language-mermaid">flowchart TD&#10;    cfg[&quot;configureSession() — once at startup, not per-turn&quot;] --&gt; bt[&quot;beforeTurn() — inspect context, override model/tools/prompt&quot;]&#10;    bt --&gt; bs&#10;&#10;    subgraph loop [&quot;streamText (repeats per step)&quot;]&#10;        bs[&quot;beforeStep()&quot;] --&gt; chunk[&quot;onChunk() — per streaming chunk&quot;]&#10;        chunk --&gt; btc[&quot;beforeToolCall()&quot;]&#10;        btc --&gt; exec[&quot;tool executes&quot;]&#10;        exec --&gt; atc[&quot;afterToolCall()&quot;]&#10;        atc --&gt; sf[&quot;onStepFinish()&quot;]&#10;        sf --&gt;|&quot;more steps&quot;| bs&#10;    end&#10;&#10;    sf --&gt;|&quot;turn complete&quot;| ocr[&quot;onChatResponse() — message persisted, turn lock released&quot;]&#10;</code></pre>
 <h2 id="beforeturn">beforeTurn</h2>
 <p>Called before <code>streamText</code>. Receives the fully assembled context — system prompt, converted messages, merged tools, and model. Return a <code>TurnConfig</code> to override any part, or void to accept defaults.</p>
-<pre><code class="language-ts">beforeTurn(ctx: TurnContext): TurnConfig | void | Promise&lt;TurnConfig | void&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">beforeTurn(ctx: TurnContext): TurnConfig | void | Promise&lt;TurnConfig | void&gt;&#10;</code></pre>
 <h3 id="turncontext">TurnContext</h3>
 <table>
 <thead>
@@ -200,22 +211,22 @@
 </table>
 <h3 id="examples">Examples</h3>
 <p>Switch to a cheaper model for continuation turns:</p>
-<pre><code class="language-ts">beforeTurn(ctx: TurnContext) {&#10;	if (ctx.continuation) {&#10;		return { model: this.cheapModel };&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">beforeTurn(ctx: TurnContext) {&#10;	if (ctx.continuation) {&#10;		return { model: this.cheapModel };&#10;	}&#10;}&#10;</code></pre>
 <p>Restrict which tools the model can call:</p>
-<pre><code class="language-ts">beforeTurn(ctx: TurnContext) {&#10;	return { activeTools: [&quot;read&quot;, &quot;write&quot;, &quot;getWeather&quot;] };&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">beforeTurn(ctx: TurnContext) {&#10;	return { activeTools: [&quot;read&quot;, &quot;write&quot;, &quot;getWeather&quot;] };&#10;}&#10;</code></pre>
 <p>Add per-turn context from the client body:</p>
-<pre><code class="language-ts">beforeTurn(ctx: TurnContext) {&#10;	if (ctx.body?.selectedFile) {&#10;		return {&#10;			system: ctx.system + `\n\nUser is editing: ${ctx.body.selectedFile}`,&#10;		};&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">beforeTurn(ctx: TurnContext) {&#10;	if (ctx.body?.selectedFile) {&#10;		return {&#10;			system: ctx.system + `\n\nUser is editing: ${ctx.body.selectedFile}`,&#10;		};&#10;	}&#10;}&#10;</code></pre>
 <p>Hide reasoning for internal continuation turns:</p>
-<pre><code class="language-ts">beforeTurn(ctx: TurnContext) {&#10;	if (ctx.continuation) {&#10;		return { sendReasoning: false };&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">beforeTurn(ctx: TurnContext) {&#10;	if (ctx.continuation) {&#10;		return { sendReasoning: false };&#10;	}&#10;}&#10;</code></pre>
 <p>Force structured output for a turn:</p>
-<pre><code class="language-ts">import { Output } from &quot;ai&quot;;&#10;import { z } from &quot;zod&quot;;&#10;&#10;const ResultSchema = z.object({ severity: z.enum([&quot;low&quot;, &quot;high&quot;]) });&#10;&#10;beforeTurn(ctx: TurnContext) {&#10;	if (ctx.body?.mode === &quot;structured-answer&quot;) {&#10;		return {&#10;			output: Output.object({ schema: ResultSchema }),&#10;			activeTools: [],&#10;		};&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { Output } from &quot;ai&quot;;&#10;import { z } from &quot;zod&quot;;&#10;&#10;const ResultSchema = z.object({ severity: z.enum([&quot;low&quot;, &quot;high&quot;]) });&#10;&#10;beforeTurn(ctx: TurnContext) {&#10;	if (ctx.body?.mode === &quot;structured-answer&quot;) {&#10;		return {&#10;			output: Output.object({ schema: ResultSchema }),&#10;			activeTools: [],&#10;		};&#10;	}&#10;}&#10;</code></pre>
 <p><code>output</code> is a turn-level setting only. The AI SDK's <code>prepareStep</code> does not accept an <code>output</code> override, so <code>beforeStep</code> cannot toggle structured output on a single step.</p>
 <h2 id="beforestep">beforeStep</h2>
 <p>Called before each AI SDK step in the agentic loop. Think forwards this hook to <code>streamText</code> as <code>prepareStep</code>, so it receives the AI SDK's full prepare-step context and can return per-step overrides. Use <code>beforeTurn</code> for turn-wide assembly and <code>beforeStep</code> when the decision depends on the step number or previous step results.</p>
-<pre><code class="language-ts">beforeStep(ctx: PrepareStepContext): StepConfig | void {&#10;	if (ctx.stepNumber &gt; 0) {&#10;		return { activeTools: [] };&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">beforeStep(ctx: PrepareStepContext): StepConfig | void {&#10;	if (ctx.stepNumber &gt; 0) {&#10;		return { activeTools: [] };&#10;	}&#10;}&#10;</code></pre>
 <h2 id="beforetoolcall">beforeToolCall</h2>
 <p>Called before a server-side tool's <code>execute</code> function runs. Think wraps each server-side tool so the hook can allow, modify, block, or substitute the call before the model receives the tool result.</p>
-<pre><code class="language-ts">beforeToolCall(ctx: ToolCallContext): ToolCallDecision | void {&#10;	if (ctx.toolName === &quot;delete&quot; &amp;&amp; this.isReadOnlyMode) {&#10;		return { action: &quot;block&quot;, reason: &quot;delete is disabled in read-only mode&quot; };&#10;	}&#10;&#10;	if (ctx.toolName === &quot;weather&quot;) {&#10;		const cached = this.weatherCache.get(JSON.stringify(ctx.input));&#10;		if (cached) return { action: &quot;substitute&quot;, output: cached };&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">beforeToolCall(ctx: ToolCallContext): ToolCallDecision | void {&#10;	if (ctx.toolName === &quot;delete&quot; &amp;&amp; this.isReadOnlyMode) {&#10;		return { action: &quot;block&quot;, reason: &quot;delete is disabled in read-only mode&quot; };&#10;	}&#10;&#10;	if (ctx.toolName === &quot;weather&quot;) {&#10;		const cached = this.weatherCache.get(JSON.stringify(ctx.input));&#10;		if (cached) return { action: &quot;substitute&quot;, output: cached };&#10;	}&#10;}&#10;</code></pre>
 <table>
 <thead>
 <tr>
@@ -282,7 +293,7 @@
 <p>If a wrapped tool returns an <code>AsyncIterable</code> for preliminary tool results, Think collapses the iterable to its final yielded value after <code>beforeToolCall</code> runs. If you need true preliminary streaming from that tool, avoid intercepting it with <code>beforeToolCall</code>.</p>
 <h2 id="aftertoolcall">afterToolCall</h2>
 <p>Called after a tool outcome is known. This includes real executions, blocked calls, substituted calls, and thrown tool errors.</p>
-<pre><code class="language-ts">afterToolCall(ctx: ToolCallResultContext) {&#10;	if (!ctx.success) return;&#10;&#10;	this.env.ANALYTICS.writeDataPoint({&#10;		blobs: [ctx.toolName],&#10;		doubles: [JSON.stringify(ctx.output).length],&#10;	});&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">afterToolCall(ctx: ToolCallResultContext) {&#10;	if (!ctx.success) return;&#10;&#10;	this.env.ANALYTICS.writeDataPoint({&#10;		blobs: [ctx.toolName],&#10;		doubles: [JSON.stringify(ctx.output).length],&#10;	});&#10;}&#10;</code></pre>
 <table>
 <thead>
 <tr>
@@ -337,7 +348,7 @@
 <p>For blocked and substituted tool calls, <code>success</code> is <code>true</code> because the model receives a valid tool result. Only thrown errors from the original tool execution surface as <code>success: false</code>.</p>
 <h2 id="onstepfinish">onStepFinish</h2>
 <p>Called after each step completes in the agentic loop. <code>StepContext</code> is the AI SDK's step-finish event, so it includes the full step record: generated text, reasoning, files, sources, typed tool calls and results, usage, warnings, request and response metadata, and provider metadata.</p>
-<pre><code class="language-ts">onStepFinish(ctx: StepContext) {&#10;	console.log(&#10;		`Step ${ctx.stepNumber} (${ctx.finishReason}): ` +&#10;			`${ctx.usage.inputTokens}in/${ctx.usage.outputTokens}out`,&#10;	);&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">onStepFinish(ctx: StepContext) {&#10;	console.log(&#10;		`Step ${ctx.stepNumber} (${ctx.finishReason}): ` +&#10;			`${ctx.usage.inputTokens}in/${ctx.usage.outputTokens}out`,&#10;	);&#10;}&#10;</code></pre>
 <table>
 <thead>
 <tr>
@@ -393,7 +404,7 @@
 <h2 id="onchatresponse">onChatResponse</h2>
 <p>Called after a chat turn produces and persists an assistant message. The turn lock is released before this hook runs, so it is safe to call <code>saveMessages</code> or other methods from inside.</p>
 <p>Fires for all turn paths that persist an assistant message: WebSocket, sub-agent RPC, <code>saveMessages</code>, and auto-continuation. If a turn fails before producing any assistant parts, <code>onChatError</code> handles the error instead.</p>
-<pre><code class="language-ts">onChatResponse(result: ChatResponseResult) {&#10;	if (result.status === &quot;completed&quot;) {&#10;		console.log(`Turn ${result.requestId}: ${result.message.parts.length} parts`);&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">onChatResponse(result: ChatResponseResult) {&#10;	if (result.status === &quot;completed&quot;) {&#10;		console.log(`Turn ${result.requestId}: ${result.message.parts.length} parts`);&#10;	}&#10;}&#10;</code></pre>
 <table>
 <thead>
 <tr>
@@ -432,7 +443,7 @@
 </table>
 <h2 id="onchaterror">onChatError</h2>
 <p>Called when an error occurs during a chat turn. Return the error to propagate it, or return a different error. The optional context describes where the failure happened and whether user messages were already persisted. The partial assistant message (if any) is persisted before this hook fires.</p>
-<pre><code class="language-ts">onChatError(error: unknown, ctx?: ChatErrorContext): unknown&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">onChatError(error: unknown, ctx?: ChatErrorContext): unknown&#10;</code></pre>
 <p><code>ChatErrorContext</code> includes:</p>
 <table>
 <thead>
@@ -466,10 +477,10 @@
 </tbody>
 </table>
 <p>Think also emits <code>chat:request:failed</code> on the <code>agents:chat</code> observability channel with the same stage and persistence information.</p>
-<pre><code class="language-ts">onChatError(error: unknown, ctx?: ChatErrorContext) {&#10;	console.error(&quot;Chat turn failed:&quot;, ctx?.stage, error);&#10;	if (ctx?.classification === &quot;context_overflow&quot;) {&#10;		return new Error(&quot;This conversation is too long to continue. Please start a new one.&quot;);&#10;	}&#10;	return new Error(&quot;Something went wrong. Please try again.&quot;);&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">onChatError(error: unknown, ctx?: ChatErrorContext) {&#10;	console.error(&quot;Chat turn failed:&quot;, ctx?.stage, error);&#10;	if (ctx?.classification === &quot;context_overflow&quot;) {&#10;		return new Error(&quot;This conversation is too long to continue. Please start a new one.&quot;);&#10;	}&#10;	return new Error(&quot;Something went wrong. Please try again.&quot;);&#10;}&#10;</code></pre>
 <h2 id="classifychaterror">classifyChatError</h2>
 <p>Called when an error occurs during a turn, <strong>before</strong> <code>onChatError</code>. Maps a raw provider error into a provider-agnostic category so Think can react without baking provider-specific strings into the framework — the same split as the <code>tokenCounter</code> you pass to <code>compactAfter()</code>. The app owns the mapping because it knows which provider and model it talks to.</p>
-<pre><code class="language-ts">classifyChatError(error: unknown, ctx?: ChatErrorContext): ChatErrorClassification | void&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">classifyChatError(error: unknown, ctx?: ChatErrorContext): ChatErrorClassification | void&#10;</code></pre>
 <p><code>ChatErrorClassification</code> is <code>&quot;context_overflow&quot; | &quot;rate_limit&quot; | &quot;transient&quot; | &quot;fatal&quot; | &quot;unknown&quot;</code>. Today this hook drives only context-overflow recovery. Think calls it when a turn errors and <code>contextOverflow.reactive</code> is enabled. If reactive is off, it is not called.</p>
 <p>Returning <code>&quot;context_overflow&quot;</code> runs the compact-and-retry backstop (refer to <a href="/agents/harnesses/think/recovery/#context-window-overflow-recovery">Context-window overflow recovery</a>). If recovery cannot save the turn, that classification is surfaced on the terminal <code>onChatError</code> call through <code>ChatErrorContext.classification</code>.</p>
 <p>The other categories are reserved for future use. Returning one today is a no-op and is not forwarded to <code>onChatError</code>. Returning <code>void</code> (the default) keeps the existing terminal behavior.</p>

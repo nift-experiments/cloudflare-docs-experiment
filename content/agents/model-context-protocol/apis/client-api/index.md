@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/agents/model-context-protocol/apis/client-api/
+  description: Connect Agents to external MCP servers to use their tools, resources, and prompts over the Model Context Protocol.
+  full_title: McpClient · Cloudflare Agents docs
+  head_html: <title>McpClient · Cloudflare Agents docs</title><meta name="generator" content="Nift"><meta name="description" content="Connect Agents to external MCP servers to use their tools, resources, and prompts over the Model Context Protocol."><link rel="canonical" href="https://developers.cloudflare.com/agents/model-context-protocol/apis/client-api/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/agents/model-context-protocol/apis/client-api/index.md"><meta property="og:title" content="McpClient · Cloudflare Agents docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Connect Agents to external MCP servers to use their tools, resources, and prompts over the Model Context Protocol."><meta property="og:url" content="https://developers.cloudflare.com/agents/model-context-protocol/apis/client-api/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Agents"><meta name="algolia_product_filter" content="Agents"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Agents"><meta name="pcx_tags" content="MCP"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/agents/model-context-protocol/apis/client-api/#page","headline":"McpClient \u00b7 Cloudflare Agents docs","description":"Connect Agents to external MCP servers to use their tools, resources, and prompts over the Model Context Protocol.","url":"https://developers.cloudflare.com/agents/model-context-protocol/apis/client-api/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["MCP"]}</script>
+  markdown: true
+  noindex: false
+  route: /agents/model-context-protocol/apis/client-api/
+  schema: 1
+---
 <p>Connect your agent to external <a href="/agents/model-context-protocol/">Model Context Protocol (MCP)</a> servers to use their tools, resources, and prompts. Agents SDK v0.20.0 uses <code>@modelcontextprotocol/client</code> and negotiates stateless or legacy behavior automatically.</p>
 <p>Refer to <a href="/agents/model-context-protocol/guides/migrate-to-mcp-sdk-v2/">Migrate to MCP SDK v2</a> for package, type, OAuth provider, and rollout changes.</p>
 <h2 id="overview">Overview</h2>
@@ -81,14 +92,14 @@
 <h2 id="oauth-authentication">OAuth authentication</h2>
 <p>Many MCP servers require OAuth authentication. The agent handles the OAuth flow automatically.</p>
 <h3 id="how-it-works">How it works</h3>
-<pre><code class="language-mermaid">sequenceDiagram&#10;    participant Client&#10;    participant Agent&#10;    participant MCPServer&#10;&#10;    Client-&gt;&gt;Agent: addMcpServer(name, url)&#10;    Agent-&gt;&gt;MCPServer: Connect&#10;    MCPServer--&gt;&gt;Agent: Requires OAuth&#10;    Agent--&gt;&gt;Client: state: authenticating, authUrl&#10;    Client-&gt;&gt;MCPServer: User authorizes&#10;    MCPServer-&gt;&gt;Agent: Callback with code&#10;    Agent-&gt;&gt;MCPServer: Exchange for token&#10;    Agent--&gt;&gt;Client: onMcpUpdate (ready)&#10;</code></pre>
+<pre tabindex="0"><code class="language-mermaid">sequenceDiagram&#10;    participant Client&#10;    participant Agent&#10;    participant MCPServer&#10;&#10;    Client-&gt;&gt;Agent: addMcpServer(name, url)&#10;    Agent-&gt;&gt;MCPServer: Connect&#10;    MCPServer--&gt;&gt;Agent: Requires OAuth&#10;    Agent--&gt;&gt;Client: state: authenticating, authUrl&#10;    Client-&gt;&gt;MCPServer: User authorizes&#10;    MCPServer-&gt;&gt;Agent: Callback with code&#10;    Agent-&gt;&gt;MCPServer: Exchange for token&#10;    Agent--&gt;&gt;Client: onMcpUpdate (ready)&#10;</code></pre>
 <h3 id="handling-oauth-in-your-agent">Handling OAuth in your agent</h3>
 <div class="nb-type-script-example">
 @markup("md", "content/.markup/bodies/2257.md")
 </div>
 <h3 id="oauth-callback">OAuth callback</h3>
 <p>The callback URL is automatically constructed:</p>
-<pre><code class="language-txt">https://{host}/{agentsPrefix}/{agent-name}/{instance-name}/callback&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://{host}/{agentsPrefix}/{agent-name}/{instance-name}/callback&#10;</code></pre>
 <p>For example: <code>https://my-worker.workers.dev/agents/my-agent/default/callback</code></p>
 <p>OAuth tokens are securely stored in SQLite, and persist across agent restarts.</p>
 <h3 id="protecting-instance-names-in-oauth-callbacks">Protecting instance names in OAuth callbacks</h3>
@@ -219,7 +230,7 @@
 <p>Calling <code>addMcpServer</code> is idempotent when both the server name <strong>and</strong> URL match an existing active connection — the existing connection is returned without creating a duplicate. This makes it safe to call in <code>onStart()</code> without worrying about duplicate connections on restart.</p>
 <p>If you call <code>addMcpServer</code> with the same name but a <strong>different</strong> URL, a new connection is created. Both connections remain active and their tools are merged in <code>getAITools()</code>. To replace a server, call <code>removeMcpServer(oldId)</code> first.</p>
 <p>URLs are normalized before comparison (trailing slashes, default ports, and hostname case are handled), so <code>https://MCP.Example.com</code> and <code>https://mcp.example.com/</code> are treated as the same URL.</p>
-<pre><code class="language-ts">// HTTP transport (Streamable HTTP, SSE)&#10;async addMcpServer(&#10;  serverName: string,&#10;  url: string,&#10;  options?: {&#10;    id?: string;&#10;    callbackHost?: string;&#10;    callbackPath?: string;&#10;    agentsPrefix?: string;&#10;    client?: McpClientOptions;&#10;    transport?: {&#10;      headers?: HeadersInit;&#10;      type?: &quot;sse&quot; | &quot;streamable-http&quot; | &quot;auto&quot;;&#10;    };&#10;    retry?: RetryOptions;&#10;  }&#10;): Promise&lt;&#10;  | { id: string; state: &quot;authenticating&quot;; authUrl: string }&#10;  | { id: string; state: &quot;ready&quot; }&#10;&gt;&#10;&#10;// RPC transport (Durable Object binding — no HTTP overhead)&#10;async addMcpServer(&#10;  serverName: string,&#10;  binding: DurableObjectNamespace,&#10;  options?: {&#10;    id?: string;&#10;    props?: Record&lt;string, unknown&gt;;&#10;    client?: McpClientOptions;&#10;    retry?: RetryOptions;&#10;  }&#10;): Promise&lt;{ id: string; state: &quot;ready&quot; }&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// HTTP transport (Streamable HTTP, SSE)&#10;async addMcpServer(&#10;  serverName: string,&#10;  url: string,&#10;  options?: {&#10;    id?: string;&#10;    callbackHost?: string;&#10;    callbackPath?: string;&#10;    agentsPrefix?: string;&#10;    client?: McpClientOptions;&#10;    transport?: {&#10;      headers?: HeadersInit;&#10;      type?: &quot;sse&quot; | &quot;streamable-http&quot; | &quot;auto&quot;;&#10;    };&#10;    retry?: RetryOptions;&#10;  }&#10;): Promise&lt;&#10;  | { id: string; state: &quot;authenticating&quot;; authUrl: string }&#10;  | { id: string; state: &quot;ready&quot; }&#10;&gt;&#10;&#10;// RPC transport (Durable Object binding — no HTTP overhead)&#10;async addMcpServer(&#10;  serverName: string,&#10;  binding: DurableObjectNamespace,&#10;  options?: {&#10;    id?: string;&#10;    props?: Record&lt;string, unknown&gt;;&#10;    client?: McpClientOptions;&#10;    retry?: RetryOptions;&#10;  }&#10;): Promise&lt;{ id: string; state: &quot;ready&quot; }&gt;&#10;</code></pre>
 <h4 id="parameters-http-transport">Parameters (HTTP transport)</h4>
 <ul>
 <li><code>serverName</code> (string, required) — Display name for the MCP server</li>
@@ -276,16 +287,16 @@
 </ul>
 <h3 id="removemcpserver"><code>removeMcpServer()</code></h3>
 <p>Disconnect from an MCP server and clean up its resources.</p>
-<pre><code class="language-ts">async removeMcpServer(id: string): Promise&lt;void&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">async removeMcpServer(id: string): Promise&lt;void&gt;&#10;</code></pre>
 <h4 id="parameters">Parameters</h4>
 <ul>
 <li><code>id</code> (string, required) — Server connection ID returned from <code>addMcpServer()</code></li>
 </ul>
 <h3 id="getmcpservers"><code>getMcpServers()</code></h3>
 <p>Get the current state of all MCP server connections.</p>
-<pre><code class="language-ts">getMcpServers(): MCPServersState&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">getMcpServers(): MCPServersState&#10;</code></pre>
 <h4 id="returns-1">Returns</h4>
-<pre><code class="language-ts">type MCPServersState = {&#10;	servers: Record&lt;&#10;		string,&#10;		{&#10;			name: string;&#10;			server_url: string;&#10;			auth_url: string | null;&#10;			state:&#10;				| &quot;authenticating&quot;&#10;				| &quot;connecting&quot;&#10;				| &quot;connected&quot;&#10;				| &quot;discovering&quot;&#10;				| &quot;ready&quot;&#10;				| &quot;failed&quot;;&#10;			capabilities: ServerCapabilities | null;&#10;			instructions: string | null;&#10;			error: string | null;&#10;		}&#10;	&gt;;&#10;	tools: Array&lt;Tool &amp; { serverId: string }&gt;;&#10;	prompts: Array&lt;Prompt &amp; { serverId: string }&gt;;&#10;	resources: Array&lt;Resource &amp; { serverId: string }&gt;;&#10;	resourceTemplates: Array&lt;ResourceTemplate &amp; { serverId: string }&gt;;&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">type MCPServersState = {&#10;	servers: Record&lt;&#10;		string,&#10;		{&#10;			name: string;&#10;			server_url: string;&#10;			auth_url: string | null;&#10;			state:&#10;				| &quot;authenticating&quot;&#10;				| &quot;connecting&quot;&#10;				| &quot;connected&quot;&#10;				| &quot;discovering&quot;&#10;				| &quot;ready&quot;&#10;				| &quot;failed&quot;;&#10;			capabilities: ServerCapabilities | null;&#10;			instructions: string | null;&#10;			error: string | null;&#10;		}&#10;	&gt;;&#10;	tools: Array&lt;Tool &amp; { serverId: string }&gt;;&#10;	prompts: Array&lt;Prompt &amp; { serverId: string }&gt;;&#10;	resources: Array&lt;Resource &amp; { serverId: string }&gt;;&#10;	resourceTemplates: Array&lt;ResourceTemplate &amp; { serverId: string }&gt;;&#10;};&#10;</code></pre>
 <p>The <code>state</code> field indicates the connection lifecycle:</p>
 <ul>
 <li><code>authenticating</code> — Waiting for OAuth authorization to complete</li>
@@ -298,7 +309,7 @@
 <p>The <code>error</code> field contains an error message when <code>state</code> is <code>&quot;failed&quot;</code>. Error messages from external OAuth providers are automatically escaped to prevent XSS attacks, making them safe to display directly in your UI.</p>
 <h3 id="configureoauthcallback"><code>configureOAuthCallback()</code></h3>
 <p>Configure OAuth callback behavior for MCP servers requiring authentication. This method allows you to customize what happens after a user completes OAuth authorization.</p>
-<pre><code class="language-ts">this.mcp.configureOAuthCallback(options: {&#10;  successRedirect?: string;&#10;  errorRedirect?: string;&#10;  customHandler?: () =&gt; Response | Promise&lt;Response&gt;;&#10;}): void&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">this.mcp.configureOAuthCallback(options: {&#10;  successRedirect?: string;&#10;  errorRedirect?: string;&#10;  customHandler?: () =&gt; Response | Promise&lt;Response&gt;;&#10;}): void&#10;</code></pre>
 <h4 id="parameters-1">Parameters</h4>
 <ul>
 <li><code>options</code> (object, required) — OAuth callback configuration:
@@ -323,7 +334,7 @@
 </div>
 <h3 id="configureelicitationhandlers"><code>configureElicitationHandlers()</code></h3>
 <p>Configure handlers for stateless elicitation and legacy <code>elicitation/create</code> requests. Add a handler for each elicitation mode your Agent supports.</p>
-<pre><code class="language-txt">this.mcp.configureElicitationHandlers(handlers?: {&#10;  form?: (&#10;    request: ElicitRequest,&#10;    serverId: string,&#10;    signal?: AbortSignal,&#10;  ) =&gt; Promise&lt;ElicitResult&gt;;&#10;  url?: (&#10;    request: ElicitRequest,&#10;    serverId: string,&#10;    signal?: AbortSignal,&#10;  ) =&gt; Promise&lt;ElicitResult&gt;;&#10;}): void&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">this.mcp.configureElicitationHandlers(handlers?: {&#10;  form?: (&#10;    request: ElicitRequest,&#10;    serverId: string,&#10;    signal?: AbortSignal,&#10;  ) =&gt; Promise&lt;ElicitResult&gt;;&#10;  url?: (&#10;    request: ElicitRequest,&#10;    serverId: string,&#10;    signal?: AbortSignal,&#10;  ) =&gt; Promise&lt;ElicitResult&gt;;&#10;}): void&#10;</code></pre>
 <h4 id="parameters-2">Parameters</h4>
 <ul>
 <li><code>handlers</code> (object, optional) — Elicitation handlers keyed by mode:
@@ -375,32 +386,32 @@
 <h3 id="lifecycle-methods">Lifecycle methods</h3>
 <h4 id="this-mcp-registerserver"><code>this.mcp.registerServer()</code></h4>
 <p>Register a server without immediately connecting.</p>
-<pre><code class="language-ts">async registerServer(&#10;  id: string,&#10;  options: {&#10;    url: string;&#10;    name: string;&#10;    callbackUrl: string;&#10;    clientOptions?: ClientOptions;&#10;    transportOptions?: TransportOptions;&#10;  }&#10;): Promise&lt;string&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">async registerServer(&#10;  id: string,&#10;  options: {&#10;    url: string;&#10;    name: string;&#10;    callbackUrl: string;&#10;    clientOptions?: ClientOptions;&#10;    transportOptions?: TransportOptions;&#10;  }&#10;): Promise&lt;string&gt;&#10;</code></pre>
 <h4 id="this-mcp-connecttoserver"><code>this.mcp.connectToServer()</code></h4>
 <p>Establish a connection to a previously registered server.</p>
-<pre><code class="language-ts">async connectToServer(id: string): Promise&lt;MCPConnectionResult&gt;&#10;&#10;type MCPConnectionResult =&#10;  | { state: &quot;failed&quot;; error: string }&#10;  | { state: &quot;authenticating&quot;; authUrl: string }&#10;  | { state: &quot;connected&quot; }&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">async connectToServer(id: string): Promise&lt;MCPConnectionResult&gt;&#10;&#10;type MCPConnectionResult =&#10;  | { state: &quot;failed&quot;; error: string }&#10;  | { state: &quot;authenticating&quot;; authUrl: string }&#10;  | { state: &quot;connected&quot; }&#10;</code></pre>
 <h4 id="this-mcp-discoverifconnected"><code>this.mcp.discoverIfConnected()</code></h4>
 <p>Check server capabilities if a connection is active.</p>
-<pre><code class="language-ts">async discoverIfConnected(&#10;  serverId: string,&#10;  options?: { timeoutMs?: number }&#10;): Promise&lt;MCPDiscoverResult | undefined&gt;&#10;&#10;type MCPDiscoverResult = {&#10;  success: boolean;&#10;  state: MCPConnectionState;&#10;  error?: string;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">async discoverIfConnected(&#10;  serverId: string,&#10;  options?: { timeoutMs?: number }&#10;): Promise&lt;MCPDiscoverResult | undefined&gt;&#10;&#10;type MCPDiscoverResult = {&#10;  success: boolean;&#10;  state: MCPConnectionState;&#10;  error?: string;&#10;}&#10;</code></pre>
 <h4 id="this-mcp-waitforconnections"><code>this.mcp.waitForConnections()</code></h4>
 <p>Wait for all in-flight MCP connection and discovery operations to settle. This is useful when you need <code>this.mcp.getAITools()</code> to return the full set of tools immediately after the agent wakes from hibernation.</p>
-<pre><code class="language-ts">// Wait indefinitely&#10;await this.mcp.waitForConnections();&#10;&#10;// Wait with a timeout (milliseconds)&#10;await this.mcp.waitForConnections({ timeout: 10_000 });&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// Wait indefinitely&#10;await this.mcp.waitForConnections();&#10;&#10;// Wait with a timeout (milliseconds)&#10;await this.mcp.waitForConnections({ timeout: 10_000 });&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/2247.md")
 </aside>
 <h4 id="this-mcp-closeconnection"><code>this.mcp.closeConnection()</code></h4>
 <p>Close the connection to a specific server while keeping it registered.</p>
-<pre><code class="language-ts">async closeConnection(id: string): Promise&lt;void&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">async closeConnection(id: string): Promise&lt;void&gt;&#10;</code></pre>
 <h4 id="this-mcp-closeallconnections"><code>this.mcp.closeAllConnections()</code></h4>
 <p>Close all active server connections while preserving registrations.</p>
-<pre><code class="language-ts">async closeAllConnections(): Promise&lt;void&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">async closeAllConnections(): Promise&lt;void&gt;&#10;</code></pre>
 <h4 id="this-mcp-listtools"><code>this.mcp.listTools()</code></h4>
 <p>Get raw MCP tool records without converting their schemas to Zod.</p>
-<pre><code class="language-ts">listTools(filter?: MCPServerFilter): Array&lt;Tool &amp; { serverId: string }&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">listTools(filter?: MCPServerFilter): Array&lt;Tool &amp; { serverId: string }&gt;&#10;</code></pre>
 <p>Use this method for catalog discovery and inspection. Pass an <code>MCPServerFilter</code> to limit the returned tools to specific connections.</p>
 <h4 id="this-mcp-getaitools"><code>this.mcp.getAITools()</code></h4>
 <p>Get all discovered MCP tools in a format compatible with the AI SDK.</p>
-<pre><code class="language-ts">getAITools(filter?: MCPServerFilter): ToolSet&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">getAITools(filter?: MCPServerFilter): ToolSet&#10;</code></pre>
 <p>Tools are automatically namespaced by server ID to prevent conflicts when multiple MCP servers expose tools with the same name.</p>
 <p><code>getAITools()</code> reuses converted schemas for the current catalog on each live connection. It converts schemas again after discovery replaces the catalog or the live connection changes. Each call returns fresh tool records and execute functions. Use <code>this.mcp.listTools()</code> when you only need the raw catalog.</p>
 <p>Pass an <code>MCPServerFilter</code> to scope the returned tools to a subset of connected servers:</p>
@@ -408,7 +419,7 @@
 @markup("md", "content/.markup/bodies/2277.md")
 </div>
 <p>The filter type is available from <code>agents/mcp/client</code>:</p>
-<pre><code class="language-ts">import type { MCPServerFilter } from &quot;agents/mcp/client&quot;;&#10;&#10;type MCPServerFilter = {&#10;	serverId?: string | string[];&#10;	serverName?: string | string[];&#10;	state?: MCPConnectionState | MCPConnectionState[];&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import type { MCPServerFilter } from &quot;agents/mcp/client&quot;;&#10;&#10;type MCPServerFilter = {&#10;	serverId?: string | string[];&#10;	serverName?: string | string[];&#10;	state?: MCPConnectionState | MCPConnectionState[];&#10;};&#10;</code></pre>
 <p>All specified filter criteria are AND'd together. The same filter parameter is accepted by <code>listTools()</code>, <code>listPrompts()</code>, <code>listResources()</code>, and <code>listResourceTemplates()</code>.</p>
 <h2 id="error-handling">Error handling</h2>
 <p>Use error detection utilities to handle connection errors:</p>
@@ -416,6 +427,6 @@
 @markup("md", "content/.markup/bodies/2278.md")
 </div>
 <h2 id="next-steps">Next steps</h2>
-<p><a class="nb-card nb-link-card" href="/agents/model-context-protocol/apis/agent-api/"><h3 id="card-creating-mcp-servers-agents-model-context-protocol-apis-agent-api">Creating MCP servers</h3><p>Build your own MCP server.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/communication-channels/chat/client-sdk/"><h3 id="card-client-sdk-agents-communication-channels-chat-client-sdk">Client SDK</h3><p>Connect from browsers with onMcpUpdate.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/lifecycle/state/"><h3 id="card-store-and-sync-state-agents-runtime-lifecycle-state">Store and sync state</h3><p>Learn about agent persistence.</p></a></p>
+<div class="nb-card nb-link-card"><h3 id="card-creating-mcp-servers-agents-model-context-protocol-apis-agent-api"><a href="/agents/model-context-protocol/apis/agent-api/">Creating MCP servers</a></h3><p>Build your own MCP server.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-client-sdk-agents-communication-channels-chat-client-sdk"><a href="/agents/communication-channels/chat/client-sdk/">Client SDK</a></h3><p>Connect from browsers with onMcpUpdate.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-store-and-sync-state-agents-runtime-lifecycle-state"><a href="/agents/runtime/lifecycle/state/">Store and sync state</a></h3><p>Learn about agent persistence.</p></div>

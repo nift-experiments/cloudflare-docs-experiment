@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/access-controls/access-settings/session-management/
+  description: Session management in Access.
+  full_title: Session management · Cloudflare One docs
+  head_html: <title>Session management · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="Session management in Access."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/access-controls/access-settings/session-management/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/access-controls/access-settings/session-management/index.md"><meta property="og:title" content="Session management · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Session management in Access."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/access-controls/access-settings/session-management/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Cloudflare One"><meta name="pcx_tags" content="JSON web token (JWT),Authentication"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/access-controls/access-settings/session-management/#page","headline":"Session management \u00b7 Cloudflare One docs","description":"Session management in Access.","url":"https://developers.cloudflare.com/cloudflare-one/access-controls/access-settings/session-management/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["JSON web token (JWT)","Authentication"]}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/access-controls/access-settings/session-management/
+  schema: 1
+---
 <p>A user session determines how long a user can access an Access application without re-authenticating.</p>
 <h2 id="session-durations">Session durations</h2>
 <p>When a user logs in to an application protected by Access, Access validates their identity against your Access policies and generates two signed JSON Web Tokens (JWTs):</p>
@@ -15,13 +26,16 @@
 <td>Global session token</td>
 <td>Stores the user's identity from the IdP and provides single sign-on (SSO) functionality for all Access applications.</td>
 <td><a href="#global-session-duration">Global session duration</a></td>
-<td>Your Cloudflare <span class="nb-interactive-component" data-cf-component="GlossaryTooltip"></td>
+<td>Your Cloudflare <span class="nb-glossary-tooltip" title="team domain">team domain</span></td>
+</tr>
+<tr>
+<td><a href="/cloudflare-one/access-controls/applications/http-apps/authorization-cookie/application-token/">Application token</a></td>
+<td>Allows the user to access a specific Access application.</td>
+<td><a href="#policy-session-duration">Policy session duration</a>, which defaults to the <a href="#application-session-duration">application session duration</a></td>
+<td>The hostname protected by the Access application</td>
 </tr>
 </tbody>
 </table>
-@markup("md", "content/.markup/bodies/4737.md")
-</div> |
-| [Application token](/cloudflare-one/access-controls/applications/http-apps/authorization-cookie/application-token/) | Allows the user to access a specific Access application.                                                             | [Policy session duration](#policy-session-duration), which defaults to the [application session duration](#application-session-duration) | The hostname protected by the Access application                                  |
 <p>The user can access the application for the entire duration of the application token's lifecycle. When the application token expires, Cloudflare will automatically issue a new application token if the global token is still valid (and the user's identity still passes your Access policies). If the global token has also expired, the user will be prompted to re-authenticate with the IdP.</p>
 <p>The global token expiration is usually set to equal or exceed the application token expiration. Setting a longer global token provides a more secure way to allow for longer user sessions, since the global token cannot be used to directly access an application.</p>
 <p>In summary, Access checks sessions from most specific to least specific:</p>
@@ -116,7 +130,7 @@
 </tr>
 </tbody>
 </table>
-<pre><code class="language-mermaid">flowchart TB&#10;    %% Accessibility&#10;    accTitle: Access session durations&#10;    accDescr: Flowchart describing the order of enforcement for Access sessions&#10;&#10;    %% In with user traffic&#10;    start[&quot;User goes to Access application&quot;]&#10;    start--&quot;Enabled for this application&quot; --&gt;warpsession[Cloudflare One Client session expired?]&#10;    start-- &quot;Disabled for this application&quot; --&gt; policysession[Policy session expired?]&#10;&#10;		warpsession--&quot;Yes&quot;--&gt;idp[Prompt to log in to IdP]&#10;		warpsession--&quot;No&quot;--&gt;accessgranted[Access granted]&#10;&#10;		policysession--&quot;Yes&quot;--&gt;globalsession[Global session expired?]&#10;		policysession--&quot;No&quot;--&gt;accessgranted&#10;&#10;		globalsession--&quot;Yes&quot;--&gt;idp&#10;		globalsession--&quot;No&quot;--&gt;refreshtoken[Check identity against Access policies]&#10;		refreshtoken--&gt;accessgranted&#10;		idp--&gt;refreshtoken&#10;&#10;</code></pre>
+<pre tabindex="0"><code class="language-mermaid">flowchart TB&#10;    %% Accessibility&#10;    accTitle: Access session durations&#10;    accDescr: Flowchart describing the order of enforcement for Access sessions&#10;&#10;    %% In with user traffic&#10;    start[&quot;User goes to Access application&quot;]&#10;    start--&quot;Enabled for this application&quot; --&gt;warpsession[Cloudflare One Client session expired?]&#10;    start-- &quot;Disabled for this application&quot; --&gt; policysession[Policy session expired?]&#10;&#10;		warpsession--&quot;Yes&quot;--&gt;idp[Prompt to log in to IdP]&#10;		warpsession--&quot;No&quot;--&gt;accessgranted[Access granted]&#10;&#10;		policysession--&quot;Yes&quot;--&gt;globalsession[Global session expired?]&#10;		policysession--&quot;No&quot;--&gt;accessgranted&#10;&#10;		globalsession--&quot;Yes&quot;--&gt;idp&#10;		globalsession--&quot;No&quot;--&gt;refreshtoken[Check identity against Access policies]&#10;		refreshtoken--&gt;accessgranted&#10;		idp--&gt;refreshtoken&#10;&#10;</code></pre>
 <h2 id="revoke-user-sessions">Revoke user sessions</h2>
 <p>Access provides two options for revoking user sessions: per-application and per-user.</p>
 <h3 id="per-application">Per-Application</h3>

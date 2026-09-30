@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/email-service/reference/postmaster/
+  description: Reference page with postmaster information for professionals, as well as configuration details for Email Service.
+  full_title: Postmaster · Cloudflare Email Service docs
+  head_html: <title>Postmaster · Cloudflare Email Service docs</title><meta name="generator" content="Nift"><meta name="description" content="Reference page with postmaster information for professionals, as well as configuration details for Email Service."><link rel="canonical" href="https://developers.cloudflare.com/email-service/reference/postmaster/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/email-service/reference/postmaster/index.md"><meta property="og:title" content="Postmaster · Cloudflare Email Service docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Reference page with postmaster information for professionals, as well as configuration details for Email Service."><meta property="og:url" content="https://developers.cloudflare.com/email-service/reference/postmaster/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Email Service"><meta name="algolia_product_filter" content="Email Service"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Email Service"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/email-service/reference/postmaster/#page","headline":"Postmaster \u00b7 Cloudflare Email Service docs","description":"Reference page with postmaster information for professionals, as well as configuration details for Email Service.","url":"https://developers.cloudflare.com/email-service/reference/postmaster/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /email-service/reference/postmaster/
+  schema: 1
+---
 <p>This page provides technical information about Email Service to professionals who administer email systems, and other email providers.</p>
 <p>Here you will find information regarding Email Service, along with best practices, rules, guidelines, troubleshooting tools, as well as configuration details for Email Service.</p>
 <h2 id="postmaster">Postmaster</h2>
@@ -11,9 +22,9 @@
 <p>Through this standard, the sender publishes its public key to a domain's DNS once, and then signs the body of each message before it leaves the server. The recipient server reads the message, gets the domain public key from the domain's DNS, and validates the signature to ensure the message was not altered in transit.</p>
 <p>Email Service adds DKIM signatures to outgoing emails on behalf of the customer's sending domain to ensure email authenticity and improve deliverability.</p>
 <p>Email Sending and Email Routing use separate DKIM selectors. You can find the DKIM keys for your domain by querying the following:</p>
-<pre><code class="language-sh">&#35; Email Sending DKIM&#10;dig TXT cf-bounce._domainkey.example.com +short&#10;&#10;&#35; Email Routing DKIM&#10;dig TXT cf2024-1._domainkey.example.com +short&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">&#35; Email Sending DKIM&#10;dig TXT cf-bounce._domainkey.example.com +short&#10;&#10;&#35; Email Routing DKIM&#10;dig TXT cf2024-1._domainkey.example.com +short&#10;</code></pre>
 <p>For forwarded emails, Email Routing adds two DKIM signatures: one for <code>email.cloudflare.net</code>, which covers <a href="#sender-rewriting">sender rewriting</a>, and one for the recipient domain configured by the customer. You can query the Cloudflare sender rewriting key directly:</p>
-<pre><code class="language-sh">dig TXT cf2024-1._domainkey.email.cloudflare.net +short&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">dig TXT cf2024-1._domainkey.email.cloudflare.net +short&#10;</code></pre>
 <h3 id="dmarc-enforcing">DMARC enforcing</h3>
 <p>Email Service supports Domain-based Message Authentication, Reporting &amp; Conformance (DMARC). When sending emails, Email Service ensures proper SPF and DKIM alignment to pass DMARC authentication. For Email Routing, incoming emails are rejected if they fail authentication according to the sender's DMARC policy. Refer to <a href="https://dmarc.org/">dmarc.org</a> for more information on this protocol.</p>
 <p>It is recommended that all domains implement the DMARC protocol for optimal email deliverability.</p>
@@ -23,13 +34,13 @@
 <h3 id="ipv6-support">IPv6 support</h3>
 <p>Email Service supports IPv6 for both inbound and outbound email delivery. For outbound, the service connects to recipient SMTP servers over IPv6 when the recipient has AAAA records for their MX servers, and falls back to IPv4 otherwise. For inbound, Email Routing accepts mail over IPv6 on its MX servers.</p>
 <p>You can verify IPv6 connectivity for any destination using <code>dig</code>:</p>
-<pre><code class="language-sh">dig mx gmail.com&#10;dig AAAA gmail-smtp-in.l.google.com&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">dig mx gmail.com&#10;dig AAAA gmail-smtp-in.l.google.com&#10;</code></pre>
 <h3 id="mx-and-spf-records">MX and SPF records</h3>
 <p>When using Email Service for sending emails, no special MX records are required on your domain. However, if you are also using Email Routing for inbound emails, the appropriate MX records are configured automatically.</p>
 <p>For SPF records, Email Service uses <code>_spf.mx.cloudflare.net</code>. Email Sending configures SPF on the <code>cf-bounce</code> subdomain, while Email Routing configures SPF on the root domain:</p>
-<pre><code class="language-txt">v=spf1 include:_spf.mx.cloudflare.net ~all&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">v=spf1 include:_spf.mx.cloudflare.net ~all&#10;</code></pre>
 <p>For inbound mail, Email Routing announces multiple MX servers under the <code>*.mx.cloudflare.net</code> zone with different priorities. For example:</p>
-<pre><code class="language-txt">example.com.    IN    MX    13 amir.mx.cloudflare.net.&#10;example.com.    IN    MX    86 linda.mx.cloudflare.net.&#10;example.com.    IN    MX    24 isaac.mx.cloudflare.net.&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">example.com.    IN    MX    13 amir.mx.cloudflare.net.&#10;example.com.    IN    MX    86 linda.mx.cloudflare.net.&#10;example.com.    IN    MX    24 isaac.mx.cloudflare.net.&#10;</code></pre>
 <h3 id="outbound-prefixes">Outbound prefixes</h3>
 <p>Email Service sends its traffic using both IPv4 and IPv6 prefixes, when supported by the recipient SMTP server.</p>
 <p>If you are a postmaster and are having trouble receiving Email Service emails, allow the following outbound IP addresses in your server configuration:</p>
@@ -38,7 +49,7 @@
 <p><strong>IPv6</strong></p>
 <p><code>2405:8100:c000::/38</code></p>
 <p>To verify the current authoritative ranges, query the SPF record directly:</p>
-<pre><code class="language-sh">dig TXT _spf.mx.cloudflare.net +short&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">dig TXT _spf.mx.cloudflare.net +short&#10;</code></pre>
 <h3 id="outbound-hostnames">Outbound hostnames</h3>
 <p>Email Service will use the following outbound domains for the <code>HELO/EHLO</code> command:</p>
 <ul>
@@ -47,10 +58,10 @@
 <li><code>cloudflare-email.com</code></li>
 </ul>
 <p>PTR records (reverse DNS) ensure that each hostname has a corresponding IP. For example:</p>
-<pre><code class="language-sh">dig a-h.cloudflare-email.net +short&#10;</code></pre>
-<pre><code class="language-sh">104.30.0.7&#10;</code></pre>
-<pre><code class="language-sh">dig -x 104.30.0.7 +short&#10;</code></pre>
-<pre><code class="language-sh">a-h.cloudflare-email.net.&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">dig a-h.cloudflare-email.net +short&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">104.30.0.7&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">dig -x 104.30.0.7 +short&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">a-h.cloudflare-email.net.&#10;</code></pre>
 <h3 id="sender-rewriting">Sender rewriting</h3>
 <p>For forwarded emails, Email Routing uses the <a href="https://en.wikipedia.org/wiki/Sender_Rewriting_Scheme">Sender Rewriting Scheme</a> to rewrite the envelope sender (the SMTP <code>MAIL FROM</code> address) to a Cloudflare-controlled forwarding domain. This rewriting allows SPF to pass at the destination server even though the message is being relayed. The <code>From:</code> header of the message is not modified.</p>
 <h3 id="smtp-errors">SMTP errors</h3>
@@ -58,13 +69,13 @@
 <h3 id="realtime-block-lists">Realtime Block Lists</h3>
 <p>Email Service monitors sender reputation and may temporarily delay or block emails from IPs that appear on Realtime Block Lists (RBLs). This helps maintain the service's overall reputation and deliverability.</p>
 <p>For Email Routing, inbound mail from senders on RBLs is rejected with an SMTP error similar to:</p>
-<pre><code class="language-txt">554 &lt;YOUR_IP_ADDRESS&gt; found on one or more RBLs (abusixip). Refer to https://developers.cloudflare.com/email-service/reference/postmaster/#realtime-block-lists&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">554 &lt;YOUR_IP_ADDRESS&gt; found on one or more RBLs (abusixip). Refer to https://developers.cloudflare.com/email-service/reference/postmaster/#realtime-block-lists&#10;</code></pre>
 <p>You can use tools like <a href="https://mxtoolbox.com/blacklists.aspx">MxToolbox</a> to check a sending IP against multiple block lists at once. If you believe your emails are being incorrectly blocked, contact the RBL maintainer directly or reach out through Cloudflare support channels.</p>
 <h3 id="spf-record-breakdown">SPF record breakdown</h3>
 <p>Email Service publishes its SPF data under <code>_spf.mx.cloudflare.net</code>. You can resolve the underlying record directly:</p>
-<pre><code class="language-sh">dig TXT _spf.mx.cloudflare.net +short&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">dig TXT _spf.mx.cloudflare.net +short&#10;</code></pre>
 <p>The record uses the format defined in <a href="https://datatracker.ietf.org/doc/html/rfc7208">RFC 7208</a>:</p>
-<pre><code class="language-txt">&quot;v=spf1 ip4:104.30.0.0/20 ~all&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">&quot;v=spf1 ip4:104.30.0.0/20 ~all&quot;&#10;</code></pre>
 <p>The <code>~all</code> mechanism is a SoftFail. Receiving servers should treat mail from IPs not listed in the record as suspicious but should not reject it outright on SPF alone.</p>
 <hr />
 <h2 id="related-configuration">Related configuration</h2>

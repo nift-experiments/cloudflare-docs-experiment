@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/analytics/account-and-zone-analytics/app-security-reports/
+  description: View account-wide application security reports covering WAF, bots, DDoS, and API Shield.
+  full_title: Application Security reports · Cloudflare Analytics docs
+  head_html: <title>Application Security reports · Cloudflare Analytics docs</title><meta name="generator" content="Nift"><meta name="description" content="View account-wide application security reports covering WAF, bots, DDoS, and API Shield."><link rel="canonical" href="https://developers.cloudflare.com/analytics/account-and-zone-analytics/app-security-reports/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/analytics/account-and-zone-analytics/app-security-reports/index.md"><meta property="og:title" content="Application Security reports · Cloudflare Analytics docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="View account-wide application security reports covering WAF, bots, DDoS, and API Shield."><meta property="og:url" content="https://developers.cloudflare.com/analytics/account-and-zone-analytics/app-security-reports/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Analytics"><meta name="algolia_product_filter" content="Analytics"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Security Center"><meta name="pcx_tags" content="Analytics"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/analytics/account-and-zone-analytics/app-security-reports/#page","headline":"Application Security reports \u00b7 Cloudflare Analytics docs","description":"View account-wide application security reports covering WAF, bots, DDoS, and API Shield.","url":"https://developers.cloudflare.com/analytics/account-and-zone-analytics/app-security-reports/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["Analytics"]}</script>
+  markdown: true
+  noindex: false
+  route: /analytics/account-and-zone-analytics/app-security-reports/
+  schema: 1
+---
 <p>Application Security reports provide cyber attack insights and trends for all of the Enterprise zones in your Cloudflare account.</p>
 <p>The reports are automatically generated on a monthly basis.</p>
 <p>You can access reports by going to the <strong>Security reports</strong> page or via the <a href="#api">API</a>. You can access reports from previous months by selecting the month from the dropdown.</p>
@@ -41,10 +52,10 @@
 </ul>
 <hr />
 <h2 id="api">API</h2>
-<pre><code class="language-sh">GET /accounts/{account_id}/reporting/policies&#10;</code></pre>
-<pre><code class="language-sh">GET /accounts/{account_id}/reporting/policies/{policy_id}&#10;</code></pre>
-<pre><code class="language-sh">GET /accounts/{account_id}/reporting/reports&#10;</code></pre>
-<pre><code class="language-sh">GET /accounts/{account_id}/reporting/reports/{report_id}&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">GET /accounts/{account_id}/reporting/policies&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">GET /accounts/{account_id}/reporting/policies/{policy_id}&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">GET /accounts/{account_id}/reporting/reports&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">GET /accounts/{account_id}/reporting/reports/{report_id}&#10;</code></pre>
 <details class="nb-details"><summary>Data returned by the API</summary><div class="nb-details-body">
 @markup("md", "content/.markup/bodies/3148.md")
 </div></details>

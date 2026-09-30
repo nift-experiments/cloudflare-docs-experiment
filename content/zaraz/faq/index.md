@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/zaraz/faq/
+  description: Answers to common questions about Cloudflare Zaraz.
+  full_title: FAQ · Cloudflare Zaraz docs
+  head_html: <title>FAQ · Cloudflare Zaraz docs</title><meta name="generator" content="Nift"><meta name="description" content="Answers to common questions about Cloudflare Zaraz."><link rel="canonical" href="https://developers.cloudflare.com/zaraz/faq/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/zaraz/faq/index.md"><meta property="og:title" content="FAQ · Cloudflare Zaraz docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Answers to common questions about Cloudflare Zaraz."><meta property="og:url" content="https://developers.cloudflare.com/zaraz/faq/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Zaraz"><meta name="algolia_product_filter" content="Zaraz"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Faq"><meta name="algolia_content_type" content="Faq"><meta name="pcx_additional_products" content="Zaraz"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/zaraz/faq/#page","headline":"FAQ \u00b7 Cloudflare Zaraz docs","description":"Answers to common questions about Cloudflare Zaraz.","url":"https://developers.cloudflare.com/zaraz/faq/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /zaraz/faq/
+  schema: 1
+---
 <p>Below you will find answers to our most commonly asked questions. If you cannot find the answer you are looking for, refer to the <a href="https://community.cloudflare.com/">community page</a> or <a href="https://discord.cloudflare.com">Discord channel</a> to explore additional resources.</p>
 <ul>
 <li><a href="#general">General</a></li>
@@ -31,9 +42,7 @@
 <h4 id="can-i-use-zaraz-with-rocket-loader">Can I use Zaraz with Rocket Loader?</h4>
 <p>We recommend disabling <a href="/speed/optimization/content/rocket-loader/">Rocket Loader</a> when using Zaraz. While Zaraz can be used together with Rocket Loader, there's usually no need to use both. Rocket Loader can sometimes delay data from reaching Zaraz, causing issues.</p>
 <h4 id="is-zaraz-compatible-with-content-security-policies-csp">Is Zaraz compatible with Content Security Policies (CSP)?</h4>
-<p>Yes. To learn more about how Zaraz compatibility with [<div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/10.md")
-</div>](/fundamentals/reference/policies-compliances/content-security-policies/) configurations works, refer to the [Cloudflare Zaraz supports CSP](https://blog.cloudflare.com/cloudflare-zaraz-supports-csp/) blog post.
+<p>Yes. To learn more about how Zaraz compatibility with <a href="/fundamentals/reference/policies-compliances/content-security-policies/"><span class="nb-glossary-tooltip" title="content security policy (CSP)">CSP</span></a> configurations works, refer to the <a href="https://blog.cloudflare.com/cloudflare-zaraz-supports-csp/">Cloudflare Zaraz supports CSP</a> blog post.</p>
 <h4 id="does-cloudflare-process-my-html-removing-existing-scripts-and-then-injecting-zaraz">Does Cloudflare process my HTML, removing existing scripts and then injecting Zaraz?</h4>
 <p>Cloudflare Zaraz does not remove other third-party scripts from the page. Zaraz <a href="/zaraz/reference/settings/#auto-inject-script">can be auto-injected or not</a>, depending on your configuration, but if you have existing scripts that you intend to load with Zaraz, you should remove them.</p>
 <h4 id="does-zaraz-work-with-cloudflare-s-client-side-security">Does Zaraz work with Cloudflare's client-side security?</h4>
@@ -78,7 +87,7 @@
 <h3 id="google-ads">Google Ads</h3>
 <h4 id="what-is-the-expected-format-for-conversion-id-and-conversion-label">What is the expected format for Conversion ID and Conversion Label</h4>
 <p>Conversion ID and Conversion Label are usually provided by Google Ads as a &quot;gtag script&quot;. Here's an example for a $1 USD conversion:</p>
-<pre><code class="language-js">gtag(&quot;event&quot;, &quot;conversion&quot;, {&#10;	send_to: &quot;AW-123456789/AbC-D_efG-h12_34-567&quot;,&#10;	value: 1.0,&#10;	currency: &quot;USD&quot;,&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">gtag(&quot;event&quot;, &quot;conversion&quot;, {&#10;	send_to: &quot;AW-123456789/AbC-D_efG-h12_34-567&quot;,&#10;	value: 1.0,&#10;	currency: &quot;USD&quot;,&#10;});&#10;</code></pre>
 <p>The Conversion ID is the first part of <code>send_to</code> parameter, without the <code>AW-</code>. In the above example it would be <code>123456789</code>. The Conversion Label is the second part of the <code>send_to</code> parameter, therefore <code>AbC-D_efG-h12_34-567</code> in the above example. When setting up your Google Ads conversions through Zaraz, take the information from the original scripts you were asked to implement.</p>
 <h3 id="custom-html">Custom HTML</h3>
 <h4 id="can-i-use-google-tag-manager-together-with-zaraz">Can I use Google Tag Manager together with Zaraz?</h4>

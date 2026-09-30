@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/ssl/keyless-ssl/configuration/public-dns/
+  description: Deploy Keyless SSL with public DNS resolution.
+  full_title: Public DNS setup - Keyless SSL · Cloudflare SSL/TLS docs
+  head_html: <title>Public DNS setup - Keyless SSL · Cloudflare SSL/TLS docs</title><meta name="generator" content="Nift"><meta name="description" content="Deploy Keyless SSL with public DNS resolution."><link rel="canonical" href="https://developers.cloudflare.com/ssl/keyless-ssl/configuration/public-dns/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/ssl/keyless-ssl/configuration/public-dns/index.md"><meta property="og:title" content="Public DNS setup - Keyless SSL · Cloudflare SSL/TLS docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Deploy Keyless SSL with public DNS resolution."><meta property="og:url" content="https://developers.cloudflare.com/ssl/keyless-ssl/configuration/public-dns/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="SSL/TLS"><meta name="algolia_product_filter" content="SSL/TLS"><meta name="pcx_content_group" content="Application performance"><meta name="pcx_content_type" content="Get started"><meta name="algolia_content_type" content="Get started"><meta name="pcx_additional_products" content="SSL/TLS"><meta name="pcx_tags" content="DNS"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/ssl/keyless-ssl/configuration/public-dns/#page","headline":"Public DNS setup - Keyless SSL \u00b7 Cloudflare SSL/TLS docs","description":"Deploy Keyless SSL with public DNS resolution.","url":"https://developers.cloudflare.com/ssl/keyless-ssl/configuration/public-dns/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["DNS"]}</script>
+  markdown: true
+  noindex: false
+  route: /ssl/keyless-ssl/configuration/public-dns/
+  schema: 1
+---
 <p>If you cannot use a <a href="/ssl/keyless-ssl/configuration/cloudflare-tunnel/">Cloudflare Tunnel setup</a>, you can also create a public DNS record for your key server.</p>
 <p>This setup option is not ideal as the DNS record cannot be <a href="/dns/proxy-status/">proxied</a> and - as a result - will expose the origin IP address of your key server.</p>
 <hr />
@@ -101,8 +112,8 @@
 </ul>
 </li>
 </ol>
-<pre><code class="language-yaml">api_token: &quot;&lt;YOUR_API_TOKEN&gt;&quot;&#10;</code></pre>
-<pre><code> Or use the environment variable `KEYLESS_API_TOKEN`.&#10;</code></pre>
+<pre tabindex="0"><code class="language-yaml">api_token: &quot;&lt;YOUR_API_TOKEN&gt;&quot;&#10;</code></pre>
+<pre tabindex="0"><code> Or use the environment variable `KEYLESS_API_TOKEN`.&#10;</code></pre>
 <ul>
 <li><strong>Origin CA API key (deprecated):</strong> <a href="/fundamentals/api/get-started/ca-keys/">Set the Origin CA API key</a>. This option will stop working on September 30, 2026.</li>
 </ul>
@@ -112,8 +123,8 @@
 </aside>
 <h3 id="populate-keys">Populate keys</h3>
 <p>Install your private keys in <code>/etc/keyless/keys/</code> and set the user and group to keyless with 400 permissions. Keys must be in PEM or DER format and have an extension of <code>.key</code>:</p>
-<pre><code class="language-sh">ls -l /etc/keyless/keys&#10;</code></pre>
-<pre><code class="language-sh">&#45;r-------- 1 keyless keyless 1675 Nov 18 16:44 example.com.key&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">ls -l /etc/keyless/keys&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">&#45;r-------- 1 keyless keyless 1675 Nov 18 16:44 example.com.key&#10;</code></pre>
 <p>When running multiple key servers, make sure all required keys are distributed to each key server. Customers typically will either use a configuration management tool such as Salt or Puppet to distribute keys or mount <code>/etc/keyless/keys</code> to a network location accessible only by your key servers. Keys are read on boot into memory, so a network path must be accessible during the gokeyless process start/restart.</p>
 <h3 id="activate">Activate</h3>
 <p>To activate, restart your keyless instance:</p>

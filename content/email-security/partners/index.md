@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/email-security/partners/
+  description: Set up and manage Email Security accounts for channel and alliance partner organizations and their customers.
+  full_title: Channel and Alliance Partners · Cloudflare Email security (formerly Area 1) docs
+  head_html: <title>Channel and Alliance Partners · Cloudflare Email security (formerly Area 1) docs</title><meta name="generator" content="Nift"><meta name="description" content="Set up and manage Email Security accounts for channel and alliance partner organizations and their customers."><meta name="robots" content="noindex"><link rel="canonical" href="https://developers.cloudflare.com/email-security/partners/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/email-security/partners/index.md"><meta property="og:title" content="Channel and Alliance Partners · Cloudflare Email security (formerly Area 1) docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Set up and manage Email Security accounts for channel and alliance partner organizations and their customers."><meta property="og:url" content="https://developers.cloudflare.com/email-security/partners/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Email security (formerly Area 1)"><meta name="algolia_product_filter" content="Email security (formerly Area 1)"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="Navigation"><meta name="algolia_content_type" content="Navigation"><meta name="pcx_additional_products" content="Email security (formerly Area 1)">
+  markdown: true
+  noindex: true
+  route: /email-security/partners/
+  schema: 1
+---
 <aside class="nb-aside note">
 <h3 class="nb-aside-title" id="area-1-has-been-renamed">Area 1 has been renamed</h3>
 @markup("md", "content/.markup/bodies/1046.md")
@@ -59,23 +70,17 @@
 </ul>
 <p>With an <a href="/email-security/deployment/inline/">inline deployment</a>, Email security evaluates email messages before they reach a user’s inbox. When you choose an <a href="/email-security/deployment/api/">API deployment</a>, email messages only reach Email security after they have already reached a user’s inbox.</p>
 <h2 id="classification-actions">Classification actions</h2>
-<p>Email security recommends that you quarantine <code>MALICIOUS</code> and <code>SPAM</code> <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/1047.md")
-</div>. You can configure this directly in [Office 365](/email-security/deployment/inline/setup/office-365-area1-mx/) and [Gsuite](/email-security/deployment/inline/setup/gsuite-area1-mx/), as well as [Email security](/email-security/email-configuration/domains-and-routing/domains/).
+<p>Email security recommends that you quarantine <code>MALICIOUS</code> and <code>SPAM</code> <span class="nb-glossary-tooltip" title="disposition">dispositions</span>. You can configure this directly in <a href="/email-security/deployment/inline/setup/office-365-area1-mx/">Office 365</a> and <a href="/email-security/deployment/inline/setup/gsuite-area1-mx/">Gsuite</a>, as well as <a href="/email-security/email-configuration/domains-and-routing/domains/">Email security</a>.</p>
 <h2 id="message-retraction">Message retraction</h2>
 <p>You can configure message retraction to take post-delivery actions against suspicious email messages. You can retract messages manually or automatically. Refer to <a href="/email-security/email-configuration/retract-settings/">Retract settings</a> for more information.</p>
 <h2 id="tls-enforcement-for-domains">TLS enforcement for domains</h2>
 <p>To add additional TLS requirements for emails coming from certain domains, you can enforce higher levels of SSL/TLS inspection. Refer to <a href="/email-security/email-configuration/domains-and-routing/partner-domains-tls/">Partner Domains TLS</a> for more information.</p>
 <h2 id="reports">Reports</h2>
-<p>You can subscribe to <a href="https://horizon.area1security.com/settings/subscriptions/email-subscriptions">daily and weekly email reports</a>, as well as <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/1048.md")
-</div>. For SIEM events, you will need to [configure your SIEM tool](/email-security/reporting/siem-integration/) into Email security first.
+<p>You can subscribe to <a href="https://horizon.area1security.com/settings/subscriptions/email-subscriptions">daily and weekly email reports</a>, as well as <span class="nb-glossary-tooltip" title="SIEM">SIEM events</span>. For SIEM events, you will need to <a href="/email-security/reporting/siem-integration/">configure your SIEM tool</a> into Email security first.</p>
 <h2 id="whitelisting-and-blocklisting-senders">Whitelisting and blocklisting senders</h2>
 <p>If you need to whitelist of blocklist senders, refer to <a href="/email-security/email-configuration/lists/">Allow and block lists</a>.</p>
 <h2 id="submitting-false-positives-and-false-negatives">Submitting false positives and false negatives</h2>
-<p>There are several ways of dealing with missed <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/1049.md")
-</div> or messages flagged as such that are not. Refer to [Phish submissions](/email-security/email-configuration/phish-submissions/) to learn more.
+<p>There are several ways of dealing with missed <span class="nb-glossary-tooltip" title="phishing">phish</span> or messages flagged as such that are not. Refer to <a href="/email-security/email-configuration/phish-submissions/">Phish submissions</a> to learn more.</p>
 <h2 id="best-practices">Best practices</h2>
 <p>Refer to the following pages to learn more:</p>
 <ol>

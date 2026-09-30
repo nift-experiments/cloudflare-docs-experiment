@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/agents/harnesses/think/tools/
+  description: Built-in workspace tools (including bash), custom tools, approvals, MCP tools, code execution, browser tools, and extensions for Think agents.
+  full_title: Tools · Cloudflare Agents docs
+  head_html: <title>Tools · Cloudflare Agents docs</title><meta name="generator" content="Nift"><meta name="description" content="Built-in workspace tools (including bash), custom tools, approvals, MCP tools, code execution, browser tools, and extensions for Think agents."><link rel="canonical" href="https://developers.cloudflare.com/agents/harnesses/think/tools/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/agents/harnesses/think/tools/index.md"><meta property="og:title" content="Tools · Cloudflare Agents docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Built-in workspace tools (including bash), custom tools, approvals, MCP tools, code execution, browser tools, and extensions for Think agents."><meta property="og:url" content="https://developers.cloudflare.com/agents/harnesses/think/tools/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Agents"><meta name="algolia_product_filter" content="Agents"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Agents"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/agents/harnesses/think/tools/#page","headline":"Tools \u00b7 Cloudflare Agents docs","description":"Built-in workspace tools (including bash), custom tools, approvals, MCP tools, code execution, browser tools, and extensions for Think agents.","url":"https://developers.cloudflare.com/agents/harnesses/think/tools/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /agents/harnesses/think/tools/
+  schema: 1
+---
 <p>Think provides built-in workspace file tools on every turn, plus integration points for custom tools, code execution, and dynamic extensions.</p>
 <h2 id="tool-merge-order">Tool merge order</h2>
 <p>On every turn, Think merges tools from multiple sources. Later sources override earlier ones if names collide:</p>
@@ -78,14 +89,14 @@
 <p>Custom tools are merged with workspace tools automatically. If a custom tool has the same name as a workspace tool, the custom tool wins.</p>
 <h2 id="tool-approval">Tool approval</h2>
 <p>Tools can require user approval before execution using the <code>needsApproval</code> option:</p>
-<pre><code class="language-ts">getTools(): ToolSet {&#10;	return {&#10;		deleteFile: tool({&#10;			description: &quot;Delete a file from the system&quot;,&#10;			inputSchema: z.object({ path: z.string() }),&#10;			needsApproval: async ({ path }) =&gt; path.startsWith(&quot;/important/&quot;),&#10;			execute: async ({ path }) =&gt; {&#10;				await this.workspace.rm(path);&#10;				return { deleted: path };&#10;			},&#10;		}),&#10;	};&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">getTools(): ToolSet {&#10;	return {&#10;		deleteFile: tool({&#10;			description: &quot;Delete a file from the system&quot;,&#10;			inputSchema: z.object({ path: z.string() }),&#10;			needsApproval: async ({ path }) =&gt; path.startsWith(&quot;/important/&quot;),&#10;			execute: async ({ path }) =&gt; {&#10;				await this.workspace.rm(path);&#10;				return { deleted: path };&#10;			},&#10;		}),&#10;	};&#10;}&#10;</code></pre>
 <p>When <code>needsApproval</code> returns <code>true</code>, the tool call is sent to the client for approval. The conversation pauses until the client responds with <code>CF_AGENT_TOOL_APPROVAL</code>.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/2100.md")
 </aside>
 <h2 id="per-turn-tool-overrides">Per-turn tool overrides</h2>
 <p>The <code>beforeTurn</code> hook can restrict or add tools for a specific turn:</p>
-<pre><code class="language-ts">beforeTurn(ctx: TurnContext) {&#10;	return {&#10;		activeTools: [&quot;read&quot;, &quot;write&quot;, &quot;getWeather&quot;],&#10;		tools: { emergencyTool: this.createEmergencyTool() },&#10;	};&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">beforeTurn(ctx: TurnContext) {&#10;	return {&#10;		activeTools: [&quot;read&quot;, &quot;write&quot;, &quot;getWeather&quot;],&#10;		tools: { emergencyTool: this.createEmergencyTool() },&#10;	};&#10;}&#10;</code></pre>
 <p><code>activeTools</code> limits which tools the model can call. <code>tools</code> adds extra tools for this turn only (merged on top of existing tools).</p>
 <h2 id="mcp-tools">MCP tools</h2>
 <p>Think inherits MCP client support from the <code>Agent</code> base class. By default, Think converts tools from connected MCP servers to AI SDK tools and adds them to every turn.</p>
@@ -105,7 +116,7 @@
 </div>
 <h2 id="code-execution-tool">Code execution tool</h2>
 <p>Let the LLM write and run JavaScript in a sandboxed Worker, recorded on a durable Code Mode runtime (abort-and-replay, human approvals, audit trail, reusable snippets). Requires <code>@cloudflare/codemode</code> and a <code>worker_loaders</code> binding.</p>
-<pre><code class="language-sh">npm install @cloudflare/codemode&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npm install @cloudflare/codemode&#10;</code></pre>
 <p>The one-liner infers everything from the agent — <code>state.*</code> from <code>this.workspace</code>, the executor from <code>env.LOADER</code>, and a live browser (<code>cdp.*</code>) from <code>env.BROWSER</code> if bound:</p>
 <div class="nb-type-script-example">
 @markup("md", "content/.markup/bodies/2108.md")
@@ -223,7 +234,7 @@
 </ul>
 <h3 id="extension-context-blocks">Extension context blocks</h3>
 <p>Extensions can declare context blocks in their manifest. These are automatically registered with the Session:</p>
-<pre><code class="language-ts">getExtensions() {&#10;	return [{&#10;		manifest: {&#10;			name: &quot;notes&quot;,&#10;			version: &quot;1.0.0&quot;,&#10;			permissions: { network: false },&#10;			context: [&#10;				{ label: &quot;scratchpad&quot;, description: &quot;Extension scratch space&quot;, maxTokens: 500 },&#10;			],&#10;		},&#10;		source: `({ tools: { /* ... */ } })`,&#10;	}];&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">getExtensions() {&#10;	return [{&#10;		manifest: {&#10;			name: &quot;notes&quot;,&#10;			version: &quot;1.0.0&quot;,&#10;			permissions: { network: false },&#10;			context: [&#10;				{ label: &quot;scratchpad&quot;, description: &quot;Extension scratch space&quot;, maxTokens: 500 },&#10;			],&#10;		},&#10;		source: `({ tools: { /* ... */ } })`,&#10;	}];&#10;}&#10;</code></pre>
 <p>The context block is registered as <code>notes_scratchpad</code> (namespaced by extension name).</p>
 <h2 id="custom-workspace-backends">Custom workspace backends</h2>
 <p>The individual tool factories are exported for use with custom storage backends:</p>

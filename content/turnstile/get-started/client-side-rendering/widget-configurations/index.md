@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/widget-configurations/
+  description: Configure widget appearance, language, and callback functions.
+  full_title: Widget configurations · Cloudflare Turnstile docs
+  head_html: <title>Widget configurations · Cloudflare Turnstile docs</title><meta name="generator" content="Nift"><meta name="description" content="Configure widget appearance, language, and callback functions."><link rel="canonical" href="https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/widget-configurations/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/widget-configurations/index.md"><meta property="og:title" content="Widget configurations · Cloudflare Turnstile docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Configure widget appearance, language, and callback functions."><meta property="og:url" content="https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/widget-configurations/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Turnstile"><meta name="algolia_product_filter" content="Turnstile"><meta name="pcx_content_group" content="Application security"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Turnstile"><meta name="pcx_tags" content="JavaScript"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/widget-configurations/#page","headline":"Widget configurations \u00b7 Cloudflare Turnstile docs","description":"Configure widget appearance, language, and callback functions.","url":"https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/widget-configurations/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["JavaScript"]}</script>
+  markdown: true
+  noindex: false
+  route: /turnstile/get-started/client-side-rendering/widget-configurations/
+  schema: 1
+---
 <p>Configure your Turnstile widget's appearance, behavior, and functionality using data attributes or JavaScript render parameters.</p>
 <h2 id="rendering-methods">Rendering methods</h2>
 <p>Turnstile widgets can be implemented using implicit or explicit rendering.</p>
@@ -138,9 +149,9 @@
 <li><code>never</code>: Disables automatic retry. This requires manual intervention and gives you full control over error handling in applications that need custom retry logic.</li>
 <li><code>retry-interval</code>: Controls the time between retry attempts (default: 8000ms) and lets you balance between quick recovery and server load.</li>
 </ul>
-<pre><code class="language-html">&lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot;&gt;&lt;/div&gt;&#10;</code></pre>
-<pre><code class="language-html">&lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot; data-retry=&quot;never&quot;&gt;&lt;/div&gt;&#10;</code></pre>
-<pre><code class="language-html">&lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot; data-retry-interval=&quot;0000&quot;&gt;&lt;/div&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot;&gt;&lt;/div&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot; data-retry=&quot;never&quot;&gt;&lt;/div&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot; data-retry-interval=&quot;0000&quot;&gt;&lt;/div&gt;&#10;</code></pre>
 <h3 id="refresh-behavior">Refresh behavior</h3>
 <p>Control how Turnstile handles token expiration and interactive timeouts.</p>
 <ul>
@@ -154,9 +165,9 @@
 <li><code>never</code> refresh requires your application to handle all refresh logic.</li>
 </ul>
 <p>Different strategies can be used for token expiration versus interactive timeouts based on your visitor experience requirements.</p>
-<pre><code class="language-html">&lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot;&gt;&lt;/div&gt;&#10;</code></pre>
-<pre><code class="language-html">&lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot; data-refresh-expired=&quot;manual&quot;&gt;&lt;/div&gt;&#10;</code></pre>
-<pre><code class="language-html">&lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot; data-refresh-timeout=&quot;auto&quot;&gt;&lt;/div&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot;&gt;&lt;/div&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot; data-refresh-expired=&quot;manual&quot;&gt;&lt;/div&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot; data-refresh-timeout=&quot;auto&quot;&gt;&lt;/div&gt;&#10;</code></pre>
 <h3 id="custom-data">Custom data</h3>
 <p>Add custom identifiers and data to your challenges.</p>
 <ul>
@@ -173,8 +184,8 @@
 <aside class="nb-aside caution">
 @markup("md", "content/.markup/bodies/15044.md")
 </aside>
-<pre><code class="language-html">&lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot; data-action=&quot;login&quot;&gt;&lt;/div&gt;&#10;</code></pre>
-<pre><code class="language-html">&lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot; data-cdata=&quot;user-cdata&quot;&gt;&lt;/div&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot; data-action=&quot;login&quot;&gt;&lt;/div&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot; data-cdata=&quot;user-cdata&quot;&gt;&lt;/div&gt;&#10;</code></pre>
 <h3 id="form-integration">Form integration</h3>
 <p>Configure how Turnstile integrates with HTML forms.</p>
 <p>When enabled, Turnstile automatically creates a hidden <code>&lt;input&gt;</code> element with the verification token. This gets submitted along with your other form data, making server-side validation straightforward.</p>
@@ -188,8 +199,8 @@
 <li>Custom field names helps avoid conflicts with existing form fields.</li>
 <li>Disabled response fields give you full control over token handling for complex form scenarios.</li>
 </ul>
-<pre><code class="language-html">&lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot; data-response-field-name=&quot;turnstile-token&quot;&gt;&lt;/div&gt;&#10;</code></pre>
-<pre><code class="language-html">&lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot; data-response-field=&quot;false&quot;&gt;&lt;/div&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot; data-response-field-name=&quot;turnstile-token&quot;&gt;&lt;/div&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot; data-response-field=&quot;false&quot;&gt;&lt;/div&gt;&#10;</code></pre>
 <hr />
 <h2 id="complete-configuration-reference">Complete configuration reference</h2>
 <table>
@@ -329,5 +340,5 @@
 </tbody>
 </table>
 <h3 id="examples">Examples</h3>
-<pre><code class="language-html">&lt;div style=&quot;max-width: 500px;&quot;&gt;&#10;  &lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot; data-size=&quot;flexible&quot; data-theme=&quot;auto&quot;&gt;&lt;/div&gt;&#10;&lt;/div&gt;&#10;</code></pre>
-<pre><code class="language-html">&lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot; data-size=&quot;compact&quot; data-theme=&quot;light&quot; data-language=&quot;en&quot;&gt;&#10;&lt;/div&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;div style=&quot;max-width: 500px;&quot;&gt;&#10;  &lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot; data-size=&quot;flexible&quot; data-theme=&quot;auto&quot;&gt;&lt;/div&gt;&#10;&lt;/div&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;div class=&quot;cf-turnstile&quot; data-sitekey=&quot;&lt;YOUR-SITE-KEY&gt;&quot; data-size=&quot;compact&quot; data-theme=&quot;light&quot; data-language=&quot;en&quot;&gt;&#10;&lt;/div&gt;&#10;</code></pre>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/logs/changelog/audit-logs/
+  description: View changelog entries for Audit Logs.
+  full_title: Audit Logs · Cloudflare Logs docs
+  head_html: <title>Audit Logs · Cloudflare Logs docs</title><meta name="generator" content="Nift"><meta name="description" content="View changelog entries for Audit Logs."><link rel="canonical" href="https://developers.cloudflare.com/logs/changelog/audit-logs/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/logs/changelog/audit-logs/index.md"><link rel="alternate" type="application/rss+xml" href="https://developers.cloudflare.com/logs/changelog/audit-logs/index.xml"><meta property="og:title" content="Audit Logs · Cloudflare Logs docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="View changelog entries for Audit Logs."><meta property="og:url" content="https://developers.cloudflare.com/logs/changelog/audit-logs/"><meta property="image" content="https://developers.cloudflare.com/og-changelog.png"><meta property="og:image" content="https://developers.cloudflare.com/og-changelog.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-changelog.png"><meta name="pcx_product" content="Logs"><meta name="algolia_product_filter" content="Logs"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_content_type" content="Changelog"><meta name="algolia_content_type" content="Changelog"><meta name="pcx_additional_products" content="Audit Logs"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://developers.cloudflare.com/logs/changelog/audit-logs/#page","headline":"Audit Logs \u00b7 Cloudflare Logs docs","description":"View changelog entries for Audit Logs.","url":"https://developers.cloudflare.com/logs/changelog/audit-logs/","inLanguage":"en","image":"https://developers.cloudflare.com/og-changelog.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /logs/changelog/audit-logs/
+  schema: 1
+---
 <h2 id="2026-07-27">2026-07-27</h2>
 
 <strong>Audit Logs v2 — Resource History</strong>
@@ -14,7 +25,7 @@
 </ol>
 <p><strong>API:</strong></p>
 <p>Use the History endpoint to retrieve the change history for any audit log entry:</p>
-<pre><code class="language-txt">GET https://api.cloudflare.com/client/v4/accounts/{account_id}/logs/audit/{id}/history&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">GET https://api.cloudflare.com/client/v4/accounts/{account_id}/logs/audit/{id}/history&#10;</code></pre>
 <p>The endpoint is also available for organization-scoped audit logs at <code>/organizations/{organization_id}/logs/audit/{id}/history</code>.</p>
 <p>For more information, refer to the <a href="/fundamentals/account/account-security/audit-logs/#resource-history">Resource History documentation</a>.</p>
 
@@ -39,7 +50,7 @@
 
 <p>Audit Logs v2 now supports organization-level audit logs. Org Admins can retrieve audit events for actions performed at the organization level via the Audit Logs v2 API.</p>
 <p>To retrieve organization-level audit logs, use the following endpoint:</p>
-<pre><code class="language-bash">GET https://api.cloudflare.com/client/v4/organizations/{organization_id}/logs/audit&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">GET https://api.cloudflare.com/client/v4/organizations/{organization_id}/logs/audit&#10;</code></pre>
 <p>This release covers user-initiated actions performed through organization-level APIs. Audit logs for system-initiated actions, a dashboard UI, and Logpush support for organizations will be added in future releases.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/17692.md")</aside>
@@ -122,7 +133,7 @@
 <p>The latest version of audit logs streamlines audit logging by automatically capturing all user and system actions performed through the Cloudflare Dashboard or public APIs. This update leverages Cloudflare’s existing API Shield to generate audit logs based on OpenAPI schemas, ensuring a more consistent and automated logging process.</p>
 <p>Availability: Audit logs (version 2) is now in Beta, with support limited to <strong>API access</strong>.</p>
 <p>Use the following API endpoint to retrieve audit logs:</p>
-<pre><code class="language-js">GET https://api.cloudflare.com/client/v4/accounts/&lt;account_id&gt;/logs/audit?since=&lt;date&gt;&amp;before=&lt;date&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">GET https://api.cloudflare.com/client/v4/accounts/&lt;account_id&gt;/logs/audit?since=&lt;date&gt;&amp;before=&lt;date&gt;&#10;</code></pre>
 <p>You can access detailed documentation for audit logs (version 2) Beta API release <a href="https://developers.cloudflare.com/api/resources/accounts/subresources/logs/subresources/audit/methods/list/">here</a>.</p>
 <p><strong>Key Improvements in the Beta Release:</strong></p>
 <ul>

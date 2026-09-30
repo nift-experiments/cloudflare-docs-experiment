@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/dns/zone-setups/troubleshooting/pending-nameservers/
+  description: Troubleshoot a Cloudflare zone that stays in Pending Nameserver Update status, including how to verify the delegation at your registrar and check for stale DNSSEC DS records.
+  full_title: Zone stuck in Pending Nameserver Update · Cloudflare DNS docs
+  head_html: <title>Zone stuck in Pending Nameserver Update · Cloudflare DNS docs</title><meta name="generator" content="Nift"><meta name="description" content="Troubleshoot a Cloudflare zone that stays in Pending Nameserver Update status, including how to verify the delegation at your registrar and check for stale DNSSEC DS records."><link rel="canonical" href="https://developers.cloudflare.com/dns/zone-setups/troubleshooting/pending-nameservers/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/dns/zone-setups/troubleshooting/pending-nameservers/index.md"><meta property="og:title" content="Zone stuck in Pending Nameserver Update · Cloudflare DNS docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Troubleshoot a Cloudflare zone that stays in Pending Nameserver Update status, including how to verify the delegation at your registrar and check for stale DNSSEC DS records."><meta property="og:url" content="https://developers.cloudflare.com/dns/zone-setups/troubleshooting/pending-nameservers/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="DNS"><meta name="algolia_product_filter" content="DNS"><meta name="pcx_content_group" content="Application performance"><meta name="pcx_content_type" content="Troubleshooting"><meta name="algolia_content_type" content="Troubleshooting"><meta name="pcx_additional_products" content="DNS"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/dns/zone-setups/troubleshooting/pending-nameservers/#page","headline":"Zone stuck in Pending Nameserver Update \u00b7 Cloudflare DNS docs","description":"Troubleshoot a Cloudflare zone that stays in Pending Nameserver Update status, including how to verify the delegation at your registrar and check for stale DNSSEC DS records.","url":"https://developers.cloudflare.com/dns/zone-setups/troubleshooting/pending-nameservers/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /dns/zone-setups/troubleshooting/pending-nameservers/
+  schema: 1
+---
 <p>A zone stays in <strong>Pending Nameserver Update</strong> when Cloudflare cannot confirm that your domain is delegated to the Cloudflare nameservers assigned to it.</p>
 <p>The most common reasons are that the nameserver change was not fully published at the registrar, that the domain is not using the exact nameservers assigned to it, or that stale DNSSEC records at the registrar are blocking the delegation.</p>
 <p>The rest of this page walks through what to check, in order, and shows how to verify each item independently of your registrar's control panel.</p>
@@ -55,7 +66,7 @@
 <p>Use one of the following methods to query the parent zone directly.</p>
 <h3 id="option-a-dig-trace">Option A - <code>dig +trace</code></h3>
 <p><code>dig +trace</code> follows the delegation from the root zone down. Adding <code>+noall +authority +nodnssec</code> trims the output to just the delegation section from each level, which is what you care about when checking where the parent zone points your domain. In a terminal, run:</p>
-<pre><code class="language-sh">dig +trace example.com NS +noall +authority +nodnssec&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">dig +trace example.com NS +noall +authority +nodnssec&#10;</code></pre>
 <ul>
 <li><code>+trace</code> — follows the delegation step by step, from the root nameservers down to your domain, instead of asking a single recursive resolver.</li>
 <li><code>+noall +authority</code> — hides everything except the <strong>AUTHORITY</strong> section returned at each hop, which is where each parent zone lists the nameservers it delegates to. The last hop shown before your domain is the parent zone (<code>com.</code>, <code>co.uk.</code>, etc.), and its authority section is what actually delegates your zone.</li>
@@ -67,9 +78,9 @@
 </aside>
 <h3 id="option-b-nslookup">Option B - <code>nslookup</code></h3>
 <p>If you are on Windows or prefer <code>nslookup</code>, query the <code>NS</code> records for your domain. Add the <code>-debug</code> flag to see the full response, including the authority section. In a terminal, run:</p>
-<pre><code class="language-sh">nslookup -type=ns -debug example.com&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">nslookup -type=ns -debug example.com&#10;</code></pre>
 <p>By default, <code>nslookup</code> queries your system's configured resolver, which may return a cached answer. For a definitive check against the parent zone (equivalent to <code>dig +trace</code>), query a TLD nameserver directly by adding it as the last argument. For a <code>.com</code> domain, this looks like:</p>
-<pre><code class="language-sh">nslookup -type=ns -debug example.com a.gtld-servers.net&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">nslookup -type=ns -debug example.com a.gtld-servers.net&#10;</code></pre>
 <p>For other TLDs, refer to <a href="https://www.iana.org/domains/root/db">IANA's root zone database</a> to find the authoritative nameservers for your TLD.</p>
 <p>If the output shows nameservers other than the ones assigned to your Cloudflare zone, the delegation is not yet correct.</p>
 <h3 id="option-c-web-based-lookup">Option C - web-based lookup</h3>
@@ -130,7 +141,7 @@
 <p>If Step 2 shows the correct Cloudflare nameservers at the parent zone but the zone is still Pending, check whether DNSSEC is still enabled from a previous DNS provider.</p>
 <p>DS records live at the registrar, not at the DNS provider, and they must be removed or updated when you move DNS providers. If they are not, the DNSSEC chain of trust breaks and resolvers return SERVFAIL for your domain.</p>
 <p>To check for DS records:</p>
-<pre><code class="language-sh">dig DS example.com&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">dig DS example.com&#10;</code></pre>
 <p>If DS records are returned and you did not intentionally configure DNSSEC on Cloudflare, they are stale from your previous provider and will block activation.</p>
 <p>To remove them:</p>
 <ol>

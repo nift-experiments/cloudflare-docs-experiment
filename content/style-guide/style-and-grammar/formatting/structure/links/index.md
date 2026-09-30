@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/style-guide/style-and-grammar/formatting/structure/links/
+  description: Write and format links in documentation.
+  full_title: Links · Cloudflare Style Guide
+  head_html: <title>Links · Cloudflare Style Guide</title><meta name="generator" content="Nift"><meta name="description" content="Write and format links in documentation."><link rel="canonical" href="https://developers.cloudflare.com/style-guide/style-and-grammar/formatting/structure/links/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/style-guide/style-and-grammar/formatting/structure/links/index.md"><meta property="og:title" content="Links · Cloudflare Style Guide"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Write and format links in documentation."><meta property="og:url" content="https://developers.cloudflare.com/style-guide/style-and-grammar/formatting/structure/links/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Style Guide"><meta name="algolia_product_filter" content="Style Guide"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Style Guide"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/style-guide/style-and-grammar/formatting/structure/links/#page","headline":"Links \u00b7 Cloudflare Style Guide","description":"Write and format links in documentation.","url":"https://developers.cloudflare.com/style-guide/style-and-grammar/formatting/structure/links/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /style-guide/style-and-grammar/formatting/structure/links/
+  schema: 1
+---
 <p>A link is a reference to another page, part of a page, or external resource. Hyperlinks are useful, but if overdone, they can distract the reader. Follow these guidelines for link text and placement.</p>
 <h2 id="types-of-links">Types of links</h2>
 <p>There are 3 types of links:</p>
@@ -59,7 +70,7 @@
 </ul>
 <h2 id="dashboard-link-text">Dashboard link text</h2>
 <p>When directing users to the Cloudflare dashboard, use the following convention:</p>
-<pre><code class="language-text">1. Log in to the [Cloudflare dashboard](https://dash.cloudflare.com/login) and select your account and domain.&#10;2. Go to **DNS** &gt; **Records**.&#10;</code></pre>
+<pre tabindex="0"><code class="language-text">1. Log in to the [Cloudflare dashboard](https://dash.cloudflare.com/login) and select your account and domain.&#10;2. Go to **DNS** &gt; **Records**.&#10;</code></pre>
 <h2 id="related-resources">Related resources</h2>
 <p>Use a <em>Related resources</em> section at the end of your document for:</p>
 <ul>
@@ -112,9 +123,9 @@
 <p>Links should be bidirectional. If a concept page links to a how-to, the how-to should link back to the concept page. This ensures that users (and AI systems) can traverse between pages in either direction.</p>
 <h3 id="example">Example</h3>
 <p>A concept page about DNS records should link to related how-to, troubleshooting, and reference pages:</p>
-<pre><code class="language-markdown">&#35;# Related resources&#10;&#10;&#45; To create or modify DNS records, refer to [Manage DNS records](/dns/manage-dns-records/how-to/create-dns-records/).&#10;&#45; For common DNS issues, refer to [Troubleshoot DNS records](/dns/troubleshooting/).&#10;&#45; For a complete list of supported record types, refer to [DNS record types](/dns/manage-dns-records/reference/dns-record-types/).&#10;</code></pre>
+<pre tabindex="0"><code class="language-markdown">&#35;# Related resources&#10;&#10;&#45; To create or modify DNS records, refer to [Manage DNS records](/dns/manage-dns-records/how-to/create-dns-records/).&#10;&#45; For common DNS issues, refer to [Troubleshoot DNS records](/dns/troubleshooting/).&#10;&#45; For a complete list of supported record types, refer to [DNS record types](/dns/manage-dns-records/reference/dns-record-types/).&#10;</code></pre>
 <p>The corresponding how-to page should link back:</p>
-<pre><code class="language-markdown">&#35;# Related resources&#10;&#10;&#45; To learn how DNS records work, refer to [DNS records](/dns/manage-dns-records/).&#10;&#45; For record type details, refer to [DNS record types](/dns/manage-dns-records/reference/dns-record-types/).&#10;&#45; For common DNS issues, refer to [Troubleshoot DNS records](/dns/troubleshooting/).&#10;</code></pre>
+<pre tabindex="0"><code class="language-markdown">&#35;# Related resources&#10;&#10;&#45; To learn how DNS records work, refer to [DNS records](/dns/manage-dns-records/).&#10;&#45; For record type details, refer to [DNS record types](/dns/manage-dns-records/reference/dns-record-types/).&#10;&#45; For common DNS issues, refer to [Troubleshoot DNS records](/dns/troubleshooting/).&#10;</code></pre>
 <h3 id="when-links-do-not-exist">When links do not exist</h3>
 <p>Not every content type will have a matching page for every row in the table. Link to what exists. If a related page does not exist yet, do not create a placeholder link. Instead, consider whether the missing page represents a gap in the doc set that should be addressed.</p>
 <h2 id="links-for-instructions-in-documentation">Links for instructions in documentation</h2>

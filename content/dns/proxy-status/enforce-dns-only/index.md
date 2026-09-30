@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/dns/proxy-status/enforce-dns-only/
+  description: Bypass Cloudflare's reverse proxy for all zones at once.
+  full_title: Enforce DNS-only · Cloudflare DNS docs
+  head_html: <title>Enforce DNS-only · Cloudflare DNS docs</title><meta name="generator" content="Nift"><meta name="description" content="Bypass Cloudflare&#x27;s reverse proxy for all zones at once."><link rel="canonical" href="https://developers.cloudflare.com/dns/proxy-status/enforce-dns-only/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/dns/proxy-status/enforce-dns-only/index.md"><meta property="og:title" content="Enforce DNS-only · Cloudflare DNS docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Bypass Cloudflare&#x27;s reverse proxy for all zones at once."><meta property="og:url" content="https://developers.cloudflare.com/dns/proxy-status/enforce-dns-only/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="DNS"><meta name="algolia_product_filter" content="DNS"><meta name="pcx_content_group" content="Application performance"><meta name="pcx_content_type" content="Troubleshooting"><meta name="algolia_content_type" content="Troubleshooting"><meta name="pcx_additional_products" content="DNS"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/dns/proxy-status/enforce-dns-only/#page","headline":"Enforce DNS-only \u00b7 Cloudflare DNS docs","description":"Bypass Cloudflare's reverse proxy for all zones at once.","url":"https://developers.cloudflare.com/dns/proxy-status/enforce-dns-only/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /dns/proxy-status/enforce-dns-only/
+  schema: 1
+---
 <p>The enforce DNS-only setting is an account-level break-glass mechanism that allows you to bypass Cloudflare's reverse proxy for all zones in your account in a single action. When enabled, Cloudflare responds to DNS queries with the underlying record content — origin IP addresses for proxied <code>A</code> and <code>AAAA</code> records, and CNAME targets for proxied <code>CNAME</code> records — instead of Cloudflare's anycast IP addresses, effectively setting all <a href="/dns/proxy-status/">proxied DNS records</a> to DNS-only without modifying the records themselves.</p>
 <p>This setting is intended for emergency situations only, such as during an outage when you need to quickly route traffic directly to your origins.</p>
 <aside class="nb-aside caution">
@@ -37,11 +48,11 @@
 </aside>
 <h2 id="enable-enforce-dns-only">Enable enforce DNS-only</h2>
 <p>Use the <a href="/api/resources/dns/subresources/settings/subresources/account/methods/edit/">Update DNS Settings</a> endpoint to enable enforce DNS-only for your account:</p>
-<pre class="nb-api-request"><code class="language-bash">curl --request PATCH \&#10;  --url https://api.cloudflare.com/client/v4/accounts/{account_id}/dns_settings \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;enforce_dns_only&quot;: true&#10;}&#x27;</code></pre>
+<pre tabindex="0" class="nb-api-request"><code class="language-bash">curl --request PATCH \&#10;  --url https://api.cloudflare.com/client/v4/accounts/{account_id}/dns_settings \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;enforce_dns_only&quot;: true&#10;}&#x27;</code></pre>
 <p>Once enabled, Cloudflare responds to DNS queries for all proxied records with the underlying record content — your configured origin IP addresses for <code>A</code> and <code>AAAA</code> records, and the configured CNAME target for <code>CNAME</code> records — instead of Cloudflare's anycast IPs.</p>
 <h2 id="disable-enforce-dns-only">Disable enforce DNS-only</h2>
 <p>To restore normal proxy behavior, set <code>enforce_dns_only</code> to <code>false</code>:</p>
-<pre class="nb-api-request"><code class="language-bash">curl --request PATCH \&#10;  --url https://api.cloudflare.com/client/v4/accounts/{account_id}/dns_settings \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;enforce_dns_only&quot;: false&#10;}&#x27;</code></pre>
+<pre tabindex="0" class="nb-api-request"><code class="language-bash">curl --request PATCH \&#10;  --url https://api.cloudflare.com/client/v4/accounts/{account_id}/dns_settings \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;enforce_dns_only&quot;: false&#10;}&#x27;</code></pre>
 <p>After you disable the setting, Cloudflare resumes responding to DNS queries with anycast IP addresses for proxied records and all proxy-based features are restored.</p>
 <h2 id="other-cloudflare-products">Other Cloudflare products</h2>
 <p>Refer to the sections below in case you use other Cloudflare products that rely on DNS records.</p>
@@ -72,7 +83,7 @@
 </ul>
 <h2 id="check-current-status">Check current status</h2>
 <p>Use the <a href="/api/resources/dns/subresources/settings/subresources/account/methods/get/">Show DNS Settings</a> endpoint to verify the current value:</p>
-<pre class="nb-api-request"><code class="language-bash">curl --request GET \&#10;  --url https://api.cloudflare.com/client/v4/accounts/{account_id}/dns_settings \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot;</code></pre>
+<pre tabindex="0" class="nb-api-request"><code class="language-bash">curl --request GET \&#10;  --url https://api.cloudflare.com/client/v4/accounts/{account_id}/dns_settings \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot;</code></pre>
 <h2 id="related-resources">Related resources</h2>
 <ul>
 <li><a href="/dns/proxy-status/">Proxy status</a> - Understand how proxied and DNS-only records behave.</li>

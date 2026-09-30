@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/analytics/analytics-integrations/sentinel/troubleshooting/
+  description: Resolve common issues when integrating Cloudflare with Microsoft Sentinel.
+  full_title: Troubleshooting · Cloudflare Analytics docs
+  head_html: <title>Troubleshooting · Cloudflare Analytics docs</title><meta name="generator" content="Nift"><meta name="description" content="Resolve common issues when integrating Cloudflare with Microsoft Sentinel."><link rel="canonical" href="https://developers.cloudflare.com/analytics/analytics-integrations/sentinel/troubleshooting/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/analytics/analytics-integrations/sentinel/troubleshooting/index.md"><meta property="og:title" content="Troubleshooting · Cloudflare Analytics docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Resolve common issues when integrating Cloudflare with Microsoft Sentinel."><meta property="og:url" content="https://developers.cloudflare.com/analytics/analytics-integrations/sentinel/troubleshooting/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Analytics"><meta name="algolia_product_filter" content="Analytics"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_content_type" content="Troubleshooting"><meta name="algolia_content_type" content="Troubleshooting"><meta name="pcx_additional_products" content="Analytics,Logs"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/analytics/analytics-integrations/sentinel/troubleshooting/#page","headline":"Troubleshooting \u00b7 Cloudflare Analytics docs","description":"Resolve common issues when integrating Cloudflare with Microsoft Sentinel.","url":"https://developers.cloudflare.com/analytics/analytics-integrations/sentinel/troubleshooting/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /analytics/analytics-integrations/sentinel/troubleshooting/
+  schema: 1
+---
 <p>Use this guide to resolve common issues when integrating Cloudflare logs with <a href="/analytics/analytics-integrations/sentinel/">Microsoft Sentinel</a> through the Codeless Connector Framework (CCF).</p>
 <aside class="nb-aside note">
 <h3 class="nb-aside-title" id="support-scope">Support scope</h3>
@@ -9,20 +20,20 @@
 <ol>
 <li>Confirm that the <code>Microsoft.SecurityInsights</code> resource provider is registered on your subscription:</li>
 </ol>
-<pre><code class="language-sh">az provider show --namespace Microsoft.SecurityInsights --query &quot;{state:registrationState}&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">az provider show --namespace Microsoft.SecurityInsights --query &quot;{state:registrationState}&quot;&#10;</code></pre>
 <p>The output should return <code>&quot;state&quot;: &quot;Registered&quot;</code>.</p>
 <ol start="2">
 <li>In an <strong>InPrivate/Incognito</strong> browser session, sign in as a user holding one of these Microsoft Entra roles: <strong>Privileged Role Administrator</strong>, <strong>Cloud Application Administrator</strong>, <strong>AI Administrator</strong>, or <strong>Application Administrator</strong>.</li>
 <li>Open the direct tenant-wide admin consent URL for the Microsoft-managed application (App ID <code>4f05ce56-95b6-4612-9d98-a45c8cc33f9f</code>), replacing <code>{tenant-id}</code> with your Entra tenant ID:</li>
 </ol>
-<pre><code class="language-txt">https://login.microsoftonline.com/{tenant-id}/adminconsent?client_id=4f05ce56-95b6-4612-9d98-a45c8cc33f9f&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://login.microsoftonline.com/{tenant-id}/adminconsent?client_id=4f05ce56-95b6-4612-9d98-a45c8cc33f9f&#10;</code></pre>
 <ol start="4">
 <li>Complete the consent flow, including any MFA challenge.</li>
 </ol>
 <p><strong>Verify:</strong> Refresh the Cloudflare connector configuration page in Microsoft Sentinel. The <strong>Service Principal ID</strong> field should populate automatically, and the <strong>Grant tenant-wide admin consent</strong> button should no longer be displayed. Retry the connector deployment.</p>
 <h2 id="deployment-fails-with-invalidtemplate-on-createdataflowresources">Deployment fails with <code>InvalidTemplate</code> on <code>CreateDataFlowResources</code></h2>
 <p>You see a deployment failure with an error similar to:</p>
-<pre><code class="language-txt">Deployment template validation failed: &#x27;The resource&#10;&#x27;Microsoft.Resources/deployments/CreateDataFlowResources&#x27;&#10;is not defined in the template.&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">Deployment template validation failed: &#x27;The resource&#10;&#x27;Microsoft.Resources/deployments/CreateDataFlowResources&#x27;&#10;is not defined in the template.&#x27;&#10;</code></pre>
 <p><strong>Cause:</strong> The ARM template requires the Azure Blob Storage account and the Microsoft Sentinel workspace (and its underlying Log Analytics workspace) to reside in the <strong>same Azure subscription and the same resource group</strong>. When they are in different subscriptions or different resource groups, the nested <code>CreateDataFlowResources</code> sub-deployment cannot resolve the required resource references and validation fails.</p>
 <p>A less common variant of this error occurs when the <code>Microsoft.EventGrid</code> resource provider is not registered in the target subscription.</p>
 <p><strong>Fix:</strong></p>
@@ -30,7 +41,7 @@
 <li>Confirm that both resources are co-located in the same Azure subscription and the same resource group. If they are not, redeploy or migrate them so they share both.</li>
 <li>Register the required resource providers on the target subscription:</li>
 </ol>
-<pre><code class="language-sh">az provider register --namespace Microsoft.SecurityInsights&#10;az provider register --namespace Microsoft.EventGrid&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">az provider register --namespace Microsoft.SecurityInsights&#10;az provider register --namespace Microsoft.EventGrid&#10;</code></pre>
 <ol start="3">
 <li>
 <p>After deployment, confirm that the Microsoft-managed service principal holds these role assignments on the Storage account:</p>
@@ -46,18 +57,18 @@
 <p><strong>Verify:</strong> Redeploy the connector. The Deployments blade should show status <strong>Succeeded</strong>, and the connector should transition to <strong>Connected</strong>.</p>
 <h2 id="connector-update-fails-with-invalid-output-table-schema">Connector update fails with <code>Invalid output table schema</code></h2>
 <p>You see a deployment failure with an error similar to:</p>
-<pre><code class="language-txt">Failed to create required resources for data connector.&#10;Invalid output table schema: The following columns which exist&#10;in the current schema do not exist in the new schema or have&#10;different types.&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">Failed to create required resources for data connector.&#10;Invalid output table schema: The following columns which exist&#10;in the current schema do not exist in the new schema or have&#10;different types.&#10;</code></pre>
 <p><strong>Cause:</strong> An earlier version of the Cloudflare CCF connector created a <code>CloudflareV2_CL</code> table in your Log Analytics workspace. When you deploy a newer connector version, the ARM template attempts to update this table schema. Azure Monitor rejects the update if the new schema omits columns that exist in the current table, or changes an existing column to an incompatible datatype.</p>
 <p><strong>Fix:</strong> Update the existing table schema directly through the Azure Monitor REST API before redeploying the connector. Run the update from Azure Cloud Shell using an account that holds the <code>Log Analytics Contributor</code> role on the workspace.</p>
 <ol>
 <li>Download the latest <code>CloudflareV2_CL.json</code> schema definition from the Cloudflare CCF connector solution package (available in the <a href="https://marketplace.microsoft.com/en-us/product/cloudflare.azure-sentinel-solution-cloudflare-ccf?tab=Overview">Microsoft Sentinel Content Hub</a>) and upload it to your Cloud Shell session.</li>
 <li>Request an Azure Resource Manager access token:</li>
 </ol>
-<pre><code class="language-sh">az account get-access-token --resource https://management.azure.com/&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">az account get-access-token --resource https://management.azure.com/&#10;</code></pre>
 <ol start="3">
 <li>Apply the updated table schema, replacing the placeholders with your values:</li>
 </ol>
-<pre><code class="language-sh">az rest --method PUT \&#10;  &#45;-url &quot;https://management.azure.com/subscriptions/&lt;subscription-id&gt;/resourceGroups/&lt;resource-group&gt;/providers/Microsoft.OperationalInsights/workspaces/&lt;workspace-name&gt;/tables/CloudflareV2_CL?api-version=2025-07-01&quot; \&#10;  &#45;-headers &quot;Authorization=Bearer &lt;access-token&gt;&quot; &quot;Content-Type=application/json&quot; \&#10;  &#45;-body @CloudflareV2_CL.json&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">az rest --method PUT \&#10;  &#45;-url &quot;https://management.azure.com/subscriptions/&lt;subscription-id&gt;/resourceGroups/&lt;resource-group&gt;/providers/Microsoft.OperationalInsights/workspaces/&lt;workspace-name&gt;/tables/CloudflareV2_CL?api-version=2025-07-01&quot; \&#10;  &#45;-headers &quot;Authorization=Bearer &lt;access-token&gt;&quot; &quot;Content-Type=application/json&quot; \&#10;  &#45;-body @CloudflareV2_CL.json&#10;</code></pre>
 <p><strong>Verify:</strong> The command returns the updated table definition as JSON. Redeploy the Cloudflare CCF connector — the deployment should complete without a schema validation error.</p>
 <h2 id="fields-are-missing-or-null-in-cloudflarev2-cl">Fields are missing or <code>null</code> in <code>CloudflareV2_CL</code></h2>
 <p><strong>Cause:</strong> The Data Collection Rule (DCR) schema is out of sync with the Cloudflare Logpush schema being delivered. Two variants are common:</p>
@@ -75,8 +86,8 @@
 </ul>
 </li>
 </ol>
-<pre><code class="language-kusto">source&#10;| extend NELType = Type&#10;| project-away Type&#10;</code></pre>
-<pre><code> Add a `NELType` column to `CloudflareV2_CL` with datatype `string`.&#10;</code></pre>
+<pre tabindex="0"><code class="language-kusto">source&#10;| extend NELType = Type&#10;| project-away Type&#10;</code></pre>
+<pre tabindex="0"><code> Add a `NELType` column to `CloudflareV2_CL` with datatype `string`.&#10;</code></pre>
 <p><strong>Verify:</strong> Send a fresh Logpush batch and query <code>CloudflareV2_CL</code> for the affected fields. Values should now be populated and no longer <code>null</code>.</p>
 <aside class="nb-aside note">
 <h3 class="nb-aside-title" id="known-unsupported-fields">Known unsupported fields</h3>

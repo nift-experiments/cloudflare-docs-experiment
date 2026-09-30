@@ -29,6 +29,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PIN = 'bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf'
 sys.path.insert(0, str(ROOT / 'tools'))
 import import_cloudflare as mdx_importer
+from generate_navigation import frontmatter, route_for
+from page_metadata import ORIGIN, apply_to_content, directory_metadata
 from upstream_snapshot import tracked_snapshot
 
 
@@ -554,6 +556,13 @@ def main():
     ordinary_manifest = json.loads((ROOT / 'reports/cp6/expected-routes.json').read_text())
     base_names = {route.strip('/') + '/' for route in ordinary_manifest['routes']}
     base_names.add('/')
+    ordinary_metadata = {}
+    for source in sorted((up / 'src/content/docs').rglob('*')):
+        if source.suffix not in {'.md', '.mdx'}:
+            continue
+        metadata, _body = frontmatter(source)
+        rel = source.relative_to(up / 'src/content/docs')
+        ordinary_metadata[route_for(rel, metadata)] = metadata
     manifest_path = ROOT / 'reports/cp6/expected-generated-routes.json'
     previous_generated_routes = set()
     previous_text_routes = set()
@@ -1651,6 +1660,67 @@ def main():
             seen.add(x['name'])
             deduped.append(x)
     tracked = deduped
+    metadata_sections, metadata_products = directory_metadata(up)
+    for entry in tracked:
+        content_path = content / entry['name'].strip('/') / 'index.md'
+        if entry['name'] == '/':
+            content_path = content / 'index.html'
+        if not content_path.is_file():
+            continue
+        route_path = entry['output'] if entry['output'].startswith('/') else '/' + entry['output']
+        metadata = {}
+        if route_path.startswith('/changelog/post/'):
+            metadata = {'pcx_content_type': 'changelog-entry', 'title_suffix': 'Changelog'}
+        elif route_path.startswith(('/ai/models/', '/workers-ai/models/')):
+            metadata = {'pcx_content_type': 'reference'}
+        elif route_path.startswith('/videos/'):
+            metadata = {'pcx_content_type': 'video'}
+        apply_to_content(content_path, route_path, entry['title'], metadata,
+                         metadata_sections, metadata_products, markdown=False)
+    existing_entries = json.loads(tracked_path.read_text()).get('tracked', [])
+    for entry in existing_entries:
+        if entry['name'] not in base_names:
+            continue
+        route_path = '/' if entry['name'] == '/' else '/' + entry['name']
+        content_path = (content / 'index.html' if route_path == '/' else
+                        content / route_path.strip('/') / 'index.md')
+        if not content_path.is_file():
+            continue
+        apply_to_content(content_path, route_path, entry['title'],
+                         ordinary_metadata.get(route_path, {}), metadata_sections,
+                         metadata_products, markdown=route_path != '/')
+
+    # Astro's sitemap integration emits an index plus chunk. Keep the frozen
+    # route set deterministic and apply the same broad exclusions here.
+    sitemap_routes = set(ordinary_manifest['routes']) | {'/'} | {
+        entry['output'] for entry in tracked if entry['output'].endswith('/')}
+    sitemap_urls = []
+    for route_path in sorted(sitemap_routes):
+        if '/style-guide/' in route_path or route_path.endswith('/404/'):
+            continue
+        content_path = content / route_path.strip('/') / 'index.md'
+        if route_path == '/':
+            content_path = content / 'index.html'
+        noindex = False
+        if content_path.is_file() and content_path.read_text().startswith('---\n'):
+            match = re.match(r'^---\n(.*?)\n---\n?', content_path.read_text(), re.S)
+            if match:
+                page_frontmatter = yaml.safe_load(match.group(1)) or {}
+                noindex = bool((page_frontmatter.get('cp9') or {}).get('noindex'))
+        if not noindex:
+            sitemap_urls.append(f'{ORIGIN}{route_path}')
+    sitemap = ['<?xml version="1.0" encoding="UTF-8"?>',
+               '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    sitemap.extend(f'<url><loc>{html.escape(url)}</loc></url>' for url in sitemap_urls)
+    sitemap.append('</urlset>')
+    (ROOT / 'public/sitemap-0.xml').write_text('\n'.join(sitemap) + '\n')
+    (ROOT / 'public/sitemap-index.xml').write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+        f'<sitemap><loc>{ORIGIN}/sitemap-0.xml</loc></sitemap>'
+        '</sitemapindex>\n')
+    static_files.update({'/sitemap-index.xml', '/sitemap-0.xml'})
+    families['sitemap'] = {'routes': len(sitemap_urls), 'chunks': 1}
     nav_dir = ROOT / 'public/assets/navigation'
     nav_dir.mkdir(parents=True, exist_ok=True)
     generated_routes = [entry['output'] for entry in tracked if entry['output'].endswith('/')]

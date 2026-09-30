@@ -1,7 +1,16 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/email-security/email-configuration/email-policies/link-actions/
+  description: Configure URL defanging and Email Link Isolation for messages based on Email security dispositions.
+  full_title: Link actions · Cloudflare Email security (formerly Area 1) docs
+  head_html: <title>Link actions · Cloudflare Email security (formerly Area 1) docs</title><meta name="generator" content="Nift"><meta name="description" content="Configure URL defanging and Email Link Isolation for messages based on Email security dispositions."><meta name="robots" content="noindex"><link rel="canonical" href="https://developers.cloudflare.com/email-security/email-configuration/email-policies/link-actions/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/email-security/email-configuration/email-policies/link-actions/index.md"><meta property="og:title" content="Link actions · Cloudflare Email security (formerly Area 1) docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Configure URL defanging and Email Link Isolation for messages based on Email security dispositions."><meta property="og:url" content="https://developers.cloudflare.com/email-security/email-configuration/email-policies/link-actions/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Email security (formerly Area 1)"><meta name="algolia_product_filter" content="Email security (formerly Area 1)"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Email security (formerly Area 1)">
+  markdown: true
+  noindex: true
+  route: /email-security/email-configuration/email-policies/link-actions/
+  schema: 1
+---
 <h2 id="disposition-actions">Disposition actions</h2>
-<p>Create actions for emails with specific <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/8564.md")
-</div>. `URL defang` means that every URL in an email of the selected type will be rewritten so that the user cannot follow the link. For example, `https://www.example.com` will become `https[:]//www[.]example[.]com`.
+<p>Create actions for emails with specific <span class="nb-glossary-tooltip" title="disposition">dispositions</span>. <code>URL defang</code> means that every URL in an email of the selected type will be rewritten so that the user cannot follow the link. For example, <code>https://www.example.com</code> will become <code>https[:]//www[.]example[.]com</code>.</p>
 <p>To update or create a new disposition action:</p>
 <ol>
 <li>Log in to the <a href="https://horizon.area1security.com/">Email security dashboard</a>.</li>

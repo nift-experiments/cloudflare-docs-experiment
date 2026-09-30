@@ -1,7 +1,18 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/workers/runtime-apis/response/
+  description: Interface that represents an HTTP response.
+  full_title: Response · Cloudflare Workers docs
+  head_html: <title>Response · Cloudflare Workers docs</title><meta name="generator" content="Nift"><meta name="description" content="Interface that represents an HTTP response."><link rel="canonical" href="https://developers.cloudflare.com/workers/runtime-apis/response/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/workers/runtime-apis/response/index.md"><meta property="og:title" content="Response · Cloudflare Workers docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Interface that represents an HTTP response."><meta property="og:url" content="https://developers.cloudflare.com/workers/runtime-apis/response/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Workers"><meta name="algolia_product_filter" content="Workers"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Configuration"><meta name="algolia_content_type" content="Configuration"><meta name="pcx_additional_products" content="Workers"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/workers/runtime-apis/response/#page","headline":"Response \u00b7 Cloudflare Workers docs","description":"Interface that represents an HTTP response.","url":"https://developers.cloudflare.com/workers/runtime-apis/response/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /workers/runtime-apis/response/
+  schema: 1
+---
 <p>The <code>Response</code> interface represents an HTTP response and is part of the Fetch API.</p>
 <hr />
 <h2 id="constructor">Constructor</h2>
-<pre><code class="language-js">let response = new Response(body, init);&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">let response = new Response(body, init);&#10;</code></pre>
 <h3 id="parameters">Parameters</h3>
 <ul>
 <li>
@@ -160,7 +171,7 @@
 <h3 id="set-the-content-length-header">Set the <code>Content-Length</code> header</h3>
 <p>The <code>Content-Length</code> header will be automatically set by the runtime based on whatever the data source for the <code>Response</code> is. Any value manually set by user code in the <code>Headers</code> will be ignored. To have a <code>Content-Length</code> header with a specific value specified, the <code>body</code> of the <code>Response</code> must be either a <code>FixedLengthStream</code> or a fixed-length value just as a string or <code>TypedArray</code>.</p>
 <p>A <code>FixedLengthStream</code> is an identity <code>TransformStream</code> that permits only a fixed number of bytes to be written to it.</p>
-<pre><code class="language-js">  const { writable, readable } = new FixedLengthStream(11);&#10;&#10;  const enc = new TextEncoder();&#10;  const writer = writable.getWriter();&#10;  writer.write(enc.encode(&quot;hello world&quot;));&#10;  writer.end();&#10;&#10;  return new Response(readable);&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">  const { writable, readable } = new FixedLengthStream(11);&#10;&#10;  const enc = new TextEncoder();&#10;  const writer = writable.getWriter();&#10;  writer.write(enc.encode(&quot;hello world&quot;));&#10;  writer.end();&#10;&#10;  return new Response(readable);&#10;</code></pre>
 <p>Using any other type of <code>ReadableStream</code> as the body of a response will result in chunked encoding being used.</p>
 <hr />
 <h2 id="differences">Differences</h2>

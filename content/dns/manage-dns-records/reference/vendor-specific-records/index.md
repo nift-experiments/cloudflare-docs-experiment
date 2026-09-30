@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/dns/manage-dns-records/reference/vendor-specific-records/
+  description: DNS records for common third-party services.
+  full_title: Vendor-specific DNS records · Cloudflare DNS docs
+  head_html: <title>Vendor-specific DNS records · Cloudflare DNS docs</title><meta name="generator" content="Nift"><meta name="description" content="DNS records for common third-party services."><link rel="canonical" href="https://developers.cloudflare.com/dns/manage-dns-records/reference/vendor-specific-records/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/dns/manage-dns-records/reference/vendor-specific-records/index.md"><meta property="og:title" content="Vendor-specific DNS records · Cloudflare DNS docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="DNS records for common third-party services."><meta property="og:url" content="https://developers.cloudflare.com/dns/manage-dns-records/reference/vendor-specific-records/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="DNS"><meta name="algolia_product_filter" content="DNS"><meta name="pcx_content_group" content="Application performance"><meta name="pcx_content_type" content="Configuration"><meta name="algolia_content_type" content="Configuration"><meta name="pcx_additional_products" content="DNS"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/dns/manage-dns-records/reference/vendor-specific-records/#page","headline":"Vendor-specific DNS records \u00b7 Cloudflare DNS docs","description":"DNS records for common third-party services.","url":"https://developers.cloudflare.com/dns/manage-dns-records/reference/vendor-specific-records/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /dns/manage-dns-records/reference/vendor-specific-records/
+  schema: 1
+---
 <p>This article requires prior knowledge of DNS record management via the Cloudflare dashboard. To learn more, refer to Cloudflare's article on <a href="/dns/manage-dns-records/how-to/create-dns-records/">managing DNS records</a>.</p>
 <h2 id="google">Google</h2>
 <h3 id="google-workspace-mx-records">Google Workspace MX records</h3>
@@ -21,7 +32,7 @@
 <h3 id="amazon-s3-bucket">Amazon S3 bucket</h3>
 <p>Find the <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html">URL</a> for your bucket.</p>
 <p>Then, <a href="/dns/manage-dns-records/how-to/create-dns-records/">create a <code>CNAME</code> record</a> in Cloudflare. For example, if the full host URL of the bucket is <code>files.example.com.s3.amazonaws.com</code>, you would add a <code>CNAME</code> record similar to the following:</p>
-<pre><code class="language-txt">files  CNAME  files.example.com.s3.amazonaws.com&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">files  CNAME  files.example.com.s3.amazonaws.com&#10;</code></pre>
 <aside class="nb-aside caution">
 @markup("md", "content/.markup/bodies/7782.md")
 </aside>
@@ -37,10 +48,8 @@
 <p>To use Cloudflare DNS with AWS Amplify, refer to the <a href="https://docs.aws.amazon.com/amplify/latest/userguide/to-add-a-custom-domain-managed-by-a-third-party-dns-provider.html">Amplify help content</a> and follow the instructions for <strong>manual configuration</strong>.</p>
 <p>At Cloudflare, you will need at least two <code>CNAME</code> records:</p>
 <ul>
-<li>A <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></li>
+<li>A <span class="nb-glossary-tooltip" title="proxy status">DNS-only</span> <code>CNAME</code> to validate your domain ownership, which should look like the following:</li>
 </ul>
-@markup("md", "content/.markup/bodies/7785.md")
-</div> `CNAME` to validate your domain ownership, which should look like the following:
 <div class="nb-example"><h3 class="nb-component-title" id="example-1">Example</h3>
 @input("content/.markup/bodies/7786.md")
 </div>
@@ -49,10 +58,8 @@
 @markup("md", "content/.markup/bodies/7781.md")
 </aside>
 <ul>
-<li>One <code>CNAME</code> for the <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></li>
+<li>One <code>CNAME</code> for the <span class="nb-glossary-tooltip" title="apex domain">apex domain</span> (<code>example.com</code>) and/or for each of the subdomains (<code>blog.example.com</code>) that you want to manage on Cloudflare. For details refer to <a href="/dns/manage-dns-records/how-to/create-dns-records/">Manage DNS records</a>. These records can be proxied.</li>
 </ul>
-@markup("md", "content/.markup/bodies/7787.md")
-</div> (`example.com`) and/or for each of the subdomains (`blog.example.com`) that you want to manage on Cloudflare. For details refer to [Manage DNS records](/dns/manage-dns-records/how-to/create-dns-records/). These records can be proxied.
 <div class="nb-example"><h3 class="nb-component-title" id="example-2">Example</h3>
 @input("content/.markup/bodies/7788.md")
 </div>

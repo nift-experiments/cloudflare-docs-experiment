@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/durable-objects/get-started/
+  description: Create and deploy your first Durable Object with SQLite storage and a companion Worker.
+  full_title: Getting started · Cloudflare Durable Objects docs
+  head_html: <title>Getting started · Cloudflare Durable Objects docs</title><meta name="generator" content="Nift"><meta name="description" content="Create and deploy your first Durable Object with SQLite storage and a companion Worker."><link rel="canonical" href="https://developers.cloudflare.com/durable-objects/get-started/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/durable-objects/get-started/index.md"><meta property="og:title" content="Getting started · Cloudflare Durable Objects docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Create and deploy your first Durable Object with SQLite storage and a companion Worker."><meta property="og:url" content="https://developers.cloudflare.com/durable-objects/get-started/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Durable Objects"><meta name="algolia_product_filter" content="Durable Objects"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Get started"><meta name="algolia_content_type" content="Get started"><meta name="pcx_additional_products" content="Durable Objects"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/durable-objects/get-started/#page","headline":"Getting started \u00b7 Cloudflare Durable Objects docs","description":"Create and deploy your first Durable Object with SQLite storage and a companion Worker.","url":"https://developers.cloudflare.com/durable-objects/get-started/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /durable-objects/get-started/
+  schema: 1
+---
 <p>This guide will instruct you through:</p>
 <ul>
 <li>Writing a JavaScript class that defines a Durable Object.</li>
@@ -24,7 +35,7 @@
 </ol></h2>
 <p>You will access your Durable Object from a <a href="/workers/">Worker</a>. Your Worker application is an interface to interact with your Durable Object.</p>
 <p>To create a Worker project, run:</p>
-<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre><code data-nb-pm-code>npm create cloudflare@latest -- durable-object-starter</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm create cloudflare@latest -- durable-object-starter" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>yarn create cloudflare durable-object-starter</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn create cloudflare durable-object-starter" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>pnpm create cloudflare@latest durable-object-starter</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm create cloudflare@latest durable-object-starter" aria-label="Copy to clipboard">Copy</button></div></div>
+<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre tabindex="0"><code data-nb-pm-code>npm create cloudflare@latest -- durable-object-starter</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm create cloudflare@latest -- durable-object-starter" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>yarn create cloudflare durable-object-starter</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn create cloudflare durable-object-starter" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>pnpm create cloudflare@latest durable-object-starter</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm create cloudflare@latest durable-object-starter" aria-label="Copy to clipboard">Copy</button></div></div>
 <p>Running <code>create cloudflare@latest</code> will install <a href="/workers/wrangler/install-and-update/">Wrangler</a>, the Workers CLI. You will use Wrangler to test and deploy your project.</p>
 <p>For setup, select the following options:</p>
 <ul>
@@ -36,7 +47,7 @@
 </ul>
 <p>This will create a new directory, which will include either a <code>src/index.js</code> or <code>src/index.ts</code> file to write your code and a <a href="/workers/wrangler/configuration/"><code>wrangler.jsonc</code></a> configuration file.</p>
 <p>Move into your new directory:</p>
-<pre><code class="language-sh">cd durable-object-starter&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cd durable-object-starter&#10;</code></pre>
 <aside class="nb-aside note">
 <h3 class="nb-aside-title" id="adding-a-durable-object-to-an-existing-worker">Adding a Durable Object to an existing Worker</h3>
 @markup("md", "content/.markup/bodies/1098.md")
@@ -110,13 +121,13 @@
 <li>Develop a Durable Object Worker locally</li>
 </ol></h2>
 <p>To test your Durable Object locally, run <a href="/workers/wrangler/commands/general/#dev"><code>wrangler dev</code></a>:</p>
-<pre><code class="language-sh">npx wrangler dev&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler dev&#10;</code></pre>
 <p>In your console, you should see a<code>Hello world</code> string returned by the Durable Object.</p>
 <h2 id="7-deploy-your-durable-object-worker"><ol start="7">
 <li>Deploy your Durable Object Worker</li>
 </ol></h2>
 <p>To deploy your Durable Object Worker:</p>
-<pre><code class="language-sh">npx wrangler deploy&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler deploy&#10;</code></pre>
 <p>Once deployed, you should be able to see your newly created Durable Object Worker on the Cloudflare dashboard.</p>
 <div class="nb-dash-button"></div>
 <p>Preview your Durable Object Worker at <code>&lt;YOUR_WORKER&gt;.&lt;YOUR_SUBDOMAIN&gt;.workers.dev</code>.</p>

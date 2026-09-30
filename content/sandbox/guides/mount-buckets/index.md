@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/sandbox/guides/mount-buckets/
+  description: Mount S3-compatible object storage as local filesystems for persistent data storage.
+  full_title: Mount buckets · Cloudflare Sandbox SDK docs
+  head_html: <title>Mount buckets · Cloudflare Sandbox SDK docs</title><meta name="generator" content="Nift"><meta name="description" content="Mount S3-compatible object storage as local filesystems for persistent data storage."><link rel="canonical" href="https://developers.cloudflare.com/sandbox/guides/mount-buckets/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/sandbox/guides/mount-buckets/index.md"><meta property="og:title" content="Mount buckets · Cloudflare Sandbox SDK docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Mount S3-compatible object storage as local filesystems for persistent data storage."><meta property="og:url" content="https://developers.cloudflare.com/sandbox/guides/mount-buckets/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Sandbox SDK"><meta name="algolia_product_filter" content="Sandbox SDK"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Sandbox SDK"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/sandbox/guides/mount-buckets/#page","headline":"Mount buckets \u00b7 Cloudflare Sandbox SDK docs","description":"Mount S3-compatible object storage as local filesystems for persistent data storage.","url":"https://developers.cloudflare.com/sandbox/guides/mount-buckets/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /sandbox/guides/mount-buckets/
+  schema: 1
+---
 <p>Mount S3-compatible object storage buckets as local filesystem paths. Access object storage using standard file operations. For Cloudflare R2 in production, you can also mount by Worker R2 binding name so credentials stay in the Worker runtime.</p>
 <aside class="nb-aside caution">
 <h3 class="nb-aside-title" id="mounting-workspace">Mounting `/workspace`</h3>
@@ -37,7 +48,7 @@
 <p>R2 binding mounts do not require credentials. Remote endpoint mounts remain supported for Cloudflare R2 and other S3-compatible providers, and those flows can still use automatic credential detection or explicit credentials.</p>
 <h3 id="automatic-detection">Automatic detection</h3>
 <p>When you include an <code>endpoint</code>, set credentials as Worker secrets and the SDK automatically detects them:</p>
-<pre><code class="language-sh">npx wrangler secret put R2_ACCESS_KEY_ID&#10;npx wrangler secret put R2_SECRET_ACCESS_KEY&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler secret put R2_ACCESS_KEY_ID&#10;npx wrangler secret put R2_SECRET_ACCESS_KEY&#10;</code></pre>
 <aside class="nb-aside note">
 <h3 class="nb-aside-title" id="r2-credentials">R2 credentials</h3>
 @markup("md", "content/.markup/bodies/13382.md")
@@ -137,9 +148,9 @@
 <h3 id="missing-credentials-error">Missing credentials error</h3>
 <p><strong>Error</strong>: <code>MissingCredentialsError: No credentials found</code></p>
 <p><strong>Solution</strong>: This error only applies when you mount a remote S3-compatible endpoint by setting <code>endpoint</code>. Set credentials as Worker secrets:</p>
-<pre><code class="language-sh">npx wrangler secret put R2_ACCESS_KEY_ID&#10;npx wrangler secret put R2_SECRET_ACCESS_KEY&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler secret put R2_ACCESS_KEY_ID&#10;npx wrangler secret put R2_SECRET_ACCESS_KEY&#10;</code></pre>
 <p>or</p>
-<pre><code class="language-sh">npx wrangler secret put AWS_ACCESS_KEY_ID&#10;npx wrangler secret put AWS_SECRET_ACCESS_KEY&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler secret put AWS_ACCESS_KEY_ID&#10;npx wrangler secret put AWS_SECRET_ACCESS_KEY&#10;</code></pre>
 <h3 id="mount-failed-error">Mount failed error</h3>
 <p><strong>Error</strong>: <code>S3FSMountError: mount failed</code></p>
 <p><strong>Common causes</strong>:</p>

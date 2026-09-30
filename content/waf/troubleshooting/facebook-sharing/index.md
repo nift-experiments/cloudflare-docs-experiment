@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/waf/troubleshooting/facebook-sharing/
+  description: Fix issues sharing your site content to Facebook.
+  full_title: Issues sharing to Facebook · Cloudflare Web Application Firewall (WAF) docs
+  head_html: <title>Issues sharing to Facebook · Cloudflare Web Application Firewall (WAF) docs</title><meta name="generator" content="Nift"><meta name="description" content="Fix issues sharing your site content to Facebook."><link rel="canonical" href="https://developers.cloudflare.com/waf/troubleshooting/facebook-sharing/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/waf/troubleshooting/facebook-sharing/index.md"><meta property="og:title" content="Issues sharing to Facebook · Cloudflare Web Application Firewall (WAF) docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Fix issues sharing your site content to Facebook."><meta property="og:url" content="https://developers.cloudflare.com/waf/troubleshooting/facebook-sharing/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="WAF"><meta name="algolia_product_filter" content="WAF"><meta name="pcx_content_group" content="Application security"><meta name="pcx_content_type" content="Troubleshooting"><meta name="algolia_content_type" content="Troubleshooting"><meta name="pcx_additional_products" content="WAF"><meta name="pcx_tags" content="Debugging"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/waf/troubleshooting/facebook-sharing/#page","headline":"Issues sharing to Facebook \u00b7 Cloudflare Web Application Firewall (WAF) docs","description":"Fix issues sharing your site content to Facebook.","url":"https://developers.cloudflare.com/waf/troubleshooting/facebook-sharing/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["Debugging"]}</script>
+  markdown: true
+  noindex: false
+  route: /waf/troubleshooting/facebook-sharing/
+  schema: 1
+---
 <p>Cloudflare does not block or challenge requests from Facebook by default. However, a post of a website to Facebook returns an <em>Attention Required</em> error in the following situations:</p>
 <ul>
 <li>You have globally <a href="/fundamentals/reference/under-attack-mode/">enabled Under Attack mode</a>.</li>
@@ -9,10 +20,8 @@
 <p>To resolve issues sharing to Facebook, do one of the following:</p>
 <ul>
 <li>Remove the corresponding IP, ASN, or country custom rule that challenges or blocks Facebook IPs.</li>
-<li>Create a <a href="/waf/custom-rules/skip/">skip rule</a> for <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></li>
+<li>Create a <a href="/waf/custom-rules/skip/">skip rule</a> for <span class="nb-glossary-tooltip" title="autonomous system numbers (ASNs)">ASNs</span> <code>AS32934</code> and <code>AS63293</code> (use the <em>Skip</em> action and configure the rule to skip <strong>Security Level</strong>).</li>
+<li>Review existing configuration rules and Page Rules and make sure they are not affecting requests from Facebook IPs.</li>
 </ul>
-@markup("md", "content/.markup/bodies/15319.md")
-</div> `AS32934` and `AS63293` (use the _Skip_ action and configure the rule to skip **Security Level**).
-- Review existing configuration rules and Page Rules and make sure they are not affecting requests from Facebook IPs.
 <p>If you experience issues with Facebook sharing, you can re-scrape pages via the <strong>Fetch New Scrape Information</strong> option on Facebook's Object Debugger. Facebook <a href="https://developers.facebook.com/docs/sharing/opengraph/using-objects">provides an API</a> to help update a large number of resources.</p>
 <p>If you continue to have issues, you can <a href="/support/contacting-cloudflare-support/">contact Cloudflare Support</a> with the URLs of your website that cannot share to Facebook, and confirming that you have re-scraped the URLs.</p>

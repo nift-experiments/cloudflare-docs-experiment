@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/sandbox/1-0-preview/api/terminals/
+  description: Reference for createTerminal, Terminal handles, output streams, connect, and control methods in the Sandbox SDK 1.0 preview.
+  full_title: Terminals · Cloudflare Sandbox SDK docs
+  head_html: <title>Terminals · Cloudflare Sandbox SDK docs</title><meta name="generator" content="Nift"><meta name="description" content="Reference for createTerminal, Terminal handles, output streams, connect, and control methods in the Sandbox SDK 1.0 preview."><link rel="canonical" href="https://developers.cloudflare.com/sandbox/1-0-preview/api/terminals/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/sandbox/1-0-preview/api/terminals/index.md"><meta property="og:title" content="Terminals · Cloudflare Sandbox SDK docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Reference for createTerminal, Terminal handles, output streams, connect, and control methods in the Sandbox SDK 1.0 preview."><meta property="og:url" content="https://developers.cloudflare.com/sandbox/1-0-preview/api/terminals/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Sandbox SDK"><meta name="algolia_product_filter" content="Sandbox SDK"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Sandbox SDK"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/sandbox/1-0-preview/api/terminals/#page","headline":"Terminals \u00b7 Cloudflare Sandbox SDK docs","description":"Reference for createTerminal, Terminal handles, output streams, connect, and control methods in the Sandbox SDK 1.0 preview.","url":"https://developers.cloudflare.com/sandbox/1-0-preview/api/terminals/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /sandbox/1-0-preview/api/terminals/
+  schema: 1
+---
 <aside class="nb-aside note">
 <h3 class="nb-aside-title" id="path-to-sandbox-sdk-1-0">Path to Sandbox SDK 1.0</h3>
 @markup("md", "content/.markup/bodies/13757.md")
@@ -6,7 +17,7 @@
 <p>For the mental model and browser connect walkthrough, refer to <a href="/sandbox/1-0-preview/terminals/">Terminals</a>.</p>
 <h2 id="createterminal"><code>createTerminal()</code></h2>
 <p>Start a terminal from <strong>argv</strong> (usually a shell). Resolves when the terminal resource is created. Same rules as process <code>exec</code>: no implicit shell wrapping, and argv entries are not shell-escaped.</p>
-<pre><code class="language-ts">createTerminal(options: CreateTerminalOptions): Promise&lt;Terminal&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">createTerminal(options: CreateTerminalOptions): Promise&lt;Terminal&gt;&#10;</code></pre>
 <h3 id="createterminaloptions"><code>CreateTerminalOptions</code></h3>
 <table>
 <thead>
@@ -58,10 +69,10 @@
 <h2 id="getterminal"><code>getTerminal()</code></h2>
 <p>Return a handle for a terminal in the <strong>current container</strong>, or <code>null</code>.</p>
 <p>Does not start a container if none is running. Returns <code>null</code> when no container is up, when the terminal ID is unknown in the current container, or when that terminal belonged to a previous container for the same sandbox ID.</p>
-<pre><code class="language-ts">getTerminal(id: string): Promise&lt;Terminal | null&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">getTerminal(id: string): Promise&lt;Terminal | null&gt;&#10;</code></pre>
 <h2 id="listterminals"><code>listTerminals()</code></h2>
 <p>List terminals in the current container for this sandbox. Does not start a container if none is running. Returns an empty list when no container is up.</p>
-<pre><code class="language-ts">listTerminals(): Promise&lt;Terminal[]&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">listTerminals(): Promise&lt;Terminal[]&gt;&#10;</code></pre>
 <h2 id="terminal"><code>Terminal</code></h2>
 <table>
 <thead>
@@ -110,14 +121,14 @@
 </tbody>
 </table>
 <h3 id="getsnapshot"><code>getSnapshot()</code></h3>
-<pre><code class="language-ts">interface TerminalSnapshot {&#10;	id: string;&#10;	pid?: number;&#10;	command: SandboxCommand;&#10;	cwd?: string;&#10;	status: &quot;running&quot; | &quot;exited&quot; | &quot;error&quot;;&#10;	exit?: ProcessExit;&#10;	error?: ProcessFailure;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">interface TerminalSnapshot {&#10;	id: string;&#10;	pid?: number;&#10;	command: SandboxCommand;&#10;	cwd?: string;&#10;	status: &quot;running&quot; | &quot;exited&quot; | &quot;error&quot;;&#10;	exit?: ProcessExit;&#10;	error?: ProcessFailure;&#10;}&#10;</code></pre>
 <h3 id="write"><code>write()</code></h3>
-<pre><code class="language-ts">write(data: Uint8Array): Promise&lt;void&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">write(data: Uint8Array): Promise&lt;void&gt;&#10;</code></pre>
 <p>Write bytes to the PTY. Browser keystrokes normally arrive through <code>connect()</code> instead.</p>
 <h3 id="resize"><code>resize()</code></h3>
-<pre><code class="language-ts">resize(cols: number, rows: number): Promise&lt;void&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">resize(cols: number, rows: number): Promise&lt;void&gt;&#10;</code></pre>
 <h3 id="output"><code>output()</code></h3>
-<pre><code class="language-ts">output(options?: TerminalOutputOptions): Promise&lt;ReadableStream&lt;TerminalOutputEvent&gt;&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">output(options?: TerminalOutputOptions): Promise&lt;ReadableStream&lt;TerminalOutputEvent&gt;&gt;&#10;</code></pre>
 <h4 id="terminaloutputoptions"><code>TerminalOutputOptions</code></h4>
 <table>
 <thead>
@@ -151,17 +162,17 @@
 </tbody>
 </table>
 <h4 id="terminaloutputevent"><code>TerminalOutputEvent</code></h4>
-<pre><code class="language-ts">type TerminalOutputEvent =&#10;	| {&#10;			type: &quot;data&quot;;&#10;			terminalId: string;&#10;			cursor: string;&#10;			timestamp: string;&#10;			data: Uint8Array;&#10;	  }&#10;	| {&#10;			type: &quot;terminal&quot;;&#10;			terminalId: string;&#10;			cursor: string;&#10;			timestamp: string;&#10;			state: &quot;exited&quot;;&#10;			exit: ProcessExit;&#10;	  }&#10;	| {&#10;			type: &quot;terminal&quot;;&#10;			terminalId: string;&#10;			cursor: string;&#10;			timestamp: string;&#10;			state: &quot;error&quot;;&#10;			error: ProcessFailure;&#10;	  }&#10;	| {&#10;			type: &quot;truncated&quot;;&#10;			terminalId: string;&#10;			cursor?: string;&#10;			timestamp: string;&#10;	  };&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">type TerminalOutputEvent =&#10;	| {&#10;			type: &quot;data&quot;;&#10;			terminalId: string;&#10;			cursor: string;&#10;			timestamp: string;&#10;			data: Uint8Array;&#10;	  }&#10;	| {&#10;			type: &quot;terminal&quot;;&#10;			terminalId: string;&#10;			cursor: string;&#10;			timestamp: string;&#10;			state: &quot;exited&quot;;&#10;			exit: ProcessExit;&#10;	  }&#10;	| {&#10;			type: &quot;terminal&quot;;&#10;			terminalId: string;&#10;			cursor: string;&#10;			timestamp: string;&#10;			state: &quot;error&quot;;&#10;			error: ProcessFailure;&#10;	  }&#10;	| {&#10;			type: &quot;truncated&quot;;&#10;			terminalId: string;&#10;			cursor?: string;&#10;			timestamp: string;&#10;	  };&#10;</code></pre>
 <p>Retain the latest <code>cursor</code> from delivered events if you reconnect or call <code>output({ since, replay: true })</code> later on the <strong>same</strong> terminal in the <strong>same</strong> container.</p>
 <h3 id="waitforexit"><code>waitForExit()</code></h3>
-<pre><code class="language-ts">waitForExit(options?: {&#10;	timeout?: number;&#10;	signal?: AbortSignal;&#10;}): Promise&lt;ProcessExit&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">waitForExit(options?: {&#10;	timeout?: number;&#10;	signal?: AbortSignal;&#10;}): Promise&lt;ProcessExit&gt;&#10;</code></pre>
 <p>Local <code>timeout</code> / <code>signal</code> cancel only the wait. They do not terminate the terminal. Call <code>terminate()</code> or <code>interrupt()</code> when you intend to stop it.</p>
 <h3 id="interrupt-and-terminate"><code>interrupt()</code> and <code>terminate()</code></h3>
-<pre><code class="language-ts">interrupt(): Promise&lt;void&gt;&#10;terminate(): Promise&lt;void&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">interrupt(): Promise&lt;void&gt;&#10;terminate(): Promise&lt;void&gt;&#10;</code></pre>
 <p>These are terminal control operations. They are not the same as process <code>kill(signal)</code> on an <code>exec</code> handle.</p>
 <h3 id="connect"><code>connect()</code></h3>
 <p>Attach a browser (or other) WebSocket upgrade request to this terminal.</p>
-<pre><code class="language-ts">connect(&#10;	request: Request,&#10;	options?: {&#10;		cursor?: string;&#10;		cols?: number;&#10;		rows?: number;&#10;	},&#10;): Promise&lt;Response&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">connect(&#10;	request: Request,&#10;	options?: {&#10;		cursor?: string;&#10;		cols?: number;&#10;		rows?: number;&#10;	},&#10;): Promise&lt;Response&gt;&#10;</code></pre>
 <ul>
 <li><code>request</code> must be a WebSocket upgrade request.</li>
 <li><code>cursor</code> resumes output replay after a previous disconnect when the client has one.</li>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/rules/url-forwarding/bulk-redirects/concepts/
+  description: Bulk Redirects work through a combination of URL redirects, a Bulk Redirect list, and a Bulk Redirect rule.
+  full_title: Bulk Redirects concepts · Cloudflare Rules docs
+  head_html: <title>Bulk Redirects concepts · Cloudflare Rules docs</title><meta name="generator" content="Nift"><meta name="description" content="Bulk Redirects work through a combination of URL redirects, a Bulk Redirect list, and a Bulk Redirect rule."><link rel="canonical" href="https://developers.cloudflare.com/rules/url-forwarding/bulk-redirects/concepts/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/rules/url-forwarding/bulk-redirects/concepts/index.md"><meta property="og:title" content="Bulk Redirects concepts · Cloudflare Rules docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Bulk Redirects work through a combination of URL redirects, a Bulk Redirect list, and a Bulk Redirect rule."><meta property="og:url" content="https://developers.cloudflare.com/rules/url-forwarding/bulk-redirects/concepts/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Rules"><meta name="algolia_product_filter" content="Rules"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Rules"><meta name="pcx_tags" content="Redirects"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/rules/url-forwarding/bulk-redirects/concepts/#page","headline":"Bulk Redirects concepts \u00b7 Cloudflare Rules docs","description":"Bulk Redirects work through a combination of URL redirects, a Bulk Redirect list, and a Bulk Redirect rule.","url":"https://developers.cloudflare.com/rules/url-forwarding/bulk-redirects/concepts/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["Redirects"]}</script>
+  markdown: true
+  noindex: false
+  route: /rules/url-forwarding/bulk-redirects/concepts/
+  schema: 1
+---
 <p>Bulk Redirects involve the following elements:</p>
 <ul>
 <li>
@@ -39,12 +50,10 @@
 <h3 id="expression">Expression</h3>
 <p>The rule expression, or filter expression, specifies the conditions that must be met for the rule to run. By default, all URL redirects of the specified list will apply.</p>
 <p>The default expression of a Bulk Redirect Rule is the following:</p>
-<pre><code class="language-txt">http.request.full_uri in $&lt;LIST_NAME&gt;&#10;</code></pre>
-<p>This expression means that the request URL, after some basic <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/13231.md")
-</div> (if [URL normalization](/rules/normalization/) is enabled), should match the source URL of a URL redirect in the list `<LIST_NAME>` for the redirect to be applied.
+<pre tabindex="0"><code class="language-txt">http.request.full_uri in $&lt;LIST_NAME&gt;&#10;</code></pre>
+<p>This expression means that the request URL, after some basic <span class="nb-glossary-tooltip" title="URL normalization">normalization</span> (if <a href="/rules/normalization/">URL normalization</a> is enabled), should match the source URL of a URL redirect in the list <code>&lt;LIST_NAME&gt;</code> for the redirect to be applied.</p>
 <p>You can use an expression different from the default one to increase the specificity of URL redirect matches. For example, if you set the expression of a Bulk Redirect Rule to the following expression, there will only be a match for requests coming from the United Kingdom:</p>
-<pre><code class="language-txt">ip.src.country == &quot;GB&quot; and http.request.full_uri in $&lt;LIST_NAME&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">ip.src.country == &quot;GB&quot; and http.request.full_uri in $&lt;LIST_NAME&gt;&#10;</code></pre>
 <p>For more information on the available fields, refer to <a href="/rules/url-forwarding/bulk-redirects/reference/fields-functions/">Available fields and functions</a>.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/13227.md")

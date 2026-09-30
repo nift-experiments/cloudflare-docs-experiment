@@ -1,1 +1,12 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/mcp-portal/
+  description: Centralize multiple MCP servers onto a single endpoint and customize the tools, prompts, and resources available to users.
+  full_title: MCP server portals · Cloudflare Agents docs
+  head_html: <title>MCP server portals · Cloudflare Agents docs</title><meta name="generator" content="Nift"><meta name="description" content="Centralize multiple MCP servers onto a single endpoint and customize the tools, prompts, and resources available to users."><meta name="robots" content="noindex"><link rel="canonical" href="https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/mcp-portal/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/mcp-portal/index.md"><meta property="og:title" content="MCP server portals · Cloudflare Agents docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Centralize multiple MCP servers onto a single endpoint and customize the tools, prompts, and resources available to users."><meta property="og:url" content="https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/mcp-portal/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Agents"><meta name="algolia_product_filter" content="Agents"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Navigation"><meta name="algolia_content_type" content="Navigation"><meta name="pcx_additional_products" content="Agents"><meta name="pcx_tags" content="MCP"><meta http-equiv="refresh" content="0; url=/cloudflare-one/access-controls/ai-controls/mcp-portals/">
+  markdown: true
+  noindex: true
+  route: /agents/model-context-protocol/cloudflare/mcp-portal/
+  schema: 1
+---
 <p>Centralize multiple MCP servers onto a single endpoint and customize the tools, prompts, and resources available to users.</p>

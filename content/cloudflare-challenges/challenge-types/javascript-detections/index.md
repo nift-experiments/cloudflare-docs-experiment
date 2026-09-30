@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-challenges/challenge-types/javascript-detections/
+  description: Client-side JavaScript challenges that run on every request to identify automated traffic.
+  full_title: JavaScript Detections · Cloudflare challenges docs
+  head_html: <title>JavaScript Detections · Cloudflare challenges docs</title><meta name="generator" content="Nift"><meta name="description" content="Client-side JavaScript challenges that run on every request to identify automated traffic."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-challenges/challenge-types/javascript-detections/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-challenges/challenge-types/javascript-detections/index.md"><meta property="og:title" content="JavaScript Detections · Cloudflare challenges docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Client-side JavaScript challenges that run on every request to identify automated traffic."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-challenges/challenge-types/javascript-detections/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Challenges"><meta name="algolia_product_filter" content="Challenges"><meta name="pcx_content_group" content="Application security"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Challenges"><meta name="pcx_tags" content="JavaScript,CSP"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-challenges/challenge-types/javascript-detections/#page","headline":"JavaScript Detections \u00b7 Cloudflare challenges docs","description":"Client-side JavaScript challenges that run on every request to identify automated traffic.","url":"https://developers.cloudflare.com/cloudflare-challenges/challenge-types/javascript-detections/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["JavaScript","CSP"]}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-challenges/challenge-types/javascript-detections/
+  schema: 1
+---
 <p>JavaScript Detections is a type of challenge separate from Cloudflare’s Challenge Pages or Turnstile. JavaScript Detections helps Cloudflare's <a href="/bots/">bot solutions</a> identify automated requests.</p>
 <p>While Challenge Pages and Turnstile rely on client-side signals to determine the authenticity of a request, Bot Management’s JavaScript Detections relies on client-side signals and runs on every single request made to your website.</p>
 <h2 id="process">Process</h2>
@@ -54,7 +65,7 @@
 @markup("md", "content/.markup/bodies/4039.md")
 </aside>
 <p>The following script must be added to every page that you wish to have JavaScript Detections enabled:</p>
-<pre><code class="language-html">&lt;script&gt;&#10;&#10;function jsdOnload(){&#10;  window.cloudflare.jsd.executeOnce(&#10;    {&#10;      callback: function(result){&#10;        console.log(&#x27;jsd outcome&#x27;, result);&#10;      }&#10;    }&#10;  );&#10;}&#10;&lt;/script&gt;&#10;&lt;script src=&quot;/cdn-cgi/challenge-platform/scripts/jsd/api.js?onload=jsdOnload&quot; async&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;script&gt;&#10;&#10;function jsdOnload(){&#10;  window.cloudflare.jsd.executeOnce(&#10;    {&#10;      callback: function(result){&#10;        console.log(&#x27;jsd outcome&#x27;, result);&#10;      }&#10;    }&#10;  );&#10;}&#10;&lt;/script&gt;&#10;&lt;script src=&quot;/cdn-cgi/challenge-platform/scripts/jsd/api.js?onload=jsdOnload&quot; async&gt;&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/4038.md")
 </aside>
@@ -74,9 +85,7 @@
 <p>The first request from a new client to your website or application will generally not have JavaScript Detections data (<code>cf.bot_management.js_detection.passed</code> = <code>false</code>). This is because Cloudflare needs at least one HTML request before injecting JavaScript Detection and issuing the <code>cf_clearance</code> cookie.</p>
 <p>Subsequent requests can include a <code>cf_clearance</code> cookie if JavaScript ran successfully.</p>
 <h3 id="if-you-have-a-content-security-policy-csp">If you have a Content Security Policy (CSP)</h3>
-<p>If you have a <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/4046.md")
-</div>, you need to take additional steps to implement JavaScript Detections:
+<p>If you have a <span class="nb-glossary-tooltip" title="content security policy (CSP)">Content Security Policy (CSP)</span>, you need to take additional steps to implement JavaScript Detections:</p>
 <ul>
 <li>Ensure that anything under <code>/cdn-cgi/challenge-platform/</code> is allowed. Your CSP should allow scripts served from your origin domain (<code>script-src self</code>).</li>
 <li>For <code>nonce</code> script tags:

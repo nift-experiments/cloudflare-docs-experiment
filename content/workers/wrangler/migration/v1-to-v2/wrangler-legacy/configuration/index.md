@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/workers/wrangler/configuration/
+  description: Learn how to configure your Cloudflare Worker using Wrangler v1. This guide covers top-level and environment-specific settings, key types, and deployment options.
+  full_title: Configuration - Wrangler v1 (deprecated) · Cloudflare Workers docs
+  head_html: <title>Configuration - Wrangler v1 (deprecated) · Cloudflare Workers docs</title><meta name="generator" content="Nift"><meta name="description" content="Learn how to configure your Cloudflare Worker using Wrangler v1. This guide covers top-level and environment-specific settings, key types, and deployment options."><link rel="canonical" href="https://developers.cloudflare.com/workers/wrangler/configuration/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/workers/wrangler/migration/v1-to-v2/wrangler-legacy/configuration/index.md"><meta property="og:title" content="Configuration - Wrangler v1 (deprecated) · Cloudflare Workers docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Learn how to configure your Cloudflare Worker using Wrangler v1. This guide covers top-level and environment-specific settings, key types, and deployment options."><meta property="og:url" content="https://developers.cloudflare.com/workers/wrangler/migration/v1-to-v2/wrangler-legacy/configuration/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Workers"><meta name="algolia_product_filter" content="Workers"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Configuration"><meta name="algolia_content_type" content="Configuration"><meta name="pcx_additional_products" content="Workers"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/workers/wrangler/configuration/#page","headline":"Configuration - Wrangler v1 (deprecated) \u00b7 Cloudflare Workers docs","description":"Learn how to configure your Cloudflare Worker using Wrangler v1. This guide covers top-level and environment-specific settings, key types, and deployment options.","url":"https://developers.cloudflare.com/workers/wrangler/configuration/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /workers/wrangler/migration/v1-to-v2/wrangler-legacy/configuration/
+  schema: 1
+---
 <aside class="nb-aside caution">
 @markup("md", "content/.markup/bodies/17466.md")
 </aside>
@@ -141,7 +152,7 @@
 @markup("md", "content/.markup/bodies/17469.md")
 </div>
 <p>The table keys are available to your Worker as global variables, which will contain their associated values.</p>
-<pre><code class="language-js">// Worker code:&#10;console.log(FOO);&#10;//=&gt; &quot;some value&quot;&#10;&#10;console.log(BAR);&#10;//=&gt; &quot;some other string&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">// Worker code:&#10;console.log(FOO);&#10;//=&gt; &quot;some value&quot;&#10;&#10;console.log(BAR);&#10;//=&gt; &quot;some other string&quot;&#10;</code></pre>
 <p>Alternatively, you can define <code>vars</code> using an inline table format. This style should not include any new lines to be considered a valid TOML configuration:</p>
 <div class="nb-wrangler-config">
 @markup("md", "content/.markup/bodies/17470.md")
@@ -160,7 +171,7 @@
 @markup("md", "content/.markup/bodies/17472.md")
 </div>
 <p>Much like environment variables and secrets, the <code>binding</code> names are available to your Worker as global variables.</p>
-<pre><code class="language-js">// Worker script:&#10;&#10;let value = await FOO.get(&quot;keyname&quot;);&#10;//=&gt; gets the value for &quot;keyname&quot; from&#10;//=&gt; the FOO variable, which points to&#10;//=&gt; the &quot;0f2ac...e279&quot; KV namespace&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">// Worker script:&#10;&#10;let value = await FOO.get(&quot;keyname&quot;);&#10;//=&gt; gets the value for &quot;keyname&quot; from&#10;//=&gt; the FOO variable, which points to&#10;//=&gt; the &quot;0f2ac...e279&quot; KV namespace&#10;</code></pre>
 <ul>
 <li>
 <p><code>binding</code> required</p>
@@ -299,7 +310,7 @@
 @markup("md", "content/.markup/bodies/17462.md")
 </aside>
 <p>This section is for customizing Workers with the <code>service-worker</code> format. These Workers use <code>addEventListener</code> and look like the following:</p>
-<pre><code class="language-js">addEventListener(&quot;fetch&quot;, (event) =&gt; {&#10;	event.respondWith(new Response(&quot;I&#x27;m a service Worker!&quot;));&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">addEventListener(&quot;fetch&quot;, (event) =&gt; {&#10;	event.respondWith(new Response(&quot;I&#x27;m a service Worker!&quot;));&#10;});&#10;</code></pre>
 <p>Usage:</p>
 <div class="nb-wrangler-config">
 @markup("md", "content/.markup/bodies/17478.md")
@@ -344,7 +355,7 @@
 @markup("md", "content/.markup/bodies/17460.md")
 </aside>
 <p>An uploaded module may <code>import</code> other uploaded ES Modules. If using the CommonJS format, you may <code>require</code> other uploaded CommonJS modules.</p>
-<pre><code class="language-js">import html from &quot;./index.html&quot;;&#10;&#10;export default {&#10;	// * request is the same as `event.request` from the service worker format&#10;	// * waitUntil() and passThroughOnException() are accessible from `ctx` instead of `event` from the service worker format&#10;	// * env is where bindings like KV namespaces, Durable Object namespaces, Config variables, and Secrets&#10;	// are exposed, instead of them being placed in global scope.&#10;	async fetch(request, env, ctx) {&#10;		const headers = { &quot;Content-Type&quot;: &quot;text/html;charset=UTF-8&quot; };&#10;		return new Response(html, { headers });&#10;	},&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">import html from &quot;./index.html&quot;;&#10;&#10;export default {&#10;	// * request is the same as `event.request` from the service worker format&#10;	// * waitUntil() and passThroughOnException() are accessible from `ctx` instead of `event` from the service worker format&#10;	// * env is where bindings like KV namespaces, Durable Object namespaces, Config variables, and Secrets&#10;	// are exposed, instead of them being placed in global scope.&#10;	async fetch(request, env, ctx) {&#10;		const headers = { &quot;Content-Type&quot;: &quot;text/html;charset=UTF-8&quot; };&#10;		return new Response(html, { headers });&#10;	},&#10;};&#10;</code></pre>
 <p>To create a Workers project using Wrangler and Modules, add a <code>[build]</code> section:</p>
 <div class="nb-wrangler-config">
 @markup("md", "content/.markup/bodies/17479.md")

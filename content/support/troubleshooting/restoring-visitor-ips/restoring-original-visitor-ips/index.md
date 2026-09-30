@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/support/troubleshooting/restoring-visitor-ips/restoring-original-visitor-ips/
+  description: Configure your server to log original visitor IPs.
+  full_title: Restoring original visitor IPs · Cloudflare Support docs
+  head_html: <title>Restoring original visitor IPs · Cloudflare Support docs</title><meta name="generator" content="Nift"><meta name="description" content="Configure your server to log original visitor IPs."><link rel="canonical" href="https://developers.cloudflare.com/support/troubleshooting/restoring-visitor-ips/restoring-original-visitor-ips/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/support/troubleshooting/restoring-visitor-ips/restoring-original-visitor-ips/index.md"><meta property="og:title" content="Restoring original visitor IPs · Cloudflare Support docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Configure your server to log original visitor IPs."><meta property="og:url" content="https://developers.cloudflare.com/support/troubleshooting/restoring-visitor-ips/restoring-original-visitor-ips/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Support"><meta name="algolia_product_filter" content="Support"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_content_type" content="Troubleshooting"><meta name="algolia_content_type" content="Troubleshooting"><meta name="pcx_additional_products" content="Support"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/support/troubleshooting/restoring-visitor-ips/restoring-original-visitor-ips/#page","headline":"Restoring original visitor IPs \u00b7 Cloudflare Support docs","description":"Configure your server to log original visitor IPs.","url":"https://developers.cloudflare.com/support/troubleshooting/restoring-visitor-ips/restoring-original-visitor-ips/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /support/troubleshooting/restoring-visitor-ips/restoring-original-visitor-ips/
+  schema: 1
+---
 <p>When your <a href="/fundamentals/concepts/how-cloudflare-works/">website traffic is routed through the Cloudflare network</a>, we act as a reverse proxy. This allows Cloudflare to speed up page load time by routing packets more efficiently and caching static resources (images, JavaScript, CSS, etc.). As a result, when responding to requests and logging them, your origin server returns a <a href="https://www.cloudflare.com/ips/">Cloudflare IP address</a>.</p>
 <p>For example, if you install applications that depend on the incoming IP address of the original visitor, a Cloudflare IP address is logged by default. The original visitor IP address appears in an appended HTTP header called <a href="/fundamentals/reference/http-headers/#cf-connecting-ip"><code>CF-Connecting-IP</code></a>. By following our <a href="#web-server-instructions">web server instructions</a>, you can log the original visitor IP address at your origin server. If this HTTP header is not available when requests reach your origin server, check your <a href="/rules/transform/">Transform Rules</a> and <a href="/rules/transform/managed-transforms/">Managed Transforms</a> configuration.</p>
 <aside class="nb-aside note">
@@ -16,35 +27,35 @@
 <ol>
 <li>Enable <em>mod_remoteip</em> by issuing the following command:</li>
 </ol>
-<pre><code class="language-sh">sudo a2enmod remoteip&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">sudo a2enmod remoteip&#10;</code></pre>
 <ol start="2">
 <li>Update the site configuration to include <em>RemoteIPHeader CF-Connecting-IP</em>, e.g. <code>/etc/apache2/sites-available/000-default.conf</code></li>
 </ol>
-<pre><code>ServerAdmin webmaster@localhost&#10;DocumentRoot /var/www/html&#10;ServerName remoteip.andy.support&#10;RemoteIPHeader CF-Connecting-IP&#10;ErrorLog ${APACHE_LOG_DIR}/error.log&#10;CustomLog ${APACHE_LOG_DIR}/access.log combined&#10;</code></pre>
+<pre tabindex="0"><code>ServerAdmin webmaster@localhost&#10;DocumentRoot /var/www/html&#10;ServerName remoteip.andy.support&#10;RemoteIPHeader CF-Connecting-IP&#10;ErrorLog ${APACHE_LOG_DIR}/error.log&#10;CustomLog ${APACHE_LOG_DIR}/access.log combined&#10;</code></pre>
 <ol start="3">
 <li>Update combined <em>LogFormat</em> entry in <code>apache.conf</code>, replacing <em>%h</em> with <em>%a in</em> <code>/etc/apache2/apache2.conf.</code> For example, if your current <em>LogFormat</em> appeared as follows</li>
 </ol>
-<pre><code>LogFormat &quot;%h %l %u %t \&quot;%r\&quot; %&gt;s %O \&quot;%{Referer}i\&quot; \&quot;%{User-Agent}i\&quot;&quot; combined&#10;</code></pre>
+<pre tabindex="0"><code>LogFormat &quot;%h %l %u %t \&quot;%r\&quot; %&gt;s %O \&quot;%{Referer}i\&quot; \&quot;%{User-Agent}i\&quot;&quot; combined&#10;</code></pre>
 <p>you would update <em>LogFormat</em> to the following:</p>
-<pre><code>LogFormat &quot;%a %l %u %t \&quot;%r\&quot; %&gt;s %O \&quot;%{Referer}i\&quot; \&quot;%{User-Agent}i\&quot;&quot; combined&#10;</code></pre>
+<pre tabindex="0"><code>LogFormat &quot;%a %l %u %t \&quot;%r\&quot; %&gt;s %O \&quot;%{Referer}i\&quot; \&quot;%{User-Agent}i\&quot;&quot; combined&#10;</code></pre>
 <ol start="4">
 <li>Define trusted proxy addresses by creating <code>/etc/apache2/conf-available/remoteip.conf</code> by entering the following code and <a href="https://www.cloudflare.com/ips/">Cloudflare IPs</a>:</li>
 </ol>
-<pre><code>RemoteIPHeader CF-Connecting-IP&#10;RemoteIPTrustedProxy 192.0.2.1 (example IP address)&#10;RemoteIPTrustedProxy 192.0.2.2 (example IP address)&#10;(repeat for all Cloudflare IPs listed at https://www.cloudflare.com/ips/)&#10;</code></pre>
+<pre tabindex="0"><code>RemoteIPHeader CF-Connecting-IP&#10;RemoteIPTrustedProxy 192.0.2.1 (example IP address)&#10;RemoteIPTrustedProxy 192.0.2.2 (example IP address)&#10;(repeat for all Cloudflare IPs listed at https://www.cloudflare.com/ips/)&#10;</code></pre>
 <ol start="5">
 <li>Enable Apache configuration:</li>
 </ol>
-<pre><code class="language-sh">sudo a2enconf remoteip&#10;</code></pre>
-<pre><code class="language-sh">Enabling conf remoteip.&#10;To activate the new configuration, you need to run:&#10;service apache2 reload&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">sudo a2enconf remoteip&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">Enabling conf remoteip.&#10;To activate the new configuration, you need to run:&#10;service apache2 reload&#10;</code></pre>
 <ol start="6">
 <li>Test Apache configuration:</li>
 </ol>
-<pre><code class="language-sh">sudo apache2ctl configtest&#10;</code></pre>
-<pre><code class="language-sh">Syntax OK&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">sudo apache2ctl configtest&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">Syntax OK&#10;</code></pre>
 <ol start="7">
 <li>Restart Apache:</li>
 </ol>
-<pre><code class="language-sh">sudo systemctl restart apache2&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">sudo systemctl restart apache2&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/14695.md")
 </aside>
@@ -59,7 +70,7 @@
 <p>If you are using an Apache web server, you can download mod_cloudflare from <a href="https://github.com/cloudflare/mod_cloudflare">GitHub</a>.</p>
 <h4 id="adding-code-to-your-origin-web-server">Adding code to your origin web server</h4>
 <p>If you can't install mod_cloudflare, or if there is no Cloudflare plugin available for your content management system platform to restore original visitor IP, add this code to your origin web server in or before the <code>&lt;body&gt;</code> tag on any page that needs the original visitor IPs:</p>
-<pre><code class="language-php">&lt;?php if (isset($_SERVER[&#x27;HTTP_CF_CONNECTING_IP&#x27;])) $_SERVER[&#x27;REMOTE_ADDR&#x27;] = $_SERVER[&#x27;HTTP_CF_CONNECTING_IP&#x27;];?&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-php">&lt;?php if (isset($_SERVER[&#x27;HTTP_CF_CONNECTING_IP&#x27;])) $_SERVER[&#x27;REMOTE_ADDR&#x27;] = $_SERVER[&#x27;HTTP_CF_CONNECTING_IP&#x27;];?&gt;&#10;</code></pre>
 <p>This command will only make the IP address available to scripts that need it. It doesn’t store the IP in your actual server logs.</p>
 <h3 id="removing">Removing</h3>
 <h4 id="apache">Apache</h4>
@@ -104,10 +115,10 @@
 </li>
 <li>If your web server is behind a load balancer, add the following line to your Apache configuration (httpd.conf usually) and replace 123.123.123.123 with your load balancer's IP address:</li>
 </ol>
-<pre><code>IfModule cloudflare_module&#10;CloudFlareRemoteIPHeader X-Forwarded-For&#10;CloudFlareRemoteIPTrustedProxy [insert your load balancer’s IP address]&#10;DenyAllButCloudFlare&#10;/IfModule&#10;</code></pre>
+<pre tabindex="0"><code>IfModule cloudflare_module&#10;CloudFlareRemoteIPHeader X-Forwarded-For&#10;CloudFlareRemoteIPTrustedProxy [insert your load balancer’s IP address]&#10;DenyAllButCloudFlare&#10;/IfModule&#10;</code></pre>
 <h3 id="nginx-1">Nginx</h3>
 <p>Use the <a href="http://nginx.org/en/docs/http/ngx_http_realip_module.html"><code>ngx_http_realip_module</code> Nginx module</a> and the following configuration parameters:</p>
-<pre><code>&#35;example IP address&#10;set_real_ip_from 192.0.2.1; &#10;&#10;&#35;use any of the following two&#10;&#10;real_ip_header CF-Connecting-IP;&#10;&#35;real_ip_header X-Forwarded-For;&#10;</code></pre>
+<pre tabindex="0"><code>&#35;example IP address&#10;set_real_ip_from 192.0.2.1; &#10;&#10;&#35;use any of the following two&#10;&#10;real_ip_header CF-Connecting-IP;&#10;&#35;real_ip_header X-Forwarded-For;&#10;</code></pre>
 <p>That list of prefixes needs to be updated regularly, and we publish the full list in <a href="https://www.cloudflare.com/ips">Cloudflare IP addresses</a>.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/14692.md")
@@ -130,7 +141,7 @@
 <li>Open your <strong>lighttpd.conf</strong> file and add <em>mod_extforward</em> to the <em>server.modules</em> list. It must come <strong>after</strong> <em>mod_accesslog</em> to show the real IP in the access logs</li>
 <li>Add the following code block anywhere in the <strong>lighttpd.conf</strong> file after the server modules list and then restart Lighttpd</li>
 </ol>
-<pre><code>$HTTP[&quot;remoteip&quot;] == &quot;192.2.0.1 (example IP address)&quot;&#10;{&#10;extforward.forwarder = ( &quot;all&quot; =&gt; &quot;trust&quot; )&#10;extforward.headers = (&quot;CF-Connecting-IP&quot;)&#10;}&#10;</code></pre>
+<pre tabindex="0"><code>$HTTP[&quot;remoteip&quot;] == &quot;192.2.0.1 (example IP address)&quot;&#10;{&#10;extforward.forwarder = ( &quot;all&quot; =&gt; &quot;trust&quot; )&#10;extforward.headers = (&quot;CF-Connecting-IP&quot;)&#10;}&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/14690.md")
 </aside>
@@ -168,7 +179,7 @@
 <h3 id="tomcat-7">Tomcat 7</h3>
 <p>To have Tomcat7 automatically restore the original visitor IP to your access logs and application you will need to add <code>%{CF-Connecting-IP}i</code> into your log schema.</p>
 <p>As an example, you could add the below block to your <code>server.xml</code> file.</p>
-<pre><code class="language-xml">&lt;Valve className=&quot;org.apache.catalina.valves.AccessLogValve&quot; directory=&quot;logs&quot; prefix=&quot;localhost_access_log.&quot; suffix=&quot;.txt&quot; pattern=&quot;%{CF-Connecting-IP}i - %h %u %t - &amp;quot;%r&amp;quot; - %s - %b - %{CF-RAY}i&quot;/&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-xml">&lt;Valve className=&quot;org.apache.catalina.valves.AccessLogValve&quot; directory=&quot;logs&quot; prefix=&quot;localhost_access_log.&quot; suffix=&quot;.txt&quot; pattern=&quot;%{CF-Connecting-IP}i - %h %u %t - &amp;quot;%r&amp;quot; - %s - %b - %{CF-RAY}i&quot;/&gt;&#10;</code></pre>
 <p>Which would result in your logs looking like this:</p>
 <p><code>Visitor IP - Cloudflare IP - [04/Dec/2014:23:18:15 -0500] - &quot;GET / HTTP/1.1&quot; - 200 - 1895 - 193d704b85200296-SJC</code></p>
 <h3 id="magento">Magento</h3>
@@ -255,17 +266,17 @@
 <li>Ensure to disable <code>option forwardfor</code> in HAProxy</li>
 </ol>
 <p>HAProxy config:</p>
-<pre><code>acl from_cf src -f /path/to/CF_ips.lst&#10;acl cf_ip_hdr req.hdr(CF-Connecting-IP) -m found&#10;http-request set-header X-Forwarded-For %[req.hdr(CF-Connecting-IP)] if from_cf cf_ip_hdr&#10;</code></pre>
+<pre tabindex="0"><code>acl from_cf src -f /path/to/CF_ips.lst&#10;acl cf_ip_hdr req.hdr(CF-Connecting-IP) -m found&#10;http-request set-header X-Forwarded-For %[req.hdr(CF-Connecting-IP)] if from_cf cf_ip_hdr&#10;</code></pre>
 <h3 id="envoy-gateway">Envoy Gateway</h3>
 <p>To extract the original client IP for your Envoy Gateway, set a <a href="https://gateway.envoyproxy.io/latest/tasks/traffic/client-traffic-policy/#configure-client-ip-detection">Client Traffic Policy</a> to look for the custom <a href="/fundamentals/reference/http-headers/#cf-connecting-ip"><code>CF-Connecting-IP</code> header</a>.</p>
-<pre><code class="language-txt">clientIPDetection:&#10;    customHeader:&#10;        name: CF-Connecting-IP&#10;        failClosed: true&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">clientIPDetection:&#10;    customHeader:&#10;        name: CF-Connecting-IP&#10;        failClosed: true&#10;</code></pre>
 <p>For more details, refer to <a href="https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/http/original_ip_detection/custom_header/v3/custom_header.proto">Custom header original IP detection extension</a>.</p>
 <h3 id="caddy">Caddy</h3>
 <p>If you are running an application behind <a href="https://caddyserver.com/">Caddy</a> that relies on the <code>X-Forwarded-For</code> header, you can configure Caddy to override the header with Cloudflare's <a href="/fundamentals/reference/http-headers/#cf-connecting-ip">CF-Connecting-IP header</a>.</p>
 <p>It is advised that you also only accept traffic from <a href="https://www.cloudflare.com/ips/">Cloudflare's IP addresses</a>; otherwise, the header could be spoofed. That's why, in the second example, we handle this as part of the Caddy configuration. Alternatively, you can handle this at the firewall level, which is usually easier to automate. If you already have a firewall or other measure in place to ensure this, your Caddyfile could look like this:</p>
-<pre><code class="language-txt">https://example.com {&#10;    reverse_proxy localhost:8080 {&#10;				&#35; Sets X-Forwarded-For as the value Cloudflare gives us for CF-Connecting-IP.&#10;				header_up X-Forwarded-For {http.request.header.CF-Connecting-IP}&#10;		}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://example.com {&#10;    reverse_proxy localhost:8080 {&#10;				&#35; Sets X-Forwarded-For as the value Cloudflare gives us for CF-Connecting-IP.&#10;				header_up X-Forwarded-For {http.request.header.CF-Connecting-IP}&#10;		}&#10;}&#10;</code></pre>
 <p>If you want Caddy to handle only accepting traffic from <a href="https://www.cloudflare.com/ips/">Cloudflare's IP addresses</a>, you can use a configuration like this one:</p>
-<pre><code class="language-txt">https://example.com {&#10;    &#35; Restrict access to Cloudflare IPs (https://www.cloudflare.com/ips/)&#10;    @cloudflare {&#10;        remote_ip 173.245.48.0/20 103.21.244.0/22 103.22.200.0/22 103.31.4.0/22 141.101.64.0/18 108.162.192.0/18 190.93.240.0/20 188.114.96.0/20 197.234.240.0/22 198.41.128.0/17 162.158.0.0/15 104.16.0.0/13 104.24.0.0/14 172.64.0.0/13 131.0.72.0/22 2400:cb00::/32 2606:4700::/32 2803:f800::/32 2405:b500::/32 2405:8100::/32 2a06:98c0::/29 2c0f:f248::/32&#10;    }&#10;&#10;    &#35; Process requests from Cloudflare IPs&#10;    handle @cloudflare {&#10;        reverse_proxy localhost:8080 {&#10;            &#35; Sets X-Forwarded-For as the value Cloudflare gives us for CF-Connecting-IP.&#10;            header_up X-Forwarded-For {http.request.header.CF-Connecting-IP}&#10;        }&#10;    }&#10;&#10;    &#35; Deny requests from non-Cloudflare IPs&#10;    handle {&#10;        respond &quot;Access Denied&quot; 403&#10;    }&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://example.com {&#10;    &#35; Restrict access to Cloudflare IPs (https://www.cloudflare.com/ips/)&#10;    @cloudflare {&#10;        remote_ip 173.245.48.0/20 103.21.244.0/22 103.22.200.0/22 103.31.4.0/22 141.101.64.0/18 108.162.192.0/18 190.93.240.0/20 188.114.96.0/20 197.234.240.0/22 198.41.128.0/17 162.158.0.0/15 104.16.0.0/13 104.24.0.0/14 172.64.0.0/13 131.0.72.0/22 2400:cb00::/32 2606:4700::/32 2803:f800::/32 2405:b500::/32 2405:8100::/32 2a06:98c0::/29 2c0f:f248::/32&#10;    }&#10;&#10;    &#35; Process requests from Cloudflare IPs&#10;    handle @cloudflare {&#10;        reverse_proxy localhost:8080 {&#10;            &#35; Sets X-Forwarded-For as the value Cloudflare gives us for CF-Connecting-IP.&#10;            header_up X-Forwarded-For {http.request.header.CF-Connecting-IP}&#10;        }&#10;    }&#10;&#10;    &#35; Deny requests from non-Cloudflare IPs&#10;    handle {&#10;        respond &quot;Access Denied&quot; 403&#10;    }&#10;}&#10;</code></pre>
 <hr />
 <h2 id="related-resources">Related Resources</h2>
 <ul>

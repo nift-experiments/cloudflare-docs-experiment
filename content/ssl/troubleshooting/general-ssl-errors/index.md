@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/ssl/troubleshooting/general-ssl-errors/
+  description: Learn how to troubleshoot various SSL/TLS errors with Cloudflare.
+  full_title: General SSL errors · Cloudflare SSL/TLS docs
+  head_html: <title>General SSL errors · Cloudflare SSL/TLS docs</title><meta name="generator" content="Nift"><meta name="description" content="Learn how to troubleshoot various SSL/TLS errors with Cloudflare."><link rel="canonical" href="https://developers.cloudflare.com/ssl/troubleshooting/general-ssl-errors/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/ssl/troubleshooting/general-ssl-errors/index.md"><meta property="og:title" content="General SSL errors · Cloudflare SSL/TLS docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Learn how to troubleshoot various SSL/TLS errors with Cloudflare."><meta property="og:url" content="https://developers.cloudflare.com/ssl/troubleshooting/general-ssl-errors/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="SSL/TLS"><meta name="algolia_product_filter" content="SSL/TLS"><meta name="pcx_content_group" content="Application performance"><meta name="pcx_content_type" content="Troubleshooting"><meta name="algolia_content_type" content="Troubleshooting"><meta name="pcx_additional_products" content="SSL/TLS"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/ssl/troubleshooting/general-ssl-errors/#page","headline":"General SSL errors \u00b7 Cloudflare SSL/TLS docs","description":"Learn how to troubleshoot various SSL/TLS errors with Cloudflare.","url":"https://developers.cloudflare.com/ssl/troubleshooting/general-ssl-errors/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /ssl/troubleshooting/general-ssl-errors/
+  schema: 1
+---
 <h2 id="let-s-encrypt-chain-update">Let's Encrypt chain update</h2>
 <h3 id="symptom">Symptom</h3>
 <p>Starting September 9, 2024, visitors that try to connect to your website using older devices - for example, Android 7.0 and earlier - have access problems or reach security warnings.</p>
@@ -46,9 +57,7 @@
 <p>If your domain is on a <a href="/dns/zone-setups/full-setup/">full setup</a>, review your DNS records.</p>
 <p>Cloudflare SSL/TLS certificates only apply for traffic <a href="/dns/proxy-status/">proxied through Cloudflare</a>. If SSL errors only occur for hostnames not proxied to Cloudflare, proxy those hostnames through Cloudflare.</p>
 <h4 id="partial-dns-setup">Partial DNS setup</h4>
-<p>If your domain is on a <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/13959.md")
-</div>, confirm whether you have CAA DNS records enabled at your current hosting provider. If so, ensure you [specify the Certificate Authorities that Cloudflare uses](/ssl/edge-certificates/caa-records/) to provision certificates for your domain.
+<p>If your domain is on a <span class="nb-glossary-tooltip" title="CNAME setup">CNAME setup (partial)</span>, confirm whether you have CAA DNS records enabled at your current hosting provider. If so, ensure you <a href="/ssl/edge-certificates/caa-records/">specify the Certificate Authorities that Cloudflare uses</a> to provision certificates for your domain.</p>
 <hr />
 <h2 id="ocsp-response-error">OCSP response error</h2>
 <h3 id="symptom-4">Symptom</h3>

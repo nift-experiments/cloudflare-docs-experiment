@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/artifacts/api/workers-binding/
+  description: Call Artifacts from a Worker binding.
+  full_title: Workers binding · Artifacts · Cloudflare Artifacts docs
+  head_html: <title>Workers binding · Artifacts · Cloudflare Artifacts docs</title><meta name="generator" content="Nift"><meta name="description" content="Call Artifacts from a Worker binding."><link rel="canonical" href="https://developers.cloudflare.com/artifacts/api/workers-binding/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/artifacts/api/workers-binding/index.md"><meta property="og:title" content="Workers binding · Artifacts · Cloudflare Artifacts docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Call Artifacts from a Worker binding."><meta property="og:url" content="https://developers.cloudflare.com/artifacts/api/workers-binding/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Artifacts"><meta name="algolia_product_filter" content="Artifacts"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Artifacts"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/artifacts/api/workers-binding/#page","headline":"Workers binding \u00b7 Artifacts \u00b7 Cloudflare Artifacts docs","description":"Call Artifacts from a Worker binding.","url":"https://developers.cloudflare.com/artifacts/api/workers-binding/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /artifacts/api/workers-binding/
+  schema: 1
+---
 <p>Use the Artifacts Workers binding to create, import, inspect, fork, and delete repos directly from your Worker. The Artifacts binding returns repo handles that allow repo-scoped operations such as token management and forking.</p>
 <p>Review <a href="/artifacts/concepts/namespaces/">Namespaces</a> first, then choose the namespace name you will bind here.</p>
 <h2 id="configure-the-binding">Configure the binding</h2>
@@ -6,7 +17,7 @@
 @markup("md", "content/.markup/bodies/3325.md")
 </div>
 <p>After you run <code>npx wrangler types</code>, your Worker environment looks like this:</p>
-<pre><code class="language-ts">export interface Env {&#10;	ARTIFACTS: Artifacts;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">export interface Env {&#10;	ARTIFACTS: Artifacts;&#10;}&#10;</code></pre>
 <p>Wrangler generates the <code>Artifacts</code> type for consumers and binds it directly in your environment.</p>
 <p>In named Wrangler environments, <code>artifacts</code> is non-inheritable. Repeat the binding in each environment where you need it.</p>
 <p>At runtime, deployed Workers use the configured binding directly. For local Wrangler commands such as <code>wrangler dev</code>, <code>wrangler deploy</code>, or <code>wrangler types</code>, authenticate Wrangler first. For local OAuth authentication, refer to <a href="/workers/wrangler/commands/general/#login"><code>wrangler login</code></a>. For CI or headless environments, refer to <a href="/workers/ci-cd/">Running Wrangler in CI/CD</a>.</p>
@@ -144,6 +155,6 @@
 <h2 id="generated-types">Generated types</h2>
 <p>Run <code>npx wrangler types</code> in your own project and treat the generated <code>worker-configuration.d.ts</code> file as the source of truth for the Artifacts binding types in that environment.</p>
 <h2 id="next-steps">Next steps</h2>
-<p><a class="nb-card nb-link-card" href="/artifacts/api/rest-api/"><h3 id="card-rest-api-artifacts-api-rest-api">REST API</h3><p>Compare the binding methods with the underlying HTTP routes.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/artifacts/get-started/workers/"><h3 id="card-get-started-with-workers-artifacts-get-started-workers">Get started with Workers</h3><p>Use the binding in a full Worker project from local development through deploy.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/artifacts/api/git-protocol/"><h3 id="card-git-protocol-artifacts-api-git-protocol">Git protocol</h3><p>Use repo remotes and tokens with standard git-over-HTTPS clients.</p></a></p>
+<div class="nb-card nb-link-card"><h3 id="card-rest-api-artifacts-api-rest-api"><a href="/artifacts/api/rest-api/">REST API</a></h3><p>Compare the binding methods with the underlying HTTP routes.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-get-started-with-workers-artifacts-get-started-workers"><a href="/artifacts/get-started/workers/">Get started with Workers</a></h3><p>Use the binding in a full Worker project from local development through deploy.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-git-protocol-artifacts-api-git-protocol"><a href="/artifacts/api/git-protocol/">Git protocol</a></h3><p>Use repo remotes and tokens with standard git-over-HTTPS clients.</p></div>

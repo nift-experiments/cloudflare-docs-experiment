@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/browser-run/faq/
+  description: Find answers to frequently asked questions about Browser Run, including errors, troubleshooting, and session management.
+  full_title: Frequently asked questions about Cloudflare Browser Run · Cloudflare Browser Run docs
+  head_html: <title>Frequently asked questions about Cloudflare Browser Run · Cloudflare Browser Run docs</title><meta name="generator" content="Nift"><meta name="description" content="Find answers to frequently asked questions about Browser Run, including errors, troubleshooting, and session management."><link rel="canonical" href="https://developers.cloudflare.com/browser-run/faq/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/browser-run/faq/index.md"><meta property="og:title" content="Frequently asked questions about Cloudflare Browser Run · Cloudflare Browser Run docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Find answers to frequently asked questions about Browser Run, including errors, troubleshooting, and session management."><meta property="og:url" content="https://developers.cloudflare.com/browser-run/faq/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Browser Run"><meta name="algolia_product_filter" content="Browser Run"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Faq"><meta name="algolia_content_type" content="Faq"><meta name="pcx_additional_products" content="Browser Run"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/browser-run/faq/#page","headline":"Frequently asked questions about Cloudflare Browser Run \u00b7 Cloudflare Browser Run docs","description":"Find answers to frequently asked questions about Browser Run, including errors, troubleshooting, and session management.","url":"https://developers.cloudflare.com/browser-run/faq/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /browser-run/faq/
+  schema: 1
+---
 <p>Below you will find answers to our most commonly asked questions about Browser Run (formerly Browser Rendering).</p>
 <p>For pricing questions, visit the <a href="/browser-run/pricing/#pricing-faq">pricing FAQ</a>.
 For usage limits questions, visit the <a href="/browser-run/limits/#faq">limits FAQ</a>.
@@ -41,7 +52,7 @@ If you cannot find the answer you are looking for, join us on <a href="https://d
 </tbody>
 </table>
 <p>Quick Actions example:</p>
-<pre><code class="language-json">{&#10;	&quot;url&quot;: &quot;https://example.com&quot;,&#10;	&quot;goToOptions&quot;: {&#10;		&quot;waitUntil&quot;: &quot;networkidle2&quot;&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;url&quot;: &quot;https://example.com&quot;,&#10;	&quot;goToOptions&quot;: {&#10;		&quot;waitUntil&quot;: &quot;networkidle2&quot;&#10;	}&#10;}&#10;</code></pre>
 <p>If content is still missing:</p>
 <ul>
 <li>Use <code>waitForSelector</code> to wait for a specific element to appear before capturing.</li>
@@ -62,7 +73,7 @@ If you cannot find the answer you are looking for, join us on <a href="https://d
 <li>Requests larger than 1 MB are not supported.</li>
 </ul>
 <p>You can also run Chrome in visible (headful) mode during local development to visually debug your automation scripts (experimental). Set the <code>X_BROWSER_HEADFUL</code> environment variable before starting your dev server:</p>
-<pre><code class="language-sh">X_BROWSER_HEADFUL=true npx wrangler dev&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">X_BROWSER_HEADFUL=true npx wrangler dev&#10;</code></pre>
 <aside class="nb-aside note">
 <h3 class="nb-aside-title" id="use-real-headless-browser-during-local-development">Use real headless browser during local development</h3>
 @markup("md", "content/.markup/bodies/1440.md")
@@ -70,11 +81,11 @@ If you cannot find the answer you are looking for, join us on <a href="https://d
 <h3 id="how-do-i-render-authenticated-pages-using-quick-actions">How do I render authenticated pages using Quick Actions?</h3>
 <p>If the page you are rendering requires authentication, you can pass credentials using one of the following methods. These parameters work with all <a href="/browser-run/quick-actions/">Quick Actions</a> endpoints.</p>
 <p>HTTP Basic Auth:</p>
-<pre><code class="language-json">{&#10;	&quot;authenticate&quot;: {&#10;		&quot;username&quot;: &quot;user&quot;,&#10;		&quot;password&quot;: &quot;pass&quot;&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;authenticate&quot;: {&#10;		&quot;username&quot;: &quot;user&quot;,&#10;		&quot;password&quot;: &quot;pass&quot;&#10;	}&#10;}&#10;</code></pre>
 <p>Cookie-based authentication:</p>
-<pre><code class="language-json">{&#10;	&quot;cookies&quot;: [&#10;		{&#10;			&quot;name&quot;: &quot;session_id&quot;,&#10;			&quot;value&quot;: &quot;abc123&quot;,&#10;			&quot;domain&quot;: &quot;example.com&quot;,&#10;			&quot;path&quot;: &quot;/&quot;,&#10;			&quot;secure&quot;: true,&#10;			&quot;httpOnly&quot;: true&#10;		}&#10;	]&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;cookies&quot;: [&#10;		{&#10;			&quot;name&quot;: &quot;session_id&quot;,&#10;			&quot;value&quot;: &quot;abc123&quot;,&#10;			&quot;domain&quot;: &quot;example.com&quot;,&#10;			&quot;path&quot;: &quot;/&quot;,&#10;			&quot;secure&quot;: true,&#10;			&quot;httpOnly&quot;: true&#10;		}&#10;	]&#10;}&#10;</code></pre>
 <p>Token-based authentication:</p>
-<pre><code class="language-json">{&#10;	&quot;setExtraHTTPHeaders&quot;: {&#10;		&quot;Authorization&quot;: &quot;Bearer your-token&quot;&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;setExtraHTTPHeaders&quot;: {&#10;		&quot;Authorization&quot;: &quot;Bearer your-token&quot;&#10;	}&#10;}&#10;</code></pre>
 <p>For complete working examples of all three methods, refer to <a href="/browser-run/quick-actions/screenshot-endpoint/#capture-a-screenshot-of-an-authenticated-page">Capture a screenshot of an authenticated page</a>.</p>
 <h3 id="will-browser-run-be-detected-by-bot-management">Will Browser Run be detected by Bot Management?</h3>
 <p>Yes, Browser Run requests are always identified as bot traffic by Cloudflare. Cloudflare does not enforce bot protection by default — that is the customer's choice.</p>

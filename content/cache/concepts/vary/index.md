@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cache/concepts/vary/
+  description: Cache multiple versions of the same URL based on the request headers your origin varies on.
+  full_title: Vary · Cloudflare Cache (CDN) docs
+  head_html: <title>Vary · Cloudflare Cache (CDN) docs</title><meta name="generator" content="Nift"><meta name="description" content="Cache multiple versions of the same URL based on the request headers your origin varies on."><link rel="canonical" href="https://developers.cloudflare.com/cache/concepts/vary/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cache/concepts/vary/index.md"><meta property="og:title" content="Vary · Cloudflare Cache (CDN) docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Cache multiple versions of the same URL based on the request headers your origin varies on."><meta property="og:url" content="https://developers.cloudflare.com/cache/concepts/vary/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cache / CDN"><meta name="algolia_product_filter" content="Cache / CDN"><meta name="pcx_content_group" content="Application performance"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Cache / CDN"><meta name="pcx_tags" content="Headers"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cache/concepts/vary/#page","headline":"Vary \u00b7 Cloudflare Cache (CDN) docs","description":"Cache multiple versions of the same URL based on the request headers your origin varies on.","url":"https://developers.cloudflare.com/cache/concepts/vary/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["Headers"]}</script>
+  markdown: true
+  noindex: false
+  route: /cache/concepts/vary/
+  schema: 1
+---
 <p>The <a href="https://www.rfc-editor.org/rfc/rfc9110.html#name-vary"><code>Vary</code></a> HTTP response header tells Cloudflare that an origin can serve different responses for the same URL depending on request headers. For example, an origin might serve different languages based on <code>Accept-Language</code>, or different content formats based on <code>Accept</code>.</p>
 <p>By default, Cloudflare's CDN constructs <a href="/cache/how-to/cache-keys/">cache keys</a> from a request's URL and a handful of specific headers. <a href="/cache/how-to/cache-rules/">Cache Rules</a> can add other request properties to the cache key ahead of time. The <code>Vary</code> response header lets the origin decide which request headers matter when Cloudflare receives the response.</p>
 <aside class="nb-aside note">
@@ -30,10 +41,10 @@
 <p>When Cloudflare caches a response with a <code>Vary</code> header, the listed request headers become part of the cache key for that response, following the HTTP caching behavior described in <a href="https://www.rfc-editor.org/rfc/rfc9111.html#name-calculating-cache-keys-with">RFC 9111</a>. The same URL can then have multiple cached versions, each selected by the request header values named in the origin's <code>Vary</code> response.</p>
 <p>Cloudflare does not vary every cached response just because Vary is configured in a Cache Rule. The origin response must include a <code>Vary</code> header. Cloudflare then uses the configured action for each listed header to decide which request header value is added to the cache key.</p>
 <p>For example, assume the origin returns this response:</p>
-<pre><code class="language-txt">Vary: Accept-Language&#10;Cache-Control: public, max-age=3600&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">Vary: Accept-Language&#10;Cache-Control: public, max-age=3600&#10;</code></pre>
 <p>This tells Cloudflare that the value of the <code>Accept-Language</code> request header should be part of the cache key.</p>
 <p>With <code>accept-language</code> configured to <code>normalize</code>, these two requests can use the same cached version:</p>
-<pre><code class="language-txt">Accept-Language: en-US, fr;q=0.8&#10;Accept-Language: fr;q=0.8, en-GB&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">Accept-Language: en-US, fr;q=0.8&#10;Accept-Language: fr;q=0.8, en-GB&#10;</code></pre>
 <p>Both request headers normalize to the same language preference order, <code>en,fr</code>. A request with a different normalized value, such as <code>Accept-Language: fr, en;q=0.8</code>, creates or selects a different cached version of the same URL.</p>
 <p>When a response varies on multiple headers, Cloudflare includes each listed header in the cache key. For example, a response with <code>Vary: Accept, Accept-Language</code> uses both the configured <code>accept</code> value and the configured <code>accept-language</code> value to select the cached response.</p>
 <p>If the origin response does not include a <code>Vary</code> header, Cloudflare caches the response normally. If the origin response includes a <code>Vary</code> header name configured to <code>bypass</code> cache, Cloudflare does not store that response.</p>
@@ -68,16 +79,16 @@
 <h3 id="normalize">Normalize</h3>
 <p><code>normalize</code> reduces unnecessary cached versions by converting equivalent request header values into the same cache key value.</p>
 <p>For example, these two <code>Accept</code> headers can normalize to the same value:</p>
-<pre><code class="language-txt">Accept: text/html, application/json;q=0.9&#10;Accept: application/json;q=0.9, text/html&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">Accept: text/html, application/json;q=0.9&#10;Accept: application/json;q=0.9, text/html&#10;</code></pre>
 <h3 id="passthrough">Passthrough</h3>
 <p><code>passthrough</code> uses the raw request header value when selecting a cached version. Semantically equivalent values can still create different cached versions if the bytes differ.</p>
 <p>For example, under <code>passthrough</code>, these two requests select different cached versions:</p>
-<pre><code class="language-txt">Accept: text/html, application/json&#10;Accept: application/json, text/html&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">Accept: text/html, application/json&#10;Accept: application/json, text/html&#10;</code></pre>
 <p>Use <code>passthrough</code> only when the exact header value matters to your origin and should matter to the cache.</p>
 <h3 id="bypass">Bypass</h3>
 <p><code>bypass</code> tells Cloudflare not to cache a response when the origin's <code>Vary</code> response includes that header name.</p>
 <p>For example, if your configuration sets <code>user-agent</code> to <code>bypass</code>, a response with this header is not cached:</p>
-<pre><code class="language-txt">Vary: User-Agent&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">Vary: User-Agent&#10;</code></pre>
 <h2 id="normalization-behavior">Normalization behavior</h2>
 <p>Vary normalization is the normalization performed when the configured action is <code>normalize</code>. It affects how Cloudflare selects a cached version and, for some headers, what Cloudflare forwards to the origin.</p>
 <p>Normalization is optional but recommended for most deployments because it reduces the number of cached versions and improves cache hit ratio.</p>
@@ -85,7 +96,7 @@
 <h3 id="origin-request-headers">Origin request headers</h3>
 <p>For <code>Accept</code>, <code>Accept-Language</code>, and <code>Accept-Encoding</code> with <a href="/cache/how-to/cache-rules/settings/#respect-strong-etags">Respect Strong ETags</a> enabled, Cloudflare may also forward the normalized header value to the origin. This keeps the response generated by the origin consistent with the cache key value Cloudflare uses for caching.</p>
 <p>For example, if <code>accept-language</code> normalizes these two requests to <code>en,fr</code>, Cloudflare forwards <code>Accept-Language: en,fr</code> to the origin on a cache miss or revalidation:</p>
-<pre><code class="language-txt">Accept-Language: en-US, fr;q=0.8&#10;Accept-Language: fr;q=0.8, en-GB&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">Accept-Language: en-US, fr;q=0.8&#10;Accept-Language: fr;q=0.8, en-GB&#10;</code></pre>
 <p>Forwarding the normalized value prevents Cloudflare from storing a response generated for one raw header value under a broader normalized value that another request could later reuse incorrectly.</p>
 <p>This origin request rewrite applies to:</p>
 <ul>
@@ -142,7 +153,7 @@
 </ul>
 <p>Values are not reordered, lowercased, deduplicated, or otherwise altered, because the order and contents of an arbitrary header may be significant.</p>
 <p>For example, these two header field lines:</p>
-<pre><code class="language-txt">X-Custom-Header: Value2&#10;X-Custom-Header: Value1&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">X-Custom-Header: Value2&#10;X-Custom-Header: Value1&#10;</code></pre>
 <p>When selecting a cached version, Cloudflare combines these values as <code>Value2,Value1</code>. The header forwarded to the origin is not rewritten.</p>
 <h2 id="purge-behavior">Purge behavior</h2>
 <p>Purging a URL purges all cached versions for that URL. You do not need to send a separate <a href="/cache/how-to/purge-cache/">purge</a> request for each <code>Vary</code> header value. This applies to purge methods that target the cached object, such as purge by URL, tag, hostname, prefix, or purge everything.</p>

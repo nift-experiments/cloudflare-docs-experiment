@@ -1,1 +1,12 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-network-firewall/reference/network-firewall-functions/
+  description: Functions available in Network Firewall rule expressions.
+  full_title: Cloudflare Network Firewall functions · Cloudflare Network Firewall docs
+  head_html: <title>Cloudflare Network Firewall functions · Cloudflare Network Firewall docs</title><meta name="generator" content="Nift"><meta name="description" content="Functions available in Network Firewall rule expressions."><meta name="robots" content="noindex"><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-network-firewall/reference/network-firewall-functions/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-network-firewall/reference/network-firewall-functions/index.md"><meta property="og:title" content="Cloudflare Network Firewall functions · Cloudflare Network Firewall docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Functions available in Network Firewall rule expressions."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-network-firewall/reference/network-firewall-functions/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare Network Firewall"><meta name="algolia_product_filter" content="Cloudflare Network Firewall"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="Navigation"><meta name="algolia_content_type" content="Navigation"><meta name="pcx_additional_products" content="Cloudflare Network Firewall"><meta http-equiv="refresh" content="0; url=/ruleset-engine/rules-language/functions/#cloudflare-network-firewall-functions">
+  markdown: true
+  noindex: true
+  route: /cloudflare-network-firewall/reference/network-firewall-functions/
+  schema: 1
+---
 <p>Functions available in Network Firewall rule expressions.</p>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/logs/logpush/logpush-job/api-configuration/
+  description: Configure Logpush jobs via the API.
+  full_title: API configuration · Cloudflare Logs docs
+  head_html: <title>API configuration · Cloudflare Logs docs</title><meta name="generator" content="Nift"><meta name="description" content="Configure Logpush jobs via the API."><link rel="canonical" href="https://developers.cloudflare.com/logs/logpush/logpush-job/api-configuration/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/logs/logpush/logpush-job/api-configuration/index.md"><meta property="og:title" content="API configuration · Cloudflare Logs docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Configure Logpush jobs via the API."><meta property="og:url" content="https://developers.cloudflare.com/logs/logpush/logpush-job/api-configuration/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Logs"><meta name="algolia_product_filter" content="Logs"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Logpush"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/logs/logpush/logpush-job/api-configuration/#page","headline":"API configuration \u00b7 Cloudflare Logs docs","description":"Configure Logpush jobs via the API.","url":"https://developers.cloudflare.com/logs/logpush/logpush-job/api-configuration/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /logs/logpush/logpush-job/api-configuration/
+  schema: 1
+---
 <h2 id="endpoints">Endpoints</h2>
 <p>The table below summarizes the job operations available for both Logpush and Edge Log Delivery jobs. Make sure that Account-scoped datasets use <code>/accounts/{account_id}</code> and Zone-scoped datasets use <code>/zone/{zone_id}</code>. For more information, refer to the <a href="/logs/logpush/logpush-job/datasets/">Datasets</a> page.</p>
 <p>You can locate <code>{zone_id}</code> and <code>{account_id}</code> arguments based on the <a href="/fundamentals/account/find-account-and-zone-ids/">Find zone and account IDs</a> page.
@@ -72,13 +83,13 @@ The <code>{dataset_id}</code> argument indicates the log category (such as <code
 <p>For concrete examples, refer to the tutorials in <a href="/logs/logpush/examples/">Logpush examples</a>.</p>
 <h2 id="connecting">Connecting</h2>
 <p>The Logpush API requires credentials like any other Cloudflare API.</p>
-<pre class="nb-api-request"><code class="language-bash">curl --request GET \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/logpush/jobs \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot;</code></pre>
+<pre tabindex="0" class="nb-api-request"><code class="language-bash">curl --request GET \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/logpush/jobs \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot;</code></pre>
 <h2 id="ownership">Ownership</h2>
 <p>Before creating a new job, ownership of the destination must be proven.</p>
 <p>To issue an ownership challenge token to your destination:</p>
-<pre class="nb-api-request"><code class="language-bash">curl --request POST \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/logpush/ownership \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;destination_conf&quot;: &quot;s3://&lt;BUCKET_PATH&gt;?region=us-west-2&quot;&#10;}&#x27;</code></pre>
+<pre tabindex="0" class="nb-api-request"><code class="language-bash">curl --request POST \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/logpush/ownership \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;destination_conf&quot;: &quot;s3://&lt;BUCKET_PATH&gt;?region=us-west-2&quot;&#10;}&#x27;</code></pre>
 <p>A challenge file will be written to the destination, and the filename will be in the response (the filename may be expressed as a path, if appropriate for your destination):</p>
-<pre><code class="language-json">{&#10;  &quot;errors&quot;: [],&#10;  &quot;messages&quot;: [],&#10;  &quot;result&quot;: {&#10;    &quot;valid&quot;: true,&#10;    &quot;message&quot;: &quot;&quot;,&#10;    &quot;filename&quot;: &quot;&lt;PATH_TO_CHALLENGE_FILE&gt;.txt&quot;&#10;  },&#10;  &quot;success&quot;: true&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;  &quot;errors&quot;: [],&#10;  &quot;messages&quot;: [],&#10;  &quot;result&quot;: {&#10;    &quot;valid&quot;: true,&#10;    &quot;message&quot;: &quot;&quot;,&#10;    &quot;filename&quot;: &quot;&lt;PATH_TO_CHALLENGE_FILE&gt;.txt&quot;&#10;  },&#10;  &quot;success&quot;: true&#10;}&#10;</code></pre>
 <p>You will need to provide the token contained in the file when creating a job.</p>
 <aside class="nb-aside note">
 <h3 class="nb-aside-title" id="note">Note</h3>
@@ -91,7 +102,7 @@ The <code>{dataset_id}</code> argument indicates the log category (such as <code
 @markup("md", "content/.markup/bodies/10533.md")
 </aside>
 <p>The <code>destination_conf</code> parameter must follow this format:</p>
-<pre><code>&lt;scheme&gt;://&lt;destination-address&gt;&#10;</code></pre>
+<pre tabindex="0"><code>&lt;scheme&gt;://&lt;destination-address&gt;&#10;</code></pre>
 <p>Supported schemes are listed below, each tailored to specific providers such as
 R2, S3, etc. Additionally, generic use cases like <code>https</code> are also covered:</p>
 <ul>
@@ -134,9 +145,9 @@ to follow a specific format:</p>
 <li><a href="https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source">Sumo Logic HTTP Source</a></li>
 </ul>
 <p>To check if a destination is already in use:</p>
-<pre class="nb-api-request"><code class="language-bash">curl --request POST \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/logpush/validate/destination/exists \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;destination_conf&quot;: &quot;s3://foo&quot;&#10;}&#x27;</code></pre>
+<pre tabindex="0" class="nb-api-request"><code class="language-bash">curl --request POST \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/logpush/validate/destination/exists \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;destination_conf&quot;: &quot;s3://foo&quot;&#10;}&#x27;</code></pre>
 <p>Response</p>
-<pre><code class="language-json">{&#10;  &quot;errors&quot;: [],&#10;  &quot;messages&quot;: [],&#10;  &quot;result&quot;: {&#10;    &quot;exists&quot;: false&#10;  },&#10;  &quot;success&quot;: true&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;  &quot;errors&quot;: [],&#10;  &quot;messages&quot;: [],&#10;  &quot;result&quot;: {&#10;    &quot;exists&quot;: false&#10;  },&#10;  &quot;success&quot;: true&#10;}&#10;</code></pre>
 <h2 id="name">Name</h2>
 <p>A human-readable, optional job name that does not need to be unique. We recommend choosing a meaningful name, such as the domain name, to help you easily identify and manage your job. You can update the name later if needed.</p>
 <h2 id="kind">Kind</h2>
@@ -145,7 +156,7 @@ to follow a specific format:</p>
 <h3 class="nb-aside-title" id="note-2">Note</h3>
 @markup("md", "content/.markup/bodies/10532.md")
 </aside>
-<pre class="nb-api-request"><code class="language-bash">curl --request POST \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/logpush/jobs \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;name&quot;: &quot;&lt;DOMAIN_NAME&gt;&quot;,&#10;  &quot;destination_conf&quot;: &quot;s3://&lt;BUCKET_PATH&gt;?region=us-west-2&quot;,&#10;  &quot;dataset&quot;: &quot;http_requests&quot;,&#10;  &quot;output_options&quot;: {&#10;    &quot;field_names&quot;: [&#10;      &quot;ClientIP&quot;,&#10;      &quot;ClientRequestHost&quot;,&#10;      &quot;ClientRequestMethod&quot;,&#10;      &quot; ClientRequestURI&quot;,&#10;      &quot;EdgeEndTimestamp&quot;,&#10;      &quot;EdgeResponseBytes&quot;,&#10;      &quot;EdgeResponseStatus&quot;,&#10;      &quot;EdgeStartTimestamp&quot;,&#10;      &quot;RayID&quot;&#10;    ],&#10;    &quot;timestamp_format&quot;: &quot;rfc3339&quot;&#10;  },&#10;  &quot;kind&quot;: &quot;edge&quot;&#10;}&#x27;</code></pre>
+<pre tabindex="0" class="nb-api-request"><code class="language-bash">curl --request POST \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/logpush/jobs \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;name&quot;: &quot;&lt;DOMAIN_NAME&gt;&quot;,&#10;  &quot;destination_conf&quot;: &quot;s3://&lt;BUCKET_PATH&gt;?region=us-west-2&quot;,&#10;  &quot;dataset&quot;: &quot;http_requests&quot;,&#10;  &quot;output_options&quot;: {&#10;    &quot;field_names&quot;: [&#10;      &quot;ClientIP&quot;,&#10;      &quot;ClientRequestHost&quot;,&#10;      &quot;ClientRequestMethod&quot;,&#10;      &quot; ClientRequestURI&quot;,&#10;      &quot;EdgeEndTimestamp&quot;,&#10;      &quot;EdgeResponseBytes&quot;,&#10;      &quot;EdgeResponseStatus&quot;,&#10;      &quot;EdgeStartTimestamp&quot;,&#10;      &quot;RayID&quot;&#10;    ],&#10;    &quot;timestamp_format&quot;: &quot;rfc3339&quot;&#10;  },&#10;  &quot;kind&quot;: &quot;edge&quot;&#10;}&#x27;</code></pre>
 <h2 id="options">Options</h2>
 <p>Logpull_options has been replaced with Custom Log Formatting output_options. Please refer to the <a href="/logs/logpush/logpush-job/log-output-options/">Log Output Options</a> documentation for instructions on configuring these options and updating your existing jobs to use these options.</p>
 <p>If you are still using logpull_options, here are the options that you can customize:</p>
@@ -159,9 +170,9 @@ to follow a specific format:</p>
 @markup("md", "content/.markup/bodies/10531.md")
 </aside>
 <p>To check if the selected <strong>logpull_options</strong> are valid:</p>
-<pre class="nb-api-request"><code class="language-bash">curl --request POST \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/logpush/validate/origin \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;logpull_options&quot;: &quot;fields=RayID,ClientIP,EdgeStartTimestamp&amp;timestamps=rfc3339&amp;CVE-2021-44228=true&quot;,&#10;  &quot;dataset&quot;: &quot;http_requests&quot;&#10;}&#x27;</code></pre>
+<pre tabindex="0" class="nb-api-request"><code class="language-bash">curl --request POST \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/logpush/validate/origin \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;logpull_options&quot;: &quot;fields=RayID,ClientIP,EdgeStartTimestamp&amp;timestamps=rfc3339&amp;CVE-2021-44228=true&quot;,&#10;  &quot;dataset&quot;: &quot;http_requests&quot;&#10;}&#x27;</code></pre>
 <p>Response</p>
-<pre><code class="language-json">{&#10;  &quot;errors&quot;: [],&#10;  &quot;messages&quot;: [],&#10;  &quot;result&quot;: {&#10;    &quot;valid&quot;: true,&#10;    &quot;message&quot;: &quot;&quot;&#10;  },&#10;  &quot;success&quot;: true&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;  &quot;errors&quot;: [],&#10;  &quot;messages&quot;: [],&#10;  &quot;result&quot;: {&#10;    &quot;valid&quot;: true,&#10;    &quot;message&quot;: &quot;&quot;&#10;  },&#10;  &quot;success&quot;: true&#10;}&#10;</code></pre>
 <h2 id="configuration-change-timing">Configuration change timing</h2>
 <p>When you modify a Logpush job configuration, changes do not take effect immediately.</p>
 <h3 id="destination-changes">Destination changes</h3>

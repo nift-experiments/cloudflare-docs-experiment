@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/email-security/deployment/inline/setup/office-365-area1-mx/
+  description: Deploy Email Security as the MX record for Office 365 inline email protection.
+  full_title: Deploy and configure Microsoft Office 365 with Email security (formerly Area 1) as the MX Record · Cloudflare Email security (formerly Area 1) docs
+  head_html: <title>Deploy and configure Microsoft Office 365 with Email security (formerly Area 1) as the MX Record · Cloudflare Email security (formerly Area 1) docs</title><meta name="generator" content="Nift"><meta name="description" content="Deploy Email Security as the MX record for Office 365 inline email protection."><meta name="robots" content="noindex"><link rel="canonical" href="https://developers.cloudflare.com/email-security/deployment/inline/setup/office-365-area1-mx/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/email-security/deployment/inline/setup/office-365-area1-mx/index.md"><meta property="og:title" content="Deploy and configure Microsoft Office 365 with Email security (formerly Area 1) as the MX Record · Cloudflare Email security (formerly Area 1) docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Deploy Email Security as the MX record for Office 365 inline email protection."><meta property="og:url" content="https://developers.cloudflare.com/email-security/deployment/inline/setup/office-365-area1-mx/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Email security (formerly Area 1)"><meta name="algolia_product_filter" content="Email security (formerly Area 1)"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="Integration guide"><meta name="algolia_content_type" content="Integration guide"><meta name="pcx_additional_products" content="Email security (formerly Area 1)">
+  markdown: true
+  noindex: true
+  route: /email-security/deployment/inline/setup/office-365-area1-mx/
+  schema: 1
+---
 <aside class="nb-aside note">
 <h3 class="nb-aside-title" id="area-1-has-been-renamed">Area 1 has been renamed</h3>
 @markup("md", "content/.markup/bodies/8536.md")
@@ -16,8 +27,8 @@
 <p>To ensure changes made in this tutorial take effect quickly, update the Time to Live (TTL) value of the existing MX records on your domains to five minutes. Do this on all the domains you will be deploying.</p>
 <p>Changing the TTL value instructs DNS servers on how long to cache this value before requesting an update from the responsible nameserver. You need to change the TTL value before changing your MX records to Cloudflare Email Security (formerly Area 1). This will ensure that changes take effect quickly and can also be reverted quickly if needed. If your DNS manager does not allow for a TTL of five minutes, set it to the lowest possible setting.</p>
 <p>To check your existing TTL, open a terminal window and run the following command against your domain:</p>
-<pre><code class="language-sh">dig mx &lt;YOUR_DOMAIN&gt;&#10;</code></pre>
-<pre><code class="language-sh">&#10;; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; mx &lt;YOUR_DOMAIN&gt;&#10;;; global options: +cmd&#10;;; Got answer:&#10;;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 39938&#10;;; flags: qr rd ra; QUERY: 1, ANSWER: 5, AUTHORITY: 0, ADDITIONAL: 1&#10;&#10;;; OPT PSEUDOSECTION:&#10;; EDNS: version: 0, flags:; udp: 4096&#10;;; QUESTION SECTION:&#10;;domain.		IN	MX&#10;&#10;;; ANSWER SECTION:&#10;&lt;YOUR_DOMAIN&gt;.	300	IN	MX	5 mailstream-central.mxrecord.mx.&#10;&lt;YOUR_DOMAIN&gt;.	300	IN	MX	10 mailstream-east.mxrecord.io.&#10;&lt;YOUR_DOMAIN&gt;.	300	IN	MX	10 mailstream-west.mxrecord.io.&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">dig mx &lt;YOUR_DOMAIN&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">&#10;; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; mx &lt;YOUR_DOMAIN&gt;&#10;;; global options: +cmd&#10;;; Got answer:&#10;;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 39938&#10;;; flags: qr rd ra; QUERY: 1, ANSWER: 5, AUTHORITY: 0, ADDITIONAL: 1&#10;&#10;;; OPT PSEUDOSECTION:&#10;; EDNS: version: 0, flags:; udp: 4096&#10;;; QUESTION SECTION:&#10;;domain.		IN	MX&#10;&#10;;; ANSWER SECTION:&#10;&lt;YOUR_DOMAIN&gt;.	300	IN	MX	5 mailstream-central.mxrecord.mx.&#10;&lt;YOUR_DOMAIN&gt;.	300	IN	MX	10 mailstream-east.mxrecord.io.&#10;&lt;YOUR_DOMAIN&gt;.	300	IN	MX	10 mailstream-west.mxrecord.io.&#10;</code></pre>
 <p>In the above example, TTL is shown in seconds as <code>300</code> (or five minutes).</p>
 <p>If you are using Cloudflare for DNS, you can leave the <a href="/dns/manage-dns-records/reference/ttl/">TTL setting as <strong>Auto</strong></a>.</p>
 <p>Below is a list with instructions on how to edit MX records for some popular services:</p>
@@ -195,11 +206,9 @@
 <p>Select the <strong>...</strong> &gt; <strong>Edit</strong>.</p>
 </li>
 <li>
-<p>Select the additional <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
+<p>Select the additional <span class="nb-glossary-tooltip" title="disposition">dispositions</span> you want to quarantine.</p>
 </li>
 </ol>
-@markup("md", "content/.markup/bodies/8537.md")
-</div> you want to quarantine.
 <div class="large-img">
 <p><img src="/assets/upstream/images/email-security/deployment/inline-setup/o365-area1-mx/step4-area1-dispositions.png" alt="Manage domain quarantines" /></p>
 </div>
@@ -344,9 +353,7 @@
 </table>
 <p>DNS changes will reach the major DNS servers in about an hour or follow the TTL value as described in the <a href="#prerequisites">Prerequisites section</a>.</p>
 <h3 id="secure-office-365-from-mx-records-bypass-recommended">Secure Office 365 from MX records bypass (recommended)</h3>
-<p>One method of DNS attacks is to search for old MX records and send <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/8538.md")
-</div> emails directly to the mail server. To secure the email flow, you will want to enforce an email flow where inbound messages are accepted by Office 365 only when they originate from Email security. This can be done by adding a connector to only allow email from Email security with TLS encryption. This step is optional but recommended.
+<p>One method of DNS attacks is to search for old MX records and send <span class="nb-glossary-tooltip" title="phishing">phishing</span> emails directly to the mail server. To secure the email flow, you will want to enforce an email flow where inbound messages are accepted by Office 365 only when they originate from Email security. This can be done by adding a connector to only allow email from Email security with TLS encryption. This step is optional but recommended.</p>
 <aside class="nb-aside caution">
 <h3 class="nb-aside-title" id="important">Important</h3>
 @markup("md", "content/.markup/bodies/8532.md")
@@ -438,7 +445,7 @@
 <ol>
 <li>Run PowerShell as administrator, and execute the following command. Reply <code>Yes</code> when prompted:</li>
 </ol>
-<pre><code class="language-powershell">Install-Module ExchangeOnlineManagement&#10;</code></pre>
+<pre tabindex="0"><code class="language-powershell">Install-Module ExchangeOnlineManagement&#10;</code></pre>
 <p><img src="/assets/upstream/images/email-security/deployment/inline-setup/o365-area1-mx/step1-install-module.png" alt="Run the install-module command in PowerShell" /></p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/8531.md")
@@ -446,11 +453,11 @@
 <ol start="2">
 <li>Run the following commands to execute the policy change and connect to the Office 365 instance:</li>
 </ol>
-<pre><code class="language-powershell">set-executionpolicy remotesigned&#10;</code></pre>
+<pre tabindex="0"><code class="language-powershell">set-executionpolicy remotesigned&#10;</code></pre>
 <p>Confirm that you want to execute the policy change, and then run the following command:</p>
-<pre><code class="language-powershell">Import-Module ExchangeOnlineManagement&#10;</code></pre>
+<pre tabindex="0"><code class="language-powershell">Import-Module ExchangeOnlineManagement&#10;</code></pre>
 <p>Finally, run the following to authenticate against your Office 365 instance:</p>
-<pre><code class="language-powershell">Connect-ExchangeOnline&#10;</code></pre>
+<pre tabindex="0"><code class="language-powershell">Connect-ExchangeOnline&#10;</code></pre>
 <p><img src="/assets/upstream/images/email-security/deployment/inline-setup/o365-area1-mx/step2-set-executionpolicy.png" alt="Run the commands to execute the policy change" /></p>
 <ol start="3">
 <li>The <code>Connect-ExchangeOnline</code> cmdlet will prompt you to login. Log in using an Office 365 administrator account. Once authenticated, you will be returned to the PowerShell prompt.</li>
@@ -459,8 +466,8 @@
 <ol start="4">
 <li>You can verify that the <code>OrganizationCustomization</code> is enabled by running the command:</li>
 </ol>
-<pre><code class="language-powershell">Get-OrganizationConfig | FL isDehydrated&#10;</code></pre>
+<pre tabindex="0"><code class="language-powershell">Get-OrganizationConfig | FL isDehydrated&#10;</code></pre>
 <p><img src="/assets/upstream/images/email-security/deployment/inline-setup/o365-area1-mx/step4-get-organizationconfig.png" alt="Run the get-organizationconfig command" /></p>
 <p>If the result is <code>false</code>, <code>OrganizationCustomization</code> is already enabled and no further actions are required. If it is true, you need to enable it:</p>
-<pre><code class="language-powershell">Enable-OrganizationCustomization&#10;</code></pre>
+<pre tabindex="0"><code class="language-powershell">Enable-OrganizationCustomization&#10;</code></pre>
 <p><img src="/assets/upstream/images/email-security/deployment/inline-setup/o365-area1-mx/step4-enable-organizationcustomization.png" alt="If the previous result is true, enable the organization customization mode" /></p>

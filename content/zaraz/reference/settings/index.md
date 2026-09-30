@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/zaraz/reference/settings/
+  description: Global Zaraz configuration settings.
+  full_title: Zaraz settings · Cloudflare Zaraz docs
+  head_html: <title>Zaraz settings · Cloudflare Zaraz docs</title><meta name="generator" content="Nift"><meta name="description" content="Global Zaraz configuration settings."><link rel="canonical" href="https://developers.cloudflare.com/zaraz/reference/settings/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/zaraz/reference/settings/index.md"><meta property="og:title" content="Zaraz settings · Cloudflare Zaraz docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Global Zaraz configuration settings."><meta property="og:url" content="https://developers.cloudflare.com/zaraz/reference/settings/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Zaraz"><meta name="algolia_product_filter" content="Zaraz"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Zaraz"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/zaraz/reference/settings/#page","headline":"Zaraz settings \u00b7 Cloudflare Zaraz docs","description":"Global Zaraz configuration settings.","url":"https://developers.cloudflare.com/zaraz/reference/settings/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /zaraz/reference/settings/
+  schema: 1
+---
 <p>To configure Zaraz's general settings, go to the <strong>Settings</strong> page in the Cloudflare dashboard:</p>
 <div class="nb-dash-button"></div>
 <p>Make sure you save your changes, by selecting the <strong>Save</strong> button after making them.</p>
@@ -40,9 +51,9 @@
 <p>When toggled on, the Zaraz script will also be injected into <code>iframe</code> elements.</p>
 <h2 id="endpoints">Endpoints</h2>
 <p>Specify custom URLs for Zaraz's scripts. You need to use a valid pathname:</p>
-<pre><code class="language-txt">/&lt;PATHNAME&gt;/&lt;FILE.JS&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">/&lt;PATHNAME&gt;/&lt;FILE.JS&gt;&#10;</code></pre>
 <p>This is an example of a custom pathname to host Zaraz's initialization script:</p>
-<pre><code class="language-txt">/my-server/my-scripts/start.js&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">/my-server/my-scripts/start.js&#10;</code></pre>
 <h3 id="http-events-api">HTTP Events API</h3>
 <p>Refer to <a href="/zaraz/http-events-api/">HTTP Events API</a> for more information on this endpoint.</p>
 <h2 id="other">Other</h2>

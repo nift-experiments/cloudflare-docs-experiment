@@ -1,13 +1,24 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/zaraz/web-api/set/
+  description: Set key-value pairs in the Zaraz data layer.
+  full_title: zaraz.set · Cloudflare Zaraz docs
+  head_html: <title>zaraz.set · Cloudflare Zaraz docs</title><meta name="generator" content="Nift"><meta name="description" content="Set key-value pairs in the Zaraz data layer."><link rel="canonical" href="https://developers.cloudflare.com/zaraz/web-api/set/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/zaraz/web-api/set/index.md"><meta property="og:title" content="zaraz.set · Cloudflare Zaraz docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Set key-value pairs in the Zaraz data layer."><meta property="og:url" content="https://developers.cloudflare.com/zaraz/web-api/set/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Zaraz"><meta name="algolia_product_filter" content="Zaraz"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Zaraz"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/zaraz/web-api/set/#page","headline":"zaraz.set \u00b7 Cloudflare Zaraz docs","description":"Set key-value pairs in the Zaraz data layer.","url":"https://developers.cloudflare.com/zaraz/web-api/set/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /zaraz/web-api/set/
+  schema: 1
+---
 <p>You can use <code>zaraz.set()</code> anywhere inside the <code>&lt;body&gt;</code> tag of a page:</p>
-<pre><code class="language-js">zaraz.set(key, value, [options])&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">zaraz.set(key, value, [options])&#10;</code></pre>
 <p>Set is useful if you want to make a variable available in all your events without manually setting it every time you are using <code>zaraz.track()</code>. For the purpose of this example, assume users in your system have a unique identifier that you want to send to your tools. You might have many <code>zaraz.track()</code> calls all sharing this one parameter:</p>
-<pre><code class="language-js">zaraz.track(&quot;form completed&quot;, {userId: &quot;ABC-123&quot;})&#10;</code></pre>
-<pre><code class="language-js">zaraz.track(&quot;button clicked&quot;, {userId: &quot;ABC-123&quot;, value: 200})&#10;</code></pre>
-<pre><code class="language-js">zaraz.track(&quot;cart viewed&quot;, {items: 3, userId: &quot;ABC-123&quot;})&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">zaraz.track(&quot;form completed&quot;, {userId: &quot;ABC-123&quot;})&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">zaraz.track(&quot;button clicked&quot;, {userId: &quot;ABC-123&quot;, value: 200})&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">zaraz.track(&quot;cart viewed&quot;, {items: 3, userId: &quot;ABC-123&quot;})&#10;</code></pre>
 <p>Here, all the events are collecting the <code>userId</code> key, and the code for setting that key repeats itself. With <code>zaraz.set()</code> you can avoid repetition by setting the key once when the page loads. Zaraz will then attach this key to all future <code>zaraz.track()</code> calls.</p>
 <p>Using the above data as the example, if you use <code>zaraz.set(&quot;userId&quot;, &quot;ABC-123&quot;)</code> once, before the <code>zaraz.track()</code> calls, you can remove the <code>userId</code> key from all <code>zaraz.track()</code> calls.</p>
 <p>Another example:</p>
-<pre><code class="language-js">zaraz.set(&#x27;product_name&#x27;, &#x27;t-shirt&#x27;, {scope: &#x27;page&#x27;})&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">zaraz.set(&#x27;product_name&#x27;, &#x27;t-shirt&#x27;, {scope: &#x27;page&#x27;})&#10;</code></pre>
 <p>Keys that are sent using <code>zaraz.set()</code> can be used inside tool actions exactly like keys in the <code>eventProperties</code> of <code>zaraz.track()</code>. So, the above <code>product</code> key is accessible through the Cloudflare dashboard with the variable <em>Track Property name:</em>, and setting its name as <code>product_name</code>. Zaraz will then replace it with <code>t-shirt</code>.</p>
 <p><img src="/assets/upstream/images/zaraz/set.png" alt="Example of how to create a variable with the Set method, tracking t-shirts" /></p>
 <p>The <code>[options]</code> argument is an optional object and can include a <code>scope</code> property that has a string value. This property determines the lifetime of this key, meaning for how long Zaraz should keep attaching it to <code>zaraz.track()</code> calls. Allowed values are:</p>
@@ -18,4 +29,4 @@
 </ul>
 <p>In the previous example, <code>{scope: 'page'}</code> makes the <code>product_name</code> property available to all <code>zaraz.track()</code> calls in the current page, but will not affect calls after visitors navigate to other pages.</p>
 <p>To unset a variable, set it to <code>undefined</code>. The variable will then be removed from all scopes it was included in, and will not be automatically sent with future <code>zaraz.track</code> calls. For example:</p>
-<pre><code class="language-js">zaraz.set(&#x27;product_name&#x27;, undefined)&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">zaraz.set(&#x27;product_name&#x27;, undefined)&#10;</code></pre>

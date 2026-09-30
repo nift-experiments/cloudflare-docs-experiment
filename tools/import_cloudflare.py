@@ -1229,6 +1229,10 @@ def render(name, a, body=''):
     # Markdown boundary so Nift renders the body (fences, lists, bold) instead
     # of leaving it literal inside the component HTML block.
     wrapped = _wrap_markup(body, f'<{name}>')
+    if name == 'GlossaryTooltip':
+        term = _clean_attr(at.get('term') or body)
+        return (f'<span class="nb-glossary-tooltip" title="{html.escape(term, quote=True)}">'
+                f'{_inline_markdown(body)}</span>')
     if name == 'Aside':
         return f'<aside class="nb-aside {html.escape(at.get("type", "note"))}">{wrapped}</aside>'
     if name in {'Card', 'Example'}:
@@ -1272,7 +1276,7 @@ def render(name, a, body=''):
             href = html.escape(at['href'], quote=True)
             identity = f'{html.unescape(title)}-{at.get("href", "")}'
             heading_id = 'card-' + (re.sub(r'[^a-z0-9]+', '-', identity.casefold()).strip('-') or 'link')
-            return f'<a class="nb-card nb-link-card" href="{href}"><h3 id="{heading_id}">{title}</h3>{description}{wrapped}</a>'
+            return f'<div class="nb-card nb-link-card"><h3 id="{heading_id}"><a href="{href}">{title}</a></h3>{description}{wrapped}</div>'
         return f'<div class="nb-card"><strong>{title}</strong>{description}{wrapped}</div>'
     if name == 'LinkButton':
         href = html.escape(at.get('href', ''), quote=True)
@@ -2109,6 +2113,10 @@ def convert(text, path='<memory>', metadata=None):
     # Source-style '~/assets/...' references resolve to the staged upstream
     # asset tree at /assets/upstream/ in the generated site.
     text = _rewrite_asset_refs(text)
+    text = re.sub(r'<iframe\b(?![^>]*\btitle\s*=)([^>]*)>',
+                  r'<iframe title="Embedded media"\1>', text, flags=re.I)
+    text = re.sub(r'<pre\b(?![^>]*\btabindex\s*=)([^>]*)>',
+                  r'<pre tabindex="0"\1>', text, flags=re.I)
     # A bare '---' horizontal rule left at the start of the body would be
     # misread by Nift as an unterminated front-matter block. Drop a leading
     # standalone '---' line (it was an HR after the stripped import block).

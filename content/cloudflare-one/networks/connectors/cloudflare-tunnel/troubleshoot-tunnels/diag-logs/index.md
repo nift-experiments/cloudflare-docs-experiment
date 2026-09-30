@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/troubleshoot-tunnels/diag-logs/
+  description: Tunnel diagnostic logs in Zero Trust networking.
+  full_title: Tunnel diagnostic logs · Cloudflare One docs
+  head_html: <title>Tunnel diagnostic logs · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="Tunnel diagnostic logs in Zero Trust networking."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/troubleshoot-tunnels/diag-logs/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/troubleshoot-tunnels/diag-logs/index.md"><meta property="og:title" content="Tunnel diagnostic logs · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Tunnel diagnostic logs in Zero Trust networking."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/troubleshoot-tunnels/diag-logs/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Cloudflare One"><meta name="pcx_tags" content="Debugging"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/troubleshoot-tunnels/diag-logs/#page","headline":"Tunnel diagnostic logs \u00b7 Cloudflare One docs","description":"Tunnel diagnostic logs in Zero Trust networking.","url":"https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/troubleshoot-tunnels/diag-logs/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["Debugging"]}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/networks/connectors/cloudflare-tunnel/troubleshoot-tunnels/diag-logs/
+  schema: 1
+---
 <p>Cloudflare Tunnel generates a set of diagnostic logs that can be used to troubleshoot issues with <code>cloudflared</code>. A diagnostic report collects data from a single instance of <code>cloudflared</code> running on the local machine.</p>
 <h2 id="get-diagnostic-logs">Get diagnostic logs</h2>
 <p>The steps for getting diagnostic logs depend on your <code>cloudflared</code> deployment environment.</p>
@@ -10,14 +21,14 @@
 <ol>
 <li>(Linux only) To include network diagnostics in the logs, allow the <code>cloudflared</code> user to create RAW and PACKET sockets without root permissions:</li>
 </ol>
-<pre><code class="language-sh">sudo setcap cap_net_raw+ep /usr/bin/traceroute &amp;&amp; sudo setcap cap_net_raw+ep /usr/bin/traceroute&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">sudo setcap cap_net_raw+ep /usr/bin/traceroute &amp;&amp; sudo setcap cap_net_raw+ep /usr/bin/traceroute&#10;</code></pre>
 <p>If you do not set <code>cap_net_raw</code>, then traceroute data will be unavailable.</p>
 <ol start="2">
 <li>Get diagnostic logs:</li>
 </ol>
-<pre><code class="language-sh">cloudflared tunnel diag&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel diag&#10;</code></pre>
 <p>If multiple instances of <code>cloudflared</code> are running on the same host, specify the <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/monitor-tunnels/metrics/#configure-the-metrics-server-address">metrics server IP and port</a> for the instance you want to diagnose. For example:</p>
-<pre><code class="language-sh">cloudflared tunnel diag --metrics 127.0.0.1:20241&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel diag --metrics 127.0.0.1:20241&#10;</code></pre>
 <p>This command will output the status of each diagnostic task and place a <code>cloudflared-diag-YYYY-MM-DDThh-mm-ss.zip</code> file in your working directory.</p>
 <h3 id="docker">Docker</h3>
 <p><code>cloudflared</code> reads diagnostic data from the <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/monitor-tunnels/metrics/">tunnel metrics server</a>. To get diagnostic logs, the metrics server must be exposed from the Docker container and reachable from the host machine.</p>
@@ -29,19 +40,19 @@
 <p>Ensure the container is deployed with port forwarding enabled. The diagnostic feature will request information from the Docker instance using local port <code>20241</code>, therefore you should forward port <code>20241</code> to the container port obtained in Step 1:</p>
 </li>
 </ol>
-<pre><code class="language-sh">docker run -d -p 20241:&lt;metrics_port&gt; docker.io/cloudflare/cloudflared tunnel ...&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">docker run -d -p 20241:&lt;metrics_port&gt; docker.io/cloudflare/cloudflared tunnel ...&#10;</code></pre>
 <ol start="3">
 <li>Verify that you can reach the metrics server address from the Docker host environment:</li>
 </ol>
-<pre><code class="language-sh">curl localhost:20241/diag/tunnel&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">curl localhost:20241/diag/tunnel&#10;</code></pre>
 <p>This command should return a JSON:</p>
-<pre><code class="language-json">{&#10;  &quot;tunnelID&quot;: &quot;ef96b330-a7f5-4bce-a00e-827ce5be077f&quot;,&#10;  &quot;connectorID&quot;: &quot;d236670a-9f74-422f-adf1-030f5c5f0523&quot;,&#10;  &quot;connections&quot;: [&#10;    { &quot;isConnected&quot;: true, &quot;protocol&quot;: 1, &quot;edgeAddress&quot;: &quot;198.41.192.167&quot;},&#10;    {&quot;isConnected&quot;: true, &quot;protocol&quot;: 1, &quot;edgeAddress&quot;: &quot;198.41.200.113&quot;, &quot;index&quot;: 1},&#10;    {&quot;isConnected&quot;: true, &quot;protocol&quot;: 1, &quot;edgeAddress&quot;: &quot;198.41.192.47&quot;, &quot;index&quot;: 2},&#10;    {&quot;isConnected&quot;: true, &quot;protocol&quot;: 1, &quot;edgeAddress&quot;: &quot;198.41.200.73&quot;, &quot;index&quot;: 3}&#10;  ],&#10;  &quot;icmp_sources&quot;: [&quot;192.168.1.243&quot;, &quot;fe80::c59:bd4a:e815:ed6&quot;]&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;  &quot;tunnelID&quot;: &quot;ef96b330-a7f5-4bce-a00e-827ce5be077f&quot;,&#10;  &quot;connectorID&quot;: &quot;d236670a-9f74-422f-adf1-030f5c5f0523&quot;,&#10;  &quot;connections&quot;: [&#10;    { &quot;isConnected&quot;: true, &quot;protocol&quot;: 1, &quot;edgeAddress&quot;: &quot;198.41.192.167&quot;},&#10;    {&quot;isConnected&quot;: true, &quot;protocol&quot;: 1, &quot;edgeAddress&quot;: &quot;198.41.200.113&quot;, &quot;index&quot;: 1},&#10;    {&quot;isConnected&quot;: true, &quot;protocol&quot;: 1, &quot;edgeAddress&quot;: &quot;198.41.192.47&quot;, &quot;index&quot;: 2},&#10;    {&quot;isConnected&quot;: true, &quot;protocol&quot;: 1, &quot;edgeAddress&quot;: &quot;198.41.200.73&quot;, &quot;index&quot;: 3}&#10;  ],&#10;  &quot;icmp_sources&quot;: [&quot;192.168.1.243&quot;, &quot;fe80::c59:bd4a:e815:ed6&quot;]&#10;}&#10;</code></pre>
 <ol start="4">
 <li>Run the diagnostic using the Docker container ID:</li>
 </ol>
-<pre><code class="language-sh">cloudflared tunnel diag --diag-container-id=&lt;containerID&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel diag --diag-container-id=&lt;containerID&gt;&#10;</code></pre>
 <p>Alternatively, you can specify the container's name instead of its ID:</p>
-<pre><code class="language-sh">cloudflared tunnel diag --diag-container-id=&lt;containerName&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel diag --diag-container-id=&lt;containerName&gt;&#10;</code></pre>
 <p>Running the diagnostic command with the container ID allows <code>cloudflared</code> to collect information from the Docker environment such as logs and container details.</p>
 <p>This command will output the status of each diagnostic task and place a <code>cloudflared-diag-YYYY-MM-DDThh-mm-ss.zip</code> file in your working directory.</p>
 <h3 id="kubernetes">Kubernetes</h3>
@@ -54,21 +65,21 @@
 <p>Enable port forwarding:</p>
 </li>
 </ol>
-<pre><code class="language-sh">kubectl port-forward &lt;pod&gt; &lt;diagnostic_port&gt;:&lt;metrics_port&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">kubectl port-forward &lt;pod&gt; &lt;diagnostic_port&gt;:&lt;metrics_port&gt;&#10;</code></pre>
 <ul>
 <li><code>&lt;pod&gt;</code>: Name of the pod where the tunnel is running</li>
 <li><code>&lt;diagnostic_port&gt;</code> is any local port in the range <code>20241</code> to <code>20245</code>.</li>
 <li><code>&lt;metrics_port&gt;</code> is the Kubernetes pod port for the <code>cloudflared</code> instance you want to diagnose (obtained in Step 1).</li>
 </ul>
 <p>For example, if you set the metrics server address to <code>0.0.0.0:12345</code>:</p>
-<pre><code class="language-sh">kubectl port-forward cloudflared-6d4897585b-r8kfz 20244:12345&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">kubectl port-forward cloudflared-6d4897585b-r8kfz 20244:12345&#10;</code></pre>
 <p>Connections made to local port <code>20244</code> are forwarded to port <code>12345</code> of the pod that is running the tunnel.</p>
 <ol start="3">
 <li>Run the diagnostic:</li>
 </ol>
-<pre><code class="language-sh">cloudflared tunnel diag --diag-pod-id=&lt;podID&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel diag --diag-pod-id=&lt;podID&gt;&#10;</code></pre>
 <p>If the pod has multiple applications/services running and <code>cloudflared</code> is not the first in the pod, you must specify either the container ID or name:</p>
-<pre><code class="language-sh">cloudflared tunnel diag --diag-pod-id=&lt;podID&gt; --diag-container-id=&lt;containerName&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel diag --diag-pod-id=&lt;podID&gt; --diag-container-id=&lt;containerName&gt;&#10;</code></pre>
 <p>This command will output the status of each diagnostic task and place a <code>cloudflared-diag-YYYY-MM-DDThh-mm-ss.zip</code> file in your working directory.</p>
 <h2 id="cloudflared-diag-files">cloudflared-diag files</h2>
 <p>The <code>cloudflared-diag-YYYY-MM-DDThh-mm-ss.zip</code> archive contains the files listed below. The data in a file either applies to the <code>cloudflared</code> instance being diagnosed (<code>diagnosee</code>) or the instance that triggered the diagnosis (<code>diagnoser</code>). For example, if your tunnel is running in a Docker container, the diagnosee is the Docker instance and the diagnoser is the host instance.</p>

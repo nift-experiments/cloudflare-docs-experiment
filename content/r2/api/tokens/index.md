@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/r2/api/tokens/
+  description: Generate and manage R2 API tokens for use with S3-compatible SDKs and APIs.
+  full_title: Authentication · Cloudflare R2 docs
+  head_html: <title>Authentication · Cloudflare R2 docs</title><meta name="generator" content="Nift"><meta name="description" content="Generate and manage R2 API tokens for use with S3-compatible SDKs and APIs."><link rel="canonical" href="https://developers.cloudflare.com/r2/api/tokens/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/r2/api/tokens/index.md"><meta property="og:title" content="Authentication · Cloudflare R2 docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Generate and manage R2 API tokens for use with S3-compatible SDKs and APIs."><meta property="og:url" content="https://developers.cloudflare.com/r2/api/tokens/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="R2"><meta name="algolia_product_filter" content="R2"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="R2"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/r2/api/tokens/#page","headline":"Authentication \u00b7 Cloudflare R2 docs","description":"Generate and manage R2 API tokens for use with S3-compatible SDKs and APIs.","url":"https://developers.cloudflare.com/r2/api/tokens/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /r2/api/tokens/
+  schema: 1
+---
 <p>You can generate an API token to serve as the Access Key for usage with existing S3-compatible SDKs or XML APIs.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/11501.md")
@@ -75,14 +86,14 @@
 <h5 id="bucket">Bucket</h5>
 <p>Include a set of R2 buckets or all buckets in an account.</p>
 <p>A specific bucket is represented as:</p>
-<pre><code class="language-json">&quot;com.cloudflare.edge.r2.bucket.&lt;ACCOUNT_ID&gt;_&lt;JURISDICTION&gt;_&lt;BUCKET_NAME&gt;&quot;: &quot;*&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">&quot;com.cloudflare.edge.r2.bucket.&lt;ACCOUNT_ID&gt;_&lt;JURISDICTION&gt;_&lt;BUCKET_NAME&gt;&quot;: &quot;*&quot;&#10;</code></pre>
 <ul>
 <li><code>ACCOUNT_ID</code>: Refer to <a href="/fundamentals/account/find-account-and-zone-ids/#find-account-id-workers-and-pages">Find zone and account IDs</a>.</li>
 <li><code>JURISDICTION</code>: The <a href="/r2/reference/data-location/#available-jurisdictions">jurisdiction</a> where the R2 bucket lives. For buckets not created in a specific jurisdiction this value will be <code>default</code>.</li>
 <li><code>BUCKET_NAME</code>: The name of the bucket your Access Policy applies to.</li>
 </ul>
 <p>All buckets in an account are represented as:</p>
-<pre><code class="language-json">&quot;com.cloudflare.api.account.&lt;ACCOUNT_ID&gt;&quot;: {&#10;  &quot;com.cloudflare.edge.r2.bucket.*&quot;: &quot;*&quot;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">&quot;com.cloudflare.api.account.&lt;ACCOUNT_ID&gt;&quot;: {&#10;  &quot;com.cloudflare.edge.r2.bucket.*&quot;: &quot;*&quot;&#10;}&#10;</code></pre>
 <ul>
 <li><code>ACCOUNT_ID</code>: Refer to <a href="/fundamentals/account/find-account-and-zone-ids/#find-account-id-workers-and-pages">Find zone and account IDs</a>.</li>
 </ul>
@@ -172,7 +183,7 @@
 </tbody>
 </table>
 <h4 id="example-access-policy">Example Access Policy</h4>
-<pre><code class="language-json">[&#10;	{&#10;		&quot;id&quot;: &quot;f267e341f3dd4697bd3b9f71dd96247f&quot;,&#10;		&quot;effect&quot;: &quot;allow&quot;,&#10;		&quot;resources&quot;: {&#10;			&quot;com.cloudflare.edge.r2.bucket.4793d734c0b8e484dfc37ec392b5fa8a_default_my-bucket&quot;: &quot;*&quot;,&#10;			&quot;com.cloudflare.edge.r2.bucket.4793d734c0b8e484dfc37ec392b5fa8a_eu_my-eu-bucket&quot;: &quot;*&quot;&#10;		},&#10;		&quot;permission_groups&quot;: [&#10;			{&#10;				&quot;id&quot;: &quot;6a018a9f2fc74eb6b293b0c548f38b39&quot;,&#10;				&quot;name&quot;: &quot;Workers R2 Storage Bucket Item Read&quot;&#10;			}&#10;		]&#10;	}&#10;]&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">[&#10;	{&#10;		&quot;id&quot;: &quot;f267e341f3dd4697bd3b9f71dd96247f&quot;,&#10;		&quot;effect&quot;: &quot;allow&quot;,&#10;		&quot;resources&quot;: {&#10;			&quot;com.cloudflare.edge.r2.bucket.4793d734c0b8e484dfc37ec392b5fa8a_default_my-bucket&quot;: &quot;*&quot;,&#10;			&quot;com.cloudflare.edge.r2.bucket.4793d734c0b8e484dfc37ec392b5fa8a_eu_my-eu-bucket&quot;: &quot;*&quot;&#10;		},&#10;		&quot;permission_groups&quot;: [&#10;			{&#10;				&quot;id&quot;: &quot;6a018a9f2fc74eb6b293b0c548f38b39&quot;,&#10;				&quot;name&quot;: &quot;Workers R2 Storage Bucket Item Read&quot;&#10;			}&#10;		]&#10;	}&#10;]&#10;</code></pre>
 <h3 id="get-s3-api-credentials-from-an-api-token">Get S3 API credentials from an API token</h3>
 <p>You can get the Access Key ID and Secret Access Key values from the response of the <a href="/api/resources/user/subresources/tokens/methods/create/">Create Token</a> API:</p>
 <ul>

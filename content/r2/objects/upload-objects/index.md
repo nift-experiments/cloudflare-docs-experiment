@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/r2/objects/upload-objects/
+  description: Upload objects to R2 using single-part or multipart uploads via the dashboard, Workers API, or S3 API.
+  full_title: Upload objects · Cloudflare R2 docs
+  head_html: <title>Upload objects · Cloudflare R2 docs</title><meta name="generator" content="Nift"><meta name="description" content="Upload objects to R2 using single-part or multipart uploads via the dashboard, Workers API, or S3 API."><link rel="canonical" href="https://developers.cloudflare.com/r2/objects/upload-objects/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/r2/objects/upload-objects/index.md"><meta property="og:title" content="Upload objects · Cloudflare R2 docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Upload objects to R2 using single-part or multipart uploads via the dashboard, Workers API, or S3 API."><meta property="og:url" content="https://developers.cloudflare.com/r2/objects/upload-objects/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="R2"><meta name="algolia_product_filter" content="R2"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="R2"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/r2/objects/upload-objects/#page","headline":"Upload objects \u00b7 Cloudflare R2 docs","description":"Upload objects to R2 using single-part or multipart uploads via the dashboard, Workers API, or S3 API.","url":"https://developers.cloudflare.com/r2/objects/upload-objects/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /r2/objects/upload-objects/
+  schema: 1
+---
 <p>There are several ways to upload objects to R2. Which approach you choose depends on the size of your objects and your performance requirements.</p>
 <h2 id="choose-an-upload-method">Choose an upload method</h2>
 <table>
@@ -105,16 +116,16 @@
 <p><a href="https://rclone.org/">Rclone</a> is a command-line tool for managing files on cloud storage. Rclone works well for uploading multiple files from your local machine or copying data from other cloud storage providers.</p>
 <p>To use rclone, install it onto your machine using their official documentation - <a href="https://rclone.org/install/">Install rclone</a>.</p>
 <p>Upload files with the <code>rclone copy</code> command:</p>
-<pre><code class="language-sh">&#35; Upload a single file&#10;rclone copy /path/to/local/image.png r2:bucket_name&#10;&#10;&#35; Upload everything in a directory&#10;rclone copy /path/to/local/folder r2:bucket_name&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">&#35; Upload a single file&#10;rclone copy /path/to/local/image.png r2:bucket_name&#10;&#10;&#35; Upload everything in a directory&#10;rclone copy /path/to/local/folder r2:bucket_name&#10;</code></pre>
 <p>Verify the upload with <code>rclone ls</code>:</p>
-<pre><code class="language-sh">rclone ls r2:bucket_name&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">rclone ls r2:bucket_name&#10;</code></pre>
 <p>For more information, refer to our <a href="/r2/examples/rclone/">rclone example</a>.</p>
 <h3 id="wrangler">Wrangler</h3>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/11378.md")
 </aside>
 <p>Use <a href="/workers/wrangler/install-and-update/">Wrangler</a> to upload objects. Run the <a href="/workers/wrangler/commands/r2/#r2-object-put"><code>r2 object put</code> command</a>:</p>
-<pre><code class="language-sh">wrangler r2 object put test-bucket/image.png --file=image.png&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">wrangler r2 object put test-bucket/image.png --file=image.png&#10;</code></pre>
 <p>You can set the <code>Content-Type</code> (MIME type), <code>Content-Disposition</code>, <code>Cache-Control</code> and other HTTP header metadata through optional flags.</p>
 <h2 id="multipart-upload-details">Multipart upload details</h2>
 <h3 id="part-size-limits">Part size limits</h3>
@@ -130,7 +141,7 @@
 <p>ETags for objects uploaded via multipart differ from those uploaded with a single <code>PUT</code>. The ETag of each part is the MD5 hash of that part's contents. The ETag of the completed multipart object is the hash of the concatenated binary MD5 sums of all parts, followed by a hyphen and the number of parts.</p>
 <p>For example, if a two-part upload has part ETags <code>bce6bf66aeb76c7040fdd5f4eccb78e6</code> and <code>8165449fc15bbf43d3b674595cbcc406</code>, the completed object's ETag will be <code>f77dc0eecdebcd774a2a22cb393ad2ff-2</code>.</p>
 <h2 id="related-resources">Related resources</h2>
-<p><a class="nb-card nb-link-card" href="/r2/api/workers/workers-api-reference/"><h3 id="card-workers-api-reference-r2-api-workers-workers-api-reference">Workers API reference</h3><p>Full reference for the R2 Workers API including put(), createMultipartUpload(), and more.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/r2/api/s3/api/"><h3 id="card-s3-api-compatibility-r2-api-s3-api">S3 API compatibility</h3><p>Supported S3 API operations and R2-specific behavior.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/r2/api/s3/presigned-urls/"><h3 id="card-presigned-urls-r2-api-s3-presigned-urls">Presigned URLs</h3><p>Generate temporary upload and download URLs for client-side access.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/r2/buckets/object-lifecycles/"><h3 id="card-object-lifecycles-r2-buckets-object-lifecycles">Object lifecycles</h3><p>Configure automatic cleanup of incomplete multipart uploads.</p></a></p>
+<div class="nb-card nb-link-card"><h3 id="card-workers-api-reference-r2-api-workers-workers-api-reference"><a href="/r2/api/workers/workers-api-reference/">Workers API reference</a></h3><p>Full reference for the R2 Workers API including put(), createMultipartUpload(), and more.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-s3-api-compatibility-r2-api-s3-api"><a href="/r2/api/s3/api/">S3 API compatibility</a></h3><p>Supported S3 API operations and R2-specific behavior.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-presigned-urls-r2-api-s3-presigned-urls"><a href="/r2/api/s3/presigned-urls/">Presigned URLs</a></h3><p>Generate temporary upload and download URLs for client-side access.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-object-lifecycles-r2-buckets-object-lifecycles"><a href="/r2/buckets/object-lifecycles/">Object lifecycles</a></h3><p>Configure automatic cleanup of incomplete multipart uploads.</p></div>

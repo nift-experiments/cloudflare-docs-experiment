@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/agents/examples/chat-agent/
+  description: Build a streaming AI chat agent with tools using Workers AI — no API keys required.
+  full_title: Chat agent · Cloudflare Agents docs
+  head_html: <title>Chat agent · Cloudflare Agents docs</title><meta name="generator" content="Nift"><meta name="description" content="Build a streaming AI chat agent with tools using Workers AI — no API keys required."><link rel="canonical" href="https://developers.cloudflare.com/agents/examples/chat-agent/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/agents/examples/chat-agent/index.md"><meta property="og:title" content="Chat agent · Cloudflare Agents docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Build a streaming AI chat agent with tools using Workers AI — no API keys required."><meta property="og:url" content="https://developers.cloudflare.com/agents/examples/chat-agent/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Agents"><meta name="algolia_product_filter" content="Agents"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Example"><meta name="algolia_content_type" content="Example"><meta name="pcx_additional_products" content="Agents"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/agents/examples/chat-agent/#page","headline":"Chat agent \u00b7 Cloudflare Agents docs","description":"Build a streaming AI chat agent with tools using Workers AI \u2014 no API keys required.","url":"https://developers.cloudflare.com/agents/examples/chat-agent/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /agents/examples/chat-agent/
+  schema: 1
+---
 <p>Build a chat agent that streams AI responses, calls server-side tools, executes client-side tools in the browser, and asks for user approval before sensitive actions.</p>
 <p><strong>What you will build:</strong> A chat agent powered by Workers AI with three tool types — automatic, client-side, and approval-gated.</p>
 <p><strong>Time:</strong> ~15 minutes</p>
@@ -10,9 +21,9 @@
 <h2 id="1-create-the-project"><ol>
 <li>Create the project</li>
 </ol></h2>
-<pre><code class="language-sh">npm create cloudflare@latest chat-agent&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npm create cloudflare@latest chat-agent&#10;</code></pre>
 <p>Select <strong>&quot;Hello World&quot; Worker</strong> when prompted. Then install the dependencies:</p>
-<pre><code class="language-sh">cd chat-agent&#10;npm install agents @cloudflare/ai-chat ai workers-ai-provider zod&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cd chat-agent&#10;npm install agents @cloudflare/ai-chat ai workers-ai-provider zod&#10;</code></pre>
 <h2 id="2-configure-wrangler"><ol start="2">
 <li>Configure Wrangler</li>
 </ol></h2>
@@ -83,7 +94,7 @@
 <li>Run locally</li>
 </ol></h2>
 <p>Generate types and start the dev server:</p>
-<pre><code class="language-sh">npx wrangler types&#10;npm run dev&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler types&#10;npm run dev&#10;</code></pre>
 <p>Try these prompts:</p>
 <ul>
 <li><strong>&quot;What is the weather in Tokyo?&quot;</strong> — calls the server-side <code>getWeather</code> tool</li>
@@ -93,7 +104,7 @@
 <h2 id="6-deploy"><ol start="6">
 <li>Deploy</li>
 </ol></h2>
-<pre><code class="language-sh">npx wrangler deploy&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler deploy&#10;</code></pre>
 <p>Your agent is now live on Cloudflare's global network. Messages persist in SQLite, streams resume on disconnect, and the agent hibernates when idle to save resources.</p>
 <h2 id="what-you-built">What you built</h2>
 <p>Your chat agent has:</p>
@@ -106,7 +117,7 @@
 <li><strong>Resumable streaming</strong> — if a client disconnects mid-stream, it picks up where it left off</li>
 </ul>
 <h2 id="next-steps">Next steps</h2>
-<p><a class="nb-card nb-link-card" href="/agents/communication-channels/chat/chat-agents/"><h3 id="card-chat-agents-api-reference-agents-communication-channels-chat-chat-agents">Chat agents API reference</h3><p>Full reference for AIChatAgent and useAgentChat — providers, storage, advanced patterns.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/lifecycle/state/"><h3 id="card-store-and-sync-state-agents-runtime-lifecycle-state">Store and sync state</h3><p>Add real-time state beyond chat messages.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/lifecycle/callable-methods/"><h3 id="card-callable-methods-agents-runtime-lifecycle-callable-methods">Callable methods</h3><p>Expose agent methods as typed RPC for your client.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/concepts/agentic-patterns/human-in-the-loop/"><h3 id="card-human-in-the-loop-agents-concepts-agentic-patterns-human-in-the-loop">Human-in-the-loop</h3><p>Deeper patterns for approval flows and manual intervention.</p></a></p>
+<div class="nb-card nb-link-card"><h3 id="card-chat-agents-api-reference-agents-communication-channels-chat-chat-agents"><a href="/agents/communication-channels/chat/chat-agents/">Chat agents API reference</a></h3><p>Full reference for AIChatAgent and useAgentChat — providers, storage, advanced patterns.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-store-and-sync-state-agents-runtime-lifecycle-state"><a href="/agents/runtime/lifecycle/state/">Store and sync state</a></h3><p>Add real-time state beyond chat messages.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-callable-methods-agents-runtime-lifecycle-callable-methods"><a href="/agents/runtime/lifecycle/callable-methods/">Callable methods</a></h3><p>Expose agent methods as typed RPC for your client.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-human-in-the-loop-agents-concepts-agentic-patterns-human-in-the-loop"><a href="/agents/concepts/agentic-patterns/human-in-the-loop/">Human-in-the-loop</a></h3><p>Deeper patterns for approval flows and manual intervention.</p></div>

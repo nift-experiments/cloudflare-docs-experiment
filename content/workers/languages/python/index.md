@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/workers/languages/python/
+  description: Write Workers in 100% Python
+  full_title: Write Cloudflare Workers in Python · Cloudflare Workers docs
+  head_html: <title>Write Cloudflare Workers in Python · Cloudflare Workers docs</title><meta name="generator" content="Nift"><meta name="description" content="Write Workers in 100% Python"><link rel="canonical" href="https://developers.cloudflare.com/workers/languages/python/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/workers/languages/python/index.md"><meta property="og:title" content="Write Cloudflare Workers in Python · Cloudflare Workers docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Write Workers in 100% Python"><meta property="og:url" content="https://developers.cloudflare.com/workers/languages/python/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Workers"><meta name="algolia_product_filter" content="Workers"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Navigation"><meta name="algolia_content_type" content="Navigation"><meta name="pcx_additional_products" content="Workers"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://developers.cloudflare.com/workers/languages/python/#page","headline":"Write Cloudflare Workers in Python \u00b7 Cloudflare Workers docs","description":"Write Workers in 100% Python","url":"https://developers.cloudflare.com/workers/languages/python/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /workers/languages/python/
+  schema: 1
+---
 <p>Cloudflare Workers provides a first-class Python experience, including support for:</p>
 <ul>
 <li>Easy to install and fast-booting <a href="/workers/languages/python/packages">Packages</a>, including <a href="https://fastapi.tiangolo.com/">FastAPI</a>, <a href="https://pypi.org/project/langchain/">Langchain</a>, <a href="https://docs.pydantic.dev/latest/">Pydantic</a> and more.</li>
@@ -14,7 +25,7 @@
 </ul>
 <h2 id="introduction">Introduction</h2>
 <p>A Python Worker can be as simple as four lines of code:</p>
-<pre><code class="language-python">from workers import WorkerEntrypoint, Response&#10;&#10;class Default(WorkerEntrypoint):&#10;    async def fetch(self, request):&#10;        return Response(&quot;Hello World!&quot;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-python">from workers import WorkerEntrypoint, Response&#10;&#10;class Default(WorkerEntrypoint):&#10;    async def fetch(self, request):&#10;        return Response(&quot;Hello World!&quot;)&#10;</code></pre>
 <p>Similar to other Workers, the main entry point for a Python worker is the <a href="/workers/runtime-apis/handlers/fetch"><code>fetch</code> handler</a> which handles incoming requests
 sent to the Worker.</p>
 <p>In a Python Worker, this handler is placed in a <code>Default</code> class that extends the <code>WorkerEntrypoint</code> class (which you can import from the <code>workers</code> SDK module).</p>
@@ -26,18 +37,18 @@ sent to the Worker.</p>
 the CLI for Python Workers.</p>
 <p>To set it up, first, ensure <a href="https://docs.astral.sh/uv/#installation">uv</a> and <a href="https://nodejs.org/en">Node</a> are installed.</p>
 <p>Then set up your development environment:</p>
-<pre><code class="language-bash">uvx --from workers-py pywrangler init&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">uvx --from workers-py pywrangler init&#10;</code></pre>
 <p>This will create a <code>pyproject.toml</code> file with <code>workers-py</code> as a development
 dependency. <code>pywrangler init</code> will create a wrangler config file. You can then
 run <code>pywrangler</code> with:</p>
-<pre><code class="language-bash">uv run pywrangler dev&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">uv run pywrangler dev&#10;</code></pre>
 <p>To deploy a Python Worker to Cloudflare, run <code>pywrangler deploy</code>:</p>
-<pre><code class="language-bash">uv run pywrangler deploy&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">uv run pywrangler deploy&#10;</code></pre>
 <h3 id="python-worker-templates">Python Worker Templates</h3>
 <p>When you initialize a new Python Worker project and select from one of many templates:</p>
-<pre><code class="language-bash">uv run pywrangler init&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">uv run pywrangler init&#10;</code></pre>
 <p>Or you can clone the examples repository to explore more options:</p>
-<pre><code class="language-bash">git clone https://github.com/cloudflare/python-workers-examples&#10;cd python-workers-examples/hello&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">git clone https://github.com/cloudflare/python-workers-examples&#10;cd python-workers-examples/hello&#10;</code></pre>
 <h2 id="next-up">Next Up</h2>
 <ul>
 <li>Learn more about <a href="/workers/languages/python/basics">the basics of Python Workers</a></li>

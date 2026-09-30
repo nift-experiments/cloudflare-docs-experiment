@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/logs/faq/504-origin-status-0/
+  description: Why internal subrequests appear as 504 with origin status 0 in Logpush.
+  full_title: 504 responses with origin status 0 in Logpush · Cloudflare Logs docs
+  head_html: <title>504 responses with origin status 0 in Logpush · Cloudflare Logs docs</title><meta name="generator" content="Nift"><meta name="description" content="Why internal subrequests appear as 504 with origin status 0 in Logpush."><link rel="canonical" href="https://developers.cloudflare.com/logs/faq/504-origin-status-0/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/logs/faq/504-origin-status-0/index.md"><meta property="og:title" content="504 responses with origin status 0 in Logpush · Cloudflare Logs docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Why internal subrequests appear as 504 with origin status 0 in Logpush."><meta property="og:url" content="https://developers.cloudflare.com/logs/faq/504-origin-status-0/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Logs"><meta name="algolia_product_filter" content="Logs"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_content_type" content="Faq"><meta name="algolia_content_type" content="Faq"><meta name="pcx_additional_products" content="Logs"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/logs/faq/504-origin-status-0/#page","headline":"504 responses with origin status 0 in Logpush \u00b7 Cloudflare Logs docs","description":"Why internal subrequests appear as 504 with origin status 0 in Logpush.","url":"https://developers.cloudflare.com/logs/faq/504-origin-status-0/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /logs/faq/504-origin-status-0/
+  schema: 1
+---
 <p><a href="/logs/faq/">❮ Back to FAQ</a></p>
 <h3 id="why-do-i-see-504-responses-with-originresponsestatus-0-in-logpush-that-do-not-appear-in-the-dashboard">Why do I see 504 responses with <code>OriginResponseStatus=0</code> in Logpush that do not appear in the dashboard?</h3>
 <p>If you ingest Cloudflare Logpush into Splunk, Datadog, or another SIEM, you may see log entries with <code>EdgeResponseStatus=504</code> and <code>OriginResponseStatus=0</code> that do not appear anywhere in the Cloudflare dashboard.</p>
@@ -5,7 +16,7 @@
 <p>Cache Analytics and the dashboard filter these subrequests out by design. Logpush ships every log line the edge produces, including internal subrequests, so the same data appears in two places with two different default filters. Filter the subrequests out in your SIEM using the <code>RequestSource</code> field.</p>
 <h3 id="what-a-matching-log-entry-looks-like">What a matching log entry looks like</h3>
 <p>A typical entry in your SIEM looks like this:</p>
-<pre><code class="language-txt">EdgeResponseStatus: 504&#10;OriginResponseStatus: 0&#10;ClientRequestHost: www.example.com&#10;EdgeStartTimestamp: 2026-04-15T10:23:17Z&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">EdgeResponseStatus: 504&#10;OriginResponseStatus: 0&#10;ClientRequestHost: www.example.com&#10;EdgeStartTimestamp: 2026-04-15T10:23:17Z&#10;</code></pre>
 <p>Your application is working normally, your origin is healthy, and no 504 responses appear in the dashboard for this zone. Your SIEM dashboards may still show tens of thousands of these entries per day.</p>
 <h3 id="what-the-fields-mean">What the fields mean</h3>
 <p>From the <a href="/logs/logpush/logpush-job/datasets/zone/http_requests/">HTTP requests dataset reference</a>:</p>
@@ -50,7 +61,7 @@
 <p>To replicate the dashboard's filter in the GraphQL Analytics API, refer to <a href="/analytics/graphql-api/features/filtering/#filter-end-users">Filter end users</a>.</p>
 <h3 id="confirm-what-you-are-seeing">Confirm what you are seeing</h3>
 <p>Add the <code>RequestSource</code> field to your Logpush job's <code>output_options.field_names</code>. Field changes propagate in approximately 10–15 minutes, per the <a href="/logs/logpush/logpush-job/api-configuration/">API configuration reference</a>.</p>
-<pre><code class="language-bash">curl -X PUT &quot;https://api.cloudflare.com/client/v4/zones/$ZONE_ID/logpush/jobs/$JOB_ID&quot; \&#10;  &#45;H &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;-data &#x27;{&#10;    &quot;output_options&quot;: {&#10;      &quot;field_names&quot;: [&quot;...existing fields...&quot;, &quot;RequestSource&quot;]&#10;    }&#10;  }&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl -X PUT &quot;https://api.cloudflare.com/client/v4/zones/$ZONE_ID/logpush/jobs/$JOB_ID&quot; \&#10;  &#45;H &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;-data &#x27;{&#10;    &quot;output_options&quot;: {&#10;      &quot;field_names&quot;: [&quot;...existing fields...&quot;, &quot;RequestSource&quot;]&#10;    }&#10;  }&#x27;&#10;</code></pre>
 <p>Once the field flows, re-check your <code>504</code> / <code>0</code> entries:</p>
 <table>
 <thead>
@@ -81,11 +92,11 @@
 <h3 id="filter-in-your-siem">Filter in your SIEM</h3>
 <p>Add a filter equivalent to the following to your SIEM dashboards, alerts, and queries. This replicates the filter the Cloudflare dashboard applies to its analytics views.</p>
 <p><strong>Splunk:</strong></p>
-<pre><code class="language-txt">NOT RequestSource IN (&quot;earlyHintsCache&quot;, &quot;edgeWorkerCacheAPI&quot;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">NOT RequestSource IN (&quot;earlyHintsCache&quot;, &quot;edgeWorkerCacheAPI&quot;)&#10;</code></pre>
 <p><strong>Datadog:</strong></p>
-<pre><code class="language-txt">NOT @RequestSource:(&quot;earlyHintsCache&quot; OR &quot;edgeWorkerCacheAPI&quot;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">NOT @RequestSource:(&quot;earlyHintsCache&quot; OR &quot;edgeWorkerCacheAPI&quot;)&#10;</code></pre>
 <p><strong>Sumo Logic or generic:</strong></p>
-<pre><code class="language-txt">!(RequestSource = &quot;earlyHintsCache&quot; OR RequestSource = &quot;edgeWorkerCacheAPI&quot;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">!(RequestSource = &quot;earlyHintsCache&quot; OR RequestSource = &quot;edgeWorkerCacheAPI&quot;)&#10;</code></pre>
 <h3 id="when-504-with-origin-status-0-is-a-real-problem">When 504 with origin status 0 is a real problem</h3>
 <p>Not every <code>504</code> with <code>OriginResponseStatus=0</code> is an internal subrequest. Real origin-side failures produce the same field combination:</p>
 <ul>

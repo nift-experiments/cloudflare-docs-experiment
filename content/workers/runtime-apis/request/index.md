@@ -1,13 +1,24 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/workers/runtime-apis/request/
+  description: Interface that represents an HTTP request.
+  full_title: Request · Cloudflare Workers docs
+  head_html: <title>Request · Cloudflare Workers docs</title><meta name="generator" content="Nift"><meta name="description" content="Interface that represents an HTTP request."><link rel="canonical" href="https://developers.cloudflare.com/workers/runtime-apis/request/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/workers/runtime-apis/request/index.md"><meta property="og:title" content="Request · Cloudflare Workers docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Interface that represents an HTTP request."><meta property="og:url" content="https://developers.cloudflare.com/workers/runtime-apis/request/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Workers"><meta name="algolia_product_filter" content="Workers"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Configuration"><meta name="algolia_content_type" content="Configuration"><meta name="pcx_additional_products" content="Workers"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/workers/runtime-apis/request/#page","headline":"Request \u00b7 Cloudflare Workers docs","description":"Interface that represents an HTTP request.","url":"https://developers.cloudflare.com/workers/runtime-apis/request/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /workers/runtime-apis/request/
+  schema: 1
+---
 <p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/Request/Request"><code>Request</code></a> interface represents an HTTP request and is part of the <a href="/workers/runtime-apis/fetch/">Fetch API</a>.</p>
 <h2 id="background">Background</h2>
 <p>The most common way you will encounter a <code>Request</code> object is as a property of an incoming request:</p>
-<pre><code class="language-js">export default {&#10;	async fetch(request, env, ctx) {&#10;		return new Response(&#x27;Hello World!&#x27;);&#10;	},&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">export default {&#10;	async fetch(request, env, ctx) {&#10;		return new Response(&#x27;Hello World!&#x27;);&#10;	},&#10;};&#10;</code></pre>
 <p>You may also want to construct a <code>Request</code> yourself when you need to modify a request object, because the incoming <code>request</code> parameter that you receive from the <a href="/workers/runtime-apis/handlers/fetch/"><code>fetch()</code> handler</a> is immutable.</p>
-<pre><code class="language-js">export default {&#10;	async fetch(request, env, ctx) {&#10;        const url = &quot;https://example.com&quot;;&#10;        const modifiedRequest = new Request(url, request);&#10;		// ...&#10;	},&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">export default {&#10;	async fetch(request, env, ctx) {&#10;        const url = &quot;https://example.com&quot;;&#10;        const modifiedRequest = new Request(url, request);&#10;		// ...&#10;	},&#10;};&#10;</code></pre>
 <p>The <a href="/workers/runtime-apis/handlers/fetch/"><code>fetch() handler</code></a> invokes the <code>Request</code> constructor. The <a href="#options"><code>RequestInit</code></a> and <a href="#the-cf-property-requestinitcfproperties"><code>RequestInitCfProperties</code></a> types defined below also describe the valid parameters that can be passed to the <a href="/workers/runtime-apis/handlers/fetch/"><code>fetch() handler</code></a>.</p>
 <hr />
 <h2 id="constructor">Constructor</h2>
-<pre><code class="language-js">let request = new Request(input, options)&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">let request = new Request(input, options)&#10;</code></pre>
 <h3 id="parameters">Parameters</h3>
 <ul>
 <li>
@@ -73,7 +84,7 @@ Any other cache header will result in a <code>TypeError</code> with the message 
 </ul>
 <h4 id="the-cf-property-requestinitcfproperties">The <code>cf</code> property (<code>RequestInitCfProperties</code>)</h4>
 <p>An object containing Cloudflare-specific properties that can be set on the <code>Request</code> object. For example:</p>
-<pre><code class="language-js">// Disable ScrapeShield for this request.&#10;fetch(event.request, { cf: { scrapeShield: false } })&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">// Disable ScrapeShield for this request.&#10;fetch(event.request, { cf: { scrapeShield: false } })&#10;</code></pre>
 <p>Invalid or incorrectly-named keys in the <code>cf</code> object will be silently ignored. Consider using TypeScript and generating types by running <a href="/workers/languages/typescript/#generate-types"><code>wrangler types</code></a> to ensure proper use of the <code>cf</code> object.</p>
 <ul>
 <li>
@@ -215,7 +226,7 @@ This option applies to <code>GET</code> and <code>HEAD</code> request methods on
 <li>Values in <code>media_types</code> and <code>languages</code> must be non-empty printable ASCII strings.</li>
 </ul>
 <p>The following request init fragment normalizes <code>Accept</code> and <code>Accept-Language</code>, and bypasses cache for any other header in the origin <code>Vary</code> response:</p>
-<pre><code class="language-json">{&#10;	&quot;cf&quot;: {&#10;		&quot;vary&quot;: {&#10;			&quot;default&quot;: {&#10;				&quot;action&quot;: &quot;bypass&quot;&#10;			},&#10;			&quot;headers&quot;: {&#10;				&quot;accept&quot;: {&#10;					&quot;action&quot;: &quot;normalize&quot;,&#10;					&quot;media_types&quot;: [&quot;text/html&quot;, &quot;application/json&quot;]&#10;				},&#10;				&quot;accept-language&quot;: {&#10;					&quot;action&quot;: &quot;normalize&quot;,&#10;					&quot;languages&quot;: [&quot;en&quot;, &quot;fr&quot;, &quot;de&quot;]&#10;				}&#10;			}&#10;		}&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;cf&quot;: {&#10;		&quot;vary&quot;: {&#10;			&quot;default&quot;: {&#10;				&quot;action&quot;: &quot;bypass&quot;&#10;			},&#10;			&quot;headers&quot;: {&#10;				&quot;accept&quot;: {&#10;					&quot;action&quot;: &quot;normalize&quot;,&#10;					&quot;media_types&quot;: [&quot;text/html&quot;, &quot;application/json&quot;]&#10;				},&#10;				&quot;accept-language&quot;: {&#10;					&quot;action&quot;: &quot;normalize&quot;,&#10;					&quot;languages&quot;: [&quot;en&quot;, &quot;fr&quot;, &quot;de&quot;]&#10;				}&#10;			}&#10;		}&#10;	}&#10;}&#10;</code></pre>
 <hr />
 <h2 id="properties">Properties</h2>
 <p>All properties of an incoming <code>Request</code> object (the request you receive from the <a href="/workers/runtime-apis/handlers/fetch/"><code>fetch()</code> handler</a>) are read-only. To modify the properties of an incoming request, create a new <code>Request</code> object and pass the options to modify to its <a href="#constructor">constructor</a>.</p>
@@ -517,19 +528,19 @@ For example, if you run the Worker below, and then abort the request from the cl
 <hr />
 <h2 id="the-request-context">The <code>Request</code> context</h2>
 <p>Each time a Worker is invoked by an incoming HTTP request, the <a href="/workers/runtime-apis/handlers/fetch"><code>fetch()</code> handler</a> is called on your Worker. The <code>Request</code> context starts when the <code>fetch()</code> handler is called, and asynchronous tasks (such as making a subrequest using the <a href="/workers/runtime-apis/fetch/"><code>fetch() API</code></a>) can only be run inside the <code>Request</code> context:</p>
-<pre><code class="language-js">export default {&#10;	async fetch(request, env, ctx) {&#10;        // Request context starts here&#10;		return new Response(&#x27;Hello World!&#x27;);&#10;	},&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">export default {&#10;	async fetch(request, env, ctx) {&#10;        // Request context starts here&#10;		return new Response(&#x27;Hello World!&#x27;);&#10;	},&#10;};&#10;</code></pre>
 <h3 id="when-passing-a-promise-to-fetch-event-respondwith">When passing a promise to fetch event <code>.respondWith()</code></h3>
 <p>If you pass a Response promise to the fetch event <code>.respondWith()</code> method, the request context is active during any asynchronous tasks which run before the Response promise has settled. You can pass the event to an async handler, for example:</p>
-<pre><code class="language-js">addEventListener(&quot;fetch&quot;, event =&gt; {&#10;  event.respondWith(eventHandler(event))&#10;})&#10;&#10;// No request context available here&#10;&#10;async function eventHandler(event){&#10;  // Request context available here&#10;  return new Response(&quot;Hello, Workers!&quot;)&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">addEventListener(&quot;fetch&quot;, event =&gt; {&#10;  event.respondWith(eventHandler(event))&#10;})&#10;&#10;// No request context available here&#10;&#10;async function eventHandler(event){&#10;  // Request context available here&#10;  return new Response(&quot;Hello, Workers!&quot;)&#10;}&#10;</code></pre>
 <h3 id="errors-when-attempting-to-access-an-inactive-request-context">Errors when attempting to access an inactive <code>Request</code> context</h3>
 <p>Any attempt to use APIs such as <code>fetch()</code> or access the <code>Request</code> context during script startup will throw an exception:</p>
-<pre><code class="language-js">const promise = fetch(&quot;https://example.com/&quot;) // Error&#10;async function eventHandler(event){..}&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">const promise = fetch(&quot;https://example.com/&quot;) // Error&#10;async function eventHandler(event){..}&#10;</code></pre>
 <p>This code snippet will throw during script startup, and the <code>&quot;fetch&quot;</code> event listener will never be registered.</p>
 <hr />
 <h3 id="set-the-content-length-header">Set the <code>Content-Length</code> header</h3>
 <p>The <code>Content-Length</code> header will be automatically set by the runtime based on whatever the data source for the <code>Request</code> is. Any value manually set by user code in the <code>Headers</code> will be ignored. To have a <code>Content-Length</code> header with a specific value specified, the <code>body</code> of the <code>Request</code> must be either a <code>FixedLengthStream</code> or a fixed-length value just as a string or <code>TypedArray</code>.</p>
 <p>A <code>FixedLengthStream</code> is an identity <code>TransformStream</code> that permits only a fixed number of bytes to be written to it.</p>
-<pre><code class="language-js">  const { writable, readable } = new FixedLengthStream(11);&#10;&#10;  const enc = new TextEncoder();&#10;  const writer = writable.getWriter();&#10;  writer.write(enc.encode(&quot;hello world&quot;));&#10;  writer.end();&#10;&#10;  const req = new Request(&#x27;https://example.org&#x27;, { method: &#x27;POST&#x27;, body: readable });&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">  const { writable, readable } = new FixedLengthStream(11);&#10;&#10;  const enc = new TextEncoder();&#10;  const writer = writable.getWriter();&#10;  writer.write(enc.encode(&quot;hello world&quot;));&#10;  writer.end();&#10;&#10;  const req = new Request(&#x27;https://example.org&#x27;, { method: &#x27;POST&#x27;, body: readable });&#10;</code></pre>
 <p>Using any other type of <code>ReadableStream</code> as the body of a request will result in Chunked-Encoding being used.</p>
 <hr />
 <h2 id="differences">Differences</h2>

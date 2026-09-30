@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/spectrum/reference/analytics/
+  description: Metrics tracked for every Spectrum connection, including bytes and connection duration.
+  full_title: Analytics · Cloudflare Spectrum docs
+  head_html: <title>Analytics · Cloudflare Spectrum docs</title><meta name="generator" content="Nift"><meta name="description" content="Metrics tracked for every Spectrum connection, including bytes and connection duration."><link rel="canonical" href="https://developers.cloudflare.com/spectrum/reference/analytics/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/spectrum/reference/analytics/index.md"><meta property="og:title" content="Analytics · Cloudflare Spectrum docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Metrics tracked for every Spectrum connection, including bytes and connection duration."><meta property="og:url" content="https://developers.cloudflare.com/spectrum/reference/analytics/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Spectrum"><meta name="algolia_product_filter" content="Spectrum"><meta name="pcx_content_group" content="Application performance"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Spectrum"><meta name="pcx_tags" content="Analytics"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/spectrum/reference/analytics/#page","headline":"Analytics \u00b7 Cloudflare Spectrum docs","description":"Metrics tracked for every Spectrum connection, including bytes and connection duration.","url":"https://developers.cloudflare.com/spectrum/reference/analytics/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["Analytics"]}</script>
+  markdown: true
+  noindex: false
+  route: /spectrum/reference/analytics/
+  schema: 1
+---
 <p>Cloudflare measures the following metrics for every connection.</p>
 <table>
 <thead>
@@ -139,7 +150,7 @@
 @markup("md", "content/.markup/bodies/13873.md")
 </aside>
 <h2 id="analytics-request-structure">Analytics request structure</h2>
-<pre><code class="language-txt">/api/v4/zones/{zone_id}/spectrum/analytics/events/summary?metrics=METRICS&amp;dimensions=DIMENSIONS&amp;filters=FILTERS&amp;since=FROM_TS&amp;sort=SORT&amp;until=TO_TS&amp;limit=LIMIT&#10;/api/v4/zones/{zone_id}/spectrum/analytics/events/bytime?metrics=METRICS&amp;dimensions=DIMENSIONS&amp;filters=FILTERS&amp;since=FROM_TS&amp;sort=SORT&amp;until=TO_TS&amp;limit=LIMIT&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">/api/v4/zones/{zone_id}/spectrum/analytics/events/summary?metrics=METRICS&amp;dimensions=DIMENSIONS&amp;filters=FILTERS&amp;since=FROM_TS&amp;sort=SORT&amp;until=TO_TS&amp;limit=LIMIT&#10;/api/v4/zones/{zone_id}/spectrum/analytics/events/bytime?metrics=METRICS&amp;dimensions=DIMENSIONS&amp;filters=FILTERS&amp;since=FROM_TS&amp;sort=SORT&amp;until=TO_TS&amp;limit=LIMIT&#10;</code></pre>
 <ul>
 <li>METRICS is one or more metrics (such as count) to compute</li>
 <li>DIMENSIONS can be used to break down the data by given attributes</li>
@@ -160,5 +171,5 @@
 </li>
 </ul>
 <h2 id="analytics-query-example">Analytics query example</h2>
-<pre class="nb-api-request"><code class="language-bash">curl --request GET \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/spectrum/analytics/events/summary \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot;</code></pre>
+<pre tabindex="0" class="nb-api-request"><code class="language-bash">curl --request GET \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/spectrum/analytics/events/summary \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot;</code></pre>
 <p>Refer to the <a href="/api/resources/spectrum/subresources/analytics/subresources/aggregates/subresources/currents/methods/get/">Spectrum API documentation</a> for more examples of API requests.</p>

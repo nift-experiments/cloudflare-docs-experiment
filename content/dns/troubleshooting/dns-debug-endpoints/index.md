@@ -1,16 +1,27 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/dns/troubleshooting/dns-debug-endpoints/
+  description: Use dig commands against Cloudflare nameservers to find your public IP, connected data center, DNS software version, and more.
+  full_title: Available debug endpoints · Cloudflare DNS docs
+  head_html: <title>Available debug endpoints · Cloudflare DNS docs</title><meta name="generator" content="Nift"><meta name="description" content="Use dig commands against Cloudflare nameservers to find your public IP, connected data center, DNS software version, and more."><link rel="canonical" href="https://developers.cloudflare.com/dns/troubleshooting/dns-debug-endpoints/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/dns/troubleshooting/dns-debug-endpoints/index.md"><meta property="og:title" content="Available debug endpoints · Cloudflare DNS docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Use dig commands against Cloudflare nameservers to find your public IP, connected data center, DNS software version, and more."><meta property="og:url" content="https://developers.cloudflare.com/dns/troubleshooting/dns-debug-endpoints/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="DNS"><meta name="algolia_product_filter" content="DNS"><meta name="pcx_content_group" content="Application performance"><meta name="pcx_content_type" content="Troubleshooting"><meta name="algolia_content_type" content="Troubleshooting"><meta name="pcx_additional_products" content="DNS"><meta name="pcx_tags" content="Debugging"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/dns/troubleshooting/dns-debug-endpoints/#page","headline":"Available debug endpoints \u00b7 Cloudflare DNS docs","description":"Use dig commands against Cloudflare nameservers to find your public IP, connected data center, DNS software version, and more.","url":"https://developers.cloudflare.com/dns/troubleshooting/dns-debug-endpoints/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["Debugging"]}</script>
+  markdown: true
+  noindex: false
+  route: /dns/troubleshooting/dns-debug-endpoints/
+  schema: 1
+---
 <p>The following debug endpoints are available via <code>dig</code> or other DNS query tools.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/7563.md")
 </aside>
 <h2 id="get-your-public-ip-address">Get your public IP address</h2>
-<pre><code class="language-sh">dig @alex.ns.cloudflare.com chaos txt myip.cloudflare +short&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">dig @alex.ns.cloudflare.com chaos txt myip.cloudflare +short&#10;</code></pre>
 <p>This command returns your public IP address, meaning the IP address that Cloudflare receives the DNS query from. This is useful for debugging when you need to know your own IP.</p>
 <h2 id="find-your-connected-data-center">Find your connected data center</h2>
-<pre><code class="language-sh">dig @alex.ns.cloudflare.com chaos txt id.server +short&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">dig @alex.ns.cloudflare.com chaos txt id.server +short&#10;</code></pre>
 <p>This command returns the Cloudflare data center you are connecting to, for DNS queries sent from where you execute this command.</p>
 <h2 id="check-the-dns-software-version">Check the DNS software version</h2>
-<pre><code class="language-sh">dig @alex.ns.cloudflare.com chaos txt version.bind +short&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">dig @alex.ns.cloudflare.com chaos txt version.bind +short&#10;</code></pre>
 <p>This command returns the version of Cloudflare's authoritative DNS software that is running on the data center you are connected to. Usually, the same version is present on all Cloudflare data centers. However, since Cloudflare performs staged releases, different versions can exist on different data centers.</p>
 <h2 id="get-your-ip-asn-and-country-code">Get your IP, ASN, and country code</h2>
-<pre><code class="language-sh">dig @alex.ns.cloudflare.com txt whoami.cloudflare.net +short&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">dig @alex.ns.cloudflare.com txt whoami.cloudflare.net +short&#10;</code></pre>
 <p>This command returns your public IP (same as the first command), your ASN, and the associated country code, all indicating where you are sending the query from.</p>

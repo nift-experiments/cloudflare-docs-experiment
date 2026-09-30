@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/learning-paths/data-center-protection/get-started/
+  description: Begin onboarding with Magic Transit.
+  full_title: Get started · Cloudflare Learning Paths
+  head_html: <title>Get started · Cloudflare Learning Paths</title><meta name="generator" content="Nift"><meta name="description" content="Begin onboarding with Magic Transit."><link rel="canonical" href="https://developers.cloudflare.com/learning-paths/data-center-protection/get-started/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/learning-paths/data-center-protection/get-started/index.md"><meta property="og:title" content="Get started · Cloudflare Learning Paths"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Begin onboarding with Magic Transit."><meta property="og:url" content="https://developers.cloudflare.com/learning-paths/data-center-protection/get-started/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Learning Paths"><meta name="algolia_product_filter" content="Learning Paths"><meta name="pcx_content_group" content="Docs collections"><meta name="pcx_content_type" content="Learning unit"><meta name="algolia_content_type" content="Learning unit"><meta name="pcx_additional_products" content="Magic Transit,DDoS Protection"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/learning-paths/data-center-protection/get-started/#page","headline":"Get started \u00b7 Cloudflare Learning Paths","description":"Begin onboarding with Magic Transit.","url":"https://developers.cloudflare.com/learning-paths/data-center-protection/get-started/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /learning-paths/data-center-protection/get-started/
+  schema: 1
+---
 <h2 id="scope-your-configuration">Scope your configuration</h2>
 <p>Magic Transit is not a self-serve product. Start by <a href="https://www.cloudflare.com/network-services/products/magic-transit/">engaging with our team</a> to assess your needs and implementation timeline. During this assessment, Cloudflare reviews specific requirements such as your prefix count and how fast you can go through the necessary steps to implement Magic Transit on your network.</p>
 <h2 id="ips">IPs</h2>
@@ -10,35 +21,25 @@
 <li>Confirm you properly configured <a href="/magic-transit/network-health/update-tunnel-health-checks-frequency/">tunnel</a> and endpoint health checks.</li>
 <li>Update your infrastructure at your own pace to use the allocated Cloudflare IPs.</li>
 </ul>
-<p>When you use a Cloudflare-owned IP space, you do not need a <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/9605.md")
-</div>. When using Cloudflare-leased IPs, Cloudflare automatically enables [Magic Transit Egress](/magic-transit/reference/egress/), which routes your egress traffic to Cloudflare instead of the Internet. Set up policy-based routing on your end to ensure return traffic routes properly.
+<p>When you use a Cloudflare-owned IP space, you do not need a <span class="nb-glossary-tooltip" title="letter of agency">Letter of Agency (LOA)</span>. When using Cloudflare-leased IPs, Cloudflare automatically enables <a href="/magic-transit/reference/egress/">Magic Transit Egress</a>, which routes your egress traffic to Cloudflare instead of the Internet. Set up policy-based routing on your end to ensure return traffic routes properly.</p>
 <h2 id="verify-router-compatibility">Verify router compatibility</h2>
-<p>Magic Transit relies on <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/9606.md")
-</div> tunnels to transmit <div class="nb-interactive-component" data-cf-component="GlossaryTooltip">
-@markup("md", "content/.markup/bodies/9607.md")
-</div> from Cloudflare's global network to your origin network.
+<p>Magic Transit relies on <span class="nb-glossary-tooltip" title="anycast">anycast</span> tunnels to transmit <span class="nb-glossary-tooltip" title="data packet">packets</span> from Cloudflare's global network to your origin network.</p>
 <p>The routers at your tunnel endpoints must meet the following requirements for Magic Transit compatibility.</p>
 <ul>
 <li>Support GRE tunnels (or IPsec if GRE is not available).</li>
 <li>Support at least one tunnel per Internet service provider (ISP).</li>
-<li>Support <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></li>
+<li>Support <span class="nb-glossary-tooltip" title="maximum segment size (MSS)">maximum segment size (MSS)</span> clamping.</li>
+<li>Support asymmetric traffic flow (for ingress-only Magic Transit).</li>
 </ul>
-@markup("md", "content/.markup/bodies/9608.md")
-</div> clamping.
-- Support asymmetric traffic flow (for ingress-only Magic Transit).
 <h2 id="draft-letter-of-agency">Draft Letter of Agency</h2>
 <p>Draft a <a href="/byoip/concepts/loa/">Letter of Agency (LOA)</a> that identifies the prefixes you want to advertise and authorizes Cloudflare to announce them. Our transit providers require the LOA so they can accept the routes we advertise on your behalf.</p>
-<p>If you are an Internet service provider (ISP) and advertising <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/9609.md")
-</div> on behalf of a customer, you need an LOA for the ISP and for the customer.
+<p>If you are an Internet service provider (ISP) and advertising <span class="nb-glossary-tooltip" title="prefix">prefixes</span> on behalf of a customer, you need an LOA for the ISP and for the customer.</p>
 <p>If you are using a <a href="#ips">Cloudflare IP address</a>, you do not need to submit an LOA.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/9604.md")
 </aside>
 <h3 id="example-of-a-letter-of-agency">Example of a Letter of Agency</h3>
-<pre><code class="language-txt">[COMPANY LETTERHEAD]&#10;&#10;LETTER OF AGENCY (&quot;LOA&quot;)&#10;&#10;[DATE]&#10;&#10;&#10;To whom it may concern:&#10;&#10;[COMPANY NAME] (the &quot;Company&quot;) authorizes Cloudflare, Inc. with AS13335 to advertise the following IP address blocks / originating ASNs:&#10;&#10;&#45; - - - - - - - - - - - - - - - - - -&#10;[Subnet &amp; Originating ASN]&#10;[Subnet &amp; Originating ASN]&#10;[Subnet &amp; Originating ASN]&#10;&#45; - - - - - - - - - - - - - - - - - -&#10;&#10;As a representative of the Company that is the owner of the aforementioned IP address blocks / originating ASNs, I hereby declare that I am authorized to sign this LOA on the Company’s behalf.&#10;&#10;Should you have any questions please email me at [E-MAIL ADDRESS], or call: [TELEPHONE NUMBER]&#10;&#10;Regards,&#10;&#10;&#10;[SIGNATURE]&#10;&#10;&#10;[NAME TYPED]&#10;[TITLE]&#10;[COMPANY NAME]&#10;[COMPANY ADDRESS]&#10;[COMPANY STAMP]&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">[COMPANY LETTERHEAD]&#10;&#10;LETTER OF AGENCY (&quot;LOA&quot;)&#10;&#10;[DATE]&#10;&#10;&#10;To whom it may concern:&#10;&#10;[COMPANY NAME] (the &quot;Company&quot;) authorizes Cloudflare, Inc. with AS13335 to advertise the following IP address blocks / originating ASNs:&#10;&#10;&#45; - - - - - - - - - - - - - - - - - -&#10;[Subnet &amp; Originating ASN]&#10;[Subnet &amp; Originating ASN]&#10;[Subnet &amp; Originating ASN]&#10;&#45; - - - - - - - - - - - - - - - - - -&#10;&#10;As a representative of the Company that is the owner of the aforementioned IP address blocks / originating ASNs, I hereby declare that I am authorized to sign this LOA on the Company’s behalf.&#10;&#10;Should you have any questions please email me at [E-MAIL ADDRESS], or call: [TELEPHONE NUMBER]&#10;&#10;Regards,&#10;&#10;&#10;[SIGNATURE]&#10;&#10;&#10;[NAME TYPED]&#10;[TITLE]&#10;[COMPANY NAME]&#10;[COMPANY ADDRESS]&#10;[COMPANY STAMP]&#10;</code></pre>
 <h2 id="verify-irr-entries">Verify IRR entries</h2>
 <p>Verify that your Internet Routing Registry (IRR) entries match your corresponding origin autonomous system numbers (ASNs) to ensure Magic Transit routes traffic to the correct autonomous systems (AS). For guidance, refer to <a href="/byoip/concepts/irr-entries/best-practices/#verify-an-irr-entry">Verify IRR entries</a>.</p>
 <p>If you are using a <a href="#ips">Cloudflare IP</a>, you do not need to verify your IRR entries.</p>

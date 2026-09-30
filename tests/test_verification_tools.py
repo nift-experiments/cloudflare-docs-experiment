@@ -4,8 +4,11 @@ import contextlib
 import io
 import json
 import pathlib
+import re
 import tempfile
 import unittest
+
+import yaml
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 
@@ -21,6 +24,152 @@ routes = load_tool('verify_routes')
 leaks = load_tool('leak_scan')
 parity = load_tool('parity')
 corpus_parity = load_tool('audit_corpus_parity')
+page_metadata = load_tool('page_metadata')
+metadata_audit = load_tool('audit_metadata')
+accessibility_audit = load_tool('audit_accessibility')
+
+
+class TestPageMetadata(unittest.TestCase):
+    def test_product_metadata_and_head_title_override_match_upstream_contract(self):
+        head = page_metadata.build_head(
+            '/workers/get-started/guide/', 'CLI',
+            {'description': 'Deploy with **Wrangler**.',
+             'pcx_content_type': 'get-started',
+             'head': [{'tag': 'title', 'content': 'Get started - CLI'}],
+             'products': ['workers'], 'tags': ['first']},
+            sections={'workers': {'product': 'Workers',
+                                  'group': 'Developer platform',
+                                  'title_suffix': 'Cloudflare Workers docs'}},
+            products={'workers': 'Workers'}, markdown=True)
+        markup = head['head_html']
+        self.assertIn('<title>Get started - CLI · Cloudflare Workers docs</title>', markup)
+        self.assertEqual(1, markup.count('property="og:title"'))
+        self.assertIn('property="og:title" content="Get started - CLI · Cloudflare Workers docs"', markup)
+        self.assertIn('name="pcx_content_type" content="Get started"', markup)
+        self.assertIn('rel="canonical" href="https://developers.cloudflare.com/workers/get-started/guide/"', markup)
+        self.assertIn('type="text/markdown"', markup)
+        structured = re.search(
+            r'<script type="application/ld\+json">(.*?)</script>', markup).group(1)
+        self.assertEqual('Deploy with Wrangler.', json.loads(structured)['description'])
+
+    def test_absent_description_is_not_replaced_with_generic_copy(self):
+        head = page_metadata.build_head('/empty/', 'Empty', body='<h1>Empty</h1>')
+        self.assertEqual('', head['description'])
+        self.assertNotIn('name="description"', head['head_html'])
+        self.assertNotIn(page_metadata.DEFAULT_DESCRIPTION, head['head_html'])
+
+    def test_noindex_suppresses_json_ld_and_external_link_redirects(self):
+        head = page_metadata.build_head(
+            '/workers/api/', 'API',
+            {'external_link': '/api/', 'description': 'API docs'})
+        self.assertTrue(head['noindex'])
+        self.assertIn('name="robots" content="noindex"', head['head_html'])
+        self.assertIn('http-equiv="refresh" content="0; url=/api/"', head['head_html'])
+        self.assertNotIn('application/ld+json', head['head_html'])
+
+    def test_frontmatter_replacement_is_idempotent(self):
+        first = page_metadata.add_frontmatter('<h1>Page</h1>\n', {'schema': 1, 'head_html': 'one'})
+        second = page_metadata.add_frontmatter(first, {'schema': 1, 'head_html': 'two'})
+        self.assertEqual(1, second.count('\n---\n'))
+        parsed = yaml.safe_load(second.split('---\n', 2)[1])
+        self.assertEqual('two', parsed['cp9']['head_html'])
+
+    def test_empty_body_has_no_blank_line_after_frontmatter(self):
+        rendered = page_metadata.add_frontmatter('\n', {'schema': 1})
+        self.assertTrue(rendered.endswith('---\n'))
+
+    def test_legacy_embedded_head_is_lifted_and_removed(self):
+        body, metadata = page_metadata.extract_embedded_head(
+            '<p>Body</p><head><title>Custom | ignored</title>'
+            '<meta name="description" content="duplicate"></head>',
+            {'title': 'Page'})
+        self.assertEqual('<p>Body</p>', body)
+        self.assertEqual([{'tag': 'title', 'content': 'Custom | ignored'}], metadata['head'])
+
+
+class TestMetadataAudit(unittest.TestCase):
+    def test_complete_metadata_and_sitemap_pass_then_missing_canonical_fails(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = pathlib.Path(tmp)
+            public = base / 'public'
+            for route, title in (('/', 'Home'), ('/docs/', 'Docs')):
+                page = public / ('index.html' if route == '/' else 'docs/index.html')
+                page.parent.mkdir(parents=True, exist_ok=True)
+                head = page_metadata.build_head(route, title)['head_html']
+                page.write_text(f'<html lang="en"><head>{head}</head><body></body></html>')
+            (public / 'robots.txt').write_text(
+                f'User-agent: *\nSitemap: {page_metadata.ORIGIN}/sitemap-index.xml\n')
+            (public / 'sitemap-index.xml').write_text(
+                '<?xml version="1.0"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+                f'<sitemap><loc>{page_metadata.ORIGIN}/sitemap-0.xml</loc></sitemap></sitemapindex>')
+            (public / 'sitemap-0.xml').write_text(
+                '<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+                f'<url><loc>{page_metadata.ORIGIN}/</loc></url>'
+                f'<url><loc>{page_metadata.ORIGIN}/docs/</loc></url></urlset>')
+            ordinary = base / 'ordinary.json'
+            generated = base / 'generated.json'
+            manifest = {'upstream_sha': 'pinned', 'routes': ['/docs/']}
+            ordinary.write_text(json.dumps(manifest))
+            generated.write_text(json.dumps({'upstream_sha': 'pinned', 'routes': []}))
+            report = metadata_audit.audit(public, ordinary, generated)
+            self.assertEqual(0, report['fatalFindingCount'])
+            docs = public / 'docs/index.html'
+            docs.write_text(docs.read_text().replace(
+                '<link rel="canonical" href="https://developers.cloudflare.com/docs/">', ''))
+            report = metadata_audit.audit(public, ordinary, generated)
+            self.assertIn('canonical', report['findings'])
+            self.assertGreater(report['fatalFindingCount'], 0)
+
+    def test_duplicate_social_metadata_fails(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = pathlib.Path(tmp)
+            public = base / 'public'
+            public.mkdir()
+            head = page_metadata.build_head('/', 'Home')['head_html']
+            head += '<meta property="og:title" content="Duplicate">'
+            (public / 'index.html').write_text(
+                f'<html lang="en"><head>{head}</head><body></body></html>')
+            (public / 'robots.txt').write_text(
+                f'User-agent: *\nSitemap: {page_metadata.ORIGIN}/sitemap-index.xml\n')
+            (public / 'sitemap-index.xml').write_text(
+                '<?xml version="1.0"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+                f'<sitemap><loc>{page_metadata.ORIGIN}/sitemap-0.xml</loc></sitemap></sitemapindex>')
+            (public / 'sitemap-0.xml').write_text(
+                '<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+                f'<url><loc>{page_metadata.ORIGIN}/</loc></url></urlset>')
+            ordinary = base / 'ordinary.json'
+            generated = base / 'generated.json'
+            ordinary.write_text(json.dumps({'upstream_sha': 'pinned', 'routes': []}))
+            generated.write_text(json.dumps({'upstream_sha': 'pinned', 'routes': []}))
+            report = metadata_audit.audit(public, ordinary, generated)
+            self.assertIn('social_metadata', report['findings'])
+
+
+class TestAccessibilityAudit(unittest.TestCase):
+    def test_labels_and_aria_targets_are_enforced(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = pathlib.Path(tmp)
+            public = base / 'public'
+            public.mkdir()
+            page = public / 'index.html'
+            page.write_text('''<html lang="en"><body><main>
+                <label for="query">Search</label><input id="query">
+                <button aria-controls="panel">Open</button><div id="panel"></div>
+                <iframe title="Example"></iframe></main></body></html>''')
+            ordinary = base / 'ordinary.json'
+            generated = base / 'generated.json'
+            ordinary.write_text(json.dumps({'upstream_sha': 'pinned', 'routes': []}))
+            generated.write_text(json.dumps({'upstream_sha': 'pinned', 'routes': []}))
+            report = accessibility_audit.audit(public, ordinary, generated)
+            self.assertEqual(0, report['fatalFindingCount'])
+            page.write_text('''<html><body><main>
+                <input><button aria-controls="missing"></button><iframe></iframe>
+                </main></body></html>''')
+            report = accessibility_audit.audit(public, ordinary, generated)
+            self.assertIn('document_language', report['findings'])
+            self.assertIn('unnamed_control', report['findings'])
+            self.assertIn('dangling_aria_reference', report['findings'])
+            self.assertIn('iframe_without_title', report['findings'])
 
 
 class TestRouteVerification(unittest.TestCase):

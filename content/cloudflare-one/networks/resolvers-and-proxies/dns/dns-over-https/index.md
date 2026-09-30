@@ -1,14 +1,21 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/networks/resolvers-and-proxies/dns/dns-over-https/
+  description: DNS over HTTPS (DoH) in Zero Trust networking.
+  full_title: DNS over HTTPS (DoH) · Cloudflare One docs
+  head_html: <title>DNS over HTTPS (DoH) · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="DNS over HTTPS (DoH) in Zero Trust networking."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/networks/resolvers-and-proxies/dns/dns-over-https/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/networks/resolvers-and-proxies/dns/dns-over-https/index.md"><meta property="og:title" content="DNS over HTTPS (DoH) · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="DNS over HTTPS (DoH) in Zero Trust networking."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/networks/resolvers-and-proxies/dns/dns-over-https/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Cloudflare One"><meta name="pcx_tags" content="DNS"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/networks/resolvers-and-proxies/dns/dns-over-https/#page","headline":"DNS over HTTPS (DoH) \u00b7 Cloudflare One docs","description":"DNS over HTTPS (DoH) in Zero Trust networking.","url":"https://developers.cloudflare.com/cloudflare-one/networks/resolvers-and-proxies/dns/dns-over-https/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["DNS"]}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/networks/resolvers-and-proxies/dns/dns-over-https/
+  schema: 1
+---
 <p>With Cloudflare Gateway, you can filter DNS over HTTPS (DoH) requests by <a href="/cloudflare-one/networks/resolvers-and-proxies/dns/locations/">DNS location</a> or by user without needing to install the Cloudflare One Client on your devices.</p>
 <p>Location-based policies require that you send DNS requests to a <a href="#filter-doh-requests-by-location">location-specific DoH endpoint</a>, while identity-based policies require that requests include a <a href="#filter-doh-requests-by-user">user-specific DoH token</a>.</p>
 <h2 id="filter-doh-requests-by-location">Filter DoH requests by location</h2>
-<p>Location-based policies require that you send DNS queries to a unique <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/5870.md")
-</div> assigned to the location:
-<pre><code class="language-txt">https://&lt;YOUR_DOH_SUBDOMAIN&gt;.cloudflare-gateway.com/dns-query&#10;</code></pre>
+<p>Location-based policies require that you send DNS queries to a unique <span class="nb-glossary-tooltip" title="DoH subdomain">DoH endpoint</span> assigned to the location:</p>
+<pre tabindex="0"><code class="language-txt">https://&lt;YOUR_DOH_SUBDOMAIN&gt;.cloudflare-gateway.com/dns-query&#10;</code></pre>
 <h3 id="prerequisites">Prerequisites</h3>
-<p>Obtain your location's <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/5871.md")
-</div>.
+<p>Obtain your location's <span class="nb-glossary-tooltip" title="DoH subdomain">DoH subdomain</span>.</p>
 <h3 id="configure-browser-for-doh">Configure browser for DoH</h3>
 <p>Browsers can be configured to use any DNS over HTTPS (DoH) endpoint. If you choose to configure DoH directly in your browser, you must choose a Gateway DNS location as your DoH endpoint, otherwise DNS filtering will not occur in that browser.</p>
 <details class="nb-details"><summary>Mozilla Firefox</summary><div class="nb-details-body">
@@ -36,7 +43,7 @@
 </div></details>
 <h3 id="use-generic-doh-endpoint">Use generic DoH endpoint</h3>
 <p>You can send DoH requests to the generic Cloudflare DoH endpoint, <code>dns.cloudflare-gateway.com</code>. To specify a location in your request, include a header named <code>cf-dns-location</code> with a value of your location's DoH subdomain. For example:</p>
-<pre><code class="language-http">GET /dns-query?name=example.com&amp;type=A HTTP/2&#10;Host: dns.cloudflare-gateway.com&#10;cf-dns-location: 9y65g5srsm&#10;Accept: application/dns-message&#10;</code></pre>
+<pre tabindex="0"><code class="language-http">GET /dns-query?name=example.com&amp;type=A HTTP/2&#10;Host: dns.cloudflare-gateway.com&#10;cf-dns-location: 9y65g5srsm&#10;Accept: application/dns-message&#10;</code></pre>
 <h2 id="filter-doh-requests-by-user">Filter DoH requests by user</h2>
 <p>In order to filter DoH queries based on user identity, each query must include a user-specific authentication token. If you have several devices per user and want to apply device-specific policies, you will need to map each device to a different email.</p>
 <p>Currently, authentication tokens can only be generated through the API. You can run this <a href="/cloudflare-one/static/authenticated-doh.py">interactive Python script</a> which automates the setup procedure, or follow the steps described below.</p>
@@ -44,7 +51,7 @@
 <li>Create a service token for the account</li>
 </ol></h3>
 <p>Each Cloudflare account can only have one active Access <a href="/cloudflare-one/access-controls/service-credentials/service-tokens/">service token</a> authorized for DNS over HTTPS (DoH) at a time.</p>
-<pre><code class="language-bash">curl &quot;https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/service_tokens&quot; \&#10;&#45;-header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;&#45;-header &quot;Content-Type: application/json&quot; \&#10;&#45;-data &#x27;{&quot;name&quot;:&quot;ACME Corporation service token&quot;}&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl &quot;https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/service_tokens&quot; \&#10;&#45;-header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;&#45;-header &quot;Content-Type: application/json&quot; \&#10;&#45;-data &#x27;{&quot;name&quot;:&quot;ACME Corporation service token&quot;}&#x27;&#10;</code></pre>
 <p>Save the service token's <code>client_id</code>, <code>client_secret</code>, and <code>id</code>.</p>
 <details class="nb-details"><summary>Example response</summary><div class="nb-details-body">
 @markup("md", "content/.markup/bodies/5879.md")
@@ -52,7 +59,7 @@
 <h3 id="2-enable-doh-functionality-for-the-service-token"><ol start="2">
 <li>Enable DoH functionality for the service token</li>
 </ol></h3>
-<pre><code class="language-bash">curl --request PUT \&#10;&quot;https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/organizations/doh/$SERVICE_TOKEN_ID&quot; \&#10;&#45;-header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl --request PUT \&#10;&quot;https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/organizations/doh/$SERVICE_TOKEN_ID&quot; \&#10;&#45;-header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot;&#10;</code></pre>
 <p>If you get an <code>access.api.error.service_token_not_found</code> error, check that <code>$SERVICE_TOKEN_ID</code> is the value of <code>id</code> and not <code>client_id</code>.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/5868.md")
@@ -64,7 +71,7 @@
 <li>Create a user</li>
 </ol></h3>
 <p>Create a new user and optionally add them to a group.</p>
-<pre><code class="language-bash">curl &quot;https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/users&quot; \&#10;&#45;-header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;&#45;-header &quot;Content-Type: application/json&quot; \&#10;&#45;-data &#x27;{&#10;  &quot;name&quot;: &quot;John Doe&quot;,&#10;  &quot;email&quot;: &quot;jdoe@acme.com&quot;,&#10;  &quot;custom&quot;: {&quot;groups&quot;:[{&quot;id&quot;: &quot;02fk6b3p3majl10&quot;, &quot;email&quot;: &quot;finance@acme.com&quot;, &quot;name&quot;: &quot;Finance&quot;}]}&#10;}&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl &quot;https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/users&quot; \&#10;&#45;-header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;&#45;-header &quot;Content-Type: application/json&quot; \&#10;&#45;-data &#x27;{&#10;  &quot;name&quot;: &quot;John Doe&quot;,&#10;  &quot;email&quot;: &quot;jdoe@acme.com&quot;,&#10;  &quot;custom&quot;: {&quot;groups&quot;:[{&quot;id&quot;: &quot;02fk6b3p3majl10&quot;, &quot;email&quot;: &quot;finance@acme.com&quot;, &quot;name&quot;: &quot;Finance&quot;}]}&#10;}&#x27;&#10;</code></pre>
 <p>Save the user's <code>id</code> returned in the response.</p>
 <details class="nb-details"><summary>Example response</summary><div class="nb-details-body">
 @markup("md", "content/.markup/bodies/5881.md")
@@ -75,10 +82,8 @@
 <h3 id="4-generate-a-doh-token-for-the-user"><ol start="4">
 <li>Generate a DoH token for the user</li>
 </ol></h3>
-<p>Request a DoH token for the user, using your service token to authenticate into your <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/5882.md")
-</div>.
-<pre><code class="language-bash">curl &quot;https://&lt;TEAM_NAME&gt;.cloudflareaccess.com/cdn-cgi/access/doh-token?account-id=&lt;ACCOUNT_ID&gt;&amp;user-id=&lt;USER_ID&gt;&amp;auth-domain=&lt;TEAM_NAME&gt;.cloudflareaccess.com&quot; \&#10;&#45;-header &quot;Cf-Access-Client-Id: &lt;CLIENT_ID&gt;&quot; \&#10;&#45;-header &quot;Cf-Access-Client-Secret: &lt;CLIENT_SECRET&gt;&quot;&#10;</code></pre>
+<p>Request a DoH token for the user, using your service token to authenticate into your <span class="nb-glossary-tooltip" title="team domain">team domain</span>.</p>
+<pre tabindex="0"><code class="language-bash">curl &quot;https://&lt;TEAM_NAME&gt;.cloudflareaccess.com/cdn-cgi/access/doh-token?account-id=&lt;ACCOUNT_ID&gt;&amp;user-id=&lt;USER_ID&gt;&amp;auth-domain=&lt;TEAM_NAME&gt;.cloudflareaccess.com&quot; \&#10;&#45;-header &quot;Cf-Access-Client-Id: &lt;CLIENT_ID&gt;&quot; \&#10;&#45;-header &quot;Cf-Access-Client-Secret: &lt;CLIENT_SECRET&gt;&quot;&#10;</code></pre>
 <p>The response contains a unique DoH token associated with the user. This token expires in 24 hours. We recommend setting up a refresh flow for the DoH token instead of generating a new one for every DoH query.</p>
 <details class="nb-details"><summary>Example response</summary><div class="nb-details-body">
 @markup("md", "content/.markup/bodies/5883.md")
@@ -87,7 +92,7 @@
 <li>Send an authenticated DoH query</li>
 </ol></h3>
 <p>Send DoH queries to the resolver at <code>https://&lt;ACCOUNT_ID&gt;.cloudflare-gateway.com/dns-query</code>, making sure to include the user's DoH token in the <code>CF-Authorization</code> header.</p>
-<pre><code class="language-bash">curl --silent &quot;https://&lt;ACCOUNT_ID&gt;.cloudflare-gateway.com/dns-query?name=example.com&quot; \&#10;&#45;-header &quot;accept: application/dns-json&quot; \&#10;&#45;-header &quot;CF-Authorization: &lt;USER_DOH_TOKEN&gt;&quot; | jq&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl --silent &quot;https://&lt;ACCOUNT_ID&gt;.cloudflare-gateway.com/dns-query?name=example.com&quot; \&#10;&#45;-header &quot;accept: application/dns-json&quot; \&#10;&#45;-header &quot;CF-Authorization: &lt;USER_DOH_TOKEN&gt;&quot; | jq&#10;</code></pre>
 <p>If the site is blocked and you have turned on the <a href="/cloudflare-one/reusable-components/custom-pages/gateway-block-page/#configure-policy-block-behavior">block page</a> for the policy, the query will return <code>162.159.36.12</code> (the IP address of the Gateway block page). If the block page is disabled, the response will be <code>0.0.0.0</code>.</p>
 <details class="nb-details"><summary>Example response</summary><div class="nb-details-body">
 @markup("md", "content/.markup/bodies/5884.md")

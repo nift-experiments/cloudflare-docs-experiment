@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/fundamentals/organizations/for-mssp-distributors/
+  description: Set up and manage an MSSP or Distributor Organization to manage customer accounts and partner sub-organizations.
+  full_title: Organizations for MSSP and Distributors · Cloudflare Fundamentals docs
+  head_html: <title>Organizations for MSSP and Distributors · Cloudflare Fundamentals docs</title><meta name="generator" content="Nift"><meta name="description" content="Set up and manage an MSSP or Distributor Organization to manage customer accounts and partner sub-organizations."><link rel="canonical" href="https://developers.cloudflare.com/fundamentals/organizations/for-mssp-distributors/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/fundamentals/organizations/for-mssp-distributors/index.md"><meta property="og:title" content="Organizations for MSSP and Distributors · Cloudflare Fundamentals docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Set up and manage an MSSP or Distributor Organization to manage customer accounts and partner sub-organizations."><meta property="og:url" content="https://developers.cloudflare.com/fundamentals/organizations/for-mssp-distributors/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare Fundamentals"><meta name="algolia_product_filter" content="Cloudflare Fundamentals"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Cloudflare Fundamentals"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/fundamentals/organizations/for-mssp-distributors/#page","headline":"Organizations for MSSP and Distributors \u00b7 Cloudflare Fundamentals docs","description":"Set up and manage an MSSP or Distributor Organization to manage customer accounts and partner sub-organizations.","url":"https://developers.cloudflare.com/fundamentals/organizations/for-mssp-distributors/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /fundamentals/organizations/for-mssp-distributors/
+  schema: 1
+---
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/8819.md")
 </aside>
@@ -12,7 +23,7 @@
 <p>Looking for Enterprise documentation? Refer to <a href="/fundamentals/organizations/for-enterprise/">Organizations for Enterprise</a>.</p>
 <h2 id="hierarchy-structure">Hierarchy structure</h2>
 <p>MSSP/Distributor Organizations use a <strong>multi-tier structure</strong>:</p>
-<pre><code>Distributor Organization&#10;├── MSSP Organization A&#10;│   ├── Sub-Organization A1&#10;│   │   ├── Customer Account 1&#10;│   │   │   ├── Zone A&#10;│   │   │   └── Zone B&#10;│   │   └── Customer Account 2&#10;│   │       └── Zone C&#10;│   └── Customer Account 3&#10;│       └── Zone D&#10;├── MSSP Organization B&#10;│   ├── Customer Account 4&#10;│   │   └── Zone E&#10;│   └── Customer Account 5&#10;│       └── Zone F&#10;└── MSSP Organization C&#10;    └── Sub-Organization C1&#10;        └── Customer Account 6&#10;            └── Zone G&#10;</code></pre>
+<pre tabindex="0"><code>Distributor Organization&#10;├── MSSP Organization A&#10;│   ├── Sub-Organization A1&#10;│   │   ├── Customer Account 1&#10;│   │   │   ├── Zone A&#10;│   │   │   └── Zone B&#10;│   │   └── Customer Account 2&#10;│   │       └── Zone C&#10;│   └── Customer Account 3&#10;│       └── Zone D&#10;├── MSSP Organization B&#10;│   ├── Customer Account 4&#10;│   │   └── Zone E&#10;│   └── Customer Account 5&#10;│       └── Zone F&#10;└── MSSP Organization C&#10;    └── Sub-Organization C1&#10;        └── Customer Account 6&#10;            └── Zone G&#10;</code></pre>
 <p><strong>Key characteristics:</strong></p>
 <ul>
 <li>Distributors create and manage child MSSP Organizations</li>
@@ -29,7 +40,7 @@
 <li>Total: 15 MSSP Organizations, 300+ customer accounts</li>
 </ul>
 <p><strong>Distributor A's structure:</strong></p>
-<pre><code>Distributor A Organization&#10;├── Security MSSP&#10;│   ├── Retail Customer 1 (10 zones)&#10;│   ├── Healthcare Customer 2 (25 zones)&#10;│   └── Finance Customer 3 (40 zones)&#10;├── Web Performance MSSP&#10;│   ├── E-commerce Customer 4 (15 zones)&#10;│   └── Media Customer 5 (30 zones)&#10;└── [13 more MSSP Organizations...]&#10;</code></pre>
+<pre tabindex="0"><code>Distributor A Organization&#10;├── Security MSSP&#10;│   ├── Retail Customer 1 (10 zones)&#10;│   ├── Healthcare Customer 2 (25 zones)&#10;│   └── Finance Customer 3 (40 zones)&#10;├── Web Performance MSSP&#10;│   ├── E-commerce Customer 4 (15 zones)&#10;│   └── Media Customer 5 (30 zones)&#10;└── [13 more MSSP Organizations...]&#10;</code></pre>
 <p><strong>What Distributor A can do:</strong></p>
 <ul>
 <li>Create new MSSP Organizations for new partners</li>
@@ -139,7 +150,7 @@
 <li>Select <strong>Audit Logs</strong>.</li>
 </ol>
 <p>You can also retrieve Organization audit logs via the API:</p>
-<pre><code class="language-bash">GET https://api.cloudflare.com/client/v4/organizations/{organization_id}/logs/audit&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">GET https://api.cloudflare.com/client/v4/organizations/{organization_id}/logs/audit&#10;</code></pre>
 <p>If you are viewing account-level audit logs and the account belongs to an Organization where you are an Organization Super Administrator, you can select <strong>View Organization Audit Logs</strong> to go to the parent Organization's audit logs.</p>
 <p>For more details on audit log structure, filtering, and retention, refer to <a href="/fundamentals/account/account-security/audit-logs/#organization-activity-logs">Audit Logs — Organization Activity Logs</a>.</p>
 <h3 id="api">API</h3>

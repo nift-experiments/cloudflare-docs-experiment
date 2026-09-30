@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/agents/examples/email-agent/
+  description: Build an agent that sends, receives, routes, and replies to email using Cloudflare Email Service and the Agents SDK.
+  full_title: Email agent · Cloudflare Agents docs
+  head_html: <title>Email agent · Cloudflare Agents docs</title><meta name="generator" content="Nift"><meta name="description" content="Build an agent that sends, receives, routes, and replies to email using Cloudflare Email Service and the Agents SDK."><link rel="canonical" href="https://developers.cloudflare.com/agents/examples/email-agent/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/agents/examples/email-agent/index.md"><meta property="og:title" content="Email agent · Cloudflare Agents docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Build an agent that sends, receives, routes, and replies to email using Cloudflare Email Service and the Agents SDK."><meta property="og:url" content="https://developers.cloudflare.com/agents/examples/email-agent/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Agents"><meta name="algolia_product_filter" content="Agents"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Example"><meta name="algolia_content_type" content="Example"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/agents/examples/email-agent/#page","headline":"Email agent \u00b7 Cloudflare Agents docs","description":"Build an agent that sends, receives, routes, and replies to email using Cloudflare Email Service and the Agents SDK.","url":"https://developers.cloudflare.com/agents/examples/email-agent/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /agents/examples/email-agent/
+  schema: 1
+---
 <p>Agents can send and receive email with Cloudflare <a href="/email-service/api/route-emails/email-handler/">Email Service</a>. This guide shows how to send outbound email with the Workers binding, route inbound mail into Agents, and handle follow-up replies securely.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <p>Before using email with Agents, you need:</p>
@@ -97,7 +108,7 @@
 <h2 id="handling-emails-in-your-agent">Handling emails in your Agent</h2>
 <h3 id="the-agentemail-interface">The <code>AgentEmail</code> interface</h3>
 <p>When your agent's <code>onEmail</code> method is called, it receives an <code>AgentEmail</code> object:</p>
-<pre><code class="language-ts">type AgentEmail = {&#10;	from: string; // Sender&#x27;s email address&#10;	to: string; // Recipient&#x27;s email address&#10;	headers: Headers; // Email headers (subject, message-id, etc.)&#10;	rawSize: number; // Size of the raw email in bytes&#10;&#10;	getRaw(): Promise&lt;Uint8Array&gt;; // Get the full raw email content&#10;	reply(options): Promise&lt;void&gt;; // Send a reply&#10;	forward(rcptTo, headers?): Promise&lt;void&gt;; // Forward the email&#10;	setReject(reason): void; // Reject the email with a reason&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">type AgentEmail = {&#10;	from: string; // Sender&#x27;s email address&#10;	to: string; // Recipient&#x27;s email address&#10;	headers: Headers; // Email headers (subject, message-id, etc.)&#10;	rawSize: number; // Size of the raw email in bytes&#10;&#10;	getRaw(): Promise&lt;Uint8Array&gt;; // Get the full raw email content&#10;	reply(options): Promise&lt;void&gt;; // Send a reply&#10;	forward(rcptTo, headers?): Promise&lt;void&gt;; // Forward the email&#10;	setReject(reason): void; // Reject the email with a reason&#10;};&#10;</code></pre>
 <h3 id="parsing-email-content">Parsing email content</h3>
 <p>Use a library like <a href="https://www.npmjs.com/package/postal-mime">postal-mime</a> to parse the raw email:</p>
 <div class="nb-type-script-example">
@@ -197,7 +208,7 @@
 <ol>
 <li>Store the signing key as a Wrangler secret. Do not put it in <code>vars</code> or commit it to source control:</li>
 </ol>
-<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre><code data-nb-pm-code>npx wrangler secret put EMAIL_SECRET</code></pre><button type="button" data-nb-pm-copy data-nb-command="npx wrangler secret put EMAIL_SECRET" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>yarn wrangler secret put EMAIL_SECRET</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn wrangler secret put EMAIL_SECRET" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>pnpm wrangler secret put EMAIL_SECRET</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm wrangler secret put EMAIL_SECRET" aria-label="Copy to clipboard">Copy</button></div></div>
+<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre tabindex="0"><code data-nb-pm-code>npx wrangler secret put EMAIL_SECRET</code></pre><button type="button" data-nb-pm-copy data-nb-command="npx wrangler secret put EMAIL_SECRET" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>yarn wrangler secret put EMAIL_SECRET</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn wrangler secret put EMAIL_SECRET" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>pnpm wrangler secret put EMAIL_SECRET</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm wrangler secret put EMAIL_SECRET" aria-label="Copy to clipboard">Copy</button></div></div>
 <ol start="2">
 <li>Use the combined resolver pattern:</li>
 </ol>
@@ -241,9 +252,9 @@
 </div>
 <h2 id="api-reference">API reference</h2>
 <h3 id="emailaddress"><code>EmailAddress</code></h3>
-<pre><code class="language-ts">interface EmailAddress {&#10;	email: string;&#10;	name?: string;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">interface EmailAddress {&#10;	email: string;&#10;	name?: string;&#10;}&#10;</code></pre>
 <h3 id="sendemail"><code>sendEmail</code></h3>
-<pre><code class="language-ts">async sendEmail(options: {&#10;	binding: EmailSendBinding;&#10;	to: string | EmailAddress | (string | EmailAddress)[];&#10;	from: string | EmailAddress;&#10;	subject: string;&#10;	text?: string;&#10;	html?: string;&#10;	replyTo?: string | EmailAddress;&#10;	cc?: string | EmailAddress | (string | EmailAddress)[];&#10;	bcc?: string | EmailAddress | (string | EmailAddress)[];&#10;	inReplyTo?: string;&#10;	headers?: Record&lt;string, string&gt;;&#10;	secret?: string;&#10;}): Promise&lt;EmailSendResult&gt;;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">async sendEmail(options: {&#10;	binding: EmailSendBinding;&#10;	to: string | EmailAddress | (string | EmailAddress)[];&#10;	from: string | EmailAddress;&#10;	subject: string;&#10;	text?: string;&#10;	html?: string;&#10;	replyTo?: string | EmailAddress;&#10;	cc?: string | EmailAddress | (string | EmailAddress)[];&#10;	bcc?: string | EmailAddress | (string | EmailAddress)[];&#10;	inReplyTo?: string;&#10;	headers?: Record&lt;string, string&gt;;&#10;	secret?: string;&#10;}): Promise&lt;EmailSendResult&gt;;&#10;</code></pre>
 <p>Send an outbound email through the Email Service binding. Automatically injects <code>X-Agent-Name</code> and <code>X-Agent-ID</code> headers. When <code>secret</code> is provided, signs headers with HMAC-SHA256 for secure reply routing.</p>
 <table>
 <thead>
@@ -304,7 +315,7 @@
 </tbody>
 </table>
 <h3 id="routeagentemail"><code>routeAgentEmail</code></h3>
-<pre><code class="language-ts">function routeAgentEmail&lt;Env&gt;(&#10;	email: ForwardableEmailMessage,&#10;	env: Env,&#10;	options: {&#10;		resolver: EmailResolver;&#10;		onNoRoute?: (email: ForwardableEmailMessage) =&gt; void | Promise&lt;void&gt;;&#10;	},&#10;): Promise&lt;void&gt;;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">function routeAgentEmail&lt;Env&gt;(&#10;	email: ForwardableEmailMessage,&#10;	env: Env,&#10;	options: {&#10;		resolver: EmailResolver;&#10;		onNoRoute?: (email: ForwardableEmailMessage) =&gt; void | Promise&lt;void&gt;;&#10;	},&#10;): Promise&lt;void&gt;;&#10;</code></pre>
 <p>Routes an incoming email to the appropriate Agent based on the resolver's decision.</p>
 <table>
 <thead>
@@ -325,7 +336,7 @@
 </tbody>
 </table>
 <h3 id="createsecurereplyemailresolver-1"><code>createSecureReplyEmailResolver</code></h3>
-<pre><code class="language-ts">function createSecureReplyEmailResolver(&#10;	secret: string,&#10;	options?: {&#10;		maxAge?: number;&#10;		onInvalidSignature?: (&#10;			email: ForwardableEmailMessage,&#10;			reason: SignatureFailureReason,&#10;		) =&gt; void;&#10;	},&#10;): EmailResolver;&#10;&#10;type SignatureFailureReason =&#10;	| &quot;missing_headers&quot;&#10;	| &quot;expired&quot;&#10;	| &quot;invalid&quot;&#10;	| &quot;malformed_timestamp&quot;;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">function createSecureReplyEmailResolver(&#10;	secret: string,&#10;	options?: {&#10;		maxAge?: number;&#10;		onInvalidSignature?: (&#10;			email: ForwardableEmailMessage,&#10;			reason: SignatureFailureReason,&#10;		) =&gt; void;&#10;	},&#10;): EmailResolver;&#10;&#10;type SignatureFailureReason =&#10;	| &quot;missing_headers&quot;&#10;	| &quot;expired&quot;&#10;	| &quot;invalid&quot;&#10;	| &quot;malformed_timestamp&quot;;&#10;</code></pre>
 <p>Creates a resolver for routing email replies with signature verification.</p>
 <table>
 <thead>
@@ -350,10 +361,10 @@
 </tbody>
 </table>
 <h3 id="signagentheaders"><code>signAgentHeaders</code></h3>
-<pre><code class="language-ts">function signAgentHeaders(&#10;	secret: string,&#10;	agentName: string,&#10;	agentId: string,&#10;): Promise&lt;Record&lt;string, string&gt;&gt;;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">function signAgentHeaders(&#10;	secret: string,&#10;	agentName: string,&#10;	agentId: string,&#10;): Promise&lt;Record&lt;string, string&gt;&gt;;&#10;</code></pre>
 <p>Manually sign agent routing headers. Returns an object with <code>X-Agent-Name</code>, <code>X-Agent-ID</code>, <code>X-Agent-Sig</code>, and <code>X-Agent-Sig-Ts</code> headers.</p>
 <p>Useful when sending emails through external services while maintaining secure reply routing. The signature includes a timestamp and will be valid for 30 days by default.</p>
 <h2 id="next-steps">Next steps</h2>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/communication/http-sse/"><h3 id="card-http-and-sse-agents-runtime-communication-http-sse">HTTP and SSE</h3><p>Handle HTTP requests in your Agent.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/communication-channels/webhooks/"><h3 id="card-webhooks-agents-communication-channels-webhooks">Webhooks</h3><p>Receive events from external services.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/agents-api/"><h3 id="card-agents-api-agents-runtime-agents-api">Agents API</h3><p>Complete API reference for the Agents SDK.</p></a></p>
+<div class="nb-card nb-link-card"><h3 id="card-http-and-sse-agents-runtime-communication-http-sse"><a href="/agents/runtime/communication/http-sse/">HTTP and SSE</a></h3><p>Handle HTTP requests in your Agent.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-webhooks-agents-communication-channels-webhooks"><a href="/agents/communication-channels/webhooks/">Webhooks</a></h3><p>Receive events from external services.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-agents-api-agents-runtime-agents-api"><a href="/agents/runtime/agents-api/">Agents API</a></h3><p>Complete API reference for the Agents SDK.</p></div>

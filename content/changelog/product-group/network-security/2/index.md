@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/changelog/product-group/network-security/2/
+  description: '2026-05-07'
+  full_title: Network security changelog - page 2 | Cloudflare Docs
+  head_html: <title>Network security changelog - page 2 | Cloudflare Docs</title><meta name="generator" content="Nift"><meta name="description" content="2026-05-07"><link rel="canonical" href="https://developers.cloudflare.com/changelog/product-group/network-security/2/"><link rel="sitemap" href="/sitemap-index.xml"><meta property="og:title" content="Network security changelog - page 2"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="2026-05-07"><meta property="og:url" content="https://developers.cloudflare.com/changelog/product-group/network-security/2/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/changelog/product-group/network-security/2/#page","headline":"Network security changelog - page 2 | Cloudflare Docs","description":"2026-05-07","url":"https://developers.cloudflare.com/changelog/product-group/network-security/2/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: false
+  noindex: false
+  route: /changelog/product-group/network-security/2/
+  schema: 1
+---
 <h1 id="changelog">Changelog</h1>
 
 <h2 id="source-based-breakout-and-prioritization-on-cloudflare-one-appliance"><a href="/changelog/post/2026-05-07-appliance-source-based-breakout/">Source-based breakout and prioritization on Cloudflare One Appliance</a></h2>
@@ -82,7 +93,7 @@
 <h4 id="2026-04-01-quic-rtt-delivery-rate-fields-example-route-slow-connections-to-a-lightweight-origin">Example: Route slow connections to a lightweight origin</h4>
 <p>Use a request header transform rule to tag requests from high-latency connections, so your origin can serve a lighter page variant:</p>
 <p><strong>Rule expression:</strong></p>
-<pre><code class="language-txt">cf.timings.client_tcp_rtt_msec &gt; 200 or cf.timings.client_quic_rtt_msec &gt; 200&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">cf.timings.client_tcp_rtt_msec &gt; 200 or cf.timings.client_quic_rtt_msec &gt; 200&#10;</code></pre>
 <p><strong>Header modifications:</strong></p>
 <table>
 <thead>
@@ -101,7 +112,7 @@
 </tbody>
 </table>
 <h4 id="2026-04-01-quic-rtt-delivery-rate-fields-example-match-low-bandwidth-connections">Example: Match low-bandwidth connections</h4>
-<pre><code class="language-txt">cf.edge.l4.delivery_rate &gt; 0 and cf.edge.l4.delivery_rate &lt; 100000&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">cf.edge.l4.delivery_rate &gt; 0 and cf.edge.l4.delivery_rate &lt; 100000&#10;</code></pre>
 <p>For more information, refer to <a href="/rules/transform/request-header-modification/">Request Header Transform Rules</a> and the <a href="/ruleset-engine/rules-language/fields/reference/">fields reference</a>.</p>
 
 
@@ -145,7 +156,7 @@
 <h4 id="2026-03-25-rfc9440-mtls-fields-example-forwarding-client-certificate-headers-to-your-origin-server">Example: Forwarding client certificate headers to your origin server</h4>
 <p>Add a request header transform rule to set the <code>Client-Cert</code> and <code>Client-Cert-Chain</code> headers on requests forwarded to your origin server. For example, to forward headers for verified, non-revoked certificates:</p>
 <p><strong>Rule expression:</strong></p>
-<pre><code class="language-txt">cf.tls_client_auth.cert_verified and not cf.tls_client_auth.cert_revoked&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">cf.tls_client_auth.cert_verified and not cf.tls_client_auth.cert_revoked&#10;</code></pre>
 <p><strong>Header modifications:</strong></p>
 <table>
 <thead>
@@ -233,7 +244,7 @@
 </tbody>
 </table>
 <p>Example filter expression:</p>
-<pre><code>cf.timings.worker_msec &gt; 500&#10;</code></pre>
+<pre tabindex="0"><code>cf.timings.worker_msec &gt; 500&#10;</code></pre>
 <p>For more information, refer to the <a href="/ruleset-engine/rules-language/fields/reference/cf.timings.worker_msec/">Fields reference</a>.</p>
 
 
@@ -389,7 +400,7 @@
 <aside class="nb-aside caution">
 @markup("md", "content/.markup/bodies/17748.md")</aside>
 <h4 id="2026-01-27-body-buffering-settings-api-example">API example</h4>
-<pre><code class="language-json">{&#10;  &quot;action&quot;: &quot;set_config&quot;,&#10;  &quot;action_parameters&quot;: {&#10;    &quot;request_body_buffering&quot;: &quot;standard&quot;,&#10;    &quot;response_body_buffering&quot;: &quot;none&quot;&#10;  }&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;  &quot;action&quot;: &quot;set_config&quot;,&#10;  &quot;action_parameters&quot;: {&#10;    &quot;request_body_buffering&quot;: &quot;standard&quot;,&#10;    &quot;response_body_buffering&quot;: &quot;none&quot;&#10;  }&#10;}&#10;</code></pre>
 <p>For more information, refer to <a href="/rules/configuration-rules/">Configuration Rules</a>.</p>
 
 
@@ -424,19 +435,19 @@
 <hr />
 <h4 id="2026-01-22-sha256-base64-encode-functions-examples">Examples</h4>
 <p><strong>Encode a string to Base64 format:</strong></p>
-<pre><code class="language-txt">encode_base64(&quot;hello world&quot;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">encode_base64(&quot;hello world&quot;)&#10;</code></pre>
 <p>Returns: <code>aGVsbG8gd29ybGQ</code></p>
 <p><strong>Encode a string to Base64 format with padding:</strong></p>
-<pre><code class="language-txt">encode_base64(&quot;hello world&quot;, &quot;p&quot;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">encode_base64(&quot;hello world&quot;, &quot;p&quot;)&#10;</code></pre>
 <p>Returns: <code>aGVsbG8gd29ybGQ=</code></p>
 <p><strong>Perform a URL-safe Base64 encoding of a string:</strong></p>
-<pre><code class="language-txt">encode_base64(&quot;hello world&quot;, &quot;u&quot;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">encode_base64(&quot;hello world&quot;, &quot;u&quot;)&#10;</code></pre>
 <p>Returns: <code>aGVsbG8gd29ybGQ</code></p>
 <p><strong>Compute the SHA256 hash of a secret token:</strong></p>
-<pre><code class="language-txt">sha256(&quot;my-token&quot;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">sha256(&quot;my-token&quot;)&#10;</code></pre>
 <p>Returns a hash that your origin can validate to authenticate requests.</p>
 <p><strong>Compute the SHA256 hash of a string and encode the result to Base64 format:</strong></p>
-<pre><code class="language-txt">encode_base64(sha256(&quot;my-token&quot;))&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">encode_base64(sha256(&quot;my-token&quot;))&#10;</code></pre>
 <p>Combines hashing and encoding for systems that expect Base64-encoded signatures.</p>
 <p>For more information, refer to the <a href="/ruleset-engine/rules-language/functions/">Functions reference</a>.</p>
 
@@ -476,11 +487,11 @@
 <hr />
 <h4 id="2026-01-20-array-map-functions-example-use-cases">Example use cases</h4>
 <p><strong>Check if a country code exists in a header list:</strong></p>
-<pre><code class="language-txt">has_value(split(http.response.headers[&quot;x-allow-country&quot;][0], &quot;,&quot;), ip.src.country)&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">has_value(split(http.response.headers[&quot;x-allow-country&quot;][0], &quot;,&quot;), ip.src.country)&#10;</code></pre>
 <p><strong>Check if a specific header key exists:</strong></p>
-<pre><code class="language-txt">has_key(http.request.headers, &quot;x-custom-header&quot;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">has_key(http.request.headers, &quot;x-custom-header&quot;)&#10;</code></pre>
 <p><strong>Join array values for logging or comparison:</strong></p>
-<pre><code class="language-txt">join(http.request.headers.names, &quot;, &quot;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">join(http.request.headers.names, &quot;, &quot;)&#10;</code></pre>
 <p>For more information, refer to the <a href="/ruleset-engine/rules-language/functions/">Functions reference</a>.</p>
 
 
@@ -536,7 +547,7 @@
 </tbody>
 </table>
 <p>Example filter expression:</p>
-<pre><code>ip.src.metro_code eq &quot;501&quot;&#10;</code></pre>
+<pre tabindex="0"><code>ip.src.metro_code eq &quot;501&quot;&#10;</code></pre>
 <p>For more information, refer to the <a href="/ruleset-engine/rules-language/fields/reference/ip.src.metro_code/">Fields reference</a>.</p>
 
 

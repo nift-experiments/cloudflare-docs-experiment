@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/workers/languages/rust/
+  description: Write Workers in 100% Rust using the [`workers-rs` crate](https://github.com/cloudflare/workers-rs)
+  full_title: Cloudflare Workers — Rust language support · Cloudflare Workers docs
+  head_html: <title>Cloudflare Workers — Rust language support · Cloudflare Workers docs</title><meta name="generator" content="Nift"><meta name="description" content="Write Workers in 100% Rust using the [`workers-rs` crate](https://github.com/cloudflare/workers-rs)"><link rel="canonical" href="https://developers.cloudflare.com/workers/languages/rust/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/workers/languages/rust/index.md"><meta property="og:title" content="Cloudflare Workers — Rust language support · Cloudflare Workers docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Write Workers in 100% Rust using the [`workers-rs` crate](https://github.com/cloudflare/workers-rs)"><meta property="og:url" content="https://developers.cloudflare.com/workers/languages/rust/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Workers"><meta name="algolia_product_filter" content="Workers"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Workers"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/workers/languages/rust/#page","headline":"Cloudflare Workers \u2014 Rust language support \u00b7 Cloudflare Workers docs","description":"Write Workers in 100% Rust using the workers-rs crate","url":"https://developers.cloudflare.com/workers/languages/rust/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /workers/languages/rust/
+  schema: 1
+---
 <p>Cloudflare Workers provides support for Rust via the <a href="https://github.com/cloudflare/workers-rs"><code>workers-rs</code> crate</a>, which makes <a href="/workers/runtime-apis">Runtime APIs</a> and <a href="/workers/runtime-apis/bindings/">bindings</a> to developer platform products, such as <a href="/kv/concepts/how-kv-works/">Workers KV</a>, <a href="/r2/">R2</a>, and <a href="/queues/">Queues</a>, available directly from your Rust code.</p>
 <p>By following this guide, you will learn how to build a Worker entirely in the Rust programming language.</p>
 <h2 id="prerequisites">Prerequisites</h2>
@@ -7,16 +18,16 @@
 <li><a href="https://docs.npmjs.com/getting-started"><code>npm</code></a></li>
 <li>The Rust <code>wasm32-unknown-unknown</code> toolchain:</li>
 </ul>
-<pre><code class="language-sh">rustup target add wasm32-unknown-unknown&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">rustup target add wasm32-unknown-unknown&#10;</code></pre>
 <ul>
 <li>And <code>cargo-generate</code> sub-command by running:</li>
 </ul>
-<pre><code class="language-sh">cargo install cargo-generate&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cargo install cargo-generate&#10;</code></pre>
 <h2 id="1-create-a-new-project-with-wrangler"><ol>
 <li>Create a new project with Wrangler</li>
 </ol></h2>
 <p>Open a terminal window, and run the following command to generate a Worker project template in Rust:</p>
-<pre><code class="language-sh">cargo generate cloudflare/workers-rs&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cargo generate cloudflare/workers-rs&#10;</code></pre>
 <p>Your project will be created in a new directory that you named, in which you will find the following files and folders:</p>
 <ul>
 <li><code>Cargo.toml</code> - The standard project configuration file for Rust's <a href="https://doc.rust-lang.org/cargo/"><code>Cargo</code></a> package manager. The template pre-populates some best-practice settings for building for Wasm on Workers.</li>
@@ -27,7 +38,7 @@
 <li>Develop locally</li>
 </ol></h2>
 <p>After you have created your first Worker, run the <a href="/workers/wrangler/commands/general/#dev"><code>wrangler dev</code></a> command to start a local server for developing your Worker. This will allow you to test your Worker in development.</p>
-<pre><code class="language-sh">npx wrangler dev&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler dev&#10;</code></pre>
 <p>If you have not used Wrangler before, it will try to open your web browser to login with your Cloudflare account.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/17003.md")
@@ -37,7 +48,7 @@
 <li>Write your Worker code</li>
 </ol></h2>
 <p>With your new project generated, write your Worker code. Find the entrypoint to your Worker in <code>src/lib.rs</code>:</p>
-<pre><code class="language-rust">use worker::*;&#10;&#10;&#35;[event(fetch)]&#10;async fn main(req: Request, env: Env, ctx: Context) -&gt; Result&lt;Response&gt; {&#10;    Response::ok(&quot;Hello, World!&quot;)&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-rust">use worker::*;&#10;&#10;&#35;[event(fetch)]&#10;async fn main(req: Request, env: Env, ctx: Context) -&gt; Result&lt;Response&gt; {&#10;    Response::ok(&quot;Hello, World!&quot;)&#10;}&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/17002.md")
 </aside>
@@ -89,7 +100,7 @@
 <li>Deploy your Worker project</li>
 </ol></h2>
 <p>With your project configured, you can now deploy your Worker, to a <code>*.workers.dev</code> subdomain, or a <a href="/workers/configuration/routing/custom-domains/">Custom Domain</a>, if you have one configured. If you have not configured any subdomain or domain, Wrangler will prompt you during the deployment process to set one up.</p>
-<pre><code class="language-sh">npx wrangler deploy&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler deploy&#10;</code></pre>
 <p>Preview your Worker at <code>&lt;YOUR_WORKER&gt;.&lt;YOUR_SUBDOMAIN&gt;.workers.dev</code>.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/17001.md")
@@ -117,7 +128,7 @@ into a single JavaScript Promise and run on the JavaScript event loop. Calls to 
 <p><code>worker-build</code> is invoked by default in the template project using a custom build command specified in the <code>wrangler.toml</code> file.</p>
 <h3 id="binary-size-wasm-opt">Binary Size (<code>wasm-opt</code>)</h3>
 <p>Unoptimized Rust Wasm binaries can be large and may exceed Worker bundle size limits or experience long startup times. The template project pre-configures several useful size optimizations in your <code>Cargo.toml</code> file:</p>
-<pre><code class="language-toml">[profile.release]&#10;lto = true&#10;strip = true&#10;codegen-units = 1&#10;</code></pre>
+<pre tabindex="0"><code class="language-toml">[profile.release]&#10;lto = true&#10;strip = true&#10;codegen-units = 1&#10;</code></pre>
 <p>Finally, <code>worker-bundle</code> automatically invokes <a href="https://github.com/brson/wasm-opt-rs"><code>wasm-opt</code></a> to further optimize binary size before upload.</p>
 <h2 id="related-resources">Related resources</h2>
 <ul>

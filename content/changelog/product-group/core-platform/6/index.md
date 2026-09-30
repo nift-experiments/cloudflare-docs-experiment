@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/changelog/product-group/core-platform/6/
+  description: '2025-11-04'
+  full_title: Core platform changelog - page 6 | Cloudflare Docs
+  head_html: <title>Core platform changelog - page 6 | Cloudflare Docs</title><meta name="generator" content="Nift"><meta name="description" content="2025-11-04"><link rel="canonical" href="https://developers.cloudflare.com/changelog/product-group/core-platform/6/"><link rel="sitemap" href="/sitemap-index.xml"><meta property="og:title" content="Core platform changelog - page 6"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="2025-11-04"><meta property="og:url" content="https://developers.cloudflare.com/changelog/product-group/core-platform/6/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/changelog/product-group/core-platform/6/#page","headline":"Core platform changelog - page 6 | Cloudflare Docs","description":"2025-11-04","url":"https://developers.cloudflare.com/changelog/product-group/core-platform/6/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: false
+  noindex: false
+  route: /changelog/product-group/core-platform/6/
+  schema: 1
+---
 <h1 id="changelog">Changelog</h1>
 
 <h2 id="log-explorer-now-shows-query-result-distribution"><a href="/changelog/post/2025-11-13-query-result-distribution/">Log Explorer now shows query result distribution</a></h2>
@@ -89,7 +100,7 @@
 </tbody>
 </table>
 <p>Example filter expression:</p>
-<pre><code>cf.edge.client_tcp &amp;&amp; cf.timings.client_tcp_rtt_msec &lt; 100&#10;</code></pre>
+<pre tabindex="0"><code>cf.edge.client_tcp &amp;&amp; cf.timings.client_tcp_rtt_msec &lt; 100&#10;</code></pre>
 <p>More information can be found in the Rules language <a href="/ruleset-engine/rules-language/fields/reference/">fields reference</a>.</p>
 
 
@@ -253,7 +264,7 @@
 <h2 id="return-markdown"><a href="/changelog/post/2025-10-01-md-returned/">Return markdown</a></h2>
 <p><em>2025-10-01</em></p>
 <p>Users can now specify that they want to retrieve Cloudflare documentation as markdown rather than the previous HTML default. This can significantly reduce token consumption when used alongside Large Language Model (LLM) tools.</p>
-<pre><code class="language-sh">curl https://developers.cloudflare.com/workers/ -H &#x27;Accept: text/markdown&#x27;  -v&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">curl https://developers.cloudflare.com/workers/ -H &#x27;Accept: text/markdown&#x27;  -v&#10;</code></pre>
 <p>If you maintain your own site and want to adopt this practice using Cloudflare Workers for your own users you can follow the example <a href="https://github.com/cloudflare/cloudflare-docs/pull/25493">here</a>.</p>
 
 
@@ -387,7 +398,7 @@ These new headers and back offs are only available for Cloudflare REST APIs, and
 <h4 id="2025-09-02-tunnel-networks-list-endpoints-new-default-action-required">Action required</h4>
 <p>If you need to retrieve deleted (or all) resources, please update your API calls to explicitly include the <code>is_deleted</code> parameter before <strong>December 1, 2025</strong>.</p>
 <p>To get a list of only deleted resources, you must now explicitly add the <code>is_deleted=true</code> query parameter to your request:</p>
-<pre><code class="language-bash">&#35; Example: Get ONLY deleted Tunnels&#10;curl &quot;https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/tunnels?is_deleted=true&quot; \&#10;     &#45;H &quot;Authorization: Bearer $API_TOKEN&quot;&#10;&#10;&#35; Example: Get ONLY deleted Virtual Networks&#10;curl &quot;https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/teamnet/virtual_networks?is_deleted=true&quot; \&#10;     &#45;H &quot;Authorization: Bearer $API_TOKEN&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">&#35; Example: Get ONLY deleted Tunnels&#10;curl &quot;https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/tunnels?is_deleted=true&quot; \&#10;     &#45;H &quot;Authorization: Bearer $API_TOKEN&quot;&#10;&#10;&#35; Example: Get ONLY deleted Virtual Networks&#10;curl &quot;https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/teamnet/virtual_networks?is_deleted=true&quot; \&#10;     &#45;H &quot;Authorization: Bearer $API_TOKEN&quot;&#10;</code></pre>
 <p>Following this change, retrieving a complete list of both active and deleted resources will require two separate API calls: one to get active items (by omitting the parameter or using <code>is_deleted=false</code>) and one to get deleted items (<code>is_deleted=true</code>).</p>
 <h4 id="2025-09-02-tunnel-networks-list-endpoints-new-default-why-we-re-making-this-change">Why we’re making this change</h4>
 This update is based on user feedback and aims to:
@@ -465,7 +476,7 @@ You can now return HTTP 402 &quot;Payment Required&quot; responses when blocking
 </ul>
 <p><img src="/assets/upstream/images/changelog/ai-crawl-control/ai-crawl-control-block-response.png" alt="AI Crawl Control block response configuration interface" /></p>
 <p>Example 402 response:</p>
-<pre><code class="language-http">HTTP 402 Payment Required&#10;Date: Mon, 24 Aug 2025 12:56:49 GMT&#10;Content-type: application/json&#10;Server: cloudflare&#10;Cf-Ray: 967e8da599d0c3fa-EWR&#10;Cf-Team: 2902f6db750000c3fa1e2ef400000001&#10;&#10;{&#10;  &quot;message&quot;: &quot;Please contact the site owner for access.&quot;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-http">HTTP 402 Payment Required&#10;Date: Mon, 24 Aug 2025 12:56:49 GMT&#10;Content-type: application/json&#10;Server: cloudflare&#10;Cf-Ray: 967e8da599d0c3fa-EWR&#10;Cf-Team: 2902f6db750000c3fa1e2ef400000001&#10;&#10;{&#10;  &quot;message&quot;: &quot;Please contact the site owner for access.&quot;&#10;}&#10;</code></pre>
 
 
 <h2 id="audit-logs-version-2-logpush-beta-release"><a href="/changelog/post/2025-08-22-audit-logs-v2-logpush/">Audit logs (version 2) - Logpush Beta Release</a></h2>

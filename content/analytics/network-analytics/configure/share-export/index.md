@@ -1,15 +1,24 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/analytics/network-analytics/configure/share-export/
+  description: Share filters and export Network Analytics data.
+  full_title: Share and export Network Analytics data · Cloudflare Analytics docs
+  head_html: <title>Share and export Network Analytics data · Cloudflare Analytics docs</title><meta name="generator" content="Nift"><meta name="description" content="Share filters and export Network Analytics data."><link rel="canonical" href="https://developers.cloudflare.com/analytics/network-analytics/configure/share-export/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/analytics/network-analytics/configure/share-export/index.md"><meta property="og:title" content="Share and export Network Analytics data · Cloudflare Analytics docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Share filters and export Network Analytics data."><meta property="og:url" content="https://developers.cloudflare.com/analytics/network-analytics/configure/share-export/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Analytics"><meta name="algolia_product_filter" content="Analytics"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Analytics"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/analytics/network-analytics/configure/share-export/#page","headline":"Share and export Network Analytics data \u00b7 Cloudflare Analytics docs","description":"Share filters and export Network Analytics data.","url":"https://developers.cloudflare.com/analytics/network-analytics/configure/share-export/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /analytics/network-analytics/configure/share-export/
+  schema: 1
+---
 <h2 id="share-network-analytics-filters">Share Network Analytics filters</h2>
 <p>When you add filters and specify a time range in Network Analytics, the URL changes to reflect those parameters.</p>
 <p>To share your view of the data, copy the URL and send it to other users so that they can work with the same view.</p>
 <h2 id="export-sample-log-data">Export sample log data</h2>
-<p>You can export up to 100 raw events from the <strong>Packet sample log</strong> at a time. This option is useful when you need to combine and analyze Cloudflare data with data stored in a separate system or database, such as a <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/3184.md")
-</div>.
+<p>You can export up to 100 raw events from the <strong>Packet sample log</strong> at a time. This option is useful when you need to combine and analyze Cloudflare data with data stored in a separate system or database, such as a <span class="nb-glossary-tooltip" title="SIEM">SIEM system</span>.</p>
 <p>To export log data:</p>
 <ol>
 <li>Select <strong>Export</strong>.</li>
 <li>Choose either CSV or JSON format for rendering exported data. The downloaded file name will reflect the selected time range, using this pattern:</li>
 </ol>
-<pre><code class="language-txt">network-analytics-attacks-&lt;START_TIME&gt;-&lt;END_TIME&gt;.json&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">network-analytics-attacks-&lt;START_TIME&gt;-&lt;END_TIME&gt;.json&#10;</code></pre>
 <h2 id="export-a-network-analytics-report">Export a Network Analytics report</h2>
 <p>To print or download a snapshot report from Network Analytics, select <strong>Print report</strong>. Your web browser's print interface displays options for printing or saving as a PDF.</p>

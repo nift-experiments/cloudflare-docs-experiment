@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/tunnel/observability/
+  description: Monitor tunnel health, connectors, and connection status.
+  full_title: Observability · Cloudflare Docs
+  head_html: <title>Observability · Cloudflare Docs</title><meta name="generator" content="Nift"><meta name="description" content="Monitor tunnel health, connectors, and connection status."><link rel="canonical" href="https://developers.cloudflare.com/tunnel/observability/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/tunnel/observability/index.md"><meta property="og:title" content="Observability · Cloudflare Docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Monitor tunnel health, connectors, and connection status."><meta property="og:url" content="https://developers.cloudflare.com/tunnel/observability/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare Tunnel"><meta name="algolia_product_filter" content="Cloudflare Tunnel"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Cloudflare Tunnel"><meta name="pcx_tags" content="Logging"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/tunnel/observability/#page","headline":"Observability \u00b7 Cloudflare Docs","description":"Monitor tunnel health, connectors, and connection status.","url":"https://developers.cloudflare.com/tunnel/observability/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["Logging"]}</script>
+  markdown: true
+  noindex: false
+  route: /tunnel/observability/
+  schema: 1
+---
 <p>Cloudflare Tunnel exposes logs, metrics, and diagnostic tools to help you monitor tunnel health and resolve issues.</p>
 <h2 id="tunnel-health">Tunnel health</h2>
 <p>You can check your tunnel connection status in the <a href="https://dash.cloudflare.com/">Cloudflare dashboard</a> by going to <strong>Networking</strong> &gt; <strong>Tunnels</strong>, or by running <code>cloudflared tunnel list</code>.</p>
@@ -58,10 +69,10 @@
 @markup("md", "content/.markup/bodies/14889.md")
 </aside>
 <p>To format each log line as a JSON object, add <code>--output json</code> before <code>run</code>:</p>
-<pre><code class="language-sh">cloudflared tunnel --output json run &lt;UUID&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel --output json run &lt;UUID&gt;&#10;</code></pre>
 <p>This format is useful for Kubernetes deployments and log collection systems that consume JSON.</p>
 <p>For routine persistent logging, <a href=/tunnel/reference/run-parameters/#add-run-parameters-to-tunnel-service#log-directory>run the tunnel</a> with <code>--log-directory &lt;PATH&gt;</code>. This flag writes logs to <code>cloudflared.log</code> in the specified directory, rotates the file when it reaches 1 MB, and keeps up to five backups. It does not remove logs based on age.</p>
-<pre><code class="language-sh">cloudflared tunnel --loglevel info --log-directory &lt;PATH&gt; run &lt;UUID&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel --loglevel info --log-directory &lt;PATH&gt; run &lt;UUID&gt;&#10;</code></pre>
 <p>Use the <a href="/tunnel/reference/run-parameters/#logfile"><code>--logfile</code> flag</a> instead for short troubleshooting sessions or when another tool manages rotation. <code>cloudflared</code> does not rotate the file specified by <code>--logfile</code>. If you set both flags, <code>--logfile</code> takes precedence.</p>
 <h3 id="remote-log-streaming">Remote log streaming</h3>
 <p>You can stream real-time logs from a running tunnel without SSH access to the server.</p>
@@ -75,14 +86,14 @@
 <h3 id="default-metrics-server-address">Default metrics server address</h3>
 <p>In non-containerized environments, <code>cloudflared</code> starts the metrics server on <code>127.0.0.1:&lt;PORT&gt;/metrics</code>, where <code>&lt;PORT&gt;</code> is the first available port in the range <code>20241</code> to <code>20245</code>. If all ports are unavailable, <code>cloudflared</code> binds to a random port. In containerized environments (Docker, Kubernetes), the default address is <code>0.0.0.0:&lt;PORT&gt;/metrics</code>.</p>
 <p>To determine the default port, check your <a href="#server-side-logs">tunnel logs</a> around the time when the tunnel started. For example:</p>
-<pre><code class="language-text">2024-12-19T21:17:58Z INF Starting metrics server on 127.0.0.1:20241/metrics&#10;</code></pre>
+<pre tabindex="0"><code class="language-text">2024-12-19T21:17:58Z INF Starting metrics server on 127.0.0.1:20241/metrics&#10;</code></pre>
 <h3 id="configure-a-custom-address">Configure a custom address</h3>
 <p>To serve metrics on a custom IP address and port, perform these steps on the <code>cloudflared</code> host:</p>
 <ol>
 <li><a href="/tunnel/reference/run-parameters/#add-run-parameters-to-tunnel-service">Run the tunnel</a> using the
 <code>--metrics</code> flag. For example,</li>
 </ol>
-<pre><code class="language-sh">cloudflared tunnel --metrics 127.0.0.1:60123 run my-tunnel&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel --metrics 127.0.0.1:60123 run my-tunnel&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/14888.md")
 </aside>
@@ -105,14 +116,14 @@
 <ol>
 <li>(Linux only) To include network diagnostics in the logs, allow the <code>cloudflared</code> user to create RAW and PACKET sockets without root permissions:</li>
 </ol>
-<pre><code class="language-sh">sudo setcap cap_net_raw+ep /usr/bin/traceroute &amp;&amp; sudo setcap cap_net_raw+ep /usr/bin/traceroute&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">sudo setcap cap_net_raw+ep /usr/bin/traceroute &amp;&amp; sudo setcap cap_net_raw+ep /usr/bin/traceroute&#10;</code></pre>
 <p>If you do not set <code>cap_net_raw</code>, then traceroute data will be unavailable.</p>
 <ol start="2">
 <li>Get diagnostic logs:</li>
 </ol>
-<pre><code class="language-sh">cloudflared tunnel diag&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel diag&#10;</code></pre>
 <p>If multiple instances of <code>cloudflared</code> are running on the same host, specify the <a href="#configure-a-custom-address">metrics server IP and port</a> for the instance you want to diagnose. For example:</p>
-<pre><code class="language-sh">cloudflared tunnel diag --metrics 127.0.0.1:20241&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel diag --metrics 127.0.0.1:20241&#10;</code></pre>
 <p>This command will output the status of each diagnostic task and place a <code>cloudflared-diag-YYYY-MM-DDThh-mm-ss.zip</code> file in your working directory.</p>
 <details class="nb-details"><summary>Docker diagnostics</summary><div class="nb-details-body">
 @markup("md", "content/.markup/bodies/14898.md")

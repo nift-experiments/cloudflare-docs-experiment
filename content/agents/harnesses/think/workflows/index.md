@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/agents/harnesses/think/workflows/
+  description: Run a durable model-driven reasoning step inside a Cloudflare Workflow with ThinkWorkflow and step.prompt(), including structured output and timeouts.
+  full_title: Workflows · Cloudflare Agents docs
+  head_html: <title>Workflows · Cloudflare Agents docs</title><meta name="generator" content="Nift"><meta name="description" content="Run a durable model-driven reasoning step inside a Cloudflare Workflow with ThinkWorkflow and step.prompt(), including structured output and timeouts."><link rel="canonical" href="https://developers.cloudflare.com/agents/harnesses/think/workflows/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/agents/harnesses/think/workflows/index.md"><meta property="og:title" content="Workflows · Cloudflare Agents docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Run a durable model-driven reasoning step inside a Cloudflare Workflow with ThinkWorkflow and step.prompt(), including structured output and timeouts."><meta property="og:url" content="https://developers.cloudflare.com/agents/harnesses/think/workflows/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Agents"><meta name="algolia_product_filter" content="Agents"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Agents"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/agents/harnesses/think/workflows/#page","headline":"Workflows \u00b7 Cloudflare Agents docs","description":"Run a durable model-driven reasoning step inside a Cloudflare Workflow with ThinkWorkflow and step.prompt(), including structured output and timeouts.","url":"https://developers.cloudflare.com/agents/harnesses/think/workflows/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /agents/harnesses/think/workflows/
+  schema: 1
+---
 <p><code>ThinkWorkflow</code> connects Think to Cloudflare Workflows when a durable job needs one model-driven reasoning step.</p>
 <p>Use it when the Workflow owns the process:</p>
 <ul>
@@ -9,7 +20,7 @@
 <p>Keep recurring prompts as <a href="/agents/harnesses/think/scheduled-tasks/">scheduled tasks</a>, and keep simple one-off background turns on <a href="/agents/harnesses/think/programmatic-submissions/"><code>submitMessages()</code></a>. Workflows are for jobs where the steps matter.</p>
 <h2 id="api">API</h2>
 <p>Import from <code>@cloudflare/think/workflows</code>:</p>
-<pre><code class="language-ts">import { ThinkWorkflow } from &quot;@cloudflare/think/workflows&quot;;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { ThinkWorkflow } from &quot;@cloudflare/think/workflows&quot;;&#10;</code></pre>
 <p>Extend <code>ThinkWorkflow</code> and call <code>step.prompt()</code> inside <code>run()</code>:</p>
 <div class="nb-type-script-example">
 @markup("md", "content/.markup/bodies/2096.md")
@@ -19,9 +30,9 @@
 @markup("md", "content/.markup/bodies/2097.md")
 </div>
 <p><code>runWorkflow()</code> creates the Workflow instance and injects the Agent identity that <code>ThinkWorkflow</code> needs to reconnect to <code>this.agent</code> inside <code>run()</code>. Prefer it over calling the Workflows binding directly:</p>
-<pre><code class="language-ts">// Avoid this for Agent workflows. It does not include Agent context.&#10;await this.env.TRIAGE_WORKFLOW.create({ params: { issueNumber } });&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// Avoid this for Agent workflows. It does not include Agent context.&#10;await this.env.TRIAGE_WORKFLOW.create({ params: { issueNumber } });&#10;</code></pre>
 <p>Use <code>sendWorkflowEvent()</code> from the Agent when a waiting Workflow needs an external signal, such as human approval:</p>
-<pre><code class="language-ts">await this.sendWorkflowEvent(&quot;TRIAGE_WORKFLOW&quot;, workflowId, {&#10;	type: &quot;approval&quot;,&#10;	payload: { approved: true },&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">await this.sendWorkflowEvent(&quot;TRIAGE_WORKFLOW&quot;, workflowId, {&#10;	type: &quot;approval&quot;,&#10;	payload: { approved: true },&#10;});&#10;</code></pre>
 <p><code>step.prompt()</code> accepts a prompt string and a Zod object schema. The schema is converted to JSON Schema before the Workflow calls the Agent. Think then runs a full agentic turn: the Agent may use its tools across multiple steps and returns the structured result by calling an internal <code>final_answer</code> tool whose arguments match the schema. This uses ordinary tool calling rather than a streaming <code>response_format</code>, so it works across every provider Think supports — including Workers AI, which rejects JSON Schema responses on streaming requests. When the Workflow resumes, the payload is validated again with the original Zod schema before the typed value is returned.</p>
 <p>Unsupported Zod features that cannot be represented as JSON Schema fail while creating the prompt step. Think does not silently repair invalid model output. If the model does not produce a valid <code>final_answer</code> call, the submission reaches a terminal error state and <code>step.prompt()</code> throws.</p>
 <h3 id="behavior-notes">Behavior notes</h3>
@@ -44,16 +55,16 @@
 <p>The machine-readable output is carried in the pending notification and Workflow event payload. Think does not store a separate <code>output_json</code> column on the submission ledger, and clears the notification payload after delivery. After delivery, the Workflow owns the durable result.</p>
 <h2 id="idempotency">Idempotency</h2>
 <p>By default, <code>step.prompt()</code> infers the idempotency key from Workflow identity and step name:</p>
-<pre><code class="language-text">think-workflow:&lt;workflowName&gt;:&lt;workflowId&gt;:&lt;stepName&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-text">think-workflow:&lt;workflowName&gt;:&lt;workflowId&gt;:&lt;stepName&gt;&#10;</code></pre>
 <p>For loops, pass a string <code>key</code> to distinguish repeated uses of the same step name:</p>
-<pre><code class="language-ts">await step.prompt(&quot;summarize-file&quot;, {&#10;	key: file.path,&#10;	prompt: `Summarize ${file.path}`,&#10;	output: summarySchema,&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">await step.prompt(&quot;summarize-file&quot;, {&#10;	key: file.path,&#10;	prompt: `Summarize ${file.path}`,&#10;	output: summarySchema,&#10;});&#10;</code></pre>
 <p>Prompt text is not part of the inferred key, but Think stores workflow metadata and a prompt/config fingerprint for diagnostics.</p>
 <h2 id="timeouts">Timeouts</h2>
 <p>Pass <code>timeout</code> to control how long the Workflow waits for the terminal event. If the wait times out, <code>step.prompt()</code> cancels the Think submission by default and throws <code>ThinkPromptTimeoutError</code>.</p>
 <p>Set <code>cancelOnTimeout: false</code> when you intentionally want the Think submission to continue after the Workflow stops waiting.</p>
 <h2 id="boundary-with-other-primitives">Boundary with other primitives</h2>
 <p>Use <a href="/agents/harnesses/think/scheduled-tasks/"><code>getScheduledTasks()</code></a> for recurring prompt submissions or deterministic scheduled handlers:</p>
-<pre><code class="language-ts">getScheduledTasks() {&#10;	return {&#10;		dailySummary: {&#10;			schedule: &quot;every day at 09:00&quot;,&#10;			timezone: &quot;UTC&quot;,&#10;			prompt: &quot;Generate the daily report.&quot;&#10;		},&#10;		dailyWorkflow: {&#10;			schedule: &quot;every day at 09:00&quot;,&#10;			timezone: &quot;UTC&quot;,&#10;			retry: { maxAttempts: 3 },&#10;			handler: async ({ idempotencyKey, scheduledFor, timezone }) =&gt; {&#10;				await this.env.REPORT_WORKFLOW.create({&#10;					id: idempotencyKey,&#10;					params: { scheduledFor, timezone }&#10;				});&#10;			}&#10;		}&#10;	};&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">getScheduledTasks() {&#10;	return {&#10;		dailySummary: {&#10;			schedule: &quot;every day at 09:00&quot;,&#10;			timezone: &quot;UTC&quot;,&#10;			prompt: &quot;Generate the daily report.&quot;&#10;		},&#10;		dailyWorkflow: {&#10;			schedule: &quot;every day at 09:00&quot;,&#10;			timezone: &quot;UTC&quot;,&#10;			retry: { maxAttempts: 3 },&#10;			handler: async ({ idempotencyKey, scheduledFor, timezone }) =&gt; {&#10;				await this.env.REPORT_WORKFLOW.create({&#10;					id: idempotencyKey,&#10;					params: { scheduledFor, timezone }&#10;				});&#10;			}&#10;		}&#10;	};&#10;}&#10;</code></pre>
 <p>Use <a href="/agents/harnesses/think/programmatic-submissions/"><code>submitMessages()</code></a> for durable one-off turns where the caller can inspect submission status later.</p>
 <p>Use <a href="/agents/runtime/execution/durable-execution/#startfiber"><code>startFiber()</code></a> for app-owned idempotent Agent jobs that need recovery inside the Agent. Think's workflow notification delivery does not use fibers; it uses a private outbox because it needs to store an event until delivery succeeds.</p>
 <p>Use Workflows when the process has multiple deterministic steps, long waits, or human approval.</p>

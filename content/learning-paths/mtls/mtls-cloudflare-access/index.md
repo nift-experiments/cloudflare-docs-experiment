@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/learning-paths/mtls/mtls-cloudflare-access/
+  description: Implement mutual TLS authentication with Cloudflare.
+  full_title: mTLS with Cloudflare Access · Cloudflare Learning Paths
+  head_html: <title>mTLS with Cloudflare Access · Cloudflare Learning Paths</title><meta name="generator" content="Nift"><meta name="description" content="Implement mutual TLS authentication with Cloudflare."><link rel="canonical" href="https://developers.cloudflare.com/learning-paths/mtls/mtls-cloudflare-access/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/learning-paths/mtls/mtls-cloudflare-access/index.md"><meta property="og:title" content="mTLS with Cloudflare Access · Cloudflare Learning Paths"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Implement mutual TLS authentication with Cloudflare."><meta property="og:url" content="https://developers.cloudflare.com/learning-paths/mtls/mtls-cloudflare-access/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Learning Paths"><meta name="algolia_product_filter" content="Learning Paths"><meta name="pcx_content_group" content="Docs collections"><meta name="pcx_content_type" content="Overview"><meta name="algolia_content_type" content="Overview"><meta name="pcx_additional_products" content="SSL/TLS,Access,API Shield"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://developers.cloudflare.com/learning-paths/mtls/mtls-cloudflare-access/#page","headline":"mTLS with Cloudflare Access \u00b7 Cloudflare Learning Paths","description":"Implement mutual TLS authentication with Cloudflare.","url":"https://developers.cloudflare.com/learning-paths/mtls/mtls-cloudflare-access/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /learning-paths/mtls/mtls-cloudflare-access/
+  schema: 1
+---
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/9833.md")
 </aside>
@@ -15,26 +26,26 @@
 <ol>
 <li>Create a JSON file called <code>ca-csr.json</code>:</li>
 </ol>
-<pre><code class="language-json">{&#10;	&quot;CN&quot;: &quot;Cloudflare Access Testing CA&quot;,&#10;	&quot;key&quot;: {&#10;		&quot;algo&quot;: &quot;rsa&quot;,&#10;		&quot;size&quot;: 4096&#10;	},&#10;	&quot;names&quot;: [&#10;		{&#10;			&quot;C&quot;: &quot;US&quot;,&#10;			&quot;L&quot;: &quot;LA&quot;,&#10;			&quot;O&quot;: &quot;Access Testing&quot;,&#10;			&quot;OU&quot;: &quot;CA&quot;,&#10;			&quot;ST&quot;: &quot;California&quot;&#10;		}&#10;	]&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;CN&quot;: &quot;Cloudflare Access Testing CA&quot;,&#10;	&quot;key&quot;: {&#10;		&quot;algo&quot;: &quot;rsa&quot;,&#10;		&quot;size&quot;: 4096&#10;	},&#10;	&quot;names&quot;: [&#10;		{&#10;			&quot;C&quot;: &quot;US&quot;,&#10;			&quot;L&quot;: &quot;LA&quot;,&#10;			&quot;O&quot;: &quot;Access Testing&quot;,&#10;			&quot;OU&quot;: &quot;CA&quot;,&#10;			&quot;ST&quot;: &quot;California&quot;&#10;		}&#10;	]&#10;}&#10;</code></pre>
 <ol start="2">
 <li>Create a JSON file called <code>ca-config.json</code>:</li>
 </ol>
-<pre><code class="language-json">{&#10;	&quot;signing&quot;: {&#10;		&quot;default&quot;: {&#10;			&quot;expiry&quot;: &quot;8760h&quot;&#10;		},&#10;		&quot;profiles&quot;: {&#10;			&quot;server&quot;: {&#10;				&quot;usages&quot;: [&quot;signing&quot;, &quot;key encipherment&quot;, &quot;server auth&quot;],&#10;				&quot;expiry&quot;: &quot;8760h&quot;&#10;			},&#10;			&quot;client&quot;: {&#10;				&quot;usages&quot;: [&quot;signing&quot;, &quot;key encipherment&quot;, &quot;client auth&quot;],&#10;				&quot;expiry&quot;: &quot;8760h&quot;&#10;			}&#10;		}&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;signing&quot;: {&#10;		&quot;default&quot;: {&#10;			&quot;expiry&quot;: &quot;8760h&quot;&#10;		},&#10;		&quot;profiles&quot;: {&#10;			&quot;server&quot;: {&#10;				&quot;usages&quot;: [&quot;signing&quot;, &quot;key encipherment&quot;, &quot;server auth&quot;],&#10;				&quot;expiry&quot;: &quot;8760h&quot;&#10;			},&#10;			&quot;client&quot;: {&#10;				&quot;usages&quot;: [&quot;signing&quot;, &quot;key encipherment&quot;, &quot;client auth&quot;],&#10;				&quot;expiry&quot;: &quot;8760h&quot;&#10;			}&#10;		}&#10;	}&#10;}&#10;</code></pre>
 <ol start="3">
 <li>Run the following <a href="/cloudflare-one/access-controls/service-credentials/mutual-tls-authentication/#test-mtls-using-cloudflare-pki">cfssl</a> command to generate the CA certificate <code>ca.pem</code>:</li>
 </ol>
-<pre><code class="language-txt">cfssl gencert -initca ca-csr.json | cfssljson -bare ca&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">cfssl gencert -initca ca-csr.json | cfssljson -bare ca&#10;</code></pre>
 <h2 id="2-create-client-certificates"><ol start="2">
 <li>Create Client Certificates</li>
 </ol></h2>
 <ol>
 <li>In order to create the Client Certificates, you need to prepare the following JSON file called <code>client-csr.json</code>:</li>
 </ol>
-<pre><code class="language-json">{&#10;    &quot;CN&quot;: &quot;mtls-access.example.com&quot;,        # replace with your own hostname&#10;    &quot;hosts&quot;: [&quot;mtls-access.example.com&quot;],   # replace with your own hostname&#10;    &quot;key&quot;: {&#10;      &quot;algo&quot;: &quot;rsa&quot;,&#10;      &quot;size&quot;: 4096&#10;    },&#10;    &quot;names&quot;: [&#10;      {&#10;        &quot;C&quot;: &quot;US&quot;,&#10;        &quot;L&quot;: &quot;Austin&quot;,&#10;        &quot;O&quot;: &quot;Access&quot;,&#10;        &quot;OU&quot;: &quot;Access Admins&quot;,&#10;        &quot;ST&quot;: &quot;Texas&quot;&#10;      }&#10;    ]&#10;  }&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;    &quot;CN&quot;: &quot;mtls-access.example.com&quot;,        # replace with your own hostname&#10;    &quot;hosts&quot;: [&quot;mtls-access.example.com&quot;],   # replace with your own hostname&#10;    &quot;key&quot;: {&#10;      &quot;algo&quot;: &quot;rsa&quot;,&#10;      &quot;size&quot;: 4096&#10;    },&#10;    &quot;names&quot;: [&#10;      {&#10;        &quot;C&quot;: &quot;US&quot;,&#10;        &quot;L&quot;: &quot;Austin&quot;,&#10;        &quot;O&quot;: &quot;Access&quot;,&#10;        &quot;OU&quot;: &quot;Access Admins&quot;,&#10;        &quot;ST&quot;: &quot;Texas&quot;&#10;      }&#10;    ]&#10;  }&#10;</code></pre>
 <ol start="2">
 <li>Now you can run the following command to generate the Client Certificates, which will output the files <code>client.pem</code>, <code>client-key.pem</code> and <code>client.csr</code>:</li>
 </ol>
-<pre><code class="language-sh">cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=client client-csr.json | cfssljson -bare client&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=client client-csr.json | cfssljson -bare client&#10;</code></pre>
 <h2 id="3-add-mtls-ca-certificate-to-cloudflare-access"><ol start="3">
 <li>Add mTLS CA certificate to Cloudflare Access</li>
 </ol></h2>
@@ -52,8 +63,8 @@
 @markup("md", "content/.markup/bodies/9832.md")
 </aside>
 <p>With the Public and Private Client Certificates in the same directory, with this cURL command, we will gain access:</p>
-<pre><code class="language-sh">curl -IXGET --cert client.pem --key client-key.pem https://mtls-access.example.com/&#10;</code></pre>
-<pre><code class="language-txt">HTTP/2 200&#10;server: cloudflare&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">curl -IXGET --cert client.pem --key client-key.pem https://mtls-access.example.com/&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">HTTP/2 200&#10;server: cloudflare&#10;</code></pre>
 <p>Without the certificates, we would see the following:</p>
-<pre><code class="language-sh">curl -I https://mtls-access.example.com/mtls-test&#10;</code></pre>
-<pre><code class="language-txt">HTTP/2 401&#10;server: cloudflare&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">curl -I https://mtls-access.example.com/mtls-test&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">HTTP/2 401&#10;server: cloudflare&#10;</code></pre>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/tunnel/troubleshooting/
+  description: Resolve common Cloudflare Tunnel connection and configuration issues.
+  full_title: Troubleshooting · Cloudflare Docs
+  head_html: <title>Troubleshooting · Cloudflare Docs</title><meta name="generator" content="Nift"><meta name="description" content="Resolve common Cloudflare Tunnel connection and configuration issues."><link rel="canonical" href="https://developers.cloudflare.com/tunnel/troubleshooting/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/tunnel/troubleshooting/index.md"><meta property="og:title" content="Troubleshooting · Cloudflare Docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Resolve common Cloudflare Tunnel connection and configuration issues."><meta property="og:url" content="https://developers.cloudflare.com/tunnel/troubleshooting/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare Tunnel"><meta name="algolia_product_filter" content="Cloudflare Tunnel"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_content_type" content="Troubleshooting"><meta name="algolia_content_type" content="Troubleshooting"><meta name="pcx_additional_products" content="Cloudflare Tunnel"><meta name="pcx_tags" content="Debugging"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/tunnel/troubleshooting/#page","headline":"Troubleshooting \u00b7 Cloudflare Docs","description":"Resolve common Cloudflare Tunnel connection and configuration issues.","url":"https://developers.cloudflare.com/tunnel/troubleshooting/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["Debugging"]}</script>
+  markdown: true
+  noindex: false
+  route: /tunnel/troubleshooting/
+  schema: 1
+---
 <p>Use this page to diagnose and resolve common issues with Cloudflare Tunnel. Many issues are resolved by upgrading to the latest version of <code>cloudflared</code> — refer to <a href="/tunnel/guides/update-cloudflared/">Update cloudflared</a> before investigating further.</p>
 <p>For tunnel health monitoring, logs, and metrics, refer to <a href="/tunnel/observability/">Observability</a>.</p>
 <p>If your tunnel is <code>Healthy</code> but an HTTPS route fails or redirects, refer to <a href="/tunnel/troubleshooting/https-origins/">Troubleshoot HTTPS origins</a>.</p>
@@ -5,20 +16,20 @@
 <p>When <code>cloudflared</code> cannot reach the Cloudflare network, it <a href="/tunnel/observability/#logs">logs</a> specific error messages that indicate whether the issue is DNS resolution, QUIC (UDP), or TCP connectivity.</p>
 <h3 id="dns-resolution-failures">DNS resolution failures</h3>
 <h4 id="edge-discovery-error-looking-up-cloudflare-edge-ips"><code>edge discovery: error looking up Cloudflare edge IPs</code></h4>
-<pre><code class="language-txt">ERR edge discovery: error looking up Cloudflare edge IPs: the DNS query failed&#10;    error=&quot;lookup _v2-origintunneld._tcp.argotunnel.com on 172.19.64.1:53: no such host&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">ERR edge discovery: error looking up Cloudflare edge IPs: the DNS query failed&#10;    error=&quot;lookup _v2-origintunneld._tcp.argotunnel.com on 172.19.64.1:53: no such host&quot;&#10;</code></pre>
 <p>This error means the DNS resolver configured on your machine cannot resolve the SRV records that <code>cloudflared</code> uses to discover the <a href="/tunnel/configuration/#firewall-rules">Cloudflare Tunnel destination IPs</a>. Common causes include corporate DNS resolvers that strip or block SRV records, and DNS resolvers that return compressed SRV records.</p>
 <p><strong>To diagnose:</strong></p>
 <p>On the <code>cloudflared</code> host machine, run:</p>
-<pre><code class="language-sh">dig SRV _v2-origintunneld._tcp.argotunnel.com&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">dig SRV _v2-origintunneld._tcp.argotunnel.com&#10;</code></pre>
 <p>If you receive <code>SERVFAIL</code>, <code>NXDOMAIN</code>, or an empty answer, test against Cloudflare's public resolver:</p>
-<pre><code class="language-sh">dig SRV _v2-origintunneld._tcp.argotunnel.com @1.1.1.1&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">dig SRV _v2-origintunneld._tcp.argotunnel.com @1.1.1.1&#10;</code></pre>
 <p><strong>To resolve:</strong></p>
 <ul>
 <li>If <code>1.1.1.1</code> returns results but your local resolver does not, configure the host to use <a href="/1.1.1.1/setup/">Cloudflare DNS (1.1.1.1)</a> or another public resolver.</li>
 <li>If neither resolver returns results, your firewall is likely blocking outbound DNS queries (UDP port <code>53</code>). Work with your network administrator to allow DNS traffic.</li>
 </ul>
 <h4 id="dns-query-failed-i-o-timeout"><code>DNS query failed ... i/o timeout</code></h4>
-<pre><code class="language-txt">ERR edge discovery: error looking up Cloudflare edge IPs: the DNS query failed&#10;    error=&quot;lookup _v2-origintunneld._tcp.argotunnel.com on 127.0.0.11:53:&#10;    read udp 127.0.0.1:53467-&gt;127.0.0.11:53: i/o timeout&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">ERR edge discovery: error looking up Cloudflare edge IPs: the DNS query failed&#10;    error=&quot;lookup _v2-origintunneld._tcp.argotunnel.com on 127.0.0.11:53:&#10;    read udp 127.0.0.1:53467-&gt;127.0.0.11:53: i/o timeout&quot;&#10;</code></pre>
 <p>This variant means DNS queries from <code>cloudflared</code> are being blocked or dropped entirely — the resolver never responds. This is common in container environments (Docker, Kubernetes) where the internal DNS resolver (<code>127.0.0.11</code>) is unreachable or misconfigured.</p>
 <p><strong>To resolve:</strong></p>
 <ul>
@@ -28,14 +39,14 @@
 </ul>
 <h3 id="quic-handshake-timeout">QUIC handshake timeout</h3>
 <h4 id="failed-to-dial-a-quic-connection"><code>Failed to dial a quic connection</code></h4>
-<pre><code class="language-txt">ERR Failed to dial a quic connection error=&quot;failed to dial to edge with quic:&#10;    timeout: handshake did not complete in time&quot; connIndex=0 ip=198.41.192.227&#10;INF Retrying connection in up to 2s connIndex=0 ip=198.41.192.227&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">ERR Failed to dial a quic connection error=&quot;failed to dial to edge with quic:&#10;    timeout: handshake did not complete in time&quot; connIndex=0 ip=198.41.192.227&#10;INF Retrying connection in up to 2s connIndex=0 ip=198.41.192.227&#10;</code></pre>
 <p>This error means <code>cloudflared</code> resolved the <a href="/tunnel/configuration/#firewall-rules">Cloudflare Tunnel destination IPs</a> but could not complete a QUIC handshake over UDP port <code>7844</code>. Your network or firewall is blocking outbound UDP traffic to Cloudflare.</p>
 <p><code>cloudflared</code> retries with exponential backoff (2, 4, 8, 16, 32, up to 64 seconds). After exhausting retries, it falls back to HTTP/2 over TCP:</p>
-<pre><code class="language-txt">INF Switching to fallback protocol http2 connIndex=0&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">INF Switching to fallback protocol http2 connIndex=0&#10;</code></pre>
 <p>If the fallback also fails, you will see a <a href="#tcp-connection-timeout">TCP connection timeout</a> error.</p>
 <p><strong>To diagnose:</strong></p>
 <p>On the <code>cloudflared</code> host machine, test connectivity on port <code>7844</code>:</p>
-<pre><code class="language-sh">nc -uvz -w 3 198.41.192.227 7844&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">nc -uvz -w 3 198.41.192.227 7844&#10;</code></pre>
 <p>Replace <code>198.41.192.227</code> with the IP shown in your <a href="#failed-to-dial-a-quic-connection">error message</a>. If the port is closed or blocked by a firewall, the command will return <code>Connection refused</code> or time out.</p>
 <p><strong>To resolve:</strong></p>
 <ul>
@@ -44,14 +55,14 @@
 </ul>
 <h3 id="tcp-connection-timeout">TCP connection timeout</h3>
 <h4 id="dialcontext-error-dial-tcp-i-o-timeout"><code>DialContext error: dial tcp ... i/o timeout</code></h4>
-<pre><code class="language-txt">ERR Unable to establish connection with Cloudflare edge&#10;    error=&quot;DialContext error: dial tcp 198.41.200.43:7844: i/o timeout&quot; connIndex=0&#10;ERR Serve tunnel error&#10;    error=&quot;DialContext error: dial tcp 198.41.200.43:7844: i/o timeout&quot; connIndex=0&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">ERR Unable to establish connection with Cloudflare edge&#10;    error=&quot;DialContext error: dial tcp 198.41.200.43:7844: i/o timeout&quot; connIndex=0&#10;ERR Serve tunnel error&#10;    error=&quot;DialContext error: dial tcp 198.41.200.43:7844: i/o timeout&quot; connIndex=0&#10;</code></pre>
 <p>This error means <code>cloudflared</code> cannot reach Cloudflare over TCP port <code>7844</code>. If you also see the <a href="#failed-to-dial-a-quic-connection">QUIC handshake timeout</a> above it, both UDP and TCP are blocked — the tunnel cannot connect at all.</p>
 <p><strong>To diagnose:</strong></p>
 <p>As a quick test, run:</p>
-<pre><code class="language-sh">curl -v https://region1.v2.argotunnel.com:7844&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">curl -v https://region1.v2.argotunnel.com:7844&#10;</code></pre>
 <p>If the connection hangs, traffic is being dropped between your host and Cloudflare.</p>
 <p>To test if <code>cloudflared</code> can connect on port <code>7844</code>, run:</p>
-<pre><code class="language-sh">nc -vz -w 3 198.41.200.43 7844&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">nc -vz -w 3 198.41.200.43 7844&#10;</code></pre>
 <p>Replace <code>198.41.200.43</code> with the IP shown in your <a href="#dialcontext-error-dial-tcp--io-timeout">error message</a>. If the port is closed or blocked by a firewall, the command will return <code>Connection refused</code> or time out.</p>
 <p><strong>To resolve:</strong></p>
 <ul>
@@ -64,8 +75,8 @@
 <p>If you are unable to save your tunnel's public hostname, choose a different hostname or delete the existing DNS record. <a href="/dns/manage-dns-records/how-to/create-dns-records/">Check the DNS records</a> for your domain from the <a href="https://dash.cloudflare.com">Cloudflare dashboard</a>.</p>
 <h2 id="tunnel-credentials-file-does-not-exist-or-is-not-a-file">Tunnel credentials file does not exist or is not a file.</h2>
 <p>If you encounter the following error when running a tunnel, double check your <code>config.yml</code> file and ensure that the <code>credentials-file</code> points to the correct location. You may need to change <code>/root/</code> to your home directory.</p>
-<pre><code class="language-sh">cloudflared tunnel run&#10;</code></pre>
-<pre><code class="language-sh">2021-06-04T06:21:16Z INF Starting tunnel tunnelID=928655cc-7f95-43f2-8539-2aba6cf3592d&#10;Tunnel credentials file &#x27;/root/.cloudflared/928655cc-7f95-43f2-8539-2aba6cf3592d.json&#x27; doesn&#x27;t exist or is not a file&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel run&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">2021-06-04T06:21:16Z INF Starting tunnel tunnelID=928655cc-7f95-43f2-8539-2aba6cf3592d&#10;Tunnel credentials file &#x27;/root/.cloudflared/928655cc-7f95-43f2-8539-2aba6cf3592d.json&#x27; doesn&#x27;t exist or is not a file&#10;</code></pre>
 <h2 id="my-tunnel-fails-to-authenticate">My tunnel fails to authenticate.</h2>
 <p>To start using Cloudflare Tunnel, a super administrator in the Cloudflare account must first log in through <code>cloudflared login</code>. The client will launch a browser window and prompt the user to select a hostname in their Cloudflare account. Once selected, Cloudflare generates a certificate that consists of three components:</p>
 <ul>
@@ -123,33 +134,33 @@
 <p>To identify the specific cause, review your <a href="/tunnel/observability/#logs">Tunnel logs</a> for <code>error</code>-level messages. Common causes include:</p>
 <h4 id="origin-service-is-not-running">Origin service is not running</h4>
 <p>If the origin service has stopped or never started, <code>cloudflared</code> logs will show an error similar to:</p>
-<pre><code class="language-txt">error=&quot;dial tcp [::1]:8080: connect: connection refused&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">error=&quot;dial tcp [::1]:8080: connect: connection refused&quot;&#10;</code></pre>
 <p>To resolve, verify the service is running and listening on the expected port:</p>
-<pre><code class="language-sh">curl -v http://localhost:8080&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">curl -v http://localhost:8080&#10;</code></pre>
 <p>If the service is not running, start or restart it. You can confirm the service is listening by running <code>ss -tlnp | grep &lt;PORT&gt;</code> (Linux) or <code>lsof -iTCP -sTCP:LISTEN -nP | grep &lt;PORT&gt;</code> (macOS).</p>
 <h4 id="origin-service-url-uses-the-wrong-protocol">Origin service URL uses the wrong protocol</h4>
 <p>If the origin expects HTTPS but the tunnel route specifies <code>http://</code>, or vice versa, <code>cloudflared</code> logs will show an error similar to:</p>
-<pre><code class="language-txt">error=&quot;net/http: HTTP/1.x transport connection broken: malformed HTTP response \&quot;\x15\x03\x01\x00\x02\x02\&quot;&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">error=&quot;net/http: HTTP/1.x transport connection broken: malformed HTTP response \&quot;\x15\x03\x01\x00\x02\x02\&quot;&quot;&#10;</code></pre>
 <p>To resolve, update the service URL in your tunnel route to match the <a href="/tunnel/concepts/routing/#supported-protocols">protocol</a> your origin expects. For example, change <code>http://localhost:8080</code> to <code>https://localhost:8080</code>. If you are using a locally-managed tunnel, update your ingress rule in the <a href="/tunnel/features/locally-managed-tunnels/configuration-file/">configuration file</a>.</p>
 <h4 id="origin-service-url-points-to-the-wrong-port">Origin service URL points to the wrong port</h4>
 <p>If the port in your tunnel route does not match the port your service is listening on, <code>cloudflared</code> will log a <code>connection refused</code> error for that port. Double-check the service URL in your ingress rule and compare it against the port your application is bound to.</p>
 <h4 id="cloudflared-cannot-validate-the-origin-certificate"><code>cloudflared</code> cannot validate the origin certificate</h4>
 <p>If the origin presents a TLS certificate that <code>cloudflared</code> cannot verify, the logs will show an error similar to:</p>
-<pre><code class="language-txt">error=&quot;x509: certificate is valid for example.com, not localhost&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">error=&quot;x509: certificate is valid for example.com, not localhost&quot;&#10;</code></pre>
 <p>This error indicates that the certificate does not cover the service hostname. An <code>x509: certificate signed by unknown authority</code> error instead indicates that <code>cloudflared</code> does not trust the certificate authority.</p>
 <p>To resolve, use one of the following approaches:</p>
 <ul>
 <li>Set <a href="/tunnel/reference/origin-parameters/#originservername"><code>originServerName</code></a> to the hostname on the origin certificate in your tunnel route. If you are using a locally-managed tunnel, here is an example of a <a href="/tunnel/features/locally-managed-tunnels/configuration-file/">configuration file</a>:</li>
 </ul>
-<pre><code class="language-yml">ingress:&#10;  &#45; hostname: app.example.com&#10;    service: https://localhost:443&#10;    originRequest:&#10;      originServerName: app.example.com&#10;</code></pre>
+<pre tabindex="0"><code class="language-yml">ingress:&#10;  &#45; hostname: app.example.com&#10;    service: https://localhost:443&#10;    originRequest:&#10;      originServerName: app.example.com&#10;</code></pre>
 <ul>
 <li>Provide the CA certificate using <a href="/tunnel/reference/origin-parameters/#capool"><code>caPool</code></a>:</li>
 </ul>
-<pre><code class="language-yml">ingress:&#10;  &#45; hostname: app.example.com&#10;    service: https://localhost:443&#10;    originRequest:&#10;      caPool: /path/to/ca-cert.pem&#10;</code></pre>
+<pre tabindex="0"><code class="language-yml">ingress:&#10;  &#45; hostname: app.example.com&#10;    service: https://localhost:443&#10;    originRequest:&#10;      caPool: /path/to/ca-cert.pem&#10;</code></pre>
 <ul>
 <li>As a temporary last resort, disable TLS verification with <a href="/tunnel/reference/origin-parameters/#notlsverify"><code>noTLSVerify</code></a>. Turn it off after resolving the certificate issue.</li>
 </ul>
-<pre><code class="language-yml">ingress:&#10;  &#45; hostname: app.example.com&#10;    service: https://localhost:443&#10;    originRequest:&#10;      noTLSVerify: true&#10;</code></pre>
+<pre tabindex="0"><code class="language-yml">ingress:&#10;  &#45; hostname: app.example.com&#10;    service: https://localhost:443&#10;    originRequest:&#10;      noTLSVerify: true&#10;</code></pre>
 <h2 id="a-published-application-returns-err-too-many-redirects">A published application returns <code>ERR_TOO_MANY_REDIRECTS</code>.</h2>
 <p>This error can occur when the origin redirects HTTP requests to HTTPS but the published application route uses an <code>http://</code> <code>Service URL</code>. Each request reaches the origin over HTTP and receives the same redirect.</p>
 <p>To choose the correct service URL and origin settings, refer to <a href="/tunnel/troubleshooting/https-origins/">Troubleshoot HTTPS origins</a>. If the redirect chain alternates between HTTP and HTTPS, also refer to <a href="/ssl/troubleshooting/too-many-redirects/">ERR_TOO_MANY_REDIRECTS</a>.</p>
@@ -174,11 +185,11 @@
 <ol>
 <li>Create a new file under <code>/etc/sysctl.d/</code>:</li>
 </ol>
-<pre><code class="language-sh">sudo vi 98-core-rmem-max.conf&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">sudo vi 98-core-rmem-max.conf&#10;</code></pre>
 <ol start="2">
 <li>In the file, define the desired buffer size:</li>
 </ol>
-<pre><code class="language-txt">net.core.rmem_max=2500000&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">net.core.rmem_max=2500000&#10;</code></pre>
 <ol start="3">
 <li>
 <p>Reboot the host machine running <code>cloudflared</code>.</p>
@@ -187,8 +198,8 @@
 <p>To validate that these changes have taken effect, use the <code>grep</code> command:</p>
 </li>
 </ol>
-<pre><code class="language-sh">sudo sysctl -a | grep net.core.rmem_max&#10;</code></pre>
-<pre><code class="language-sh">net.core.rmem_max = 2500000&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">sudo sysctl -a | grep net.core.rmem_max&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">net.core.rmem_max = 2500000&#10;</code></pre>
 <h2 id="cloudflare-tunnel-is-buffering-my-streaming-response-instead-of-streaming-it-live">Cloudflare Tunnel is buffering my streaming response instead of streaming it live.</h2>
 <p>Proxied traffic through Cloudflare Tunnel is buffered by default unless the origin server includes the <code>Content-Type: text/event-stream</code> response header. This header tells <code>cloudflared</code> to stream data as it arrives instead of buffering the entire response.</p>
 <h2 id="cloudflare-tunnel-fails-to-connect-through-palo-alto-networks-next-generation-firewall">Cloudflare Tunnel fails to connect through Palo Alto Networks Next-Generation Firewall</h2>
@@ -269,7 +280,7 @@
 <p>For the fastest possible troubleshooting, ensure your support ticket includes comprehensive details. The more context you provide, the faster your issue can be identified and resolved.</p>
 <p>To ensure efficient resolution when <a href="/support/contacting-cloudflare-support/">contacting support</a>, include as much relevant detail as possible in your ticket:</p>
 <ul>
-<pre><code>&lt;li&gt;&#10;	&lt;label&gt;&#10;		&lt;input type=&quot;checkbox&quot; /&gt; Context: Briefly describe the scenario or use&#10;		case (for example, where the user was, what they were trying to do).&#10;	&lt;/label&gt;&#10;&lt;/li&gt;&#10;&lt;li&gt;&#10;	&lt;label&gt;&#10;		&lt;input type=&quot;checkbox&quot; /&gt; Reproduction steps: Describe the steps you took&#10;		to reproduce the issue during troubleshhooting.&#10;	&lt;/label&gt;&#10;&lt;/li&gt;&#10;&lt;li&gt;&#10;	&lt;label&gt;&#10;		&lt;input type=&quot;checkbox&quot; /&gt; Timestamps: Be specific and include the exact&#10;		time and time zone when the issue occurred.&#10;	&lt;/label&gt;&#10;&lt;/li&gt;&#10;&lt;li&gt;&#10;	&lt;label&gt;&#10;		&lt;input type=&quot;checkbox&quot; /&gt; Troubleshooting attempts: Outline any&#10;		troubleshooting steps or changes already attempted to resolve the issue.&#10;	&lt;/label&gt;&#10;&lt;/li&gt;&#10;&lt;li&gt;&#10;	&lt;label&gt;&#10;		&lt;input type=&quot;checkbox&quot; /&gt; Tunnel ID and tunnel name.&#10;	&lt;/label&gt;&#10;&lt;/li&gt;&#10;&lt;li&gt;&#10;	&lt;label&gt;&#10;		&lt;input type=&quot;checkbox&quot; /&gt; &lt;code&gt;cloudflared&lt;/code&gt; version (run &lt;code&gt;cloudflared --version&lt;/code&gt;).&#10;	&lt;/label&gt;&#10;&lt;/li&gt;&#10;&lt;li&gt;&#10;	&lt;label&gt;&#10;		&lt;input type=&quot;checkbox&quot; /&gt; How the tunnel was set up (locally-managed or remotely-managed via the dashboard).&#10;	&lt;/label&gt;&#10;&lt;/li&gt;&#10;&lt;li&gt;&#10;	&lt;label&gt;&#10;		&lt;input type=&quot;checkbox&quot; /&gt; Tunnel logs: Include the &lt;a href=&quot;/cloudflare-one/networks/connectors/cloudflare-tunnel/monitor-tunnels/logs/#view-logs-on-your-local-machine&quot;&gt;logs from your local machine&lt;/a&gt;.&#10;	&lt;/label&gt;&#10;&lt;/li&gt;&#10;&lt;li&gt;&#10;	&lt;label&gt;&#10;		&lt;input type=&quot;checkbox&quot; /&gt; Tunnel diagnostic logs: Include &lt;a href=&quot;/cloudflare-one/networks/connectors/cloudflare-tunnel/troubleshoot-tunnels/diag-logs/&quot;&gt;tunnel diagnostic logs&lt;/a&gt;.&#10;	&lt;/label&gt;&#10;&lt;/li&gt;&#10;</code></pre>
+<pre tabindex="0"><code>&lt;li&gt;&#10;	&lt;label&gt;&#10;		&lt;input type=&quot;checkbox&quot; /&gt; Context: Briefly describe the scenario or use&#10;		case (for example, where the user was, what they were trying to do).&#10;	&lt;/label&gt;&#10;&lt;/li&gt;&#10;&lt;li&gt;&#10;	&lt;label&gt;&#10;		&lt;input type=&quot;checkbox&quot; /&gt; Reproduction steps: Describe the steps you took&#10;		to reproduce the issue during troubleshhooting.&#10;	&lt;/label&gt;&#10;&lt;/li&gt;&#10;&lt;li&gt;&#10;	&lt;label&gt;&#10;		&lt;input type=&quot;checkbox&quot; /&gt; Timestamps: Be specific and include the exact&#10;		time and time zone when the issue occurred.&#10;	&lt;/label&gt;&#10;&lt;/li&gt;&#10;&lt;li&gt;&#10;	&lt;label&gt;&#10;		&lt;input type=&quot;checkbox&quot; /&gt; Troubleshooting attempts: Outline any&#10;		troubleshooting steps or changes already attempted to resolve the issue.&#10;	&lt;/label&gt;&#10;&lt;/li&gt;&#10;&lt;li&gt;&#10;	&lt;label&gt;&#10;		&lt;input type=&quot;checkbox&quot; /&gt; Tunnel ID and tunnel name.&#10;	&lt;/label&gt;&#10;&lt;/li&gt;&#10;&lt;li&gt;&#10;	&lt;label&gt;&#10;		&lt;input type=&quot;checkbox&quot; /&gt; &lt;code&gt;cloudflared&lt;/code&gt; version (run &lt;code&gt;cloudflared --version&lt;/code&gt;).&#10;	&lt;/label&gt;&#10;&lt;/li&gt;&#10;&lt;li&gt;&#10;	&lt;label&gt;&#10;		&lt;input type=&quot;checkbox&quot; /&gt; How the tunnel was set up (locally-managed or remotely-managed via the dashboard).&#10;	&lt;/label&gt;&#10;&lt;/li&gt;&#10;&lt;li&gt;&#10;	&lt;label&gt;&#10;		&lt;input type=&quot;checkbox&quot; /&gt; Tunnel logs: Include the &lt;a href=&quot;/cloudflare-one/networks/connectors/cloudflare-tunnel/monitor-tunnels/logs/#view-logs-on-your-local-machine&quot;&gt;logs from your local machine&lt;/a&gt;.&#10;	&lt;/label&gt;&#10;&lt;/li&gt;&#10;&lt;li&gt;&#10;	&lt;label&gt;&#10;		&lt;input type=&quot;checkbox&quot; /&gt; Tunnel diagnostic logs: Include &lt;a href=&quot;/cloudflare-one/networks/connectors/cloudflare-tunnel/troubleshoot-tunnels/diag-logs/&quot;&gt;tunnel diagnostic logs&lt;/a&gt;.&#10;	&lt;/label&gt;&#10;&lt;/li&gt;&#10;</code></pre>
 </ul>
 <aside class="nb-aside tip">
 <h3 class="nb-aside-title" id="write-a-detailed-ticket-to-resolve-your-issue-faster">Write a detailed ticket to resolve your issue faster</h3>
@@ -280,9 +291,9 @@
 <ul>
 <li><strong>Locally-managed tunnels</strong>: Run <code>cloudflared</code> with the <code>--loglevel debug</code> flag:</li>
 </ul>
-<pre><code class="language-sh">cloudflared tunnel --loglevel debug run&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel --loglevel debug run&#10;</code></pre>
 <p>To persist logs to a file, add the <code>--logfile</code> flag:</p>
-<pre><code class="language-sh">cloudflared tunnel --loglevel debug --logfile /var/log/cloudflared/cloudflared.log run&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel --loglevel debug --logfile /var/log/cloudflared/cloudflared.log run&#10;</code></pre>
 <ul>
 <li><strong>Remotely-managed tunnels</strong> (created via the dashboard): Configure logging in the tunnel's <a href="/tunnel/reference/run-parameters/#loglevel">run parameters</a>. You can also stream logs in real time using the <a href="/tunnel/observability/#remote-log-streaming">remote log streaming</a> feature.</li>
 </ul>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/email-security/account-setup/sso/okta/
+  description: Connect your Email Security account to Okta for SAML-based single sign-on authentication.
+  full_title: Okta integration guide · Cloudflare Email security (formerly Area 1) docs
+  head_html: <title>Okta integration guide · Cloudflare Email security (formerly Area 1) docs</title><meta name="generator" content="Nift"><meta name="description" content="Connect your Email Security account to Okta for SAML-based single sign-on authentication."><meta name="robots" content="noindex"><link rel="canonical" href="https://developers.cloudflare.com/email-security/account-setup/sso/okta/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/email-security/account-setup/sso/okta/index.md"><meta property="og:title" content="Okta integration guide · Cloudflare Email security (formerly Area 1) docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Connect your Email Security account to Okta for SAML-based single sign-on authentication."><meta property="og:url" content="https://developers.cloudflare.com/email-security/account-setup/sso/okta/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Email security (formerly Area 1)"><meta name="algolia_product_filter" content="Email security (formerly Area 1)"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Email security (formerly Area 1)">
+  markdown: true
+  noindex: true
+  route: /email-security/account-setup/sso/okta/
+  schema: 1
+---
 <p>In this tutorial you will learn how to connect your Email security (formerly Area 1) account to Okta. When single sign-on (SSO) is correctly configured, your authorized employees can connect to the Email security dashboard using a familiar user name and password.</p>
 <h2 id="1-create-an-email-security-app-in-okta"><ol>
 <li>Create an Email security app in Okta</li>
@@ -111,7 +122,7 @@
 <ol start="13">
 <li>Scroll down to <strong>Optional</strong>. You might need to enlarge the text box to copy and save all the XML data. You will need this information to finish configuration in the Email security dashboard. The start of the metadata should be similar to the following:</li>
 </ol>
-<pre><code class="language-txt">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;EntityDescriptor ID=&quot;_&lt;YOUR_DESCRIPTOR_ID&gt;&quot; entityID=&quot;https://&lt;YOUR_ENTITY_ID&gt; &quot; xmlns=&quot;urn:oasis:names:tc:SAML:2.0:metadata&quot;&gt;...&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;EntityDescriptor ID=&quot;_&lt;YOUR_DESCRIPTOR_ID&gt;&quot; entityID=&quot;https://&lt;YOUR_ENTITY_ID&gt; &quot; xmlns=&quot;urn:oasis:names:tc:SAML:2.0:metadata&quot;&gt;...&#10;</code></pre>
 <p><img src="/assets/upstream/images/email-security/sso/okta/step13-optional.png" alt="Copy and save the XML metadata to use later in the Email security dashboard" /></p>
 <h2 id="2-configure-email-security-to-connect-to-okta"><ol start="2">
 <li>Configure Email security to connect to Okta</li>
@@ -136,12 +147,10 @@
 <li>In <strong>SSO Enforcement</strong>, choose one of the settings according to your specific needs:</li>
 </ol>
 <ul>
-<li><strong>None</strong>: This setting allows each user to choose SSO, or username and password plus <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></li>
+<li><strong>None</strong>: This setting allows each user to choose SSO, or username and password plus <span class="nb-glossary-tooltip" title="two-factor authentication (2FA)">2FA</span> (this is the recommended setting while testing SSO).</li>
+<li><strong>Admin</strong>: This setting will force only the administrator account to use SSO. The user that enables this setting will still be able to log in using username and password plus 2FA. This is a backup, so that your organization does not get locked out of the portal in emergencies.</li>
+<li><strong>Non-Admin Only</strong>: This option will require that all <code>Read only</code> and <code>Read &amp; Write</code> users use SSO to access the portal. Admins will still have the option to use either SSO or username and password plus 2FA.</li>
 </ul>
-@markup("md", "content/.markup/bodies/8494.md")
-</div> (this is the recommended setting while testing SSO).
-* **Admin**: This setting will force only the administrator account to use SSO. The user that enables this setting will still be able to log in using username and password plus 2FA. This is a backup, so that your organization does not get locked out of the portal in emergencies.
-* **Non-Admin Only**: This option will require that all `Read only` and `Read & Write` users use SSO to access the portal. Admins will still have the option to use either SSO or username and password plus 2FA.
 <ol start="6">
 <li>
 <p>In <strong>SAML SSO Domain</strong> enter the domain you saved from step 13. For example, <code>area1security-examplecorp.okta.com</code>.</p>

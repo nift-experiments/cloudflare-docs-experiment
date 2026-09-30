@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/sandbox/get-started/
+  description: Create your first Sandbox SDK Worker to execute Python code in isolated containers.
+  full_title: Getting started · Cloudflare Sandbox SDK docs
+  head_html: <title>Getting started · Cloudflare Sandbox SDK docs</title><meta name="generator" content="Nift"><meta name="description" content="Create your first Sandbox SDK Worker to execute Python code in isolated containers."><link rel="canonical" href="https://developers.cloudflare.com/sandbox/get-started/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/sandbox/get-started/index.md"><meta property="og:title" content="Getting started · Cloudflare Sandbox SDK docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Create your first Sandbox SDK Worker to execute Python code in isolated containers."><meta property="og:url" content="https://developers.cloudflare.com/sandbox/get-started/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Sandbox SDK"><meta name="algolia_product_filter" content="Sandbox SDK"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Get started"><meta name="algolia_content_type" content="Get started"><meta name="pcx_additional_products" content="Sandbox SDK"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/sandbox/get-started/#page","headline":"Getting started \u00b7 Cloudflare Sandbox SDK docs","description":"Create your first Sandbox SDK Worker to execute Python code in isolated containers.","url":"https://developers.cloudflare.com/sandbox/get-started/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /sandbox/get-started/
+  schema: 1
+---
 <p>Build your first application with Sandbox SDK - a secure code execution environment. In this guide, you'll create a Worker that can execute Python code and work with files in isolated containers.</p>
 <aside class="nb-aside note">
 <h3 class="nb-aside-title" id="coming-soon-sandbox-sdk-1-0">Coming soon: Sandbox SDK 1.0</h3>
@@ -24,19 +35,19 @@ the <code>docker info</code> command will hang or return an error including the 
 <li>Create a new project</li>
 </ol></h2>
 <p>Create a new Sandbox SDK project:</p>
-<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre><code data-nb-pm-code>npm create cloudflare@latest -- my-sandbox --template=cloudflare/sandbox-sdk/examples/minimal</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm create cloudflare@latest -- my-sandbox --template=cloudflare/sandbox-sdk/examples/minimal" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>yarn create cloudflare my-sandbox --template=cloudflare/sandbox-sdk/examples/minimal</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn create cloudflare my-sandbox --template=cloudflare/sandbox-sdk/examples/minimal" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre><code data-nb-pm-code>pnpm create cloudflare@latest my-sandbox --template=cloudflare/sandbox-sdk/examples/minimal</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm create cloudflare@latest my-sandbox --template=cloudflare/sandbox-sdk/examples/minimal" aria-label="Copy to clipboard">Copy</button></div></div>
+<div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre tabindex="0"><code data-nb-pm-code>npm create cloudflare@latest -- my-sandbox --template=cloudflare/sandbox-sdk/examples/minimal</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm create cloudflare@latest -- my-sandbox --template=cloudflare/sandbox-sdk/examples/minimal" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>yarn create cloudflare my-sandbox --template=cloudflare/sandbox-sdk/examples/minimal</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn create cloudflare my-sandbox --template=cloudflare/sandbox-sdk/examples/minimal" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>pnpm create cloudflare@latest my-sandbox --template=cloudflare/sandbox-sdk/examples/minimal</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm create cloudflare@latest my-sandbox --template=cloudflare/sandbox-sdk/examples/minimal" aria-label="Copy to clipboard">Copy</button></div></div>
 <p>This creates a <code>my-sandbox</code> directory with everything you need:</p>
 <ul>
 <li><code>src/index.ts</code> - Worker with sandbox integration</li>
 <li><code>wrangler.jsonc</code> - Configuration for Workers and Containers</li>
 <li><code>Dockerfile</code> - Container environment definition</li>
 </ul>
-<pre><code class="language-sh">cd my-sandbox&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cd my-sandbox&#10;</code></pre>
 <h2 id="2-explore-the-template"><ol start="2">
 <li>Explore the template</li>
 </ol></h2>
 <p>The template provides a minimal Worker that demonstrates core sandbox capabilities:</p>
-<pre><code class="language-typescript">import { getSandbox, proxyToSandbox, type Sandbox } from &quot;@cloudflare/sandbox&quot;;&#10;&#10;export { Sandbox } from &quot;@cloudflare/sandbox&quot;;&#10;&#10;type Env = {&#10;	Sandbox: DurableObjectNamespace&lt;Sandbox&gt;;&#10;};&#10;&#10;export default {&#10;	async fetch(request: Request, env: Env): Promise&lt;Response&gt; {&#10;		const url = new URL(request.url);&#10;&#10;		// Get or create a sandbox instance. For user-facing apps,&#10;		// derive this ID from the authenticated user.&#10;		const sandbox = getSandbox(env.Sandbox, &quot;my-sandbox&quot;);&#10;&#10;		// Execute Python code&#10;		if (url.pathname === &quot;/run&quot;) {&#10;			const result = await sandbox.exec(&#x27;python3 -c &quot;print(2 + 2)&quot;&#x27;);&#10;			return Response.json({&#10;				output: result.stdout,&#10;				error: result.stderr,&#10;				exitCode: result.exitCode,&#10;				success: result.success,&#10;			});&#10;		}&#10;&#10;		// Work with files&#10;		if (url.pathname === &quot;/file&quot;) {&#10;			await sandbox.writeFile(&quot;/workspace/hello.txt&quot;, &quot;Hello, Sandbox!&quot;);&#10;			const file = await sandbox.readFile(&quot;/workspace/hello.txt&quot;);&#10;			return Response.json({&#10;				content: file.content,&#10;			});&#10;		}&#10;&#10;		return new Response(&quot;Try /run or /file&quot;);&#10;	},&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-typescript">import { getSandbox, proxyToSandbox, type Sandbox } from &quot;@cloudflare/sandbox&quot;;&#10;&#10;export { Sandbox } from &quot;@cloudflare/sandbox&quot;;&#10;&#10;type Env = {&#10;	Sandbox: DurableObjectNamespace&lt;Sandbox&gt;;&#10;};&#10;&#10;export default {&#10;	async fetch(request: Request, env: Env): Promise&lt;Response&gt; {&#10;		const url = new URL(request.url);&#10;&#10;		// Get or create a sandbox instance. For user-facing apps,&#10;		// derive this ID from the authenticated user.&#10;		const sandbox = getSandbox(env.Sandbox, &quot;my-sandbox&quot;);&#10;&#10;		// Execute Python code&#10;		if (url.pathname === &quot;/run&quot;) {&#10;			const result = await sandbox.exec(&#x27;python3 -c &quot;print(2 + 2)&quot;&#x27;);&#10;			return Response.json({&#10;				output: result.stdout,&#10;				error: result.stderr,&#10;				exitCode: result.exitCode,&#10;				success: result.success,&#10;			});&#10;		}&#10;&#10;		// Work with files&#10;		if (url.pathname === &quot;/file&quot;) {&#10;			await sandbox.writeFile(&quot;/workspace/hello.txt&quot;, &quot;Hello, Sandbox!&quot;);&#10;			const file = await sandbox.readFile(&quot;/workspace/hello.txt&quot;);&#10;			return Response.json({&#10;				content: file.content,&#10;			});&#10;		}&#10;&#10;		return new Response(&quot;Try /run or /file&quot;);&#10;	},&#10;};&#10;</code></pre>
 <p><strong>Key concepts</strong>:</p>
 <ul>
 <li><code>getSandbox()</code> - Gets or creates a sandbox instance by ID. Use a stable ID to reconnect to the same sandbox. In user-facing apps, scope IDs to a single user.</li>
@@ -47,18 +58,18 @@ the <code>docker info</code> command will hang or return an error including the 
 <li>Test locally</li>
 </ol></h2>
 <p>Start the development server:</p>
-<pre><code class="language-sh">npm run dev&#10;&#35; If you expect to have multiple sandbox instances, you can increase `max_instances`.&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npm run dev&#10;&#35; If you expect to have multiple sandbox instances, you can increase `max_instances`.&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/419.md")
 </aside>
 <p>Test the endpoints:</p>
-<pre><code class="language-sh">&#35; Execute Python code&#10;curl http://localhost:8787/run&#10;&#10;&#35; File operations&#10;curl http://localhost:8787/file&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">&#35; Execute Python code&#10;curl http://localhost:8787/run&#10;&#10;&#35; File operations&#10;curl http://localhost:8787/file&#10;</code></pre>
 <p>You should see JSON responses with the command output and file contents.</p>
 <h2 id="4-deploy-to-production"><ol start="4">
 <li>Deploy to production</li>
 </ol></h2>
 <p>Deploy your Worker and container:</p>
-<pre><code class="language-sh">npx wrangler deploy&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler deploy&#10;</code></pre>
 <p>This will:</p>
 <ol>
 <li>Build your container image using Docker</li>
@@ -70,12 +81,12 @@ the <code>docker info</code> command will hang or return an error including the 
 @markup("md", "content/.markup/bodies/418.md")
 </aside>
 <p>Check deployment status:</p>
-<pre><code class="language-sh">npx wrangler containers list&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler containers list&#10;</code></pre>
 <h2 id="5-test-your-deployment"><ol start="5">
 <li>Test your deployment</li>
 </ol></h2>
 <p>Visit your Worker URL (shown in deploy output):</p>
-<pre><code class="language-sh">&#35; Replace with your actual URL&#10;curl https://my-sandbox.YOUR_SUBDOMAIN.workers.dev/run&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">&#35; Replace with your actual URL&#10;curl https://my-sandbox.YOUR_SUBDOMAIN.workers.dev/run&#10;</code></pre>
 <p>Your sandbox is now deployed and can execute code in isolated containers.</p>
 <h2 id="understanding-the-configuration">Understanding the configuration</h2>
 <p>Your <code>wrangler.jsonc</code> connects three pieces together:</p>

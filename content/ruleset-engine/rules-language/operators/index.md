@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/ruleset-engine/rules-language/operators/
+  description: Learn about comparison, logical operators, and grouping symbols in Cloudflare's Rules language. Understand precedence and how to structure expressions.
+  full_title: Rule operators and grouping symbols · Cloudflare Ruleset Engine docs
+  head_html: <title>Rule operators and grouping symbols · Cloudflare Ruleset Engine docs</title><meta name="generator" content="Nift"><meta name="description" content="Learn about comparison, logical operators, and grouping symbols in Cloudflare&#x27;s Rules language. Understand precedence and how to structure expressions."><link rel="canonical" href="https://developers.cloudflare.com/ruleset-engine/rules-language/operators/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/ruleset-engine/rules-language/operators/index.md"><meta property="og:title" content="Rule operators and grouping symbols · Cloudflare Ruleset Engine docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Learn about comparison, logical operators, and grouping symbols in Cloudflare&#x27;s Rules language. Understand precedence and how to structure expressions."><meta property="og:url" content="https://developers.cloudflare.com/ruleset-engine/rules-language/operators/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Ruleset Engine"><meta name="algolia_product_filter" content="Ruleset Engine"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Ruleset Engine"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/ruleset-engine/rules-language/operators/#page","headline":"Rule operators and grouping symbols \u00b7 Cloudflare Ruleset Engine docs","description":"Learn about comparison, logical operators, and grouping symbols in Cloudflare's Rules language. Understand precedence and how to structure expressions.","url":"https://developers.cloudflare.com/ruleset-engine/rules-language/operators/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /ruleset-engine/rules-language/operators/
+  schema: 1
+---
 <p>The Cloudflare Rules language supports comparison and logical operators:</p>
 <ul>
 <li><a href="#comparison-operators">Comparison operators</a> specify how values defined in an expression must relate to the actual HTTP request value for the expression to return <code>true</code>.</li>
@@ -7,7 +18,7 @@
 <h2 id="comparison-operators">Comparison operators</h2>
 <p>Comparison operators return <code>true</code> when a value from an HTTP request matches a value defined in an expression.</p>
 <p>This is the general pattern for using comparison operators:</p>
-<pre><code class="language-txt">&lt;field&gt; &lt;comparison_operator&gt; &lt;value&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">&lt;field&gt; &lt;comparison_operator&gt; &lt;value&gt;&#10;</code></pre>
 <p>The Rules language supports these comparison operators:</p>
 <div style="width: 100%; overflow-x: auto;">
 <table style="width:100%">
@@ -181,12 +192,12 @@
 </aside>
 <h3 id="comparing-string-values">Comparing string values</h3>
 <p>String comparison in rule expressions is case-sensitive. To account for possible variations of string capitalization in an expression, you can use the <a href="/ruleset-engine/rules-language/functions/#lower"><code>lower()</code></a> function and compare the result with a lowercased string, like in the following example:</p>
-<pre><code class="language-txt">lower(http.request.uri.path) contains &quot;/wp-login.php&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">lower(http.request.uri.path) contains &quot;/wp-login.php&quot;&#10;</code></pre>
 <p><a href="#wildcard-matching">Wildcard matching</a> is only supported with the <code>wildcard</code> and <code>strict wildcard</code> operators, and <a href="#regular-expression-matching">regular expression matching</a> is only supported with the <code>matches</code> operator.</p>
 <h3 id="wildcard-matching">Wildcard matching</h3>
 <p>The <code>wildcard</code> operator performs a case-insensitive match between a field value and a literal string containing zero or more <code>*</code> metacharacters. Each <code>*</code> metacharacter represents zero or more characters. The <code>strict wildcard</code> operator performs a similar match, but is case-sensitive.</p>
 <p>When using the <code>wildcard</code>/<code>strict wildcard</code> operator, the entire field value must match the literal string with wildcards (the literal after the operator).</p>
-<pre><code class="language-txt">&#35; The following expression:&#10;http.request.full_uri wildcard &quot;http*://example.com/a/*&quot;&#10;&#10;&#35; Would match the following URIs:&#10;&#35; - https://example.com/a/           (the &#x27;*&#x27; matches zero characters)&#10;&#35; - http://example.com/a/&#10;&#35; - https://example.com/a/page.html&#10;&#35; - https://example.com/a/sub/folder/?name=value&#10;&#10;&#35; Would NOT match the following URIs:&#10;&#35; - https://example.com/ab/&#10;&#35; - https://example.com/b/page.html&#10;&#35; - https://sub.example.com/a/&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">&#35; The following expression:&#10;http.request.full_uri wildcard &quot;http*://example.com/a/*&quot;&#10;&#10;&#35; Would match the following URIs:&#10;&#35; - https://example.com/a/           (the &#x27;*&#x27; matches zero characters)&#10;&#35; - http://example.com/a/&#10;&#35; - https://example.com/a/page.html&#10;&#35; - https://example.com/a/sub/folder/?name=value&#10;&#10;&#35; Would NOT match the following URIs:&#10;&#35; - https://example.com/ab/&#10;&#35; - https://example.com/b/page.html&#10;&#35; - https://sub.example.com/a/&#10;</code></pre>
 <details class="nb-details"><summary>Example B</summary><div class="nb-details-body">
 @markup("md", "content/.markup/bodies/13252.md")
 </div></details>
@@ -205,7 +216,7 @@
 <p>For more information on regular expressions, refer to <a href="/ruleset-engine/rules-language/values/#string-values-and-regular-expressions">String values and regular expressions</a>.</p>
 <h2 id="logical-operators">Logical operators</h2>
 <p>Logical operators combine two or more expressions into a single compound expression. A compound expression has this general syntax:</p>
-<pre><code class="language-txt">&lt;expression&gt; &lt;logical_operator&gt; &lt;expression&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">&lt;expression&gt; &lt;logical_operator&gt; &lt;expression&gt;&#10;</code></pre>
 <h3 id="supported-logical-operators">Supported logical operators</h3>
 <p>Each logical operator has an <a href="#order-of-precedence">order of precedence</a>. The order of precedence (along with <a href="#grouping-symbols">grouping symbols</a>) determines the order in which Cloudflare evaluates logical operators in an expression. The <code>not</code> operator ranks first in order of precedence.</p>
 <div style={{ width: "100%" }}>
@@ -265,7 +276,7 @@
 <h3 id="order-of-precedence">Order of precedence</h3>
 <p>When writing compound expressions, it is important to be aware of the precedence of logical operators so that your expression is evaluated the way you expect.</p>
 <p>For example, consider the following generic expression, which uses <code>and</code> and <code>or</code> operators:</p>
-<pre><code class="language-java">Expression1 and Expression2 or Expression3&#10;</code></pre>
+<pre tabindex="0"><code class="language-java">Expression1 and Expression2 or Expression3&#10;</code></pre>
 <p>If these operators had no order of precedence, it would not be clear which of two interpretations is correct:</p>
 <ol>
 <li>Match when Expression 1 and Expression 2 are both true <strong>or</strong> when Expression 3 is true.</li>
@@ -278,14 +289,14 @@
 <p>Only the <a href="/ruleset-engine/rules-language/expressions/edit-expressions/#expression-editor">Expression Editor</a> and the <a href="/api/">Cloudflare API</a> support grouping symbols. The <a href="/ruleset-engine/rules-language/expressions/edit-expressions/#expression-builder">Expression Builder</a> does not.</p>
 <h3 id="group-expressions">Group expressions</h3>
 <p>Use parentheses to explicitly group expressions that should be evaluated together. In this example, the parentheses do not alter the evaluation of the expression, but they unambiguously call out which logical operators to evaluate first.</p>
-<pre><code class="language-java">(Expression1 and Expression2) or Expression3&#10;</code></pre>
+<pre tabindex="0"><code class="language-java">(Expression1 and Expression2) or Expression3&#10;</code></pre>
 <p>Because grouping symbols are so explicit, you are less likely to make errors when you use them to write compound expressions.</p>
 <h3 id="enforce-precedence">Enforce precedence</h3>
 <p>Grouping symbols are a powerful tool to enforce precedence for grouped elements of a compound expression. In this example, parentheses force the logical <code>or</code> operator to be evaluated before the logical <code>and</code>:</p>
-<pre><code class="language-java">Expression1 and (Expression2 or Expression3)&#10;</code></pre>
+<pre tabindex="0"><code class="language-java">Expression1 and (Expression2 or Expression3)&#10;</code></pre>
 <p>Without parentheses, the logical <code>and</code> operator would take precedence.</p>
 <h3 id="nest-expressions">Nest expressions</h3>
 <p>You can nest expressions grouped by parentheses inside other groups to create very precise, sophisticated expressions, such as this example for a rule designed to block access to a domain:</p>
-<pre><code class="language-sql">(&#10; (http.host eq &quot;api.example.com&quot; and http.request.uri.path eq &quot;/api/v2/auth&quot;) or&#10; (http.host matches &quot;^(www|store|blog)\.example\.com&quot; and http.request.uri.path contains &quot;wp-login.php&quot;) or&#10; ip.src.country in {&quot;CN&quot; &quot;TH&quot; &quot;US&quot; &quot;ID&quot; &quot;KR&quot; &quot;MY&quot; &quot;IT&quot; &quot;SG&quot; &quot;GB&quot;} or ip.src.asnum in {12345 54321 11111}&#10;) and not ip.src in {11.22.33.0/24}&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">(&#10; (http.host eq &quot;api.example.com&quot; and http.request.uri.path eq &quot;/api/v2/auth&quot;) or&#10; (http.host matches &quot;^(www|store|blog)\.example\.com&quot; and http.request.uri.path contains &quot;wp-login.php&quot;) or&#10; ip.src.country in {&quot;CN&quot; &quot;TH&quot; &quot;US&quot; &quot;ID&quot; &quot;KR&quot; &quot;MY&quot; &quot;IT&quot; &quot;SG&quot; &quot;GB&quot;} or ip.src.asnum in {12345 54321 11111}&#10;) and not ip.src in {11.22.33.0/24}&#10;</code></pre>
 <p>Note that when evaluating the precedence of logical operators, parentheses inside strings delimited by quotes are ignored, such as those in the following regular expression, drawn from the example above:</p>
-<pre><code class="language-sql">&quot;^(www|store|blog)\.example\.com&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">&quot;^(www|store|blog)\.example\.com&quot;&#10;</code></pre>

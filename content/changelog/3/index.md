@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/changelog/3/
+  description: New updates and improvements at Cloudflare.
+  full_title: Changelog - page 3 | Cloudflare Docs
+  head_html: <title>Changelog - page 3 | Cloudflare Docs</title><meta name="generator" content="Nift"><meta name="description" content="New updates and improvements at Cloudflare."><link rel="canonical" href="https://developers.cloudflare.com/changelog/3/"><link rel="sitemap" href="/sitemap-index.xml"><meta property="og:title" content="Changelog - page 3"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="New updates and improvements at Cloudflare."><meta property="og:url" content="https://developers.cloudflare.com/changelog/3/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/changelog/3/#page","headline":"Changelog - page 3 | Cloudflare Docs","description":"New updates and improvements at Cloudflare.","url":"https://developers.cloudflare.com/changelog/3/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: false
+  noindex: false
+  route: /changelog/3/
+  schema: 1
+---
 <div class="changelog-landing"><header class="catalog-hero"><h1>Changelog</h1><p>New updates and improvements at Cloudflare.</p></header>
 <div class="changelog-tools"><span>All products</span><a href="/changelog/rss/index.xml">View RSS feeds</a><a href="/changelog/rss/index.xml">Subscribe to RSS</a></div>
 <section class="changelog-feed" aria-label="Changelog entries">
@@ -392,7 +403,7 @@
 <p><img src="/assets/upstream/images/changelog/workers/observability/2026-08-24-error-info.png" alt="Workers Observability log entry showing a caught exception and its stack trace" /></p>
 <p>The exception's stack trace appears directly in the log message.</p>
 <p>If you send telemetry to a <a href="/workers/observability/logs/tail-workers/">Tail Worker</a>, the Tail Worker now receives a log entry with an <code>errorInfo</code> array:</p>
-<pre><code class="language-json">{&#10;	&quot;message&quot;: [&quot;Request failed:&quot;, &quot;RangeError: Value out of range&quot;],&#10;	&quot;errorInfo&quot;: [&#10;		null,&#10;		{&#10;			&quot;name&quot;: &quot;RangeError&quot;,&#10;			&quot;message&quot;: &quot;Value out of range&quot;,&#10;			&quot;stack&quot;: &quot;RangeError: Value out of range\n    at ...&quot;&#10;		}&#10;	],&#10;	&quot;level&quot;: &quot;error&quot;,&#10;	&quot;timestamp&quot;: 1784851200000&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;message&quot;: [&quot;Request failed:&quot;, &quot;RangeError: Value out of range&quot;],&#10;	&quot;errorInfo&quot;: [&#10;		null,&#10;		{&#10;			&quot;name&quot;: &quot;RangeError&quot;,&#10;			&quot;message&quot;: &quot;Value out of range&quot;,&#10;			&quot;stack&quot;: &quot;RangeError: Value out of range\n    at ...&quot;&#10;		}&#10;	],&#10;	&quot;level&quot;: &quot;error&quot;,&#10;	&quot;timestamp&quot;: 1784851200000&#10;}&#10;</code></pre>
 <p>Each <code>errorInfo</code> item corresponds to the console argument at the same index in <code>message</code>. Arguments that are not exceptions have a <code>null</code> entry.</p>
 </div>
 </div></article>
@@ -457,7 +468,7 @@
 <p><strong>Faster troubleshooting</strong>: The linked API docs surface the roles required for each endpoint, making it easier to self-serve access issues.</p>
 <p><strong>Better support for tools and agents</strong>: Agents can use the \documentation_url` field to immediately fetch the endpoint's documentation from the 403 error response, identify the accepted permissions for the denied action, and use that context to drive third-party approval workflows.`</p>
 <p>Example 403 response:</p>
-<pre><code class="language-json">{&#10;  &quot;success&quot;: false,&#10;  &quot;errors&quot;: [&#10;    {&#10;      &quot;code&quot;: 10000,&#10;      &quot;message&quot;: &quot;Forbidden&quot;,&#10;      &quot;documentation_url&quot;: &quot;https://developers.cloudflare.com/api/resources/workers/subresources/beta/subresources/workers/methods/list&quot;&#10;    }&#10;  ],&#10;  &quot;messages&quot;: [],&#10;  &quot;result&quot;: null&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;  &quot;success&quot;: false,&#10;  &quot;errors&quot;: [&#10;    {&#10;      &quot;code&quot;: 10000,&#10;      &quot;message&quot;: &quot;Forbidden&quot;,&#10;      &quot;documentation_url&quot;: &quot;https://developers.cloudflare.com/api/resources/workers/subresources/beta/subresources/workers/methods/list&quot;&#10;    }&#10;  ],&#10;  &quot;messages&quot;: [],&#10;  &quot;result&quot;: null&#10;}&#10;</code></pre>
 <p>For more info:</p>
 <ul>
 <li><a href="/api/">Browse the Cloudflare API documentation</a></li>

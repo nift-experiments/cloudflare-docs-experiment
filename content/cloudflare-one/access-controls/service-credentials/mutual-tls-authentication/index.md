@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/access-controls/service-credentials/mutual-tls-authentication/
+  description: Mutual TLS in Access.
+  full_title: Mutual TLS · Cloudflare One docs
+  head_html: <title>Mutual TLS · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="Mutual TLS in Access."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/access-controls/service-credentials/mutual-tls-authentication/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/access-controls/service-credentials/mutual-tls-authentication/index.md"><meta property="og:title" content="Mutual TLS · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Mutual TLS in Access."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/access-controls/service-credentials/mutual-tls-authentication/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Cloudflare One"><meta name="pcx_tags" content="mTLS"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/access-controls/service-credentials/mutual-tls-authentication/#page","headline":"Mutual TLS \u00b7 Cloudflare One docs","description":"Mutual TLS in Access.","url":"https://developers.cloudflare.com/cloudflare-one/access-controls/service-credentials/mutual-tls-authentication/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["mTLS"]}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/access-controls/service-credentials/mutual-tls-authentication/
+  schema: 1
+---
 <aside class="nb-aside note">
 <h3 class="nb-aside-title" id="availability">Availability</h3>
 @markup("md", "content/.markup/bodies/4568.md")
@@ -49,8 +60,8 @@
 <p>If the client certificate is directly signed by the root CA, you only need to upload the root. If the client certificate is signed by an intermediate certificate, you must upload the entire CA chain (intermediate and root). For example:</p>
 </li>
 </ol>
-<pre><code class="language-txt">&#45;----BEGIN CERTIFICATE-----&#10;&lt;intermediate.pem&gt;&#10;&#45;----END CERTIFICATE-----&#10;&#45;----BEGIN CERTIFICATE-----&#10;&lt;rootCA.pem&gt;&#10;&#45;----END CERTIFICATE-----&#10;</code></pre>
-<pre><code>Do not include any SSL/TLS server certificates; Access only uses the CA chain to verify the connection between the user's device and Cloudflare.&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">&#45;----BEGIN CERTIFICATE-----&#10;&lt;intermediate.pem&gt;&#10;&#45;----END CERTIFICATE-----&#10;&#45;----BEGIN CERTIFICATE-----&#10;&lt;rootCA.pem&gt;&#10;&#45;----END CERTIFICATE-----&#10;</code></pre>
+<pre tabindex="0"><code>Do not include any SSL/TLS server certificates; Access only uses the CA chain to verify the connection between the user's device and Cloudflare.&#10;</code></pre>
 <ol start="5">
 <li>
 <p>In <strong>Associated hostnames</strong>, enter the fully-qualified domain names (FQDN) that will use this certificate.</p>
@@ -98,12 +109,12 @@
 <li>First, attempt to curl the site without a client certificate.
 This curl command example is for the site <code>example.com</code> that has an <a href="#add-mtls-to-your-access-application">Access application and policy</a> set for <code>https://auth.example.com</code>:</li>
 </ol>
-<pre><code class="language-sh">curl -sv https://auth.example.com&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">curl -sv https://auth.example.com&#10;</code></pre>
 <p>Without a client certificate in the request, a <code>403 forbidden</code> response displays and the site cannot be accessed.</p>
 <ol start="2">
 <li>Now, add your client certificate and key to the request:</li>
 </ol>
-<pre><code class="language-sh">curl -sv https://auth.example.com --cert example.pem --key key.pem&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">curl -sv https://auth.example.com --cert example.pem --key key.pem&#10;</code></pre>
 <p>When the authentication process completes successfully, a <code>CF_Authorization Set-Cookie</code> header returns in the response.</p>
 <aside class="nb-aside caution">
 @markup("md", "content/.markup/bodies/4566.md")
@@ -141,38 +152,38 @@ This curl command example is for the site <code>example.com</code> that has an <
 <ol>
 <li>Generate the root CA private key:</li>
 </ol>
-<pre><code class="language-sh"> openssl genrsa -aes256 -out rootCA.key 4096&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh"> openssl genrsa -aes256 -out rootCA.key 4096&#10;</code></pre>
 <p>When prompted, enter a password to use with <code>rootCA.key</code>.</p>
 <ol start="2">
 <li>Create a self-signed root certificate called <code>rootCA.pem</code>:</li>
 </ol>
-<pre><code class="language-sh">openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 3650 -out rootCA.pem&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 3650 -out rootCA.pem&#10;</code></pre>
 <p>You will be prompted to enter your private key password and fill in some optional fields. For testing purposes, you can leave the optional fields blank.</p>
 <h4 id="generate-an-intermediate-certificate">Generate an intermediate certificate</h4>
 <ol>
 <li>Generate the intermediate CA private key:</li>
 </ol>
-<pre><code class="language-sh"> openssl genrsa -aes256 -out intermediate.key 4096&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh"> openssl genrsa -aes256 -out intermediate.key 4096&#10;</code></pre>
 <p>When prompted, enter a password to use with <code>intermediate.key</code>.</p>
 <ol start="2">
 <li>Create a certificate signing request (CSR) for the intermediate certificate:</li>
 </ol>
-<pre><code class="language-sh">openssl req -new -sha256 -key intermediate.key -out intermediate.csr&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">openssl req -new -sha256 -key intermediate.key -out intermediate.csr&#10;</code></pre>
 <p>You will be prompted to enter your private key password and fill in some optional fields. For testing purposes, you can leave the optional fields blank.</p>
 <ol start="3">
 <li>Create a CA Extension file called <code>v3_intermediate_ca.ext</code>. For example,</li>
 </ol>
-<pre><code class="language-txt">subjectKeyIdentifier = hash&#10;authorityKeyIdentifier = keyid:always,issuer&#10;basicConstraints = critical, CA:true&#10;keyUsage = critical, cRLSign, keyCertSign&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">subjectKeyIdentifier = hash&#10;authorityKeyIdentifier = keyid:always,issuer&#10;basicConstraints = critical, CA:true&#10;keyUsage = critical, cRLSign, keyCertSign&#10;</code></pre>
 <p>Make sure that <code>basicConstraints</code> includes the <code>CA:true</code> property. This property allows the intermediate certificate to act as a CA and sign client certificates.</p>
 <ol start="4">
 <li>Sign the intermediate certificate with the root CA:</li>
 </ol>
-<pre><code class="language-sh"> openssl x509 -req -in intermediate.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out intermediate.pem -days 1825 -sha256 -extfile v3_intermediate_ca.ext&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh"> openssl x509 -req -in intermediate.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out intermediate.pem -days 1825 -sha256 -extfile v3_intermediate_ca.ext&#10;</code></pre>
 <h4 id="create-a-ca-chain-file">Create a CA chain file</h4>
 <ol>
 <li>Combine the intermediate and root certificates into a single file:</li>
 </ol>
-<pre><code class="language-sh">cat intermediate.pem rootCA.pem &gt; ca-chain.pem&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cat intermediate.pem rootCA.pem &gt; ca-chain.pem&#10;</code></pre>
 <p>The intermediate certificate should be at the top of the file, followed by its signing certificate.</p>
 <ol start="2">
 <li>Upload the contents of <code>ca-chain.pem</code> to Cloudflare Access. For instructions, refer to <a href="#add-mtls-to-your-access-application">Add mTLS to your Access application</a>.</li>
@@ -181,21 +192,21 @@ This curl command example is for the site <code>example.com</code> that has an <
 <ol>
 <li>Generate a private key for the client:</li>
 </ol>
-<pre><code class="language-sh"> openssl genrsa -out client.key 2048&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh"> openssl genrsa -out client.key 2048&#10;</code></pre>
 <ol start="2">
 <li>Create a CSR for the client certificate:</li>
 </ol>
-<pre><code class="language-sh">openssl req -new -key client.key -out client.csr&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">openssl req -new -key client.key -out client.csr&#10;</code></pre>
 <p>You will be prompted to fill in some optional fields. For testing purposes, you can set <strong>Common Name</strong> to something like <code>John Doe</code>.</p>
 <ol start="3">
 <li>Sign the client certificate with the intermediate certificate:</li>
 </ol>
-<pre><code class="language-sh"> openssl x509 -req -in client.csr -CA intermediate.pem -CAkey intermediate.key -CAcreateserial -out client.pem -days 365 -sha256&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh"> openssl x509 -req -in client.csr -CA intermediate.pem -CAkey intermediate.key -CAcreateserial -out client.pem -days 365 -sha256&#10;</code></pre>
 <ol start="4">
 <li>Validate the client certificate against the certificate chain:</li>
 </ol>
-<pre><code class="language-sh">openssl verify -CAfile ca-chain.pem client.pem&#10;</code></pre>
-<pre><code class="language-sh">client.pem: OK&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">openssl verify -CAfile ca-chain.pem client.pem&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">client.pem: OK&#10;</code></pre>
 <p>You can now use the client certificate (<code>client.pem</code>) and its key (<code>client.key</code>) to <a href="#test-mtls">test mTLS</a>.</p>
 <h3 id="cloudflare-pki">Cloudflare PKI</h3>
 <p>This guide uses <a href="https://github.com/cloudflare/cfssl">Cloudflare's PKI toolkit</a> to generate a root CA and client certificates from JSON files.</p>
@@ -223,20 +234,20 @@ Use the instructions under Installation to install the toolkit, and ensure that 
 </ul>
 </li>
 </ol>
-<pre><code class="language-json">{&#10;	&quot;CN&quot;: &quot;Access Testing CA&quot;,&#10;	&quot;key&quot;: {&#10;		&quot;algo&quot;: &quot;rsa&quot;,&#10;		&quot;size&quot;: 4096&#10;	},&#10;	&quot;names&quot;: [&#10;		{&#10;			&quot;C&quot;: &quot;US&quot;,&#10;			&quot;L&quot;: &quot;Austin&quot;,&#10;			&quot;O&quot;: &quot;Access Testing&quot;,&#10;			&quot;OU&quot;: &quot;TX&quot;,&#10;			&quot;ST&quot;: &quot;Texas&quot;&#10;		}&#10;	]&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;CN&quot;: &quot;Access Testing CA&quot;,&#10;	&quot;key&quot;: {&#10;		&quot;algo&quot;: &quot;rsa&quot;,&#10;		&quot;size&quot;: 4096&#10;	},&#10;	&quot;names&quot;: [&#10;		{&#10;			&quot;C&quot;: &quot;US&quot;,&#10;			&quot;L&quot;: &quot;Austin&quot;,&#10;			&quot;O&quot;: &quot;Access Testing&quot;,&#10;			&quot;OU&quot;: &quot;TX&quot;,&#10;			&quot;ST&quot;: &quot;Texas&quot;&#10;		}&#10;	]&#10;}&#10;</code></pre>
 <ul>
 <li><strong>config</strong>. Create a file named <code>ca-config.json</code> and add the following JSON blob, then save the file.</li>
 </ul>
-<pre><code class="language-json">{&#10;	&quot;signing&quot;: {&#10;		&quot;default&quot;: {&#10;			&quot;expiry&quot;: &quot;8760h&quot;&#10;		},&#10;		&quot;profiles&quot;: {&#10;			&quot;server&quot;: {&#10;				&quot;usages&quot;: [&quot;signing&quot;, &quot;key encipherment&quot;, &quot;server auth&quot;],&#10;				&quot;expiry&quot;: &quot;8760h&quot;&#10;			},&#10;			&quot;client&quot;: {&#10;				&quot;usages&quot;: [&quot;signing&quot;, &quot;key encipherment&quot;, &quot;client auth&quot;],&#10;				&quot;expiry&quot;: &quot;8760h&quot;&#10;			}&#10;		}&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;signing&quot;: {&#10;		&quot;default&quot;: {&#10;			&quot;expiry&quot;: &quot;8760h&quot;&#10;		},&#10;		&quot;profiles&quot;: {&#10;			&quot;server&quot;: {&#10;				&quot;usages&quot;: [&quot;signing&quot;, &quot;key encipherment&quot;, &quot;server auth&quot;],&#10;				&quot;expiry&quot;: &quot;8760h&quot;&#10;			},&#10;			&quot;client&quot;: {&#10;				&quot;usages&quot;: [&quot;signing&quot;, &quot;key encipherment&quot;, &quot;client auth&quot;],&#10;				&quot;expiry&quot;: &quot;8760h&quot;&#10;			}&#10;		}&#10;	}&#10;}&#10;</code></pre>
 <ol start="3">
 <li>Now, run the following command to generate the root CA with those files.</li>
 </ol>
-<pre><code class="language-sh">cfssl gencert -initca ca-csr.json | cfssljson -bare ca&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cfssl gencert -initca ca-csr.json | cfssljson -bare ca&#10;</code></pre>
 <ol start="4">
 <li>The command will output a root certificate (<code>ca.pem</code>) and its key (<code>ca-key.pem</code>).</li>
 </ol>
-<pre><code class="language-sh">ls&#10;</code></pre>
-<pre><code class="language-sh">ca-config.json ca-csr.json ca-key.pem ca.csr  ca.pem&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">ls&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">ca-config.json ca-csr.json ca-key.pem ca.csr  ca.pem&#10;</code></pre>
 <ol start="5">
 <li>Upload the contents of <code>ca.pem</code> to Cloudflare Access. For instructions, refer to <a href="#add-mtls-to-your-access-application">Add mTLS to your Access application</a>.</li>
 </ol>
@@ -247,11 +258,11 @@ Use the instructions under Installation to install the toolkit, and ensure that 
 <ol>
 <li>Create a file named <code>client-csr.json</code> and add the following JSON blob:</li>
 </ol>
-<pre><code class="language-json">{&#10;	&quot;CN&quot;: &quot;James Royal&quot;,&#10;	&quot;hosts&quot;: [&quot;&quot;],&#10;	&quot;key&quot;: {&#10;		&quot;algo&quot;: &quot;rsa&quot;,&#10;		&quot;size&quot;: 4096&#10;	},&#10;	&quot;names&quot;: [&#10;		{&#10;			&quot;C&quot;: &quot;US&quot;,&#10;			&quot;L&quot;: &quot;Austin&quot;,&#10;			&quot;O&quot;: &quot;Access&quot;,&#10;			&quot;OU&quot;: &quot;Access Admins&quot;,&#10;			&quot;ST&quot;: &quot;Texas&quot;&#10;		}&#10;	]&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;CN&quot;: &quot;James Royal&quot;,&#10;	&quot;hosts&quot;: [&quot;&quot;],&#10;	&quot;key&quot;: {&#10;		&quot;algo&quot;: &quot;rsa&quot;,&#10;		&quot;size&quot;: 4096&#10;	},&#10;	&quot;names&quot;: [&#10;		{&#10;			&quot;C&quot;: &quot;US&quot;,&#10;			&quot;L&quot;: &quot;Austin&quot;,&#10;			&quot;O&quot;: &quot;Access&quot;,&#10;			&quot;OU&quot;: &quot;Access Admins&quot;,&#10;			&quot;ST&quot;: &quot;Texas&quot;&#10;		}&#10;	]&#10;}&#10;</code></pre>
 <ol start="2">
 <li>Now, use the following command to generate a client certificate with the Cloudflare PKI toolkit:</li>
 </ol>
-<pre><code class="language-sh">cfssl gencert -ca=ca.pem -ca-key=ca-key.pem  -config=ca-config.json -profile=client client-csr.json | cfssljson -bare client&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cfssl gencert -ca=ca.pem -ca-key=ca-key.pem  -config=ca-config.json -profile=client client-csr.json | cfssljson -bare client&#10;</code></pre>
 <p>The command will output a client certificate file (<code>client.pem</code>) and its key (<code>client-key.pem</code>). You can now use these files to <a href="#test-mtls">test mTLS</a>.</p>
 <h4 id="create-a-certificate-revocation-list">Create a certificate revocation list</h4>
 <p>You can use the Cloudflare PKI toolkit to generate a certificate revocation list (CRL), as well. This list will contain client certificates that are revoked.</p>
@@ -263,7 +274,7 @@ Use the instructions under Installation to install the toolkit, and ensure that 
 <p>Create the CRL with the following command.</p>
 </li>
 </ol>
-<pre><code class="language-sh">cfssl gencrl serials.txt ../mtls-test/ca.pem ../mtls-test/ca-key.pem | base64 -D &gt; ca.crl&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cfssl gencrl serials.txt ../mtls-test/ca.pem ../mtls-test/ca-key.pem | base64 -D &gt; ca.crl&#10;</code></pre>
 <p>You will need to add the CRL to your server or enforce the revocation in a Cloudflare Worker. An example Worker Script can be found on the <a href="https://github.com/cloudflare/access-crl-worker-template">Cloudflare GitHub repository</a>.</p>
 <h2 id="add-client-cert-and-client-cert-chain-headers-rfc-9440">Add Client-Cert and Client-Cert-Chain headers (RFC 9440)</h2>
 <p><a href="https://datatracker.ietf.org/doc/html/rfc9440">RFC 9440</a> defines the <code>Client-Cert</code> and <code>Client-Cert-Chain</code> HTTP header fields for passing client certificate information to origin servers. You can construct these headers using <a href="/rules/transform/request-header-modification/">request header modification rules</a> with the following Ruleset Engine fields:</p>
@@ -331,7 +342,7 @@ properties on the incoming request.</p>
 </aside>
 <h3 id="cloudflare-api">Cloudflare API</h3>
 <p>The most common approach to forwarding a certificate is to use the Cloudflare API to <a href="/api/resources/zero_trust/subresources/access/subresources/certificates/subresources/settings/methods/update/">update an mTLS certificate's hostname settings</a>.</p>
-<pre class="nb-api-request"><code class="language-bash">curl --request PUT \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/access/certificates/settings \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;settings&quot;: [&#10;    {&#10;      &quot;hostname&quot;: &quot;&lt;HOSTNAME&gt;&quot;,&#10;      &quot;china_network&quot;: false,&#10;      &quot;client_certificate_forwarding&quot;: true&#10;    }&#10;  ]&#10;}&#x27;</code></pre>
+<pre tabindex="0" class="nb-api-request"><code class="language-bash">curl --request PUT \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/access/certificates/settings \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;settings&quot;: [&#10;    {&#10;      &quot;hostname&quot;: &quot;&lt;HOSTNAME&gt;&quot;,&#10;      &quot;china_network&quot;: false,&#10;      &quot;client_certificate_forwarding&quot;: true&#10;    }&#10;  ]&#10;}&#x27;</code></pre>
 <p>Once <code>client_certificate_forwarding</code> is set to <code>true</code>, every request within an mTLS connection will now include the following headers:</p>
 <ul>
 <li><code>Cf-Client-Cert-Der-Base64</code></li>
@@ -344,7 +355,7 @@ properties on the incoming request.</p>
 <p>You can also <a href="/rules/transform/response-header-modification/">modify HTTP response headers</a> using Managed Transforms to pass along <strong>TLS client auth headers</strong>.</p>
 <h3 id="cloudflare-workers-1">Cloudflare Workers</h3>
 <p>Additionally, Workers can provide details around the <a href="/workers/runtime-apis/bindings/mtls/">client certificate</a>.</p>
-<pre><code class="language-js">const tlsHeaders = {&#10;	&quot;X-CERT-ISSUER-DN&quot;: request.cf.tlsClientAuth.certIssuerDN,&#10;	&quot;X-CERT-SUBJECT-DN&quot;: request.cf.tlsClientAuth.certSubjectDN,&#10;	&quot;X-CERT-ISSUER-DN-L&quot;: request.cf.tlsClientAuth.certIssuerDNLegacy,&#10;	&quot;X-CERT-SUBJECT-DN-L&quot;: request.cf.tlsClientAuth.certSubjectDNLegacy,&#10;	&quot;X-CERT-SERIAL&quot;: request.cf.tlsClientAuth.certSerial,&#10;	&quot;X-CERT-FINGER&quot;: request.cf.tlsClientAuth.certFingerprintSHA1,&#10;	&quot;X-CERT-VERIFY&quot;: request.cf.tlsClientAuth.certVerify,&#10;	&quot;X-CERT-NOTBE&quot;: request.cf.tlsClientAuth.certNotBefore,&#10;	&quot;X-CERT-NOTAF&quot;: request.cf.tlsClientAuth.certNotAfter,&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">const tlsHeaders = {&#10;	&quot;X-CERT-ISSUER-DN&quot;: request.cf.tlsClientAuth.certIssuerDN,&#10;	&quot;X-CERT-SUBJECT-DN&quot;: request.cf.tlsClientAuth.certSubjectDN,&#10;	&quot;X-CERT-ISSUER-DN-L&quot;: request.cf.tlsClientAuth.certIssuerDNLegacy,&#10;	&quot;X-CERT-SUBJECT-DN-L&quot;: request.cf.tlsClientAuth.certSubjectDNLegacy,&#10;	&quot;X-CERT-SERIAL&quot;: request.cf.tlsClientAuth.certSerial,&#10;	&quot;X-CERT-FINGER&quot;: request.cf.tlsClientAuth.certFingerprintSHA1,&#10;	&quot;X-CERT-VERIFY&quot;: request.cf.tlsClientAuth.certVerify,&#10;	&quot;X-CERT-NOTBE&quot;: request.cf.tlsClientAuth.certNotBefore,&#10;	&quot;X-CERT-NOTAF&quot;: request.cf.tlsClientAuth.certNotAfter,&#10;};&#10;</code></pre>
 <h2 id="known-limitations">Known limitations</h2>
 <p>mTLS does not currently work for:</p>
 <ul>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/logs/reference/pathing-status/
+  description: Understand edge pathing status fields in logs.
+  full_title: Pathing status · Cloudflare Logs docs
+  head_html: <title>Pathing status · Cloudflare Logs docs</title><meta name="generator" content="Nift"><meta name="description" content="Understand edge pathing status fields in logs."><link rel="canonical" href="https://developers.cloudflare.com/logs/reference/pathing-status/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/logs/reference/pathing-status/index.md"><meta property="og:title" content="Pathing status · Cloudflare Logs docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Understand edge pathing status fields in logs."><meta property="og:url" content="https://developers.cloudflare.com/logs/reference/pathing-status/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Logs"><meta name="algolia_product_filter" content="Logs"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Logs"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/logs/reference/pathing-status/#page","headline":"Pathing status \u00b7 Cloudflare Logs docs","description":"Understand edge pathing status fields in logs.","url":"https://developers.cloudflare.com/logs/reference/pathing-status/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /logs/reference/pathing-status/
+  schema: 1
+---
 <h2 id="understand-pathing">Understand pathing</h2>
 <p>Cloudflare issues the following <strong>Edge Pathing Statuses</strong>:</p>
 <ul>
@@ -17,8 +28,8 @@
 <li><code>user</code> (user firewall rule)</li>
 </ul>
 <p>For example:</p>
-<pre><code class="language-bash">jq -r .EdgePathingSrc logs.json | sort -n | uniq -c | sort -n | tail&#10;</code></pre>
-<pre><code class="language-bash">1 err&#10;5 user&#10;93 macro&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">jq -r .EdgePathingSrc logs.json | sort -n | uniq -c | sort -n | tail&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">1 err&#10;5 user&#10;93 macro&#10;</code></pre>
 <h3 id="edgepathingop">EdgePathingOp</h3>
 <p><strong>EdgePathingOp</strong> indicates how the request was handled. <code>wl</code> is a request that passed all security checks in the cn. Other possible values are:</p>
 <ul>
@@ -26,13 +37,13 @@
 <li><code>ban</code> (blocked by IP address, range, etc.)</li>
 </ul>
 <p>For example:</p>
-<pre><code class="language-bash">jq -r .EdgePathingOp logs.json | sort -n | uniq -c | sort -n | tail&#10;</code></pre>
-<pre><code class="language-bash">1 errHost&#10;97 wl&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">jq -r .EdgePathingOp logs.json | sort -n | uniq -c | sort -n | tail&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">1 errHost&#10;97 wl&#10;</code></pre>
 <h3 id="edgepathingstatus">EdgePathingStatus</h3>
 <p><strong>EdgePathingStatus</strong> is the value <strong>EdgePathingSrc</strong> returns. With a pathing source of <code>macro</code>, <code>user</code>, or <code>err</code>, the pathing status indicates the list where the IP address was found. <code>nr</code> is the most common value and it means that the request was not flagged by a security check. Some values indicate the class of user; for example, <code>se</code> means search engine.</p>
 <p>For example:</p>
-<pre><code class="language-bash">jq -r .EdgePathingStatus logs.json | sort -n | uniq -c | sort -n | tail&#10;</code></pre>
-<pre><code class="language-bash">1 dnsErr&#10;5 ip&#10;92 nr&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">jq -r .EdgePathingStatus logs.json | sort -n | uniq -c | sort -n | tail&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">1 dnsErr&#10;5 ip&#10;92 nr&#10;</code></pre>
 <h2 id="how-does-pathing-map-to-threat-analytics">How does pathing map to Threat Analytics?</h2>
 <p>Certain combinations of pathing have been labeled in the Cloudflare <strong>Threat Analytics</strong> feature (in the <strong>Analytics</strong> app in the Cloudflare dashboard). The mapping is as follows:</p>
 <table>
@@ -87,8 +98,8 @@
 <p>In your logs, the edge is what first accepts a visitor's request. The cache then accepts the request and either forwards it to your origin or responds from the cache. It is possible to have a request that has only an <strong>edgeResponse</strong> or a request that has an <strong>edgeResponse</strong> and a <strong>cacheResponse</strong>, but no <strong>originResponse</strong>.</p>
 <p>This is how you can see where a request terminates. Requests with only an <strong>edgeResponse</strong> likely hit a security check or processing error. Requests with an <strong>edgeResponse</strong> and a <strong>cacheResponse</strong> either were served from the cache or saw an error contacting your origin server. Requests that have an <strong>originResponse</strong> went all the way to your origin server and errors seen would have been served directly from there.</p>
 <p>For example, the following query shows the status code and pathing information for all requests that terminated at the Cloudflare edge:</p>
-<pre><code class="language-bash">jq -r &#x27;select(.OriginResponseStatus == null) | select(.CacheResponseStatus == null) |&quot;\(.EdgeResponseStatus) / \(.EdgePathingSrc) / \(.EdgePathingStatus) / \(.EdgePathingOp)&quot;&#x27; logs.json | sort -n | uniq -c | sort -n&#10;</code></pre>
-<pre><code class="language-bash">1 403 / macro / nr / wl&#10;1 409 / err / dnsErr / errHost&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">jq -r &#x27;select(.OriginResponseStatus == null) | select(.CacheResponseStatus == null) |&quot;\(.EdgeResponseStatus) / \(.EdgePathingSrc) / \(.EdgePathingStatus) / \(.EdgePathingOp)&quot;&#x27; logs.json | sort -n | uniq -c | sort -n&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">1 403 / macro / nr / wl&#10;1 409 / err / dnsErr / errHost&#10;</code></pre>
 <p>The information stored is broken down based on the following categories:</p>
 <h2 id="errors">Errors</h2>
 <p>These occur for requests that did not pass any of the validation performed by the Cloudflare network. Example cases include:</p>

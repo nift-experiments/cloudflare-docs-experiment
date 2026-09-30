@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/d1/configuration/data-location/
+  description: Control where D1 stores your data by setting location hints or jurisdiction constraints.
+  full_title: Data location · Cloudflare D1 docs
+  head_html: <title>Data location · Cloudflare D1 docs</title><meta name="generator" content="Nift"><meta name="description" content="Control where D1 stores your data by setting location hints or jurisdiction constraints."><link rel="canonical" href="https://developers.cloudflare.com/d1/configuration/data-location/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/d1/configuration/data-location/index.md"><meta property="og:title" content="Data location · Cloudflare D1 docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Control where D1 stores your data by setting location hints or jurisdiction constraints."><meta property="og:url" content="https://developers.cloudflare.com/d1/configuration/data-location/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="D1"><meta name="algolia_product_filter" content="D1"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="D1"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/d1/configuration/data-location/#page","headline":"Data location \u00b7 Cloudflare D1 docs","description":"Control where D1 stores your data by setting location hints or jurisdiction constraints.","url":"https://developers.cloudflare.com/d1/configuration/data-location/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /d1/configuration/data-location/
+  schema: 1
+---
 <p>Learn how the location of data stored in D1 is determined, including where the database runs and how you optimize that location based on your needs.</p>
 <h2 id="automatic-recommended">Automatic (recommended)</h2>
 <p>By default, D1 will automatically create your primary database instance in a location close to where you issued the request to create a database. In most cases this allows D1 to choose the optimal location for your database on your behalf.</p>
@@ -37,9 +48,9 @@
 <li>Select <strong>Create</strong> to create your database.</li>
 </ol>
 <h3 id="use-wrangler">Use wrangler</h3>
-<pre><code class="language-sh">npx wrangler@latest d1 create db-with-jurisdiction --jurisdiction=eu&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler@latest d1 create db-with-jurisdiction --jurisdiction=eu&#10;</code></pre>
 <h3 id="use-rest-api">Use REST API</h3>
-<pre><code class="language-curl">curl -X POST &quot;https://api.cloudflare.com/client/v4/accounts/&lt;account_id&gt;/d1/database&quot; \&#10;     &#45;H &quot;Authorization: Bearer $TOKENn&quot; \&#10;     &#45;H &quot;Content-Type: application/json&quot; \&#10;     &#45;-data &#x27;{&quot;name&quot;: &quot;db-with-jurisdiction&quot;, &quot;jurisdiction&quot;: &quot;eu&quot; }&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-curl">curl -X POST &quot;https://api.cloudflare.com/client/v4/accounts/&lt;account_id&gt;/d1/database&quot; \&#10;     &#45;H &quot;Authorization: Bearer $TOKENn&quot; \&#10;     &#45;H &quot;Content-Type: application/json&quot; \&#10;     &#45;-data &#x27;{&quot;name&quot;: &quot;db-with-jurisdiction&quot;, &quot;jurisdiction&quot;: &quot;eu&quot; }&#x27;&#10;</code></pre>
 <h2 id="provide-a-location-hint">Provide a location hint</h2>
 <p>Location hint is an optional parameter you can provide to indicate your desired geographical location for your primary database instance.</p>
 <p>You may want to explicitly provide a location hint in cases where the majority of your writes to a specific database come from a different location than where you are creating the database from. Location hints can be useful when:</p>
@@ -61,7 +72,7 @@
 @markup("md", "content/.markup/bodies/7370.md")
 </aside>
 <p>To provide a location hint when creating a new database, pass the <code>--location</code> flag with a valid location hint:</p>
-<pre><code class="language-sh">wrangler d1 create new-database --location=weur&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">wrangler d1 create new-database --location=weur&#10;</code></pre>
 <h3 id="use-the-dashboard-1">Use the dashboard</h3>
 <p>To provide a location hint when creating a database via the dashboard:</p>
 <ol>

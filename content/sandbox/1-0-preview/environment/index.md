@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/sandbox/1-0-preview/environment/
+  description: How processes and terminals get environment variables in the Sandbox SDK 1.0 preview.
+  full_title: Environment variables · Cloudflare Sandbox SDK docs
+  head_html: <title>Environment variables · Cloudflare Sandbox SDK docs</title><meta name="generator" content="Nift"><meta name="description" content="How processes and terminals get environment variables in the Sandbox SDK 1.0 preview."><link rel="canonical" href="https://developers.cloudflare.com/sandbox/1-0-preview/environment/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/sandbox/1-0-preview/environment/index.md"><meta property="og:title" content="Environment variables · Cloudflare Sandbox SDK docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="How processes and terminals get environment variables in the Sandbox SDK 1.0 preview."><meta property="og:url" content="https://developers.cloudflare.com/sandbox/1-0-preview/environment/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Sandbox SDK"><meta name="algolia_product_filter" content="Sandbox SDK"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Sandbox SDK"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/sandbox/1-0-preview/environment/#page","headline":"Environment variables \u00b7 Cloudflare Sandbox SDK docs","description":"How processes and terminals get environment variables in the Sandbox SDK 1.0 preview.","url":"https://developers.cloudflare.com/sandbox/1-0-preview/environment/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /sandbox/1-0-preview/environment/
+  schema: 1
+---
 <aside class="nb-aside note">
 <h3 class="nb-aside-title" id="path-to-sandbox-sdk-1-0">Path to Sandbox SDK 1.0</h3>
 @markup("md", "content/.markup/bodies/13753.md")
@@ -14,7 +25,7 @@
 <p>Later launches do not keep overlays from earlier launches. A command that runs <code>export FOO=bar</code> inside one process does not change the next <code>exec()</code>.</p>
 <p>Worker bindings in your <code>fetch</code> handler are not process environment variables. Only values you pass through <code>setEnvVars</code> or launch <code>env</code> appear inside the process (and those should not be long-lived secrets).</p>
 <h2 id="setenvvars"><code>setEnvVars()</code></h2>
-<pre><code class="language-ts">setEnvVars(envVars: Record&lt;string, string | undefined&gt;): Promise&lt;void&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">setEnvVars(envVars: Record&lt;string, string | undefined&gt;): Promise&lt;void&gt;&#10;</code></pre>
 <table>
 <thead>
 <tr>

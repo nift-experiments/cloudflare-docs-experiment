@@ -1,12 +1,21 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/grpc/
+  description: gRPC in Zero Trust networking.
+  full_title: gRPC · Cloudflare One docs
+  head_html: <title>gRPC · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="gRPC in Zero Trust networking."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/grpc/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/grpc/index.md"><meta property="og:title" content="gRPC · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="gRPC in Zero Trust networking."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/grpc/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Cloudflare One"><meta name="pcx_tags" content="RPC"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/grpc/#page","headline":"gRPC \u00b7 Cloudflare One docs","description":"gRPC in Zero Trust networking.","url":"https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/grpc/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["RPC"]}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/grpc/
+  schema: 1
+---
 <p>gRPC is a Remote Procedure Call (RPC) framework that allows client applications to call methods on a remote server as if they were running on the same local machine. You can connect gRPC servers and clients to Cloudflare's global network, making it easier to build applications that use services across different data centers and environments.</p>
 <p>Cloudflare Tunnel supports gRPC traffic via <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/private-net/">private subnet routing</a>. Public hostname deployments are not currently supported.
 <br /> <br />
 In this example, we will connect a gRPC server to Cloudflare using the
-<code>cloudflared</code> <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/5263.md")
-</div>, secure
+<code>cloudflared</code> <span class="nb-glossary-tooltip" title="daemon">daemon</span>, secure
 the server with Gateway policies, and open a gRPC channel to the server using
-the Cloudflare One Client.
+the Cloudflare One Client.</p>
 <h2 id="1-set-up-a-grpc-server"><ol>
 <li>Set up a gRPC server</li>
 </ol></h2>
@@ -18,7 +27,7 @@ the Cloudflare One Client.
 <p>Start the server:</p>
 </li>
 </ol>
-<pre><code class="language-sh">~/grpc/examples/python/helloworld $ python3 greeter_server.py&#10;WARNING: All log messages before absl::InitializeLog() is called are written to STDERR&#10;I0000 00:00:1721770418.373806    3677 config.cc:230] gRPC experiments enabled: call_status_override_on_cancellation, event_engine_dns, event_engine_listener, http2_stats_fix, monitoring_experiment, pick_first_new, trace_record_callops, work_serializer_clears_time_cache&#10;Server started, listening on 50051&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">~/grpc/examples/python/helloworld $ python3 greeter_server.py&#10;WARNING: All log messages before absl::InitializeLog() is called are written to STDERR&#10;I0000 00:00:1721770418.373806    3677 config.cc:230] gRPC experiments enabled: call_status_override_on_cancellation, event_engine_dns, event_engine_listener, http2_stats_fix, monitoring_experiment, pick_first_new, trace_record_callops, work_serializer_clears_time_cache&#10;Server started, listening on 50051&#10;</code></pre>
 <h2 id="2-connect-the-server-to-cloudflare"><ol start="2">
 <li>Connect the server to Cloudflare</li>
 </ol></h2>
@@ -133,7 +142,7 @@ routes through the Cloudflare One Client.</p>
 <li>Install gRPC on the device by following this <a href="https://grpc.io/docs/languages/python/quickstart/">quick start guide</a>.</li>
 <li>Modify <code>greeter.py</code> to point to the private IP of your gRPC server. This is the same private IP configured in your <a href="#2-connect-the-server-to-cloudflare">Cloudflare Tunnel routes</a>. For example,</li>
 </ol>
-<pre><code class="language-python">def run():&#10;    &#35; NOTE(gRPC Python Team): .close() is possible on a channel and should be&#10;    &#35; used in circumstances in which the with statement does not fit the needs&#10;    &#35; of the code.&#10;    print(&quot;Will try to greet world ...&quot;)&#10;    with grpc.insecure_channel(&quot;172.31.0.133:50051&quot;) as channel:&#10;        stub = helloworld_pb2_grpc.GreeterStub(channel)&#10;        response = stub.SayHello(helloworld_pb2.HelloRequest(name=&quot;you&quot;))&#10;    print(&quot;Greeter client received: &quot; + response.message)&#10;</code></pre>
+<pre tabindex="0"><code class="language-python">def run():&#10;    &#35; NOTE(gRPC Python Team): .close() is possible on a channel and should be&#10;    &#35; used in circumstances in which the with statement does not fit the needs&#10;    &#35; of the code.&#10;    print(&quot;Will try to greet world ...&quot;)&#10;    with grpc.insecure_channel(&quot;172.31.0.133:50051&quot;) as channel:&#10;        stub = helloworld_pb2_grpc.GreeterStub(channel)&#10;        response = stub.SayHello(helloworld_pb2.HelloRequest(name=&quot;you&quot;))&#10;    print(&quot;Greeter client received: &quot; + response.message)&#10;</code></pre>
 <h2 id="6-test-the-connection"><ol start="6">
 <li>Test the connection</li>
 </ol></h2>
@@ -141,5 +150,5 @@ routes through the Cloudflare One Client.</p>
 <li>On the client device, ensure that the Cloudflare One Client is <code>Connected</code>.</li>
 <li>Run the gRPC client application:</li>
 </ol>
-<pre><code class="language-sh">~/grpc/examples/python/helloworld $ python3 greeter_client.py&#10;Will try to greet world ...&#10;WARNING: All log messages before absl::InitializeLog() is called are written to STDERR&#10;I0000 00:00:1721771484.489711 4414247 config.cc:230] gRPC experiments enabled: call_status_override_on_cancellation, event_engine_dns, event_engine_listener, http2_stats_fix, monitoring_experiment, pick_first_new, trace_record_callops, work_serializer_clears_time_cache&#10;Greeter client received: Hello, you!&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">~/grpc/examples/python/helloworld $ python3 greeter_client.py&#10;Will try to greet world ...&#10;WARNING: All log messages before absl::InitializeLog() is called are written to STDERR&#10;I0000 00:00:1721771484.489711 4414247 config.cc:230] gRPC experiments enabled: call_status_override_on_cancellation, event_engine_dns, event_engine_listener, http2_stats_fix, monitoring_experiment, pick_first_new, trace_record_callops, work_serializer_clears_time_cache&#10;Greeter client received: Hello, you!&#10;</code></pre>
 <p>You can view <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/monitor-tunnels/logs/#view-logs-on-your-local-machine">Tunnel logs</a> to validate that requests are coming into the tunnel and reaching the gRPC server as intended.</p>

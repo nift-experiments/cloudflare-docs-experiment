@@ -1,1 +1,12 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/load-balancing/get-started/learning-path/
+  description: This guide provides an in-depth walkthrough for how to plan for and set up a load balancer. For a quicker explanation, refer to the [quickstart](/load-balancing/get-started/quickstart/).
+  full_title: Learning path · Cloudflare Load Balancing docs
+  head_html: <title>Learning path · Cloudflare Load Balancing docs</title><meta name="generator" content="Nift"><meta name="description" content="This guide provides an in-depth walkthrough for how to plan for and set up a load balancer. For a quicker explanation, refer to the [quickstart](/load-balancing/get-started/quickstart/)."><meta name="robots" content="noindex"><link rel="canonical" href="https://developers.cloudflare.com/load-balancing/get-started/learning-path/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/load-balancing/get-started/learning-path/index.md"><meta property="og:title" content="Learning path · Cloudflare Load Balancing docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="This guide provides an in-depth walkthrough for how to plan for and set up a load balancer. For a quicker explanation, refer to the [quickstart](/load-balancing/get-started/quickstart/)."><meta property="og:url" content="https://developers.cloudflare.com/load-balancing/get-started/learning-path/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Load Balancing"><meta name="algolia_product_filter" content="Load Balancing"><meta name="pcx_content_group" content="Application performance"><meta name="pcx_content_type" content="Navigation"><meta name="algolia_content_type" content="Navigation"><meta name="pcx_additional_products" content="Load Balancing"><meta http-equiv="refresh" content="0; url=/learning-paths/load-balancing/concepts/">
+  markdown: true
+  noindex: true
+  route: /load-balancing/get-started/learning-path/
+  schema: 1
+---
 <p>This guide provides an in-depth walkthrough for how to plan for and</p>

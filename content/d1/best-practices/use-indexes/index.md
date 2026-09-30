@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/d1/best-practices/use-indexes/
+  description: Improve D1 query performance by creating indexes on frequently queried columns.
+  full_title: Use indexes · Cloudflare D1 docs
+  head_html: <title>Use indexes · Cloudflare D1 docs</title><meta name="generator" content="Nift"><meta name="description" content="Improve D1 query performance by creating indexes on frequently queried columns."><link rel="canonical" href="https://developers.cloudflare.com/d1/best-practices/use-indexes/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/d1/best-practices/use-indexes/index.md"><meta property="og:title" content="Use indexes · Cloudflare D1 docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Improve D1 query performance by creating indexes on frequently queried columns."><meta property="og:url" content="https://developers.cloudflare.com/d1/best-practices/use-indexes/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="D1"><meta name="algolia_product_filter" content="D1"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="D1"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/d1/best-practices/use-indexes/#page","headline":"Use indexes \u00b7 Cloudflare D1 docs","description":"Improve D1 query performance by creating indexes on frequently queried columns.","url":"https://developers.cloudflare.com/d1/best-practices/use-indexes/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /d1/best-practices/use-indexes/
+  schema: 1
+---
 <p>Indexes enable D1 to improve query performance over the indexed columns for common (popular) queries by reducing the amount of data (number of rows) the database has to scan when running a query.</p>
 <h2 id="when-is-an-index-useful">When is an index useful?</h2>
 <p>Indexes are useful:</p>
@@ -14,31 +25,29 @@
 </aside>
 <p>To create an index on a D1 table, use the <code>CREATE INDEX</code> SQL command and specify the table and column(s) to create the index over.</p>
 <p>For example, given the following <code>orders</code> table, you may want to create an index on <code>customer_id</code>. Nearly all of your queries against that table filter on <code>customer_id</code>, and you would see a performance improvement by creating an index for it.</p>
-<pre><code class="language-sql">CREATE TABLE IF NOT EXISTS orders (&#10;    order_id INTEGER PRIMARY KEY,&#10;    customer_id STRING NOT NULL, -- for example, a unique ID aba0e360-1e04-41b3-91a0-1f2263e1e0fb&#10;    order_date STRING NOT NULL,&#10;    status INTEGER NOT NULL,&#10;    last_updated_date STRING NOT NULL&#10;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">CREATE TABLE IF NOT EXISTS orders (&#10;    order_id INTEGER PRIMARY KEY,&#10;    customer_id STRING NOT NULL, -- for example, a unique ID aba0e360-1e04-41b3-91a0-1f2263e1e0fb&#10;    order_date STRING NOT NULL,&#10;    status INTEGER NOT NULL,&#10;    last_updated_date STRING NOT NULL&#10;)&#10;</code></pre>
 <p>To create the index on the <code>customer_id</code> column, execute the below statement against your database:</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/7374.md")
 </aside>
-<pre><code class="language-sql">CREATE INDEX IF NOT EXISTS idx_orders_customer_id ON orders(customer_id)&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">CREATE INDEX IF NOT EXISTS idx_orders_customer_id ON orders(customer_id)&#10;</code></pre>
 <p>Queries that reference the <code>customer_id</code> column will now benefit from the index:</p>
-<pre><code class="language-sql">&#45;- Uses the index: the indexed column is referenced by the query.&#10;SELECT * FROM orders WHERE customer_id = ?&#10;&#10;&#45;- Does not use the index: customer_id is not in the query.&#10;SELECT * FROM orders WHERE order_date = &#x27;2023-05-01&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">&#45;- Uses the index: the indexed column is referenced by the query.&#10;SELECT * FROM orders WHERE customer_id = ?&#10;&#10;&#45;- Does not use the index: customer_id is not in the query.&#10;SELECT * FROM orders WHERE order_date = &#x27;2023-05-01&#x27;&#10;</code></pre>
 <p>In more complex cases, you can confirm whether an index was used by D1 by <a href="#test-an-index">analyzing a query</a> directly.</p>
 <h3 id="run-pragma-optimize">Run <code>PRAGMA optimize</code></h3>
 <p>After creating an index, run the <code>PRAGMA optimize</code> command to improve your database performance.</p>
-<p><code>PRAGMA optimize</code> runs <code>ANALYZE</code> command on each table in the database, which collects statistics on the tables and indices. These statistics allows the <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/7376.md")
-</div> to generate the most efficient query plan when executing the user query.
+<p><code>PRAGMA optimize</code> runs <code>ANALYZE</code> command on each table in the database, which collects statistics on the tables and indices. These statistics allows the <span class="nb-glossary-tooltip" title="query planner">query planner</span> to generate the most efficient query plan when executing the user query.</p>
 <p>For more information, refer to <a href="/d1/sql-api/sql-statements/#pragma-optimize"><code>PRAGMA optimize</code></a>.</p>
 <h2 id="list-indexes">List indexes</h2>
 <p>List the indexes on a database, as well as the SQL definition, by querying the <code>sqlite_schema</code> system table:</p>
-<pre><code class="language-sql">SELECT name, type, sql FROM sqlite_schema WHERE type IN (&#x27;index&#x27;);&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">SELECT name, type, sql FROM sqlite_schema WHERE type IN (&#x27;index&#x27;);&#10;</code></pre>
 <p>This will return output resembling the below:</p>
-<pre><code class="language-txt">┌──────────────────────────────────┬───────┬────────────────────────────────────────┐&#10;│ name                             │ type  │ sql                                    │&#10;├──────────────────────────────────┼───────┼────────────────────────────────────────┤&#10;│ idx_users_id                     │ index │ CREATE INDEX idx_users_id ON users(id) │&#10;└──────────────────────────────────┴───────┴────────────────────────────────────────┘&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">┌──────────────────────────────────┬───────┬────────────────────────────────────────┐&#10;│ name                             │ type  │ sql                                    │&#10;├──────────────────────────────────┼───────┼────────────────────────────────────────┤&#10;│ idx_users_id                     │ index │ CREATE INDEX idx_users_id ON users(id) │&#10;└──────────────────────────────────┴───────┴────────────────────────────────────────┘&#10;</code></pre>
 <p>Note that you cannot modify this table, or an existing index. To modify an index, <a href="#remove-indexes">delete it first</a> and <a href="#create-an-index">create a new index</a> with the updated definition.</p>
 <h2 id="test-an-index">Test an index</h2>
 <p>Validate that an index was used for a query by prepending a query with <a href="https://www.sqlite.org/eqp.html"><code>EXPLAIN QUERY PLAN</code></a>. This will output a query plan for the succeeding statement, including which (if any) indexes were used.</p>
 <p>For example, if you assume the <code>users</code> table has an <code>email_address TEXT</code> column and you created an index <code>CREATE UNIQUE INDEX idx_email_address ON users(email_address)</code>, any query with a predicate on <code>email_address</code> should use your index.</p>
-<pre><code class="language-sql">EXPLAIN QUERY PLAN SELECT * FROM users WHERE email_address = &#x27;foo@example.com&#x27;;&#10;QUERY PLAN&#10;`--SEARCH users USING INDEX idx_email_address (email_address=?)&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">EXPLAIN QUERY PLAN SELECT * FROM users WHERE email_address = &#x27;foo@example.com&#x27;;&#10;QUERY PLAN&#10;`--SEARCH users USING INDEX idx_email_address (email_address=?)&#10;</code></pre>
 <p>Review the <code>USING INDEX &lt;INDEX_NAME&gt;</code> output from the query planner, confirming the index was used.</p>
 <p>This is also a fairly common use-case for an index. Finding a user based on their email address is often a very common query type for login (authentication) systems.</p>
 <p>Using an index can reduce the number of rows read by a query. Use the <code>meta</code> object to estimate your usage. Refer to <a href="/d1/platform/pricing/#can-i-use-an-index-to-reduce-the-number-of-rows-read-by-a-query">&quot;Can I use an index to reduce the number of rows read by a query?&quot;</a> and <a href="/d1/platform/pricing/#how-can-i-estimate-my-eventual-bill">&quot;How can I estimate my (eventual) bill?&quot;</a>.</p>
@@ -132,7 +141,7 @@
 <li>Partial indexes also keep the index from growing unbounded over time. The index does not need to keep a row for every completed order, and completed orders are likely to be queried far fewer times than in-progress orders.</li>
 </ul>
 <p>A partial index that filters out completed orders from the index would resemble the following:</p>
-<pre><code class="language-sql">CREATE INDEX idx_order_status_not_complete ON orders(order_status) WHERE order_status != 6&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">CREATE INDEX idx_order_status_not_complete ON orders(order_status) WHERE order_status != 6&#10;</code></pre>
 <p>Partial indexes can be faster at read time (less rows in the index) and at write time (fewer writes to the index) than full indexes. You can also combine a partial index with a <a href="#multi-column-indexes">multi-column index</a>.</p>
 <h2 id="remove-indexes">Remove indexes</h2>
 <p>Use <code>DROP INDEX</code> to remove an index. Dropped indexes cannot be restored.</p>

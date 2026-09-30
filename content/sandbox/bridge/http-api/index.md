@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/sandbox/bridge/http-api/
+  description: Complete HTTP API reference for the sandbox bridge Worker.
+  full_title: HTTP API reference · Cloudflare Sandbox SDK docs
+  head_html: <title>HTTP API reference · Cloudflare Sandbox SDK docs</title><meta name="generator" content="Nift"><meta name="description" content="Complete HTTP API reference for the sandbox bridge Worker."><link rel="canonical" href="https://developers.cloudflare.com/sandbox/bridge/http-api/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/sandbox/bridge/http-api/index.md"><meta property="og:title" content="HTTP API reference · Cloudflare Sandbox SDK docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Complete HTTP API reference for the sandbox bridge Worker."><meta property="og:url" content="https://developers.cloudflare.com/sandbox/bridge/http-api/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Sandbox SDK"><meta name="algolia_product_filter" content="Sandbox SDK"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Sandbox SDK,Workers"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/sandbox/bridge/http-api/#page","headline":"HTTP API reference \u00b7 Cloudflare Sandbox SDK docs","description":"Complete HTTP API reference for the sandbox bridge Worker.","url":"https://developers.cloudflare.com/sandbox/bridge/http-api/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /sandbox/bridge/http-api/
+  schema: 1
+---
 <aside class="nb-aside note">
 <h3 class="nb-aside-title" id="sandbox-sdk-1-0-preview">Sandbox SDK 1.0 preview</h3>
 @markup("md", "content/.markup/bodies/13587.md")
@@ -5,7 +16,7 @@
 <p>This page documents every route exposed by the <a href="/sandbox/bridge/">sandbox bridge</a> on the stable template.</p>
 <h2 id="authentication">Authentication</h2>
 <p>All routes under <code>/v1/sandbox/*</code> and <code>/v1/openapi.*</code> require a Bearer token:</p>
-<pre><code class="language-txt">Authorization: Bearer &lt;SANDBOX_API_KEY&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">Authorization: Bearer &lt;SANDBOX_API_KEY&gt;&#10;</code></pre>
 <p>When <code>SANDBOX_API_KEY</code> is not configured, authentication is skipped for local development convenience. Always set the secret before deploying to production.</p>
 <h2 id="openapi-schema">OpenAPI schema</h2>
 <p>The bridge serves its own API documentation:</p>
@@ -77,7 +88,7 @@
 </tbody>
 </table>
 <p>The <code>/exec</code> endpoint accepts a JSON body:</p>
-<pre><code class="language-json">{&#10;  &quot;argv&quot;: [&quot;sh&quot;, &quot;-lc&quot;, &quot;echo hello&quot;],&#10;  &quot;timeout_ms&quot;: 10000,&#10;  &quot;cwd&quot;: &quot;/workspace&quot;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;  &quot;argv&quot;: [&quot;sh&quot;, &quot;-lc&quot;, &quot;echo hello&quot;],&#10;  &quot;timeout_ms&quot;: 10000,&#10;  &quot;cwd&quot;: &quot;/workspace&quot;&#10;}&#10;</code></pre>
 <h3 id="argv-escaping">Argv escaping</h3>
 <p>Each element of the <code>argv</code> array is escaped using ANSI-C <code>$'...'</code> quoting before being joined into a shell command. Tokens that contain only safe characters (<code>A-Za-z0-9@%+=:,./-</code>) are passed through unchanged. All other tokens are wrapped in <code>$'...'</code> with backslashes, single quotes, newlines, carriage returns, and tabs escaped. This prevents shell injection while preserving arguments that contain spaces, quotes, or special characters.</p>
 <h3 id="sse-response-format">SSE response format</h3>
@@ -185,10 +196,10 @@
 <p>The <code>/mount</code> endpoint accepts a JSON body. Two flows are supported:</p>
 <h3 id="r2-binding-mounts">R2 binding mounts</h3>
 <p>Omit <code>endpoint</code> and pass the Worker R2 binding name in <code>bucket</code>:</p>
-<pre><code class="language-json">{&#10;  &quot;bucket&quot;: &quot;MY_BUCKET&quot;,&#10;  &quot;mountPath&quot;: &quot;/mnt/data&quot;,&#10;  &quot;options&quot;: {&#10;    &quot;readOnly&quot;: false,&#10;    &quot;prefix&quot;: &quot;/subdir&quot;&#10;  }&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;  &quot;bucket&quot;: &quot;MY_BUCKET&quot;,&#10;  &quot;mountPath&quot;: &quot;/mnt/data&quot;,&#10;  &quot;options&quot;: {&#10;    &quot;readOnly&quot;: false,&#10;    &quot;prefix&quot;: &quot;/subdir&quot;&#10;  }&#10;}&#10;</code></pre>
 <p>When <code>options.endpoint</code> is omitted, <code>bucket</code> means the Worker R2 binding name.</p>
 <p>For an explicit S3-compatible endpoint mount, include <code>endpoint</code> and optionally <code>credentials</code>:</p>
-<pre><code class="language-json">{&#10;  &quot;bucket&quot;: &quot;my-r2-bucket&quot;,&#10;  &quot;mountPath&quot;: &quot;/mnt/data&quot;,&#10;  &quot;options&quot;: {&#10;    &quot;endpoint&quot;: &quot;https://ACCOUNT_ID.r2.cloudflarestorage.com&quot;,&#10;    &quot;readOnly&quot;: false,&#10;    &quot;prefix&quot;: &quot;/subdir&quot;,&#10;    &quot;credentials&quot;: {&#10;      &quot;accessKeyId&quot;: &quot;...&quot;,&#10;      &quot;secretAccessKey&quot;: &quot;...&quot;&#10;    }&#10;  }&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;  &quot;bucket&quot;: &quot;my-r2-bucket&quot;,&#10;  &quot;mountPath&quot;: &quot;/mnt/data&quot;,&#10;  &quot;options&quot;: {&#10;    &quot;endpoint&quot;: &quot;https://ACCOUNT_ID.r2.cloudflarestorage.com&quot;,&#10;    &quot;readOnly&quot;: false,&#10;    &quot;prefix&quot;: &quot;/subdir&quot;,&#10;    &quot;credentials&quot;: {&#10;      &quot;accessKeyId&quot;: &quot;...&quot;,&#10;      &quot;secretAccessKey&quot;: &quot;...&quot;&#10;    }&#10;  }&#10;}&#10;</code></pre>
 <p>When <code>endpoint</code> is provided, <code>bucket</code> means the remote bucket name. Credentials are optional in this mode only — the bridge auto-detects from Worker secrets (<code>R2_ACCESS_KEY_ID</code> / <code>R2_SECRET_ACCESS_KEY</code> or <code>AWS_ACCESS_KEY_ID</code> / <code>AWS_SECRET_ACCESS_KEY</code>) when omitted.</p>
 <h2 id="sessions">Sessions</h2>
 <table>

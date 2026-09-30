@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/use-cases/solutions/discover-secure-api-endpoints/
+  description: Block API abuse, restrict unauthorized access, and monitor endpoint traffic using layered Cloudflare security features.
+  full_title: Discover and secure your API endpoints (Free, Pro, and Business) · Cloudflare use cases
+  head_html: <title>Discover and secure your API endpoints (Free, Pro, and Business) · Cloudflare use cases</title><meta name="generator" content="Nift"><meta name="description" content="Block API abuse, restrict unauthorized access, and monitor endpoint traffic using layered Cloudflare security features."><link rel="canonical" href="https://developers.cloudflare.com/use-cases/solutions/discover-secure-api-endpoints/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/use-cases/solutions/discover-secure-api-endpoints/index.md"><meta property="og:title" content="Discover and secure your API endpoints (Free, Pro, and Business) · Cloudflare use cases"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Block API abuse, restrict unauthorized access, and monitor endpoint traffic using layered Cloudflare security features."><meta property="og:url" content="https://developers.cloudflare.com/use-cases/solutions/discover-secure-api-endpoints/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Use cases"><meta name="algolia_product_filter" content="Use cases"><meta name="pcx_content_type" content="Solution guide"><meta name="algolia_content_type" content="Solution guide"><meta name="pcx_additional_products" content="API Shield,Bots,Leaked credentials detection,Rate limiting,SSL/TLS,WAF"><meta name="pcx_tags" content="REST API,Security"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/use-cases/solutions/discover-secure-api-endpoints/#page","headline":"Discover and secure your API endpoints (Free, Pro, and Business) \u00b7 Cloudflare use cases","description":"Block API abuse, restrict unauthorized access, and monitor endpoint traffic using layered Cloudflare security features.","url":"https://developers.cloudflare.com/use-cases/solutions/discover-secure-api-endpoints/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["REST API","Security"]}</script>
+  markdown: true
+  noindex: false
+  route: /use-cases/solutions/discover-secure-api-endpoints/
+  schema: 1
+---
 <p>Once your API is in production and receiving traffic, you need to decide which endpoints to protect first, what restrictions to apply, and how to monitor for abuse without blocking legitimate clients. This guide walks through that process in five stages: inventory your endpoints, enforce encrypted connections, restrict access to expected traffic patterns, block automated abuse, and monitor the results.</p>
 <p>The core workflow uses <a href="/waf/">Cloudflare Application Security</a> (also known as Web Application Firewall or WAF) features, <a href="/ssl/">SSL/TLS</a> settings, and <a href="/bots/">bot detection</a>, all available on Free, Pro, and Business plans. Enterprise callouts cover <a href="/api-shield/">API Shield</a> capabilities for teams that need schema validation, JSON Web Token (JWT) validation, and sequence analysis.</p>
 <aside class="nb-aside note">
@@ -94,7 +105,7 @@
 <li>Define the rule name. For example, <code>Block API requests missing Content-Type</code>.</li>
 <li>In the expression editor, enter:</li>
 </ol>
-<pre><code class="language-txt">(starts_with(http.request.uri.path, &quot;/api/&quot;) and not len(http.request.headers[&quot;content-type&quot;][0]) &gt; 0)&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">(starts_with(http.request.uri.path, &quot;/api/&quot;) and not len(http.request.headers[&quot;content-type&quot;][0]) &gt; 0)&#10;</code></pre>
 <ol start="5">
 <li>For <strong>Choose action</strong>, select <strong>Block</strong>.</li>
 <li>Select <strong>Deploy</strong>.</li>
@@ -110,7 +121,7 @@
 <li>Define the rule name. For example, <code>Block unexpected methods on /api/users</code>.</li>
 <li>In the expression editor, enter:</li>
 </ol>
-<pre><code class="language-txt">(http.request.uri.path eq &quot;/api/users&quot; and http.request.method ne &quot;GET&quot; and http.request.method ne &quot;POST&quot;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">(http.request.uri.path eq &quot;/api/users&quot; and http.request.method ne &quot;GET&quot; and http.request.method ne &quot;POST&quot;)&#10;</code></pre>
 <p>Adjust the path and allowed methods to match your endpoint.</p>
 <ol start="5">
 <li>For <strong>Choose action</strong>, select <strong>Block</strong>.</li>
@@ -159,7 +170,7 @@
 <li>Define the rule name. For example, <code>Skip bot protections for monitoring service</code>.</li>
 <li>Build an expression that matches your known bot traffic. For example, to skip protections for requests from a specific IP range with a known User-Agent:</li>
 </ol>
-<pre><code class="language-txt">(ip.src in {203.0.113.0/24} and http.user_agent contains &quot;MonitoringBot&quot;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">(ip.src in {203.0.113.0/24} and http.user_agent contains &quot;MonitoringBot&quot;)&#10;</code></pre>
 <p>Replace the IP range and User-Agent with values that match your legitimate bot clients.</p>
 <ol start="5">
 <li>For <strong>Choose action</strong>, select <em>Skip</em> and then select <strong>All Super Bot Fight Mode rules</strong>.</li>

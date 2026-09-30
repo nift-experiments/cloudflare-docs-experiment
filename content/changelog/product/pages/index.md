@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/changelog/product/pages/
+  description: '2026-08-11'
+  full_title: pages changelog | Cloudflare Docs
+  head_html: <title>pages changelog | Cloudflare Docs</title><meta name="generator" content="Nift"><meta name="description" content="2026-08-11"><link rel="canonical" href="https://developers.cloudflare.com/changelog/product/pages/"><link rel="sitemap" href="/sitemap-index.xml"><meta property="og:title" content="pages changelog"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="2026-08-11"><meta property="og:url" content="https://developers.cloudflare.com/changelog/product/pages/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/changelog/product/pages/#page","headline":"pages changelog | Cloudflare Docs","description":"2026-08-11","url":"https://developers.cloudflare.com/changelog/product/pages/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: false
+  noindex: false
+  route: /changelog/product/pages/
+  schema: 1
+---
 <h1 id="changelog">Changelog</h1>
 
 <h2 id="pages-now-skips-superseded-queued-builds"><a href="/changelog/post/2026-08-11-skip-superseded-builds/">Pages now skips superseded queued builds</a></h2>
@@ -48,7 +59,7 @@
 <li>Give the rule a name - e.g. <code>next-js-CVE-2025-29927</code></li>
 <li>Set the matching parameters for the rule match any request where the <code>x-middleware-subrequest</code> header <code>exists</code> per the rule expression below.</li>
 </ol>
-<pre><code class="language-sh">(len(http.request.headers[&quot;x-middleware-subrequest&quot;]) &gt; 0)&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">(len(http.request.headers[&quot;x-middleware-subrequest&quot;]) &gt; 0)&#10;</code></pre>
 <ol start="4">
 <li>Set the action to 'block'. If you want to observe the impact before blocking requests, set the action to 'log' (and edit the rule later).</li>
 <li><strong>Deploy</strong> the rule.</li>

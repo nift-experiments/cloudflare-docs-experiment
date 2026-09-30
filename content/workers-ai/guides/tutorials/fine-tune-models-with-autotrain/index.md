@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/workers-ai/guides/tutorials/fine-tune-models-with-autotrain/
+  description: Fine-tuning AI models with LoRA adapters on Workers AI allows adding custom training data, like for LLM finetuning.
+  full_title: Fine Tune Models With AutoTrain from HuggingFace · Cloudflare Workers AI docs
+  head_html: <title>Fine Tune Models With AutoTrain from HuggingFace · Cloudflare Workers AI docs</title><meta name="generator" content="Nift"><meta name="description" content="Fine-tuning AI models with LoRA adapters on Workers AI allows adding custom training data, like for LLM finetuning."><link rel="canonical" href="https://developers.cloudflare.com/workers-ai/guides/tutorials/fine-tune-models-with-autotrain/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/workers-ai/guides/tutorials/fine-tune-models-with-autotrain/index.md"><meta property="og:title" content="Fine Tune Models With AutoTrain from HuggingFace · Cloudflare Workers AI docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Fine-tuning AI models with LoRA adapters on Workers AI allows adding custom training data, like for LLM finetuning."><meta property="og:url" content="https://developers.cloudflare.com/workers-ai/guides/tutorials/fine-tune-models-with-autotrain/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Workers AI"><meta name="algolia_product_filter" content="Workers AI"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Tutorial"><meta name="algolia_content_type" content="Tutorial"><meta name="pcx_additional_products" content="Workers AI"><meta name="pcx_tags" content="AI,LLM"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/workers-ai/guides/tutorials/fine-tune-models-with-autotrain/#page","headline":"Fine Tune Models With AutoTrain from HuggingFace \u00b7 Cloudflare Workers AI docs","description":"Fine-tuning AI models with LoRA adapters on Workers AI allows adding custom training data, like for LLM finetuning.","url":"https://developers.cloudflare.com/workers-ai/guides/tutorials/fine-tune-models-with-autotrain/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["AI","LLM"]}</script>
+  markdown: true
+  noindex: false
+  route: /workers-ai/guides/tutorials/fine-tune-models-with-autotrain/
+  schema: 1
+---
 <p>Fine tuning an AI model gives you the opportunity to add additional training data to the model. Workers AI allows for <a href="/workers-ai/features/fine-tunes/loras/">Low-Rank Adaptation, LoRA, adapters</a> that will allow you to finetune our models.</p>
 <p>In this tutorial, we will explore how to create our own LoRAs. We will focus on <a href="https://huggingface.co/docs/autotrain/llm_finetuning">LLM Finetuning using AutoTrain</a>.</p>
 <h2 id="1-create-a-csv-file-with-your-training-data"><ol>
@@ -6,11 +17,11 @@
 <p>Start by creating a CSV, Comma Separated Values, file. This file will only have one column named <code>text</code>. Set the header by adding the word <code>text</code> on a line by itself.</p>
 <p>Now you need to figure out what you want to add to your model.</p>
 <p>Example formats are below:</p>
-<pre><code class="language-text">&#35;## Human: What is the meaning of life? ### Assistant: 42.&#10;</code></pre>
+<pre tabindex="0"><code class="language-text">&#35;## Human: What is the meaning of life? ### Assistant: 42.&#10;</code></pre>
 <p>If your training row contains newlines, you should wrap it with quotes.</p>
-<pre><code class="language-text">&quot;human: What is the meaning of life? \n bot: 42.&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-text">&quot;human: What is the meaning of life? \n bot: 42.&quot;&#10;</code></pre>
 <p>Different models, like Mistral, will provide a specific <a href="https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.1#instruction-format">chat template/instruction format</a></p>
-<pre><code class="language-text">&lt;s&gt;[INST] What is the meaning of life? [/INST] 42&lt;/s&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-text">&lt;s&gt;[INST] What is the meaning of life? [/INST] 42&lt;/s&gt;&#10;</code></pre>
 <h2 id="2-configure-the-huggingface-autotrain-advanced-notebook"><ol start="2">
 <li>Configure the HuggingFace Autotrain Advanced Notebook</li>
 </ol></h2>
@@ -60,7 +71,7 @@
 <p>It will run through each cell of the notebook, first doing installations, then configuring and running your AutoTrain session.</p>
 <p>This might take some time depending on the size of your train.csv file.</p>
 <p>If you encounter the following error, it is caused by an Out of Memory error. You might want to change your runtime to a bigger GPU backend.</p>
-<pre><code class="language-bash">subprocess.CalledProcessError: Command &#x27;[&#x27;/usr/bin/python3&#x27;, &#x27;-m&#x27;, &#x27;autotrain.trainers.clm&#x27;, &#x27;--training_config&#x27;, &#x27;blog-instruct/training_params.json&#x27;]&#x27; died with &lt;Signals.SIGKILL: 9&gt;.&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">subprocess.CalledProcessError: Command &#x27;[&#x27;/usr/bin/python3&#x27;, &#x27;-m&#x27;, &#x27;autotrain.trainers.clm&#x27;, &#x27;--training_config&#x27;, &#x27;blog-instruct/training_params.json&#x27;]&#x27; died with &lt;Signals.SIGKILL: 9&gt;.&#10;</code></pre>
 <h2 id="5-download-the-lora"><ol start="5">
 <li>Download The LoRA</li>
 </ol></h2>

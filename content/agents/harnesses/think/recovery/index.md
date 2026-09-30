@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/agents/harnesses/think/recovery/
+  description: Bounded chat recovery, the stream-stall watchdog, repairing interrupted tool calls, and stability detection for Think agents.
+  full_title: Durable recovery · Cloudflare Agents docs
+  head_html: <title>Durable recovery · Cloudflare Agents docs</title><meta name="generator" content="Nift"><meta name="description" content="Bounded chat recovery, the stream-stall watchdog, repairing interrupted tool calls, and stability detection for Think agents."><link rel="canonical" href="https://developers.cloudflare.com/agents/harnesses/think/recovery/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/agents/harnesses/think/recovery/index.md"><meta property="og:title" content="Durable recovery · Cloudflare Agents docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Bounded chat recovery, the stream-stall watchdog, repairing interrupted tool calls, and stability detection for Think agents."><meta property="og:url" content="https://developers.cloudflare.com/agents/harnesses/think/recovery/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Agents"><meta name="algolia_product_filter" content="Agents"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Agents"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/agents/harnesses/think/recovery/#page","headline":"Durable recovery \u00b7 Cloudflare Agents docs","description":"Bounded chat recovery, the stream-stall watchdog, repairing interrupted tool calls, and stability detection for Think agents.","url":"https://developers.cloudflare.com/agents/harnesses/think/recovery/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /agents/harnesses/think/recovery/
+  schema: 1
+---
 <p>Think always wraps chat turns in recoverable <a href="/agents/runtime/execution/durable-execution/">fibers</a>. If the Durable Object is evicted mid-stream, Think reconstructs any buffered chunks. It persists partial output and schedules a continuation or retry.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/2132.md")
@@ -116,7 +127,7 @@
 </table>
 <p>With <code>persist: true</code>, the partial message is saved. With <code>continue: true</code>, Think calls <code>continueLastTurn()</code> after the agent reaches a stable state.</p>
 <p>For pre-stream interruptions, where <code>ctx.streamId === &quot;&quot;</code> and <code>ctx.partialText === &quot;&quot;</code> but the latest persisted message is still the unanswered user message, Think retries that turn automatically unless <code>continue</code> is <code>false</code>.</p>
-<pre><code class="language-ts">onChatRecovery(ctx: ChatRecoveryContext): ChatRecoveryOptions {&#10;	if (!ctx.streamId &amp;&amp; !ctx.partialText) {&#10;		console.log(&quot;Recovering a pre-stream interruption&quot;);&#10;	}&#10;	return {};&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">onChatRecovery(ctx: ChatRecoveryContext): ChatRecoveryOptions {&#10;	if (!ctx.streamId &amp;&amp; !ctx.partialText) {&#10;		console.log(&quot;Recovering a pre-stream interruption&quot;);&#10;	}&#10;	return {};&#10;}&#10;</code></pre>
 <p>Use <code>ctx.createdAt</code> to skip stale recoveries. For example, if the interrupted turn is older than a few minutes, return <code>{ continue: false }</code> so the partial response is preserved without starting an old continuation.</p>
 <p>Durable bookkeeping remains active when automatic continuation is not appropriate. Return <code>{ continue: false }</code> to prevent another model call. For cancellation, side-effect, and cost controls, refer to <a href="/agents/communication-channels/chat/chat-agents/#control-automatic-continuation">Control automatic continuation</a>.</p>
 <h3 id="recovery-budgets-and-limits">Recovery budgets and limits</h3>
@@ -203,7 +214,7 @@
 <p>Think provides methods to check if the agent is in a stable state — no pending tool results, no pending approvals, no active turns.</p>
 <h3 id="haspendinginteraction">hasPendingInteraction</h3>
 <p>Returns <code>true</code> if any assistant message has pending tool calls (tools without results or pending approvals).</p>
-<pre><code class="language-ts">protected hasPendingInteraction(): boolean&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">protected hasPendingInteraction(): boolean&#10;</code></pre>
 <h3 id="waituntilstable">waitUntilStable</h3>
 <p>Returns a promise that resolves to <code>true</code> when the agent reaches a stable state, or <code>false</code> if the timeout is exceeded.</p>
 <div class="nb-type-script-example">

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/pages/framework-guides/deploy-a-sphinx-site/
+  description: Deploy a Sphinx documentation site to Cloudflare Pages.
+  full_title: Sphinx · Cloudflare Pages docs
+  head_html: <title>Sphinx · Cloudflare Pages docs</title><meta name="generator" content="Nift"><meta name="description" content="Deploy a Sphinx documentation site to Cloudflare Pages."><link rel="canonical" href="https://developers.cloudflare.com/pages/framework-guides/deploy-a-sphinx-site/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/pages/framework-guides/deploy-a-sphinx-site/index.md"><meta property="og:title" content="Sphinx · Cloudflare Pages docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Deploy a Sphinx documentation site to Cloudflare Pages."><meta property="og:url" content="https://developers.cloudflare.com/pages/framework-guides/deploy-a-sphinx-site/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Pages"><meta name="algolia_product_filter" content="Pages"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Pages"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/pages/framework-guides/deploy-a-sphinx-site/#page","headline":"Sphinx \u00b7 Cloudflare Pages docs","description":"Deploy a Sphinx documentation site to Cloudflare Pages.","url":"https://developers.cloudflare.com/pages/framework-guides/deploy-a-sphinx-site/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /pages/framework-guides/deploy-a-sphinx-site/
+  schema: 1
+---
 <p><a href="https://www.sphinx-doc.org/">Sphinx</a> is a tool that makes it easy to create documentation and was originally made for the publication of Python documentation. It is well known for its simplicity and ease of use.</p>
 <p>In this guide, you will create a new Sphinx project and deploy it using Cloudflare Pages.</p>
 <h2 id="prerequisites">Prerequisites</h2>
@@ -29,40 +40,40 @@
 <p>If you already had an earlier version of Python installed before installing version 3.7, other global packages you may have installed could interfere with the following steps to install Pipenv, or your other Python projects which depend on global packages.</p>
 <p><a href="https://pipenv.pypa.io/en/latest/">Pipenv</a> is a Python-based package manager that makes managing virtual environments simple. This guide will not require you to have prior experience with or knowledge of Pipenv to complete your Sphinx site deployment. Cloudflare Pages natively supports the use of Pipenv and, by default, has the latest version installed.</p>
 <p>The quickest way to install Pipenv is by running the command:</p>
-<pre><code class="language-sh">pip install --user pipenv&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">pip install --user pipenv&#10;</code></pre>
 <p>This command will install Pipenv to your user level directory and will make it accessible via your terminal. You can confirm this by running the following command and reviewing the expected output:</p>
-<pre><code class="language-sh">pipenv --version&#10;</code></pre>
-<pre><code class="language-sh">pipenv, version 2021.5.29&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">pipenv --version&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">pipenv, version 2021.5.29&#10;</code></pre>
 <h3 id="creating-a-sphinx-project-directory">Creating a Sphinx project directory</h3>
 <p>From your terminal, run the following commands to create a new directory and navigate to it:</p>
-<pre><code class="language-sh">mkdir my-wonderful-new-sphinx-project&#10;cd my-wonderful-new-sphinx-project&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">mkdir my-wonderful-new-sphinx-project&#10;cd my-wonderful-new-sphinx-project&#10;</code></pre>
 <h3 id="pipenv-with-python-3-7">Pipenv with Python 3.7</h3>
 <p>Pipenv allows you to specify which version of Python to associate with a virtual environment. For the purpose of this guide, the virtual environment for your Sphinx project must use Python 3.7.</p>
 <p>Use the following command:</p>
-<pre><code class="language-sh">pipenv --python 3.7&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">pipenv --python 3.7&#10;</code></pre>
 <p>You should see the following output:</p>
-<pre><code class="language-bash">Creating a virtualenv for this project...&#10;Pipfile: /home/ubuntu/my-wonderful-new-sphinx-project/Pipfile&#10;Using /usr/bin/python3.7m (3.7.11) to create virtualenv...&#10;⠸ Creating virtual environment...created virtual environment CPython3.7.11.final.0-64 in 1598ms&#10;  creator CPython3Posix(dest=/home/ubuntu/.local/share/virtualenvs/my-wonderful-new-sphinx-project-Y2HfWoOr, clear=False, no_vcs_ignore=False, global=False)&#10;  seeder FromAppData(download=False, pip=bundle, setuptools=bundle, wheel=bundle, via=copy, app_data_dir=/home/ubuntu/.local/share/virtualenv)&#10;    added seed packages: pip==21.1.3, setuptools==57.1.0, wheel==0.36.2&#10;  activators BashActivator,CShellActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator&#10;&#10;✔ Successfully created virtual environment!&#10;Virtualenv location: /home/ubuntu/.local/share/virtualenvs/my-wonderful-new-sphinx-project-Y2HfWoOr&#10;Creating a Pipfile for this project...&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">Creating a virtualenv for this project...&#10;Pipfile: /home/ubuntu/my-wonderful-new-sphinx-project/Pipfile&#10;Using /usr/bin/python3.7m (3.7.11) to create virtualenv...&#10;⠸ Creating virtual environment...created virtual environment CPython3.7.11.final.0-64 in 1598ms&#10;  creator CPython3Posix(dest=/home/ubuntu/.local/share/virtualenvs/my-wonderful-new-sphinx-project-Y2HfWoOr, clear=False, no_vcs_ignore=False, global=False)&#10;  seeder FromAppData(download=False, pip=bundle, setuptools=bundle, wheel=bundle, via=copy, app_data_dir=/home/ubuntu/.local/share/virtualenv)&#10;    added seed packages: pip==21.1.3, setuptools==57.1.0, wheel==0.36.2&#10;  activators BashActivator,CShellActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator&#10;&#10;✔ Successfully created virtual environment!&#10;Virtualenv location: /home/ubuntu/.local/share/virtualenvs/my-wonderful-new-sphinx-project-Y2HfWoOr&#10;Creating a Pipfile for this project...&#10;</code></pre>
 <p>List the contents of the directory:</p>
-<pre><code class="language-sh">ls&#10;</code></pre>
-<pre><code class="language-sh">Pipfile&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">ls&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">Pipfile&#10;</code></pre>
 <h3 id="installing-sphinx">Installing Sphinx</h3>
 <p>Before installing Sphinx, create the directory you want your project to live in.</p>
 <p>From your terminal, run the following command to install Sphinx:</p>
-<pre><code class="language-sh">pipenv install sphinx&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">pipenv install sphinx&#10;</code></pre>
 <p>You should see output similar to the following:</p>
-<pre><code class="language-bash">Installing sphinx...&#10;Adding sphinx to Pipfile&#x27;s [packages]...&#10;✔ Installation Succeeded&#10;Pipfile.lock not found, creating...&#10;Locking [dev-packages] dependencies...&#10;Locking [packages] dependencies...&#10;Building requirements...&#10;Resolving dependencies...&#10;✔ Success!&#10;Updated Pipfile.lock (763aa3)!&#10;Installing dependencies from Pipfile.lock (763aa3)...&#10;  🐍   ▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉ 0/0 — 00:00:00&#10;To activate this project&#x27;s virtualenv, run pipenv shell.&#10;Alternatively, run a command inside the virtualenv with pipenv run.&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">Installing sphinx...&#10;Adding sphinx to Pipfile&#x27;s [packages]...&#10;✔ Installation Succeeded&#10;Pipfile.lock not found, creating...&#10;Locking [dev-packages] dependencies...&#10;Locking [packages] dependencies...&#10;Building requirements...&#10;Resolving dependencies...&#10;✔ Success!&#10;Updated Pipfile.lock (763aa3)!&#10;Installing dependencies from Pipfile.lock (763aa3)...&#10;  🐍   ▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉ 0/0 — 00:00:00&#10;To activate this project&#x27;s virtualenv, run pipenv shell.&#10;Alternatively, run a command inside the virtualenv with pipenv run.&#10;</code></pre>
 <p>This will install Sphinx into a new virtual environment managed by Pipenv. You should see a directory structure like this:</p>
-<pre><code class="language-bash">my-wonderful-new-sphinx-project&#10;|--Pipfile&#10;|--Pipfile.lock&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">my-wonderful-new-sphinx-project&#10;|--Pipfile&#10;|--Pipfile.lock&#10;</code></pre>
 <h2 id="creating-a-new-project">Creating a new project</h2>
 <p>With Sphinx installed, you can now run the quickstart command to create a template project for you. This command will only work within the Pipenv environment you created in the previous step. To enter that environment, run the following command from your terminal:</p>
-<pre><code class="language-sh">pipenv shell&#10;</code></pre>
-<pre><code class="language-sh">Launching subshell in virtual environment...&#10;ubuntu@sphinx-demo:~/my-wonderful-new-sphinx-project$  . /home/ubuntu/.local/share/virtualenvs/my-wonderful-new-sphinx-project-Y2HfWoOr/bin/activate&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">pipenv shell&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">Launching subshell in virtual environment...&#10;ubuntu@sphinx-demo:~/my-wonderful-new-sphinx-project$  . /home/ubuntu/.local/share/virtualenvs/my-wonderful-new-sphinx-project-Y2HfWoOr/bin/activate&#10;</code></pre>
 <p>Now run the following command:</p>
-<pre><code class="language-sh">sphinx-quickstart&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">sphinx-quickstart&#10;</code></pre>
 <p>You will be presented with a number of questions, please answer them in the following:</p>
-<pre><code class="language-sh">Separate source and build directories (y/n) [n]: Y&#10;Project name: &lt;Your project name&gt;&#10;Author name(s): &lt;You Author Name&gt;&#10;Project release []: &lt;You can accept default here or provide a version&gt;&#10;Project language [en]: &lt;You can accept en here or provide a regional language code&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">Separate source and build directories (y/n) [n]: Y&#10;Project name: &lt;Your project name&gt;&#10;Author name(s): &lt;You Author Name&gt;&#10;Project release []: &lt;You can accept default here or provide a version&gt;&#10;Project language [en]: &lt;You can accept en here or provide a regional language code&gt;&#10;</code></pre>
 <p>This will create four new files in your active directory, <code>source/conf.py</code>, <code>index.rst</code>, <code>Makefile</code> and <code>make.bat</code>:</p>
-<pre><code class="language-bash">my-wonderful-new-sphinx-project&#10;|--Pipfile&#10;|--Pipfile.lock&#10;|--source&#10;|----_static&#10;|----_templates&#10;|----conf.py&#10;|----index.rst&#10;|--Makefile&#10;|--make.bat&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">my-wonderful-new-sphinx-project&#10;|--Pipfile&#10;|--Pipfile.lock&#10;|--source&#10;|----_static&#10;|----_templates&#10;|----conf.py&#10;|----index.rst&#10;|--Makefile&#10;|--make.bat&#10;</code></pre>
 <p>You now have everything you need to start deploying your site to Cloudflare Pages. For learning how to create documentation with Sphinx, refer to the official <a href="https://www.sphinx-doc.org/en/master/usage/quickstart.html">Sphinx documentation</a>.</p>
 <h2 id="before-you-continue">Before you continue</h2>
 <p>All of the framework guides assume you already have a fundamental understanding of <a href="https://git-scm.com/">Git</a>. If you are new to Git, refer to this <a href="https://guides.github.com/introduction/git-handbook/">summarized Git handbook</a> on how to set up Git on your local machine.</p>
@@ -70,10 +81,10 @@
 <p>Refer to the <a href="https://guides.github.com/introduction/git-handbook/">GitHub documentation</a> and <a href="https://git-scm.com/book/en/v2">Git documentation</a> for more information.</p>
 <h2 id="creating-a-github-repository">Creating a GitHub repository</h2>
 <p>In a separate terminal window that is not within the pipenv shell session, verify that SSH key-based authentication is working:</p>
-<pre><code class="language-sh">eval &quot;$(ssh-agent)&quot;&#10;ssh-add -T ~/.ssh/id_rsa.pub&#10;ssh -T git@github.com&#10;</code></pre>
-<pre><code class="language-sh">&#10;The authenticity of host &#x27;github.com (140.82.113.4)&#x27; can&#x27;t be established.&#10;RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.&#10;Are you sure you want to continue connecting (yes/no/[fingerprint])? yes&#10;Warning: Permanently added &#x27;github.com,140.82.113.4&#x27; (RSA) to the list of known hosts.&#10;Hi yourgithubusername! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">eval &quot;$(ssh-agent)&quot;&#10;ssh-add -T ~/.ssh/id_rsa.pub&#10;ssh -T git@github.com&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">&#10;The authenticity of host &#x27;github.com (140.82.113.4)&#x27; can&#x27;t be established.&#10;RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.&#10;Are you sure you want to continue connecting (yes/no/[fingerprint])? yes&#10;Warning: Permanently added &#x27;github.com,140.82.113.4&#x27; (RSA) to the list of known hosts.&#10;Hi yourgithubusername! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.&#10;</code></pre>
 <p>Create a new GitHub repository by visiting <a href="https://repo.new">repo.new</a>. After your repository is set up, push your application to GitHub by running the following commands in your terminal:</p>
-<pre><code class="language-sh">git init&#10;git config user.name &quot;Your Name&quot;&#10;git config user.email &quot;username@domain.com&quot;&#10;git remote add origin git@github.com:yourgithubusername/githubrepo.git&#10;git add .&#10;git commit -m &quot;Initial commit&quot;&#10;git branch -M main&#10;git push -u origin main&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">git init&#10;git config user.name &quot;Your Name&quot;&#10;git config user.email &quot;username@domain.com&quot;&#10;git remote add origin git@github.com:yourgithubusername/githubrepo.git&#10;git add .&#10;git commit -m &quot;Initial commit&quot;&#10;git branch -M main&#10;git push -u origin main&#10;</code></pre>
 <h2 id="deploy-with-cloudflare-pages">Deploy with Cloudflare Pages</h2>
 <p>To deploy your site to Pages:</p>
 <ol>

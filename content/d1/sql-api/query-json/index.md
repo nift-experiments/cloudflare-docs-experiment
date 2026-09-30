@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/d1/sql-api/query-json/
+  description: Extract, insert, and manipulate JSON data stored in D1 using built-in SQLite JSON functions.
+  full_title: Query JSON · Cloudflare D1 docs
+  head_html: <title>Query JSON · Cloudflare D1 docs</title><meta name="generator" content="Nift"><meta name="description" content="Extract, insert, and manipulate JSON data stored in D1 using built-in SQLite JSON functions."><link rel="canonical" href="https://developers.cloudflare.com/d1/sql-api/query-json/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/d1/sql-api/query-json/index.md"><meta property="og:title" content="Query JSON · Cloudflare D1 docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Extract, insert, and manipulate JSON data stored in D1 using built-in SQLite JSON functions."><meta property="og:url" content="https://developers.cloudflare.com/d1/sql-api/query-json/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="D1"><meta name="algolia_product_filter" content="D1"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="D1"><meta name="pcx_tags" content="JSON"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/d1/sql-api/query-json/#page","headline":"Query JSON \u00b7 Cloudflare D1 docs","description":"Extract, insert, and manipulate JSON data stored in D1 using built-in SQLite JSON functions.","url":"https://developers.cloudflare.com/d1/sql-api/query-json/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["JSON"]}</script>
+  markdown: true
+  noindex: false
+  route: /d1/sql-api/query-json/
+  schema: 1
+---
 <p>D1 has built-in support for querying and parsing JSON data stored within a database. This enables you to:</p>
 <ul>
 <li><a href="#extract-values">Query paths</a> within a stored JSON object - for example, extracting the value of named key or array index directly, which is especially useful with larger JSON objects.</li>
@@ -127,14 +138,14 @@
 <h2 id="error-handling">Error Handling</h2>
 <p>JSON functions will return a <code>malformed JSON</code> error when operating over data that isn't JSON and/or is not valid JSON. D1 considers valid JSON to be <a href="https://www.rfc-editor.org/rfc/rfc7159.txt">RFC 7159</a> conformant.</p>
 <p>In the following example, calling <code>json_extract</code> over a string (not valid JSON) will cause the query to return a <code>malformed JSON</code> error:</p>
-<pre><code class="language-sql">SELECT json_extract(&#x27;not valid JSON: just a string&#x27;, &#x27;$&#x27;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">SELECT json_extract(&#x27;not valid JSON: just a string&#x27;, &#x27;$&#x27;)&#10;</code></pre>
 <p>This will return an error:</p>
-<pre><code class="language-txt">ERROR 9015: SQL engine error: query error: Error code 1: SQL error or missing database (malformed&#10;  JSON)`&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">ERROR 9015: SQL engine error: query error: Error code 1: SQL error or missing database (malformed&#10;  JSON)`&#10;</code></pre>
 <h2 id="generated-columns">Generated columns</h2>
 <p>D1's support for <a href="/d1/reference/generated-columns/">generated columns</a> allows you to create dynamic columns that are generated based on the values of other columns, including extracted or calculated values of JSON data.</p>
 <p>These columns can be queried like any other column, and can have <a href="/d1/best-practices/use-indexes/">indexes</a> defined on them. If you have JSON data that you frequently query and filter over, creating a generated column and an index can dramatically improve query performance.</p>
 <p>For example, to define a column based on a value within a larger JSON object, use the <code>AS</code> keyword combined with a <a href="#supported-functions">JSON function</a> to generate a typed column:</p>
-<pre><code class="language-sql">CREATE TABLE some_table (&#10;    &#45;- other columns omitted&#10;    raw_data TEXT -- JSON: {&quot;measurement&quot;:{&quot;aqi&quot;:[21,42,58],&quot;wind_mph&quot;:&quot;13&quot;,&quot;location&quot;:&quot;US-NY&quot;}}&#10;    location AS (json_extract(raw_data, &#x27;$.measurement.location&#x27;)) STORED&#10;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">CREATE TABLE some_table (&#10;    &#45;- other columns omitted&#10;    raw_data TEXT -- JSON: {&quot;measurement&quot;:{&quot;aqi&quot;:[21,42,58],&quot;wind_mph&quot;:&quot;13&quot;,&quot;location&quot;:&quot;US-NY&quot;}}&#10;    location AS (json_extract(raw_data, &#x27;$.measurement.location&#x27;)) STORED&#10;)&#10;</code></pre>
 <p>Refer to <a href="/d1/reference/generated-columns/">Generated columns</a> to learn more about how to generate columns.</p>
 <h2 id="example-usage">Example usage</h2>
 <h3 id="extract-values">Extract values</h3>
@@ -146,10 +157,10 @@
 </ul>
 <p>The <code>-&gt;</code> and <code>-&gt;&gt;</code> operators functions both operate similarly to the same operators in PostgreSQL and MySQL/MariaDB.</p>
 <p>Given the following JSON object in a column named <code>sensor_reading</code>, you can extract values from it directly.</p>
-<pre><code class="language-json">{&#10;    &quot;measurement&quot;: {&#10;        &quot;temp_f&quot;: &quot;77.4&quot;,&#10;        &quot;aqi&quot;: [21, 42, 58],&#10;        &quot;o3&quot;: [18, 500],&#10;        &quot;wind_mph&quot;: &quot;13&quot;,&#10;        &quot;location&quot;: &quot;US-NY&quot;&#10;    }&#10;}&#10;</code></pre>
-<pre><code class="language-sql">&#45;- Extract the temperature value&#10;json_extract(sensor_reading, &#x27;$.measurement.temp_f&#x27;)-- returns &quot;77.4&quot; as TEXT&#10;</code></pre>
-<pre><code class="language-sql">&#45;- Extract the maximum PM2.5 air quality reading&#10;sensor_reading -&gt; &#x27;$.measurement.aqi[3]&#x27; -- returns 58 as a JSON number&#10;</code></pre>
-<pre><code class="language-sql">&#45;- Extract the o3 (ozone) array in full&#10;sensor_reading -\-&gt; &#x27;$.measurement.o3&#x27; -- returns &#x27;[18, 500]&#x27; as TEXT&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;    &quot;measurement&quot;: {&#10;        &quot;temp_f&quot;: &quot;77.4&quot;,&#10;        &quot;aqi&quot;: [21, 42, 58],&#10;        &quot;o3&quot;: [18, 500],&#10;        &quot;wind_mph&quot;: &quot;13&quot;,&#10;        &quot;location&quot;: &quot;US-NY&quot;&#10;    }&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">&#45;- Extract the temperature value&#10;json_extract(sensor_reading, &#x27;$.measurement.temp_f&#x27;)-- returns &quot;77.4&quot; as TEXT&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">&#45;- Extract the maximum PM2.5 air quality reading&#10;sensor_reading -&gt; &#x27;$.measurement.aqi[3]&#x27; -- returns 58 as a JSON number&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">&#45;- Extract the o3 (ozone) array in full&#10;sensor_reading -\-&gt; &#x27;$.measurement.o3&#x27; -- returns &#x27;[18, 500]&#x27; as TEXT&#10;</code></pre>
 <h3 id="get-the-length-of-an-array">Get the length of an array</h3>
 <p>You can get the length of a JSON array in two ways:</p>
 <ol>
@@ -157,14 +168,14 @@
 <li>By calling <code>json_array_length(value, path)</code> to specify the path to an array within an object or outer array.</li>
 </ol>
 <p>For example, given the following JSON object stored in a column called <code>login_history</code>, you could get a count of the last logins directly:</p>
-<pre><code class="language-json">{&#10;    &quot;user_id&quot;: &quot;abc12345&quot;,&#10;    &quot;previous_logins&quot;: [&quot;2023-03-31T21:07:14-05:00&quot;, &quot;2023-03-28T08:21:02-05:00&quot;, &quot;2023-03-28T05:52:11-05:00&quot;]&#10;}&#10;</code></pre>
-<pre><code class="language-sql">json_array_length(login_history, &#x27;$.previous_logins&#x27;) --&gt; returns 3 as an INTEGER&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;    &quot;user_id&quot;: &quot;abc12345&quot;,&#10;    &quot;previous_logins&quot;: [&quot;2023-03-31T21:07:14-05:00&quot;, &quot;2023-03-28T08:21:02-05:00&quot;, &quot;2023-03-28T05:52:11-05:00&quot;]&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">json_array_length(login_history, &#x27;$.previous_logins&#x27;) --&gt; returns 3 as an INTEGER&#10;</code></pre>
 <p>You can also use <code>json_array_length</code> as a predicate in a more complex query - for example, <code>WHERE json_array_length(some_column, '$.path.to.value') &gt;= 5</code>.</p>
 <h3 id="insert-a-value-into-an-existing-object">Insert a value into an existing object</h3>
 <p>You can insert a value into an existing JSON object or array using <code>json_insert()</code>. For example, if you have a <code>TEXT</code> column called <code>login_history</code> in a <code>users</code> table containing the following object:</p>
-<pre><code class="language-json">{&quot;history&quot;: [&quot;2023-05-13T15:13:02+00:00&quot;, &quot;2023-05-14T07:11:22+00:00&quot;, &quot;2023-05-15T15:03:51+00:00&quot;]}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&quot;history&quot;: [&quot;2023-05-13T15:13:02+00:00&quot;, &quot;2023-05-14T07:11:22+00:00&quot;, &quot;2023-05-15T15:03:51+00:00&quot;]}&#10;</code></pre>
 <p>To add a new timestamp to the <code>history</code> array within our <code>login_history</code> column, write a query resembling the following:</p>
-<pre><code class="language-sql">UPDATE users&#10;SET login_history = json_insert(login_history, &#x27;$.history[#]&#x27;, &#x27;2023-05-15T20:33:06+00:00&#x27;)&#10;WHERE user_id = &#x27;aba0e360-1e04-41b3-91a0-1f2263e1e0fb&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">UPDATE users&#10;SET login_history = json_insert(login_history, &#x27;$.history[#]&#x27;, &#x27;2023-05-15T20:33:06+00:00&#x27;)&#10;WHERE user_id = &#x27;aba0e360-1e04-41b3-91a0-1f2263e1e0fb&#x27;&#10;</code></pre>
 <p>Provide three arguments to <code>json_insert</code>:</p>
 <ol>
 <li>The name of our column containing the JSON you want to modify.</li>
@@ -174,7 +185,7 @@
 <p>To replace an existing value, use <code>json_replace()</code>, which will overwrite an existing key-value pair if one already exists. To set a value regardless of whether it already exists, use <code>json_set()</code>.</p>
 <h3 id="expand-arrays-for-in-queries">Expand arrays for IN queries</h3>
 <p>Use <code>json_each</code> to expand an array into multiple rows. This can be useful when composing a <code>WHERE column IN (?)</code> query over several values. For example, if you wanted to update a list of users by their integer <code>id</code>, use <code>json_each</code> to return a table with each value as a column called <code>value</code>:</p>
-<pre><code class="language-sql">UPDATE users&#10;SET last_audited = &#x27;2023-05-16T11:24:08+00:00&#x27;&#10;WHERE id IN (SELECT value FROM json_each(&#x27;[183183, 13913, 94944]&#x27;))&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">UPDATE users&#10;SET last_audited = &#x27;2023-05-16T11:24:08+00:00&#x27;&#10;WHERE id IN (SELECT value FROM json_each(&#x27;[183183, 13913, 94944]&#x27;))&#10;</code></pre>
 <p>This would extract only the <code>value</code> column from the table returned by <code>json_each</code>, with each row representing the user IDs you passed in as an array.</p>
 <p><code>json_each</code> effectively returns a table with multiple columns, with the most relevant being:</p>
 <ul>
@@ -185,7 +196,7 @@
 <li><code>path</code> - the top-level path - <code>$</code> as the path for an element with a <code>fullkey</code> of <code>$[0]</code>.</li>
 </ul>
 <p>In this example, <code>SELECT * FROM json_each('[183183, 13913, 94944]')</code> would return a table resembling the below:</p>
-<pre><code class="language-sql">key|value|type|id|fullkey|path&#10;0|183183|integer|1|$[0]|$&#10;1|13913|integer|2|$[1]|$&#10;2|94944|integer|3|$[2]|$&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">key|value|type|id|fullkey|path&#10;0|183183|integer|1|$[0]|$&#10;1|13913|integer|2|$[1]|$&#10;2|94944|integer|3|$[2]|$&#10;</code></pre>
 <p>You can use <code>json_each</code> with <a href="/d1/worker-api/">D1 Workers Binding API</a> in a Worker by creating a statement and using <code>JSON.stringify</code> to pass an array as a <a href="/d1/worker-api/d1-database/#guidance">bound parameter</a>:</p>
-<pre><code class="language-ts">const stmt = context.env.DB&#10;    .prepare(&quot;UPDATE users SET last_audited = ? WHERE id IN (SELECT value FROM json_each(?1))&quot;)&#10;const resp = await stmt.bind(&#10;    &quot;2023-05-16T11:24:08+00:00&quot;,&#10;    JSON.stringify([183183, 13913, 94944])&#10;    ).run()&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const stmt = context.env.DB&#10;    .prepare(&quot;UPDATE users SET last_audited = ? WHERE id IN (SELECT value FROM json_each(?1))&quot;)&#10;const resp = await stmt.bind(&#10;    &quot;2023-05-16T11:24:08+00:00&quot;,&#10;    JSON.stringify([183183, 13913, 94944])&#10;    ).run()&#10;</code></pre>
 <p>This would only update rows in your <code>users</code> table where the <code>id</code> matches one of the three provided.</p>

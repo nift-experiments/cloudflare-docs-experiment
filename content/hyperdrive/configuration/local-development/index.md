@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/hyperdrive/configuration/local-development/
+  description: Develop and test Hyperdrive-connected Workers locally using Wrangler.
+  full_title: Local development · Cloudflare Hyperdrive docs
+  head_html: <title>Local development · Cloudflare Hyperdrive docs</title><meta name="generator" content="Nift"><meta name="description" content="Develop and test Hyperdrive-connected Workers locally using Wrangler."><link rel="canonical" href="https://developers.cloudflare.com/hyperdrive/configuration/local-development/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/hyperdrive/configuration/local-development/index.md"><meta property="og:title" content="Local development · Cloudflare Hyperdrive docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Develop and test Hyperdrive-connected Workers locally using Wrangler."><meta property="og:url" content="https://developers.cloudflare.com/hyperdrive/configuration/local-development/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Hyperdrive"><meta name="algolia_product_filter" content="Hyperdrive"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Hyperdrive,Workers"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/hyperdrive/configuration/local-development/#page","headline":"Local development \u00b7 Cloudflare Hyperdrive docs","description":"Develop and test Hyperdrive-connected Workers locally using Wrangler.","url":"https://developers.cloudflare.com/hyperdrive/configuration/local-development/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /hyperdrive/configuration/local-development/
+  schema: 1
+---
 <p>Hyperdrive can be used when developing and testing your Workers locally. <a href="/workers/wrangler/install-and-update/">Wrangler</a>, the command-line interface for Workers, provides two options for local development:</p>
 <ul>
 <li><strong><code>wrangler dev</code></strong> (default): Runs your Worker code locally on your machine. You configure a <code>localConnectionString</code> to connect directly to a database (either local or remote). Hyperdrive query caching does not take effect in this mode.</li>
@@ -15,11 +26,11 @@
 </aside>
 <h3 id="configure-with-environment-variable">Configure with environment variable</h3>
 <p>The recommended approach is to use an environment variable to avoid committing credentials to source control:</p>
-<pre><code class="language-sh">&#35; Your configured Hyperdrive binding is &quot;HYPERDRIVE&quot;&#10;export CLOUDFLARE_HYPERDRIVE_LOCAL_CONNECTION_STRING_HYPERDRIVE=&quot;postgres://user:password@your-database-host:5432/database&quot;&#10;npx wrangler dev&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">&#35; Your configured Hyperdrive binding is &quot;HYPERDRIVE&quot;&#10;export CLOUDFLARE_HYPERDRIVE_LOCAL_CONNECTION_STRING_HYPERDRIVE=&quot;postgres://user:password@your-database-host:5432/database&quot;&#10;npx wrangler dev&#10;</code></pre>
 <p>The environment variable format is <code>CLOUDFLARE_HYPERDRIVE_LOCAL_CONNECTION_STRING_&lt;BINDING_NAME&gt;</code>, where <code>&lt;BINDING_NAME&gt;</code> is the name of the binding assigned to your Hyperdrive in your <a href="/workers/wrangler/configuration/">Wrangler configuration file</a>.</p>
 <p>To unset an environment variable: <code>unset CLOUDFLARE_HYPERDRIVE_LOCAL_CONNECTION_STRING_&lt;BINDING_NAME&gt;</code></p>
 <p>For example, to set the connection string for a local database:</p>
-<pre><code class="language-sh">export CLOUDFLARE_HYPERDRIVE_LOCAL_CONNECTION_STRING_HYPERDRIVE=&quot;postgres://user:password@localhost:5432/databasename&quot;&#10;npx wrangler dev&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">export CLOUDFLARE_HYPERDRIVE_LOCAL_CONNECTION_STRING_HYPERDRIVE=&quot;postgres://user:password@localhost:5432/databasename&quot;&#10;npx wrangler dev&#10;</code></pre>
 <h3 id="configure-in-wrangler-configuration-file">Configure in Wrangler configuration file</h3>
 <p>Alternatively, you can set <code>localConnectionString</code> in your <a href="/workers/wrangler/configuration/">Wrangler configuration file</a>:</p>
 <div class="nb-wrangler-config">
@@ -40,7 +51,7 @@
 @markup("md", "content/.markup/bodies/9050.md")
 </div>
 <p>To start a remote development session:</p>
-<pre><code class="language-sh">npx wrangler dev --remote&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler dev --remote&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/9047.md")
 </aside>

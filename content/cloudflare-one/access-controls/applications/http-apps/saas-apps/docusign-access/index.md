@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/access-controls/applications/http-apps/saas-apps/docusign-access/
+  description: Integrate DocuSign with Access.
+  full_title: DocuSign · Cloudflare One docs
+  head_html: <title>DocuSign · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="Integrate DocuSign with Access."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/access-controls/applications/http-apps/saas-apps/docusign-access/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/access-controls/applications/http-apps/saas-apps/docusign-access/index.md"><meta property="og:title" content="DocuSign · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Integrate DocuSign with Access."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/access-controls/applications/http-apps/saas-apps/docusign-access/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="Integration guide"><meta name="algolia_content_type" content="Integration guide"><meta name="pcx_additional_products" content="Cloudflare One"><meta name="pcx_tags" content="SAML"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/access-controls/applications/http-apps/saas-apps/docusign-access/#page","headline":"DocuSign \u00b7 Cloudflare One docs","description":"Integrate DocuSign with Access.","url":"https://developers.cloudflare.com/cloudflare-one/access-controls/applications/http-apps/saas-apps/docusign-access/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["SAML"]}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/access-controls/applications/http-apps/saas-apps/docusign-access/
+  schema: 1
+---
 <p>This guide covers how to configure <a href="https://support.docusign.com/s/document-item?bundleId=rrf1583359212854&amp;topicId=ozd1583359139126.html">Docusign</a> as a SAML application in Cloudflare One.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <ul>
@@ -53,7 +64,7 @@
 </li>
 <li>
 <p>Transform the <strong>Public Key</strong> into a fingerprint:</p>
-<pre><code>1. Copy the **Public Key** Value.&#10;&#10;2. Paste the **Public Key** into VIM or another code editor.&#10;&#10;3. Wrap the value in `-----BEGIN CERTIFICATE-----` and `-----END CERTIFICATE-----`.&#10;&#10;4. Set the file extension to `.crt` and save.&#10;</code></pre>
+<pre tabindex="0"><code>1. Copy the **Public Key** Value.&#10;&#10;2. Paste the **Public Key** into VIM or another code editor.&#10;&#10;3. Wrap the value in `-----BEGIN CERTIFICATE-----` and `-----END CERTIFICATE-----`.&#10;&#10;4. Set the file extension to `.crt` and save.&#10;</code></pre>
 </li>
 </ol>
 <h2 id="2-configure-your-docusign-sso-instance"><ol start="2">

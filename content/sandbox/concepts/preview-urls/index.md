@@ -1,6 +1,17 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/sandbox/concepts/preview-urls/
+  description: Sandbox SDK preview URLs provide public HTTPS access to services running inside sandboxes.
+  full_title: Preview URLs · Cloudflare Sandbox SDK docs
+  head_html: <title>Preview URLs · Cloudflare Sandbox SDK docs</title><meta name="generator" content="Nift"><meta name="description" content="Sandbox SDK preview URLs provide public HTTPS access to services running inside sandboxes."><link rel="canonical" href="https://developers.cloudflare.com/sandbox/concepts/preview-urls/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/sandbox/concepts/preview-urls/index.md"><meta property="og:title" content="Preview URLs · Cloudflare Sandbox SDK docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Sandbox SDK preview URLs provide public HTTPS access to services running inside sandboxes."><meta property="og:url" content="https://developers.cloudflare.com/sandbox/concepts/preview-urls/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Sandbox SDK"><meta name="algolia_product_filter" content="Sandbox SDK"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Sandbox SDK"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/sandbox/concepts/preview-urls/#page","headline":"Preview URLs \u00b7 Cloudflare Sandbox SDK docs","description":"Sandbox SDK preview URLs provide public HTTPS access to services running inside sandboxes.","url":"https://developers.cloudflare.com/sandbox/concepts/preview-urls/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /sandbox/concepts/preview-urls/
+  schema: 1
+---
 <h2 id="quick-deployment">Quick deployment</h2>
 <p>For quick preview deployments we recommend using <a href="https://developers.cloudflare.com/tunnel/">Cloudflare Tunnel</a> to generate preview URLs to your web services. These work across local development, workers.dev and production usage.</p>
-<pre><code class="language-ts">await sandbox.startProcess(&quot;python -m http.server 8000&quot;);&#10;const tunnel = await sandbox.tunnels.get(8000);&#10;console.log(tunnel.url);&#10;// https://acute-llama-dancing-roundly.trycloudflare.app&#10;&#10;// Request will be routed directly to the webserver running on the sandbox.&#10;const req = await fetch(`${tunnel.url}/api/users`); // =&gt; GET http://localhost:8000/api/users&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">await sandbox.startProcess(&quot;python -m http.server 8000&quot;);&#10;const tunnel = await sandbox.tunnels.get(8000);&#10;console.log(tunnel.url);&#10;// https://acute-llama-dancing-roundly.trycloudflare.app&#10;&#10;// Request will be routed directly to the webserver running on the sandbox.&#10;const req = await fetch(`${tunnel.url}/api/users`); // =&gt; GET http://localhost:8000/api/users&#10;</code></pre>
 <p>Cloudflare Tunnel support currently has the following limitations:</p>
 <ul>
 <li>No control over generated URL.</li>
@@ -19,7 +30,7 @@
 @markup("md", "content/.markup/bodies/13572.md")
 </aside>
 <p>Preview URLs provide public HTTPS access to services running inside sandboxes. When you expose a port, you get a unique URL that proxies requests to your service.</p>
-<pre><code class="language-typescript">// Extract hostname from request&#10;const { hostname } = new URL(request.url);&#10;&#10;await sandbox.startProcess(&quot;python -m http.server 8000&quot;);&#10;const exposed = await sandbox.exposePort(8000, { hostname });&#10;&#10;console.log(exposed.url);&#10;// Production: https://8000-sandbox-id-abc123random4567.yourdomain.com&#10;// Local dev: http://8000-sandbox-id-abc123random4567.localhost:{port}/&#10;</code></pre>
+<pre tabindex="0"><code class="language-typescript">// Extract hostname from request&#10;const { hostname } = new URL(request.url);&#10;&#10;await sandbox.startProcess(&quot;python -m http.server 8000&quot;);&#10;const exposed = await sandbox.exposePort(8000, { hostname });&#10;&#10;console.log(exposed.url);&#10;// Production: https://8000-sandbox-id-abc123random4567.yourdomain.com&#10;// Local dev: http://8000-sandbox-id-abc123random4567.localhost:{port}/&#10;</code></pre>
 <h2 id="url-format">URL Format</h2>
 <p><strong>Production</strong>: <code>https://{port}-{sandbox-id}-{token}.yourdomain.com</code></p>
 <ul>
@@ -30,11 +41,11 @@
 <h2 id="token-types">Token Types</h2>
 <h3 id="auto-generated-tokens-default">Auto-generated tokens (default)</h3>
 <p>When no custom token is specified, a random 16-character token is generated:</p>
-<pre><code class="language-typescript">const exposed = await sandbox.exposePort(8000, { hostname });&#10;// https://8000-sandbox-id-abc123random4567.yourdomain.com&#10;</code></pre>
+<pre tabindex="0"><code class="language-typescript">const exposed = await sandbox.exposePort(8000, { hostname });&#10;// https://8000-sandbox-id-abc123random4567.yourdomain.com&#10;</code></pre>
 <p>URLs with auto-generated tokens change when you unexpose and re-expose a port.</p>
 <h3 id="custom-tokens-for-stable-urls">Custom tokens for stable URLs</h3>
 <p>For production deployments or shared URLs, specify a custom token to maintain consistency across container restarts:</p>
-<pre><code class="language-typescript">const stable = await sandbox.exposePort(8000, {&#10;	hostname,&#10;	token: &quot;api_v1&quot;,&#10;});&#10;// https://8000-sandbox-id-api_v1.yourdomain.com&#10;// Same URL every time ✓&#10;</code></pre>
+<pre tabindex="0"><code class="language-typescript">const stable = await sandbox.exposePort(8000, {&#10;	hostname,&#10;	token: &quot;api_v1&quot;,&#10;});&#10;// https://8000-sandbox-id-api_v1.yourdomain.com&#10;// Same URL every time ✓&#10;</code></pre>
 <p><strong>Token requirements:</strong></p>
 <ul>
 <li>1-16 characters long</li>
@@ -51,18 +62,18 @@
 <h2 id="id-case-sensitivity">ID Case Sensitivity</h2>
 <p>Preview URLs extract the sandbox ID from the hostname to route requests. Since hostnames are case-insensitive (per RFC 3986), they're always lowercased: <code>8080-MyProject-123.yourdomain.com</code> becomes <code>8080-myproject-123.yourdomain.com</code>.</p>
 <p><strong>The problem</strong>: If you create a sandbox with <code>&quot;MyProject-123&quot;</code>, it exists as a Durable Object with that exact ID. But the preview URL routes to <code>&quot;myproject-123&quot;</code> (lowercased from the hostname). These are different Durable Objects, so your sandbox is unreachable via preview URL.</p>
-<pre><code class="language-typescript">// Problem scenario&#10;const sandbox = getSandbox(env.Sandbox, &quot;MyProject-123&quot;);&#10;// Durable Object ID: &quot;MyProject-123&quot;&#10;await sandbox.exposePort(8080, { hostname });&#10;// Preview URL: 8080-myproject-123-token123.yourdomain.com&#10;// Routes to: &quot;myproject-123&quot; (different DO - doesn&#x27;t exist!)&#10;</code></pre>
+<pre tabindex="0"><code class="language-typescript">// Problem scenario&#10;const sandbox = getSandbox(env.Sandbox, &quot;MyProject-123&quot;);&#10;// Durable Object ID: &quot;MyProject-123&quot;&#10;await sandbox.exposePort(8080, { hostname });&#10;// Preview URL: 8080-myproject-123-token123.yourdomain.com&#10;// Routes to: &quot;myproject-123&quot; (different DO - doesn&#x27;t exist!)&#10;</code></pre>
 <p><strong>The solution</strong>: Use <code>normalizeId: true</code> to lowercase IDs when creating sandboxes:</p>
-<pre><code class="language-typescript">const sandbox = getSandbox(env.Sandbox, &quot;MyProject-123&quot;, {&#10;	normalizeId: true,&#10;});&#10;// Durable Object ID: &quot;myproject-123&quot; (lowercased)&#10;// Preview URL: 8080-myproject-123-token123.yourdomain.com&#10;// Routes to: &quot;myproject-123&quot; (same DO - works!)&#10;</code></pre>
+<pre tabindex="0"><code class="language-typescript">const sandbox = getSandbox(env.Sandbox, &quot;MyProject-123&quot;, {&#10;	normalizeId: true,&#10;});&#10;// Durable Object ID: &quot;myproject-123&quot; (lowercased)&#10;// Preview URL: 8080-myproject-123-token123.yourdomain.com&#10;// Routes to: &quot;myproject-123&quot; (same DO - works!)&#10;</code></pre>
 <p>Without <code>normalizeId: true</code>, <code>exposePort()</code> throws an error when the ID contains uppercase letters.</p>
 <p><strong>Best practice</strong>: Use lowercase IDs from the start (<code>'my-project-123'</code>). See <a href="/sandbox/configuration/sandbox-options/#normalizeid">Sandbox options - normalizeId</a> for details.</p>
 <h2 id="request-routing">Request Routing</h2>
 <p>You must call <code>proxyToSandbox()</code> first in your Worker's fetch handler to route preview URL requests:</p>
-<pre><code class="language-typescript">import { proxyToSandbox, getSandbox } from &quot;@cloudflare/sandbox&quot;;&#10;&#10;export { Sandbox } from &quot;@cloudflare/sandbox&quot;;&#10;&#10;export default {&#10;	async fetch(request, env) {&#10;		// Handle preview URL routing first&#10;		const proxyResponse = await proxyToSandbox(request, env);&#10;		if (proxyResponse) return proxyResponse;&#10;&#10;		// Your application routes&#10;		// ...&#10;	},&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-typescript">import { proxyToSandbox, getSandbox } from &quot;@cloudflare/sandbox&quot;;&#10;&#10;export { Sandbox } from &quot;@cloudflare/sandbox&quot;;&#10;&#10;export default {&#10;	async fetch(request, env) {&#10;		// Handle preview URL routing first&#10;		const proxyResponse = await proxyToSandbox(request, env);&#10;		if (proxyResponse) return proxyResponse;&#10;&#10;		// Your application routes&#10;		// ...&#10;	},&#10;};&#10;</code></pre>
 <p>Requests flow: Browser → Your Worker → Durable Object (sandbox) → Your Service.</p>
 <h2 id="multiple-ports">Multiple Ports</h2>
 <p>Expose multiple services simultaneously:</p>
-<pre><code class="language-typescript">// Extract hostname from request&#10;const { hostname } = new URL(request.url);&#10;&#10;await sandbox.startProcess(&quot;node api.js&quot;); // Port 3000&#10;await sandbox.startProcess(&quot;node admin.js&quot;); // Port 3001&#10;&#10;const api = await sandbox.exposePort(3000, { hostname, name: &quot;api&quot; });&#10;const admin = await sandbox.exposePort(3001, { hostname, name: &quot;admin&quot; });&#10;&#10;// Each gets its own URL with unique tokens:&#10;// https://3000-abc123-random16chars01.yourdomain.com&#10;// https://3001-abc123-random16chars02.yourdomain.com&#10;</code></pre>
+<pre tabindex="0"><code class="language-typescript">// Extract hostname from request&#10;const { hostname } = new URL(request.url);&#10;&#10;await sandbox.startProcess(&quot;node api.js&quot;); // Port 3000&#10;await sandbox.startProcess(&quot;node admin.js&quot;); // Port 3001&#10;&#10;const api = await sandbox.exposePort(3000, { hostname, name: &quot;api&quot; });&#10;const admin = await sandbox.exposePort(3001, { hostname, name: &quot;admin&quot; });&#10;&#10;// Each gets its own URL with unique tokens:&#10;// https://3000-abc123-random16chars01.yourdomain.com&#10;// https://3001-abc123-random16chars02.yourdomain.com&#10;</code></pre>
 <h2 id="what-works">What Works</h2>
 <ul>
 <li>HTTP/HTTPS requests</li>
@@ -80,7 +91,7 @@
 </ul>
 <h2 id="websocket-support">WebSocket Support</h2>
 <p>Preview URLs support WebSocket connections. When a WebSocket upgrade request hits an exposed port, the routing layer automatically handles the connection handshake.</p>
-<pre><code class="language-typescript">// Extract hostname from request&#10;const { hostname } = new URL(request.url);&#10;&#10;// Start a WebSocket server&#10;await sandbox.startProcess(&quot;bun run ws-server.ts 8080&quot;);&#10;const { url } = await sandbox.exposePort(8080, { hostname });&#10;&#10;// Clients connect using WebSocket protocol&#10;// Browser: new WebSocket(&#x27;wss://8080-abc123-token123.yourdomain.com&#x27;)&#10;&#10;// Your Worker routes automatically&#10;export default {&#10;	async fetch(request, env) {&#10;		const proxyResponse = await proxyToSandbox(request, env);&#10;		if (proxyResponse) return proxyResponse;&#10;	},&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-typescript">// Extract hostname from request&#10;const { hostname } = new URL(request.url);&#10;&#10;// Start a WebSocket server&#10;await sandbox.startProcess(&quot;bun run ws-server.ts 8080&quot;);&#10;const { url } = await sandbox.exposePort(8080, { hostname });&#10;&#10;// Clients connect using WebSocket protocol&#10;// Browser: new WebSocket(&#x27;wss://8080-abc123-token123.yourdomain.com&#x27;)&#10;&#10;// Your Worker routes automatically&#10;export default {&#10;	async fetch(request, env) {&#10;		const proxyResponse = await proxyToSandbox(request, env);&#10;		if (proxyResponse) return proxyResponse;&#10;	},&#10;};&#10;</code></pre>
 <p>For custom routing scenarios where your Worker needs to control which sandbox or port to connect to based on request properties, see <code>wsConnect()</code> in the <a href="/sandbox/api/ports/#wsconnect">Ports API</a>.</p>
 <h2 id="security">Security</h2>
 <aside class="nb-aside caution">
@@ -95,12 +106,12 @@
 </ul>
 <p><strong>Add application-level authentication</strong>:</p>
 <p>For additional security, implement authentication within your application:</p>
-<pre><code class="language-python">from flask import Flask, request, abort&#10;&#10;app = Flask(__name__)&#10;&#10;@app.route(&#x27;/data&#x27;)&#10;def get_data():&#10;    &#35; Check for your own authentication token&#10;    auth_token = request.headers.get(&#x27;Authorization&#x27;)&#10;    if auth_token != &#x27;Bearer your-secret-token&#x27;:&#10;        abort(401)&#10;    return {&#x27;data&#x27;: &#x27;protected&#x27;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-python">from flask import Flask, request, abort&#10;&#10;app = Flask(__name__)&#10;&#10;@app.route(&#x27;/data&#x27;)&#10;def get_data():&#10;    &#35; Check for your own authentication token&#10;    auth_token = request.headers.get(&#x27;Authorization&#x27;)&#10;    if auth_token != &#x27;Bearer your-secret-token&#x27;:&#10;        abort(401)&#10;    return {&#x27;data&#x27;: &#x27;protected&#x27;}&#10;</code></pre>
 <p>This adds a second layer of security on top of the URL token.</p>
 <h2 id="troubleshooting">Troubleshooting</h2>
 <h3 id="url-not-accessible">URL Not Accessible</h3>
 <p>Check if service is running and listening:</p>
-<pre><code class="language-typescript">// 1. Is service running?&#10;const processes = await sandbox.listProcesses();&#10;&#10;// 2. Is port exposed?&#10;const ports = await sandbox.getExposedPorts();&#10;&#10;// 3. Is service binding to 0.0.0.0 (not 127.0.0.1)?&#10;// Good:&#10;app.run((host = &quot;0.0.0.0&quot;), (port = 3000));&#10;&#10;// Bad (localhost only):&#10;app.run((host = &quot;127.0.0.1&quot;), (port = 3000));&#10;</code></pre>
+<pre tabindex="0"><code class="language-typescript">// 1. Is service running?&#10;const processes = await sandbox.listProcesses();&#10;&#10;// 2. Is port exposed?&#10;const ports = await sandbox.getExposedPorts();&#10;&#10;// 3. Is service binding to 0.0.0.0 (not 127.0.0.1)?&#10;// Good:&#10;app.run((host = &quot;0.0.0.0&quot;), (port = 3000));&#10;&#10;// Bad (localhost only):&#10;app.run((host = &quot;127.0.0.1&quot;), (port = 3000));&#10;</code></pre>
 <h3 id="production-errors">Production Errors</h3>
 <p>For custom domain issues, refer to <a href="/sandbox/guides/preview-urls-custom-domain/#troubleshooting">preview URL custom domain troubleshooting</a>.</p>
 <h3 id="local-development">Local Development</h3>

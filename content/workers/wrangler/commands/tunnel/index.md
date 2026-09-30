@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/workers/wrangler/commands/tunnel/
+  description: Wrangler commands for managing Cloudflare Tunnels.
+  full_title: Tunnel · Cloudflare Workers docs
+  head_html: <title>Tunnel · Cloudflare Workers docs</title><meta name="generator" content="Nift"><meta name="description" content="Wrangler commands for managing Cloudflare Tunnels."><link rel="canonical" href="https://developers.cloudflare.com/workers/wrangler/commands/tunnel/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/workers/wrangler/commands/tunnel/index.md"><meta property="og:title" content="Tunnel · Cloudflare Workers docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Wrangler commands for managing Cloudflare Tunnels."><meta property="og:url" content="https://developers.cloudflare.com/workers/wrangler/commands/tunnel/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Workers"><meta name="algolia_product_filter" content="Workers"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Workers"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/workers/wrangler/commands/tunnel/#page","headline":"Tunnel \u00b7 Cloudflare Workers docs","description":"Wrangler commands for managing Cloudflare Tunnels.","url":"https://developers.cloudflare.com/workers/wrangler/commands/tunnel/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /workers/wrangler/commands/tunnel/
+  schema: 1
+---
 <p>Manage <a href="/tunnel/">Cloudflare Tunnels</a> directly from Wrangler. Create, run, and manage tunnels that securely connect your local services to Cloudflare's network — no public IPs required.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/17429.md")
@@ -5,7 +16,7 @@
 <p>Wrangler manages the <a href="/tunnel/downloads/">cloudflared</a> binary automatically. On first use, Wrangler will prompt you to download <code>cloudflared</code> to a local cache directory. You can skip this by installing <code>cloudflared</code> yourself and adding it to your <code>PATH</code>, or by setting the <code>CLOUDFLARED_PATH</code> environment variable to point to an existing binary.</p>
 <h3 id="tunnel-create">tunnel create</h3>
 <p>Create a new remotely managed <a href="/tunnel/">Cloudflare Tunnel</a>.</p>
-<pre><code class="language-txt">wrangler tunnel create &lt;NAME&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">wrangler tunnel create &lt;NAME&gt;&#10;</code></pre>
 <ul>
 <li><code>NAME</code> <span class="nb-type">string</span> <span class="nb-metainfo">required</span>
 <ul>
@@ -15,8 +26,8 @@
 </ul>
 <p>Tunnels created via Wrangler are always <strong>remotely managed</strong> — configure them in the <a href="https://dash.cloudflare.com/?to=/:account/tunnels">Cloudflare dashboard</a> or via the API.</p>
 <p>After creation, use <code>wrangler tunnel run</code> with the tunnel ID to start the tunnel.</p>
-<pre><code class="language-sh">npx wrangler tunnel create my-app&#10;</code></pre>
-<pre><code class="language-sh">Creating tunnel &quot;my-app&quot;&#10;Created tunnel.&#10;ID: f70ff985-a4ef-4643-bbbc-4a0ed4fc8415&#10;Name: my-app&#10;&#10;To run this tunnel, configure its ingress rules in the Cloudflare dashboard, then run:&#10;   wrangler tunnel run f70ff985-a4ef-4643-bbbc-4a0ed4fc8415&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler tunnel create my-app&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">Creating tunnel &quot;my-app&quot;&#10;Created tunnel.&#10;ID: f70ff985-a4ef-4643-bbbc-4a0ed4fc8415&#10;Name: my-app&#10;&#10;To run this tunnel, configure its ingress rules in the Cloudflare dashboard, then run:&#10;   wrangler tunnel run f70ff985-a4ef-4643-bbbc-4a0ed4fc8415&#10;</code></pre>
 <p>The following global flags work on every command:</p>
 <ul>
 <li><code>--help</code> <span class="nb-type">boolean</span>
@@ -38,7 +49,7 @@
 <hr />
 <h3 id="tunnel-delete">tunnel delete</h3>
 <p>Delete a Cloudflare Tunnel from your account.</p>
-<pre><code class="language-txt">wrangler tunnel delete &lt;TUNNEL&gt; [OPTIONS]&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">wrangler tunnel delete &lt;TUNNEL&gt; [OPTIONS]&#10;</code></pre>
 <ul>
 <li><code>TUNNEL</code> <span class="nb-type">string</span> <span class="nb-metainfo">required</span>
 <ul>
@@ -54,8 +65,8 @@
 <aside class="nb-aside caution">
 @markup("md", "content/.markup/bodies/17428.md")
 </aside>
-<pre><code class="language-sh">npx wrangler tunnel delete f70ff985-a4ef-4643-bbbc-4a0ed4fc8415&#10;</code></pre>
-<pre><code class="language-sh">Are you sure you want to delete tunnel &quot;f70ff985-a4ef-4643-bbbc-4a0ed4fc8415&quot;? This action cannot be undone. (y/n)&#10;Deleting tunnel f70ff985-a4ef-4643-bbbc-4a0ed4fc8415&#10;Tunnel deleted.&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler tunnel delete f70ff985-a4ef-4643-bbbc-4a0ed4fc8415&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">Are you sure you want to delete tunnel &quot;f70ff985-a4ef-4643-bbbc-4a0ed4fc8415&quot;? This action cannot be undone. (y/n)&#10;Deleting tunnel f70ff985-a4ef-4643-bbbc-4a0ed4fc8415&#10;Tunnel deleted.&#10;</code></pre>
 <p>The following global flags work on every command:</p>
 <ul>
 <li><code>--help</code> <span class="nb-type">boolean</span>
@@ -77,7 +88,7 @@
 <hr />
 <h3 id="tunnel-info">tunnel info</h3>
 <p>Display details about a Cloudflare Tunnel, including its ID, name, status, and creation time.</p>
-<pre><code class="language-txt">wrangler tunnel info &lt;TUNNEL&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">wrangler tunnel info &lt;TUNNEL&gt;&#10;</code></pre>
 <ul>
 <li><code>TUNNEL</code> <span class="nb-type">string</span> <span class="nb-metainfo">required</span>
 <ul>
@@ -85,8 +96,8 @@
 </ul>
 </li>
 </ul>
-<pre><code class="language-sh">npx wrangler tunnel info f70ff985-a4ef-4643-bbbc-4a0ed4fc8415&#10;</code></pre>
-<pre><code class="language-sh">Getting tunnel details&#10;ID: f70ff985-a4ef-4643-bbbc-4a0ed4fc8415&#10;Name: my-app&#10;Status: healthy&#10;Created: 2025-01-15T10:30:00Z&#10;Type: cfd_tunnel&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler tunnel info f70ff985-a4ef-4643-bbbc-4a0ed4fc8415&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">Getting tunnel details&#10;ID: f70ff985-a4ef-4643-bbbc-4a0ed4fc8415&#10;Name: my-app&#10;Status: healthy&#10;Created: 2025-01-15T10:30:00Z&#10;Type: cfd_tunnel&#10;</code></pre>
 <p>The following global flags work on every command:</p>
 <ul>
 <li><code>--help</code> <span class="nb-type">boolean</span>
@@ -108,10 +119,10 @@
 <hr />
 <h3 id="tunnel-list">tunnel list</h3>
 <p>List all Cloudflare Tunnels in your account.</p>
-<pre><code class="language-txt">wrangler tunnel list&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">wrangler tunnel list&#10;</code></pre>
 <p>The output includes the tunnel ID, name, status, and creation date for each tunnel. Only non-deleted tunnels are shown.</p>
-<pre><code class="language-sh">npx wrangler tunnel list&#10;</code></pre>
-<pre><code class="language-sh">Listing Cloudflare Tunnels&#10;&#10;ID                                   Name       Status    Created&#10;f70ff985-a4ef-4643-bbbc-4a0ed4fc8415 my-app     healthy   2025-01-15T10:30:00Z&#10;550e8400-e29b-41d4-a716-446655440000 api-tunnel inactive  2025-01-10T15:45:00Z&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler tunnel list&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">Listing Cloudflare Tunnels&#10;&#10;ID                                   Name       Status    Created&#10;f70ff985-a4ef-4643-bbbc-4a0ed4fc8415 my-app     healthy   2025-01-15T10:30:00Z&#10;550e8400-e29b-41d4-a716-446655440000 api-tunnel inactive  2025-01-10T15:45:00Z&#10;</code></pre>
 <p>The following global flags work on every command:</p>
 <ul>
 <li><code>--help</code> <span class="nb-type">boolean</span>
@@ -133,7 +144,7 @@
 <hr />
 <h3 id="tunnel-run">tunnel run</h3>
 <p>Run a Cloudflare Tunnel using the <a href="/tunnel/downloads/">cloudflared</a> daemon. This starts a persistent connection between your local machine and Cloudflare's network.</p>
-<pre><code class="language-txt">wrangler tunnel run [TUNNEL] [OPTIONS]&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">wrangler tunnel run [TUNNEL] [OPTIONS]&#10;</code></pre>
 <ul>
 <li><code>TUNNEL</code> <span class="nb-type">string</span> <span class="nb-metainfo">optional</span>
 <ul>
@@ -154,9 +165,9 @@
 <p>Named tunnels are <strong>remotely managed</strong> — configure ingress rules (which local services to expose) in the <a href="https://dash.cloudflare.com/?to=/:account/tunnels">Cloudflare dashboard</a> or via the API before running the tunnel.</p>
 <p>There are two ways to run a tunnel:</p>
 <p><strong>By tunnel name or ID</strong> (fetches the token via the API):</p>
-<pre><code class="language-sh">npx wrangler tunnel run my-app&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler tunnel run my-app&#10;</code></pre>
 <p><strong>By token</strong> (no API authentication needed — useful for CI/CD or remote servers):</p>
-<pre><code class="language-sh">npx wrangler tunnel run --token eyJhIjoiNGE2MjY...&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler tunnel run --token eyJhIjoiNGE2MjY...&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/17427.md")
 </aside>
@@ -182,7 +193,7 @@
 <hr />
 <h3 id="tunnel-quick-start">tunnel quick-start</h3>
 <p>Start a free, temporary tunnel without a Cloudflare account using <a href="/tunnel/get-started/#quick-tunnels-development">Quick Tunnels</a>. This is useful for quick demos, testing webhooks, or sharing local development servers.</p>
-<pre><code class="language-txt">wrangler tunnel quick-start &lt;URL&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">wrangler tunnel quick-start &lt;URL&gt;&#10;</code></pre>
 <ul>
 <li><code>URL</code> <span class="nb-type">string</span> <span class="nb-metainfo">required</span>
 <ul>
@@ -191,8 +202,8 @@
 </li>
 </ul>
 <p>The tunnel is assigned a random <code>*.trycloudflare.com</code> subdomain and lasts for the duration of the process.</p>
-<pre><code class="language-sh">npx wrangler tunnel quick-start http://localhost:8080&#10;</code></pre>
-<pre><code class="language-sh">Starting quick tunnel to http://localhost:8080...&#10;Your tunnel URL: https://random-words-here.trycloudflare.com&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler tunnel quick-start http://localhost:8080&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">Starting quick tunnel to http://localhost:8080...&#10;Your tunnel URL: https://random-words-here.trycloudflare.com&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/17426.md")
 </aside>

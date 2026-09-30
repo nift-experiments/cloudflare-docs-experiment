@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/access-controls/access-settings/independent-mfa/
+  description: Independent MFA in Access.
+  full_title: Independent MFA · Cloudflare One docs
+  head_html: <title>Independent MFA · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="Independent MFA in Access."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/access-controls/access-settings/independent-mfa/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/access-controls/access-settings/independent-mfa/index.md"><meta property="og:title" content="Independent MFA · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Independent MFA in Access."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/access-controls/access-settings/independent-mfa/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Cloudflare One"><meta name="pcx_tags" content="Authentication"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/access-controls/access-settings/independent-mfa/#page","headline":"Independent MFA \u00b7 Cloudflare One docs","description":"Independent MFA in Access.","url":"https://developers.cloudflare.com/cloudflare-one/access-controls/access-settings/independent-mfa/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["Authentication"]}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/access-controls/access-settings/independent-mfa/
+  schema: 1
+---
 <p>Independent multi-factor authentication (MFA) allows you to enforce MFA requirements directly in Access without relying on your identity provider (IdP). Users authenticate with their IdP as usual, and Access prompts for an additional authentication method before granting access to the application.</p>
 <p>Because you can <a href="/cloudflare-one/access-controls/policies/mfa-requirements/#independent-mfa">configure MFA at the application and policy level</a>, you can enforce stricter authentication methods like hardware security keys on sensitive applications without requiring them across your entire organization. This allows you to add additional security where it matters most while avoiding MFA fatigue for your broader user population.</p>
 <h2 id="supported-mfa-methods">Supported MFA methods</h2>
@@ -206,19 +217,19 @@
 </aside>
 4.  If you already have an MFA device enrolled, complete the MFA verification prompt.
 5.  Select the authenticator type you want to enroll and follow the on-screen instructions.
-<pre><code>&lt;details class=&quot;nb-details&quot;&gt;&lt;summary&gt;Authenticator application&lt;/summary&gt;&lt;div class=&quot;nb-details-body&quot;&gt;&#10;</code></pre>
+<pre tabindex="0"><code>&lt;details class=&quot;nb-details&quot;&gt;&lt;summary&gt;Authenticator application&lt;/summary&gt;&lt;div class=&quot;nb-details-body&quot;&gt;&#10;</code></pre>
 @markup("md", "content/.markup/bodies/4767.md")
 </div></details>
-<pre><code>    &lt;details class=&quot;nb-details&quot;&gt;&lt;summary&gt;Security key&lt;/summary&gt;&lt;div class=&quot;nb-details-body&quot;&gt;&#10;</code></pre>
+<pre tabindex="0"><code>    &lt;details class=&quot;nb-details&quot;&gt;&lt;summary&gt;Security key&lt;/summary&gt;&lt;div class=&quot;nb-details-body&quot;&gt;&#10;</code></pre>
 @markup("md", "content/.markup/bodies/4768.md")
 </div></details>
-<pre><code>    &lt;details class=&quot;nb-details&quot;&gt;&lt;summary&gt;Biometrics&lt;/summary&gt;&lt;div class=&quot;nb-details-body&quot;&gt;&#10;</code></pre>
+<pre tabindex="0"><code>    &lt;details class=&quot;nb-details&quot;&gt;&lt;summary&gt;Biometrics&lt;/summary&gt;&lt;div class=&quot;nb-details-body&quot;&gt;&#10;</code></pre>
 @markup("md", "content/.markup/bodies/4769.md")
 </div></details>
-<pre><code>    &lt;details class=&quot;nb-details&quot;&gt;&lt;summary&gt;PIV key (infrastructure applications only)&lt;/summary&gt;&lt;div class=&quot;nb-details-body&quot;&gt;&#10;</code></pre>
+<pre tabindex="0"><code>    &lt;details class=&quot;nb-details&quot;&gt;&lt;summary&gt;PIV key (infrastructure applications only)&lt;/summary&gt;&lt;div class=&quot;nb-details-body&quot;&gt;&#10;</code></pre>
 @markup("md", "content/.markup/bodies/4770.md")
 </div></details>
-<pre><code>    &lt;details class=&quot;nb-details&quot;&gt;&lt;summary&gt;FIDO2 key (infrastructure applications only)&lt;/summary&gt;&lt;div class=&quot;nb-details-body&quot;&gt;&#10;</code></pre>
+<pre tabindex="0"><code>    &lt;details class=&quot;nb-details&quot;&gt;&lt;summary&gt;FIDO2 key (infrastructure applications only)&lt;/summary&gt;&lt;div class=&quot;nb-details-body&quot;&gt;&#10;</code></pre>
 @markup("md", "content/.markup/bodies/4771.md")
 </div></details>
 <p>You can now use these authenticators to log in to your organization's applications.</p>
@@ -242,22 +253,22 @@
 <h4 id="configure-your-ssh-client-for-a-fido2-key">Configure your SSH client for a FIDO2 key</h4>
 <p>The command creates the identity at <code>~/.ssh/id_ed25519_sk_cf</code>.</p>
 <p>Add the following configuration to your <code>~/.ssh/config</code> file:</p>
-<pre><code class="language-txt">Host *&#10;  IdentityFile ~/.ssh/id_ed25519_sk_cf&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">Host *&#10;  IdentityFile ~/.ssh/id_ed25519_sk_cf&#10;</code></pre>
 <p>Alternatively, supply the identity when you connect:</p>
-<pre><code class="language-sh">ssh -i ~/.ssh/id_ed25519_sk_cf &lt;username&gt;@&lt;target IP&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">ssh -i ~/.ssh/id_ed25519_sk_cf &lt;username&gt;@&lt;target IP&gt;&#10;</code></pre>
 <p>For more information on how OpenSSH uses FIDO2 hardware keys, refer to Yubico's <a href="https://developers.yubico.com/SSH/Securing_SSH_with_FIDO2.html">Securing SSH with FIDO2</a>.</p>
 <h3 id="enroll-a-piv-key-for-infrastructure-apps">Enroll a PIV key for infrastructure apps</h3>
 <p>PIV key enrollment is separate from the general authenticator enrollment above and requires additional client-side setup.</p>
 <p>Before enrolling, you must have a YubiKey with firmware 4.3 or later and a key generated in PIV slot <code>9a</code>. If you have not generated a PIV key yet, refer to <a href="#generate-a-piv-key">Generate a PIV key</a>.</p>
 <h4 id="generate-a-piv-key">Generate a PIV key</h4>
 <p>If you do not already have a PIV key on your YubiKey, generate one in slot <code>9a</code>:</p>
-<pre><code class="language-bash">ykman piv keys generate \&#10;  &#45;-algorithm ECCP256 \&#10;  &#45;-pin-policy once \&#10;  &#45;-touch-policy always \&#10;  9a pubkey.pem&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">ykman piv keys generate \&#10;  &#45;-algorithm ECCP256 \&#10;  &#45;-pin-policy once \&#10;  &#45;-touch-policy always \&#10;  9a pubkey.pem&#10;</code></pre>
 <p>Touch your YubiKey when it blinks to confirm key generation. Then create a self-signed certificate to make the key visible to SSH agents:</p>
-<pre><code class="language-bash">ykman piv certificates generate --subject &quot;CN=SSH-Identity&quot; 9a pubkey.pem&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">ykman piv certificates generate --subject &quot;CN=SSH-Identity&quot; 9a pubkey.pem&#10;</code></pre>
 <p>After generating the key, <a href="#generate-attestation-certificates">generate attestation certificates</a> and continue with enrollment.</p>
 <h4 id="generate-attestation-certificates">Generate attestation certificates</h4>
 <p>Attestation certificates prove that the key was generated on genuine hardware. Run the following commands to export them from your YubiKey:</p>
-<pre><code class="language-bash">ykman piv keys attest 9a leaf.pem&#10;ykman piv certificates export f9 intermediate.pem&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">ykman piv keys attest 9a leaf.pem&#10;ykman piv certificates export f9 intermediate.pem&#10;</code></pre>
 <ul>
 <li><code>leaf.pem</code> contains the public key and metadata for the key in slot <code>9a</code>.</li>
 <li><code>intermediate.pem</code> is the YubiKey attestation CA certificate.</li>
@@ -278,19 +289,19 @@
 <ol>
 <li>Install and start <code>yubikey-agent</code>:</li>
 </ol>
-<pre><code class="language-bash">brew install yubikey-agent&#10;brew services start yubikey-agent&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">brew install yubikey-agent&#10;brew services start yubikey-agent&#10;</code></pre>
 <ol start="2">
 <li>Extract the SSH public key from your leaf certificate:</li>
 </ol>
-<pre><code class="language-bash">openssl x509 -in leaf.pem -pubkey -noout | ssh-keygen -i -m PKCS8 -f /dev/stdin &gt; ~/.ssh/id_yubikey.pub&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">openssl x509 -in leaf.pem -pubkey -noout | ssh-keygen -i -m PKCS8 -f /dev/stdin &gt; ~/.ssh/id_yubikey.pub&#10;</code></pre>
 <ol start="3">
 <li>Add the following to your <code>~/.ssh/config</code>:</li>
 </ol>
-<pre><code class="language-txt">Host *&#10;  IdentityAgent /opt/homebrew/var/run/yubikey-agent.sock&#10;  IdentitiesOnly yes&#10;  AddKeysToAgent yes&#10;  IdentityFile ~/.ssh/id_yubikey.pub&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">Host *&#10;  IdentityAgent /opt/homebrew/var/run/yubikey-agent.sock&#10;  IdentitiesOnly yes&#10;  AddKeysToAgent yes&#10;  IdentityFile ~/.ssh/id_yubikey.pub&#10;</code></pre>
 <ol start="4">
 <li>Verify that the key is loaded:</li>
 </ol>
-<pre><code class="language-sh">ssh-add -L&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">ssh-add -L&#10;</code></pre>
 <p>The output should show an <code>ecdsa-sha2-nistp256</code> key.</p>
 <h3 id="delete-an-authenticator">Delete an authenticator</h3>
 <p>Users can delete their own authenticators from the App Launcher. If the user has at least one authenticator enrolled, Access requires them to <a href="#mfa-verification-for-authenticator-changes">verify with an existing MFA method</a> before they can remove a device.</p>

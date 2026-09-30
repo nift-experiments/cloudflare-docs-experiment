@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/workers/examples/cache-using-fetch/
+  description: Determine how to cache a resource by setting TTLs, custom cache keys, and cache headers in a fetch request.
+  full_title: Cache using fetch · Cloudflare Workers docs
+  head_html: <title>Cache using fetch · Cloudflare Workers docs</title><meta name="generator" content="Nift"><meta name="description" content="Determine how to cache a resource by setting TTLs, custom cache keys, and cache headers in a fetch request."><link rel="canonical" href="https://developers.cloudflare.com/workers/examples/cache-using-fetch/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/workers/examples/cache-using-fetch/index.md"><meta property="og:title" content="Cache using fetch · Cloudflare Workers docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Determine how to cache a resource by setting TTLs, custom cache keys, and cache headers in a fetch request."><meta property="og:url" content="https://developers.cloudflare.com/workers/examples/cache-using-fetch/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Workers"><meta name="algolia_product_filter" content="Workers"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Example"><meta name="algolia_content_type" content="Example"><meta name="pcx_additional_products" content="Workers"><meta name="pcx_tags" content="Caching,Middleware,JavaScript,TypeScript,Python,Rust"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/workers/examples/cache-using-fetch/#page","headline":"Cache using fetch \u00b7 Cloudflare Workers docs","description":"Determine how to cache a resource by setting TTLs, custom cache keys, and cache headers in a fetch request.","url":"https://developers.cloudflare.com/workers/examples/cache-using-fetch/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["Caching","Middleware","JavaScript","TypeScript","Python","Rust"]}</script>
+  markdown: true
+  noindex: false
+  route: /workers/examples/cache-using-fetch/
+  schema: 1
+---
 <p class="article-summary">Determine how to cache a resource by setting TTLs, custom cache keys, and cache headers in a fetch request.</p>
 <p>If you want to get started quickly, click on the button below.</p>
 <p><a href="https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/docs-examples/tree/main/workers/cache-using-fetch"><img src="https://deploy.workers.cloudflare.com/button" alt="Deploy to Cloudflare" /></a></p>
@@ -6,14 +17,14 @@
 @input("content/.markup/bodies/16508.md")
 </div></div>
 <h2 id="caching-html-resources">Caching HTML resources</h2>
-<pre><code class="language-js">// Force Cloudflare to cache an asset&#10;fetch(event.request, { cf: { cacheEverything: true } });&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">// Force Cloudflare to cache an asset&#10;fetch(event.request, { cf: { cacheEverything: true } });&#10;</code></pre>
 <p>Setting the cache level to <strong>Cache Everything</strong> will override the default cacheability of the asset. For time-to-live (TTL), Cloudflare will still rely on headers set by the origin.</p>
 <h2 id="custom-cache-keys">Custom cache keys</h2>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/16502.md")
 </aside>
 <p>A request's cache key is what determines if two requests are the same for caching purposes. If a request has the same cache key as some previous request, then Cloudflare can serve the same cached response for both. For more about cache keys, refer to the <a href="/cache/how-to/cache-keys/#create-custom-cache-keys">Create custom cache keys</a> documentation.</p>
-<pre><code class="language-js">// Set cache key for this request to &quot;some-string&quot;.&#10;fetch(event.request, { cf: { cacheKey: &quot;some-string&quot; } });&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">// Set cache key for this request to &quot;some-string&quot;.&#10;fetch(event.request, { cf: { cacheKey: &quot;some-string&quot; } });&#10;</code></pre>
 <p>Normally, Cloudflare computes the cache key for a request based on the request's URL. Sometimes, though, you may like different URLs to be treated as if they were the same for caching purposes. For example, if your website content is hosted from both Amazon S3 and Google Cloud Storage - you have the same content in both places, and you can use a Worker to randomly balance between the two. However, you do not want to end up caching two copies of your content. You could utilize custom cache keys to cache based on the original request URL rather than the subrequest URL:</p>
 <div class="nb-tabs" data-nb-tabs data-nb-sync-key="workersExamples"><div role="tablist" aria-label="Options" data-nb-tabs-list></div><div data-nb-tabs-panels>
 @input("content/.markup/bodies/16512.md")
@@ -26,7 +37,7 @@
 @markup("md", "content/.markup/bodies/16513.md")
 </div>
 <h2 id="override-based-on-origin-response-code">Override based on origin response code</h2>
-<pre><code class="language-js">// Force response to be cached for 86400 seconds for 200 status&#10;// codes, 1 second for 404, and do not cache 500 errors.&#10;fetch(request, {&#10;	cf: { cacheTtlByStatus: { &quot;200-299&quot;: 86400, 404: 1, &quot;500-599&quot;: 0 } },&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">// Force response to be cached for 86400 seconds for 200 status&#10;// codes, 1 second for 404, and do not cache 500 errors.&#10;fetch(request, {&#10;	cf: { cacheTtlByStatus: { &quot;200-299&quot;: 86400, 404: 1, &quot;500-599&quot;: 0 } },&#10;});&#10;</code></pre>
 <p>This option is a version of the <code>cacheTtl</code> feature which chooses a TTL based on the response's status code and does not automatically set <code>cacheEverything: true</code>. If the response to this request has a status code that matches, Cloudflare will cache for the instructed time, and override cache directives sent by the origin. You can review <a href="/workers/runtime-apis/request/#the-cf-property-requestinitcfproperties">details on the <code>cacheTtl</code> feature on the Request page</a>.</p>
 <h2 id="customize-cache-behavior-based-on-request-file-type">Customize cache behavior based on request file type</h2>
 <p>Using custom cache keys and overrides based on response code, you can write a Worker that sets the TTL based on the response status code from origin, and request file type.</p>
@@ -40,4 +51,4 @@ Currently Workers only support the <code>no-store</code> and <code>no-cache</cod
 When <code>no-store</code> is supplied the cache is bypassed on the way to the origin and the request is not cacheable.
 When <code>no-cache</code> is supplied the cache is forced to revalidate the currently cached response with the
 origin.</p>
-<pre><code class="language-js">fetch(request, { cache: &#x27;no-store&#x27;});&#10;fetch(request, { cache: &#x27;no-cache&#x27;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">fetch(request, { cache: &#x27;no-store&#x27;});&#10;fetch(request, { cache: &#x27;no-cache&#x27;});&#10;</code></pre>

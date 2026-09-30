@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/learning-paths/replace-vpn/connect-devices/install-agent/
+  description: Install the Cloudflare One device client.
+  full_title: Download and install the Cloudflare One Client · Cloudflare Learning Paths
+  head_html: <title>Download and install the Cloudflare One Client · Cloudflare Learning Paths</title><meta name="generator" content="Nift"><meta name="description" content="Install the Cloudflare One device client."><link rel="canonical" href="https://developers.cloudflare.com/learning-paths/replace-vpn/connect-devices/install-agent/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/learning-paths/replace-vpn/connect-devices/install-agent/index.md"><meta property="og:title" content="Download and install the Cloudflare One Client · Cloudflare Learning Paths"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Install the Cloudflare One device client."><meta property="og:url" content="https://developers.cloudflare.com/learning-paths/replace-vpn/connect-devices/install-agent/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Learning Paths"><meta name="algolia_product_filter" content="Learning Paths"><meta name="pcx_content_group" content="Docs collections"><meta name="pcx_content_type" content="Overview"><meta name="algolia_content_type" content="Overview"><meta name="pcx_additional_products" content="Cloudflare One,Access,Cloudflare Tunnel,Gateway"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://developers.cloudflare.com/learning-paths/replace-vpn/connect-devices/install-agent/#page","headline":"Download and install the Cloudflare One Client \u00b7 Cloudflare Learning Paths","description":"Install the Cloudflare One device client.","url":"https://developers.cloudflare.com/learning-paths/replace-vpn/connect-devices/install-agent/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /learning-paths/replace-vpn/connect-devices/install-agent/
+  schema: 1
+---
 <p>Most admins test by manually downloading the Cloudflare One Client and enrolling in your organization's Cloudflare Zero Trust instance.</p>
 <h2 id="install-the-cloudflare-one-client">Install the Cloudflare One Client</h2>
 <ol>
@@ -22,12 +33,12 @@
 <ol start="3">
 <li>
 <p>Manually install the Cloudflare One Client on the device.</p>
-<pre><code> &lt;details class=&quot;nb-details&quot;&gt;&lt;summary&gt;Window, macOS, and Linux&lt;/summary&gt;&lt;div class=&quot;nb-details-body&quot;&gt;&#10;</code></pre>
+<pre tabindex="0"><code> &lt;details class=&quot;nb-details&quot;&gt;&lt;summary&gt;Window, macOS, and Linux&lt;/summary&gt;&lt;div class=&quot;nb-details-body&quot;&gt;&#10;</code></pre>
 </li>
 </ol>
 @markup("md", "content/.markup/bodies/9912.md")
 </div></details>
-<pre><code>	&lt;details class=&quot;nb-details&quot;&gt;&lt;summary&gt;iOS, Android, and ChromeOS&lt;/summary&gt;&lt;div class=&quot;nb-details-body&quot;&gt;&#10;</code></pre>
+<pre tabindex="0"><code>	&lt;details class=&quot;nb-details&quot;&gt;&lt;summary&gt;iOS, Android, and ChromeOS&lt;/summary&gt;&lt;div class=&quot;nb-details-body&quot;&gt;&#10;</code></pre>
 @markup("md", "content/.markup/bodies/9914.md")
 </div></details>
 <p>The Cloudflare One Client should show as <strong>Connected</strong>. The device can now access private network resources that you have made available via Cloudflare Tunnel.</p>

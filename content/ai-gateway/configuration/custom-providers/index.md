@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/ai-gateway/configuration/custom-providers/
+  description: Create and manage custom AI providers for your account.
+  full_title: Custom Providers · Cloudflare AI Gateway docs
+  head_html: <title>Custom Providers · Cloudflare AI Gateway docs</title><meta name="generator" content="Nift"><meta name="description" content="Create and manage custom AI providers for your account."><link rel="canonical" href="https://developers.cloudflare.com/ai-gateway/configuration/custom-providers/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/ai-gateway/configuration/custom-providers/index.md"><meta property="og:title" content="Custom Providers · Cloudflare AI Gateway docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Create and manage custom AI providers for your account."><meta property="og:url" content="https://developers.cloudflare.com/ai-gateway/configuration/custom-providers/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="AI Gateway"><meta name="algolia_product_filter" content="AI Gateway"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Configuration"><meta name="algolia_content_type" content="Configuration"><meta name="pcx_additional_products" content="AI Gateway"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/ai-gateway/configuration/custom-providers/#page","headline":"Custom Providers \u00b7 Cloudflare AI Gateway docs","description":"Create and manage custom AI providers for your account.","url":"https://developers.cloudflare.com/ai-gateway/configuration/custom-providers/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /ai-gateway/configuration/custom-providers/
+  schema: 1
+---
 <h2 id="overview">Overview</h2>
 <p>Custom Providers allow you to integrate AI providers that are not natively supported by AI Gateway. This feature enables you to use AI Gateway's observability, caching, rate limiting, and other features with any AI provider that has an HTTPS API endpoint.</p>
 <h2 id="use-cases">Use cases</h2>
@@ -58,7 +69,7 @@
 <p>When AI Gateway receives a request for a custom provider, it constructs the upstream URL by combining the provider's configured <code>base_url</code> with the path that comes after <code>custom-{slug}/</code> in the gateway URL.</p>
 <p><strong>The <code>base_url</code> field should contain only the root domain</strong> (or domain with a fixed prefix) of the provider's API. Any API-specific path segments (like <code>/v1/chat/completions</code>) go in the request URL, not in <code>base_url</code>.</p>
 <p>The formula is:</p>
-<pre><code>Gateway URL:   https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/custom-{slug}/{provider-path}&#10;Upstream URL:  {base_url}/{provider-path}&#10;</code></pre>
+<pre tabindex="0"><code>Gateway URL:   https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/custom-{slug}/{provider-path}&#10;Upstream URL:  {base_url}/{provider-path}&#10;</code></pre>
 <p>Everything after <code>custom-{slug}/</code> in your request URL is appended directly to the <code>base_url</code> to form the final upstream URL. This means <code>{provider-path}</code> can include multiple path segments, query parameters, or any path structure your provider requires.</p>
 <h3 id="choosing-between-unified-api-and-provider-specific-endpoint">Choosing between Unified API and provider-specific endpoint</h3>
 <table>
@@ -96,10 +107,10 @@
 <p>Use the <strong>provider-specific endpoint</strong> when your custom provider uses a non-standard API path or request format. This gives you full control over both the URL path and the request body sent to the upstream provider.</p>
 <h3 id="via-unified-api">Via Unified API</h3>
 <p>The Unified API sends requests to the provider's chat completions endpoint using the OpenAI-compatible format. Specify the model using the format <code>custom-{slug}/{model-name}</code>.</p>
-<pre><code class="language-bash">&#35; Run `wrangler auth token` to get an auth token to replace $CF_AIG_TOKEN for use with the API.&#10;curl https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/compat/chat/completions \&#10;  &#45;H &quot;Authorization: Bearer $PROVIDER_API_KEY&quot; \&#10;  &#45;H &quot;cf-aig-authorization: Bearer $CF_AIG_TOKEN&quot; \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;model&quot;: &quot;custom-some-provider/model-name&quot;,&#10;    &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello!&quot;}]&#10;  }&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">&#35; Run `wrangler auth token` to get an auth token to replace $CF_AIG_TOKEN for use with the API.&#10;curl https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/compat/chat/completions \&#10;  &#45;H &quot;Authorization: Bearer $PROVIDER_API_KEY&quot; \&#10;  &#45;H &quot;cf-aig-authorization: Bearer $CF_AIG_TOKEN&quot; \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;model&quot;: &quot;custom-some-provider/model-name&quot;,&#10;    &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello!&quot;}]&#10;  }&#x27;&#10;</code></pre>
 <h3 id="via-provider-specific-endpoint">Via provider-specific endpoint</h3>
 <p>The provider-specific endpoint gives you full control over the upstream path. Everything after <code>custom-{slug}/</code> in the URL is appended to the <code>base_url</code>.</p>
-<pre><code class="language-bash">&#35; Run `wrangler auth token` to get an auth token to replace $CF_AIG_TOKEN for use with the API.&#10;curl https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/custom-some-provider/v1/chat/completions \&#10;  &#45;H &quot;Authorization: Bearer $PROVIDER_API_KEY&quot; \&#10;  &#45;H &quot;cf-aig-authorization: Bearer $CF_AIG_TOKEN&quot; \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;model&quot;: &quot;model-name&quot;,&#10;    &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello!&quot;}]&#10;  }&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">&#35; Run `wrangler auth token` to get an auth token to replace $CF_AIG_TOKEN for use with the API.&#10;curl https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/custom-some-provider/v1/chat/completions \&#10;  &#45;H &quot;Authorization: Bearer $PROVIDER_API_KEY&quot; \&#10;  &#45;H &quot;cf-aig-authorization: Bearer $CF_AIG_TOKEN&quot; \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;model&quot;: &quot;model-name&quot;,&#10;    &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello!&quot;}]&#10;  }&#x27;&#10;</code></pre>
 <p>If <code>base_url</code> is <code>https://api.myprovider.com</code>, this request is proxied to: <code>https://api.myprovider.com/v1/chat/completions</code></p>
 <h3 id="examples">Examples</h3>
 <p>The following examples show how to configure <code>base_url</code> and construct request URLs for different types of providers.</p>
@@ -111,7 +122,7 @@
 <li><code>base_url</code>: <code>https://api.example-provider.com</code></li>
 </ul>
 <p><strong>Provider-specific endpoint:</strong></p>
-<pre><code class="language-bash">curl https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/custom-my-openai-compat/v1/chat/completions \&#10;  &#45;H &quot;Authorization: Bearer $PROVIDER_API_KEY&quot; \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;model&quot;: &quot;example-model&quot;,&#10;    &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello!&quot;}]&#10;  }&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/custom-my-openai-compat/v1/chat/completions \&#10;  &#45;H &quot;Authorization: Bearer $PROVIDER_API_KEY&quot; \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;model&quot;: &quot;example-model&quot;,&#10;    &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello!&quot;}]&#10;  }&#x27;&#10;</code></pre>
 <p><strong>URL mapping:</strong></p>
 <table>
 <thead>
@@ -140,7 +151,7 @@
 </tbody>
 </table>
 <p>Since this provider is OpenAI-compatible, you could also use the Unified API:</p>
-<pre><code class="language-bash">curl https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/compat/chat/completions \&#10;  &#45;H &quot;Authorization: Bearer $PROVIDER_API_KEY&quot; \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;model&quot;: &quot;custom-my-openai-compat/example-model&quot;,&#10;    &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello!&quot;}]&#10;  }&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/compat/chat/completions \&#10;  &#45;H &quot;Authorization: Bearer $PROVIDER_API_KEY&quot; \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;model&quot;: &quot;custom-my-openai-compat/example-model&quot;,&#10;    &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello!&quot;}]&#10;  }&#x27;&#10;</code></pre>
 <h4 id="example-2-provider-with-a-non-standard-api-path">Example 2: Provider with a non-standard API path</h4>
 <p>Some providers use API paths that don't follow the <code>/v1/</code> convention. For example, a provider whose chat endpoint is at <code>https://api.custom-ai.com/api/coding/paas/v4/chat/completions</code>.</p>
 <p><strong>Configuration:</strong></p>
@@ -149,7 +160,7 @@
 <li><code>base_url</code>: <code>https://api.custom-ai.com</code></li>
 </ul>
 <p><strong>Provider-specific endpoint:</strong></p>
-<pre><code class="language-bash">curl https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/custom-custom-ai/api/coding/paas/v4/chat/completions \&#10;  &#45;H &quot;Authorization: Bearer $PROVIDER_API_KEY&quot; \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;model&quot;: &quot;custom-ai-model&quot;,&#10;    &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello!&quot;}]&#10;  }&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/custom-custom-ai/api/coding/paas/v4/chat/completions \&#10;  &#45;H &quot;Authorization: Bearer $PROVIDER_API_KEY&quot; \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;model&quot;: &quot;custom-ai-model&quot;,&#10;    &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello!&quot;}]&#10;  }&#x27;&#10;</code></pre>
 <p><strong>URL mapping:</strong></p>
 <table>
 <thead>
@@ -188,7 +199,7 @@
 <li><code>base_url</code>: <code>https://ml.internal.example.com</code></li>
 </ul>
 <p><strong>Provider-specific endpoint:</strong></p>
-<pre><code class="language-bash">curl https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/custom-internal-llm/serving/models/my-model:predict \&#10;  &#45;H &quot;Authorization: Bearer $INTERNAL_API_KEY&quot; \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;instances&quot;: [{&quot;prompt&quot;: &quot;Summarize the following text:&quot;}]&#10;  }&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/custom-internal-llm/serving/models/my-model:predict \&#10;  &#45;H &quot;Authorization: Bearer $INTERNAL_API_KEY&quot; \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;instances&quot;: [{&quot;prompt&quot;: &quot;Summarize the following text:&quot;}]&#10;  }&#x27;&#10;</code></pre>
 <p><strong>URL mapping:</strong></p>
 <table>
 <thead>
@@ -224,7 +235,7 @@
 <li><code>base_url</code>: <code>https://api.alt-provider.com</code></li>
 </ul>
 <p><strong>Python (OpenAI SDK):</strong></p>
-<pre><code class="language-python">from openai import OpenAI&#10;&#10;client = OpenAI(&#10;    api_key=&quot;your-provider-api-key&quot;,&#10;    base_url=&quot;https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/custom-alt-provider/v1&quot;,&#10;    default_headers={&#10;        &quot;cf-aig-authorization&quot;: &quot;Bearer {cf_aig_token}&quot;,&#10;    },&#10;)&#10;&#10;&#35; The SDK appends /chat/completions to the base_url automatically.&#10;&#35; Final upstream URL: https://api.alt-provider.com/v1/chat/completions&#10;response = client.chat.completions.create(&#10;    model=&quot;alt-model-v2&quot;,&#10;    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello!&quot;}],&#10;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-python">from openai import OpenAI&#10;&#10;client = OpenAI(&#10;    api_key=&quot;your-provider-api-key&quot;,&#10;    base_url=&quot;https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/custom-alt-provider/v1&quot;,&#10;    default_headers={&#10;        &quot;cf-aig-authorization&quot;: &quot;Bearer {cf_aig_token}&quot;,&#10;    },&#10;)&#10;&#10;&#35; The SDK appends /chat/completions to the base_url automatically.&#10;&#35; Final upstream URL: https://api.alt-provider.com/v1/chat/completions&#10;response = client.chat.completions.create(&#10;    model=&quot;alt-model-v2&quot;,&#10;    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello!&quot;}],&#10;)&#10;</code></pre>
 <p><strong>URL mapping:</strong></p>
 <table>
 <thead>
@@ -262,13 +273,13 @@
 </table>
 <h2 id="common-errors">Common errors</h2>
 <h3 id="409-conflict-duplicate-slug">409 Conflict - Duplicate slug</h3>
-<pre><code class="language-json">{&#10;	&quot;success&quot;: false,&#10;	&quot;errors&quot;: [&#10;		{&#10;			&quot;code&quot;: 1003,&#10;			&quot;message&quot;: &quot;A custom provider with this slug already exists&quot;,&#10;			&quot;path&quot;: [&quot;body&quot;, &quot;slug&quot;]&#10;		}&#10;	]&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;success&quot;: false,&#10;	&quot;errors&quot;: [&#10;		{&#10;			&quot;code&quot;: 1003,&#10;			&quot;message&quot;: &quot;A custom provider with this slug already exists&quot;,&#10;			&quot;path&quot;: [&quot;body&quot;, &quot;slug&quot;]&#10;		}&#10;	]&#10;}&#10;</code></pre>
 <p>Each custom provider slug must be unique within your account. Choose a different slug or update the existing provider.</p>
 <h3 id="404-not-found">404 Not Found</h3>
-<pre><code class="language-json">{&#10;	&quot;success&quot;: false,&#10;	&quot;errors&quot;: [&#10;		{&#10;			&quot;code&quot;: 1004,&#10;			&quot;message&quot;: &quot;Custom Provider not found&quot;&#10;		}&#10;	]&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;success&quot;: false,&#10;	&quot;errors&quot;: [&#10;		{&#10;			&quot;code&quot;: 1004,&#10;			&quot;message&quot;: &quot;Custom Provider not found&quot;&#10;		}&#10;	]&#10;}&#10;</code></pre>
 <p>The specified provider ID does not exist or you don't have access to it. Verify the provider ID and your authentication credentials.</p>
 <h3 id="400-bad-request-invalid-base-url">400 Bad Request - Invalid base_url</h3>
-<pre><code class="language-json">{&#10;	&quot;success&quot;: false,&#10;	&quot;errors&quot;: [&#10;		{&#10;			&quot;code&quot;: 1002,&#10;			&quot;message&quot;: &quot;base_url must be a valid HTTPS URL starting with https://&quot;,&#10;			&quot;path&quot;: [&quot;body&quot;, &quot;base_url&quot;]&#10;		}&#10;	]&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;success&quot;: false,&#10;	&quot;errors&quot;: [&#10;		{&#10;			&quot;code&quot;: 1002,&#10;			&quot;message&quot;: &quot;base_url must be a valid HTTPS URL starting with https://&quot;,&#10;			&quot;path&quot;: [&quot;body&quot;, &quot;base_url&quot;]&#10;		}&#10;	]&#10;}&#10;</code></pre>
 <p>The <code>base_url</code> field must be a valid HTTPS URL. HTTP URLs are not supported for security reasons.</p>
 <h3 id="404-when-making-requests-to-a-custom-provider">404 when making requests to a custom provider</h3>
 <p>If you receive a 404 from the upstream provider, the most common cause is an incorrect path mapping. Verify that:</p>

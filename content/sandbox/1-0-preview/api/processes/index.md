@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/sandbox/1-0-preview/api/processes/
+  description: Reference for argv exec, SandboxProcess handles, logs, waits, and related types in the Sandbox SDK 1.0 preview.
+  full_title: Processes · Cloudflare Sandbox SDK docs
+  head_html: <title>Processes · Cloudflare Sandbox SDK docs</title><meta name="generator" content="Nift"><meta name="description" content="Reference for argv exec, SandboxProcess handles, logs, waits, and related types in the Sandbox SDK 1.0 preview."><link rel="canonical" href="https://developers.cloudflare.com/sandbox/1-0-preview/api/processes/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/sandbox/1-0-preview/api/processes/index.md"><meta property="og:title" content="Processes · Cloudflare Sandbox SDK docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Reference for argv exec, SandboxProcess handles, logs, waits, and related types in the Sandbox SDK 1.0 preview."><meta property="og:url" content="https://developers.cloudflare.com/sandbox/1-0-preview/api/processes/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Sandbox SDK"><meta name="algolia_product_filter" content="Sandbox SDK"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Sandbox SDK"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/sandbox/1-0-preview/api/processes/#page","headline":"Processes \u00b7 Cloudflare Sandbox SDK docs","description":"Reference for argv exec, SandboxProcess handles, logs, waits, and related types in the Sandbox SDK 1.0 preview.","url":"https://developers.cloudflare.com/sandbox/1-0-preview/api/processes/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /sandbox/1-0-preview/api/processes/
+  schema: 1
+---
 <aside class="nb-aside note">
 <h3 class="nb-aside-title" id="path-to-sandbox-sdk-1-0">Path to Sandbox SDK 1.0</h3>
 @markup("md", "content/.markup/bodies/13761.md")
@@ -7,9 +18,9 @@
 <p>Process handles have <strong>no standard input</strong>. Use <code>cwd</code>, <code>env</code>, and argv (or an explicit shell script) for non-interactive work. Use a <a href="/sandbox/1-0-preview/terminals/">terminal</a> when you need an interactive PTY.</p>
 <h2 id="exec"><code>exec()</code></h2>
 <p>Start a process from <strong>argv</strong> (executable, then arguments). Resolves when launch succeeds, not when the process exits. The SDK does not run a shell and does not shell-escape argv — each entry is one process argument.</p>
-<pre><code class="language-ts">exec(command: SandboxCommand, options?: ExecOptions): Promise&lt;SandboxProcess&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">exec(command: SandboxCommand, options?: ExecOptions): Promise&lt;SandboxProcess&gt;&#10;</code></pre>
 <h3 id="sandboxcommand"><code>SandboxCommand</code></h3>
-<pre><code class="language-ts">type SandboxCommand = readonly [executable: string, ...args: string[]];&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">type SandboxCommand = readonly [executable: string, ...args: string[]];&#10;</code></pre>
 <ul>
 <li><code>command[0]</code> must be a non-empty executable path or name.</li>
 <li>Later arguments may be empty strings.</li>
@@ -51,11 +62,11 @@
 <h2 id="getprocess"><code>getProcess()</code></h2>
 <p>Return a handle for a process running in the <strong>current container</strong> for this sandbox, or <code>null</code>.</p>
 <p>Does not start a container if none is running. Returns <code>null</code> when no container is up, when the process ID is unknown in the current container, or when that process belonged to a previous container for the same sandbox ID.</p>
-<pre><code class="language-ts">getProcess(id: string): Promise&lt;SandboxProcess | null&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">getProcess(id: string): Promise&lt;SandboxProcess | null&gt;&#10;</code></pre>
 <p>Process IDs are not durable across container stop or replace. Refer to <a href="/sandbox/1-0-preview/processes/#how-long-a-process-lives">How long a process lives</a>.</p>
 <h2 id="listprocesses"><code>listProcesses()</code></h2>
 <p>List processes in the current container for this sandbox. Does not start a container if none is running. Returns an empty list when no container is up.</p>
-<pre><code class="language-ts">listProcesses(): Promise&lt;ProcessStatus[]&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">listProcesses(): Promise&lt;ProcessStatus[]&gt;&#10;</code></pre>
 <p>Each entry is a <a href="#processstatus">ProcessStatus</a> value (the same shape as <code>status()</code>).</p>
 <h2 id="sandboxprocess"><code>SandboxProcess</code></h2>
 <table>
@@ -110,13 +121,13 @@
 </table>
 <p>There is no process stdin API on this handle.</p>
 <h3 id="status"><code>status()</code></h3>
-<pre><code class="language-ts">status(): Promise&lt;ProcessStatus&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">status(): Promise&lt;ProcessStatus&gt;&#10;</code></pre>
 <p>Refer to <a href="#processstatus">ProcessStatus</a>. A process stays <code>running</code> until the supervised <strong>process group</strong> has settled, even if the root pid exits while descendants continue.</p>
 <h3 id="output"><code>output()</code></h3>
 <p>Buffer stdout and stderr until the process completes (or the local wait ends), then return exit metadata.</p>
-<pre><code class="language-ts">output(options?: ProcessOutputOptions): Promise&lt;ProcessOutput&lt;Uint8Array&gt;&gt;&#10;output(&#10;	options: ProcessOutputOptions &amp; { encoding: &quot;utf8&quot; },&#10;): Promise&lt;ProcessOutput&lt;string&gt;&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">output(options?: ProcessOutputOptions): Promise&lt;ProcessOutput&lt;Uint8Array&gt;&gt;&#10;output(&#10;	options: ProcessOutputOptions &amp; { encoding: &quot;utf8&quot; },&#10;): Promise&lt;ProcessOutput&lt;string&gt;&gt;&#10;</code></pre>
 <h4 id="processoutput"><code>ProcessOutput</code></h4>
-<pre><code class="language-ts">interface ProcessOutput&lt;T = Uint8Array&gt; {&#10;	stdout: T;&#10;	stderr: T;&#10;	exitCode: number;&#10;	signal?: number;&#10;	timedOut: boolean;&#10;	truncated: boolean;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">interface ProcessOutput&lt;T = Uint8Array&gt; {&#10;	stdout: T;&#10;	stderr: T;&#10;	exitCode: number;&#10;	signal?: number;&#10;	timedOut: boolean;&#10;	truncated: boolean;&#10;}&#10;</code></pre>
 <p>Default body encoding is binary (<code>Uint8Array</code>) unless you pass <code>encoding: &quot;utf8&quot;</code>. Prefer <code>logs()</code> when output may exceed what you want to buffer.</p>
 <h4 id="processoutputoptions"><code>ProcessOutputOptions</code></h4>
 <table>
@@ -156,7 +167,7 @@
 </div>
 <h3 id="logs"><code>logs()</code></h3>
 <p>Stream replayable log events with an opaque cursor.</p>
-<pre><code class="language-ts">logs(options?: ProcessLogsOptions): Promise&lt;ReadableStream&lt;ProcessLogEvent&gt;&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">logs(options?: ProcessLogsOptions): Promise&lt;ReadableStream&lt;ProcessLogEvent&gt;&gt;&#10;</code></pre>
 <h4 id="processlogsoptions"><code>ProcessLogsOptions</code></h4>
 <table>
 <thead>
@@ -190,14 +201,14 @@
 </tbody>
 </table>
 <h4 id="processlogevent"><code>ProcessLogEvent</code></h4>
-<pre><code class="language-ts">type ProcessLogEvent =&#10;	| {&#10;			type: &quot;stdout&quot; | &quot;stderr&quot;;&#10;			cursor: string;&#10;			timestamp: string;&#10;			data: Uint8Array;&#10;	  }&#10;	| {&#10;			type: &quot;terminal&quot;;&#10;			state: &quot;exited&quot;;&#10;			cursor: string;&#10;			timestamp: string;&#10;			exit: ProcessExit;&#10;	  }&#10;	| {&#10;			type: &quot;terminal&quot;;&#10;			state: &quot;error&quot;;&#10;			cursor: string;&#10;			timestamp: string;&#10;			error: ProcessFailure;&#10;	  }&#10;	| {&#10;			type: &quot;truncated&quot;;&#10;			cursor?: string;&#10;			timestamp: string;&#10;	  };&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">type ProcessLogEvent =&#10;	| {&#10;			type: &quot;stdout&quot; | &quot;stderr&quot;;&#10;			cursor: string;&#10;			timestamp: string;&#10;			data: Uint8Array;&#10;	  }&#10;	| {&#10;			type: &quot;terminal&quot;;&#10;			state: &quot;exited&quot;;&#10;			cursor: string;&#10;			timestamp: string;&#10;			exit: ProcessExit;&#10;	  }&#10;	| {&#10;			type: &quot;terminal&quot;;&#10;			state: &quot;error&quot;;&#10;			cursor: string;&#10;			timestamp: string;&#10;			error: ProcessFailure;&#10;	  }&#10;	| {&#10;			type: &quot;truncated&quot;;&#10;			cursor?: string;&#10;			timestamp: string;&#10;	  };&#10;</code></pre>
 <p>Retain the latest <code>cursor</code> from delivered events if a later Worker request resumes with <code>logs({ since: cursor, replay: true, follow: true })</code> on the <strong>same</strong> process in the <strong>same</strong> container.</p>
 <div class="nb-type-script-example">
 @markup("md", "content/.markup/bodies/13764.md")
 </div>
 <h3 id="waitforexit"><code>waitForExit()</code></h3>
 <p>Wait until the supervised process group settles.</p>
-<pre><code class="language-ts">waitForExit(options?: {&#10;	timeout?: number;&#10;	signal?: AbortSignal;&#10;}): Promise&lt;ProcessExit&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">waitForExit(options?: {&#10;	timeout?: number;&#10;	signal?: AbortSignal;&#10;}): Promise&lt;ProcessExit&gt;&#10;</code></pre>
 <table>
 <thead>
 <tr>
@@ -225,7 +236,7 @@
 </div>
 <h3 id="waitforlog"><code>waitForLog()</code></h3>
 <p>Wait until stdout and/or stderr matches a pattern.</p>
-<pre><code class="language-ts">waitForLog(&#10;	pattern: string | RegExp,&#10;	options?: WaitForLogOptions,&#10;): Promise&lt;WaitForLogResult&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">waitForLog(&#10;	pattern: string | RegExp,&#10;	options?: WaitForLogOptions,&#10;): Promise&lt;WaitForLogResult&gt;&#10;</code></pre>
 <h4 id="waitforlogoptions"><code>WaitForLogOptions</code></h4>
 <table>
 <thead>
@@ -254,7 +265,7 @@
 </tbody>
 </table>
 <h4 id="waitforlogresult"><code>WaitForLogResult</code></h4>
-<pre><code class="language-ts">interface WaitForLogResult {&#10;	stream: &quot;stdout&quot; | &quot;stderr&quot;;&#10;	text: string;&#10;	match: string;&#10;	cursor?: string;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">interface WaitForLogResult {&#10;	stream: &quot;stdout&quot; | &quot;stderr&quot;;&#10;	text: string;&#10;	match: string;&#10;	cursor?: string;&#10;}&#10;</code></pre>
 <ul>
 <li><code>text</code> is the matching window of decoded output for that stream.</li>
 <li><code>match</code> is the matched substring.</li>
@@ -266,7 +277,7 @@
 </div>
 <h3 id="waitforport"><code>waitForPort()</code></h3>
 <p>Wait until a port is ready, or fail if the process exits first or the local wait ends.</p>
-<pre><code class="language-ts">waitForPort(port: number, options?: WaitForPortOptions): Promise&lt;void&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">waitForPort(port: number, options?: WaitForPortOptions): Promise&lt;void&gt;&#10;</code></pre>
 <h4 id="waitforportoptions"><code>WaitForPortOptions</code></h4>
 <table>
 <thead>
@@ -325,21 +336,21 @@
 </ul>
 <h3 id="kill"><code>kill()</code></h3>
 <p>Send a numeric signal to the process.</p>
-<pre><code class="language-ts">kill(signal?: number): Promise&lt;void&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">kill(signal?: number): Promise&lt;void&gt;&#10;</code></pre>
 <p>Default <code>signal</code> is <code>15</code> (<code>SIGTERM</code>). Pass a numeric signal only (for example <code>9</code> for <code>SIGKILL</code>). String signal names are not accepted.</p>
 <p>Stopping the process is separate from cancelling a local wait or log subscription.</p>
 <h3 id="exitcode"><code>exitCode</code></h3>
-<pre><code class="language-ts">readonly exitCode: Promise&lt;number&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">readonly exitCode: Promise&lt;number&gt;&#10;</code></pre>
 <p>Resolves to the exit code when the supervised process group has settled (the same completion boundary as <code>waitForExit()</code>). Prefer <code>waitForExit()</code> when you also need <code>signal</code> or <code>timedOut</code>.</p>
 <h2 id="processstatus">ProcessStatus</h2>
-<pre><code class="language-ts">type ProcessStatus =&#10;	| {&#10;			state: &quot;running&quot;;&#10;			id: string;&#10;			pid: number;&#10;			command: SandboxCommand;&#10;			cwd?: string;&#10;			startedAt: string;&#10;	  }&#10;	| {&#10;			state: &quot;exited&quot;;&#10;			id: string;&#10;			pid: number;&#10;			command: SandboxCommand;&#10;			cwd?: string;&#10;			startedAt: string;&#10;			endedAt: string;&#10;			exit: ProcessExit;&#10;	  }&#10;	| {&#10;			state: &quot;error&quot;;&#10;			id: string;&#10;			pid: number;&#10;			command: SandboxCommand;&#10;			cwd?: string;&#10;			startedAt: string;&#10;			endedAt: string;&#10;			error: ProcessFailure;&#10;	  };&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">type ProcessStatus =&#10;	| {&#10;			state: &quot;running&quot;;&#10;			id: string;&#10;			pid: number;&#10;			command: SandboxCommand;&#10;			cwd?: string;&#10;			startedAt: string;&#10;	  }&#10;	| {&#10;			state: &quot;exited&quot;;&#10;			id: string;&#10;			pid: number;&#10;			command: SandboxCommand;&#10;			cwd?: string;&#10;			startedAt: string;&#10;			endedAt: string;&#10;			exit: ProcessExit;&#10;	  }&#10;	| {&#10;			state: &quot;error&quot;;&#10;			id: string;&#10;			pid: number;&#10;			command: SandboxCommand;&#10;			cwd?: string;&#10;			startedAt: string;&#10;			endedAt: string;&#10;			error: ProcessFailure;&#10;	  };&#10;</code></pre>
 <p><code>listProcesses()</code> returns <code>ProcessStatus[]</code> using this shape.</p>
 <h3 id="processexit"><code>ProcessExit</code></h3>
 <p>Outcome observed for the <strong>root</strong> subprocess when the supervised group settles.</p>
-<pre><code class="language-ts">interface ProcessExit {&#10;	code: number;&#10;	signal?: number;&#10;	timedOut: boolean;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">interface ProcessExit {&#10;	code: number;&#10;	signal?: number;&#10;	timedOut: boolean;&#10;}&#10;</code></pre>
 <p>Signals delivered only to descendants do not rewrite this outcome. Refer to <a href="/sandbox/1-0-preview/processes/">Process execution</a>.</p>
 <h3 id="processfailure"><code>ProcessFailure</code></h3>
-<pre><code class="language-ts">interface ProcessFailure {&#10;	code: string;&#10;	message: string;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">interface ProcessFailure {&#10;	code: string;&#10;	message: string;&#10;}&#10;</code></pre>
 <h2 id="common-errors">Common errors</h2>
 <p><code>getProcess</code> and <code>listProcesses</code> do not throw for missing work. They return <code>null</code> or <code>[]</code> when no container is up, the ID is unknown in the current container, or the process belonged to a previous container. The following error classes apply to operations on a process handle (and to launch), not to those lookups.</p>
 <table>

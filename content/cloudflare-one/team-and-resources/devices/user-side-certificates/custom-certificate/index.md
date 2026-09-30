@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/user-side-certificates/custom-certificate/
+  description: Configure the Cloudflare One Client to use a custom root certificate instead of the Cloudflare certificate.
+  full_title: Deploy custom certificate · Cloudflare One docs
+  head_html: <title>Deploy custom certificate · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="Configure the Cloudflare One Client to use a custom root certificate instead of the Cloudflare certificate."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/user-side-certificates/custom-certificate/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/user-side-certificates/custom-certificate/index.md"><meta property="og:title" content="Deploy custom certificate · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Configure the Cloudflare One Client to use a custom root certificate instead of the Cloudflare certificate."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/user-side-certificates/custom-certificate/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Cloudflare One"><meta name="pcx_tags" content="TLS,Python"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/user-side-certificates/custom-certificate/#page","headline":"Deploy custom certificate \u00b7 Cloudflare One docs","description":"Configure the Cloudflare One Client to use a custom root certificate instead of the Cloudflare certificate.","url":"https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/user-side-certificates/custom-certificate/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["TLS","Python"]}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/team-and-resources/devices/user-side-certificates/custom-certificate/
+  schema: 1
+---
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/6043.md")
 </aside>
@@ -16,12 +27,12 @@
 <p>(Optional) Create a directory for the root CA and change into it.</p>
 </li>
 </ol>
-<pre><code class="language-sh">mkdir -p /root/customca&#10;cd /root/customca&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">mkdir -p /root/customca&#10;cd /root/customca&#10;</code></pre>
 <p>You can generate the certificate files in any directory. This step keeps things organized. If you skip it, files will be created in your current working directory.</p>
 <ol start="3">
 <li>Generate a private key for the root CA.</li>
 </ol>
-<pre><code class="language-sh">openssl genrsa -out &lt;CUSTOM-ROOT-PRIVATE-KEY&gt;.pem 2048&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">openssl genrsa -out &lt;CUSTOM-ROOT-PRIVATE-KEY&gt;.pem 2048&#10;</code></pre>
 <p>The <code>2048</code> value specifies the RSA key size in bits. You can use <code>4096</code> for stronger security at the cost of slightly slower TLS handshakes.</p>
 <aside class="nb-aside caution">
 @markup("md", "content/.markup/bodies/6041.md")
@@ -29,7 +40,7 @@
 <ol start="4">
 <li>Generate a self-signed root certificate.</li>
 </ol>
-<pre><code class="language-sh">openssl req -x509 -sha256 -new -nodes \&#10;  &#45;key &lt;CUSTOM-ROOT-PRIVATE-KEY&gt;.pem \&#10;  &#45;days 365 \&#10;  &#45;out &lt;CUSTOM-ROOT-CERT&gt;.pem \&#10;  &#45;addext &quot;basicConstraints=critical,CA:TRUE&quot; \&#10;  &#45;addext &quot;keyUsage=critical,keyCertSign,cRLSign&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">openssl req -x509 -sha256 -new -nodes \&#10;  &#45;key &lt;CUSTOM-ROOT-PRIVATE-KEY&gt;.pem \&#10;  &#45;days 365 \&#10;  &#45;out &lt;CUSTOM-ROOT-CERT&gt;.pem \&#10;  &#45;addext &quot;basicConstraints=critical,CA:TRUE&quot; \&#10;  &#45;addext &quot;keyUsage=critical,keyCertSign,cRLSign&quot;&#10;</code></pre>
 <p>The <code>-addext</code> flags add the <code>basicConstraints</code> and <code>keyUsage</code> extensions required by <a href="https://datatracker.ietf.org/doc/html/rfc5280">RFC 5280</a> for CA certificates. Without them, some TLS clients may reject certificates signed by your custom CA. In particular, Python 3.13 and later enforce strict RFC 5280 compliance by default (<code>ssl.VERIFY_X509_STRICT</code>), causing HTTPS requests to fail for devices using the Cloudflare One Client when the uploaded CA does not include these extensions.</p>
 <p>The <code>-days 365</code> value controls certificate expiry. A shorter duration reduces risk if the key is compromised, but requires more frequent rotation. Rotating a deployed BYOPKI certificate is a disruptive operation, so choose an expiry that balances security with operational overhead.</p>
    <details class="nb-details"><summary>Error: �CODE18�</summary><div class="nb-details-body">
@@ -38,16 +49,16 @@
 <ol start="5">
 <li>Verify the required RFC 5280 extensions are present:</li>
 </ol>
-<pre><code class="language-sh">openssl x509 -in &lt;CUSTOM-ROOT-CERT&gt;.pem -noout -ext keyUsage,basicConstraints&#10;</code></pre>
-<pre><code>The output should include:&#10;</code></pre>
-<pre><code class="language-txt">X509v3 Basic Constraints: critical&#10;		CA:TRUE&#10;X509v3 Key Usage: critical&#10;		Certificate Sign, CRL Sign&#10;</code></pre>
-<pre><code>If these fields are missing, regenerate the certificate using the command in step 4.&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">openssl x509 -in &lt;CUSTOM-ROOT-CERT&gt;.pem -noout -ext keyUsage,basicConstraints&#10;</code></pre>
+<pre tabindex="0"><code>The output should include:&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">X509v3 Basic Constraints: critical&#10;		CA:TRUE&#10;X509v3 Key Usage: critical&#10;		Certificate Sign, CRL Sign&#10;</code></pre>
+<pre tabindex="0"><code>If these fields are missing, regenerate the certificate using the command in step 4.&#10;</code></pre>
 <ol start="6">
 <li>To review the private key, run the following command:</li>
 </ol>
-<pre><code class="language-sh">openssl rsa -in &lt;CUSTOM-ROOT-PRIVATE-KEY&gt;.pem -text&#10;</code></pre>
-<pre><code>To review the certificate, run the following command:&#10;</code></pre>
-<pre><code class="language-sh">openssl x509 -in &lt;CUSTOM-ROOT-CERT&gt;.pem -text&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">openssl rsa -in &lt;CUSTOM-ROOT-PRIVATE-KEY&gt;.pem -text&#10;</code></pre>
+<pre tabindex="0"><code>To review the certificate, run the following command:&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">openssl x509 -in &lt;CUSTOM-ROOT-CERT&gt;.pem -text&#10;</code></pre>
 <p>When preparing your certificate and private key for upload, be sure to remove any unwanted characters, such as mismatching subdomains in the certificate's common name.</p>
 <h2 id="deploy-a-custom-root-certificate">Deploy a custom root certificate</h2>
 <p>You can upload a single root certificate or a full certificate chain. When uploading a certificate chain via the dashboard, API, or Terraform, concatenate the root certificate and any intermediate certificates in PEM format, with the root certificate first.</p>

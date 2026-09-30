@@ -1,6 +1,15 @@
-<p>If your certificate is stuck in <strong>Pending Validation</strong> or failing to issue, the <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/14101.md")
-</div> may be unable to complete [domain control validation (DCV)](/ssl/edge-certificates/changing-dcv-method/dcv-flow/). This page helps you identify and resolve common DCV issues.
+---
+cp9:
+  canonical: https://developers.cloudflare.com/ssl/edge-certificates/changing-dcv-method/troubleshooting/
+  description: Resolve domain control validation failures.
+  full_title: Troubleshooting Domain Control Validation · Cloudflare SSL/TLS docs
+  head_html: <title>Troubleshooting Domain Control Validation · Cloudflare SSL/TLS docs</title><meta name="generator" content="Nift"><meta name="description" content="Resolve domain control validation failures."><link rel="canonical" href="https://developers.cloudflare.com/ssl/edge-certificates/changing-dcv-method/troubleshooting/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/ssl/edge-certificates/changing-dcv-method/troubleshooting/index.md"><meta property="og:title" content="Troubleshooting Domain Control Validation · Cloudflare SSL/TLS docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Resolve domain control validation failures."><meta property="og:url" content="https://developers.cloudflare.com/ssl/edge-certificates/changing-dcv-method/troubleshooting/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="SSL/TLS"><meta name="algolia_product_filter" content="SSL/TLS"><meta name="pcx_content_group" content="Application performance"><meta name="pcx_content_type" content="Troubleshooting"><meta name="algolia_content_type" content="Troubleshooting"><meta name="pcx_additional_products" content="SSL/TLS"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/ssl/edge-certificates/changing-dcv-method/troubleshooting/#page","headline":"Troubleshooting Domain Control Validation \u00b7 Cloudflare SSL/TLS docs","description":"Resolve domain control validation failures.","url":"https://developers.cloudflare.com/ssl/edge-certificates/changing-dcv-method/troubleshooting/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /ssl/edge-certificates/changing-dcv-method/troubleshooting/
+  schema: 1
+---
+<p>If your certificate is stuck in <strong>Pending Validation</strong> or failing to issue, the <span class="nb-glossary-tooltip" title="Certificate Authority (CA)">certificate authority (CA)</span> may be unable to complete <a href="/ssl/edge-certificates/changing-dcv-method/dcv-flow/">domain control validation (DCV)</a>. This page helps you identify and resolve common DCV issues.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/14100.md")
 </aside>
@@ -34,9 +43,9 @@
 <p>Enabling <a href="/ssl/edge-certificates/additional-options/always-use-https/">Always Use HTTPS</a> does not impact the validation process.</p>
 <p>In a <a href="/ssl/edge-certificates/changing-dcv-method/#partial-dns-setup---action-sometimes-required">Partial (CNAME) setup</a> where you are managing the token on the origin side, please ensure that no redirection from HTTP to HTTPS occurs on the <code>/.well-known/*</code> path.</p>
 <p>When using <a href="/rules/url-forwarding/single-redirects/">Redirect Rules</a>, exclude the <code>/.well-known/*</code> path from redirections by adding a condition to your rule:</p>
-<pre><code class="language-txt">not starts_with(http.request.uri.path, &quot;/.well-known/&quot;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">not starts_with(http.request.uri.path, &quot;/.well-known/&quot;)&#10;</code></pre>
 <p>For example, if you have a rule that redirects all HTTP traffic to HTTPS, modify the rule expression to:</p>
-<pre><code class="language-txt">(http.request.scheme eq &quot;http&quot;) and not starts_with(http.request.uri.path, &quot;/.well-known/&quot;)&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">(http.request.scheme eq &quot;http&quot;) and not starts_with(http.request.uri.path, &quot;/.well-known/&quot;)&#10;</code></pre>
 <h2 id="dns-settings-and-records">DNS settings and records</h2>
 <p>The errors below refer to situations that have to be addressed at the authoritative DNS provider:</p>
 <ul>

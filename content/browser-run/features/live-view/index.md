@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/browser-run/features/live-view/
+  description: Watch and control active Browser Run sessions from the dashboard, a generated Live View URL, or Chrome DevTools.
+  full_title: Live View · Cloudflare Browser Run docs
+  head_html: <title>Live View · Cloudflare Browser Run docs</title><meta name="generator" content="Nift"><meta name="description" content="Watch and control active Browser Run sessions from the dashboard, a generated Live View URL, or Chrome DevTools."><link rel="canonical" href="https://developers.cloudflare.com/browser-run/features/live-view/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/browser-run/features/live-view/index.md"><meta property="og:title" content="Live View · Cloudflare Browser Run docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Watch and control active Browser Run sessions from the dashboard, a generated Live View URL, or Chrome DevTools."><meta property="og:url" content="https://developers.cloudflare.com/browser-run/features/live-view/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Browser Run"><meta name="algolia_product_filter" content="Browser Run"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Browser Run"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/browser-run/features/live-view/#page","headline":"Live View \u00b7 Cloudflare Browser Run docs","description":"Watch and control active Browser Run sessions from the dashboard, a generated Live View URL, or Chrome DevTools.","url":"https://developers.cloudflare.com/browser-run/features/live-view/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /browser-run/features/live-view/
+  schema: 1
+---
 <p>Live View lets you see and interact with a remote Browser Run session in real time. This is useful for debugging automation scripts, monitoring what a browser is doing, or manually stepping in when a task requires human intervention (see <a href="/browser-run/features/human-in-the-loop/">Human in the Loop</a>).</p>
 <p>Live View is available for any <a href="/browser-run/#integration-methods">Browser Session</a>, including sessions created with <a href="/browser-run/puppeteer/">Puppeteer</a>, <a href="/browser-run/playwright/">Playwright</a>, or the <a href="/browser-run/cdp/">Chrome DevTools Protocol (CDP)</a> endpoints.</p>
 <p>A browser session is one remote Chrome instance. A session can contain multiple tabs. CDP calls each debuggable item a target, and a page target usually represents one browser tab. Live View connects to a page target.</p>
@@ -40,7 +51,7 @@
 </table>
 <h3 id="native-chrome-devtools-chrome-only">Native Chrome DevTools (Chrome only)</h3>
 <p>Browser Run supports CDP, the protocol that powers Chrome DevTools. If a generated <code>devtoolsFrontendUrl</code> starts with <code>https://live.browser.run/ui/inspector?wss=</code>, replace that prefix with <code>devtools://devtools/bundled/inspector.html?wss=</code>:</p>
-<pre><code class="language-txt">devtools://devtools/bundled/inspector.html?wss=live.browser.run/api/devtools/browser/SESSION_ID/page/TARGET_ID?jwt=...&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">devtools://devtools/bundled/inspector.html?wss=live.browser.run/api/devtools/browser/SESSION_ID/page/TARGET_ID?jwt=...&#10;</code></pre>
 <p>Paste the updated URL into Chrome's address bar. Chrome opens its built-in DevTools interface for the remote tab. The <code>devtools://</code> protocol works only in Chrome and supports only the <code>devtools</code> viewing mode.</p>
 <aside class="nb-aside caution">
 <h3 class="nb-aside-title" id="url-validity">URL validity</h3>
@@ -51,8 +62,8 @@
 <ol>
 <li>Create a browser session with <code>targets=true</code> to include its current page targets and generated Live View URLs in the response:</li>
 </ol>
-<pre><code class="language-bash">curl --request POST --url https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/browser-rendering/devtools/browser</code></pre>
-<pre><code class="language-json">{&#10;	&quot;sessionId&quot;: &quot;1909cef7-23e8-4394-bc31-27404bf4348f&quot;,&#10;	&quot;targets&quot;: [&#10;		{&#10;			&quot;description&quot;: &quot;&quot;,&#10;			&quot;devtoolsFrontendUrl&quot;: &quot;https://live.browser.run/ui/inspector?wss=live.browser.run/api/devtools/browser/1909cef7-.../page/8E598E99...?jwt=...&quot;,&#10;			&quot;id&quot;: &quot;8E598E996530FB09E46A22B8B7754F7F&quot;,&#10;			&quot;title&quot;: &quot;about:blank&quot;,&#10;			&quot;type&quot;: &quot;page&quot;,&#10;			&quot;url&quot;: &quot;about:blank&quot;,&#10;			&quot;webSocketDebuggerUrl&quot;: &quot;wss://live.browser.run/api/devtools/browser/1909cef7-.../page/8E598E99...?jwt=...&quot;&#10;		}&#10;	],&#10;	&quot;webSocketDebuggerUrl&quot;: &quot;wss://api.cloudflare.com/client/v4/accounts/{account_id}/browser-rendering/devtools/browser/1909cef7-...&quot;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl --request POST --url https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/browser-rendering/devtools/browser</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;sessionId&quot;: &quot;1909cef7-23e8-4394-bc31-27404bf4348f&quot;,&#10;	&quot;targets&quot;: [&#10;		{&#10;			&quot;description&quot;: &quot;&quot;,&#10;			&quot;devtoolsFrontendUrl&quot;: &quot;https://live.browser.run/ui/inspector?wss=live.browser.run/api/devtools/browser/1909cef7-.../page/8E598E99...?jwt=...&quot;,&#10;			&quot;id&quot;: &quot;8E598E996530FB09E46A22B8B7754F7F&quot;,&#10;			&quot;title&quot;: &quot;about:blank&quot;,&#10;			&quot;type&quot;: &quot;page&quot;,&#10;			&quot;url&quot;: &quot;about:blank&quot;,&#10;			&quot;webSocketDebuggerUrl&quot;: &quot;wss://live.browser.run/api/devtools/browser/1909cef7-.../page/8E598E99...?jwt=...&quot;&#10;		}&#10;	],&#10;	&quot;webSocketDebuggerUrl&quot;: &quot;wss://api.cloudflare.com/client/v4/accounts/{account_id}/browser-rendering/devtools/browser/1909cef7-...&quot;&#10;}&#10;</code></pre>
 <p>The <code>targets[].devtoolsFrontendUrl</code> opens the hosted interface for a page. The <code>targets[].webSocketDebuggerUrl</code> connects a CDP client to that page. The top-level <code>webSocketDebuggerUrl</code> connects a CDP client to the browser session.</p>
 <ol start="2">
 <li>Find the page target you want by its <code>title</code> or <code>url</code>. Copy its <code>devtoolsFrontendUrl</code> and open it in your browser. A new session initially contains an <code>about:blank</code> page.</li>
@@ -62,14 +73,14 @@
 <ol>
 <li>
 <p>List your active sessions and copy the ID of the session you want to view:</p>
-<pre><code class="language-bash">curl --request GET --url https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/browser-rendering/devtools/session</code></pre>
+<pre tabindex="0"><code class="language-bash">curl --request GET --url https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/browser-rendering/devtools/session</code></pre>
 </li>
 <li>
 <p>Using the session ID, list the targets in that session:</p>
-<pre><code class="language-bash">curl --request GET --url https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/browser-rendering/devtools/browser/$SESSION_ID/json/list</code></pre>
+<pre tabindex="0"><code class="language-bash">curl --request GET --url https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/browser-rendering/devtools/browser/$SESSION_ID/json/list</code></pre>
 </li>
 </ol>
-<pre><code class="language-json">[&#10;	{&#10;		&quot;id&quot;: &quot;110850A800BDB8B593CDDA30676635CF&quot;,&#10;		&quot;type&quot;: &quot;page&quot;,&#10;		&quot;url&quot;: &quot;https://example.com&quot;,&#10;		&quot;title&quot;: &quot;Example Domain&quot;,&#10;		&quot;description&quot;: &quot;&quot;,&#10;		&quot;devtoolsFrontendUrl&quot;: &quot;https://live.browser.run/ui/view?wss=live.browser.run/api/devtools/browser/28d75446-.../page/110850A8...?jwt=...&quot;,&#10;		&quot;webSocketDebuggerUrl&quot;: &quot;wss://live.browser.run/api/devtools/browser/28d75446-.../page/110850A8...?jwt=...&quot;&#10;	}&#10;]&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">[&#10;	{&#10;		&quot;id&quot;: &quot;110850A800BDB8B593CDDA30676635CF&quot;,&#10;		&quot;type&quot;: &quot;page&quot;,&#10;		&quot;url&quot;: &quot;https://example.com&quot;,&#10;		&quot;title&quot;: &quot;Example Domain&quot;,&#10;		&quot;description&quot;: &quot;&quot;,&#10;		&quot;devtoolsFrontendUrl&quot;: &quot;https://live.browser.run/ui/view?wss=live.browser.run/api/devtools/browser/28d75446-.../page/110850A8...?jwt=...&quot;,&#10;		&quot;webSocketDebuggerUrl&quot;: &quot;wss://live.browser.run/api/devtools/browser/28d75446-.../page/110850A8...?jwt=...&quot;&#10;	}&#10;]&#10;</code></pre>
 <ol start="3">
 <li>Copy the <code>devtoolsFrontendUrl</code> and open it in your browser.</li>
 </ol>
@@ -121,10 +132,10 @@
 <p>A read-only Live View guardrail applies only to the generated connection. Other connections and automation scripts can still control the session. Session <a href="/browser-run/features/guardrails/">guardrails</a> restrict HTTP and HTTPS destinations for the entire session and remain active for every Live View connection.</p>
 <h3 id="rest-api">REST API</h3>
 <p>Use the <a href="/api/resources/browser_rendering/subresources/devtools/subresources/browser/subresources/live_view/methods/create/">Live View endpoint</a> to generate a URL:</p>
-<pre><code class="language-bash">curl --request POST --url https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/browser-rendering/devtools/browser/$SESSION_ID/live_view</code></pre>
+<pre tabindex="0"><code class="language-bash">curl --request POST --url https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/browser-rendering/devtools/browser/$SESSION_ID/live_view</code></pre>
 <h4 id="share-a-view-only-link">Share a view-only link</h4>
 <p>To block viewer interaction, set <code>guardrails</code> to <code>{ &quot;mode&quot;: &quot;readonly&quot; }</code>:</p>
-<pre><code class="language-bash">curl --request POST --url https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/browser-rendering/devtools/browser/$SESSION_ID/live_view</code></pre>
+<pre tabindex="0"><code class="language-bash">curl --request POST --url https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/browser-rendering/devtools/browser/$SESSION_ID/live_view</code></pre>
 <p>The link streams the session but blocks navigation, input, and JavaScript evaluation. The tab title starts with <code>READ ONLY - </code>.</p>
 <aside class="nb-aside caution">
 @markup("md", "content/.markup/bodies/3698.md")

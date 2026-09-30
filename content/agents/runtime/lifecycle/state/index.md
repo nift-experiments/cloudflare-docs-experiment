@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/agents/runtime/lifecycle/state/
+  description: Persist and sync Agent state across clients in real time using setState, SQL storage, and bidirectional updates.
+  full_title: Store and sync state · Cloudflare Agents docs
+  head_html: <title>Store and sync state · Cloudflare Agents docs</title><meta name="generator" content="Nift"><meta name="description" content="Persist and sync Agent state across clients in real time using setState, SQL storage, and bidirectional updates."><link rel="canonical" href="https://developers.cloudflare.com/agents/runtime/lifecycle/state/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/agents/runtime/lifecycle/state/index.md"><meta property="og:title" content="Store and sync state · Cloudflare Agents docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Persist and sync Agent state across clients in real time using setState, SQL storage, and bidirectional updates."><meta property="og:url" content="https://developers.cloudflare.com/agents/runtime/lifecycle/state/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Agents"><meta name="algolia_product_filter" content="Agents"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Agents"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/agents/runtime/lifecycle/state/#page","headline":"Store and sync state \u00b7 Cloudflare Agents docs","description":"Persist and sync Agent state across clients in real time using setState, SQL storage, and bidirectional updates.","url":"https://developers.cloudflare.com/agents/runtime/lifecycle/state/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /agents/runtime/lifecycle/state/
+  schema: 1
+---
 <p>Agents provide built-in state management with automatic persistence and real-time synchronization across all connected clients.</p>
 <h2 id="overview">Overview</h2>
 <p>State within an Agent is:</p>
@@ -125,7 +136,7 @@
 @markup("md", "content/.markup/bodies/2353.md")
 </div>
 <h3 id="state-flow">State flow</h3>
-<pre><code class="language-mermaid">flowchart TD&#10;    subgraph Agent&#10;        S[&quot;this.state&lt;br/&gt;(persisted in SQLite)&quot;]&#10;    end&#10;    subgraph Clients&#10;        C1[&quot;Client 1&quot;]&#10;        C2[&quot;Client 2&quot;]&#10;        C3[&quot;Client 3&quot;]&#10;    end&#10;    C1 &amp; C2 &amp; C3 --&gt;|setState| S&#10;    S --&gt;|broadcast via WebSocket| C1 &amp; C2 &amp; C3&#10;</code></pre>
+<pre tabindex="0"><code class="language-mermaid">flowchart TD&#10;    subgraph Agent&#10;        S[&quot;this.state&lt;br/&gt;(persisted in SQLite)&quot;]&#10;    end&#10;    subgraph Clients&#10;        C1[&quot;Client 1&quot;]&#10;        C2[&quot;Client 2&quot;]&#10;        C3[&quot;Client 3&quot;]&#10;    end&#10;    C1 &amp; C2 &amp; C3 --&gt;|setState| S&#10;    S --&gt;|broadcast via WebSocket| C1 &amp; C2 &amp; C3&#10;</code></pre>
 <h2 id="state-from-workflows">State from Workflows</h2>
 <p>When using <a href="/agents/runtime/execution/run-workflows/">Workflows</a>, you can update agent state from workflow steps:</p>
 <div class="nb-type-script-example">
@@ -150,7 +161,7 @@
 <h2 id="best-practices">Best practices</h2>
 <h3 id="keep-state-small">Keep state small</h3>
 <p>State is broadcast to all clients on every change. For large data:</p>
-<pre><code class="language-ts">// Bad - storing large arrays in state&#10;initialState = {&#10;  allMessages: [] // Could grow to thousands of items&#10;};&#10;&#10;// Good - store in SQL, keep state light&#10;initialState = {&#10;  messageCount: 0,&#10;  lastMessageId: null&#10;};&#10;&#10;// Query SQL for full data&#10;async getMessages(limit = 50) {&#10;  return this.sql`SELECT * FROM messages ORDER BY created_at DESC LIMIT ${limit}`;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// Bad - storing large arrays in state&#10;initialState = {&#10;  allMessages: [] // Could grow to thousands of items&#10;};&#10;&#10;// Good - store in SQL, keep state light&#10;initialState = {&#10;  messageCount: 0,&#10;  lastMessageId: null&#10;};&#10;&#10;// Query SQL for full data&#10;async getMessages(limit = 50) {&#10;  return this.sql`SELECT * FROM messages ORDER BY created_at DESC LIMIT ${limit}`;&#10;}&#10;</code></pre>
 <h3 id="optimistic-updates">Optimistic updates</h3>
 <p>For responsive UIs, update client state immediately:</p>
 <div class="nb-type-script-example">
@@ -188,7 +199,7 @@
 </div>
 <h3 id="avoid-infinite-loops">Avoid infinite loops</h3>
 <p>Be careful not to trigger state updates in response to your own updates:</p>
-<pre><code class="language-ts">// Bad - infinite loop&#10;onStateChanged(state: State) {&#10;  this.setState({ ...state, lastUpdated: Date.now() });&#10;}&#10;&#10;// Good - check source&#10;onStateChanged(state: State, source: Connection | &quot;server&quot;) {&#10;  if (source === &quot;server&quot;) return; // Do not react to own updates&#10;  this.setState({ ...state, lastUpdated: Date.now() });&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// Bad - infinite loop&#10;onStateChanged(state: State) {&#10;  this.setState({ ...state, lastUpdated: Date.now() });&#10;}&#10;&#10;// Good - check source&#10;onStateChanged(state: State, source: Connection | &quot;server&quot;) {&#10;  if (source === &quot;server&quot;) return; // Do not react to own updates&#10;  this.setState({ ...state, lastUpdated: Date.now() });&#10;}&#10;</code></pre>
 <h2 id="use-agent-state-as-model-context">Use Agent state as model context</h2>
 <p>You can combine the state and SQL APIs in your Agent with its ability to <a href="/agents/runtime/operations/using-ai-models/">call AI models</a> to include historical context within your prompts to a model. Modern Large Language Models (LLMs) often have very large context windows (up to millions of tokens), which allows you to pull relevant context into your prompt directly.</p>
 <p>For example, you can use an Agent's built-in SQL database to pull history, query a model with it, and append to that history ahead of the next call to the model:</p>
@@ -270,7 +281,7 @@
 </tbody>
 </table>
 <h2 id="next-steps">Next steps</h2>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/agents-api/"><h3 id="card-agents-api-agents-runtime-agents-api">Agents API</h3><p>Complete API reference for the Agents SDK.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/examples/chat-agent/"><h3 id="card-build-a-chat-agent-agents-examples-chat-agent">Build a chat agent</h3><p>Build and deploy an AI chat agent.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/communication/websockets/"><h3 id="card-websockets-agents-runtime-communication-websockets">WebSockets</h3><p>Build interactive agents with real-time data streaming.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/execution/run-workflows/"><h3 id="card-run-workflows-agents-runtime-execution-run-workflows">Run Workflows</h3><p>Orchestrate asynchronous workflows from your agent.</p></a></p>
+<div class="nb-card nb-link-card"><h3 id="card-agents-api-agents-runtime-agents-api"><a href="/agents/runtime/agents-api/">Agents API</a></h3><p>Complete API reference for the Agents SDK.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-build-a-chat-agent-agents-examples-chat-agent"><a href="/agents/examples/chat-agent/">Build a chat agent</a></h3><p>Build and deploy an AI chat agent.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-websockets-agents-runtime-communication-websockets"><a href="/agents/runtime/communication/websockets/">WebSockets</a></h3><p>Build interactive agents with real-time data streaming.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-run-workflows-agents-runtime-execution-run-workflows"><a href="/agents/runtime/execution/run-workflows/">Run Workflows</a></h3><p>Orchestrate asynchronous workflows from your agent.</p></div>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/traffic-policies/http-policies/package-registry-security/
+  description: Use Gateway HTTP policies to detect and control software package downloads across seven major package ecosystems.
+  full_title: Package registry security · Cloudflare One docs
+  head_html: <title>Package registry security · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="Use Gateway HTTP policies to detect and control software package downloads across seven major package ecosystems."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/traffic-policies/http-policies/package-registry-security/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/traffic-policies/http-policies/package-registry-security/index.md"><meta property="og:title" content="Package registry security · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Use Gateway HTTP policies to detect and control software package downloads across seven major package ecosystems."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/traffic-policies/http-policies/package-registry-security/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Cloudflare One"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/traffic-policies/http-policies/package-registry-security/#page","headline":"Package registry security \u00b7 Cloudflare One docs","description":"Use Gateway HTTP policies to detect and control software package downloads across seven major package ecosystems.","url":"https://developers.cloudflare.com/cloudflare-one/traffic-policies/http-policies/package-registry-security/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/traffic-policies/http-policies/package-registry-security/
+  schema: 1
+---
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/6493.md")
 </aside>
@@ -217,7 +228,7 @@
 </tbody>
 </table>
 <p>Wirefilter expression:</p>
-<pre><code class="language-txt">pkg.ecosystem == &quot;pypi&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">pkg.ecosystem == &quot;pypi&quot;&#10;</code></pre>
 <h3 id="block-a-specific-package">Block a specific package</h3>
 <p>To block a known malicious or unwanted npm package regardless of version:</p>
 <table>
@@ -248,7 +259,7 @@
 </tbody>
 </table>
 <p>Wirefilter expression:</p>
-<pre><code class="language-txt">pkg.ecosystem == &quot;npm&quot; and pkg.name == &quot;event-stream&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">pkg.ecosystem == &quot;npm&quot; and pkg.name == &quot;event-stream&quot;&#10;</code></pre>
 <h3 id="block-vulnerable-versions-of-a-package">Block vulnerable versions of a package</h3>
 <p>To block all versions of <code>lodash</code> below <code>4.17.21</code>, which is the version that patched CVE-2021-23337:</p>
 <table>
@@ -286,7 +297,7 @@
 </tbody>
 </table>
 <p>Wirefilter expression:</p>
-<pre><code class="language-txt">pkg.ecosystem == &quot;npm&quot; and pkg.name == &quot;lodash&quot; and pkg.version &lt; &quot;4.17.21&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">pkg.ecosystem == &quot;npm&quot; and pkg.name == &quot;lodash&quot; and pkg.version &lt; &quot;4.17.21&quot;&#10;</code></pre>
 <h3 id="restrict-packages-to-a-sanctioned-registry-mirror">Restrict packages to a sanctioned registry mirror</h3>
 <p>To allow npm package downloads only through your corporate Artifactory instance and block all other npm downloads, create two policies:</p>
 <p><strong>Policy 1 - Allow sanctioned mirror (higher priority):</strong></p>
@@ -318,7 +329,7 @@
 </tbody>
 </table>
 <p>Wirefilter expression:</p>
-<pre><code class="language-txt">pkg.ecosystem == &quot;npm&quot; and http.request.host == &quot;npm.internal.example.com&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">pkg.ecosystem == &quot;npm&quot; and http.request.host == &quot;npm.internal.example.com&quot;&#10;</code></pre>
 <p><strong>Policy 2 - Block all other npm downloads (lower priority):</strong></p>
 <table>
 <thead>
@@ -339,7 +350,7 @@
 </tbody>
 </table>
 <p>Wirefilter expression:</p>
-<pre><code class="language-txt">pkg.ecosystem == &quot;npm&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">pkg.ecosystem == &quot;npm&quot;&#10;</code></pre>
 <p>Because detection is based on the registry protocol rather than the hostname, both the public <code>registry.npmjs.org</code> and your internal mirror at <code>npm.internal.example.com</code> are detected as npm traffic. Policy 1 (at higher priority) allows the sanctioned mirror, and Policy 2 blocks everything else.</p>
 <h3 id="block-a-specific-package-unless-from-a-sanctioned-host">Block a specific package unless from a sanctioned host</h3>
 <p>To allow downloads of a sensitive internal package only through your corporate registry, blocking it from all other sources:</p>
@@ -386,7 +397,7 @@
 </tbody>
 </table>
 <p>Wirefilter expression:</p>
-<pre><code class="language-txt">pkg.ecosystem == &quot;npm&quot; and pkg.namespace == &quot;@acme&quot; and pkg.name == &quot;internal-sdk&quot; and http.request.host == &quot;npm.internal.example.com&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">pkg.ecosystem == &quot;npm&quot; and pkg.namespace == &quot;@acme&quot; and pkg.name == &quot;internal-sdk&quot; and http.request.host == &quot;npm.internal.example.com&quot;&#10;</code></pre>
 <p><strong>Policy 2 - Block from all other hosts (lower priority):</strong></p>
 <table>
 <thead>
@@ -423,7 +434,7 @@
 </tbody>
 </table>
 <p>Wirefilter expression:</p>
-<pre><code class="language-txt">pkg.ecosystem == &quot;npm&quot; and pkg.namespace == &quot;@acme&quot; and pkg.name == &quot;internal-sdk&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">pkg.ecosystem == &quot;npm&quot; and pkg.namespace == &quot;@acme&quot; and pkg.name == &quot;internal-sdk&quot;&#10;</code></pre>
 <h2 id="detection-and-mirrors">Detection and mirrors</h2>
 <p>Package detection classifies traffic based on the URL path structure of each registry's download API. It does not rely on matching against a list of known registry hostnames. This design means that any server serving packages using a compatible URL layout is detected the same way, whether it is:</p>
 <ul>

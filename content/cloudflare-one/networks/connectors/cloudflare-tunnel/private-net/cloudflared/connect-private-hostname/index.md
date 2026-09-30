@@ -1,8 +1,17 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/private-net/cloudflared/connect-private-hostname/
+  description: Connect a private hostname in Zero Trust networking.
+  full_title: Connect a private hostname · Cloudflare One docs
+  head_html: <title>Connect a private hostname · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="Connect a private hostname in Zero Trust networking."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/private-net/cloudflared/connect-private-hostname/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/private-net/cloudflared/connect-private-hostname/index.md"><meta property="og:title" content="Connect a private hostname · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Connect a private hostname in Zero Trust networking."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/private-net/cloudflared/connect-private-hostname/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Cloudflare One"><meta name="pcx_tags" content="Private networks"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/private-net/cloudflared/connect-private-hostname/#page","headline":"Connect a private hostname \u00b7 Cloudflare One docs","description":"Connect a private hostname in Zero Trust networking.","url":"https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/private-net/cloudflared/connect-private-hostname/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["Private networks"]}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/networks/connectors/cloudflare-tunnel/private-net/cloudflared/connect-private-hostname/
+  schema: 1
+---
 <p>Instead of managing static IP lists and routes, you can connect users to private HTTP and non-HTTP applications using their hostnames (for example, <code>wiki.internal.local</code>). Private hostname routes are especially useful when the application has an unknown or ephemeral IP, which often occurs when infrastructure is provisioned by a third-party cloud provider.</p>
 <div class="nb-interactive-component" data-cf-component="TunnelHostnameRoutingDiagram"></div>
-<p>When a user requests a private hostname, Cloudflare Gateway assigns an <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/5405.md")
-</div> to route the traffic through your tunnel to the correct private IP address. By default, this IP is drawn from a Cloudflare-owned public IPv4 range (`172.64.128.0/20`) rather than Carrier-Grade NAT (CGNAT) space, so it does not trigger [Google Chrome's Local Network Access restrictions](#google-chrome-restricts-access-to-private-hostnames). You can also [configure a custom range](/cloudflare-one/networks/routes/configure-initial-resolved-ips/) if it conflicts with your existing network. For a deep dive into the architecture and packet flow, refer to our [announcement blog post](https://blog.cloudflare.com/tunnel-hostname-routing/).
+<p>When a user requests a private hostname, Cloudflare Gateway assigns an <span class="nb-glossary-tooltip" title="initial resolved IP">initial resolved IP</span> to route the traffic through your tunnel to the correct private IP address. By default, this IP is drawn from a Cloudflare-owned public IPv4 range (<code>172.64.128.0/20</code>) rather than Carrier-Grade NAT (CGNAT) space, so it does not trigger <a href="#google-chrome-restricts-access-to-private-hostnames">Google Chrome's Local Network Access restrictions</a>. You can also <a href="/cloudflare-one/networks/routes/configure-initial-resolved-ips/">configure a custom range</a> if it conflicts with your existing network. For a deep dive into the architecture and packet flow, refer to our <a href="https://blog.cloudflare.com/tunnel-hostname-routing/">announcement blog post</a>.</p>
 <h2 id="supported-on-ramps-off-ramps">Supported on-ramps/off-ramps</h2>
 <p>The table below summarizes the Cloudflare One products that are compatible with private hostname routing. Refer to the table legend for guidance on interpreting the table.</p>
 <p>✅ Product works with no caveats <br/>
@@ -159,7 +168,7 @@
 </li>
 </ol>
 <div class="nb-dash-button"></div>
-<pre><code>2. Select **Add CIDR route**.&#10;3. Enter the private IP address of your internal DNS resolver.&#10;4. Select the Cloudflare Tunnel that connects to the network where this DNS server resides.&#10;5. Select **Create**.&#10;</code></pre>
+<pre tabindex="0"><code>2. Select **Add CIDR route**.&#10;3. Enter the private IP address of your internal DNS resolver.&#10;4. Select the Cloudflare Tunnel that connects to the network where this DNS server resides.&#10;5. Select **Create**.&#10;</code></pre>
 <ol start="2">
 <li>To create a resolver policy:
 <ol>
@@ -197,10 +206,10 @@
 <p>You can create an <a href="/cloudflare-one/access-controls/applications/non-http/self-hosted-private-app/">Access self-hosted application</a> for your private hostname and configure <a href="/cloudflare-one/access-controls/policies/">Access policies</a> within that application. This option allows you to manage user access alongside your SaaS and other web apps.</p>
 <h4 id="option-2-gateway-firewall-policies">Option 2: Gateway firewall policies</h4>
 <p>If you prefer to secure the application using a traditional firewall model, you can build Gateway network policies using the <a href="/cloudflare-one/traffic-policies/network-policies/#sni">SNI</a> or <a href="/cloudflare-one/traffic-policies/network-policies/#sni-domain">SNI Domain</a> selector. For an additional layer of protection, add a Gateway DNS policy to allow or block the <a href="/cloudflare-one/traffic-policies/dns-policies/#host">Host</a> or <a href="/cloudflare-one/traffic-policies/dns-policies/#domain">Domain</a> from resolving.</p>
-<pre><code>&lt;details class=&quot;nb-details&quot;&gt;&lt;summary&gt;Example network policies&lt;/summary&gt;&lt;div class=&quot;nb-details-body&quot;&gt;&#10;</code></pre>
+<pre tabindex="0"><code>&lt;details class=&quot;nb-details&quot;&gt;&lt;summary&gt;Example network policies&lt;/summary&gt;&lt;div class=&quot;nb-details-body&quot;&gt;&#10;</code></pre>
 @markup("md", "content/.markup/bodies/5417.md")
 </div></details>
-<pre><code>&lt;details class=&quot;nb-details&quot;&gt;&lt;summary&gt;Example DNS policy&lt;/summary&gt;&lt;div class=&quot;nb-details-body&quot;&gt;&#10;</code></pre>
+<pre tabindex="0"><code>&lt;details class=&quot;nb-details&quot;&gt;&lt;summary&gt;Example DNS policy&lt;/summary&gt;&lt;div class=&quot;nb-details-body&quot;&gt;&#10;</code></pre>
 @input("content/.markup/bodies/5418.md")
 </div></details>
 <aside class="nb-aside note">
@@ -216,11 +225,9 @@
 <ol>
 <li><strong>Confirm DNS resolution</strong> - From the device, confirm that you can successfully resolve the private hostname:</li>
 </ol>
-<pre><code class="language-sh">nslookup wiki.internal.local&#10;</code></pre>
-<pre><code class="language-sh">Server:		127.0.2.2&#10;Address:	127.0.2.2#53&#10;&#10;Non-authoritative answer:&#10;Name:	wiki.internal.local&#10;Address: 172.64.128.48&#10;</code></pre>
-<p>The query should resolve using <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/route-traffic/client-architecture/#dns-traffic">WARP's DNS proxy</a> and return a Gateway <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/5419.md")
-</div>. If the query fails to resolve or returns a different IP, check your [Local Domain Fallback](/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/route-traffic/local-domains/) configuration and [Gateway resolver policies](/cloudflare-one/traffic-policies/resolver-policies/).
+<pre tabindex="0"><code class="language-sh">nslookup wiki.internal.local&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">Server:		127.0.2.2&#10;Address:	127.0.2.2#53&#10;&#10;Non-authoritative answer:&#10;Name:	wiki.internal.local&#10;Address: 172.64.128.48&#10;</code></pre>
+<p>The query should resolve using <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/route-traffic/client-architecture/#dns-traffic">WARP's DNS proxy</a> and return a Gateway <span class="nb-glossary-tooltip" title="initial resolved IP">initial resolved IP</span>. If the query fails to resolve or returns a different IP, check your <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/route-traffic/local-domains/">Local Domain Fallback</a> configuration and <a href="/cloudflare-one/traffic-policies/resolver-policies/">Gateway resolver policies</a>.</p>
 <ol start="2">
 <li>
 <p><strong>Check Gateway logs</strong> - Review your <a href="/cloudflare-one/insights/logs/dashboard-logs/gateway-logs/">Gateway network logs</a> to see if the connection is being blocked by a policy.</p>
@@ -229,19 +236,15 @@
 <p><strong>Verify tunnel status</strong> - Confirm that your tunnel is healthy and connected by checking <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/monitor-tunnels/">tunnel status</a>.</p>
 </li>
 <li>
-<p><strong>Test connectivity to initial resolved IP</strong> - When you connect to the application using its private hostname, the device should make a connection to the <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
+<p><strong>Test connectivity to initial resolved IP</strong> - When you connect to the application using its private hostname, the device should make a connection to the <span class="nb-glossary-tooltip" title="initial resolved IP">initial resolved IP</span>:</p>
 </li>
 </ol>
-@markup("md", "content/.markup/bodies/5420.md")
-</div>:
-<pre><code class="language-sh">curl -v4 http://wiki.internal.local&#10;</code></pre>
-<pre><code class="language-sh">&#42; Trying 172.64.128.48:80...&#10;&#42; Connected to wiki.internal.local (172.64.128.48) port 80&#10;...&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">curl -v4 http://wiki.internal.local&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">&#42; Trying 172.64.128.48:80...&#10;&#42; Connected to wiki.internal.local (172.64.128.48) port 80&#10;...&#10;</code></pre>
 <p>If the request fails, confirm that the initial resolved IP <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/route-traffic/split-tunnels/">routes through the WARP tunnel</a>. You can also check your <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/monitor-tunnels/logs/">tunnel logs</a> to confirm that requests are routing to the application's private IP.</p>
 <h2 id="limitations">Limitations</h2>
 <h3 id="google-chrome-restricts-access-to-private-hostnames">Google Chrome restricts access to private hostnames</h3>
-<p>Starting with <a href="https://developer.chrome.com/release-notes/142">Chrome 142</a>, Local Network Access (LNA) restricts requests from websites to local IP addresses. LNA is implemented at the Chromium engine level, so this affects all Chromium-based browsers (for example, Microsoft Edge, Brave, and Opera), not only Google Chrome. This can affect accounts whose Gateway <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/5421.md")
-</div> range is still drawn from Carrier-Grade NAT (CGNAT) address space (`100.64.0.0/10`) — for example, the legacy default range `100.80.0.0/16`, or a custom range configured within CGNAT space. These browsers categorize such addresses as belonging to a local network. When a website loaded from a public IP makes subrequests to a domain resolved through an initial resolved IP in this space, the browser treats this as a public-to-local network request and displays a prompt asking the user to allow access to devices on the local network. The browser blocks requests to these domains until the user accepts this prompt.
+<p>Starting with <a href="https://developer.chrome.com/release-notes/142">Chrome 142</a>, Local Network Access (LNA) restricts requests from websites to local IP addresses. LNA is implemented at the Chromium engine level, so this affects all Chromium-based browsers (for example, Microsoft Edge, Brave, and Opera), not only Google Chrome. This can affect accounts whose Gateway <span class="nb-glossary-tooltip" title="initial resolved IP">initial resolved IP</span> range is still drawn from Carrier-Grade NAT (CGNAT) address space (<code>100.64.0.0/10</code>) — for example, the legacy default range <code>100.80.0.0/16</code>, or a custom range configured within CGNAT space. These browsers categorize such addresses as belonging to a local network. When a website loaded from a public IP makes subrequests to a domain resolved through an initial resolved IP in this space, the browser treats this as a public-to-local network request and displays a prompt asking the user to allow access to devices on the local network. The browser blocks requests to these domains until the user accepts this prompt.</p>
 <p>This commonly occurs when an Egress policy matches broadly used domains (such as <code>cloudfront.net</code> or <code>github.com</code>), causing subrequests from public pages to resolve into CGNAT space.</p>
 <p>Accounts using the current default initial resolved IP range (<code>172.64.128.0/20</code>) are not affected, because this range is public Cloudflare address space rather than CGNAT. If your account was created before this default changed, or if you configured a custom CGNAT-space range, refer to <a href="/cloudflare-one/networks/routes/configure-initial-resolved-ips/">Configure initial resolved IPs</a> to move to a non-CGNAT range instead of relying on the following browser workarounds.</p>
 <p>The workarounds below use Google Chrome Enterprise policies. If your organization manages a different Chromium-based browser, consult that browser's enterprise policy documentation for an equivalent control.</p>

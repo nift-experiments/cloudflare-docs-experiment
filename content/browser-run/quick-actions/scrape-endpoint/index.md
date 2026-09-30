@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/browser-run/quick-actions/scrape-endpoint/
+  description: Extract structured data from specific webpage elements using the Browser Run /scrape endpoint.
+  full_title: /scrape - Scrape HTML elements · Cloudflare Browser Run docs
+  head_html: <title>/scrape - Scrape HTML elements · Cloudflare Browser Run docs</title><meta name="generator" content="Nift"><meta name="description" content="Extract structured data from specific webpage elements using the Browser Run /scrape endpoint."><link rel="canonical" href="https://developers.cloudflare.com/browser-run/quick-actions/scrape-endpoint/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/browser-run/quick-actions/scrape-endpoint/index.md"><meta property="og:title" content="/scrape - Scrape HTML elements · Cloudflare Browser Run docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Extract structured data from specific webpage elements using the Browser Run /scrape endpoint."><meta property="og:url" content="https://developers.cloudflare.com/browser-run/quick-actions/scrape-endpoint/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Browser Run"><meta name="algolia_product_filter" content="Browser Run"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Browser Run"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/browser-run/quick-actions/scrape-endpoint/#page","headline":"/scrape - Scrape HTML elements \u00b7 Cloudflare Browser Run docs","description":"Extract structured data from specific webpage elements using the Browser Run /scrape endpoint.","url":"https://developers.cloudflare.com/browser-run/quick-actions/scrape-endpoint/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /browser-run/quick-actions/scrape-endpoint/
+  schema: 1
+---
 <p>The <code>/scrape</code> endpoint extracts structured data from specific elements on a webpage, returning details such as element dimensions and inner HTML.</p>
 <p>You can use this endpoint in two ways:</p>
 <ul>
@@ -6,7 +17,7 @@
 </ul>
 <p>For more information, refer to <a href="/browser-run/quick-actions/#before-you-begin">Quick Actions: Before you begin</a>.</p>
 <h2 id="endpoint">Endpoint</h2>
-<pre><code class="language-txt">https://api.cloudflare.com/client/v4/accounts/&lt;accountId&gt;/browser-rendering/scrape&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://api.cloudflare.com/client/v4/accounts/&lt;accountId&gt;/browser-rendering/scrape&#10;</code></pre>
 <h2 id="required-fields">Required fields</h2>
 <p>You must provide <code>elements</code> and exactly one of <code>url</code> or <code>html</code>:</p>
 <ul>
@@ -49,7 +60,7 @@
 <h3 id="handling-javascript-heavy-pages">Handling JavaScript-heavy pages</h3>
 <p>For JavaScript-heavy pages or Single Page Applications (SPAs), the default page load behavior may return empty or incomplete results. This happens because the browser considers the page loaded before JavaScript has finished rendering the content.</p>
 <p>The simplest solution is to use the <code>gotoOptions.waitUntil</code> parameter set to <code>networkidle0</code> or <code>networkidle2</code>:</p>
-<pre><code class="language-json">{&#10;	&quot;url&quot;: &quot;https://example.com&quot;,&#10;	&quot;gotoOptions&quot;: {&#10;		&quot;waitUntil&quot;: &quot;networkidle0&quot;&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;url&quot;: &quot;https://example.com&quot;,&#10;	&quot;gotoOptions&quot;: {&#10;		&quot;waitUntil&quot;: &quot;networkidle0&quot;&#10;	}&#10;}&#10;</code></pre>
 <p>For faster responses, advanced users can use <code>waitForSelector</code> to wait for a specific element instead of waiting for all network activity to stop. This requires knowing which CSS selector indicates the content you need has loaded. For more details, refer to <a href="/browser-run/reference/timeouts/">Quick Actions timeouts</a>.</p>
 <h3 id="set-a-custom-user-agent">Set a custom user agent</h3>
 <p>You can change the user agent at the page level by passing <code>userAgent</code> as a top-level parameter in the JSON body. This is useful if the target website serves different content based on the user agent.</p>

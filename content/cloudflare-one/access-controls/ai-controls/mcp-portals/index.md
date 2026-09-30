@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/access-controls/ai-controls/mcp-portals/
+  description: MCP server portals in Access.
+  full_title: MCP server portals · Cloudflare One docs
+  head_html: <title>MCP server portals · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="MCP server portals in Access."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/access-controls/ai-controls/mcp-portals/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/access-controls/ai-controls/mcp-portals/index.md"><meta property="og:title" content="MCP server portals · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="MCP server portals in Access."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/access-controls/ai-controls/mcp-portals/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Cloudflare One"><meta name="pcx_tags" content="MCP"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/access-controls/ai-controls/mcp-portals/#page","headline":"MCP server portals \u00b7 Cloudflare One docs","description":"MCP server portals in Access.","url":"https://developers.cloudflare.com/cloudflare-one/access-controls/ai-controls/mcp-portals/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["MCP"]}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/access-controls/ai-controls/mcp-portals/
+  schema: 1
+---
 <p>An MCP server portal centralizes multiple <a href="https://www.cloudflare.com/learning/ai/what-is-model-context-protocol-mcp/">Model Context Protocol (MCP) servers</a> onto a single HTTP endpoint.</p>
 <p><img src="/assets/upstream/images/cloudflare-one/applications/mcp-portal.png" alt="MCP clients connect through an MCP portal to access internal MCP servers and SaaS MCP servers." /></p>
 <p>This guide explains how to add MCP servers to Cloudflare Access, create an MCP portal with customized tools and policies, and connect users to the portal using an MCP client.</p>
@@ -138,7 +149,7 @@
 @markup("md", "content/.markup/bodies/4720.md")
 </div>
 <p>The dashboard uses the <a href="#shared-cloudflare-callback-url-opt-in">shared Cloudflare callback URL</a> when you switch a server from automatic to manual credentials:</p>
-<pre><code class="language-txt">https://oauth-callbacks.cloudflareaccess.com/cdn-cgi/access/outbound-oauth-callback&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://oauth-callbacks.cloudflareaccess.com/cdn-cgi/access/outbound-oauth-callback&#10;</code></pre>
 <p>Always register the redirect URI displayed in the dashboard. OAuth providers typically require an exact URI match.</p>
 <p>Cloudflare stores the client secret encrypted and does not return it through the dashboard or API. When editing the server, leave <strong>Client secret</strong> blank to keep the existing value. To rotate the secret, create or activate the replacement at the upstream provider, enter the new value, and save the server.</p>
 <p>Manual credentials require per-user authentication. Leave <strong>Require user auth</strong> enabled when you add the server to a portal. The server remains in <strong>Waiting</strong> status until the first user completes upstream OAuth. Cloudflare then retrieves the server's tools and prompts and changes its status to <strong>Ready</strong>.</p>
@@ -231,11 +242,11 @@
 <h3 id="upstream-oauth-callback-url">Upstream OAuth callback URL</h3>
 <p>When a user authorizes an upstream MCP server that requires per-user OAuth, the portal performs an OAuth authorization code flow with the upstream server on the user's behalf. As part of this flow, the portal registers a callback URL (<code>redirect_uri</code>) with the upstream server. The upstream server redirects to this URL after the user authorizes access.</p>
 <p>By default, the portal uses a callback URL on your portal domain:</p>
-<pre><code class="language-txt">https://&lt;your-portal-hostname&gt;/servers-callback&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://&lt;your-portal-hostname&gt;/servers-callback&#10;</code></pre>
 <p>Allowlist this URL as a redirect URI at the upstream OAuth provider. OAuth providers typically exact-match the full URI including path.</p>
 <h4 id="shared-cloudflare-callback-url-opt-in">Shared Cloudflare callback URL (opt-in)</h4>
 <p>If you turn on the shared callback URL for an MCP server, every portal that uses that server uses this Cloudflare-owned URL instead:</p>
-<pre><code class="language-txt">https://oauth-callbacks.cloudflareaccess.com/cdn-cgi/access/outbound-oauth-callback&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://oauth-callbacks.cloudflareaccess.com/cdn-cgi/access/outbound-oauth-callback&#10;</code></pre>
 <p>Use the shared callback URL when an upstream vendor only allows a small number of redirect URIs, or when you want one callback URL for a server across multiple portals. This setting is off by default and configured separately for each OAuth server. To turn it on, go to <strong>Zero Trust</strong> &gt; <strong>Access controls</strong> &gt; <strong>MCP Portals</strong> &gt; <strong>MCP servers</strong>, add or edit an OAuth server, and turn on <strong>Use the Cloudflare-hosted OAuth callback</strong> under <strong>Basic information</strong> &gt; <strong>Advanced settings</strong>.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/4717.md")
@@ -306,7 +317,7 @@
 <h3 id="use-an-allowlist-pattern">Use an allowlist pattern</h3>
 <p>By default, all tools and prompts from an MCP server are available in the portal. You can invert this behavior so that all tools are hidden by default and only explicitly turned-on tools are exposed. This is useful when an MCP server has many tools but you only want to expose a curated subset.</p>
 <p>To configure an allowlist via the API, set <code>default_disabled</code> to <code>true</code> on the server-to-portal mapping, then explicitly list the tools you want to expose in <code>updated_tools</code>:</p>
-<pre><code class="language-json">{&#10;	&quot;servers&quot;: [&#10;		{&#10;			&quot;id&quot;: &quot;example-server&quot;,&#10;			&quot;default_disabled&quot;: true,&#10;			&quot;updated_tools&quot;: [&#10;				{&#10;					&quot;name&quot;: &quot;search_documents&quot;,&#10;					&quot;enabled&quot;: true&#10;				},&#10;				{&#10;					&quot;name&quot;: &quot;list_projects&quot;,&#10;					&quot;enabled&quot;: true&#10;				}&#10;			]&#10;		}&#10;	]&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;servers&quot;: [&#10;		{&#10;			&quot;id&quot;: &quot;example-server&quot;,&#10;			&quot;default_disabled&quot;: true,&#10;			&quot;updated_tools&quot;: [&#10;				{&#10;					&quot;name&quot;: &quot;search_documents&quot;,&#10;					&quot;enabled&quot;: true&#10;				},&#10;				{&#10;					&quot;name&quot;: &quot;list_projects&quot;,&#10;					&quot;enabled&quot;: true&#10;				}&#10;			]&#10;		}&#10;	]&#10;}&#10;</code></pre>
 <p>With <code>default_disabled</code> set to <code>true</code>, only <code>search_documents</code> and <code>list_projects</code> will be available to portal users. All other tools from this server will be hidden.</p>
 <h3 id="rename-tools-and-prompts-with-aliases">Rename tools and prompts with aliases</h3>
 <p>Aliases let you give tools and prompts clearer names in the portal. Use aliases to:</p>
@@ -349,7 +360,7 @@
 <p>Tools and prompts that have been modified display a <strong>Modified</strong> label in the dashboard.</p>
 <h4 id="set-aliases-with-the-api">Set aliases with the API</h4>
 <p>Send a <code>PUT</code> request to the <a href="/api/resources/zero_trust/subresources/access/subresources/ai_controls/subresources/mcp/subresources/portals/methods/update/">update a MCP portal</a> endpoint. Include the <code>alias</code> field for each tool or prompt you want to rename.</p>
-<pre><code class="language-bash">curl --request PUT --url https://api.cloudflare.com/client/v4/accounts/{account_id}/access/ai-controls/mcp/portals/{id}</code></pre>
+<pre tabindex="0"><code class="language-bash">curl --request PUT --url https://api.cloudflare.com/client/v4/accounts/{account_id}/access/ai-controls/mcp/portals/{id}</code></pre>
 <p>To set server-level aliases that apply across all portals, send a <code>PUT</code> request to the <a href="/api/resources/zero_trust/subresources/access/subresources/ai_controls/subresources/mcp/subresources/servers/methods/update/">update a MCP server</a> endpoint with the same <code>updated_tools</code> and <code>updated_prompts</code> fields.</p>
 <h4 id="reset-an-alias">Reset an alias</h4>
 <p>To reset a tool or prompt to its original upstream name, open the edit modal for the tool or prompt in the dashboard and select &quot;Reset to server definition.&quot; When using the API, omit the <code>alias</code> field from the corresponding entry in <code>updated_tools</code> or <code>updated_prompts</code>.</p>
@@ -486,13 +497,13 @@
 @markup("md", "content/.markup/bodies/4713.md")
 </aside>
 <h3 id="list-portals">List portals</h3>
-<pre><code class="language-bash">curl --request GET --url https://api.cloudflare.com/client/v4/accounts/{account_id}/access/ai-controls/mcp/portals</code></pre>
+<pre tabindex="0"><code class="language-bash">curl --request GET --url https://api.cloudflare.com/client/v4/accounts/{account_id}/access/ai-controls/mcp/portals</code></pre>
 <h3 id="create-a-portal-1">Create a portal</h3>
-<pre><code class="language-bash">curl --request POST --url https://api.cloudflare.com/client/v4/accounts/{account_id}/access/ai-controls/mcp/portals</code></pre>
+<pre tabindex="0"><code class="language-bash">curl --request POST --url https://api.cloudflare.com/client/v4/accounts/{account_id}/access/ai-controls/mcp/portals</code></pre>
 <h3 id="list-mcp-servers">List MCP servers</h3>
-<pre><code class="language-bash">curl --request GET --url https://api.cloudflare.com/client/v4/accounts/{account_id}/access/ai-controls/mcp/servers</code></pre>
+<pre tabindex="0"><code class="language-bash">curl --request GET --url https://api.cloudflare.com/client/v4/accounts/{account_id}/access/ai-controls/mcp/servers</code></pre>
 <h3 id="create-an-mcp-server">Create an MCP server</h3>
-<pre><code class="language-bash">curl --request POST --url https://api.cloudflare.com/client/v4/accounts/{account_id}/access/ai-controls/mcp/servers</code></pre>
+<pre tabindex="0"><code class="language-bash">curl --request POST --url https://api.cloudflare.com/client/v4/accounts/{account_id}/access/ai-controls/mcp/servers</code></pre>
 <p>The <code>auth_type</code> field accepts the following values:</p>
 <table>
 <thead>
@@ -518,7 +529,7 @@
 </table>
 <h4 id="manual-oauth-credentials">Manual OAuth credentials</h4>
 <p>To create an MCP server with a pre-registered OAuth client, set <code>auth_type</code> to <code>oauth</code> and provide both <code>auth_credentials</code> and <code>client_secret</code>. The <code>auth_credentials</code> value is required and must be a JSON-encoded string:</p>
-<pre><code class="language-bash">curl --request POST --url https://api.cloudflare.com/client/v4/accounts/{account_id}/access/ai-controls/mcp/servers</code></pre>
+<pre tabindex="0"><code class="language-bash">curl --request POST --url https://api.cloudflare.com/client/v4/accounts/{account_id}/access/ai-controls/mcp/servers</code></pre>
 <p>The decoded <code>auth_credentials</code> object must contain:</p>
 <ul>
 <li><code>auth_mode</code>: Must be <code>manual</code>.</li>
@@ -536,15 +547,15 @@
 <ul>
 <li><strong>A raw bearer token</strong> — the portal sends the value as the <code>Authorization: Bearer &lt;token&gt;</code> header on requests to the upstream MCP server:</li>
 </ul>
-<pre><code class="language-json">{&#10;  &quot;auth_type&quot;: &quot;bearer&quot;,&#10;  &quot;auth_credentials&quot;: &quot;your-bearer-token&quot;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;  &quot;auth_type&quot;: &quot;bearer&quot;,&#10;  &quot;auth_credentials&quot;: &quot;your-bearer-token&quot;&#10;}&#10;</code></pre>
 <ul>
 <li><strong>A JSON-encoded object of custom headers</strong> — for upstream MCP servers that require multiple headers or a non-standard header name:</li>
 </ul>
-<pre><code class="language-json">{&#10;  &quot;auth_type&quot;: &quot;bearer&quot;,&#10;  &quot;auth_credentials&quot;: &quot;{\&quot;headers\&quot;:{\&quot;X-Api-Key\&quot;:\&quot;&lt;api-key&gt;\&quot;,\&quot;X-Client-Id\&quot;:\&quot;&lt;client-id&gt;\&quot;}}&quot;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;  &quot;auth_type&quot;: &quot;bearer&quot;,&#10;  &quot;auth_credentials&quot;: &quot;{\&quot;headers\&quot;:{\&quot;X-Api-Key\&quot;:\&quot;&lt;api-key&gt;\&quot;,\&quot;X-Client-Id\&quot;:\&quot;&lt;client-id&gt;\&quot;}}&quot;&#10;}&#10;</code></pre>
 <p>The value of <code>auth_credentials</code> must be a JSON string. The parsed object must have a <code>headers</code> field mapping header names to string values. The portal forwards all headers verbatim to the upstream MCP server.</p>
 <h3 id="view-tool-call-analytics">View tool-call analytics</h3>
 <p>Use the account endpoint to retrieve daily or monthly MCP tool-call counts across the account:</p>
-<pre><code class="language-bash">curl --request GET --url https://api.cloudflare.com/client/v4/accounts/{account_id}/access/ai-controls/mcp/analytics/tool-calls/timeseries?granularity=daily&amp;aggregate=false&amp;tz=utc&amp;days=30</code></pre>
+<pre tabindex="0"><code class="language-bash">curl --request GET --url https://api.cloudflare.com/client/v4/accounts/{account_id}/access/ai-controls/mcp/analytics/tool-calls/timeseries?granularity=daily&amp;aggregate=false&amp;tz=utc&amp;days=30</code></pre>
 <p>The same query parameters apply to each endpoint:</p>
 <table>
 <thead>
@@ -580,16 +591,16 @@
 </ul>
 <h3 id="force-sync-an-mcp-server">Force sync an MCP server</h3>
 <p>To manually trigger a synchronization of tools and prompts from an upstream MCP server:</p>
-<pre><code class="language-bash">curl --request POST --url https://api.cloudflare.com/client/v4/accounts/{account_id}/access/ai-controls/mcp/servers/{server_id}/sync</code></pre>
+<pre tabindex="0"><code class="language-bash">curl --request POST --url https://api.cloudflare.com/client/v4/accounts/{account_id}/access/ai-controls/mcp/servers/{server_id}/sync</code></pre>
 <h3 id="delete-a-portal">Delete a portal</h3>
-<pre><code class="language-bash">curl --request DELETE --url https://api.cloudflare.com/client/v4/accounts/{account_id}/access/ai-controls/mcp/portals/{id}</code></pre>
+<pre tabindex="0"><code class="language-bash">curl --request DELETE --url https://api.cloudflare.com/client/v4/accounts/{account_id}/access/ai-controls/mcp/portals/{id}</code></pre>
 <h2 id="configure-via-terraform">Configure via Terraform</h2>
 <p>You can manage MCP server portals using the <a href="https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs">Cloudflare Terraform provider</a>. Use the <code>cloudflare_zero_trust_access_mcp_server_portal</code> resource to create and configure portals programmatically.</p>
 <aside class="nb-aside caution">
 @markup("md", "content/.markup/bodies/4712.md")
 </aside>
 <p>The following example creates an MCP server portal with a CNAME record:</p>
-<pre><code class="language-hcl">&#35; Create the MCP server portal&#10;resource &quot;cloudflare_zero_trust_access_mcp_server_portal&quot; &quot;example&quot; {&#10;  account_id = var.cloudflare_account_id&#10;  name       = &quot;Engineering Portal&quot;&#10;  hostname   = &quot;mcp.example.com&quot;&#10;}&#10;&#10;&#35; Required: Create the CNAME record for the portal hostname&#10;resource &quot;cloudflare_dns_record&quot; &quot;mcp_portal&quot; {&#10;  zone_id = var.cloudflare_zone_id&#10;  name    = &quot;mcp&quot;&#10;  content = &quot;gateway.agents.cloudflare.com&quot;&#10;  type    = &quot;CNAME&quot;&#10;  proxied = true&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-hcl">&#35; Create the MCP server portal&#10;resource &quot;cloudflare_zero_trust_access_mcp_server_portal&quot; &quot;example&quot; {&#10;  account_id = var.cloudflare_account_id&#10;  name       = &quot;Engineering Portal&quot;&#10;  hostname   = &quot;mcp.example.com&quot;&#10;}&#10;&#10;&#35; Required: Create the CNAME record for the portal hostname&#10;resource &quot;cloudflare_dns_record&quot; &quot;mcp_portal&quot; {&#10;  zone_id = var.cloudflare_zone_id&#10;  name    = &quot;mcp&quot;&#10;  content = &quot;gateway.agents.cloudflare.com&quot;&#10;  type    = &quot;CNAME&quot;&#10;  proxied = true&#10;}&#10;</code></pre>
 <p>For the full list of supported resource arguments, refer to the <a href="https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs">Terraform provider documentation</a>.</p>
 <h2 id="code-mode">Code Mode</h2>
 <p><a href="/agents/tools/codemode/">Code Mode</a> reduces context window usage by replacing upstream tool definitions with two tools for search and code execution. The connected AI agent writes JavaScript that calls typed <code>codemode.*</code> methods. The generated code runs in an isolated <a href="/workers/runtime-apis/bindings/worker-loader/">Dynamic Worker</a> environment. Authentication credentials and environment variables remain outside the model context.</p>
@@ -643,9 +654,9 @@
 <h3 id="connect-with-code-mode">Connect with Code Mode</h3>
 <p>The portal policy determines whether the MCP client needs a query parameter. For <em>Opt-in</em>, append <code>?codemode=search_and_execute</code> to the portal URL. For <em>On by default</em>, clients can append <code>?codemode=off</code> instead.</p>
 <p>For example, an <em>Opt-in</em> portal at <code>https://&lt;subdomain&gt;.&lt;domain&gt;/mcp</code> uses this URL:</p>
-<pre><code class="language-txt">https://&lt;subdomain&gt;.&lt;domain&gt;/mcp?codemode=search_and_execute&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://&lt;subdomain&gt;.&lt;domain&gt;/mcp?codemode=search_and_execute&#10;</code></pre>
 <p>For MCP clients with server configuration files, use the portal URL with the query string parameter:</p>
-<pre><code class="language-json">{&#10;	&quot;mcpServers&quot;: {&#10;		&quot;example-portal&quot;: {&#10;			&quot;command&quot;: &quot;npx&quot;,&#10;			&quot;args&quot;: [&#10;				&quot;-y&quot;,&#10;				&quot;mcp-remote@latest&quot;,&#10;				&quot;https://&lt;subdomain&gt;.&lt;domain&gt;/mcp?codemode=search_and_execute&quot;&#10;			]&#10;		}&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;mcpServers&quot;: {&#10;		&quot;example-portal&quot;: {&#10;			&quot;command&quot;: &quot;npx&quot;,&#10;			&quot;args&quot;: [&#10;				&quot;-y&quot;,&#10;				&quot;mcp-remote@latest&quot;,&#10;				&quot;https://&lt;subdomain&gt;.&lt;domain&gt;/mcp?codemode=search_and_execute&quot;&#10;			]&#10;		}&#10;	}&#10;}&#10;</code></pre>
 <p>When Code Mode is active, the portal advertises <code>portal_codemode_search</code> and <code>portal_codemode_execute</code>. The AI agent can discover tools and compose multiple tool calls in one execution.</p>
 <p>For more information on building with Code Mode, refer to the <a href="/agents/tools/codemode/api-reference/">Code Mode SDK reference</a>.</p>
 <h2 id="route-portal-traffic-through-gateway">Route portal traffic through Gateway</h2>
@@ -742,7 +753,7 @@
 </ol>
 <p>Workers AI Playground will show a <strong>Connected</strong> status and list the available tools. You can now ask the AI model to complete a task using an available tool. Requests made to an MCP server will appear in your <a href="#view-portal-logs">portal logs</a>.</p>
 <p>For MCP clients with server configuration files, we recommend using the <code>npx</code> command with the <code>mcp-remote@latest</code> argument:</p>
-<pre><code class="language-json">{&#10;	&quot;mcpServers&quot;: {&#10;		&quot;example-mcp-server&quot;: {&#10;			&quot;command&quot;: &quot;npx&quot;,&#10;			&quot;args&quot;: [&#10;				&quot;-y&quot;,&#10;				&quot;mcp-remote@latest&quot;,&#10;				&quot;https://&lt;subdomain&gt;.&lt;domain&gt;.com/mcp&quot;&#10;			]&#10;		}&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;mcpServers&quot;: {&#10;		&quot;example-mcp-server&quot;: {&#10;			&quot;command&quot;: &quot;npx&quot;,&#10;			&quot;args&quot;: [&#10;				&quot;-y&quot;,&#10;				&quot;mcp-remote@latest&quot;,&#10;				&quot;https://&lt;subdomain&gt;.&lt;domain&gt;.com/mcp&quot;&#10;			]&#10;		}&#10;	}&#10;}&#10;</code></pre>
 <p>We do not recommend using the <code>serverURL</code> parameter since it may cause issues with portal session creation and management.</p>
 <h3 id="portal-homepage">Portal homepage</h3>
 <p>When users visit the portal domain (<code>https://&lt;subdomain&gt;.&lt;domain&gt;/</code>) in a browser, the portal displays a homepage with connection details and setup instructions.</p>
@@ -815,9 +826,9 @@
 <li>Connect from your MCP client with the service token headers.</li>
 </ol>
 <p>For a CLI client, set the headers directly:</p>
-<pre><code class="language-sh">curl https://&lt;subdomain&gt;.&lt;domain&gt;/mcp \&#10;  &#45;H &quot;CF-Access-Client-Id: &lt;CLIENT_ID&gt;&quot; \&#10;  &#45;H &quot;CF-Access-Client-Secret: &lt;CLIENT_SECRET&gt;&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">curl https://&lt;subdomain&gt;.&lt;domain&gt;/mcp \&#10;  &#45;H &quot;CF-Access-Client-Id: &lt;CLIENT_ID&gt;&quot; \&#10;  &#45;H &quot;CF-Access-Client-Secret: &lt;CLIENT_SECRET&gt;&quot;&#10;</code></pre>
 <p>For <code>mcp-remote</code>, pass the headers with <code>--header</code>:</p>
-<pre><code class="language-json">{&#10;	&quot;mcpServers&quot;: {&#10;		&quot;example-portal&quot;: {&#10;			&quot;command&quot;: &quot;npx&quot;,&#10;			&quot;args&quot;: [&#10;				&quot;-y&quot;,&#10;				&quot;mcp-remote@latest&quot;,&#10;				&quot;https://&lt;subdomain&gt;.&lt;domain&gt;/mcp&quot;,&#10;				&quot;--header&quot;,&#10;				&quot;CF-Access-Client-Id: &lt;CLIENT_ID&gt;&quot;,&#10;				&quot;--header&quot;,&#10;				&quot;CF-Access-Client-Secret: &lt;CLIENT_SECRET&gt;&quot;&#10;			]&#10;		}&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;mcpServers&quot;: {&#10;		&quot;example-portal&quot;: {&#10;			&quot;command&quot;: &quot;npx&quot;,&#10;			&quot;args&quot;: [&#10;				&quot;-y&quot;,&#10;				&quot;mcp-remote@latest&quot;,&#10;				&quot;https://&lt;subdomain&gt;.&lt;domain&gt;/mcp&quot;,&#10;				&quot;--header&quot;,&#10;				&quot;CF-Access-Client-Id: &lt;CLIENT_ID&gt;&quot;,&#10;				&quot;--header&quot;,&#10;				&quot;CF-Access-Client-Secret: &lt;CLIENT_SECRET&gt;&quot;&#10;			]&#10;		}&#10;	}&#10;}&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/4707.md")
 </aside>
@@ -830,16 +841,16 @@
 <p>The <code>minimize_tools</code> option strips tool descriptions and input schemas from all upstream tools, leaving only their names. The portal exposes a special <code>query</code> tool that agents use to search and retrieve full tool definitions on demand. Agents can discover tools without loading all definitions upfront.</p>
 <p>This option provides up to 5x savings in token usage, though querying tool definitions before use adds a small amount of overhead.</p>
 <p>To connect with <code>minimize_tools</code>, use the following portal URL:</p>
-<pre><code class="language-txt">https://&lt;subdomain&gt;.&lt;domain&gt;/mcp?optimize_context=minimize_tools&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://&lt;subdomain&gt;.&lt;domain&gt;/mcp?optimize_context=minimize_tools&#10;</code></pre>
 <p>For MCP clients with server configuration files:</p>
-<pre><code class="language-json">{&#10;	&quot;mcpServers&quot;: {&#10;		&quot;example-portal&quot;: {&#10;			&quot;command&quot;: &quot;npx&quot;,&#10;			&quot;args&quot;: [&#10;				&quot;-y&quot;,&#10;				&quot;mcp-remote@latest&quot;,&#10;				&quot;https://&lt;subdomain&gt;.&lt;domain&gt;/mcp?optimize_context=minimize_tools&quot;&#10;			]&#10;		}&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;mcpServers&quot;: {&#10;		&quot;example-portal&quot;: {&#10;			&quot;command&quot;: &quot;npx&quot;,&#10;			&quot;args&quot;: [&#10;				&quot;-y&quot;,&#10;				&quot;mcp-remote@latest&quot;,&#10;				&quot;https://&lt;subdomain&gt;.&lt;domain&gt;/mcp?optimize_context=minimize_tools&quot;&#10;			]&#10;		}&#10;	}&#10;}&#10;</code></pre>
 <h3 id="search-and-execute">Search and execute</h3>
 <p>The <code>search_and_execute</code> option hides all upstream tools and exposes only two tools to the agent: <code>query</code> and <code>execute</code>. The <code>query</code> tool searches and retrieves tool definitions. The <code>execute</code> tool runs the upstream tools. The generated code runs in an isolated <a href="/workers/runtime-apis/bindings/worker-loader/">Dynamic Worker</a> environment, which keeps authentication credentials and environment variables out of the model context.</p>
 <p>This option reduces the initial token cost of portal tools to a small constant, regardless of how many tools are available. However, the agent becomes fully reliant on <code>query</code> to discover tools before it can call them.</p>
 <p>To connect with <code>search_and_execute</code>, use the following portal URL:</p>
-<pre><code class="language-txt">https://&lt;subdomain&gt;.&lt;domain&gt;/mcp?optimize_context=search_and_execute&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://&lt;subdomain&gt;.&lt;domain&gt;/mcp?optimize_context=search_and_execute&#10;</code></pre>
 <p>For MCP clients with server configuration files:</p>
-<pre><code class="language-json">{&#10;	&quot;mcpServers&quot;: {&#10;		&quot;example-portal&quot;: {&#10;			&quot;command&quot;: &quot;npx&quot;,&#10;			&quot;args&quot;: [&#10;				&quot;-y&quot;,&#10;				&quot;mcp-remote@latest&quot;,&#10;				&quot;https://&lt;subdomain&gt;.&lt;domain&gt;/mcp?optimize_context=search_and_execute&quot;&#10;			]&#10;		}&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;mcpServers&quot;: {&#10;		&quot;example-portal&quot;: {&#10;			&quot;command&quot;: &quot;npx&quot;,&#10;			&quot;args&quot;: [&#10;				&quot;-y&quot;,&#10;				&quot;mcp-remote@latest&quot;,&#10;				&quot;https://&lt;subdomain&gt;.&lt;domain&gt;/mcp?optimize_context=search_and_execute&quot;&#10;			]&#10;		}&#10;	}&#10;}&#10;</code></pre>
 <p>For more information on the Code Mode pattern behind <code>search_and_execute</code>, refer to <a href="/agents/tools/codemode/">Code Mode</a>.</p>
 <h2 id="manage-portal-sessions">Manage portal sessions</h2>
 <p>Once connected to a portal, users can manage their upstream MCP server sessions without leaving their MCP client. The portal uses <a href="https://modelcontextprotocol.io/specification/2025-03-26/server/elicitation">MCP elicitations</a> to provide a server selection page where you can enable or disable servers, log out of individual servers, and reauthenticate.</p>
@@ -849,7 +860,7 @@
 <p>Take me back to the server selection page.</p>
 </blockquote>
 <p>The portal returns an authorization URL. Open this URL in your web browser to access the server selection page:</p>
-<pre><code class="language-txt">https://&lt;subdomain&gt;.&lt;domain&gt;/authorize?elicitationId=&lt;ELICITATION_ID&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://&lt;subdomain&gt;.&lt;domain&gt;/authorize?elicitationId=&lt;ELICITATION_ID&gt;&#10;</code></pre>
 <p>From this page you can:</p>
 <ul>
 <li><strong>Enable or disable servers</strong> — Toggle individual upstream MCP servers on or off. Disabling a server removes its tools from the active session, which reduces context window usage.</li>
@@ -870,7 +881,7 @@
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/4706.md")
 </aside>
-<pre><code class="language-sh">rm -rf ~/.mcp-auth&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">rm -rf ~/.mcp-auth&#10;</code></pre>
 <p>After clearing credentials, reconnect to the portal from your MCP client.</p>
 <h3 id="authorize-new-servers">Authorize new servers</h3>
 <p>When an admin adds a new upstream MCP server to a portal, the portal automatically prompts connected users to authorize the new server. The portal batches admin changes and redirects you to the authorization flow once, rather than interrupting for each individual server update.</p>

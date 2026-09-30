@@ -1,11 +1,20 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/rdp/rdp-browser/
+  description: Connect to RDP in a browser in Zero Trust networking.
+  full_title: Connect to RDP in a browser · Cloudflare One docs
+  head_html: <title>Connect to RDP in a browser · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="Connect to RDP in a browser in Zero Trust networking."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/rdp/rdp-browser/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/rdp/rdp-browser/index.md"><meta property="og:title" content="Connect to RDP in a browser · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Connect to RDP in a browser in Zero Trust networking."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/rdp/rdp-browser/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Cloudflare One"><meta name="pcx_tags" content="RDP"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/rdp/rdp-browser/#page","headline":"Connect to RDP in a browser \u00b7 Cloudflare One docs","description":"Connect to RDP in a browser in Zero Trust networking.","url":"https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/rdp/rdp-browser/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["RDP"]}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/rdp/rdp-browser/
+  schema: 1
+---
 <p>Users can connect to an RDP server without installing an RDP client or the <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/">Cloudflare One Client</a> on their device. Browser-based RDP leverages <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/">Cloudflare Tunnel</a>, which creates a secure, outbound-only connection from your RDP server to Cloudflare's global network. Setup involves running the <code>cloudflared</code> daemon on the RDP server (or any other host machine within the private network) and routing RDP traffic over a public hostname.</p>
 <p>There are two ways for users to <a href="#4-connect-as-a-user">reach the RDP server in their browser</a>:</p>
 <ul>
 <li><strong>App Launcher (recommended)</strong>: Users can log in to the <a href="/cloudflare-one/access-controls/access-settings/app-launcher/">Access App Launcher</a> with their Cloudflare Access credentials and then initiate an RDP connection within the browser to their Windows machine. Users will authenticate to the Windows machine using their pre-configured Windows username and password. Cloudflare does not manage any credentials on the Windows server.</li>
-<li><strong>Direct URL</strong>: A user may also navigate directly to the Windows server at <code>https://&lt;app-domain&gt;/rdp/&lt;vnet-id&gt;/&lt;target-ip&gt;/&lt;port&gt;</code>, where <code>vnet-id</code> is the <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></li>
+<li><strong>Direct URL</strong>: A user may also navigate directly to the Windows server at <code>https://&lt;app-domain&gt;/rdp/&lt;vnet-id&gt;/&lt;target-ip&gt;/&lt;port&gt;</code>, where <code>vnet-id</code> is the <span class="nb-glossary-tooltip" title="Virtual network">virtual network</span> assigned to the Cloudflare Tunnel route. The authentication flow is the same as for the App Launcher; first users must log in to Cloudflare Access and then use their Windows credentials to authenticate to the Windows machine.</li>
 </ul>
-@markup("md", "content/.markup/bodies/5510.md")
-</div> assigned to the Cloudflare Tunnel route. The authentication flow is the same as for the App Launcher; first users must log in to Cloudflare Access and then use their Windows credentials to authenticate to the Windows machine.
 <p>Browser-based RDP can be used in conjunction with <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/rdp/rdp-device-client/">the Cloudflare One Client</a> so that there are multiple ways to connect to the server. You can reuse the same Cloudflare Tunnel when configuring each connection method.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <ul>
@@ -82,7 +91,7 @@ To create a new target:</p>
 <li></li>
 </ol>
 <p>In the <strong>Domain</strong> dropdown, select the domain that will represent the application. Domains must belong to an active zone in your Cloudflare account. You can use <a href="/cloudflare-one/access-controls/policies/app-paths/">wildcards</a> to protect multiple parts of an application that share a root path.</p>
-<pre><code>	Alternatively, to use a [Cloudflare for SaaS custom hostname](/cloudflare-for-platforms/cloudflare-for-saas/security/secure-with-access/), select **Switch to custom input** and enter your custom hostname.&#10;</code></pre>
+<pre tabindex="0"><code>	Alternatively, to use a [Cloudflare for SaaS custom hostname](/cloudflare-for-platforms/cloudflare-for-saas/security/secure-with-access/), select **Switch to custom input** and enter your custom hostname.&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/5506.md")
 </aside>
@@ -136,7 +145,7 @@ Select the [identity providers](/cloudflare-one/integrations/identity-providers/
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/5504.md")
 </aside>
-<pre><code>- &#10;</code></pre>
+<pre tabindex="0"><code>- &#10;</code></pre>
 <p><strong>Custom block pages</strong>: Choose what users will see when they are denied access to the application.</p>
 <ul>
 <li><strong>Cloudflare default</strong>: Reload the <a href="/cloudflare-one/reusable-components/custom-pages/access-login-page/">login page</a> and display a block message below the Cloudflare Access logo. The default message is <code>That account does not have access</code>, or you can enter a custom message.</li>
@@ -195,10 +204,8 @@ In the [Cloudflare dashboard](https://dash.cloudflare.com/), go to **Zero Trust*
 <ol>
 <li>Open a browser and go to your App Launcher URL:</li>
 </ol>
-<pre><code class="language-text">https://&lt;your-team-name&gt;.cloudflareaccess.com&#10;</code></pre>
-<p>Replace <code>&lt;your-team-name&gt;</code> with your Zero Trust <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/5520.md")
-</div>.
+<pre tabindex="0"><code class="language-text">https://&lt;your-team-name&gt;.cloudflareaccess.com&#10;</code></pre>
+<p>Replace <code>&lt;your-team-name&gt;</code> with your Zero Trust <span class="nb-glossary-tooltip" title="team name">team name</span>.</p>
 <ol start="2">
 <li>
 <p>Follow the prompts to log in to your identity provider.</p>

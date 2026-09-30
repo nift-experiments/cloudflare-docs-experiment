@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/changelog/product/workers/8/
+  description: '2025-08-05'
+  full_title: workers changelog - page 8 | Cloudflare Docs
+  head_html: <title>workers changelog - page 8 | Cloudflare Docs</title><meta name="generator" content="Nift"><meta name="description" content="2025-08-05"><link rel="canonical" href="https://developers.cloudflare.com/changelog/product/workers/8/"><link rel="sitemap" href="/sitemap-index.xml"><meta property="og:title" content="workers changelog - page 8"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="2025-08-05"><meta property="og:url" content="https://developers.cloudflare.com/changelog/product/workers/8/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/changelog/product/workers/8/#page","headline":"workers changelog - page 8 | Cloudflare Docs","description":"2025-08-05","url":"https://developers.cloudflare.com/changelog/product/workers/8/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: false
+  noindex: false
+  route: /changelog/product/workers/8/
+  schema: 1
+---
 <h1 id="changelog">Changelog</h1>
 
 <h2 id="cloudflare-sandbox-sdk-adds-streaming-code-interpreter-git-support-process-control-and-more"><a href="/changelog/post/2025-08-05-sandbox-sdk-major-update/">Cloudflare Sandbox SDK adds streaming, code interpreter, Git support, process control and more</a></h2>
@@ -9,7 +20,7 @@
 <p>Create persistent code contexts with support for rich visual + structured outputs.</p>
 <h4 id="2025-08-05-sandbox-sdk-major-update-createcodecontext-options">createCodeContext(options)</h4>
 <p>Creates a new code execution context with persistent state.</p>
-<pre><code class="language-ts">// Create a Python context&#10;const pythonCtx = await sandbox.createCodeContext({ language: &quot;python&quot; });&#10;&#10;// Create a JavaScript context&#10;const jsCtx = await sandbox.createCodeContext({ language: &quot;javascript&quot; });&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// Create a Python context&#10;const pythonCtx = await sandbox.createCodeContext({ language: &quot;python&quot; });&#10;&#10;// Create a JavaScript context&#10;const jsCtx = await sandbox.createCodeContext({ language: &quot;javascript&quot; });&#10;</code></pre>
 <p>Options:</p>
 <ul>
 <li>language: Programming language ('python' | 'javascript' | 'typescript')</li>
@@ -18,7 +29,7 @@
 </ul>
 <h4 id="2025-08-05-sandbox-sdk-major-update-runcode-code-options">runCode(code, options)</h4>
 <p>Executes code with optional streaming callbacks.</p>
-<pre><code class="language-ts">// Simple execution&#10;const execution = await sandbox.runCode(&#x27;print(&quot;Hello World&quot;)&#x27;, {&#10;	context: pythonCtx,&#10;});&#10;&#10;// With streaming callbacks&#10;await sandbox.runCode(&#10;	`&#10;for i in range(5):&#10;    print(f&quot;Step {i}&quot;)&#10;    time.sleep(1)&#10;`,&#10;	{&#10;		context: pythonCtx,&#10;		onStdout: (output) =&gt; console.log(&quot;Real-time:&quot;, output.text),&#10;		onResult: (result) =&gt; console.log(&quot;Result:&quot;, result),&#10;	},&#10;);&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// Simple execution&#10;const execution = await sandbox.runCode(&#x27;print(&quot;Hello World&quot;)&#x27;, {&#10;	context: pythonCtx,&#10;});&#10;&#10;// With streaming callbacks&#10;await sandbox.runCode(&#10;	`&#10;for i in range(5):&#10;    print(f&quot;Step {i}&quot;)&#10;    time.sleep(1)&#10;`,&#10;	{&#10;		context: pythonCtx,&#10;		onStdout: (output) =&gt; console.log(&quot;Real-time:&quot;, output.text),&#10;		onResult: (result) =&gt; console.log(&quot;Result:&quot;, result),&#10;	},&#10;);&#10;</code></pre>
 <p>Options:</p>
 <ul>
 <li>language: Programming language ('python' | 'javascript' | 'typescript')</li>
@@ -27,7 +38,7 @@
 </ul>
 <h4 id="2025-08-05-sandbox-sdk-major-update-real-time-streaming-output">Real-time streaming output</h4>
 <p>Returns a streaming response for real-time processing.</p>
-<pre><code class="language-ts">const stream = await sandbox.runCodeStream(&#10;	&quot;import time; [print(i) for i in range(10)]&quot;,&#10;);&#10;// Process the stream as needed&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const stream = await sandbox.runCodeStream(&#10;	&quot;import time; [print(i) for i in range(10)]&quot;,&#10;);&#10;// Process the stream as needed&#10;</code></pre>
 <h4 id="2025-08-05-sandbox-sdk-major-update-rich-output-handling">Rich output handling</h4>
 <p>Interpreter outputs are auto-formatted and returned in multiple formats:</p>
 <ul>
@@ -37,13 +48,13 @@
 <li>json (structured data)</li>
 <li>chart (parsed visualizations)</li>
 </ul>
-<pre><code class="language-ts">const result = await sandbox.runCode(&#10;	`&#10;import seaborn as sns&#10;import matplotlib.pyplot as plt&#10;&#10;data = sns.load_dataset(&quot;flights&quot;)&#10;pivot = data.pivot(&quot;month&quot;, &quot;year&quot;, &quot;passengers&quot;)&#10;sns.heatmap(pivot, annot=True, fmt=&quot;d&quot;)&#10;plt.title(&quot;Flight Passengers&quot;)&#10;plt.show()&#10;&#10;pivot.to_dict()&#10;`,&#10;	{ context: pythonCtx },&#10;);&#10;&#10;if (result.png) {&#10;	console.log(&quot;Chart output:&quot;, result.png);&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const result = await sandbox.runCode(&#10;	`&#10;import seaborn as sns&#10;import matplotlib.pyplot as plt&#10;&#10;data = sns.load_dataset(&quot;flights&quot;)&#10;pivot = data.pivot(&quot;month&quot;, &quot;year&quot;, &quot;passengers&quot;)&#10;sns.heatmap(pivot, annot=True, fmt=&quot;d&quot;)&#10;plt.title(&quot;Flight Passengers&quot;)&#10;plt.show()&#10;&#10;pivot.to_dict()&#10;`,&#10;	{ context: pythonCtx },&#10;);&#10;&#10;if (result.png) {&#10;	console.log(&quot;Chart output:&quot;, result.png);&#10;}&#10;</code></pre>
 <h4 id="2025-08-05-sandbox-sdk-major-update-preview-urls-from-exposed-ports">Preview URLs from Exposed Ports</h4>
 <p>Start background processes and expose them with live URLs.</p>
-<pre><code class="language-ts">await sandbox.startProcess(&quot;python -m http.server 8000&quot;);&#10;const preview = await sandbox.exposePort(8000);&#10;&#10;console.log(&quot;Live preview at:&quot;, preview.url);&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">await sandbox.startProcess(&quot;python -m http.server 8000&quot;);&#10;const preview = await sandbox.exposePort(8000);&#10;&#10;console.log(&quot;Live preview at:&quot;, preview.url);&#10;</code></pre>
 <h4 id="2025-08-05-sandbox-sdk-major-update-full-process-lifecycle-control">Full process lifecycle control</h4>
 <p>Start, inspect, and terminate long-running background processes.</p>
-<pre><code class="language-ts">const process = await sandbox.startProcess(&quot;node server.js&quot;);&#10;console.log(`Started process ${process.id} with PID ${process.pid}`);&#10;&#10;// Monitor the process&#10;const logStream = await sandbox.streamProcessLogs(process.id);&#10;for await (const log of parseSSEStream&lt;LogEvent&gt;(logStream)) {&#10;	console.log(`Server: ${log.data}`);&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const process = await sandbox.startProcess(&quot;node server.js&quot;);&#10;console.log(`Started process ${process.id} with PID ${process.pid}`);&#10;&#10;// Monitor the process&#10;const logStream = await sandbox.streamProcessLogs(process.id);&#10;for await (const log of parseSSEStream&lt;LogEvent&gt;(logStream)) {&#10;	console.log(`Server: ${log.data}`);&#10;}&#10;</code></pre>
 <ul>
 <li>listProcesses() - List all running processes</li>
 <li>getProcess(id) - Get detailed process status</li>
@@ -54,7 +65,7 @@
 </ul>
 <h4 id="2025-08-05-sandbox-sdk-major-update-git-integration">Git integration</h4>
 <p>Clone Git repositories directly into the sandbox.</p>
-<pre><code class="language-ts">await sandbox.gitCheckout(&quot;https://github.com/user/repo&quot;, {&#10;	branch: &quot;main&quot;,&#10;	targetDir: &quot;my-project&quot;,&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">await sandbox.gitCheckout(&quot;https://github.com/user/repo&quot;, {&#10;	branch: &quot;main&quot;,&#10;	targetDir: &quot;my-project&quot;,&#10;});&#10;</code></pre>
 <p>Sandboxes are still experimental. We're using them to explore how isolated, container-like workloads might scale on Cloudflare — and to help define the developer experience around them.</p>
 
 
@@ -90,10 +101,10 @@
 @markup("md", "content/.markup/bodies/17782.md")</div>
 <h4 id="2025-08-01-containers-in-vite-dev-worker-code">Worker Code</h4>
 <p>Once your Worker and Containers are configured, you can access the Container instances from your Worker code:</p>
-<pre><code class="language-ts">import { Container, getContainer } from &quot;@cloudflare/containers&quot;;&#10;&#10;export class MyContainer extends Container {&#10;  defaultPort = 4000; // Port the container is listening on&#10;  sleepAfter = &quot;10m&quot;; // Stop the instance if requests not sent for 10 minutes&#10;}&#10;&#10;async fetch(request, env) {&#10;  const { &quot;session-id&quot;: sessionId } = await request.json();&#10;  // Get the container instance for the given session ID&#10;  const containerInstance = getContainer(env.MY_CONTAINER, sessionId)&#10;  // Pass the request to the container instance on its default port&#10;  return containerInstance.fetch(request);&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { Container, getContainer } from &quot;@cloudflare/containers&quot;;&#10;&#10;export class MyContainer extends Container {&#10;  defaultPort = 4000; // Port the container is listening on&#10;  sleepAfter = &quot;10m&quot;; // Stop the instance if requests not sent for 10 minutes&#10;}&#10;&#10;async fetch(request, env) {&#10;  const { &quot;session-id&quot;: sessionId } = await request.json();&#10;  // Get the container instance for the given session ID&#10;  const containerInstance = getContainer(env.MY_CONTAINER, sessionId)&#10;  // Pass the request to the container instance on its default port&#10;  return containerInstance.fetch(request);&#10;}&#10;</code></pre>
 <h4 id="2025-08-01-containers-in-vite-dev-local-development">Local development</h4>
 <p>To develop your Worker locally, start a local dev server by running</p>
-<pre><code class="language-sh">vite dev&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">vite dev&#10;</code></pre>
 <p>in your terminal.</p>
 <h4 id="2025-08-01-containers-in-vite-dev-resources">Resources</h4>
 <p>Learn more about <a href="https://developers.cloudflare.com/containers/">Cloudflare Containers</a> or the <a href="https://developers.cloudflare.com/workers/vite-plugin/">Cloudflare Vite plugin</a> in our developer docs.</p>
@@ -106,9 +117,9 @@
 <div class="nb-wrangler-config">
 @markup("md", "content/.markup/bodies/17781.md")</div>
 <p>Add secrets to a <code>.dev.vars.example</code> or <code>.env.example</code> file:</p>
-<pre><code class="language-ini">COOKIE_SIGNING_KEY=my-secret # comment&#10;</code></pre>
+<pre tabindex="0"><code class="language-ini">COOKIE_SIGNING_KEY=my-secret # comment&#10;</code></pre>
 <p>And optionally, you can add a description for these bindings in your template's <code>package.json</code> to help users understand how to configure each value:</p>
-<pre><code class="language-json">{&#10;	&quot;name&quot;: &quot;my-worker&quot;,&#10;	&quot;private&quot;: true,&#10;	&quot;cloudflare&quot;: {&#10;		&quot;bindings&quot;: {&#10;			&quot;API_KEY&quot;: {&#10;				&quot;description&quot;: &quot;Select your company&#x27;s API key for connecting to the example service.&quot;&#10;			},&#10;			&quot;COOKIE_SIGNING_KEY&quot;: {&#10;				&quot;description&quot;: &quot;Generate a random string using `openssl rand -hex 32`.&quot;&#10;			}&#10;		}&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;name&quot;: &quot;my-worker&quot;,&#10;	&quot;private&quot;: true,&#10;	&quot;cloudflare&quot;: {&#10;		&quot;bindings&quot;: {&#10;			&quot;API_KEY&quot;: {&#10;				&quot;description&quot;: &quot;Select your company&#x27;s API key for connecting to the example service.&quot;&#10;			},&#10;			&quot;COOKIE_SIGNING_KEY&quot;: {&#10;				&quot;description&quot;: &quot;Generate a random string using `openssl rand -hex 32`.&quot;&#10;			}&#10;		}&#10;	}&#10;}&#10;</code></pre>
 <p>These secrets and environment variables will be presented to users in the dashboard as they deploy this template, allowing them to configure each value. Additional information about creating templates and Deploy to Cloudflare buttons can be found in <a href="/workers/platform/deploy-buttons/">our documentation</a>.</p>
 
 
@@ -134,7 +145,7 @@ These preview URLs are named after your branch and are posted as a comment to ea
 </ul>
 <h4 id="2025-07-23-workers-preview-urls-custom-alias-name">Custom alias name</h4>
 <p>You can also assign a custom preview alias using the <a href="/workers/wrangler/">Wrangler CLI</a>, by passing the <code>--preview-alias</code> flag when <a href="/workers/wrangler/commands/general/#versions-upload">uploading a version</a> of your Worker:</p>
-<pre><code class="language-bash">wrangler versions upload --preview-alias staging&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">wrangler versions upload --preview-alias staging&#10;</code></pre>
 <h4 id="2025-07-23-workers-preview-urls-limitations-while-in-beta">Limitations while in beta</h4>
 <ul>
 <li>Only available on the <strong>workers.dev</strong> subdomain (custom domains not yet supported)</li>
@@ -164,7 +175,7 @@ We continue to support Vite 6 so you do not need to immediately upgrade.</p>
 These include importing assets as URLs, importing as strings and importing from the <code>public</code> directory as well as inlining assets.</p>
 <p>Additionally, assets imported as URLs in your Worker are now automatically moved to the client build output.</p>
 <p>Here is an example that fetches an imported asset using the <a href="/workers/static-assets/binding/#binding">assets binding</a> and modifies the response.</p>
-<pre><code class="language-ts">// Import the asset URL&#10;// This returns the resolved path in development and production&#10;import myImage from &quot;./my-image.png&quot;;&#10;&#10;export default {&#10;	async fetch(request, env) {&#10;		// Fetch the asset using the binding&#10;		const response = await env.ASSETS.fetch(new URL(myImage, request.url));&#10;		// Create a new `Response` object that can be modified&#10;		const modifiedResponse = new Response(response.body, response);&#10;		// Add an additional header&#10;		modifiedResponse.headers.append(&quot;my-header&quot;, &quot;imported-asset&quot;);&#10;&#10;		// Return the modified response&#10;		return modifiedResponse;&#10;	},&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// Import the asset URL&#10;// This returns the resolved path in development and production&#10;import myImage from &quot;./my-image.png&quot;;&#10;&#10;export default {&#10;	async fetch(request, env) {&#10;		// Fetch the asset using the binding&#10;		const response = await env.ASSETS.fetch(new URL(myImage, request.url));&#10;		// Create a new `Response` object that can be modified&#10;		const modifiedResponse = new Response(response.body, response);&#10;		// Add an additional header&#10;		modifiedResponse.headers.append(&quot;my-header&quot;, &quot;imported-asset&quot;);&#10;&#10;		// Return the modified response&#10;		return modifiedResponse;&#10;	},&#10;};&#10;</code></pre>
 <p>Refer to <a href="/workers/vite-plugin/reference/static-assets/">Static Assets</a> in the Cloudflare Vite plugin docs for more info.</p>
 
 
@@ -172,7 +183,7 @@ These include importing assets as URLs, importing as strings and importing from 
 <p><em>2025-06-30</em></p>
 <p>We <a href="https://github.com/cloudflare/workers-sdk/discussions/9660">recently announced</a> our public beta for <a href="/workers/local-development/#remote-bindings">remote bindings</a>, which allow you to connect to deployed resources running on your Cloudflare account (like <a href="/r2">R2 buckets</a> or <a href="/d1">D1 databases</a>) while running a local development session.</p>
 <p>Now, you can use remote bindings with your Next.js applications through the <a href="https://opennext.js.org/cloudflare/bindings#remote-bindings"><code>@opennextjs/cloudflare</code> adaptor</a> by enabling the experimental feature in your <code>next.config.ts</code>:</p>
-<pre><code class="language-diff">&#45; initOpenNextCloudflareForDev();&#10;&#43; initOpenNextCloudflareForDev({&#10;&#43;  experimental: { remoteBindings: true }&#10;&#43; });&#10;</code></pre>
+<pre tabindex="0"><code class="language-diff">&#45; initOpenNextCloudflareForDev();&#10;&#43; initOpenNextCloudflareForDev({&#10;&#43;  experimental: { remoteBindings: true }&#10;&#43; });&#10;</code></pre>
 <p>Then, all you have to do is specify which bindings you want connected to the deployed resource on your Cloudflare account via the <code>experimental_remote</code> flag in your binding definition:</p>
 <div class="nb-wrangler-config">
 @markup("md", "content/.markup/bodies/17780.md")</div>
@@ -189,7 +200,7 @@ These include importing assets as URLs, importing as strings and importing from 
 <p><em>2025-06-26</em></p>
 <p>Workers can now talk to each other across separate dev commands using service bindings and tail consumers, whether started with <code>vite dev</code> or <code>wrangler dev</code>.</p>
 <p>Simply start each Worker in its own terminal:</p>
-<pre><code class="language-sh">&#35; Terminal 1&#10;vite dev&#10;&#10;&#35; Terminal 2&#10;wrangler dev&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">&#35; Terminal 1&#10;vite dev&#10;&#10;&#35; Terminal 2&#10;wrangler dev&#10;</code></pre>
 <p>This is useful when different teams maintain different Workers, or when each Worker has its own build setup or tooling.</p>
 <p>Check out the <a href="/workers/local-development/multi-workers">Developing with multiple Workers</a> guide to learn more about the different approaches and when to use each one.</p>
 
@@ -197,7 +208,7 @@ These include importing assets as URLs, importing as strings and importing from 
 <h2 id="run-ai-generated-code-on-demand-with-code-sandboxes-new"><a href="/changelog/post/2025-06-24-announcing-sandboxes/">Run AI-generated code on-demand with Code Sandboxes (new)</a></h2>
 <p><em>2025-06-25</em></p>
 <p>AI is supercharging app development for everyone, but we need a safe way to run untrusted, LLM-written code. We’re introducing <a href="https://www.npmjs.com/package/@cloudflare/sandbox">Sandboxes</a>, which let your Worker run actual processes in a secure, container-based environment.</p>
-<pre><code class="language-ts">import { getSandbox } from &quot;@cloudflare/sandbox&quot;;&#10;export { Sandbox } from &quot;@cloudflare/sandbox&quot;;&#10;&#10;export default {&#10;	async fetch(request: Request, env: Env) {&#10;		const sandbox = getSandbox(env.Sandbox, &quot;my-sandbox&quot;);&#10;		return sandbox.exec(&quot;ls&quot;, [&quot;-la&quot;]);&#10;	},&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import { getSandbox } from &quot;@cloudflare/sandbox&quot;;&#10;export { Sandbox } from &quot;@cloudflare/sandbox&quot;;&#10;&#10;export default {&#10;	async fetch(request: Request, env: Env) {&#10;		const sandbox = getSandbox(env.Sandbox, &quot;my-sandbox&quot;);&#10;		return sandbox.exec(&quot;ls&quot;, [&quot;-la&quot;]);&#10;	},&#10;};&#10;</code></pre>
 <h4 id="2025-06-24-announcing-sandboxes-methods">Methods</h4>
 <ul>
 <li><code>exec(command: string, args: string[], options?: { stream?: boolean })</code>:Execute a command in the sandbox.</li>
@@ -228,11 +239,11 @@ These include importing assets as URLs, importing as strings and importing from 
 <li>Durable Objects <a href="https://developers.cloudflare.com/durable-objects/api/base/">Workers API</a> is always available for your application as needed</li>
 </ul>
 <p>Storage and alarm helper methods can be combined with <a href="https://github.com/cloudflare/actors?tab=readme-ov-file#storage--alarms-with-durableobject-class">any Javascript class</a> that defines your Durable Object, i.e, ones that extend <code>DurableObject</code> including the <code>Actor</code> class.</p>
-<pre><code class="language-js">import { Storage } from &quot;@cloudflare/actors/storage&quot;;&#10;&#10;export class ChatRoom extends DurableObject&lt;Env&gt; {&#10;    storage: Storage;&#10;&#10;    constructor(ctx: DurableObjectState, env: Env) {&#10;        super(ctx, env)&#10;        this.storage = new Storage(ctx.storage);&#10;        this.storage.migrations = [{&#10;            idMonotonicInc: 1,&#10;            description: &quot;Create users table&quot;,&#10;            sql: &quot;CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY)&quot;&#10;        }]&#10;    }&#10;    async fetch(request: Request): Promise&lt;Response&gt; {&#10;        // Run migrations before executing SQL query&#10;        await this.storage.runMigrations();&#10;&#10;        // Query with SQL template&#10;        let userId = new URL(request.url).searchParams.get(&quot;userId&quot;);&#10;        const query = this.storage.sql`SELECT * FROM users WHERE id = ${userId};`&#10;        return new Response(`${JSON.stringify(query)}`);&#10;    }&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">import { Storage } from &quot;@cloudflare/actors/storage&quot;;&#10;&#10;export class ChatRoom extends DurableObject&lt;Env&gt; {&#10;    storage: Storage;&#10;&#10;    constructor(ctx: DurableObjectState, env: Env) {&#10;        super(ctx, env)&#10;        this.storage = new Storage(ctx.storage);&#10;        this.storage.migrations = [{&#10;            idMonotonicInc: 1,&#10;            description: &quot;Create users table&quot;,&#10;            sql: &quot;CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY)&quot;&#10;        }]&#10;    }&#10;    async fetch(request: Request): Promise&lt;Response&gt; {&#10;        // Run migrations before executing SQL query&#10;        await this.storage.runMigrations();&#10;&#10;        // Query with SQL template&#10;        let userId = new URL(request.url).searchParams.get(&quot;userId&quot;);&#10;        const query = this.storage.sql`SELECT * FROM users WHERE id = ${userId};`&#10;        return new Response(`${JSON.stringify(query)}`);&#10;    }&#10;}&#10;</code></pre>
 <p><code>@cloudflare/actors</code> library introduces the <code>Actor</code> class pattern. <code>Actor</code> lets you access Durable Objects without writing the Worker that communicates with your Durable Object (the Worker is created for you). By default, requests are routed to a Durable Object named &quot;default&quot;.</p>
-<pre><code class="language-js">export class MyActor extends Actor&lt;Env&gt; {&#10;    async fetch(request: Request): Promise&lt;Response&gt; {&#10;        return new Response(&#x27;Hello, World!&#x27;)&#10;    }&#10;}&#10;&#10;export default handler(MyActor);&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">export class MyActor extends Actor&lt;Env&gt; {&#10;    async fetch(request: Request): Promise&lt;Response&gt; {&#10;        return new Response(&#x27;Hello, World!&#x27;)&#10;    }&#10;}&#10;&#10;export default handler(MyActor);&#10;</code></pre>
 <p>You can <a href="/durable-objects/get-started/#3-instantiate-and-communicate-with-a-durable-object">route</a> to different Durable Objects by name within your <code>Actor</code> class using <a href="https://github.com/cloudflare/actors?tab=readme-ov-file#actor-with-custom-name"><code>nameFromRequest</code></a>.</p>
-<pre><code class="language-js">export class MyActor extends Actor&lt;Env&gt; {&#10;    static nameFromRequest(request: Request): string {&#10;        let url = new URL(request.url);&#10;        return url.searchParams.get(&quot;userId&quot;) ?? &quot;foo&quot;;&#10;    }&#10;&#10;    async fetch(request: Request): Promise&lt;Response&gt; {&#10;        return new Response(`Actor identifier (Durable Object name): ${this.identifier}`);&#10;    }&#10;}&#10;&#10;export default handler(MyActor);&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">export class MyActor extends Actor&lt;Env&gt; {&#10;    static nameFromRequest(request: Request): string {&#10;        let url = new URL(request.url);&#10;        return url.searchParams.get(&quot;userId&quot;) ?? &quot;foo&quot;;&#10;    }&#10;&#10;    async fetch(request: Request): Promise&lt;Response&gt; {&#10;        return new Response(`Actor identifier (Durable Object name): ${this.identifier}`);&#10;    }&#10;}&#10;&#10;export default handler(MyActor);&#10;</code></pre>
 <p>For more examples, check out the library <a href="https://github.com/cloudflare/actors?tab=readme-ov-file#getting-started">README</a>. <code>@cloudflare/actors</code> library is a place for more helpers and built-in patterns, like retry handling and Websocket-based applications, to reduce development overhead for common Durable Objects functionality. Please share feedback and what more you would like to see on our <a href="https://discord.com/channels/595317990191398933/773219443911819284">Discord channel</a>.</p>
 
 
@@ -258,7 +269,7 @@ These include importing assets as URLs, importing as strings and importing from 
 <h4 id="2025-06-17-workers-terraform-sdk-api-fixes-the-old-way-manual-api-calls">The Old way: Manual API calls</h4>
 <p>Previously, deploying a Worker programmatically required manually constructing a <code>multipart/form-data</code> HTTP request, packaging your code and a separate <code>metadata.json</code> file. This was more complicated and verbose, and prone to formatting errors.</p>
 <p>For example, here's how you would upload a Worker script previously with cURL:</p>
-<pre><code class="language-bash">curl https://api.cloudflare.com/client/v4/accounts/&lt;account_id&gt;/workers/scripts/my-hello-world-script \&#10;  &#45;X PUT \&#10;  &#45;H &#x27;Authorization: Bearer &lt;api_token&gt;&#x27; \&#10;  &#45;F &#x27;metadata={&#10;        &quot;main_module&quot;: &quot;my-hello-world-script.mjs&quot;,&#10;        &quot;bindings&quot;: [&#10;          {&#10;            &quot;type&quot;: &quot;plain_text&quot;,&#10;            &quot;name&quot;: &quot;MESSAGE&quot;,&#10;            &quot;text&quot;: &quot;Hello World!&quot;&#10;          }&#10;        ],&#10;        &quot;compatibility_date&quot;: &quot;$today&quot;&#10;      };type=application/json&#x27; \&#10;  &#45;F &#x27;my-hello-world-script.mjs=@-;filename=my-hello-world-script.mjs;type=application/javascript+module&#x27; &lt;&lt;EOF&#10;export default {&#10;  async fetch(request, env, ctx) {&#10;    return new Response(env.MESSAGE, { status: 200 });&#10;  }&#10;};&#10;EOF&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl https://api.cloudflare.com/client/v4/accounts/&lt;account_id&gt;/workers/scripts/my-hello-world-script \&#10;  &#45;X PUT \&#10;  &#45;H &#x27;Authorization: Bearer &lt;api_token&gt;&#x27; \&#10;  &#45;F &#x27;metadata={&#10;        &quot;main_module&quot;: &quot;my-hello-world-script.mjs&quot;,&#10;        &quot;bindings&quot;: [&#10;          {&#10;            &quot;type&quot;: &quot;plain_text&quot;,&#10;            &quot;name&quot;: &quot;MESSAGE&quot;,&#10;            &quot;text&quot;: &quot;Hello World!&quot;&#10;          }&#10;        ],&#10;        &quot;compatibility_date&quot;: &quot;$today&quot;&#10;      };type=application/json&#x27; \&#10;  &#45;F &#x27;my-hello-world-script.mjs=@-;filename=my-hello-world-script.mjs;type=application/javascript+module&#x27; &lt;&lt;EOF&#10;export default {&#10;  async fetch(request, env, ctx) {&#10;    return new Response(env.MESSAGE, { status: 200 });&#10;  }&#10;};&#10;EOF&#10;</code></pre>
 <h4 id="2025-06-17-workers-terraform-sdk-api-fixes-after-sdk-interface">After: SDK interface</h4>
 <p>With the new SDK interface, you can now define your entire Worker configuration using a single, structured object.</p>
 <p>This approach allows you to specify metadata like <code>main_module</code>, <code>bindings</code>, and <code>compatibility_date</code> as clearer properties directly alongside your script content. Our SDK takes this logical object and automatically constructs the complex multipart/form-data API request behind the scenes.</p>
@@ -443,7 +454,7 @@ The vulnerability has been fixed from <code>@opennextjs/cloudflare</code> v1.3.0
 <p>You can now <a href="https://developers.cloudflare.com/workers/observability/dev-tools/">debug, profile, view logs, and analyze memory usage for your Worker</a> using <a href="https://developer.chrome.com/docs/devtools">Chrome Devtools</a> when your Worker runs locally using the <a href="https://developers.cloudflare.com/workers/vite-plugin/">Cloudflare Vite plugin</a>.</p>
 <p>Previously, this was only possible if your Worker ran locally using the <a href="https://developers.cloudflare.com/workers/wrangler/">Wrangler CLI</a>, and now you can do all the same things if your Worker uses <a href="https://vite.dev/">Vite</a>.</p>
 <p>When you run <code>vite</code>, you'll now see a debug URL in your console:</p>
-<pre><code>  VITE v6.3.5  ready in 461 ms&#10;&#10;  ➜  Local:   http://localhost:5173/&#10;  ➜  Network: use --host to expose&#10;  ➜  Debug:   http://localhost:5173/__debug&#10;  ➜  press h + enter to show help&#10;</code></pre>
+<pre tabindex="0"><code>  VITE v6.3.5  ready in 461 ms&#10;&#10;  ➜  Local:   http://localhost:5173/&#10;  ➜  Network: use --host to expose&#10;  ➜  Debug:   http://localhost:5173/__debug&#10;  ➜  press h + enter to show help&#10;</code></pre>
 <p>Open the URL in Chrome, and an instance of Chrome Devtools will open and connect to your Worker running locally. You can then use Chrome Devtools to debug and introspect performance issues. For example, you can navigate to the Performance tab to understand where CPU time is spent in your Worker:</p>
 <p><img src="/assets/upstream/images/workers/observability/profile.png" alt="CPU Profile" /></p>
 <p>For more information on how to get the most out of Chrome Devtools, refer to the following docs:</p>

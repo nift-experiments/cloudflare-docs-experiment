@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/logs/logpush/logpush-job/enable-destinations/egress-ip/
+  description: Send Logpush logs via a dedicated egress IP.
+  full_title: Dedicated Egress IP for Logpush · Cloudflare Logs docs
+  head_html: <title>Dedicated Egress IP for Logpush · Cloudflare Logs docs</title><meta name="generator" content="Nift"><meta name="description" content="Send Logpush logs via a dedicated egress IP."><link rel="canonical" href="https://developers.cloudflare.com/logs/logpush/logpush-job/enable-destinations/egress-ip/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/logs/logpush/logpush-job/enable-destinations/egress-ip/index.md"><meta property="og:title" content="Dedicated Egress IP for Logpush · Cloudflare Logs docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Send Logpush logs via a dedicated egress IP."><meta property="og:url" content="https://developers.cloudflare.com/logs/logpush/logpush-job/enable-destinations/egress-ip/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Logs"><meta name="algolia_product_filter" content="Logs"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Logpush"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/logs/logpush/logpush-job/enable-destinations/egress-ip/#page","headline":"Dedicated Egress IP for Logpush \u00b7 Cloudflare Logs docs","description":"Send Logpush logs via a dedicated egress IP.","url":"https://developers.cloudflare.com/logs/logpush/logpush-job/enable-destinations/egress-ip/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /logs/logpush/logpush-job/enable-destinations/egress-ip/
+  schema: 1
+---
 <p>This guide covers <a href="/smart-shield/configuration/dedicated-egress-ips/">Dedicated CDN Egress IPs</a> and Logpush configuration and testing instructions to enable log delivery with a fixed, dedicated egress IP.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <p>To use Logpush with a dedicated egress IP, you will need to have <a href="/smart-shield/get-started/#smart-shield-advanced">Smart Shield Advanced</a> with Dedicated CDN Egress IPs (formerly known as Aegis). Note that the Dedicated CDN Egress IPs pool is associated with a zone, not with an account. To use Logpush with dedicated IPs, traffic must be routed to a single zone.</p>
@@ -31,7 +42,7 @@
 <li>Specify <code>aegis</code> as the setting ID in the URL.</li>
 <li>In the request body, set <code>enabled</code> to <code>true</code> and use the ID from the previous step as <code>pool_id</code>.</li>
 </ul>
-<pre class="nb-api-request"><code class="language-bash">curl --request PATCH \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/settings/{setting_id} \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;id&quot;: &quot;aegis&quot;,&#10;  &quot;value&quot;: {&#10;    &quot;enabled&quot;: true,&#10;    &quot;pool_id&quot;: &quot;&lt;YOUR_EGRESS_POOL_ID&gt;&quot;&#10;  }&#10;}&#x27;</code></pre>
+<pre tabindex="0" class="nb-api-request"><code class="language-bash">curl --request PATCH \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/settings/{setting_id} \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;id&quot;: &quot;aegis&quot;,&#10;  &quot;value&quot;: {&#10;    &quot;enabled&quot;: true,&#10;    &quot;pool_id&quot;: &quot;&lt;YOUR_EGRESS_POOL_ID&gt;&quot;&#10;  }&#10;}&#x27;</code></pre>
 <h2 id="3-proxy-zone-setup"><ol start="3">
 <li>Proxy zone setup</li>
 </ol></h2>
@@ -67,14 +78,14 @@
 <p>Add a secret token as an HTTP header in your Logpush job, then create a WAF rule to block requests without it. This is the recommended approach for most deployments.</p>
 <p><strong>Configure Logpush with a secret header</strong></p>
 <p>Any URL parameter starting with <code>header_</code> becomes an HTTP header in the request. When creating or updating your Logpush job, add the secret header to your destination URL:</p>
-<pre><code class="language-txt">https://logpush.yourdestinationendpoint.com?header_X-Logpush-Secret=YOUR_RANDOM_SECRET_TOKEN&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://logpush.yourdestinationendpoint.com?header_X-Logpush-Secret=YOUR_RANDOM_SECRET_TOKEN&#10;</code></pre>
 <p>Generate a strong random token using <code>openssl rand -hex 32</code>.</p>
 <p><strong>Create a WAF custom rule</strong></p>
 <p>In the proxy zone, go to <strong>Security</strong> &gt; <strong>WAF</strong> &gt; <strong>Custom rules</strong> and create a rule to block requests without the correct secret header.</p>
 <ul>
 <li><strong>Expression:</strong></li>
 </ul>
-<pre><code class="language-txt">(http.host eq &quot;logpush.yourdestinationendpoint.com&quot; and all(http.request.headers[&quot;x-logpush-secret&quot;][*] ne &quot;YOUR_RANDOM_SECRET_TOKEN&quot;))&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">(http.host eq &quot;logpush.yourdestinationendpoint.com&quot; and all(http.request.headers[&quot;x-logpush-secret&quot;][*] ne &quot;YOUR_RANDOM_SECRET_TOKEN&quot;))&#10;</code></pre>
 <ul>
 <li><strong>Action:</strong> Block</li>
 </ul>
@@ -83,7 +94,7 @@
 <ul>
 <li><strong>Expression:</strong></li>
 </ul>
-<pre><code class="language-txt">(http.host eq &quot;logpush.yourdestinationendpoint.com&quot; and not ip.geoip.asnum in {13335 132892 202623})&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">(http.host eq &quot;logpush.yourdestinationendpoint.com&quot; and not ip.geoip.asnum in {13335 132892 202623})&#10;</code></pre>
 <ul>
 <li><strong>Action:</strong> Block</li>
 </ul>
@@ -92,8 +103,8 @@
 </aside>
 <h3 id="use-access-service-tokens-for-high-security-environments">Use Access Service Tokens for high-security environments</h3>
 <p>For stronger authentication, use <a href="/cloudflare-one/access-controls/service-credentials/service-tokens/">Cloudflare Access Service Tokens</a> for machine-to-machine authentication. Create a Service Token in the Zero Trust dashboard, then configure Logpush with the Access headers:</p>
-<pre><code class="language-txt">https://logpush.yourdestinationendpoint.com?header_CF-Access-Client-Id=YOUR_CLIENT_ID&amp;header_CF-Access-Client-Secret=YOUR_CLIENT_SECRET&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://logpush.yourdestinationendpoint.com?header_CF-Access-Client-Id=YOUR_CLIENT_ID&amp;header_CF-Access-Client-Secret=YOUR_CLIENT_SECRET&#10;</code></pre>
 <h3 id="verify-your-security-configuration">Verify your security configuration</h3>
 <p>Test that your WAF rules are blocking unauthorized requests:</p>
-<pre><code class="language-bash">$ curl https://logpush.yourdestinationendpoint.com&#10;&#35; Expected: error code: 1020&#10;&#10;$ curl -H &quot;X-Logpush-Secret: wrong-token&quot; https://logpush.yourdestinationendpoint.com&#10;&#35; Expected: error code: 1020&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">$ curl https://logpush.yourdestinationendpoint.com&#10;&#35; Expected: error code: 1020&#10;&#10;$ curl -H &quot;X-Logpush-Secret: wrong-token&quot; https://logpush.yourdestinationendpoint.com&#10;&#35; Expected: error code: 1020&#10;</code></pre>
 <p>Check Cloudflare Analytics for the proxy zone to confirm Logpush traffic is flowing, and monitor WAF events to ensure unauthorized requests are blocked.</p>

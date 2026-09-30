@@ -1,1 +1,12 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/workers/platform/workers-for-platforms/
+  description: Deploy custom code on behalf of your users or let your users directly deploy their own code to your platform, managing infrastructure.
+  full_title: Workers for Platforms · Cloudflare Workers docs
+  head_html: <title>Workers for Platforms · Cloudflare Workers docs</title><meta name="generator" content="Nift"><meta name="description" content="Deploy custom code on behalf of your users or let your users directly deploy their own code to your platform, managing infrastructure."><meta name="robots" content="noindex"><link rel="canonical" href="https://developers.cloudflare.com/workers/platform/workers-for-platforms/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/workers/platform/workers-for-platforms/index.md"><meta property="og:title" content="Workers for Platforms · Cloudflare Workers docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Deploy custom code on behalf of your users or let your users directly deploy their own code to your platform, managing infrastructure."><meta property="og:url" content="https://developers.cloudflare.com/workers/platform/workers-for-platforms/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Workers"><meta name="algolia_product_filter" content="Workers"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Navigation"><meta name="algolia_content_type" content="Navigation"><meta name="pcx_additional_products" content="Workers"><meta http-equiv="refresh" content="0; url=/cloudflare-for-platforms/workers-for-platforms/">
+  markdown: true
+  noindex: true
+  route: /workers/platform/workers-for-platforms/
+  schema: 1
+---
 <p>Deploy custom code on behalf of your users or let your users directly deploy their own code to your platform, managing infrastructure.</p>

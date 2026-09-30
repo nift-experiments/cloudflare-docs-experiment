@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/dns/dnssec/dnssec-active-migration/
+  description: Follow this tutorial to migrate an existing DNS zone to Cloudflare without having to disable DNSSEC.
+  full_title: DNSSEC migration tutorial · Cloudflare DNS docs
+  head_html: <title>DNSSEC migration tutorial · Cloudflare DNS docs</title><meta name="generator" content="Nift"><meta name="description" content="Follow this tutorial to migrate an existing DNS zone to Cloudflare without having to disable DNSSEC."><link rel="canonical" href="https://developers.cloudflare.com/dns/dnssec/dnssec-active-migration/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/dns/dnssec/dnssec-active-migration/index.md"><meta property="og:title" content="DNSSEC migration tutorial · Cloudflare DNS docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Follow this tutorial to migrate an existing DNS zone to Cloudflare without having to disable DNSSEC."><meta property="og:url" content="https://developers.cloudflare.com/dns/dnssec/dnssec-active-migration/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="DNS"><meta name="algolia_product_filter" content="DNS"><meta name="pcx_content_group" content="Application performance"><meta name="pcx_content_type" content="Tutorial"><meta name="algolia_content_type" content="Tutorial"><meta name="pcx_additional_products" content="DNS"><meta name="pcx_tags" content="Migration"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/dns/dnssec/dnssec-active-migration/#page","headline":"DNSSEC migration tutorial \u00b7 Cloudflare DNS docs","description":"Follow this tutorial to migrate an existing DNS zone to Cloudflare without having to disable DNSSEC.","url":"https://developers.cloudflare.com/dns/dnssec/dnssec-active-migration/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["Migration"]}</script>
+  markdown: true
+  noindex: false
+  route: /dns/dnssec/dnssec-active-migration/
+  schema: 1
+---
 <p>Follow this tutorial to migrate an existing DNS zone to Cloudflare without having to disable DNSSEC.</p>
 <aside class="nb-aside caution">
 @markup("md", "content/.markup/bodies/7697.md")
@@ -21,11 +32,11 @@
 <p>On the <a href="https://dash.cloudflare.com/?to=/:account/:zone/dns/settings"><strong>DNS Settings</strong></a> page, select <strong>Enable DNSSEC</strong>. Or use the following <a href="/api/resources/dns/subresources/dnssec/methods/edit/">API request</a>.</p>
 </li>
 </ol>
-<pre class="nb-api-request"><code class="language-bash">curl --request PATCH \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/dnssec \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;status&quot;: &quot;active&quot;&#10;}&#x27;</code></pre>
+<pre tabindex="0" class="nb-api-request"><code class="language-bash">curl --request PATCH \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/dnssec \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;status&quot;: &quot;active&quot;&#10;}&#x27;</code></pre>
 <ol start="4">
 <li>On the <a href="https://dash.cloudflare.com/?to=/:account/:zone/dns/settings"><strong>DNS Settings</strong></a> page, enable <strong>Multi-signer DNSSEC</strong>. Or use the following <a href="/api/resources/dns/subresources/dnssec/methods/edit/">API request</a>.</li>
 </ol>
-<pre class="nb-api-request"><code class="language-bash">curl --request PATCH \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/dnssec \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;dnssec_multi_signer&quot;: true&#10;}&#x27;</code></pre>
+<pre tabindex="0" class="nb-api-request"><code class="language-bash">curl --request PATCH \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/dnssec \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;dnssec_multi_signer&quot;: true&#10;}&#x27;</code></pre>
 <h2 id="2-cross-import-zsks"><ol start="2">
 <li>Cross-import ZSKs</li>
 </ol></h2>
@@ -33,14 +44,14 @@
 <li>Add the <a href="https://www.cloudflare.com/learning/dns/dns-records/dnskey-ds-records/">ZSK</a> of your previous provider to Cloudflare by creating a DNSKEY record on your zone.</li>
 </ol>
 <p>You can do this <a href="/dns/manage-dns-records/how-to/create-dns-records/#create-dns-records">on the dashboard</a> or through the <a href="/api/resources/dns/subresources/records/methods/create/">Create DNS Record endpoint</a>, as in the following example.</p>
-<pre class="nb-api-request"><code class="language-bash">curl --request POST \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;type&quot;: &quot;DNSKEY&quot;,&#10;  &quot;name&quot;: &quot;&lt;ZONE_NAME&gt;&quot;,&#10;  &quot;data&quot;: {&#10;    &quot;flags&quot;: 256,&#10;    &quot;protocol&quot;: 3,&#10;    &quot;algorithm&quot;: 13,&#10;    &quot;public_key&quot;: &quot;&lt;PUBLIC_KEY&gt;&quot;&#10;  },&#10;  &quot;ttl&quot;: 3600&#10;}&#x27;</code></pre>
+<pre tabindex="0" class="nb-api-request"><code class="language-bash">curl --request POST \&#10;  --url https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records \&#10;  --header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  --data &#x27;{&#10;  &quot;type&quot;: &quot;DNSKEY&quot;,&#10;  &quot;name&quot;: &quot;&lt;ZONE_NAME&gt;&quot;,&#10;  &quot;data&quot;: {&#10;    &quot;flags&quot;: 256,&#10;    &quot;protocol&quot;: 3,&#10;    &quot;algorithm&quot;: 13,&#10;    &quot;public_key&quot;: &quot;&lt;PUBLIC_KEY&gt;&quot;&#10;  },&#10;  &quot;ttl&quot;: 3600&#10;}&#x27;</code></pre>
 <ol start="2">
 <li>Get Cloudflare's ZSK using either the API or a query from one of the assigned Cloudflare nameservers.</li>
 </ol>
 <p>API example:</p>
-<pre><code class="language-bash">curl https://api.cloudflare.com/client/v4/zones/{zone_id}/dnssec/zsk \&#10;&#45;-header &quot;X-Auth-Email: &lt;EMAIL&gt;&quot; \&#10;&#45;-header &quot;X-Auth-Key: &lt;API_KEY&gt;&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl https://api.cloudflare.com/client/v4/zones/{zone_id}/dnssec/zsk \&#10;&#45;-header &quot;X-Auth-Email: &lt;EMAIL&gt;&quot; \&#10;&#45;-header &quot;X-Auth-Key: &lt;API_KEY&gt;&quot;&#10;</code></pre>
 <p>Command line query example:</p>
-<pre><code class="language-sh">dig &lt;ZONE_NAME&gt; dnskey @&lt;CLOUDFLARE_NAMESERVER&gt; +noall +answer | grep 256&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">dig &lt;ZONE_NAME&gt; dnskey @&lt;CLOUDFLARE_NAMESERVER&gt; +noall +answer | grep 256&#10;</code></pre>
 <ol start="3">
 <li>Add Cloudflare's ZSK that you fetched in the last step to your previous provider.</li>
 </ol>

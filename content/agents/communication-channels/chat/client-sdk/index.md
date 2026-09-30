@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/agents/communication-channels/chat/client-sdk/
+  description: Connect to Cloudflare Agents from browsers or server runtimes using useAgent, AgentClient, and agentFetch.
+  full_title: Client SDK · Cloudflare Agents docs
+  head_html: <title>Client SDK · Cloudflare Agents docs</title><meta name="generator" content="Nift"><meta name="description" content="Connect to Cloudflare Agents from browsers or server runtimes using useAgent, AgentClient, and agentFetch."><link rel="canonical" href="https://developers.cloudflare.com/agents/communication-channels/chat/client-sdk/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/agents/communication-channels/chat/client-sdk/index.md"><meta property="og:title" content="Client SDK · Cloudflare Agents docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Connect to Cloudflare Agents from browsers or server runtimes using useAgent, AgentClient, and agentFetch."><meta property="og:url" content="https://developers.cloudflare.com/agents/communication-channels/chat/client-sdk/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Agents"><meta name="algolia_product_filter" content="Agents"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Agents"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/agents/communication-channels/chat/client-sdk/#page","headline":"Client SDK \u00b7 Cloudflare Agents docs","description":"Connect to Cloudflare Agents from browsers or server runtimes using useAgent, AgentClient, and agentFetch.","url":"https://developers.cloudflare.com/agents/communication-channels/chat/client-sdk/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /agents/communication-channels/chat/client-sdk/
+  schema: 1
+---
 <p>Connect to agents from any JavaScript runtime — browsers, Node.js, Deno, Bun, or edge functions — using WebSockets or HTTP. The SDK provides real-time state synchronization, RPC method calls, and streaming responses.</p>
 <h2 id="overview">Overview</h2>
 <p>The client SDK offers two ways to connect with a WebSocket connection, and one way to make HTTP requests.</p>
@@ -95,7 +106,7 @@
 <li>Your <code>onStateUpdate</code> callback fires with <code>source: &quot;client&quot;</code></li>
 </ol>
 <h3 id="state-flow">State flow</h3>
-<pre><code class="language-mermaid">sequenceDiagram&#10;    participant Client&#10;    participant Agent&#10;    Client-&gt;&gt;Agent: setState()&#10;    Agent--&gt;&gt;Client: onStateUpdate (broadcast)&#10;</code></pre>
+<pre tabindex="0"><code class="language-mermaid">sequenceDiagram&#10;    participant Client&#10;    participant Agent&#10;    Client-&gt;&gt;Agent: setState()&#10;    Agent--&gt;&gt;Client: onStateUpdate (broadcast)&#10;</code></pre>
 <h2 id="calling-agent-methods-rpc">Calling agent methods (RPC)</h2>
 <p>Call methods on your agent that are decorated with <code>@callable()</code>.</p>
 <aside class="nb-aside note">
@@ -197,7 +208,7 @@
 <p>React's <code>useAgent</code> handles cleanup automatically on unmount.</p>
 <h2 id="react-hook-reference">React hook reference</h2>
 <h3 id="useagentoptions">UseAgentOptions</h3>
-<pre><code class="language-ts">type UseAgentOptions&lt;State&gt; = {&#10;	// Required&#10;	agent: string; // Agent class name&#10;&#10;	// Optional&#10;	name?: string; // Instance name (default: &quot;default&quot;)&#10;	host?: string; // Custom host&#10;	path?: string; // Custom path prefix&#10;&#10;	// Query parameters&#10;	query?: Record&lt;string, string&gt; | (() =&gt; Promise&lt;Record&lt;string, string&gt;&gt;);&#10;	queryDeps?: unknown[]; // Dependencies for async query&#10;	cacheTtl?: number; // Query cache TTL in ms (default: 5 min)&#10;&#10;	// Callbacks&#10;	onStateUpdate?: (state: State, source: &quot;server&quot; | &quot;client&quot;) =&gt; void;&#10;	onMcpUpdate?: (mcpServers: MCPServersState) =&gt; void;&#10;	onOpen?: () =&gt; void;&#10;	onClose?: () =&gt; void;&#10;	onError?: (error: Event) =&gt; void;&#10;	onMessage?: (message: MessageEvent) =&gt; void;&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">type UseAgentOptions&lt;State&gt; = {&#10;	// Required&#10;	agent: string; // Agent class name&#10;&#10;	// Optional&#10;	name?: string; // Instance name (default: &quot;default&quot;)&#10;	host?: string; // Custom host&#10;	path?: string; // Custom path prefix&#10;&#10;	// Query parameters&#10;	query?: Record&lt;string, string&gt; | (() =&gt; Promise&lt;Record&lt;string, string&gt;&gt;);&#10;	queryDeps?: unknown[]; // Dependencies for async query&#10;	cacheTtl?: number; // Query cache TTL in ms (default: 5 min)&#10;&#10;	// Callbacks&#10;	onStateUpdate?: (state: State, source: &quot;server&quot; | &quot;client&quot;) =&gt; void;&#10;	onMcpUpdate?: (mcpServers: MCPServersState) =&gt; void;&#10;	onOpen?: () =&gt; void;&#10;	onClose?: () =&gt; void;&#10;	onError?: (error: Event) =&gt; void;&#10;	onMessage?: (message: MessageEvent) =&gt; void;&#10;};&#10;</code></pre>
 <h3 id="return-value">Return value</h3>
 <p>The <code>useAgent</code> hook returns an object with the following properties and methods:</p>
 <table>
@@ -253,7 +264,7 @@
 </table>
 <h2 id="vanilla-js-reference">Vanilla JS reference</h2>
 <h3 id="agentclientoptions">AgentClientOptions</h3>
-<pre><code class="language-ts">type AgentClientOptions&lt;State&gt; = {&#10;	// Required&#10;	agent: string; // Agent class name&#10;	host: string; // Worker host&#10;&#10;	// Optional&#10;	name?: string; // Instance name (default: &quot;default&quot;)&#10;	path?: string; // Custom path prefix&#10;	query?: Record&lt;string, string&gt;;&#10;&#10;	// Callbacks&#10;	onStateUpdate?: (state: State, source: &quot;server&quot; | &quot;client&quot;) =&gt; void;&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">type AgentClientOptions&lt;State&gt; = {&#10;	// Required&#10;	agent: string; // Agent class name&#10;	host: string; // Worker host&#10;&#10;	// Optional&#10;	name?: string; // Instance name (default: &quot;default&quot;)&#10;	path?: string; // Custom path prefix&#10;	query?: Record&lt;string, string&gt;;&#10;&#10;	// Callbacks&#10;	onStateUpdate?: (state: State, source: &quot;server&quot; | &quot;client&quot;) =&gt; void;&#10;};&#10;</code></pre>
 <h3 id="agentclient-methods">AgentClient methods</h3>
 <table>
 <thead>
@@ -317,7 +328,7 @@
 @markup("md", "content/.markup/bodies/2027.md")
 </div>
 <h2 id="next-steps">Next steps</h2>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/communication/routing/"><h3 id="card-routing-agents-runtime-communication-routing">Routing</h3><p>URL patterns and custom routing options.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/lifecycle/callable-methods/"><h3 id="card-callable-methods-agents-runtime-lifecycle-callable-methods">Callable methods</h3><p>RPC over WebSocket for client-server method calls.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/operations/cross-domain-authentication/"><h3 id="card-cross-domain-authentication-agents-runtime-operations-cross-domain-authentication">Cross-domain authentication</h3><p>Secure WebSocket connections across domains.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/examples/chat-agent/"><h3 id="card-build-a-chat-agent-agents-examples-chat-agent">Build a chat agent</h3><p>Complete client integration with AI chat.</p></a></p>
+<div class="nb-card nb-link-card"><h3 id="card-routing-agents-runtime-communication-routing"><a href="/agents/runtime/communication/routing/">Routing</a></h3><p>URL patterns and custom routing options.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-callable-methods-agents-runtime-lifecycle-callable-methods"><a href="/agents/runtime/lifecycle/callable-methods/">Callable methods</a></h3><p>RPC over WebSocket for client-server method calls.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-cross-domain-authentication-agents-runtime-operations-cross-domain-authentication"><a href="/agents/runtime/operations/cross-domain-authentication/">Cross-domain authentication</a></h3><p>Secure WebSocket connections across domains.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-build-a-chat-agent-agents-examples-chat-agent"><a href="/agents/examples/chat-agent/">Build a chat agent</a></h3><p>Complete client integration with AI chat.</p></div>

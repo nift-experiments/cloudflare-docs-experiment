@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/realtime/realtimekit/release-notes/web-ui-kit/
+  description: Release notes and changelog for the RealtimeKit Web UI Kit SDK.
+  full_title: Web UI Kit · Cloudflare Realtime docs
+  head_html: <title>Web UI Kit · Cloudflare Realtime docs</title><meta name="generator" content="Nift"><meta name="description" content="Release notes and changelog for the RealtimeKit Web UI Kit SDK."><link rel="canonical" href="https://developers.cloudflare.com/realtime/realtimekit/release-notes/web-ui-kit/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/realtime/realtimekit/release-notes/web-ui-kit/index.md"><link rel="alternate" type="application/rss+xml" href="https://developers.cloudflare.com/realtime/realtimekit/release-notes/web-ui-kit/index.xml"><meta property="og:title" content="Web UI Kit · Cloudflare Realtime docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Release notes and changelog for the RealtimeKit Web UI Kit SDK."><meta property="og:url" content="https://developers.cloudflare.com/realtime/realtimekit/release-notes/web-ui-kit/"><meta property="image" content="https://developers.cloudflare.com/og-changelog.png"><meta property="og:image" content="https://developers.cloudflare.com/og-changelog.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-changelog.png"><meta name="pcx_product" content="Realtime"><meta name="algolia_product_filter" content="Realtime"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Changelog"><meta name="algolia_content_type" content="Changelog"><meta name="pcx_additional_products" content="Realtime"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://developers.cloudflare.com/realtime/realtimekit/release-notes/web-ui-kit/#page","headline":"Web UI Kit \u00b7 Cloudflare Realtime docs","description":"Release notes and changelog for the RealtimeKit Web UI Kit SDK.","url":"https://developers.cloudflare.com/realtime/realtimekit/release-notes/web-ui-kit/","inLanguage":"en","image":"https://developers.cloudflare.com/og-changelog.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /realtime/realtimekit/release-notes/web-ui-kit/
+  schema: 1
+---
 <h2 id="2026-08-24">2026-08-24</h2><strong>RealtimeKit Web UI Kit 2.0.2</strong><p><strong>Fixes</strong></p>
 <ul>
 <li>Restored Safari 16.x compatibility by incorporating an <a href="https://github.com/stenciljs/core/pull/6236">upstream Stencil fix</a>.</li>
@@ -107,7 +118,7 @@
 <li><code>disablePrivateChat</code> - Disable private chat functionality.</li>
 <li><code>disableEmojiPicker</code> - Hide emoji picker in chat component.</li>
 </ul>
-<pre><code class="language-tsx">&lt;RtkMeeting meeting={meeting} overrides={{&#10;  disablePrivateChat: true,&#10;  disableEmojiPicker: true&#10;}} /&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-tsx">&lt;RtkMeeting meeting={meeting} overrides={{&#10;  disablePrivateChat: true,&#10;  disableEmojiPicker: true&#10;}} /&gt;&#10;</code></pre>
 </li>
 </ul>
 <p><strong>New components</strong></p>
@@ -135,7 +146,7 @@
 <li>Removed <code>rtk-channel-selector-view</code>.</li>
 <li><code>rtk-chat-composer-ui</code> no longer accepts <code>channelId</code> prop.</li>
 <li><code>rtk-chat</code> no longer accepts <code>disablePrivateChat</code> prop. Use preset configuration instead, or pass as override:
-<pre><code class="language-tsx">&lt;RtkMeeting meeting={meeting} overrides={{disablePrivateChat: true}} /&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-tsx">&lt;RtkMeeting meeting={meeting} overrides={{disablePrivateChat: true}} /&gt;&#10;</code></pre>
 </li>
 </ul>
 <p><strong>Deprecations</strong></p>

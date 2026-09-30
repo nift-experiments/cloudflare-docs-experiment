@@ -1,12 +1,23 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/agents/runtime/execution/queue-tasks/
+  description: Add background tasks to a built-in FIFO queue for asynchronous processing within Cloudflare Agents.
+  full_title: Queue tasks · Cloudflare Agents docs
+  head_html: <title>Queue tasks · Cloudflare Agents docs</title><meta name="generator" content="Nift"><meta name="description" content="Add background tasks to a built-in FIFO queue for asynchronous processing within Cloudflare Agents."><link rel="canonical" href="https://developers.cloudflare.com/agents/runtime/execution/queue-tasks/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/agents/runtime/execution/queue-tasks/index.md"><meta property="og:title" content="Queue tasks · Cloudflare Agents docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Add background tasks to a built-in FIFO queue for asynchronous processing within Cloudflare Agents."><meta property="og:url" content="https://developers.cloudflare.com/agents/runtime/execution/queue-tasks/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Agents"><meta name="algolia_product_filter" content="Agents"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Agents"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/agents/runtime/execution/queue-tasks/#page","headline":"Queue tasks \u00b7 Cloudflare Agents docs","description":"Add background tasks to a built-in FIFO queue for asynchronous processing within Cloudflare Agents.","url":"https://developers.cloudflare.com/agents/runtime/execution/queue-tasks/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /agents/runtime/execution/queue-tasks/
+  schema: 1
+---
 <p>The Agents SDK provides a built-in queue system that allows you to schedule tasks for asynchronous execution. This is useful for background processing, delayed operations, and managing workloads that do not need immediate execution.</p>
 <h2 id="overview">Overview</h2>
 <p>The queue system is built into the base <code>Agent</code> class. Tasks are stored in a SQLite table and processed automatically in FIFO (First In, First Out) order.</p>
 <h2 id="queueitem-type"><code>QueueItem</code> type</h2>
-<pre><code class="language-ts">type QueueItem&lt;T&gt; = {&#10;	id: string; // Unique identifier for the queued task&#10;	payload: T; // Data to pass to the callback function&#10;	callback: keyof Agent; // Name of the method to call&#10;	created_at: number; // Timestamp when the task was created&#10;	retry?: RetryOptions; // Retry options for this task&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">type QueueItem&lt;T&gt; = {&#10;	id: string; // Unique identifier for the queued task&#10;	payload: T; // Data to pass to the callback function&#10;	callback: keyof Agent; // Name of the method to call&#10;	created_at: number; // Timestamp when the task was created&#10;	retry?: RetryOptions; // Retry options for this task&#10;};&#10;</code></pre>
 <h2 id="core-methods">Core methods</h2>
 <h3 id="queue"><code>queue()</code></h3>
 <p>Adds a task to the queue for future execution.</p>
-<pre><code class="language-ts">async queue&lt;T&gt;(&#10;  callback: keyof this,&#10;  payload: T,&#10;  options?: { retry?: RetryOptions }&#10;): Promise&lt;string&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">async queue&lt;T&gt;(&#10;  callback: keyof this,&#10;  payload: T,&#10;  options?: { retry?: RetryOptions }&#10;): Promise&lt;string&gt;&#10;</code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>callback</code> - The name of the method to call when processing the task</li>
@@ -24,7 +35,7 @@
 </div>
 <h3 id="dequeue"><code>dequeue()</code></h3>
 <p>Removes a specific task from the queue by ID. This method is synchronous.</p>
-<pre><code class="language-ts">dequeue(id: string): void&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">dequeue(id: string): void&#10;</code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>id</code> - The ID of the task to remove</li>
@@ -35,14 +46,14 @@
 </div>
 <h3 id="dequeueall"><code>dequeueAll()</code></h3>
 <p>Removes all tasks from the queue. This method is synchronous.</p>
-<pre><code class="language-ts">dequeueAll(): void&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">dequeueAll(): void&#10;</code></pre>
 <p><strong>Example:</strong></p>
 <div class="nb-type-script-example">
 @markup("md", "content/.markup/bodies/2536.md")
 </div>
 <h3 id="dequeueallbycallback"><code>dequeueAllByCallback()</code></h3>
 <p>Removes all tasks that match a specific callback method. This method is synchronous.</p>
-<pre><code class="language-ts">dequeueAllByCallback(callback: string): void&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">dequeueAllByCallback(callback: string): void&#10;</code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>callback</code> - Name of the callback method</li>
@@ -53,7 +64,7 @@
 </div>
 <h3 id="getqueue"><code>getQueue()</code></h3>
 <p>Retrieves a specific queued task by ID. This method is synchronous.</p>
-<pre><code class="language-ts">getQueue&lt;T&gt;(id: string): QueueItem&lt;T&gt; | undefined&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">getQueue&lt;T&gt;(id: string): QueueItem&lt;T&gt; | undefined&#10;</code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>id</code> - The ID of the task to retrieve</li>
@@ -66,7 +77,7 @@
 </div>
 <h3 id="getqueues"><code>getQueues()</code></h3>
 <p>Retrieves all queued tasks that match a specific key-value pair in their payload. This method is synchronous.</p>
-<pre><code class="language-ts">getQueues&lt;T&gt;(key: string, value: string): QueueItem&lt;T&gt;[]&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">getQueues&lt;T&gt;(key: string, value: string): QueueItem&lt;T&gt;[]&#10;</code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>key</code> - The key to filter by in the payload</li>
@@ -90,7 +101,7 @@
 </ol>
 <h2 id="queue-callback-methods">Queue callback methods</h2>
 <p>When defining callback methods for queued tasks, they must follow this signature:</p>
-<pre><code class="language-ts">async callbackMethod(payload: unknown, queueItem: QueueItem): Promise&lt;void&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">async callbackMethod(payload: unknown, queueItem: QueueItem): Promise&lt;void&gt;&#10;</code></pre>
 <p><strong>Example:</strong></p>
 <div class="nb-type-script-example">
 @markup("md", "content/.markup/bodies/2540.md")
@@ -161,6 +172,6 @@
 </tbody>
 </table>
 <h2 id="next-steps">Next steps</h2>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/agents-api/"><h3 id="card-agents-api-agents-runtime-agents-api">Agents API</h3><p>Complete API reference for the Agents SDK.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/execution/schedule-tasks/"><h3 id="card-schedule-tasks-agents-runtime-execution-schedule-tasks">Schedule tasks</h3><p>Time-based execution with cron and delays.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/execution/run-workflows/"><h3 id="card-run-workflows-agents-runtime-execution-run-workflows">Run Workflows</h3><p>Durable multi-step background processing.</p></a></p>
+<div class="nb-card nb-link-card"><h3 id="card-agents-api-agents-runtime-agents-api"><a href="/agents/runtime/agents-api/">Agents API</a></h3><p>Complete API reference for the Agents SDK.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-schedule-tasks-agents-runtime-execution-schedule-tasks"><a href="/agents/runtime/execution/schedule-tasks/">Schedule tasks</a></h3><p>Time-based execution with cron and delays.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-run-workflows-agents-runtime-execution-run-workflows"><a href="/agents/runtime/execution/run-workflows/">Run Workflows</a></h3><p>Durable multi-step background processing.</p></div>

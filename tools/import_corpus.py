@@ -10,6 +10,7 @@ from pathlib import Path
 import import_cloudflare as ic
 from import_cloudflare import convert
 from generate_navigation import frontmatter, generate as generate_navigation, route_for
+from page_metadata import add_frontmatter, build_head, directory_metadata, extract_embedded_head
 from upstream_snapshot import tracked_snapshot
 
 PIN='bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf'
@@ -171,6 +172,7 @@ console.log(JSON.stringify(result));
             'external_link':fm.get('external_link'),
         })
     ic.configure_resources(resources)
+    metadata_sections, metadata_products = directory_metadata(up)
     with tempfile.TemporaryDirectory() as body_tmp:
         ic.configure_body_output(body_tmp, reset=True)
         pages=[]; failures=[]
@@ -181,9 +183,10 @@ console.log(JSON.stringify(result));
             conversion_metadata=dict(source_fm); conversion_metadata['_route']=route
             try: _converted_fm,body=convert(p.read_text(),p,metadata=conversion_metadata)
             except Exception as e: failures.append(str(e)); continue
-            fm=source_fm
+            body,fm=extract_embedded_head(body,source_fm)
             if fm.get('summary'):
                 body = f'<p class="article-summary">{html.escape(str(fm["summary"]))}</p>\n' + body
+            body=body.rstrip()+'\n'
             pages.append((p,rel,route,fm,body))
         routes=[x[2] for x in pages]
         dup=sorted({r for r in routes if routes.count(r)>1})
@@ -202,7 +205,10 @@ console.log(JSON.stringify(result));
         tracked=[]
         for p,rel,route,fm,body in pages:
             name=name_for(route)
-            q=ROOT/'content'/Path(name.strip('/')+'/index.md'); q.parent.mkdir(parents=True,exist_ok=True); q.write_text(body)
+            q=ROOT/'content'/Path(name.strip('/')+'/index.md'); q.parent.mkdir(parents=True,exist_ok=True)
+            page_head=build_head(route,fm.get('title') or rel.stem.replace('-',' ').title(),
+                                 fm,body,metadata_sections,metadata_products,markdown=True)
+            q.write_text(add_frontmatter(body,page_head))
             template='templates/splash-md.html' if fm.get('template') == 'splash' else 'templates/docs.html'
             tracked.append({'name':name,'title':fm.get('title') or rel.stem.replace('-',' ').title(),'template':template,'output':output_for(route)})
     previous_manifest=ROOT/'reports/cp6/expected-routes.json'

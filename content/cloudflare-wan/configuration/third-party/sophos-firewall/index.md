@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-wan/configuration/third-party/sophos-firewall/
+  description: Connect Sophos Firewall to Cloudflare WAN.
+  full_title: Sophos Firewall · Cloudflare WAN docs
+  head_html: <title>Sophos Firewall · Cloudflare WAN docs</title><meta name="generator" content="Nift"><meta name="description" content="Connect Sophos Firewall to Cloudflare WAN."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-wan/configuration/third-party/sophos-firewall/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-wan/configuration/third-party/sophos-firewall/index.md"><meta property="og:title" content="Sophos Firewall · Cloudflare WAN docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Connect Sophos Firewall to Cloudflare WAN."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-wan/configuration/third-party/sophos-firewall/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare WAN"><meta name="algolia_product_filter" content="Cloudflare WAN"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="Integration guide"><meta name="algolia_content_type" content="Integration guide"><meta name="pcx_additional_products" content="Cloudflare WAN"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-wan/configuration/third-party/sophos-firewall/#page","headline":"Sophos Firewall \u00b7 Cloudflare WAN docs","description":"Connect Sophos Firewall to Cloudflare WAN.","url":"https://developers.cloudflare.com/cloudflare-wan/configuration/third-party/sophos-firewall/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-wan/configuration/third-party/sophos-firewall/
+  schema: 1
+---
 <p>This tutorial shows you how to use Cloudflare WAN (formerly Magic WAN) with the following versions of the Sophos Firewall:</p>
 <ul>
 <li>
@@ -110,7 +121,7 @@
 <li>Sign in to the CLI.</li>
 <li>Enter <strong>4</strong> to choose <strong>Device console</strong>, and enter the following command:</li>
 </ol>
-<pre><code class="language-bash">set vpn ipsec-performance anti-replay window-size 0&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">set vpn ipsec-performance anti-replay window-size 0&#10;</code></pre>
 <p><img src="/assets/upstream/images/cloudflare-wan/third-party/sophos-firewall/5-sfos-19.png" alt="Access the CLI to disable anti-replay" /></p>
 <h4 id="older-sfos-versions">Older SFOS versions</h4>
 <p>Contact Sophos support.</p>
@@ -123,7 +134,7 @@
 <li>Sign in to the CLI.</li>
 <li>Enter <strong>4</strong> to choose <strong>Device console</strong>, and enter the following command:</li>
 </ol>
-<pre><code class="language-bash">system gre tunnel add name &lt;NAME_OF_YOUR_GRE_TUNNEL&gt; local-gw &lt;WAN_PORT&gt; remote-gw &lt;REMOTE_GATEWAY_IP_ADDRESS&gt; local-ip &lt;LOCAL_IP_ADDRESS&gt; remote-ip &lt;REMOTE_IP_ADDRESS&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">system gre tunnel add name &lt;NAME_OF_YOUR_GRE_TUNNEL&gt; local-gw &lt;WAN_PORT&gt; remote-gw &lt;REMOTE_GATEWAY_IP_ADDRESS&gt; local-ip &lt;LOCAL_IP_ADDRESS&gt; remote-ip &lt;REMOTE_IP_ADDRESS&gt;&#10;</code></pre>
 <p><img src="/assets/upstream/images/cloudflare-wan/third-party/sophos-firewall/1-gre-connection.png" alt="Access the CLI to configure a GRE tunnel" /></p>
 <p>For more details, refer to the <a href="https://support.sophos.com/support/s/article/KB-000035813?language=en_US">Sophos Firewall knowledge base</a>.</p>
 <h3 id="2-add-a-gre-or-sd-wan-route-to-redirect-traffic-through-the-gre-tunnel"><ol start="2">
@@ -164,7 +175,7 @@
 <li>Sign in to the CLI.</li>
 <li>Enter <strong>4</strong> to choose <strong>Device console</strong>, and enter the following command to create the tunnel:</li>
 </ol>
-<pre><code class="language-bash">system gre route add net &lt;IP_ADDRESS&gt; tunnelname &lt;TUNNEL_NAME&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">system gre route add net &lt;IP_ADDRESS&gt; tunnelname &lt;TUNNEL_NAME&gt;&#10;</code></pre>
 <p><img src="/assets/upstream/images/cloudflare-wan/third-party/sophos-firewall/gre-route-cli.png" alt="Add the route on the CLI." /></p>
 <h4 id="sd-wan-route-1">SD-WAN route</h4>
 <ol>
@@ -181,7 +192,7 @@
 <ol>
 <li>The ICMP probe packet from Cloudflare must be the type ICMP request, with anycast source IP. In the following example, we have used <code>172.64.240.252</code> as a target example:</li>
 </ol>
-<pre><code class="language-bash">curl --request PUT \&#10;https://api.cloudflare.com/client/v4/accounts/{account_id}/magic/ipsec_tunnels/{tunnel_id} \&#10;&#45;-header &quot;X-Auth-Email: &lt;EMAIL&gt;&quot; \&#10;&#45;-header &quot;X-Auth-Key: &lt;API_KEY&gt;&quot; \&#10;&#45;-header &quot;Content-Type: application/json&quot; \&#10;&#45;-data &#x27;{&#10;  &quot;health_check&quot;: {&#10;    &quot;enabled&quot;: true,&#10;    &quot;target&quot;: &quot;172.64.240.252&quot;,&#10;    &quot;type&quot;: &quot;request&quot;,&#10;    &quot;rate&quot;: &quot;mid&quot;&#10;  }&#10;}&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl --request PUT \&#10;https://api.cloudflare.com/client/v4/accounts/{account_id}/magic/ipsec_tunnels/{tunnel_id} \&#10;&#45;-header &quot;X-Auth-Email: &lt;EMAIL&gt;&quot; \&#10;&#45;-header &quot;X-Auth-Key: &lt;API_KEY&gt;&quot; \&#10;&#45;-header &quot;Content-Type: application/json&quot; \&#10;&#45;-data &#x27;{&#10;  &quot;health_check&quot;: {&#10;    &quot;enabled&quot;: true,&#10;    &quot;target&quot;: &quot;172.64.240.252&quot;,&#10;    &quot;type&quot;: &quot;request&quot;,&#10;    &quot;rate&quot;: &quot;mid&quot;&#10;  }&#10;}&#x27;&#10;</code></pre>
 <ol start="2">
 <li>Go to <strong>Configure</strong> &gt; <strong>Network</strong> &gt; <strong>Interfaces</strong> &gt; <strong>Add alias</strong>. Add the IP address provided by Cloudflare for the ICMP probe traffic. This is needed to prevent Sophos firewall from dropping them as spoof packets. This is not the same IP used to create VPN. This is the special IP address for probe traffic only.</li>
 </ol>
@@ -191,8 +202,8 @@
 </ol>
 <p><img src="/assets/upstream/images/cloudflare-wan/third-party/sophos-firewall/3-icmp-probe-reply.png" alt="Configure an SD-WAN route so the ICMP reply goes back to Cloudflare via the same tunnel." /></p>
 <p>Packet flow will look like the following:</p>
-<pre><code class="language-sh">tcpdump -nn proto 1&#10;</code></pre>
-<pre><code class="language-sh">tcpdump: verbose output suppressed, use -v or -vv for full protocol decode&#10;listening on any, link-type LINUX_SLL (Linux cooked v1), capture size 262144 bytes&#10;&#10;13:09:55.500453 xfrm1, IN: IP 172.70.51.31 &gt; 172.64.240.252: ICMP echo request, id 33504, seq 0, length 64&#10;13:09:55.500480 xfrm1, OUT: IP 172.64.240.252 &gt; 172.70.51.31: ICMP echo reply, id 33504, seq 0, length 64&#10;&#10;13:09:55.504669 xfrm1, IN: IP 172.71.29.66 &gt; 172.64.240.252: ICMP echo request, id 60828, seq 0, length 64&#10;13:09:55.504695 xfrm1, OUT: IP 172.64.240.252 &gt; 172.71.29.66: ICMP echo reply, id 60828, seq 0, length 64&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">tcpdump -nn proto 1&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">tcpdump: verbose output suppressed, use -v or -vv for full protocol decode&#10;listening on any, link-type LINUX_SLL (Linux cooked v1), capture size 262144 bytes&#10;&#10;13:09:55.500453 xfrm1, IN: IP 172.70.51.31 &gt; 172.64.240.252: ICMP echo request, id 33504, seq 0, length 64&#10;13:09:55.500480 xfrm1, OUT: IP 172.64.240.252 &gt; 172.70.51.31: ICMP echo reply, id 33504, seq 0, length 64&#10;&#10;13:09:55.504669 xfrm1, IN: IP 172.71.29.66 &gt; 172.64.240.252: ICMP echo request, id 60828, seq 0, length 64&#10;13:09:55.504695 xfrm1, OUT: IP 172.64.240.252 &gt; 172.71.29.66: ICMP echo reply, id 60828, seq 0, length 64&#10;</code></pre>
 <h2 id="verify-tunnel-status-on-sophos-firewall-dashboard">Verify tunnel status on Sophos Firewall dashboard</h2>
 <h3 id="ipsec-1">IPsec</h3>
 <p>When the tunnel is working, its <strong>Status</strong> will be green.</p>

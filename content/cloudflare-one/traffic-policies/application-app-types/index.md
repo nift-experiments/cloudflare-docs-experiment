@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/traffic-policies/application-app-types/
+  description: Reference information for Applications and app types in Gateway.
+  full_title: Applications and app types · Cloudflare One docs
+  head_html: <title>Applications and app types · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="Reference information for Applications and app types in Gateway."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/traffic-policies/application-app-types/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/traffic-policies/application-app-types/index.md"><meta property="og:title" content="Applications and app types · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Reference information for Applications and app types in Gateway."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/traffic-policies/application-app-types/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Cloudflare One"><meta name="pcx_tags" content="TLS"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/traffic-policies/application-app-types/#page","headline":"Applications and app types \u00b7 Cloudflare One docs","description":"Reference information for Applications and app types in Gateway.","url":"https://developers.cloudflare.com/cloudflare-one/traffic-policies/application-app-types/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["TLS"]}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/traffic-policies/application-app-types/
+  schema: 1
+---
 <p>Gateway allows you to create DNS, Network, and HTTP policies based on applications and application types. Because a single application often spans multiple hostnames, selecting an application by name is easier than writing separate rules for each hostname. You can select individual applications or application types to filter specific traffic on your network.</p>
 <h2 id="applications">Applications</h2>
 <p>When you choose the <em>Application</em> selector in a Gateway policy builder, the <strong>Value</strong> field will include all supported applications and their respective app types. Alternatively, you can use the <a href="/api/resources/zero_trust/subresources/gateway/subresources/app_types/methods/list/">Gateway API</a> to fetch a list of applications, app types, and ID numbers.</p>
@@ -122,18 +133,34 @@
 </tr>
 <tr>
 <td>Security</td>
-<td>Information security applications, including <span class="nb-interactive-component" data-cf-component="GlossaryTooltip"></td>
+<td>Information security applications, including <span class="nb-glossary-tooltip" title="shadow IT">shadow IT</span></td>
+</tr>
+<tr>
+<td>Shopping</td>
+<td>Online shopping applications</td>
+</tr>
+<tr>
+<td>Social Networking</td>
+<td>Social networking applications</td>
+</tr>
+<tr>
+<td>Sports</td>
+<td>Sports streaming and news applications</td>
+</tr>
+<tr>
+<td>Travel</td>
+<td>Travel related applications</td>
+</tr>
+<tr>
+<td>Video Streaming &amp; Editing</td>
+<td>Applications used for streaming and editing video</td>
+</tr>
+<tr>
+<td><a href="#do-not-inspect-applications">Do Not Inspect</a></td>
+<td>Applications incompatible with the TLS certificate required by the <a href="/cloudflare-one/traffic-policies/proxy/">Gateway proxy</a></td>
 </tr>
 </tbody>
 </table>
-@markup("md", "content/.markup/bodies/4424.md")
-</div>                  |
-| Shopping                                       | Online shopping applications                                                                                                |
-| Social Networking                              | Social networking applications                                                                                              |
-| Sports                                         | Sports streaming and news applications                                                                                      |
-| Travel                                         | Travel related applications                                                                                                 |
-| Video Streaming & Editing                      | Applications used for streaming and editing video                                                                           |
-| [Do Not Inspect](#do-not-inspect-applications) | Applications incompatible with the TLS certificate required by the [Gateway proxy](/cloudflare-one/traffic-policies/proxy/) |
 <h2 id="application-hostnames">Application hostnames</h2>
 <p>An application like Google Drive uses its own hostnames (for example, <code>drive.google.com</code>) and shared resources used by other applications (for example, <code>accounts.google.com</code> for login). Gateway separates these into <a href="#hostnames">hostnames</a> and <a href="#support-hostnames">support hostnames</a> so you can control the behavior of each application independently.</p>
 <h3 id="hostnames">Hostnames</h3>
@@ -178,4 +205,4 @@
 <p>All future Microsoft 365 traffic will bypass Gateway logging and filtering. To disable this behavior, turn off or delete the policy.</p>
 <h3 id="terraform">Terraform</h3>
 <p>Terraform users can retrieve the app types list with the <code>cloudflare_zero_trust_gateway_app_types_list</code> data source. This allows you to create Gateway policies with the application's name rather than its numeric ID. For example:</p>
-<pre><code class="language-tf">data &quot;cloudflare_zero_trust_gateway_app_types_list&quot; &quot;gateway_apptypes&quot; {&#10;  account_id = var.cloudflare_account_id&#10;}&#10;&#10;locals {&#10;  apptypes_map = merge([&#10;    for c in data.cloudflare_zero_trust_gateway_app_types_list.gateway_apptypes.result :&#10;    { (c.name) = c.id }&#10;  ]...)&#10;}&#10;&#10;resource &quot;cloudflare_zero_trust_gateway_policy&quot; &quot;zt_block_dns_apps&quot; {&#10;  account_id = var.cloudflare_account_id&#10;  name       = &quot;DNS Blocked apps&quot;&#10;  action     = &quot;block&quot;&#10;  traffic    = &quot;any(app.ids[*] in {${join(&quot; &quot;, [&#10;    local.apptypes_map[&quot;Discord&quot;],&#10;    local.apptypes_map[&quot;GoToMeeting&quot;],&#10;    local.apptypes_map[&quot;Greenhouse&quot;],&#10;    local.apptypes_map[&quot;Zelle&quot;],&#10;    local.apptypes_map[&quot;Microsoft Visual Studio&quot;]&#10;  ])}})&quot;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-tf">data &quot;cloudflare_zero_trust_gateway_app_types_list&quot; &quot;gateway_apptypes&quot; {&#10;  account_id = var.cloudflare_account_id&#10;}&#10;&#10;locals {&#10;  apptypes_map = merge([&#10;    for c in data.cloudflare_zero_trust_gateway_app_types_list.gateway_apptypes.result :&#10;    { (c.name) = c.id }&#10;  ]...)&#10;}&#10;&#10;resource &quot;cloudflare_zero_trust_gateway_policy&quot; &quot;zt_block_dns_apps&quot; {&#10;  account_id = var.cloudflare_account_id&#10;  name       = &quot;DNS Blocked apps&quot;&#10;  action     = &quot;block&quot;&#10;  traffic    = &quot;any(app.ids[*] in {${join(&quot; &quot;, [&#10;    local.apptypes_map[&quot;Discord&quot;],&#10;    local.apptypes_map[&quot;GoToMeeting&quot;],&#10;    local.apptypes_map[&quot;Greenhouse&quot;],&#10;    local.apptypes_map[&quot;Zelle&quot;],&#10;    local.apptypes_map[&quot;Microsoft Visual Studio&quot;]&#10;  ])}})&quot;&#10;}&#10;</code></pre>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/support/troubleshooting/general-troubleshooting/third-party-load-balancers/
+  description: Troubleshoot Cloudflare with third-party load balancers.
+  full_title: Third-party load balancers · Cloudflare Support docs
+  head_html: <title>Third-party load balancers · Cloudflare Support docs</title><meta name="generator" content="Nift"><meta name="description" content="Troubleshoot Cloudflare with third-party load balancers."><link rel="canonical" href="https://developers.cloudflare.com/support/troubleshooting/general-troubleshooting/third-party-load-balancers/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/support/troubleshooting/general-troubleshooting/third-party-load-balancers/index.md"><meta property="og:title" content="Third-party load balancers · Cloudflare Support docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Troubleshoot Cloudflare with third-party load balancers."><meta property="og:url" content="https://developers.cloudflare.com/support/troubleshooting/general-troubleshooting/third-party-load-balancers/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Support"><meta name="algolia_product_filter" content="Support"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_content_type" content="Troubleshooting"><meta name="algolia_content_type" content="Troubleshooting"><meta name="pcx_additional_products" content="Support"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/support/troubleshooting/general-troubleshooting/third-party-load-balancers/#page","headline":"Third-party load balancers \u00b7 Cloudflare Support docs","description":"Troubleshoot Cloudflare with third-party load balancers.","url":"https://developers.cloudflare.com/support/troubleshooting/general-troubleshooting/third-party-load-balancers/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /support/troubleshooting/general-troubleshooting/third-party-load-balancers/
+  schema: 1
+---
 <p>This guide explains how to troubleshoot common issues when using Cloudflare in front of third-party load balancers.</p>
 <hr />
 <h2 id="f5-big-ip-cookie-persistence">F5 BIG-IP cookie persistence</h2>
@@ -17,16 +28,16 @@
 <ul>
 <li>Without encryption (trivially decoded to show origin server IP and port):</li>
 </ul>
-<pre><code class="language-txt">BIGipCookie=16908480.16415.0000;path=/; Httponly; Secure&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">BIGipCookie=16908480.16415.0000;path=/; Httponly; Secure&#10;</code></pre>
 <ul>
 <li>With encryption:</li>
 </ul>
-<pre><code class="language-txt">BIGipCookie=TS019a202c=01625f1893a7d6e4b2c1a0f98e7d6c5b4a3f2e1d; path=/; Httponly; Secure&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">BIGipCookie=TS019a202c=01625f1893a7d6e4b2c1a0f98e7d6c5b4a3f2e1d; path=/; Httponly; Secure&#10;</code></pre>
 <h4 id="2-test-for-the-issue"><ol start="2">
 <li>Test for the issue</li>
 </ol></h4>
 <p>You can test for this issue using curl. Run multiple requests and check if the session cookie is set consistently:</p>
-<pre><code class="language-sh">for i in {1..100}; do curl -sI https://example.com; done 2&gt;&amp;1 | grep &quot;&lt;COOKIE_NAME&gt;&quot; | wc -l&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">for i in {1..100}; do curl -sI https://example.com; done 2&gt;&amp;1 | grep &quot;&lt;COOKIE_NAME&gt;&quot; | wc -l&#10;</code></pre>
 <p>If the count is significantly less than 100 when proxied through Cloudflare but equals 100 when connecting directly to the origin, you are experiencing this issue.</p>
 <h3 id="solution-configure-f5-oneconnect-profile">Solution: configure F5 OneConnect profile</h3>
 <p>The recommended solution is to configure an F5 OneConnect profile with a single host (<code>/32</code>) mask on your F5 BIG-IP load balancer.</p>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/fundamentals/manage-domains/add-site/
+  description: Learn how to onboard your domain to Cloudflare, to speed up and protect your website or application.
+  full_title: Onboard a domain · Cloudflare Fundamentals docs
+  head_html: <title>Onboard a domain · Cloudflare Fundamentals docs</title><meta name="generator" content="Nift"><meta name="description" content="Learn how to onboard your domain to Cloudflare, to speed up and protect your website or application."><link rel="canonical" href="https://developers.cloudflare.com/fundamentals/manage-domains/add-site/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/fundamentals/manage-domains/add-site/index.md"><meta property="og:title" content="Onboard a domain · Cloudflare Fundamentals docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Learn how to onboard your domain to Cloudflare, to speed up and protect your website or application."><meta property="og:url" content="https://developers.cloudflare.com/fundamentals/manage-domains/add-site/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare Fundamentals"><meta name="algolia_product_filter" content="Cloudflare Fundamentals"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_content_type" content="Tutorial"><meta name="algolia_content_type" content="Tutorial"><meta name="pcx_additional_products" content="Cloudflare Fundamentals"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/fundamentals/manage-domains/add-site/#page","headline":"Onboard a domain \u00b7 Cloudflare Fundamentals docs","description":"Learn how to onboard your domain to Cloudflare, to speed up and protect your website or application.","url":"https://developers.cloudflare.com/fundamentals/manage-domains/add-site/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /fundamentals/manage-domains/add-site/
+  schema: 1
+---
 <p>After you onboard your domain, Cloudflare will act as the <a href="/fundamentals/concepts/how-cloudflare-works/#cloudflare-as-a-reverse-proxy">reverse proxy</a> and <a href="/fundamentals/concepts/how-cloudflare-works/#cloudflare-as-a-dns-provider">DNS provider</a> for your site.</p>
 <p>This guide applies to existing domains that were purchased from another provider, and will use a <a href="/dns/zone-setups/full-setup">full DNS setup</a>, which is the most common configuration. To set this up, you will have to complete a few steps at Cloudflare, but also update some settings at your domain registrar<sup><a href="#footnote-1">1</a></sup>, and at your previous DNS provider (if you were using one).</p>
 <aside class="nb-aside tip">
@@ -13,10 +24,8 @@
 <div class="nb-dash-button"></div>
 <ol start="2">
 <li>Select <strong>Onboard a domain</strong>.</li>
-<li>Enter your website's <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></li>
+<li>Enter your website's <span class="nb-glossary-tooltip" title="apex domain">apex domain</span> (for example, <code>example.com</code>), choose how you would like to add your DNS records, and select <strong>Continue</strong>.</li>
 </ol>
-@markup("md", "content/.markup/bodies/8915.md")
-</div> (for example, `example.com`), choose how you would like to add your DNS records, and select **Continue**.
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/8913.md")
 </aside>
@@ -60,15 +69,19 @@
 @markup("md", "content/.markup/bodies/8912.md")
 </aside>
 <ol start="2">
-<li>If you find any missing records, <a href="/dns/manage-dns-records/how-to/create-dns-records/">manually add</a> those records.</li>
-<li>Depending on your site setup, you may want to adjust the <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></li>
-</ol>
-@markup("md", "content/.markup/bodies/8919.md")
-</div> for certain `A`, `AAAA`, or `CNAME` records. Each record has a proxy status toggle:
-   - **Proxied** (orange cloud): web traffic goes through the Cloudflare network, which provides caching, DDoS protection, and other security features.
-   - **DNS only** (gray cloud): Cloudflare returns the DNS record value but does not proxy traffic. Use this for CNAME records that verify your domain for third-party services.
-<ol start="4">
-<li>Select <strong>Continue</strong>.</li>
+<li>
+<p>If you find any missing records, <a href="/dns/manage-dns-records/how-to/create-dns-records/">manually add</a> those records.</p>
+</li>
+<li>
+<p>Depending on your site setup, you may want to adjust the <span class="nb-glossary-tooltip" title="proxy status">proxy status</span> for certain <code>A</code>, <code>AAAA</code>, or <code>CNAME</code> records. Each record has a proxy status toggle:</p>
+<ul>
+<li><strong>Proxied</strong> (orange cloud): web traffic goes through the Cloudflare network, which provides caching, DDoS protection, and other security features.</li>
+<li><strong>DNS only</strong> (gray cloud): Cloudflare returns the DNS record value but does not proxy traffic. Use this for CNAME records that verify your domain for third-party services.</li>
+</ul>
+</li>
+<li>
+<p>Select <strong>Continue</strong>.</p>
+</li>
 </ol>
 <h2 id="3-update-nameservers"><ol start="3">
 <li>Update nameservers</li>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/changelog/product-group/developer-platform/11/
+  description: '2026-03-23'
+  full_title: Developer platform changelog - page 11 | Cloudflare Docs
+  head_html: <title>Developer platform changelog - page 11 | Cloudflare Docs</title><meta name="generator" content="Nift"><meta name="description" content="2026-03-23"><link rel="canonical" href="https://developers.cloudflare.com/changelog/product-group/developer-platform/11/"><link rel="sitemap" href="/sitemap-index.xml"><meta property="og:title" content="Developer platform changelog - page 11"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="2026-03-23"><meta property="og:url" content="https://developers.cloudflare.com/changelog/product-group/developer-platform/11/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/changelog/product-group/developer-platform/11/#page","headline":"Developer platform changelog - page 11 | Cloudflare Docs","description":"2026-03-23","url":"https://developers.cloudflare.com/changelog/product-group/developer-platform/11/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: false
+  noindex: false
+  route: /changelog/product-group/developer-platform/11/
+  schema: 1
+---
 <h1 id="changelog">Changelog</h1>
 
 <h2 id="ai-search-ui-snippets-and-mcp-support"><a href="/changelog/post/2026-03-23-ai-search-public-endpoint-and-snippets/">AI Search UI snippets and MCP support</a></h2>
@@ -14,11 +25,11 @@
 <p>UI snippets are pre-built search and chat components you can embed in your website. Visit <a href="https://search.ai.cloudflare.com/">search.ai.cloudflare.com</a> to configure and preview components for your AI Search instance.</p>
 <p><img src="/assets/upstream/images/ai-search/ui-snippet-search-modal.png" alt="Example of the search-modal-snippet component" /></p>
 <p>To add a search modal to your page:</p>
-<pre><code class="language-html">&lt;script&#10;	type=&quot;module&quot;&#10;	src=&quot;https://&lt;PUBLIC_ENDPOINT_ID&gt;.search.ai.cloudflare.com/assets/v0.0.25/search-snippet.es.js&quot;&#10;&gt;&lt;/script&gt;&#10;&#10;&lt;search-modal-snippet&#10;	api-url=&quot;https://&lt;PUBLIC_ENDPOINT_ID&gt;.search.ai.cloudflare.com/&quot;&#10;	placeholder=&quot;Search...&quot;&#10;&gt;&#10;&lt;/search-modal-snippet&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-html">&lt;script&#10;	type=&quot;module&quot;&#10;	src=&quot;https://&lt;PUBLIC_ENDPOINT_ID&gt;.search.ai.cloudflare.com/assets/v0.0.25/search-snippet.es.js&quot;&#10;&gt;&lt;/script&gt;&#10;&#10;&lt;search-modal-snippet&#10;	api-url=&quot;https://&lt;PUBLIC_ENDPOINT_ID&gt;.search.ai.cloudflare.com/&quot;&#10;	placeholder=&quot;Search...&quot;&#10;&gt;&#10;&lt;/search-modal-snippet&gt;&#10;</code></pre>
 <p>For more details, refer to the <a href="/ai-search/configuration/retrieval/public-endpoint/embed-search-snippets/">UI snippets documentation</a>.</p>
 <h4 id="2026-03-23-ai-search-public-endpoint-and-snippets-mcp">MCP</h4>
 <p>The MCP endpoint allows AI agents to search your content via the Model Context Protocol. Connect your MCP client to:</p>
-<pre><code class="language-txt">https://&lt;PUBLIC_ENDPOINT_ID&gt;.search.ai.cloudflare.com/mcp&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://&lt;PUBLIC_ENDPOINT_ID&gt;.search.ai.cloudflare.com/mcp&#10;</code></pre>
 <p>For more details, refer to the <a href="/ai-search/api/search/mcp/">MCP documentation</a>.</p>
 
 
@@ -27,7 +38,7 @@
 <p><a href="/ai-search/">AI Search</a> now supports custom metadata filtering, allowing you to define your own metadata fields and filter search results based on attributes like category, version, or any custom field you define.</p>
 <h4 id="2026-03-23-custom-metadata-filtering-define-a-custom-metadata-schema">Define a custom metadata schema</h4>
 <p>You can define up to 5 custom metadata fields per AI Search instance. Each field has a name and data type (<code>text</code>, <code>number</code>, or <code>boolean</code>):</p>
-<pre><code class="language-bash">curl -X POST https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai-search/instances \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;H &quot;Authorization: Bearer {API_TOKEN}&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;id&quot;: &quot;my-instance&quot;,&#10;    &quot;type&quot;: &quot;r2&quot;,&#10;    &quot;source&quot;: &quot;my-bucket&quot;,&#10;    &quot;custom_metadata&quot;: [&#10;      { &quot;field_name&quot;: &quot;category&quot;, &quot;data_type&quot;: &quot;text&quot; },&#10;      { &quot;field_name&quot;: &quot;version&quot;, &quot;data_type&quot;: &quot;number&quot; },&#10;      { &quot;field_name&quot;: &quot;is_public&quot;, &quot;data_type&quot;: &quot;boolean&quot; }&#10;    ]&#10;  }&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl -X POST https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai-search/instances \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;H &quot;Authorization: Bearer {API_TOKEN}&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;id&quot;: &quot;my-instance&quot;,&#10;    &quot;type&quot;: &quot;r2&quot;,&#10;    &quot;source&quot;: &quot;my-bucket&quot;,&#10;    &quot;custom_metadata&quot;: [&#10;      { &quot;field_name&quot;: &quot;category&quot;, &quot;data_type&quot;: &quot;text&quot; },&#10;      { &quot;field_name&quot;: &quot;version&quot;, &quot;data_type&quot;: &quot;number&quot; },&#10;      { &quot;field_name&quot;: &quot;is_public&quot;, &quot;data_type&quot;: &quot;boolean&quot; }&#10;    ]&#10;  }&#x27;&#10;</code></pre>
 <h4 id="2026-03-23-custom-metadata-filtering-add-metadata-to-your-documents">Add metadata to your documents</h4>
 <p>How you attach metadata depends on your data source:</p>
 <ul>
@@ -36,7 +47,7 @@
 </ul>
 <h4 id="2026-03-23-custom-metadata-filtering-filter-search-results">Filter search results</h4>
 <p>Use custom metadata fields in your search queries alongside built-in attributes like <code>folder</code> and <code>timestamp</code>:</p>
-<pre><code class="language-bash">curl https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai-search/instances/{NAME}/search \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;H &quot;Authorization: Bearer {API_TOKEN}&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;messages&quot;: [&#10;      {&#10;        &quot;content&quot;: &quot;How do I configure authentication?&quot;,&#10;        &quot;role&quot;: &quot;user&quot;&#10;      }&#10;    ],&#10;    &quot;ai_search_options&quot;: {&#10;      &quot;retrieval&quot;: {&#10;        &quot;filters&quot;: {&#10;          &quot;category&quot;: &quot;documentation&quot;,&#10;          &quot;version&quot;: { &quot;$gte&quot;: 2.0 }&#10;        }&#10;      }&#10;    }&#10;  }&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai-search/instances/{NAME}/search \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;H &quot;Authorization: Bearer {API_TOKEN}&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;messages&quot;: [&#10;      {&#10;        &quot;content&quot;: &quot;How do I configure authentication?&quot;,&#10;        &quot;role&quot;: &quot;user&quot;&#10;      }&#10;    ],&#10;    &quot;ai_search_options&quot;: {&#10;      &quot;retrieval&quot;: {&#10;        &quot;filters&quot;: {&#10;          &quot;category&quot;: &quot;documentation&quot;,&#10;          &quot;version&quot;: { &quot;$gte&quot;: 2.0 }&#10;        }&#10;      }&#10;    }&#10;  }&#x27;&#10;</code></pre>
 <p>Learn more in the <a href="/ai-search/configuration/indexing/metadata/">metadata filtering documentation</a>.</p>
 
 
@@ -55,11 +66,11 @@
 </ul>
 <h4 id="2026-03-23-expanded-sql-functions-expressions-complex-types-examples">Examples</h4>
 <h4 id="2026-03-23-expanded-sql-functions-expressions-complex-types-case-expressions-with-statistical-aggregates">CASE expressions with statistical aggregates</h4>
-<pre><code class="language-sql">SELECT source,&#10;    CASE&#10;        WHEN AVG(price) &gt; 30 THEN &#x27;premium&#x27;&#10;        WHEN AVG(price) &gt; 10 THEN &#x27;mid-tier&#x27;&#10;        ELSE &#x27;budget&#x27;&#10;    END AS tier,&#10;    round(stddev(price), 2) AS price_volatility,&#10;    approx_percentile_cont(price, 0.95) AS p95_price&#10;FROM my_namespace.sales_data&#10;GROUP BY source&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">SELECT source,&#10;    CASE&#10;        WHEN AVG(price) &gt; 30 THEN &#x27;premium&#x27;&#10;        WHEN AVG(price) &gt; 10 THEN &#x27;mid-tier&#x27;&#10;        ELSE &#x27;budget&#x27;&#10;    END AS tier,&#10;    round(stddev(price), 2) AS price_volatility,&#10;    approx_percentile_cont(price, 0.95) AS p95_price&#10;FROM my_namespace.sales_data&#10;GROUP BY source&#10;</code></pre>
 <h4 id="2026-03-23-expanded-sql-functions-expressions-complex-types-struct-and-array-access">Struct and array access</h4>
-<pre><code class="language-sql">SELECT product_name,&#10;    pricing[&#x27;price&#x27;] AS price,&#10;    array_to_string(tags, &#x27;, &#x27;) AS tag_list&#10;FROM my_namespace.products&#10;WHERE array_has(tags, &#x27;Action&#x27;)&#10;ORDER BY pricing[&#x27;price&#x27;] DESC&#10;LIMIT 10&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">SELECT product_name,&#10;    pricing[&#x27;price&#x27;] AS price,&#10;    array_to_string(tags, &#x27;, &#x27;) AS tag_list&#10;FROM my_namespace.products&#10;WHERE array_has(tags, &#x27;Action&#x27;)&#10;ORDER BY pricing[&#x27;price&#x27;] DESC&#10;LIMIT 10&#10;</code></pre>
 <h4 id="2026-03-23-expanded-sql-functions-expressions-complex-types-chained-ctes-with-time-series-analysis">Chained CTEs with time-series analysis</h4>
-<pre><code class="language-sql">WITH monthly AS (&#10;    SELECT date_trunc(&#x27;month&#x27;, sale_timestamp) AS month,&#10;        department,&#10;        COUNT(*) AS transactions,&#10;        round(AVG(total_amount), 2) AS avg_amount&#10;    FROM my_namespace.sales_data&#10;    WHERE sale_timestamp BETWEEN &#x27;2025-01-01T00:00:00Z&#x27; AND &#x27;2025-12-31T23:59:59Z&#x27;&#10;    GROUP BY date_trunc(&#x27;month&#x27;, sale_timestamp), department&#10;),&#10;ranked AS (&#10;    SELECT month, department, transactions, avg_amount,&#10;        CASE&#10;            WHEN avg_amount &gt; 1000 THEN &#x27;high-value&#x27;&#10;            WHEN avg_amount &gt; 500 THEN &#x27;mid-value&#x27;&#10;            ELSE &#x27;standard&#x27;&#10;        END AS tier&#10;    FROM monthly&#10;    WHERE transactions &gt; 100&#10;)&#10;SELECT * FROM ranked&#10;ORDER BY month, avg_amount DESC&#10;</code></pre>
+<pre tabindex="0"><code class="language-sql">WITH monthly AS (&#10;    SELECT date_trunc(&#x27;month&#x27;, sale_timestamp) AS month,&#10;        department,&#10;        COUNT(*) AS transactions,&#10;        round(AVG(total_amount), 2) AS avg_amount&#10;    FROM my_namespace.sales_data&#10;    WHERE sale_timestamp BETWEEN &#x27;2025-01-01T00:00:00Z&#x27; AND &#x27;2025-12-31T23:59:59Z&#x27;&#10;    GROUP BY date_trunc(&#x27;month&#x27;, sale_timestamp), department&#10;),&#10;ranked AS (&#10;    SELECT month, department, transactions, avg_amount,&#10;        CASE&#10;            WHEN avg_amount &gt; 1000 THEN &#x27;high-value&#x27;&#10;            WHEN avg_amount &gt; 500 THEN &#x27;mid-value&#x27;&#10;            ELSE &#x27;standard&#x27;&#10;        END AS tier&#10;    FROM monthly&#10;    WHERE transactions &gt; 100&#10;)&#10;SELECT * FROM ranked&#10;ORDER BY month, avg_amount DESC&#10;</code></pre>
 <p>For the full function reference and syntax details, refer to the <a href="/r2-sql/sql-reference/">SQL reference</a>. For limitations and best practices, refer to <a href="/r2-sql/reference/limitations-best-practices/">Limitations and best practices</a>.</p>
 
 
@@ -97,7 +108,7 @@
 <li><strong>Client certificates</strong> (mTLS) for Hyperdrive to authenticate itself to your MySQL database with credentials beyond username and password.</li>
 </ul>
 <p>Create a Hyperdrive configuration with custom certificates for MySQL:</p>
-<pre><code class="language-bash">&#35; Upload a CA certificate&#10;npx wrangler cert upload certificate-authority --ca-cert your-ca-cert.pem --name your-custom-ca-name&#10;&#10;&#35; Create a Hyperdrive with VERIFY_IDENTITY mode&#10;npx wrangler hyperdrive create your-hyperdrive-config \&#10;  &#45;-connection-string=&quot;mysql://user:password@hostname:port/database&quot; \&#10;  &#45;-ca-certificate-id &lt;CA_CERT_ID&gt; \&#10;  &#45;-sslmode VERIFY_IDENTITY&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">&#35; Upload a CA certificate&#10;npx wrangler cert upload certificate-authority --ca-cert your-ca-cert.pem --name your-custom-ca-name&#10;&#10;&#35; Create a Hyperdrive with VERIFY_IDENTITY mode&#10;npx wrangler hyperdrive create your-hyperdrive-config \&#10;  &#45;-connection-string=&quot;mysql://user:password@hostname:port/database&quot; \&#10;  &#45;-ca-certificate-id &lt;CA_CERT_ID&gt; \&#10;  &#45;-sslmode VERIFY_IDENTITY&#10;</code></pre>
 <p>For more information, refer to <a href="/hyperdrive/configuration/tls-ssl-certificates-for-hyperdrive/">SSL/TLS certificates for Hyperdrive</a> and <a href="/hyperdrive/examples/connect-to-mysql/">MySQL TLS/SSL modes</a>.</p>
 
 
@@ -134,13 +145,13 @@
 <h4 id="2026-03-19-kimi-k2-5-workers-ai-prefix-caching-and-session-affinity">Prefix caching and session affinity</h4>
 <p>When an agent sends a new prompt, it resends all previous prompts, tools, and context from the session. The delta between consecutive requests is usually just a few new lines of input. Prefix caching avoids reprocessing the shared context, saving time and compute from the prefill stage. This means faster Time to First Token (TTFT) and higher Tokens Per Second (TPS) throughput.</p>
 <p>Workers AI has done prefix caching, but we are now surfacing cached tokens as a usage metric and offering a discount on cached tokens compared to input tokens (pricing is listed on the <a href="/workers-ai/models/kimi-k2.5/">model page</a>).</p>
-<pre><code class="language-bash">curl -X POST \&#10;  &quot;https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run/@cf/moonshotai/kimi-k2.5&quot; \&#10;  &#45;H &quot;Authorization: Bearer {api_token}&quot; \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;H &quot;x-session-affinity: ses_12345678&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;messages&quot;: [&#10;      {&#10;        &quot;role&quot;: &quot;system&quot;,&#10;        &quot;content&quot;: &quot;You are a helpful assistant.&quot;&#10;      },&#10;      {&#10;        &quot;role&quot;: &quot;user&quot;,&#10;        &quot;content&quot;: &quot;What is prefix caching and why does it matter?&quot;&#10;      }&#10;    ],&#10;    &quot;max_tokens&quot;: 2400,&#10;    &quot;stream&quot;: true&#10;  }&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl -X POST \&#10;  &quot;https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run/@cf/moonshotai/kimi-k2.5&quot; \&#10;  &#45;H &quot;Authorization: Bearer {api_token}&quot; \&#10;  &#45;H &quot;Content-Type: application/json&quot; \&#10;  &#45;H &quot;x-session-affinity: ses_12345678&quot; \&#10;  &#45;d &#x27;{&#10;    &quot;messages&quot;: [&#10;      {&#10;        &quot;role&quot;: &quot;system&quot;,&#10;        &quot;content&quot;: &quot;You are a helpful assistant.&quot;&#10;      },&#10;      {&#10;        &quot;role&quot;: &quot;user&quot;,&#10;        &quot;content&quot;: &quot;What is prefix caching and why does it matter?&quot;&#10;      }&#10;    ],&#10;    &quot;max_tokens&quot;: 2400,&#10;    &quot;stream&quot;: true&#10;  }&#x27;&#10;</code></pre>
 <p>Some clients like <a href="https://opencode.ai">OpenCode</a> implement session affinity automatically. The <a href="https://github.com/cloudflare/agents">Agents SDK</a> starter also sets up the wiring for you.</p>
 <h4 id="2026-03-19-kimi-k2-5-workers-ai-redesigned-asynchronous-api">Redesigned asynchronous API</h4>
 <p>For volumes of requests that exceed synchronous rate limits, you can submit batches of inferences to be completed asynchronously. We have revamped the <a href="/workers-ai/features/batch-api/">Asynchronous Batch API</a> with a pull-based system that processes queued requests as soon as capacity is available. With internal testing, async requests usually execute within 5 minutes, but this depends on live traffic.</p>
 <p>The async API is the best way to avoid capacity errors in durable workflows. It is ideal for use cases that are not real-time, such as code scanning agents or research agents.</p>
 <p>To use the asynchronous API, pass <code>queueRequest: true</code>:</p>
-<pre><code class="language-js">// 1. Push a batch of requests into the queue&#10;const res = await env.AI.run(&#10;	&quot;@cf/moonshotai/kimi-k2.5&quot;,&#10;	{&#10;		requests: [&#10;			{&#10;				messages: [{ role: &quot;user&quot;, content: &quot;Tell me a joke&quot; }],&#10;			},&#10;			{&#10;				messages: [{ role: &quot;user&quot;, content: &quot;Explain the Pythagoras theorem&quot; }],&#10;			},&#10;		],&#10;	},&#10;	{ queueRequest: true },&#10;);&#10;&#10;// 2. Grab the request ID&#10;const requestId = res.request_id;&#10;&#10;// 3. Poll for the result&#10;const result = await env.AI.run(&quot;@cf/moonshotai/kimi-k2.5&quot;, {&#10;	request_id: requestId,&#10;});&#10;&#10;if (result.status === &quot;queued&quot; || result.status === &quot;running&quot;) {&#10;	// Retry by polling again&#10;} else {&#10;	return Response.json(result);&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">// 1. Push a batch of requests into the queue&#10;const res = await env.AI.run(&#10;	&quot;@cf/moonshotai/kimi-k2.5&quot;,&#10;	{&#10;		requests: [&#10;			{&#10;				messages: [{ role: &quot;user&quot;, content: &quot;Tell me a joke&quot; }],&#10;			},&#10;			{&#10;				messages: [{ role: &quot;user&quot;, content: &quot;Explain the Pythagoras theorem&quot; }],&#10;			},&#10;		],&#10;	},&#10;	{ queueRequest: true },&#10;);&#10;&#10;// 2. Grab the request ID&#10;const requestId = res.request_id;&#10;&#10;// 3. Poll for the result&#10;const result = await env.AI.run(&quot;@cf/moonshotai/kimi-k2.5&quot;, {&#10;	request_id: requestId,&#10;});&#10;&#10;if (result.status === &quot;queued&quot; || result.status === &quot;running&quot;) {&#10;	// Retry by polling again&#10;} else {&#10;	return Response.json(result);&#10;}&#10;</code></pre>
 <p>You can also set up <a href="/workers-ai/platform/event-subscriptions/">event notifications</a> to know when inference is complete instead of polling.</p>
 <h4 id="2026-03-19-kimi-k2-5-workers-ai-get-started">Get started</h4>
 <p>Use Kimi K2.5 through the <a href="/workers-ai/configuration/bindings/">Workers AI binding</a> (<code>env.AI.run()</code>), the REST API at <code>/run</code> or <code>/v1/chat/completions</code>, <a href="/ai-gateway/">AI Gateway</a>, or via the <a href="/workers-ai/configuration/open-ai-compatibility/">OpenAI-compatible endpoint</a>.</p>
@@ -225,7 +236,7 @@
 <h4 id="2026-03-17-codemode-sdk-v0.2.1-internal-normalization-and-sanitization">Internal normalization and sanitization</h4>
 <p><code>DynamicWorkerExecutor</code> now normalizes code and sanitizes tool names internally. You no longer need to call <code>normalizeCode()</code> or <code>sanitizeToolName()</code> before passing code and functions to <code>execute()</code>.</p>
 <h4 id="2026-03-17-codemode-sdk-v0.2.1-upgrade">Upgrade</h4>
-<pre><code class="language-sh">npm i @cloudflare/codemode@latest&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npm i @cloudflare/codemode@latest&#10;</code></pre>
 <p>See the <a href="/agents/tools/codemode/">Code Mode documentation</a> for the full API reference.</p>
 
 
@@ -233,7 +244,7 @@
 <p><em>2026-03-17</em></p>
 <p>AI Gateway now supports the <code>cf-aig-collect-log-payload</code> header, which controls whether request and response bodies are stored in logs. By default, this header is set to <code>true</code> and payloads are stored alongside metadata. Set this header to <code>false</code> to skip payload storage while still logging metadata such as token counts, model, provider, status code, cost, and duration.</p>
 <p>This is useful when you need usage metrics but do not want to persist sensitive prompt or response data.</p>
-<pre><code class="language-bash">curl https://gateway.ai.cloudflare.com/v1/$ACCOUNT_ID/$GATEWAY_ID/openai/chat/completions \&#10;  &#45;-header &quot;Authorization: Bearer $TOKEN&quot; \&#10;  &#45;-header &#x27;Content-Type: application/json&#x27; \&#10;  &#45;-header &#x27;cf-aig-collect-log-payload: false&#x27; \&#10;  &#45;-data &#x27;{&#10;    &quot;model&quot;: &quot;gpt-4o-mini&quot;,&#10;    &quot;messages&quot;: [&#10;      {&#10;        &quot;role&quot;: &quot;user&quot;,&#10;        &quot;content&quot;: &quot;What is the email address and phone number of user123?&quot;&#10;      }&#10;    ]&#10;  }&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl https://gateway.ai.cloudflare.com/v1/$ACCOUNT_ID/$GATEWAY_ID/openai/chat/completions \&#10;  &#45;-header &quot;Authorization: Bearer $TOKEN&quot; \&#10;  &#45;-header &#x27;Content-Type: application/json&#x27; \&#10;  &#45;-header &#x27;cf-aig-collect-log-payload: false&#x27; \&#10;  &#45;-data &#x27;{&#10;    &quot;model&quot;: &quot;gpt-4o-mini&quot;,&#10;    &quot;messages&quot;: [&#10;      {&#10;        &quot;role&quot;: &quot;user&quot;,&#10;        &quot;content&quot;: &quot;What is the email address and phone number of user123?&quot;&#10;      }&#10;    ]&#10;  }&#x27;&#10;</code></pre>
 <p>For more information, refer to <a href="/ai-gateway/observability/logging/#collect-log-payload-cf-aig-collect-log-payload">Logging</a>.</p>
 
 
@@ -247,7 +258,7 @@
 <p><em>2026-03-15</em></p>
 <p>When your Worker accesses a Durable Object via <code>idFromName()</code> or <code>getByName()</code>, the same name is now available on <code>ctx.id.name</code> inside the object — no need to pass it through method arguments or persist it in storage. This brings the runtime behavior in line with the <a href="/workers/languages/typescript/">Workers runtime types</a>.</p>
 <p>This is especially useful for <a href="/durable-objects/api/alarms/">alarms</a>, where there is no calling client to pass the name as an argument. When an alarm handler runs, <code>ctx.id.name</code> will hold the same name the object was originally accessed with.</p>
-<pre><code class="language-js">import { DurableObject } from &quot;cloudflare:workers&quot;;&#10;&#10;export class ChatRoom extends DurableObject {&#10;  async getRoomName() {&#10;    // ctx.id.name returns the name passed to getByName() or idFromName()&#10;    return this.ctx.id.name;&#10;  }&#10;}&#10;&#10;// Worker&#10;export default {&#10;  async fetch(request, env) {&#10;    const stub = env.CHAT_ROOM.getByName(&quot;general&quot;);&#10;    const roomName = await stub.getRoomName();&#10;    return new Response(`Welcome to ${roomName}!`);&#10;  },&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">import { DurableObject } from &quot;cloudflare:workers&quot;;&#10;&#10;export class ChatRoom extends DurableObject {&#10;  async getRoomName() {&#10;    // ctx.id.name returns the name passed to getByName() or idFromName()&#10;    return this.ctx.id.name;&#10;  }&#10;}&#10;&#10;// Worker&#10;export default {&#10;  async fetch(request, env) {&#10;    const stub = env.CHAT_ROOM.getByName(&quot;general&quot;);&#10;    const roomName = await stub.getRoomName();&#10;    return new Response(`Welcome to ${roomName}!`);&#10;  },&#10;};&#10;</code></pre>
 <p><code>ctx.id.name</code> is <code>undefined</code> in the following cases:</p>
 <ul>
 <li>For Durable Objects created with <code>newUniqueId()</code>.</li>
@@ -265,9 +276,9 @@
 <div class="nb-wrangler-config">
 @markup("md", "content/.markup/bodies/17709.md")</div>
 <p>Then connect with:</p>
-<pre><code class="language-sh">wrangler containers ssh &lt;INSTANCE_ID&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">wrangler containers ssh &lt;INSTANCE_ID&gt;&#10;</code></pre>
 <p>You can also run a single command without opening an interactive shell:</p>
-<pre><code class="language-sh">wrangler containers ssh &lt;INSTANCE_ID&gt; -- ls -al&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">wrangler containers ssh &lt;INSTANCE_ID&gt; -- ls -al&#10;</code></pre>
 <p>Use <code>wrangler containers instances &lt;APPLICATION&gt;</code> to find the instance ID for a running Container.</p>
 <p>For more information, refer to the <a href="/containers/guides/ssh/">SSH documentation</a>.</p>
 
@@ -276,7 +287,7 @@
 <p><em>2026-03-12</em></p>
 <p>A new <a href="/workers/wrangler/commands/containers/#containers-instances"><code>wrangler containers instances</code></a> command lists all instances for a given Container application. This mirrors the instances view in the Cloudflare dashboard.</p>
 <p>The command displays each instance's ID, name, state, location, version, and creation time:</p>
-<pre><code class="language-sh">wrangler containers instances &lt;APPLICATION_ID&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">wrangler containers instances &lt;APPLICATION_ID&gt;&#10;</code></pre>
 <p>Use the <code>--json</code> flag for machine-readable output, which is also the default format in non-interactive environments such as CI pipelines.</p>
 <p>For the full list of options, refer to the <a href="/workers/wrangler/commands/containers/#containers-instances"><code>containers instances</code> command reference</a>.</p>
 
@@ -304,7 +315,7 @@
 <p><em>Edit: this post has been edited to clarify crawling behavior with respect to site guidance.</em></p>
 <p>You can now crawl an entire website with a single API call using <a href="/browser-run/">Browser Rendering</a>'s new <a href="/browser-run/quick-actions/crawl-endpoint/"><code>/crawl</code> endpoint</a>, available in open beta. Submit a starting URL, and pages are automatically discovered, rendered in a headless browser, and returned in multiple formats, including HTML, Markdown, and structured JSON. The endpoint is a <a href="/bots/concepts/bot/verified-bots/">verified bot (intermediary agent)</a> that respects robots.txt and <a href="https://www.cloudflare.com/ai-crawl-control/">AI Crawl Control</a> by default, making it easy for developers to comply with website rules, and making it less likely for crawlers to ignore web-owner guidance. This is great for training models, building RAG pipelines, and researching or monitoring content across a site.</p>
 <p>Crawl jobs run asynchronously. You submit a URL, receive a job ID, and check back for results as pages are processed.</p>
-<pre><code class="language-sh">&#35; Initiate a crawl&#10;curl -X POST &#x27;https://api.cloudflare.com/client/v4/accounts/{account_id}/browser-rendering/crawl&#x27; \&#10;  &#45;H &#x27;Authorization: Bearer &lt;apiToken&gt;&#x27; \&#10;  &#45;H &#x27;Content-Type: application/json&#x27; \&#10;  &#45;d &#x27;{&#10;    &quot;url&quot;: &quot;https://blog.cloudflare.com/&quot;&#10;  }&#x27;&#10;&#10;&#35; Check results&#10;curl -X GET &#x27;https://api.cloudflare.com/client/v4/accounts/{account_id}/browser-rendering/crawl/{job_id}&#x27; \&#10;  &#45;H &#x27;Authorization: Bearer &lt;apiToken&gt;&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">&#35; Initiate a crawl&#10;curl -X POST &#x27;https://api.cloudflare.com/client/v4/accounts/{account_id}/browser-rendering/crawl&#x27; \&#10;  &#45;H &#x27;Authorization: Bearer &lt;apiToken&gt;&#x27; \&#10;  &#45;H &#x27;Content-Type: application/json&#x27; \&#10;  &#45;d &#x27;{&#10;    &quot;url&quot;: &quot;https://blog.cloudflare.com/&quot;&#10;  }&#x27;&#10;&#10;&#35; Check results&#10;curl -X GET &#x27;https://api.cloudflare.com/client/v4/accounts/{account_id}/browser-rendering/crawl/{job_id}&#x27; \&#10;  &#45;H &#x27;Authorization: Bearer &lt;apiToken&gt;&#x27;&#10;</code></pre>
 <p>Key features:</p>
 <ul>
 <li><strong>Multiple output formats</strong> - Return crawled content as HTML, Markdown, and structured JSON (powered by <a href="/workers-ai/">Workers AI</a>)</li>
@@ -323,7 +334,7 @@ If you are setting up your own site to be crawled, review the <a href="/browser-
 <h2 id="workflow-steps-now-expose-retry-attempt-number-via-step-context"><a href="/changelog/post/2026-03-06-step-context-available/">Workflow steps now expose retry attempt number via step context</a></h2>
 <p><em>2026-03-06 12:00:00 UTC</em></p>
 <p>Cloudflare Workflows allows you to configure specific retry logic for each step in your workflow execution. Now, you can access <strong>which</strong> retry attempt is currently executing for calls to <code>step.do()</code>:</p>
-<pre><code class="language-ts">await step.do(&quot;my-step&quot;, async (ctx) =&gt; {&#10;	// ctx.attempt is 1 on first try, 2 on first retry, etc.&#10;	console.log(`Attempt ${ctx.attempt}`);&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">await step.do(&quot;my-step&quot;, async (ctx) =&gt; {&#10;	// ctx.attempt is 1 on first try, 2 on first retry, etc.&#10;	console.log(`Attempt ${ctx.attempt}`);&#10;});&#10;</code></pre>
 <p>You can use the step context for improved logging &amp; observability, progressive backoff, or conditional logic in your workflow definition.</p>
 <p>Note that the current attempt number is 1-indexed. For more information on retry behavior, refer to <a href="/workflows/build/sleeping-and-retrying/">Sleeping and Retrying</a>.</p>
 
@@ -333,7 +344,7 @@ If you are setting up your own site to be crawled, review the <a href="/browser-
 <p><a href="/realtime/realtimekit/ai/transcription/">Real-time transcription</a> in RealtimeKit now supports 10 languages with regional variants, powered by <a href="/workers-ai/models/nova-3/">Deepgram Nova-3</a> running on <a href="/workers-ai/">Workers AI</a>.</p>
 <p>During a meeting, participant audio is routed through <a href="/ai-gateway/">AI Gateway</a> to Nova-3 on Workers AI — so transcription runs on Cloudflare's network end-to-end, reducing latency compared to routing through external speech-to-text services.</p>
 <p>Set the language when <a href="/realtime/realtimekit/concepts/meeting/">creating a meeting</a> via <code>ai_config.transcription.language</code>:</p>
-<pre><code class="language-json">{&#10;	&quot;ai_config&quot;: {&#10;		&quot;transcription&quot;: {&#10;			&quot;language&quot;: &quot;fr&quot;&#10;		}&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;ai_config&quot;: {&#10;		&quot;transcription&quot;: {&#10;			&quot;language&quot;: &quot;fr&quot;&#10;		}&#10;	}&#10;}&#10;</code></pre>
 <p>Supported languages include English, Spanish, French, German, Hindi, Russian, Portuguese, Japanese, Italian, and Dutch — with regional variants like <code>en-AU</code>, <code>en-GB</code>, <code>en-IN</code>, <code>en-NZ</code>, <code>es-419</code>, <code>fr-CA</code>, <code>de-CH</code>, <code>pt-BR</code>, and <code>pt-PT</code>. Use <code>multi</code> for automatic multilingual detection.</p>
 <p>If you are building voice agents or real-time translation workflows, your agent can now transcribe in the caller's language natively — no extra services or routing logic needed.</p>
 <ul>
@@ -376,14 +387,14 @@ If you are setting up your own site to be crawled, review the <a href="/browser-
 <div class="nb-type-script-example">
 @markup("md", "content/.markup/bodies/17817.md")</div>
 <p>Or call the REST API:</p>
-<pre><code class="language-bash">curl https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai/tomarkdown \&#10;  &#45;H &#x27;Authorization: Bearer {API_TOKEN}&#x27; \&#10;  &#45;F &#x27;files=@index.html&#x27; \&#10;  &#45;F &#x27;conversionOptions={&quot;html&quot;: {&quot;cssSelector&quot;: &quot;article.content&quot;}}&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai/tomarkdown \&#10;  &#45;H &#x27;Authorization: Bearer {API_TOKEN}&#x27; \&#10;  &#45;F &#x27;files=@index.html&#x27; \&#10;  &#45;F &#x27;conversionOptions={&quot;html&quot;: {&quot;cssSelector&quot;: &quot;article.content&quot;}}&#x27;&#10;</code></pre>
 <p>For more details, refer to <a href="/workers-ai/features/markdown-conversion/conversion-options/">Conversion Options</a>.</p>
 
 
 <h2 id="workflows-step-limit-increased-to-25-000-steps-per-instance"><a href="/changelog/post/2026-03-03-step-limits-to-25k/">Workflows step limit increased to 25,000 steps per instance</a></h2>
 <p><em>2026-03-03 12:00:00 UTC</em></p>
 <p>Each Workflow on Workers Paid now supports 10,000 steps by default, configurable up to 25,000 steps in your <code>wrangler.jsonc</code> file:</p>
-<pre><code class="language-json">{&#10;	&quot;workflows&quot;: [&#10;		{&#10;			&quot;name&quot;: &quot;my-workflow&quot;,&#10;			&quot;binding&quot;: &quot;MY_WORKFLOW&quot;,&#10;			&quot;class_name&quot;: &quot;MyWorkflow&quot;,&#10;			&quot;limits&quot;: {&#10;				&quot;steps&quot;: 25000&#10;			}&#10;		}&#10;	]&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;workflows&quot;: [&#10;		{&#10;			&quot;name&quot;: &quot;my-workflow&quot;,&#10;			&quot;binding&quot;: &quot;MY_WORKFLOW&quot;,&#10;			&quot;class_name&quot;: &quot;MyWorkflow&quot;,&#10;			&quot;limits&quot;: {&#10;				&quot;steps&quot;: 25000&#10;			}&#10;		}&#10;	]&#10;}&#10;</code></pre>
 <p>Previously, each instance was limited to 1,024 steps. Now, Workflows can support more complex, long-running executions without the additional complexity of recursive or child workflow calls.</p>
 <p>Note that the maximum persisted state limit per Workflow instance remains <strong>100 MB</strong> for Workers Free and <strong>1 GB</strong> for Workers Paid. Refer to <a href="/workflows/reference/limits/">Workflows limits</a> for more information.</p>
 
@@ -424,7 +435,7 @@ If you are setting up your own site to be crawled, review the <a href="/browser-
 </table>
 <h4 id="2026-03-03-sandbox-watch-file-events-upgrade">Upgrade</h4>
 <p>To update to the latest version:</p>
-<pre><code class="language-sh">npm i @cloudflare/sandbox@latest&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npm i @cloudflare/sandbox@latest&#10;</code></pre>
 <p>For full API details, refer to the <a href="/sandbox/api/file-watching/">Sandbox file watching reference</a>.</p>
 
 
@@ -538,14 +549,14 @@ If you are setting up your own site to be crawled, review the <a href="/browser-
 </ul>
 <h4 id="2026-03-02-agents-sdk-v0.7.0-upgrade">Upgrade</h4>
 <p>To update to the latest version:</p>
-<pre><code class="language-sh">npm i agents@latest @cloudflare/ai-chat@latest&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npm i agents@latest @cloudflare/ai-chat@latest&#10;</code></pre>
 
 
 <h2 id="get-started-with-ai-gateway-automatically"><a href="/changelog/post/2026-03-02-default-gateway/">Get started with AI Gateway automatically</a></h2>
 <p><em>2026-03-02</em></p>
 <p>You can now start using AI Gateway with a single API call — no setup required. Use <code>default</code> as your gateway ID, and AI Gateway creates one for you automatically on the first request.</p>
 <p>To try it out, <a href="/fundamentals/api/get-started/create-token/">create an API token</a> with <code>AI Gateway - Read</code>, <code>AI Gateway - Edit</code>, and <code>Workers AI - Read</code> permissions, then run:</p>
-<pre><code class="language-bash">curl -X POST https://gateway.ai.cloudflare.com/v1/$CLOUDFLARE_ACCOUNT_ID/default/compat/chat/completions \&#10;  &#45;-header &quot;cf-aig-authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  &#45;-header &#x27;Content-Type: application/json&#x27; \&#10;  &#45;-data &#x27;{&#10;    &quot;model&quot;: &quot;workers-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast&quot;,&#10;    &quot;messages&quot;: [&#10;      {&#10;        &quot;role&quot;: &quot;user&quot;,&#10;        &quot;content&quot;: &quot;What is Cloudflare?&quot;&#10;      }&#10;    ]&#10;  }&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl -X POST https://gateway.ai.cloudflare.com/v1/$CLOUDFLARE_ACCOUNT_ID/default/compat/chat/completions \&#10;  &#45;-header &quot;cf-aig-authorization: Bearer $CLOUDFLARE_API_TOKEN&quot; \&#10;  &#45;-header &#x27;Content-Type: application/json&#x27; \&#10;  &#45;-data &#x27;{&#10;    &quot;model&quot;: &quot;workers-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast&quot;,&#10;    &quot;messages&quot;: [&#10;      {&#10;        &quot;role&quot;: &quot;user&quot;,&#10;        &quot;content&quot;: &quot;What is Cloudflare?&quot;&#10;      }&#10;    ]&#10;  }&#x27;&#10;</code></pre>
 <p>AI Gateway gives you logging, caching, rate limiting, and access to multiple AI providers through a single endpoint. For more information, refer to <a href="/ai-gateway/get-started/">Get started</a>.</p>
 
 

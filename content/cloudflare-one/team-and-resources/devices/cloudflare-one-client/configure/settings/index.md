@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/settings/
+  description: Reference information for Device client settings in Zero Trust.
+  full_title: Device client settings · Cloudflare One docs
+  head_html: <title>Device client settings · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="Reference information for Device client settings in Zero Trust."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/settings/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/settings/index.md"><meta property="og:title" content="Device client settings · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Reference information for Device client settings in Zero Trust."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/settings/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Cloudflare One"><meta name="pcx_tags" content="Wireguard,MASQUE"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/settings/#page","headline":"Device client settings \u00b7 Cloudflare One docs","description":"Reference information for Device client settings in Zero Trust.","url":"https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/settings/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["Wireguard","MASQUE"]}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/settings/
+  schema: 1
+---
 <p>Device client settings (formerly WARP) allow you to customize the Cloudflare One Client modes and permissions available to end users.</p>
 <ul>
 <li><a href="#global-device-client-settings">Global device client settings</a> are configurations which apply to all devices enrolled in your Zero Trust organization.</li>
@@ -60,20 +71,16 @@
 <p><code>Disabled</code>: (default) Sets the local interface IP to <code>172.16.0.2</code> on all devices. This configuration is only respected by devices using <a href="#device-tunnel-protocol">WireGuard</a> and does not affect devices using <a href="#device-tunnel-protocol">MASQUE</a>.</p>
 </li>
 <li>
-<p><code>Enabled</code>: Sets the local interface IP on each device to its <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
+<p><code>Enabled</code>: Sets the local interface IP on each device to its <span class="nb-glossary-tooltip" title="WARP CGNAT IP">CGNAT IP</span> or to a <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/device-ips/">custom device IP</a>.</p>
 </li>
 </ul>
-@markup("md", "content/.markup/bodies/6216.md")
-</div> or to a [custom device IP](/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/device-ips/).
 <p>The IP assigned to a device is permanent until the device unregisters from your Zero Trust organization or switches to a different registration. Disconnects and reconnects do not change the IP address assignment.</p>
 <h3 id="allow-all-cloudflare-one-traffic-to-reach-enrolled-devices">Allow all Cloudflare One traffic to reach enrolled devices</h3>
 <details class="nb-details"><summary>Feature availability</summary><div class="nb-details-body">
 @input("content/.markup/bodies/6217.md")
 </div></details>
 <p>Allows traffic on-ramped using <a href="/mesh/">Cloudflare Mesh</a> or <a href="/cloudflare-one/networks/connectors/cloudflare-wan/">Cloudflare WAN</a> to route to devices enrolled in your Zero Trust organization.</p>
-<p>Each device is assigned a virtual IP address in the <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/6218.md")
-</div> space (`100.96.0.0/12`) or a [custom device IP range](/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/device-ips/). With this setting `Enabled`, users on your private network will be able to connect to these device IPs and access [TCP, UDP, and/or ICMP-based services](/cloudflare-one/traffic-policies/proxy/) on your devices. You can create [Gateway network policies](/cloudflare-one/traffic-policies/network-policies/) to control which users and devices can access the device IPs.
+<p>Each device is assigned a virtual IP address in the <span class="nb-glossary-tooltip" title="WARP CGNAT IP">CGNAT IP</span> space (<code>100.96.0.0/12</code>) or a <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/device-ips/">custom device IP range</a>. With this setting <code>Enabled</code>, users on your private network will be able to connect to these device IPs and access <a href="/cloudflare-one/traffic-policies/proxy/">TCP, UDP, and/or ICMP-based services</a> on your devices. You can create <a href="/cloudflare-one/traffic-policies/network-policies/">Gateway network policies</a> to control which users and devices can access the device IPs.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/6206.md")
 </aside>
@@ -105,9 +112,7 @@
 <details class="nb-details"><summary>Feature availability</summary><div class="nb-details-body">
 @input("content/.markup/bodies/6222.md")
 </div></details>
-<p>When <code>Enabled</code>, the Cloudflare One Client will automatically disconnect when it detects a <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/6223.md")
-</div>, and it will automatically reconnect after the **Timeout** duration.
+<p>When <code>Enabled</code>, the Cloudflare One Client will automatically disconnect when it detects a <span class="nb-glossary-tooltip" title="captive portal">captive portal</span>, and it will automatically reconnect after the <strong>Timeout</strong> duration.</p>
 <p>Since captive portal implementations vary, the Cloudflare One Client may not detect all captive portals. For more information, refer to <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/settings/captive-portals/">Captive portal detection</a>.</p>
 <h3 id="mode-switch">Mode switch</h3>
 <details class="nb-details"><summary>Feature availability</summary><div class="nb-details-body">
@@ -140,9 +145,7 @@
 <details class="nb-details"><summary>Feature availability</summary><div class="nb-details-body">
 @input("content/.markup/bodies/6227.md")
 </div></details>
-<p>When <code>Enabled</code>, users can log out from your Zero Trust organization by selecting <strong>Logout from Zero Trust</strong> in the Cloudflare One Client UI. The <strong>Logout from Zero Trust</strong> button is only available for devices that were <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/deployment/manual-deployment/">enrolled manually</a>. Devices that enrolled using an <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/6228.md")
-</div> are always prevented from leaving your Zero Trust organization.
+<p>When <code>Enabled</code>, users can log out from your Zero Trust organization by selecting <strong>Logout from Zero Trust</strong> in the Cloudflare One Client UI. The <strong>Logout from Zero Trust</strong> button is only available for devices that were <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/deployment/manual-deployment/">enrolled manually</a>. Devices that enrolled using an <span class="nb-glossary-tooltip" title="MDM file">MDM file</span> are always prevented from leaving your Zero Trust organization.</p>
 <h3 id="allow-updates">Allow updates</h3>
 <details class="nb-details"><summary>Feature availability</summary><div class="nb-details-body">
 @input("content/.markup/bodies/6229.md")
@@ -240,7 +243,7 @@
 <ol>
 <li>
 <p>In Zero Trust:</p>
-<pre><code>a. Turn on **SCCM VPN Boundary Support** for remote [device profiles](/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/device-profiles/).&#10;&#10;b. Turn off **SCCM VPN Boundary Support** for [on-prem device profiles](/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/managed-networks/#4-configure-device-profile).&#10;&#10;c. (Optional) Verify device settings:&#10;</code></pre>
+<pre tabindex="0"><code>a. Turn on **SCCM VPN Boundary Support** for remote [device profiles](/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/device-profiles/).&#10;&#10;b. Turn off **SCCM VPN Boundary Support** for [on-prem device profiles](/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/managed-networks/#4-configure-device-profile).&#10;&#10;c. (Optional) Verify device settings:&#10;</code></pre>
 <details class="nb-details"><summary>Verify SCCM VPN Boundary Support</summary><div class="nb-details-body">
 </li>
 </ol>
@@ -249,7 +252,7 @@
 <ol start="2">
 <li>
 <p>In Microsoft SCCM:</p>
-<pre><code>a. [Create a boundary](https://learn.microsoft.com/en-us/intune/configmgr/core/servers/deploy/configure/boundaries#create-a-boundary) with the following settings:&#10;	- **Description**: `Remote Cloudflare One Clients`&#10;	- **Type**: _VPN_&#10;	- **Connection description**: `(SCCM) Cloudflare WARP Interface Tunnel`&#10;</code></pre>
+<pre tabindex="0"><code>a. [Create a boundary](https://learn.microsoft.com/en-us/intune/configmgr/core/servers/deploy/configure/boundaries#create-a-boundary) with the following settings:&#10;	- **Description**: `Remote Cloudflare One Clients`&#10;	- **Type**: _VPN_&#10;	- **Connection description**: `(SCCM) Cloudflare WARP Interface Tunnel`&#10;</code></pre>
 <p>b. Assign this boundary to one or more boundary groups.</p>
 </li>
 </ol>
@@ -269,11 +272,11 @@
 <p>Otherwise, the recommendation is to always disable <strong>NetBIOS over TCPIP</strong>. You can choose a different setting for <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/device-profiles/">remote devices</a> versus <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/managed-networks/#4-configure-device-profile">on-prem devices</a>.</p>
 <h4 id="verify-netbt-settings">Verify NetBT settings</h4>
 <p>To check if <strong>NetBIOS over TCPIP</strong> is enabled on the client tunnel interface, run the following command:</p>
-<pre><code class="language-txt">warp-cli settings | findstr &quot;NetBT&quot;&#10;</code></pre>
-<pre><code class="language-txt">(network policy) NetBT: true&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">warp-cli settings | findstr &quot;NetBT&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">(network policy) NetBT: true&#10;</code></pre>
 <p>You can also verify network interface details for the <code>CloudflareWARP</code> adapter:</p>
-<pre><code class="language-txt">ipconfig /all&#10;</code></pre>
-<pre><code class="language-txt">Windows IP Configuration&#10;...&#10;Unknown adapter CloudflareWARP:&#10;    Connection-specific DNS Suffix  . :&#10;    Description . . . . . . . . . . . : Cloudflare WARP Interface Tunnel&#10;    Physical Address. . . . . . . . . :&#10;    DHCP Enabled. . . . . . . . . . . : No&#10;    Autoconfiguration Enabled . . . . : Yes&#10;    IPv6 Address. . . . . . . . . . . : 2001:db8:110:8f79:145:f180:fc4:8106(Preferred)&#10;    Link-local IPv6 Address . . . . . : fe80::83b:d647:4bed:d388%49(Preferred)&#10;    IPv4 Address. . . . . . . . . . . : 172.16.0.2(Preferred)&#10;    Subnet Mask . . . . . . . . . . . : 255.255.255.255&#10;    Default Gateway . . . . . . . . . :&#10;    DNS Servers . . . . . . . . . . . : 127.0.2.2&#10;    																		127.0.2.3&#10;    NetBIOS over Tcpip. . . . . . . . : Enabled&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">ipconfig /all&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">Windows IP Configuration&#10;...&#10;Unknown adapter CloudflareWARP:&#10;    Connection-specific DNS Suffix  . :&#10;    Description . . . . . . . . . . . : Cloudflare WARP Interface Tunnel&#10;    Physical Address. . . . . . . . . :&#10;    DHCP Enabled. . . . . . . . . . . : No&#10;    Autoconfiguration Enabled . . . . : Yes&#10;    IPv6 Address. . . . . . . . . . . : 2001:db8:110:8f79:145:f180:fc4:8106(Preferred)&#10;    Link-local IPv6 Address . . . . . : fe80::83b:d647:4bed:d388%49(Preferred)&#10;    IPv4 Address. . . . . . . . . . . : 172.16.0.2(Preferred)&#10;    Subnet Mask . . . . . . . . . . . : 255.255.255.255&#10;    Default Gateway . . . . . . . . . :&#10;    DNS Servers . . . . . . . . . . . : 127.0.2.2&#10;    																		127.0.2.3&#10;    NetBIOS over Tcpip. . . . . . . . : Enabled&#10;</code></pre>
 <h3 id="vnet-availability">VNET availability <span class="nb-badge">Beta</span></h3>
 <details class="nb-details"><summary>Feature availability</summary><div class="nb-details-body">
 @input("content/.markup/bodies/6246.md")

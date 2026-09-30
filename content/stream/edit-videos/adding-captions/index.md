@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/stream/edit-videos/adding-captions/
+  description: Add captions and subtitles to Cloudflare Stream videos using AI generation or file upload.
+  full_title: Add captions · Cloudflare Stream docs
+  head_html: <title>Add captions · Cloudflare Stream docs</title><meta name="generator" content="Nift"><meta name="description" content="Add captions and subtitles to Cloudflare Stream videos using AI generation or file upload."><link rel="canonical" href="https://developers.cloudflare.com/stream/edit-videos/adding-captions/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/stream/edit-videos/adding-captions/index.md"><meta property="og:title" content="Add captions · Cloudflare Stream docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Add captions and subtitles to Cloudflare Stream videos using AI generation or file upload."><meta property="og:url" content="https://developers.cloudflare.com/stream/edit-videos/adding-captions/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Stream"><meta name="algolia_product_filter" content="Stream"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Stream"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/stream/edit-videos/adding-captions/#page","headline":"Add captions \u00b7 Cloudflare Stream docs","description":"Add captions and subtitles to Cloudflare Stream videos using AI generation or file upload.","url":"https://developers.cloudflare.com/stream/edit-videos/adding-captions/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /stream/edit-videos/adding-captions/
+  schema: 1
+---
 <p>Adding captions and subtitles to your video library.</p>
 <h2 id="add-or-modify-a-caption">Add or modify a caption</h2>
 <p>There are two ways to add captions to a video: generating via AI or uploading a
@@ -9,7 +20,7 @@ If the language you are adding is not included in the table, you can find the
 value through the <a href="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">The IANA registry</a>, which maintains a list of language codes. To find the
 value to send, search for the language. Below is an example value from IANA when
 we look for the value to send for a Turkish subtitle:</p>
-<pre><code class="language-bash">%%&#10;&#10;Subtag: tr&#10;Description: Turkish&#10;Added: 2005-10-16&#10;Suppress-Script: Latn&#10;%%&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">%%&#10;&#10;Subtag: tr&#10;Description: Turkish&#10;Added: 2005-10-16&#10;Suppress-Script: Latn&#10;%%&#10;</code></pre>
 <p>The <code>Subtag</code> code indicates a value of <code>tr</code>. This is the value you should send
 as the <code>language</code> at the end of the HTTP request.</p>
 <p>A label is generated from the provided language. The label will be visible for
@@ -50,7 +61,7 @@ that shows <code>British English</code> for the caption.</p>
 @input("content/.markup/bodies/14560.md")
 </div></div>
 <p>Example response:</p>
-<pre><code class="language-json">{&#10;  &quot;result&quot;: {&#10;    &quot;language&quot;: &quot;en&quot;,&#10;    &quot;label&quot;: &quot;English (auto-generated)&quot;,&#10;    &quot;generated&quot;: true,&#10;    &quot;status&quot;: &quot;inprogress&quot;&#10;  },&#10;  &quot;success&quot;: true,&#10;  &quot;errors&quot;: [],&#10;  &quot;messages&quot;: []&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;  &quot;result&quot;: {&#10;    &quot;language&quot;: &quot;en&quot;,&#10;    &quot;label&quot;: &quot;English (auto-generated)&quot;,&#10;    &quot;generated&quot;: true,&#10;    &quot;status&quot;: &quot;inprogress&quot;&#10;  },&#10;  &quot;success&quot;: true,&#10;  &quot;errors&quot;: [],&#10;  &quot;messages&quot;: []&#10;}&#10;</code></pre>
 <p>The result will provide a <code>status</code> denoting the progress of the caption generation.<br />
 There are three statuses: inprogress, ready, and error. Note that
 (auto-generated) is applied to the label.</p>
@@ -67,7 +78,7 @@ change to <code>false</code> and the (auto-generated) portion of the label will 
 @input("content/.markup/bodies/14569.md")
 </div></div>
 <h3 id="example-response-to-add-or-modify-a-caption">Example Response to Add or Modify a Caption</h3>
-<pre><code class="language-json">{&#10;  &quot;result&quot;: {&#10;    &quot;language&quot;: &quot;en&quot;,&#10;    &quot;label&quot;: &quot;English&quot;,&#10;    &quot;generated&quot;: false,&#10;    &quot;status&quot;: &quot;ready&quot;&#10;  },&#10;  &quot;success&quot;: true,&#10;  &quot;errors&quot;: [],&#10;  &quot;messages&quot;: []&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;  &quot;result&quot;: {&#10;    &quot;language&quot;: &quot;en&quot;,&#10;    &quot;label&quot;: &quot;English&quot;,&#10;    &quot;generated&quot;: false,&#10;    &quot;status&quot;: &quot;ready&quot;&#10;  },&#10;  &quot;success&quot;: true,&#10;  &quot;errors&quot;: [],&#10;  &quot;messages&quot;: []&#10;}&#10;</code></pre>
 <h2 id="list-the-captions-associated-with-a-video">List the captions associated with a video</h2>
 <p>To view captions associated with a video.
 Note this results list will also include generated captions that are <code>inprogress</code>
@@ -76,12 +87,12 @@ and <code>error</code> status:</p>
 @input("content/.markup/bodies/14578.md")
 </div></div>
 <h3 id="example-response-to-get-the-captions-associated-with-a-video">Example response to get the captions associated with a video</h3>
-<pre><code class="language-json">{&#10;  &quot;result&quot;: [&#10;    {&#10;      &quot;language&quot;: &quot;en&quot;,&#10;      &quot;label&quot;: &quot;English (auto-generated)&quot;,&#10;      &quot;generated&quot;: true,&#10;      &quot;status&quot;: &quot;inprogress&quot;&#10;    },&#10;    {&#10;      &quot;language&quot;: &quot;de&quot;,&#10;      &quot;label&quot;: &quot;Deutsch&quot;,&#10;      &quot;generated&quot;: false,&#10;      &quot;status&quot;: &quot;ready&quot;&#10;    }&#10;  ],&#10;  &quot;success&quot;: true,&#10;  &quot;errors&quot;: [],&#10;  &quot;messages&quot;: []&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;  &quot;result&quot;: [&#10;    {&#10;      &quot;language&quot;: &quot;en&quot;,&#10;      &quot;label&quot;: &quot;English (auto-generated)&quot;,&#10;      &quot;generated&quot;: true,&#10;      &quot;status&quot;: &quot;inprogress&quot;&#10;    },&#10;    {&#10;      &quot;language&quot;: &quot;de&quot;,&#10;      &quot;label&quot;: &quot;Deutsch&quot;,&#10;      &quot;generated&quot;: false,&#10;      &quot;status&quot;: &quot;ready&quot;&#10;    }&#10;  ],&#10;  &quot;success&quot;: true,&#10;  &quot;errors&quot;: [],&#10;  &quot;messages&quot;: []&#10;}&#10;</code></pre>
 <h2 id="fetch-a-caption-file">Fetch a caption file</h2>
 <p>To view the WebVTT caption file, you may make a GET request:</p>
-<pre><code class="language-bash">curl \&#10;&#45;H &#x27;Authorization: Bearer &lt;API_TOKEN&gt;&#x27; \&#10;https://api.cloudflare.com/client/v4/accounts/&lt;ACCOUNT_ID&gt;/stream/&lt;VIDEO_UID&gt;/captions/&lt;LANGUAGE_TAG&gt;/vtt&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl \&#10;&#45;H &#x27;Authorization: Bearer &lt;API_TOKEN&gt;&#x27; \&#10;https://api.cloudflare.com/client/v4/accounts/&lt;ACCOUNT_ID&gt;/stream/&lt;VIDEO_UID&gt;/captions/&lt;LANGUAGE_TAG&gt;/vtt&#10;</code></pre>
 <h3 id="example-response-to-get-the-caption-file-for-a-video">Example response to get the caption file for a video</h3>
-<pre><code class="language-text">WEBVTT&#10;&#10;1&#10;00:00:00.000 --&gt; 00:00:01.560&#10;This is an example of&#10;&#10;2&#10;00:00:01.560 --&gt; 00:00:03.880&#10;a WebVTT caption response.&#10;</code></pre>
+<pre tabindex="0"><code class="language-text">WEBVTT&#10;&#10;1&#10;00:00:00.000 --&gt; 00:00:01.560&#10;This is an example of&#10;&#10;2&#10;00:00:01.560 --&gt; 00:00:03.880&#10;a WebVTT caption response.&#10;</code></pre>
 <h2 id="delete-the-captions">Delete the captions</h2>
 <p>To remove a caption associated with your video:</p>
 <div class="nb-tabs" data-nb-tabs><div role="tablist" aria-label="Options" data-nb-tabs-list></div><div data-nb-tabs-panels>
@@ -90,7 +101,7 @@ and <code>error</code> status:</p>
 <p>If there is an entry in <code>errors</code> response field, the caption has not been
 deleted.</p>
 <h3 id="example-response-to-delete-the-caption">Example response to delete the caption</h3>
-<pre><code class="language-json">{&#10;  &quot;result&quot;: &quot;&quot;,&#10;  &quot;success&quot;: true,&#10;  &quot;errors&quot;: [],&#10;  &quot;messages&quot;: []&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;  &quot;result&quot;: &quot;&quot;,&#10;  &quot;success&quot;: true,&#10;  &quot;errors&quot;: [],&#10;  &quot;messages&quot;: []&#10;}&#10;</code></pre>
 <h2 id="limitations">Limitations</h2>
 <ul>
 <li>A video must be uploaded before a caption can be attached to it. In the following

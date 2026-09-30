@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/workers/observability/logs/workers-logs/
+  description: Store, filter, and analyze log data emitted from Cloudflare Workers.
+  full_title: Workers Logs · Cloudflare Workers docs
+  head_html: <title>Workers Logs · Cloudflare Workers docs</title><meta name="generator" content="Nift"><meta name="description" content="Store, filter, and analyze log data emitted from Cloudflare Workers."><link rel="canonical" href="https://developers.cloudflare.com/workers/observability/logs/workers-logs/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/workers/observability/logs/workers-logs/index.md"><meta property="og:title" content="Workers Logs · Cloudflare Workers docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Store, filter, and analyze log data emitted from Cloudflare Workers."><meta property="og:url" content="https://developers.cloudflare.com/workers/observability/logs/workers-logs/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Workers"><meta name="algolia_product_filter" content="Workers"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Workers"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/workers/observability/logs/workers-logs/#page","headline":"Workers Logs \u00b7 Cloudflare Workers docs","description":"Store, filter, and analyze log data emitted from Cloudflare Workers.","url":"https://developers.cloudflare.com/workers/observability/logs/workers-logs/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /workers/observability/logs/workers-logs/
+  schema: 1
+---
 <p>Workers Logs lets you automatically collect, store, filter, and analyze logging data emitted from Cloudflare Workers. Data is written to your Cloudflare Account, and you can query it in the dashboard for each of your Workers. All newly created Workers will come with the observability setting enabled by default.</p>
 <p>Logs include <a href="/workers/observability/logs/workers-logs/#invocation-logs">invocation logs</a>, <a href="/workers/observability/logs/workers-logs/#custom-logs">custom logs</a>, errors, and uncaught exceptions.</p>
 <p><img src="/assets/upstream/images/workers-observability/wobs_workers_events_122.png" alt="Example showing the Workers Logs Dashboard" /></p>
@@ -17,7 +28,7 @@
 <div class="nb-wrangler-config">
 @markup("md", "content/.markup/bodies/17030.md")
 </div>
-<pre><code>2. Deploy your Worker with `npx wrangler deploy -e staging`&#10;3. Repeat step 1 and 2 for each environment.&#10;</code></pre>
+<pre tabindex="0"><code>2. Deploy your Worker with `npx wrangler deploy -e staging`&#10;3. Repeat step 1 and 2 for each environment.&#10;</code></pre>
 <h2 id="view-logs-from-the-dashboard">View logs from the dashboard</h2>
 <p>Access logs for your Worker from the Cloudflare dashboard:</p>
 <ol>

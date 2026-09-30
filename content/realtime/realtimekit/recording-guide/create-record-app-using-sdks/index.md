@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/realtime/realtimekit/recording-guide/create-record-app-using-sdks/
+  description: Learn how to create a recording app using RealtimeKit's SDKs. Follow our guide for effective app creation and integration.
+  full_title: Create Custom Recording App Using Recording SDKs · Cloudflare Realtime docs
+  head_html: <title>Create Custom Recording App Using Recording SDKs · Cloudflare Realtime docs</title><meta name="generator" content="Nift"><meta name="description" content="Learn how to create a recording app using RealtimeKit&#x27;s SDKs. Follow our guide for effective app creation and integration."><link rel="canonical" href="https://developers.cloudflare.com/realtime/realtimekit/recording-guide/create-record-app-using-sdks/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/realtime/realtimekit/recording-guide/create-record-app-using-sdks/index.md"><meta property="og:title" content="Create Custom Recording App Using Recording SDKs · Cloudflare Realtime docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Learn how to create a recording app using RealtimeKit&#x27;s SDKs. Follow our guide for effective app creation and integration."><meta property="og:url" content="https://developers.cloudflare.com/realtime/realtimekit/recording-guide/create-record-app-using-sdks/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Realtime"><meta name="algolia_product_filter" content="Realtime"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_additional_products" content="Realtime"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/realtime/realtimekit/recording-guide/create-record-app-using-sdks/#page","headline":"Create Custom Recording App Using Recording SDKs \u00b7 Cloudflare Realtime docs","description":"Learn how to create a recording app using RealtimeKit's SDKs. Follow our guide for effective app creation and integration.","url":"https://developers.cloudflare.com/realtime/realtimekit/recording-guide/create-record-app-using-sdks/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /realtime/realtimekit/recording-guide/create-record-app-using-sdks/
+  schema: 1
+---
 <p>When you join a RealtimeKit meeting, the meeting layout is automatically designed to optimize your experience. This includes focusing on shared content and highlighting active speakers, while participants are shown in small thumbnail views. When you start recording the meeting, it is recorded with the same layout using the default UI kit component called <a href="https://docs.realtime.cloudflare.com/react-ui-kit/components/rtk-grid">RtkGrid</a>.</p>
 <p>If you wish to have a customized layout for your recording application, RealtimeKit's custom recording SDKs provide the flexibility to tailor the appearance of your recordings according to your preferences. You can choose from options like:</p>
 <ul>
@@ -12,9 +23,9 @@
 <p>When you call <a href="/api/resources/realtime_kit/subresources/recordings/methods/start_recordings/">Start Recording</a>, RealtimeKit launches a Cloudflare container, opens a Chrome browser inside it, and loads the recording app URL. If you do not provide a custom URL in the <a href="/api/resources/realtime_kit/subresources/recordings/methods/start_recordings/"><code>url</code> parameter</a>, RealtimeKit's internal recording app is used.</p>
 <h3 id="url-parameters">URL parameters</h3>
 <p>Before loading your custom recording app in the Chrome browser, RealtimeKit appends the <code>authToken</code> and <code>config</code> query parameters to the URL. For example, if you provide this URL in the <a href="/api/resources/realtime_kit/subresources/recordings/methods/start_recordings/">Start Recording</a> API:</p>
-<pre><code class="language-txt">https://example.com/my-custom-recorder&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://example.com/my-custom-recorder&#10;</code></pre>
 <p>RealtimeKit loads the app with the following parameters:</p>
-<pre><code class="language-txt">https://example.com/my-custom-recorder?authToken=AUTH_TOKEN_CREATED_BY_REALTIMEKIT&amp;config=CONFIG_CREATED_BY_REALTIMEKIT&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">https://example.com/my-custom-recorder?authToken=AUTH_TOKEN_CREATED_BY_REALTIMEKIT&amp;config=CONFIG_CREATED_BY_REALTIMEKIT&#10;</code></pre>
 <p>The placeholder values represent parameters supplied by RealtimeKit. Do not add <code>authToken</code> or <code>config</code> yourself to the URL submitted to the Start Recording API. Your app must read both parameters from the URL.</p>
 <h3 id="auth-token">Auth token</h3>
 <p>RealtimeKit generates the <code>authToken</code> automatically for the meeting whose recording you start. It generates this token with the <code>recorder_preset_v2</code> preset. If you have not created a <code>recorder_preset_v2</code> preset, RealtimeKit uses a global preset with the same name that is managed by RealtimeKit and is not visible in your account.</p>
@@ -29,7 +40,7 @@
 <p>Local testing lets you view the recording app UI. Opening the recording app URL directly on your local machine does not start a recording.</p>
 <p>For local testing only, create any preset with <code>hidden_participant: true</code>, then pass an auth token created with that preset in the <code>authToken</code> query parameter when you open the local recording app URL. This lets you see the look and feel of the recorder UI. Do not include a local testing token as the <code>authToken</code> in the URL submitted to the Start Recording API. In an actual recording, RealtimeKit generates and passes the recorder token automatically.</p>
 <p>To speed up development, use a <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/trycloudflare/">Cloudflare Tunnel</a> to expose your local recording app. For example, if your app is running on port <code>1111</code>, start a <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/trycloudflare/">Quick Tunnel</a> with:</p>
-<pre><code class="language-sh">cloudflared tunnel --url http://localhost:1111&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel --url http://localhost:1111&#10;</code></pre>
 <p>Replace <code>1111</code> with the port used by your local app. <code>cloudflared</code> prints a public <code>trycloudflare.com</code> URL. You can use this URL as the custom recording app URL when starting a recording, so the Cloudflare container can load your local app.</p>
 <p>You might see a WebSocket error in the browser console while testing locally because your browser cannot connect to <code>localhost:8080</code>. You can ignore this error during local testing. The recorder runs with this port inside the hosting Cloudflare container, and the WebSocket connection is how the recording app tells the container to record the rendered webpage.</p>
 <h3 id="examples">Examples</h3>
@@ -72,31 +83,31 @@
 </tbody>
 </table>
 <h3 id="methods">Methods</h3>
-<pre><code class="language-js">init(client: RealtimeKitClient)&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">init(client: RealtimeKitClient)&#10;</code></pre>
 <p>Initiates the SDK by providing a <code>RealtimeKitClient</code> object. Call this after creating the meeting object and before calling <code>meeting.joinRoom()</code>.</p>
-<pre><code class="language-js">startRecording();&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">startRecording();&#10;</code></pre>
 <p>In most cases, leave <code>autoStart</code> set to <code>true</code> (the default) so the recording starts automatically. To start the recording manually, set <code>autoStart</code> to <code>false</code> in the constructor options before calling this method.</p>
-<pre><code class="language-js">stopRecording();&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">stopRecording();&#10;</code></pre>
 <p>You usually do not need to call this method because <code>autoStop</code> defaults to <code>true</code>. To stop the recording manually, set <code>autoStop</code> to <code>false</code> in the constructor options before calling this method.</p>
-<pre><code class="language-js">cleanup();&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">cleanup();&#10;</code></pre>
 <p>Performs cleanup tasks after leaving the meeting, such as clearing added listeners and closing WebSocket connections.</p>
 <h2 id="create-a-custom-recording-app">Create a custom recording app</h2>
 <p>Perform the following steps to create the recording app for your RealtimeKit meetings.</p>
 <h3 id="step-1-install-the-sdk">Step 1: Install the SDK</h3>
-<pre><code class="language-js">npm i @cloudflare/realtimekit-recording-sdk&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">npm i @cloudflare/realtimekit-recording-sdk&#10;</code></pre>
 <h3 id="step-2-import-the-realtimekitrecording-object">Step 2: Import the <code>RealtimeKitRecording</code> object</h3>
-<pre><code class="language-js">import { RealtimeKitRecording } from &quot;@cloudflare/realtimekit-recording-sdk&quot;;&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">import { RealtimeKitRecording } from &quot;@cloudflare/realtimekit-recording-sdk&quot;;&#10;</code></pre>
 <h3 id="step-3-create-the-realtimekitrecording-object">Step 3: Create the <code>RealtimeKitRecording</code> object</h3>
-<pre><code class="language-js">const recordingSdk = new RealtimeKitRecording(options);&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">const recordingSdk = new RealtimeKitRecording(options);&#10;</code></pre>
 <h3 id="step-4-initialize-the-recording-sdk">Step 4: Initialize the recording SDK</h3>
 <p>Call <code>init</code> after creating the meeting object and before <code>joinRoom</code> is called.</p>
-<pre><code class="language-js">// Call this after you have initialized the RealtimeKit SDK and have the meeting object&#10;await recordingSdk.init(meeting);&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">// Call this after you have initialized the RealtimeKit SDK and have the meeting object&#10;await recordingSdk.init(meeting);&#10;</code></pre>
 <h3 id="optional-step-5-manually-start-the-recording">(Optional) Step 5: Manually start the recording</h3>
 <p>To manually start the recording, set <code>autoStart</code> to <code>false</code> in the <code>RealtimeKitRecording</code> constructor options. Then call <code>startRecording()</code> after you have loaded your UI content and are ready to begin recording.</p>
-<pre><code class="language-js">await recordingSdk.startRecording();&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">await recordingSdk.startRecording();&#10;</code></pre>
 <h3 id="optional-step-6-manually-stop-the-recording">(Optional) Step 6: Manually stop the recording</h3>
 <p>To manually stop the recording, set <code>autoStop</code> to <code>false</code> in the <code>RealtimeKitRecording</code> constructor options. Then call <code>stopRecording()</code> when you are ready to stop recording.</p>
-<pre><code class="language-js">await recordingSdk.stopRecording();&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">await recordingSdk.stopRecording();&#10;</code></pre>
 <p>Once <code>stopRecording</code> is called, the recorder in your recording app will exit after a few seconds. After this point, you won't be able to perform any further actions within your recording app.</p>
 <h3 id="step-7-deploy-the-recording-app">Step 7: Deploy the recording app</h3>
 <p>Once you've created the app, deploy it using a platform like <a href="https://cloudflare.com/workers">Cloudflare Workers</a>. Make sure to note the URL where you have deployed the app, as you will have to enter this URL in RealtimeKit's recording API.</p>

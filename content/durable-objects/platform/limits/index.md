@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/durable-objects/platform/limits/
+  description: Account, storage, CPU, and SQL limits for Durable Objects on Free and Workers Paid plans.
+  full_title: Limits · Cloudflare Durable Objects docs
+  head_html: <title>Limits · Cloudflare Durable Objects docs</title><meta name="generator" content="Nift"><meta name="description" content="Account, storage, CPU, and SQL limits for Durable Objects on Free and Workers Paid plans."><link rel="canonical" href="https://developers.cloudflare.com/durable-objects/platform/limits/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/durable-objects/platform/limits/index.md"><meta property="og:title" content="Limits · Cloudflare Durable Objects docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Account, storage, CPU, and SQL limits for Durable Objects on Free and Workers Paid plans."><meta property="og:url" content="https://developers.cloudflare.com/durable-objects/platform/limits/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Durable Objects"><meta name="algolia_product_filter" content="Durable Objects"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Durable Objects"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/durable-objects/platform/limits/#page","headline":"Limits \u00b7 Cloudflare Durable Objects docs","description":"Account, storage, CPU, and SQL limits for Durable Objects on Free and Workers Paid plans.","url":"https://developers.cloudflare.com/durable-objects/platform/limits/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /durable-objects/platform/limits/
+  schema: 1
+---
 <p>Durable Objects are a special kind of Worker, so <a href="/workers/platform/limits/">Workers Limits</a> apply according to your Workers plan. In addition, Durable Objects have specific limits as listed in this page.</p>
 <h2 id="sqlite-backed-durable-objects-general-limits">SQLite-backed Durable Objects general limits</h2>
 <table>
@@ -160,13 +171,11 @@
 <h3 id="how-many-durable-objects-can-i-create">How many Durable Objects can I create?</h3>
 <p>Durable Objects are designed such that the number of individual objects in the system do not need to be limited, and can scale horizontally.</p>
 <ul>
-<li>You can create and run as many separate Durable Objects as you want within a given Durable Object <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></li>
+<li>You can create and run as many separate Durable Objects as you want within a given Durable Object <span class="nb-glossary-tooltip" title="namespace">namespace</span>.</li>
+<li>There are no limits for storage per account when using SQLite-backed Durable Objects on a Workers Paid plan.</li>
+<li>Each SQLite-backed Durable Object has a storage limit of 10 GB on a Workers Paid plan.</li>
+<li>Refer to <a href="/durable-objects/platform/limits/">Durable Object limits</a> for more information.</li>
 </ul>
-@markup("md", "content/.markup/bodies/8165.md")
-</div>.
-- There are no limits for storage per account when using SQLite-backed Durable Objects on a Workers Paid plan.
-- Each SQLite-backed Durable Object has a storage limit of 10 GB on a Workers Paid plan.
-- Refer to [Durable Object limits](/durable-objects/platform/limits/) for more information.
 <h3 id="can-i-increase-durable-objects-cpu-limit">Can I increase Durable Objects' CPU limit?</h3>
 <p>Durable Objects are Worker scripts, and have the same <a href="/workers/platform/limits/#account-plan-limits">per invocation CPU limits</a> as any Workers do. Note that CPU time is active processing time: not time spent waiting on network requests, storage calls, or other general I/O, which don't count towards your CPU time or Durable Objects compute consumption.</p>
 <p>By default, the maximum CPU time per Durable Objects invocation (HTTP request, WebSocket message, or Alarm) is set to 30 seconds, but can be increased for all Durable Objects associated with a Durable Object definition by setting <code>limits.cpu_ms</code> in your Wrangler configuration:</p>
@@ -175,10 +184,10 @@
 </div>
 <h3 id="what-happens-when-a-durable-object-exceeds-its-storage-limit">What happens when a Durable Object exceeds its storage limit?</h3>
 <p>When a SQLite-backed Durable Object reaches its <a href="/durable-objects/platform/limits/">maximum storage limit</a> (10 GB on Workers Paid, or 1 GB on the Free plan), write operations (such as <code>INSERT</code>, <code>UPDATE</code>, or calls to the <code>put()</code> and <code>sql.exec()</code> storage APIs) will fail with the following error:</p>
-<pre><code class="language-txt">database or disk is full: SQLITE_FULL&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">database or disk is full: SQLITE_FULL&#10;</code></pre>
 <p>Read operations (such as <code>SELECT</code> queries, <code>get()</code>, and <code>list()</code> calls) will continue to work, and <code>DELETE</code> operations will also succeed so that you can remove data to free up space.</p>
 <p>To handle this error in your Durable Object, catch the exception thrown by the storage API:</p>
-<pre><code class="language-ts">try {&#10;	this.ctx.storage.sql.exec(&#10;		&quot;INSERT INTO my_table (key, value) VALUES (?, ?)&quot;,&#10;		key,&#10;		value,&#10;	);&#10;} catch (e) {&#10;	if (e.message.includes(&quot;SQLITE_FULL&quot;)) {&#10;		// Storage limit reached — reads and deletes still work&#10;		// Consider deleting old data or returning a meaningful error to the caller&#10;	}&#10;	throw e;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">try {&#10;	this.ctx.storage.sql.exec(&#10;		&quot;INSERT INTO my_table (key, value) VALUES (?, ?)&quot;,&#10;		key,&#10;		value,&#10;	);&#10;} catch (e) {&#10;	if (e.message.includes(&quot;SQLITE_FULL&quot;)) {&#10;		// Storage limit reached — reads and deletes still work&#10;		// Consider deleting old data or returning a meaningful error to the caller&#10;	}&#10;	throw e;&#10;}&#10;</code></pre>
 <h2 id="wall-time-limits-by-invocation-type">Wall time limits by invocation type</h2>
 <p>Wall time (also called wall-clock time) is the total elapsed time from the start to end of an invocation, including time spent waiting on network requests, I/O, and other asynchronous operations. This is distinct from <a href="/workers/platform/limits/#cpu-time">CPU time</a>, which only measures time the CPU spends actively executing your code.</p>
 <p>The following table summarizes the wall time limits for different types of Worker invocations across the developer platform:</p>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/local-management/create-local-tunnel/
+  description: Create a locally-managed tunnel in Zero Trust networking.
+  full_title: Create a locally-managed tunnel · Cloudflare One docs
+  head_html: <title>Create a locally-managed tunnel · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="Create a locally-managed tunnel in Zero Trust networking."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/local-management/create-local-tunnel/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/local-management/create-local-tunnel/index.md"><meta property="og:title" content="Create a locally-managed tunnel · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Create a locally-managed tunnel in Zero Trust networking."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/local-management/create-local-tunnel/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Cloudflare One"><meta name="pcx_tags" content="CLI"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/local-management/create-local-tunnel/#page","headline":"Create a locally-managed tunnel \u00b7 Cloudflare One docs","description":"Create a locally-managed tunnel in Zero Trust networking.","url":"https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/local-management/create-local-tunnel/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["CLI"]}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/local-management/create-local-tunnel/
+  schema: 1
+---
 <p>Follow this step-by-step guide to get your first tunnel up and running using the CLI.</p>
 <aside class="nb-aside tip">
 @markup("md", "content/.markup/bodies/5381.md")
@@ -17,7 +28,7 @@
 <h2 id="2-authenticate-cloudflared"><ol start="2">
 <li>Authenticate <code>cloudflared</code></li>
 </ol></h2>
-<pre><code class="language-sh">cloudflared tunnel login&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel login&#10;</code></pre>
 <p>Running this command will:</p>
 <ul>
 <li>Open a browser window and prompt you to log in to your Cloudflare account. After logging in to your account, select your hostname.</li>
@@ -26,7 +37,7 @@
 <h2 id="3-create-a-tunnel-and-give-it-a-name"><ol start="3">
 <li>Create a tunnel and give it a name</li>
 </ol></h2>
-<pre><code class="language-sh">cloudflared tunnel create &lt;NAME&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel create &lt;NAME&gt;&#10;</code></pre>
 <p>Running this command will:</p>
 <ul>
 <li>Create a tunnel by establishing a persistent relationship between the name you provide and a UUID for your tunnel. At this point, no connection is active within the tunnel yet.</li>
@@ -35,7 +46,7 @@
 </ul>
 <p>From the output of the command, take note of the tunnel's UUID and the path to your tunnel's credentials file.</p>
 <p>Confirm that the tunnel has been successfully created by running:</p>
-<pre><code class="language-sh">cloudflared tunnel list&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel list&#10;</code></pre>
 <h2 id="4-create-a-configuration-file"><ol start="4">
 <li>Create a configuration file</li>
 </ol></h2>
@@ -48,31 +59,31 @@
 <p>If you are connecting a <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/routing-to-tunnel/">published application</a>:</p>
 </li>
 </ol>
-<pre><code class="language-yml">url: http://localhost:8000&#10;tunnel: &lt;Tunnel-UUID&gt;&#10;credentials-file: /root/.cloudflared/&lt;Tunnel-UUID&gt;.json&#10;</code></pre>
-<pre><code>If you are connecting a &lt;a href=&quot;/cloudflare-one/networks/connectors/cloudflare-tunnel/private-net/&quot;&gt;private network&lt;/a&gt;:&#10;&#10;&lt;pre&gt;&lt;code class=&quot;language-yml&quot;&gt;`tunnel: &lt;Tunnel-UUID&gt;\ncredentials-file: /root/.cloudflared/&lt;Tunnel-UUID&gt;.json\nwarp-routing:\n  enabled: true`&lt;/code&gt;&lt;/pre&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-yml">url: http://localhost:8000&#10;tunnel: &lt;Tunnel-UUID&gt;&#10;credentials-file: /root/.cloudflared/&lt;Tunnel-UUID&gt;.json&#10;</code></pre>
+<pre tabindex="0"><code>If you are connecting a &lt;a href=&quot;/cloudflare-one/networks/connectors/cloudflare-tunnel/private-net/&quot;&gt;private network&lt;/a&gt;:&#10;&#10;&lt;pre&gt;&lt;code class=&quot;language-yml&quot;&gt;`tunnel: &lt;Tunnel-UUID&gt;\ncredentials-file: /root/.cloudflared/&lt;Tunnel-UUID&gt;.json\nwarp-routing:\n  enabled: true`&lt;/code&gt;&lt;/pre&gt;&#10;</code></pre>
 <ol start="3">
 <li>Confirm that the configuration file has been successfully created by running:</li>
 </ol>
-<pre><code class="language-sh">cat config.yml&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cat config.yml&#10;</code></pre>
 <h2 id="5-start-routing-traffic"><ol start="5">
 <li>Start routing traffic</li>
 </ol></h2>
 <ol>
 <li>To route a <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/routing-to-tunnel/">published application</a> through the tunnel:</li>
 </ol>
-<pre><code class="language-sh">cloudflared tunnel route dns &lt;UUID or NAME&gt; &lt;hostname&gt;&#10;</code></pre>
-<pre><code> This command will create a `CNAME` record pointing to `&lt;UUID&gt;.cfargotunnel.com`.&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel route dns &lt;UUID or NAME&gt; &lt;hostname&gt;&#10;</code></pre>
+<pre tabindex="0"><code> This command will create a `CNAME` record pointing to `&lt;UUID&gt;.cfargotunnel.com`.&#10;</code></pre>
 <p>2. If you are connecting a private network, route a private IP address or CIDR through the tunnel:</p>
-<pre><code class="language-sh">cloudflared tunnel route ip add &lt;IP/CIDR&gt; &lt;UUID or NAME&gt;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel route ip add &lt;IP/CIDR&gt; &lt;UUID or NAME&gt;</code></pre>
 <p>3. Confirm that the route has been successfully established:</p>
-<pre><code class="language-sh">cloudflared tunnel route ip show</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel route ip show</code></pre>
 <h2 id="6-run-the-tunnel"><ol start="6">
 <li>Run the tunnel</li>
 </ol></h2>
 <p>Run the tunnel to proxy incoming traffic from the tunnel to any number of services running locally on your origin.</p>
-<pre><code class="language-sh">cloudflared tunnel run &lt;UUID or NAME&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel run &lt;UUID or NAME&gt;&#10;</code></pre>
 <p>If your configuration file has a custom name or is not in the <code>.cloudflared</code> directory, add the <code>--config</code> flag and specify the path.</p>
-<pre><code class="language-sh">cloudflared tunnel --config /path/your-config-file.yml run &lt;UUID or NAME&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel --config /path/your-config-file.yml run &lt;UUID or NAME&gt;&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/5380.md")
 </aside>
@@ -80,4 +91,4 @@
 <li>Check the tunnel</li>
 </ol></h2>
 <p>To get information on the tunnel you just created, run:</p>
-<pre><code class="language-sh">cloudflared tunnel info &lt;UUID or NAME&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cloudflared tunnel info &lt;UUID or NAME&gt;&#10;</code></pre>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/workers/runtime-apis/cache/
+  description: Control reading and writing from the Cloudflare global network cache.
+  full_title: Cache · Cloudflare Workers docs
+  head_html: <title>Cache · Cloudflare Workers docs</title><meta name="generator" content="Nift"><meta name="description" content="Control reading and writing from the Cloudflare global network cache."><link rel="canonical" href="https://developers.cloudflare.com/workers/runtime-apis/cache/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/workers/runtime-apis/cache/index.md"><meta property="og:title" content="Cache · Cloudflare Workers docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Control reading and writing from the Cloudflare global network cache."><meta property="og:url" content="https://developers.cloudflare.com/workers/runtime-apis/cache/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Workers"><meta name="algolia_product_filter" content="Workers"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Configuration"><meta name="algolia_content_type" content="Configuration"><meta name="pcx_additional_products" content="Workers"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/workers/runtime-apis/cache/#page","headline":"Cache \u00b7 Cloudflare Workers docs","description":"Control reading and writing from the Cloudflare global network cache.","url":"https://developers.cloudflare.com/workers/runtime-apis/cache/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /workers/runtime-apis/cache/
+  schema: 1
+---
 <h2 id="background">Background</h2>
 <p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/Cache">Cache API</a> allows fine grained control of reading and writing from the <a href="https://www.cloudflare.com/network/">Cloudflare global network</a> cache.</p>
 <aside class="nb-aside note">
@@ -16,9 +27,9 @@
 <hr />
 <h2 id="accessing-cache">Accessing Cache</h2>
 <p>The <code>caches.default</code> API is strongly influenced by the web browsers’ Cache API, but there are some important differences. For instance, Cloudflare Workers runtime exposes a single global cache object.</p>
-<pre><code class="language-js">let cache = caches.default;&#10;await cache.match(request);&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">let cache = caches.default;&#10;await cache.match(request);&#10;</code></pre>
 <p>You may create and manage additional Cache instances via the <a href="https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/open"><code>caches.open</code></a> method.</p>
-<pre><code class="language-js">let myCache = await caches.open(&#x27;custom:cache&#x27;);&#10;await myCache.match(request);&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">let myCache = await caches.open(&#x27;custom:cache&#x27;);&#10;await myCache.match(request);&#10;</code></pre>
 <hr />
 <h2 id="headers">Headers</h2>
 <p>Our implementation of the Cache API respects the following HTTP headers on the response passed to <code>put()</code>:</p>
@@ -56,7 +67,7 @@
 <hr />
 <h2 id="methods">Methods</h2>
 <h3 id="put"><code>Put</code></h3>
-<pre><code class="language-js">cache.put(request, response);&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">cache.put(request, response);&#10;</code></pre>
 <ul>
 <li>
 <p><code>put(request, response)</code> : Promise</p>
@@ -96,7 +107,7 @@
 @markup("md", "content/.markup/bodies/16165.md")
 </aside>
 <h3 id="match"><code>Match</code></h3>
-<pre><code class="language-js">cache.match(request, options);&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">cache.match(request, options);&#10;</code></pre>
 <ul>
 <li>
 <p><code>match(request, options)</code> : Promise<code>&lt;Response | undefined&gt;</code></p>
@@ -152,7 +163,7 @@
 <p><code>cache.match</code> generates a <code>504</code> error response when the requested content is missing or expired. The Cache API does not expose this <code>504</code> directly to the Worker script, instead returning <code>undefined</code>. Nevertheless, the underlying <code>504</code> is still visible in Cloudflare Logs.</p>
 <p>If you use Cloudflare Logs, you may see these <code>504</code> responses with the <code>RequestSource</code> of <code>edgeWorkerCacheAPI</code>. Again, these are expected if the cached asset was missing or expired. Note that <code>edgeWorkerCacheAPI</code> requests are already filtered out in other views, such as Cache Analytics. To filter out these requests or to filter requests by end users of your website only, refer to <a href="/analytics/graphql-api/features/filtering/#filter-end-users">Filter end users</a>.</p>
 <h3 id="delete"><code>Delete</code></h3>
-<pre><code class="language-js">cache.delete(request, options);&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">cache.delete(request, options);&#10;</code></pre>
 <ul>
 <li><code>delete(request, options)</code> : Promise<code>&lt;boolean&gt;</code></li>
 </ul>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/email-security/reference/dispositions-and-attributes/
+  description: Email security dispositions classify messages as malicious, suspicious, spam, or other categories for policy actions.
+  full_title: Dispositions and attributes · Cloudflare Email security (formerly Area 1) docs
+  head_html: <title>Dispositions and attributes · Cloudflare Email security (formerly Area 1) docs</title><meta name="generator" content="Nift"><meta name="description" content="Email security dispositions classify messages as malicious, suspicious, spam, or other categories for policy actions."><meta name="robots" content="noindex"><link rel="canonical" href="https://developers.cloudflare.com/email-security/reference/dispositions-and-attributes/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/email-security/reference/dispositions-and-attributes/index.md"><meta property="og:title" content="Dispositions and attributes · Cloudflare Email security (formerly Area 1) docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Email security dispositions classify messages as malicious, suspicious, spam, or other categories for policy actions."><meta property="og:url" content="https://developers.cloudflare.com/email-security/reference/dispositions-and-attributes/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Email security (formerly Area 1)"><meta name="algolia_product_filter" content="Email security (formerly Area 1)"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Email security (formerly Area 1)">
+  markdown: true
+  noindex: true
+  route: /email-security/reference/dispositions-and-attributes/
+  schema: 1
+---
 <aside class="nb-aside note">
 <h3 class="nb-aside-title" id="area-1-has-been-renamed">Area 1 has been renamed</h3>
 @markup("md", "content/.markup/bodies/8470.md")
@@ -6,9 +17,7 @@
 <h3 class="nb-aside-title" id="access-to-area-1">Access to Area 1</h3>
 @markup("md", "content/.markup/bodies/8469.md")
 </aside>
-<p>Email security uses a variety of factors to determine whether a given email message, domain, URL, or packet is part of a <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/8471.md")
-</div> campaign. These small pattern assessments are dynamic in nature and — in many cases — no single pattern will determine the final verdict.
+<p>Email security uses a variety of factors to determine whether a given email message, domain, URL, or packet is part of a <span class="nb-glossary-tooltip" title="phishing">phishing</span> campaign. These small pattern assessments are dynamic in nature and — in many cases — no single pattern will determine the final verdict.</p>
 <p>Based on these patterns, Email security may add <code>X-Headers</code> to each email message that passes through our system.</p>
 <h2 id="dispositions">Dispositions</h2>
 <p>Any traffic that flows through Email security is given a final disposition, which represents our evaluation of that specific message. Each message will only receive one disposition header so your organization can take clear and specific actions on different message types.</p>
@@ -52,9 +61,9 @@
 </table>
 <h3 id="header-structure">Header structure</h3>
 <p>When Email security adds a disposition header to an email message, that header matches the following format:</p>
-<pre><code class="language-txt">X-Area1Security-Disposition: [Value]&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">X-Area1Security-Disposition: [Value]&#10;</code></pre>
 <p>Note that emails with a disposition of <code>SPAM</code> will be tagged with <code>UCE</code> (unsolicited commercial emails) in their headers:</p>
-<pre><code class="language-txt">X-Area1Security-Disposition: UCE&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">X-Area1Security-Disposition: UCE&#10;</code></pre>
 <h2 id="attributes">Attributes</h2>
 <p>Traffic that flows through Email security can also receive one or more <strong>Attributes</strong>, which indicate that a specific condition has been met.</p>
 <h3 id="available-values-1">Available values</h3>
@@ -94,4 +103,4 @@
 </table>
 <h3 id="header-structure-1">Header structure</h3>
 <p>When Email security adds a disposition header to an email message, that header matches the following format.</p>
-<pre><code class="language-txt">X-Area1Security-Attribute: [Value]&#10;X-Area1Security-Attribute: [Value2]&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">X-Area1Security-Attribute: [Value]&#10;X-Area1Security-Attribute: [Value2]&#10;</code></pre>

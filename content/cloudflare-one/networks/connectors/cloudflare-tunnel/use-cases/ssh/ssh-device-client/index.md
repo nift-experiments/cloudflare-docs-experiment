@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/ssh/ssh-device-client/
+  description: Connect with self-managed SSH keys in Zero Trust networking.
+  full_title: Connect with self-managed SSH keys · Cloudflare One docs
+  head_html: <title>Connect with self-managed SSH keys · Cloudflare One docs</title><meta name="generator" content="Nift"><meta name="description" content="Connect with self-managed SSH keys in Zero Trust networking."><link rel="canonical" href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/ssh/ssh-device-client/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/ssh/ssh-device-client/index.md"><meta property="og:title" content="Connect with self-managed SSH keys · Cloudflare One docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Connect with self-managed SSH keys in Zero Trust networking."><meta property="og:url" content="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/ssh/ssh-device-client/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare One"><meta name="algolia_product_filter" content="Cloudflare One"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Cloudflare One"><meta name="pcx_tags" content="SSH"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/ssh/ssh-device-client/#page","headline":"Connect with self-managed SSH keys \u00b7 Cloudflare One docs","description":"Connect with self-managed SSH keys in Zero Trust networking.","url":"https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/ssh/ssh-device-client/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["SSH"]}</script>
+  markdown: true
+  noindex: false
+  route: /cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/ssh/ssh-device-client/
+  schema: 1
+---
 <p>If you want to manage your own SSH keys, you can use Cloudflare Tunnel to create a secure, outbound-only connection from your server to Cloudflare's global network. This requires running the <code>cloudflared</code> daemon on the server (or any other host machine within the private network). Users with SSH keys that are trusted by the SSH server can access the server by installing the <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/">Cloudflare One Client</a> on their device and enrolling in your Zero Trust organization. Users can SSH directly to the server's private hostname (for example, <code>ssh.internal.local</code>). You control access to the server using network-level Gateway policies instead of application-level Access policies.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/5473.md")
@@ -17,7 +28,7 @@
 <ol>
 <li>Open a terminal and type the following command:</li>
 </ol>
-<pre><code class="language-sh">ssh-keygen -t rsa -f ~/.ssh/gcp_ssh -C &lt;username in GCP&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">ssh-keygen -t rsa -f ~/.ssh/gcp_ssh -C &lt;username in GCP&gt;&#10;</code></pre>
 <ol start="2">
 <li>
 <p>Enter your passphrase when prompted. It will need to be entered twice.</p>
@@ -27,7 +38,7 @@
 <p>In the command line, enter:</p>
 </li>
 </ol>
-<pre><code class="language-sh">cat ~/.ssh/gcp_ssh.pub&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cat ~/.ssh/gcp_ssh.pub&#10;</code></pre>
 <ol start="4">
 <li>Copy the output. This will be used when creating the VM instance in GCP.</li>
 </ol>
@@ -109,7 +120,7 @@
 </li>
 </ol>
 <div class="nb-dash-button"></div>
-<pre><code>2. Select **Add CIDR route**.&#10;3. Enter the private IP address of your internal DNS resolver.&#10;4. Select the Cloudflare Tunnel that connects to the network where this DNS server resides.&#10;5. Select **Create**.&#10;</code></pre>
+<pre tabindex="0"><code>2. Select **Add CIDR route**.&#10;3. Enter the private IP address of your internal DNS resolver.&#10;4. Select the Cloudflare Tunnel that connects to the network where this DNS server resides.&#10;5. Select **Create**.&#10;</code></pre>
 <ol start="2">
 <li>To create a resolver policy:
 <ol>
@@ -156,9 +167,7 @@
 <li>DNS queries for your private hostname</li>
 </ul>
 <h4 id="3-3-1-configure-split-tunnels">3.3.1 Configure Split Tunnels</h4>
-<p>In your WARP <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/device-profiles/">device profile</a>, configure <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/route-traffic/split-tunnels/">Split Tunnels</a> such that the <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/5478.md")
-</div> route through the WARP tunnel.  Configuration depends on your [Split Tunnels mode](/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/route-traffic/split-tunnels/#change-split-tunnels-mode):
+<p>In your WARP <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/device-profiles/">device profile</a>, configure <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/route-traffic/split-tunnels/">Split Tunnels</a> such that the <span class="nb-glossary-tooltip" title="initial resolved IP">initial resolved IPs</span> route through the WARP tunnel.  Configuration depends on your <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/route-traffic/split-tunnels/#change-split-tunnels-mode">Split Tunnels mode</a>:</p>
 <ul>
 <li>
 <p><strong>Exclude mode</strong>: Delete <code>100.64.0.0/10</code> from your Split Tunnels list. We recommend <a href="/cloudflare-one/networks/routes/reserved-ips/#split-tunnel-configuration">adding back the IP ranges</a> that are not explicitly used for Cloudflare One services. This reduces the risk of conflicts with existing private network configurations that may use the CGNAT address space.</p>
@@ -278,18 +287,16 @@ routes through the Cloudflare One Client.</p>
 <li>Connect as a user</li>
 </ol></h2>
 <p>Once you have set up the tunnel route and the user device, the user can now SSH into the machine. If your SSH server requires an SSH key, the key should be included in the SSH command.</p>
-<pre><code class="language-sh">ssh -i ~/.ssh/gcp_ssh &lt;username&gt;@ssh.internal.local&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">ssh -i ~/.ssh/gcp_ssh &lt;username&gt;@ssh.internal.local&#10;</code></pre>
 <p>The Cloudflare One Client must be connected to your Zero Trust organization. Users will be able to connect if they match the Gateway network policies you created.</p>
 <h3 id="troubleshooting">Troubleshooting</h3>
 <p>If you cannot connect, verify the following:</p>
 <ol>
 <li><strong>Confirm DNS resolution</strong> - From the device, confirm that you can successfully resolve the private hostname:</li>
 </ol>
-<pre><code class="language-sh">nslookup ssh.internal.local&#10;</code></pre>
-<pre><code class="language-sh">Server:		127.0.2.2&#10;Address:	127.0.2.2#53&#10;&#10;Non-authoritative answer:&#10;Name:	ssh.internal.local&#10;Address: 172.64.128.48&#10;</code></pre>
-<p>The query should resolve using <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/route-traffic/client-architecture/#dns-traffic">WARP's DNS proxy</a> and return a Gateway <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/5486.md")
-</div>. If the query fails to resolve or returns a different IP, check your [Local Domain Fallback](/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/route-traffic/local-domains/) configuration and [Gateway resolver policies](/cloudflare-one/traffic-policies/resolver-policies/).
+<pre tabindex="0"><code class="language-sh">nslookup ssh.internal.local&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">Server:		127.0.2.2&#10;Address:	127.0.2.2#53&#10;&#10;Non-authoritative answer:&#10;Name:	ssh.internal.local&#10;Address: 172.64.128.48&#10;</code></pre>
+<p>The query should resolve using <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/route-traffic/client-architecture/#dns-traffic">WARP's DNS proxy</a> and return a Gateway <span class="nb-glossary-tooltip" title="initial resolved IP">initial resolved IP</span>. If the query fails to resolve or returns a different IP, check your <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/route-traffic/local-domains/">Local Domain Fallback</a> configuration and <a href="/cloudflare-one/traffic-policies/resolver-policies/">Gateway resolver policies</a>.</p>
 <ol start="2">
 <li>
 <p><strong>Check Gateway logs</strong> - Review your <a href="/cloudflare-one/insights/logs/dashboard-logs/gateway-logs/">Gateway network logs</a> to see if the connection is being blocked by a policy.</p>
@@ -298,11 +305,9 @@ routes through the Cloudflare One Client.</p>
 <p><strong>Verify tunnel status</strong> - Confirm that your tunnel is healthy and connected by checking <a href="/cloudflare-one/networks/connectors/cloudflare-tunnel/monitor-tunnels/">tunnel status</a>.</p>
 </li>
 <li>
-<p><strong>Test connectivity to initial resolved IP</strong> - When you connect to the SSH server using its private hostname, the device should make a connection to the <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
+<p><strong>Test connectivity to initial resolved IP</strong> - When you connect to the SSH server using its private hostname, the device should make a connection to the <span class="nb-glossary-tooltip" title="initial resolved IP">initial resolved IP</span>:</p>
 </li>
 </ol>
-@markup("md", "content/.markup/bodies/5487.md")
-</div>:
-<pre><code class="language-sh">ssh -v &lt;username&gt;@ssh.internal.local&#10;</code></pre>
-<pre><code class="language-sh">...&#10;Authenticated to ssh.internal.local ([172.64.128.48]:22) using &quot;publickey&quot;.&#10;...&#10;</code></pre>
-<pre><code>	Look for a line showing connection to an IP in your account's [initial resolved IP range](/cloudflare-one/networks/routes/reserved-ips/#gateway-initial-resolved-ips). If the request fails, confirm that the initial resolved IP [routes through the WARP tunnel](/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/route-traffic/split-tunnels/). You can also check your [tunnel logs](/cloudflare-one/networks/connectors/cloudflare-tunnel/monitor-tunnels/logs/) to confirm that requests are routing to the server's private IP.&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">ssh -v &lt;username&gt;@ssh.internal.local&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">...&#10;Authenticated to ssh.internal.local ([172.64.128.48]:22) using &quot;publickey&quot;.&#10;...&#10;</code></pre>
+<pre tabindex="0"><code>	Look for a line showing connection to an IP in your account's [initial resolved IP range](/cloudflare-one/networks/routes/reserved-ips/#gateway-initial-resolved-ips). If the request fails, confirm that the initial resolved IP [routes through the WARP tunnel](/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/route-traffic/split-tunnels/). You can also check your [tunnel logs](/cloudflare-one/networks/connectors/cloudflare-tunnel/monitor-tunnels/logs/) to confirm that requests are routing to the server's private IP.&#10;</code></pre>

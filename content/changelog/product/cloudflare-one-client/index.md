@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/changelog/product/cloudflare-one-client/
+  description: '2026-09-10'
+  full_title: cloudflare-one-client changelog | Cloudflare Docs
+  head_html: <title>cloudflare-one-client changelog | Cloudflare Docs</title><meta name="generator" content="Nift"><meta name="description" content="2026-09-10"><link rel="canonical" href="https://developers.cloudflare.com/changelog/product/cloudflare-one-client/"><link rel="sitemap" href="/sitemap-index.xml"><meta property="og:title" content="cloudflare-one-client changelog"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="2026-09-10"><meta property="og:url" content="https://developers.cloudflare.com/changelog/product/cloudflare-one-client/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/changelog/product/cloudflare-one-client/#page","headline":"cloudflare-one-client changelog | Cloudflare Docs","description":"2026-09-10","url":"https://developers.cloudflare.com/changelog/product/cloudflare-one-client/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: false
+  noindex: false
+  route: /changelog/product/cloudflare-one-client/
+  schema: 1
+---
 <h1 id="changelog">Changelog</h1>
 
 <h2 id="cloudflare-one-client-for-macos-version-2026-8-1290-1"><a href="/changelog/post/2026-09-09-warp-macos-beta/">Cloudflare One Client for macOS (version 2026.8.1290.1)</a></h2>
@@ -229,7 +240,7 @@ For Consumer documentation please see: <a href="https://developers.cloudflare.co
 <p>A new GA release for the Linux Cloudflare One Client is now available on the <a href="/cloudflare-one/team-and-resources/devices/cloudflare-one-client/download/">stable releases downloads page</a>.</p>
 <p>This package is the same release as 2026.6.822.0, with a fix for our RPM package. Previously the repository served a single build to every OS version, so an install could pull a dependency that isn't available on that release. The repository now serves the correct build for each operating system version, so installs automatically pull the dependencies that version requires. Debian and Ubuntu were not affected.</p>
 <p>If you installed version 2026.6.822.0 on an RPM-based distribution, we recommend refreshing your repository configuration:</p>
-<pre><code class="language-bash">sudo curl -fsSL https://pkg.cloudflareclient.com/cloudflare-warp-ascii.repo | sudo tee /etc/yum.repos.d/cloudflare-warp.repo&#10;sudo dnf clean all&#10;sudo dnf install cloudflare-warp&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">sudo curl -fsSL https://pkg.cloudflareclient.com/cloudflare-warp-ascii.repo | sudo tee /etc/yum.repos.d/cloudflare-warp.repo&#10;sudo dnf clean all&#10;sudo dnf install cloudflare-warp&#10;</code></pre>
 
 
 <h2 id="cloudflare-one-client-for-linux-version-2026-6-822-0"><a href="/changelog/post/2026-06-29-warp-linux-ga/">Cloudflare One Client for Linux (version 2026.6.822.0)</a></h2>

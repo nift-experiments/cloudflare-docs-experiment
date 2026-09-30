@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/ai-search/api/instances/workers-binding/
+  description: Manage AI Search instances from a Cloudflare Worker using the Instances Workers binding.
+  full_title: Workers binding · Cloudflare AI Search docs
+  head_html: <title>Workers binding · Cloudflare AI Search docs</title><meta name="generator" content="Nift"><meta name="description" content="Manage AI Search instances from a Cloudflare Worker using the Instances Workers binding."><link rel="canonical" href="https://developers.cloudflare.com/ai-search/api/instances/workers-binding/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/ai-search/api/instances/workers-binding/index.md"><meta property="og:title" content="Workers binding · Cloudflare AI Search docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Manage AI Search instances from a Cloudflare Worker using the Instances Workers binding."><meta property="og:url" content="https://developers.cloudflare.com/ai-search/api/instances/workers-binding/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="AI Search"><meta name="algolia_product_filter" content="AI Search"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="AI Search"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/ai-search/api/instances/workers-binding/#page","headline":"Workers binding \u00b7 Cloudflare AI Search docs","description":"Manage AI Search instances from a Cloudflare Worker using the Instances Workers binding.","url":"https://developers.cloudflare.com/ai-search/api/instances/workers-binding/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /ai-search/api/instances/workers-binding/
+  schema: 1
+---
 <p><a href="/workers/">Workers</a> provides a serverless execution environment that allows you to create new applications or augment existing ones. Use a <a href="/workers/runtime-apis/bindings/">Workers binding</a> to create, list, update, and delete AI Search instances from a Cloudflare Worker. You can also check instance configuration and monitor indexing progress.</p>
 <h2 id="configure-the-binding">Configure the binding</h2>
 <p>To use AI Search with Workers, you must create an AI Search binding. You create bindings by updating your <a href="/workers/wrangler/configuration/">Wrangler configuration</a>. AI Search provides two types of bindings:</p>
@@ -79,7 +90,7 @@
 <p>The following methods are only available when using the <code>ai_search_namespaces</code> binding. The namespace handle (<code>env.AI_SEARCH</code>) exposes methods for working with instances within a <a href="/ai-search/concepts/namespaces/">namespace</a>.</p>
 <h3 id="get"><code>get()</code></h3>
 <p>Returns a handle to a specific instance. This is <strong>synchronous</strong> and does not make a network call. The instance is resolved lazily when you call methods like <code>search()</code> or <code>info()</code>.</p>
-<pre><code class="language-ts">const instance = env.AI_SEARCH.get(&quot;my-instance&quot;);&#10;const results = await instance.search({&#10;	messages: [{ role: &quot;user&quot;, content: &quot;What is Cloudflare?&quot; }],&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const instance = env.AI_SEARCH.get(&quot;my-instance&quot;);&#10;const results = await instance.search({&#10;	messages: [{ role: &quot;user&quot;, content: &quot;What is Cloudflare?&quot; }],&#10;});&#10;</code></pre>
 <h4 id="parameters">Parameters</h4>
 <table>
 <thead>
@@ -101,7 +112,7 @@
 </table>
 <h3 id="list"><code>list()</code></h3>
 <p>Returns all instances within the namespace.</p>
-<pre><code class="language-ts">const { result, result_info } = await env.AI_SEARCH.list();&#10;&#10;for (const instance of result) {&#10;	console.log(`${instance.id} (${instance.type}) - ${instance.status}`);&#10;}&#10;// result_info.total_count contains the total number of instances&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const { result, result_info } = await env.AI_SEARCH.list();&#10;&#10;for (const instance of result) {&#10;	console.log(`${instance.id} (${instance.type}) - ${instance.status}`);&#10;}&#10;// result_info.total_count contains the total number of instances&#10;</code></pre>
 <h4 id="parameters-1">Parameters</h4>
 <table>
 <thead>
@@ -216,13 +227,13 @@
 <p>Creates a new instance and returns a handle to it. You can create instances backed by a data source or create empty instances for use with the <a href="/ai-search/api/items/workers-binding/">Items API</a>.</p>
 <p><strong>Create an empty instance for file uploads:</strong></p>
 <p>AI Search instances come with <a href="/ai-search/configuration/data-source/built-in-storage/">built-in storage</a> where you can upload documents directly.</p>
-<pre><code class="language-ts">const instance = await env.AI_SEARCH.create({&#10;	id: &quot;knowledge-base&quot;,&#10;});&#10;&#10;// Upload documents using the Items API&#10;await instance.items.upload(&quot;guide.pdf&quot;, pdfArrayBuffer);&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const instance = await env.AI_SEARCH.create({&#10;	id: &quot;knowledge-base&quot;,&#10;});&#10;&#10;// Upload documents using the Items API&#10;await instance.items.upload(&quot;guide.pdf&quot;, pdfArrayBuffer);&#10;</code></pre>
 <p><strong>Create a web-crawler instance:</strong></p>
 <p>Automatically crawl and index a website that you own. For more configuration options, refer to <a href="/ai-search/configuration/data-source/website/">Website data source</a>.</p>
-<pre><code class="language-ts">const instance = await env.AI_SEARCH.create({&#10;	id: &quot;my-docs&quot;,&#10;	type: &quot;web-crawler&quot;,&#10;	source: &quot;developers.cloudflare.com&quot;,&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const instance = await env.AI_SEARCH.create({&#10;	id: &quot;my-docs&quot;,&#10;	type: &quot;web-crawler&quot;,&#10;	source: &quot;developers.cloudflare.com&quot;,&#10;});&#10;</code></pre>
 <p><strong>Create an R2-backed instance:</strong></p>
 <p>Index documents stored in an <a href="/r2/">R2</a> bucket. For more configuration options, refer to <a href="/ai-search/configuration/data-source/r2/">R2 data source</a>.</p>
-<pre><code class="language-ts">const instance = await env.AI_SEARCH.create({&#10;	id: &quot;internal-docs&quot;,&#10;	type: &quot;r2&quot;,&#10;	source: &quot;my-docs-bucket&quot;,&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const instance = await env.AI_SEARCH.create({&#10;	id: &quot;internal-docs&quot;,&#10;	type: &quot;r2&quot;,&#10;	source: &quot;my-docs-bucket&quot;,&#10;});&#10;</code></pre>
 <h4 id="parameters-2">Parameters</h4>
 <p><code>id</code> <span class="nb-type">string</span> <span class="nb-metainfo">required</span></p>
 <p>The unique identifier for the AI Search instance. Must be 1-64 characters and match the pattern <code>^[a-z0-9_]+(?:-[a-z0-9_]+)*$</code>.</p>
@@ -464,7 +475,7 @@
 <p>Returns an <code>AiSearchInstance</code> handle that is immediately usable for calling methods like <code>search()</code>, <code>info()</code>, <code>stats()</code>, and <code>items.upload()</code>. Call <code>info()</code> on the handle to get the instance configuration.</p>
 <h3 id="delete"><code>delete()</code></h3>
 <p>Permanently deletes an instance and all its indexed content. This action cannot be undone.</p>
-<pre><code class="language-ts">await env.AI_SEARCH.delete(&quot;old-docs&quot;);&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">await env.AI_SEARCH.delete(&quot;old-docs&quot;);&#10;</code></pre>
 <h4 id="parameters-3">Parameters</h4>
 <table>
 <thead>
@@ -494,7 +505,7 @@
 <p>The examples below use the namespace binding.</p>
 <h3 id="update"><code>update()</code></h3>
 <p>Partially updates the instance configuration. Only the fields you pass are modified.</p>
-<pre><code class="language-ts">const updated = await env.AI_SEARCH.get(&quot;my-instance&quot;).update({&#10;	ai_search_model: &quot;@cf/meta/llama-3.3-70b-instruct-fp8-fast&quot;,&#10;	reranking: true,&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const updated = await env.AI_SEARCH.get(&quot;my-instance&quot;).update({&#10;	ai_search_model: &quot;@cf/meta/llama-3.3-70b-instruct-fp8-fast&quot;,&#10;	reranking: true,&#10;});&#10;</code></pre>
 <h4 id="parameters-4">Parameters</h4>
 <p>Accepts a partial version of the <a href="#parameters">create parameters</a>. Only the fields you include are updated.</p>
 <table>
@@ -602,7 +613,7 @@
 <p>Returns the updated instance configuration. Same shape as <a href="#response-2">info()</a>.</p>
 <h3 id="info"><code>info()</code></h3>
 <p>Returns the current configuration and metadata for the instance.</p>
-<pre><code class="language-ts">const info = await env.AI_SEARCH.get(&quot;my-instance&quot;).info();&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const info = await env.AI_SEARCH.get(&quot;my-instance&quot;).info();&#10;</code></pre>
 <h4 id="response-4">Response</h4>
 <table>
 <thead>
@@ -752,7 +763,7 @@
 </table>
 <h3 id="stats"><code>stats()</code></h3>
 <p>Returns the current indexing progress for the instance. Use this to poll for completion after creating an instance or uploading files.</p>
-<pre><code class="language-ts">const stats = await env.AI_SEARCH.get(&quot;my-instance&quot;).stats();&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const stats = await env.AI_SEARCH.get(&quot;my-instance&quot;).stats();&#10;</code></pre>
 <h4 id="response-5">Response</h4>
 <table>
 <thead>
@@ -832,4 +843,4 @@
 </table>
 <h2 id="local-development">Local development</h2>
 <p>Local development is supported by proxying requests to your deployed AI Search instance. Add <code>remote: true</code> to your binding configuration to enable local development with <code>wrangler dev</code>.</p>
-<pre><code class="language-jsonc">// wrangler.jsonc&#10;{&#10;	&quot;ai_search&quot;: [&#10;		{&#10;			&quot;binding&quot;: &quot;MY_SEARCH&quot;,&#10;			&quot;instance_name&quot;: &quot;my-instance&quot;,&#10;			&quot;remote&quot;: true,&#10;		},&#10;	],&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-jsonc">// wrangler.jsonc&#10;{&#10;	&quot;ai_search&quot;: [&#10;		{&#10;			&quot;binding&quot;: &quot;MY_SEARCH&quot;,&#10;			&quot;instance_name&quot;: &quot;my-instance&quot;,&#10;			&quot;remote&quot;: true,&#10;		},&#10;	],&#10;}&#10;</code></pre>

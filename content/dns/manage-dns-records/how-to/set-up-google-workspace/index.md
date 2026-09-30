@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/dns/manage-dns-records/how-to/set-up-google-workspace/
+  description: Add the DNS records required to verify and use your domain with Google Workspace.
+  full_title: Set up Google Workspace DNS records · Cloudflare DNS docs
+  head_html: <title>Set up Google Workspace DNS records · Cloudflare DNS docs</title><meta name="generator" content="Nift"><meta name="description" content="Add the DNS records required to verify and use your domain with Google Workspace."><link rel="canonical" href="https://developers.cloudflare.com/dns/manage-dns-records/how-to/set-up-google-workspace/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/dns/manage-dns-records/how-to/set-up-google-workspace/index.md"><meta property="og:title" content="Set up Google Workspace DNS records · Cloudflare DNS docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Add the DNS records required to verify and use your domain with Google Workspace."><meta property="og:url" content="https://developers.cloudflare.com/dns/manage-dns-records/how-to/set-up-google-workspace/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="DNS"><meta name="algolia_product_filter" content="DNS"><meta name="pcx_content_group" content="Application performance"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="DNS"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/dns/manage-dns-records/how-to/set-up-google-workspace/#page","headline":"Set up Google Workspace DNS records \u00b7 Cloudflare DNS docs","description":"Add the DNS records required to verify and use your domain with Google Workspace.","url":"https://developers.cloudflare.com/dns/manage-dns-records/how-to/set-up-google-workspace/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /dns/manage-dns-records/how-to/set-up-google-workspace/
+  schema: 1
+---
 <p>To use your domain with <a href="https://workspace.google.com/">Google Workspace</a>, you must add specific DNS records in Cloudflare. This page explains how to add records for:</p>
 <ul>
 <li><a href="#verify-domain-ownership">Domain ownership verification</a></li>
@@ -14,7 +25,7 @@
 <ol>
 <li>In <a href="https://admin.google.com">Google Admin console</a>, start the domain setup wizard and copy the TXT verification value Google provides. It looks similar to:</li>
 </ol>
-<pre><code class="language-txt">google-site-verification=abc123XYZ&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">google-site-verification=abc123XYZ&#10;</code></pre>
 <ol start="2">
 <li>In the <a href="https://dash.cloudflare.com/">Cloudflare dashboard</a>, select your account and domain, then go to <strong>DNS</strong> &gt; <strong>Records</strong>.</li>
 <li>Select <strong>Add record</strong> and enter:

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/fundamentals/organizations/for-enterprise/
+  description: Set up and manage an Enterprise Organization to manage multiple Cloudflare accounts from a single dashboard.
+  full_title: Organizations for Enterprise · Cloudflare Fundamentals docs
+  head_html: <title>Organizations for Enterprise · Cloudflare Fundamentals docs</title><meta name="generator" content="Nift"><meta name="description" content="Set up and manage an Enterprise Organization to manage multiple Cloudflare accounts from a single dashboard."><link rel="canonical" href="https://developers.cloudflare.com/fundamentals/organizations/for-enterprise/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/fundamentals/organizations/for-enterprise/index.md"><meta property="og:title" content="Organizations for Enterprise · Cloudflare Fundamentals docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Set up and manage an Enterprise Organization to manage multiple Cloudflare accounts from a single dashboard."><meta property="og:url" content="https://developers.cloudflare.com/fundamentals/organizations/for-enterprise/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Cloudflare Fundamentals"><meta name="algolia_product_filter" content="Cloudflare Fundamentals"><meta name="pcx_content_group" content="Core platform"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Cloudflare Fundamentals"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/fundamentals/organizations/for-enterprise/#page","headline":"Organizations for Enterprise \u00b7 Cloudflare Fundamentals docs","description":"Set up and manage an Enterprise Organization to manage multiple Cloudflare accounts from a single dashboard.","url":"https://developers.cloudflare.com/fundamentals/organizations/for-enterprise/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /fundamentals/organizations/for-enterprise/
+  schema: 1
+---
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/8824.md")
 </aside>
@@ -15,7 +26,7 @@
 <p>Looking for MSSP (Managed Security Service Provider) or Distributor documentation? Refer to <a href="/fundamentals/organizations/for-mssp-distributors/">Organizations for MSSP and Distributors</a>.</p>
 <h2 id="hierarchy-structure">Hierarchy structure</h2>
 <p>Enterprise Organizations use a <strong>single-tier structure</strong>:</p>
-<pre><code>Organization&#10;├── Account 1&#10;│   ├── Zone A&#10;│   └── Zone B&#10;├── Account 2&#10;│   ├── Zone C&#10;│   └── Zone D&#10;└── Account 3&#10;    └── Zone E&#10;</code></pre>
+<pre tabindex="0"><code>Organization&#10;├── Account 1&#10;│   ├── Zone A&#10;│   └── Zone B&#10;├── Account 2&#10;│   ├── Zone C&#10;│   └── Zone D&#10;└── Account 3&#10;    └── Zone E&#10;</code></pre>
 <p><strong>Key characteristics:</strong></p>
 <ul>
 <li>One Organization contains multiple accounts</li>
@@ -157,7 +168,7 @@
 <li>Select <strong>Audit Logs</strong>.</li>
 </ol>
 <p>You can also retrieve Organization audit logs via the API:</p>
-<pre><code class="language-bash">GET https://api.cloudflare.com/client/v4/organizations/{organization_id}/logs/audit&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">GET https://api.cloudflare.com/client/v4/organizations/{organization_id}/logs/audit&#10;</code></pre>
 <p>If you are viewing account-level audit logs and the account belongs to an Organization where you are an Organization Super Administrator, you can select <strong>View Organization Audit Logs</strong> to go to the parent Organization's audit logs.</p>
 <p>For more details on audit log structure, filtering, and retention, refer to <a href="/fundamentals/account/account-security/audit-logs/#organization-activity-logs">Audit Logs — Organization Activity Logs</a>.</p>
 <h3 id="api">API</h3>

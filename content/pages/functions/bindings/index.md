@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/pages/functions/bindings/
+  description: Connect Pages Functions to Cloudflare resources like KV, R2, D1, and Durable Objects.
+  full_title: Bindings · Cloudflare Pages docs
+  head_html: <title>Bindings · Cloudflare Pages docs</title><meta name="generator" content="Nift"><meta name="description" content="Connect Pages Functions to Cloudflare resources like KV, R2, D1, and Durable Objects."><link rel="canonical" href="https://developers.cloudflare.com/pages/functions/bindings/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/pages/functions/bindings/index.md"><meta property="og:title" content="Bindings · Cloudflare Pages docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Connect Pages Functions to Cloudflare resources like KV, R2, D1, and Durable Objects."><meta property="og:url" content="https://developers.cloudflare.com/pages/functions/bindings/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Pages"><meta name="algolia_product_filter" content="Pages"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Pages,KV,R2,D1,Durable Objects"><meta name="pcx_tags" content="Bindings"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/pages/functions/bindings/#page","headline":"Bindings \u00b7 Cloudflare Pages docs","description":"Connect Pages Functions to Cloudflare resources like KV, R2, D1, and Durable Objects.","url":"https://developers.cloudflare.com/pages/functions/bindings/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["Bindings"]}</script>
+  markdown: true
+  noindex: false
+  route: /pages/functions/bindings/
+  schema: 1
+---
 <p>A <a href="/workers/runtime-apis/bindings/">binding</a> enables your Pages Functions to interact with resources on the Cloudflare developer platform. Use bindings to integrate your Pages Functions with Cloudflare resources like <a href="/kv/concepts/how-kv-works/">KV</a>, <a href="/durable-objects/">Durable Objects</a>, <a href="/r2/">R2</a>, and <a href="/d1/">D1</a>. You can set bindings for both production and preview environments.</p>
 <p>This guide will instruct you on configuring a binding for your Pages Function. You must already have a Cloudflare Developer Platform resource set up to continue.</p>
 <aside class="nb-aside note">
@@ -27,7 +38,7 @@
 <li>Pass arguments to <code>wrangler pages dev</code> directly.</li>
 </ul>
 <p>To interact with your KV namespace binding locally by passing arguments to the Wrangler CLI, add <code>-k &lt;BINDING_NAME&gt;</code> or <code>--kv=&lt;BINDING_NAME&gt;</code> to the <code>wrangler pages dev</code> command. For example, if your KV namespace is bound your Function via the <code>TODO_LIST</code> binding, access the KV namespace in local development by running:</p>
-<pre><code class="language-sh">npx wrangler pages dev &lt;OUTPUT_DIR&gt; --kv=TODO_LIST&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler pages dev &lt;OUTPUT_DIR&gt; --kv=TODO_LIST&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/10970.md")
 </aside>
@@ -88,7 +99,7 @@
 @markup("md", "content/.markup/bodies/10968.md")
 </aside>
 <p>To interact with an R2 bucket locally via the Wrangler CLI, add <code>--r2=&lt;BINDING_NAME&gt;</code> to the <code>wrangler pages dev</code> command. If your R2 bucket is bound to your Function with the <code>BUCKET</code> binding, access this R2 bucket in local development by running:</p>
-<pre><code class="language-sh">npx wrangler pages dev &lt;OUTPUT_DIR&gt; --r2=BUCKET&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler pages dev &lt;OUTPUT_DIR&gt; --r2=BUCKET&#10;</code></pre>
 <p>Interact with this binding by using <code>context.env</code> (for example, <code>context.env.BUCKET</code>.)</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/10967.md")
@@ -118,7 +129,7 @@
 </ul>
 <p>To interact with a D1 database via the Wrangler CLI while <a href="/d1/best-practices/local-development/#develop-locally-with-pages">developing locally</a>, add <code>--d1 &lt;BINDING_NAME&gt;=&lt;DATABASE_ID&gt;</code> to the <code>wrangler pages dev</code> command.</p>
 <p>If your D1 database is bound to your Pages Function via the <code>NORTHWIND_DB</code> binding and the <code>database_id</code> in your Wrangler file is <code>xxxx-xxxx-xxxx-xxxx-xxxx</code>, access this database in local development by running:</p>
-<pre><code class="language-sh">npx wrangler pages dev &lt;OUTPUT_DIR&gt; --d1 NORTHWIND_DB=xxxx-xxxx-xxxx-xxxx-xxxx&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler pages dev &lt;OUTPUT_DIR&gt; --d1 NORTHWIND_DB=xxxx-xxxx-xxxx-xxxx-xxxx&#10;</code></pre>
 <p>Interact with this binding by using <code>context.env</code> (for example, <code>context.env.NORTHWIND_DB</code>.)</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/10966.md")
@@ -175,7 +186,7 @@
 <li>Pass arguments to <code>wrangler pages dev</code> directly.</li>
 </ul>
 <p>To interact with a Workers AI binding via the Wrangler CLI while developing locally, run:</p>
-<pre><code class="language-sh">npx wrangler pages dev --ai=&lt;BINDING_NAME&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler pages dev --ai=&lt;BINDING_NAME&gt;&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/10963.md")
 </aside>
@@ -294,7 +305,7 @@
 <li>Pass arguments to <a href="/workers/wrangler/commands/pages/#pages-dev"><code>wrangler pages dev</code></a> directly.</li>
 </ul>
 <p>To interact with your environment variables locally via the Wrangler CLI, add <code>--binding=&lt;ENVIRONMENT_VARIABLE_NAME&gt;=&lt;ENVIRONMENT_VARIABLE_VALUE&gt;</code> to the <code>wrangler pages dev</code> command:</p>
-<pre><code class="language-sh">npx wrangler pages dev --binding=&lt;ENVIRONMENT_VARIABLE_NAME&gt;=&lt;ENVIRONMENT_VARIABLE_VALUE&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler pages dev --binding=&lt;ENVIRONMENT_VARIABLE_NAME&gt;=&lt;ENVIRONMENT_VARIABLE_VALUE&gt;&#10;</code></pre>
 <h2 id="secrets">Secrets</h2>
 <p>Secrets are a type of binding that allow you to attach encrypted text values to your Pages Function. You cannot see secrets after you set them and can only access secrets programmatically on <code>context.env</code>. Secrets are used for storing sensitive information like API keys and auth tokens.</p>
 <p>To add secrets to your Pages project:</p>
@@ -320,7 +331,7 @@
 @markup("md", "content/.markup/bodies/10956.md")
 </aside>
 <p>These files should be formatted using the <a href="https://hexdocs.pm/dotenvy/dotenv-file-format.html">dotenv</a> syntax. For example:</p>
-<pre><code class="language-bash">SECRET_KEY=&quot;value&quot;&#10;API_TOKEN=&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">SECRET_KEY=&quot;value&quot;&#10;API_TOKEN=&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9&quot;&#10;</code></pre>
 <aside class="nb-aside caution">
 <h3 class="nb-aside-title" id="do-not-commit-secrets-to-git">Do not commit secrets to git</h3>
 @markup("md", "content/.markup/bodies/10955.md")

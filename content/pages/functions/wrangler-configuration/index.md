@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/pages/functions/wrangler-configuration/
+  description: Configure Pages Functions settings using a Wrangler configuration file or the Cloudflare dashboard.
+  full_title: Configuration · Cloudflare Pages docs
+  head_html: <title>Configuration · Cloudflare Pages docs</title><meta name="generator" content="Nift"><meta name="description" content="Configure Pages Functions settings using a Wrangler configuration file or the Cloudflare dashboard."><link rel="canonical" href="https://developers.cloudflare.com/pages/functions/wrangler-configuration/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/pages/functions/wrangler-configuration/index.md"><meta property="og:title" content="Configuration · Cloudflare Pages docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Configure Pages Functions settings using a Wrangler configuration file or the Cloudflare dashboard."><meta property="og:url" content="https://developers.cloudflare.com/pages/functions/wrangler-configuration/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Pages"><meta name="algolia_product_filter" content="Pages"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="Pages"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/pages/functions/wrangler-configuration/#page","headline":"Configuration \u00b7 Cloudflare Pages docs","description":"Configure Pages Functions settings using a Wrangler configuration file or the Cloudflare dashboard.","url":"https://developers.cloudflare.com/pages/functions/wrangler-configuration/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /pages/functions/wrangler-configuration/
+  schema: 1
+---
 <aside class="nb-aside caution">
 @markup("md", "content/.markup/bodies/10925.md")
 </aside>
@@ -77,9 +88,9 @@
 @markup("md", "content/.markup/bodies/10921.md")
 </aside>
 <p>To use the example above as your configuration for production, make a new production deployment using:</p>
-<pre><code class="language-sh">npx wrangler pages deploy&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler pages deploy&#10;</code></pre>
 <p>or more specifically:</p>
-<pre><code class="language-sh">npx wrangler pages deploy --branch &lt;PRODUCTION BRANCH&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler pages deploy --branch &lt;PRODUCTION BRANCH&gt;&#10;</code></pre>
 <p>To deploy the configuration for preview deployments, you can run the same command as above while on a branch you have configured to work with <a href="/pages/configuration/branch-build-controls/#preview-branch-control">preview deployments</a>. This will set the configuration for all preview deployments, not just the deployments from a specific branch. Pages does not currently support branch-based configuration.</p>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/10920.md")

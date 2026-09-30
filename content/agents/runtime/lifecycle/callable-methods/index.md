@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/agents/runtime/lifecycle/callable-methods/
+  description: Expose Agent methods to external clients over WebSocket RPC using the @callable() decorator.
+  full_title: Callable methods · Cloudflare Agents docs
+  head_html: <title>Callable methods · Cloudflare Agents docs</title><meta name="generator" content="Nift"><meta name="description" content="Expose Agent methods to external clients over WebSocket RPC using the @callable() decorator."><link rel="canonical" href="https://developers.cloudflare.com/agents/runtime/lifecycle/callable-methods/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/agents/runtime/lifecycle/callable-methods/index.md"><meta property="og:title" content="Callable methods · Cloudflare Agents docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Expose Agent methods to external clients over WebSocket RPC using the @callable() decorator."><meta property="og:url" content="https://developers.cloudflare.com/agents/runtime/lifecycle/callable-methods/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Agents"><meta name="algolia_product_filter" content="Agents"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Agents"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/agents/runtime/lifecycle/callable-methods/#page","headline":"Callable methods \u00b7 Cloudflare Agents docs","description":"Expose Agent methods to external clients over WebSocket RPC using the @callable() decorator.","url":"https://developers.cloudflare.com/agents/runtime/lifecycle/callable-methods/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /agents/runtime/lifecycle/callable-methods/
+  schema: 1
+---
 <p>Callable methods let clients invoke agent methods over WebSocket using RPC (Remote Procedure Call). Mark methods with <code>@callable()</code> to expose them to external clients like browsers, mobile apps, or other services.</p>
 <h2 id="overview">Overview</h2>
 <div class="nb-type-script-example">
@@ -7,7 +18,7 @@
 @markup("md", "content/.markup/bodies/2410.md")
 </div>
 <h3 id="how-it-works">How it works</h3>
-<pre><code class="language-mermaid">sequenceDiagram&#10;    participant Client&#10;    participant Agent&#10;    Client-&gt;&gt;Agent: agent.stub.greet(&quot;World&quot;)&#10;    Note right of Agent: Check @callable&lt;br/&gt;Execute method&#10;    Agent--&gt;&gt;Client: &quot;Hello, World!&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-mermaid">sequenceDiagram&#10;    participant Client&#10;    participant Agent&#10;    Client-&gt;&gt;Agent: agent.stub.greet(&quot;World&quot;)&#10;    Note right of Agent: Check @callable&lt;br/&gt;Execute method&#10;    Agent--&gt;&gt;Client: &quot;Hello, World!&quot;&#10;</code></pre>
 <h3 id="when-to-use-callable">When to use <code>@callable()</code></h3>
 <table>
 <thead>
@@ -193,7 +204,7 @@
 @markup("md", "content/.markup/bodies/2431.md")
 </div>
 <h3 id="callablemetadata-type">CallableMetadata type</h3>
-<pre><code class="language-ts">type CallableMetadata = {&#10;	/** Optional description of what the method does */&#10;	description?: string;&#10;	/** Whether the method supports streaming responses */&#10;	streaming?: boolean;&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">type CallableMetadata = {&#10;	/** Optional description of what the method does */&#10;	description?: string;&#10;	/** Whether the method supports streaming responses */&#10;	streaming?: boolean;&#10;};&#10;</code></pre>
 <h3 id="streamingresponse-class">StreamingResponse class</h3>
 <p>Used in streaming callable methods to send data to the client.</p>
 <div class="nb-type-script-example">
@@ -251,7 +262,7 @@
 @markup("md", "content/.markup/bodies/2433.md")
 </div>
 <h3 id="calloptions-type">CallOptions type</h3>
-<pre><code class="language-ts">type CallOptions = {&#10;	/** Timeout in milliseconds. Rejects if call does not complete in time. */&#10;	timeout?: number;&#10;	/** Streaming options */&#10;	stream?: {&#10;		onChunk?: (chunk: unknown) =&gt; void;&#10;		onDone?: (finalChunk: unknown) =&gt; void;&#10;		onError?: (error: string) =&gt; void;&#10;	};&#10;};&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">type CallOptions = {&#10;	/** Timeout in milliseconds. Rejects if call does not complete in time. */&#10;	timeout?: number;&#10;	/** Streaming options */&#10;	stream?: {&#10;		onChunk?: (chunk: unknown) =&gt; void;&#10;		onDone?: (finalChunk: unknown) =&gt; void;&#10;		onError?: (error: string) =&gt; void;&#10;	};&#10;};&#10;</code></pre>
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/2407.md")
 </aside>
@@ -264,14 +275,14 @@
 <h3 id="syntaxerror-invalid-or-unexpected-token"><code>SyntaxError: Invalid or unexpected token</code></h3>
 <p>If your dev server fails with <code>SyntaxError: Invalid or unexpected token</code> when using <code>@callable()</code>, you need two things:</p>
 <p><strong>1. Add the <code>agents/vite</code> plugin</strong> — Vite 8 uses Oxc for transpilation, which does not yet support TC39 decorators. The plugin adds the required transform:</p>
-<pre><code class="language-ts">import agents from &quot;agents/vite&quot;;&#10;&#10;export default defineConfig({&#10;	plugins: [agents(), react(), cloudflare()],&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">import agents from &quot;agents/vite&quot;;&#10;&#10;export default defineConfig({&#10;	plugins: [agents(), react(), cloudflare()],&#10;});&#10;</code></pre>
 <p><strong>2. Extend <code>agents/tsconfig</code></strong> — this sets <code>&quot;target&quot;: &quot;ES2021&quot;</code> and all other recommended compiler options:</p>
-<pre><code class="language-json">{&#10;	&quot;extends&quot;: &quot;agents/tsconfig&quot;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;extends&quot;: &quot;agents/tsconfig&quot;&#10;}&#10;</code></pre>
 <p>If you cannot extend the shared config, set <code>&quot;target&quot;: &quot;ES2021&quot;</code> manually in your <code>tsconfig.json</code>.</p>
 <aside class="nb-aside caution">
 @markup("md", "content/.markup/bodies/2406.md")
 </aside>
 <h2 id="next-steps">Next steps</h2>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/agents-api/"><h3 id="card-agents-api-agents-runtime-agents-api">Agents API</h3><p>Complete API reference for the Agents SDK.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/communication/websockets/"><h3 id="card-websockets-agents-runtime-communication-websockets">WebSockets</h3><p>Real-time bidirectional communication with clients.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/lifecycle/state/"><h3 id="card-state-management-agents-runtime-lifecycle-state">State management</h3><p>Sync state between agents and clients.</p></a></p>
+<div class="nb-card nb-link-card"><h3 id="card-agents-api-agents-runtime-agents-api"><a href="/agents/runtime/agents-api/">Agents API</a></h3><p>Complete API reference for the Agents SDK.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-websockets-agents-runtime-communication-websockets"><a href="/agents/runtime/communication/websockets/">WebSockets</a></h3><p>Real-time bidirectional communication with clients.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-state-management-agents-runtime-lifecycle-state"><a href="/agents/runtime/lifecycle/state/">State management</a></h3><p>Sync state between agents and clients.</p></div>

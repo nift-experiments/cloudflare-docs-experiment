@@ -1,9 +1,18 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/durable-objects/api/legacy-kv-storage-api/
+  description: API reference for the legacy KV-backed Durable Objects storage methods, including get, put, delete, and list.
+  full_title: KV-backed Durable Object Storage (Legacy) · Cloudflare Durable Objects docs
+  head_html: <title>KV-backed Durable Object Storage (Legacy) · Cloudflare Durable Objects docs</title><meta name="generator" content="Nift"><meta name="description" content="API reference for the legacy KV-backed Durable Objects storage methods, including get, put, delete, and list."><link rel="canonical" href="https://developers.cloudflare.com/durable-objects/api/legacy-kv-storage-api/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/durable-objects/api/legacy-kv-storage-api/index.md"><meta property="og:title" content="KV-backed Durable Object Storage (Legacy) · Cloudflare Durable Objects docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="API reference for the legacy KV-backed Durable Objects storage methods, including get, put, delete, and list."><meta property="og:url" content="https://developers.cloudflare.com/durable-objects/api/legacy-kv-storage-api/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Durable Objects"><meta name="algolia_product_filter" content="Durable Objects"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Durable Objects"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/durable-objects/api/legacy-kv-storage-api/#page","headline":"KV-backed Durable Object Storage (Legacy) \u00b7 Cloudflare Durable Objects docs","description":"API reference for the legacy KV-backed Durable Objects storage methods, including get, put, delete, and list.","url":"https://developers.cloudflare.com/durable-objects/api/legacy-kv-storage-api/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /durable-objects/api/legacy-kv-storage-api/
+  schema: 1
+---
 <aside class="nb-aside note">
 @markup("md", "content/.markup/bodies/8378.md")
 </aside>
-<p>The Durable Object Storage API allows <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/8379.md")
-</div> to access transactional and strongly consistent storage. A Durable Object's attached storage is private to its unique instance and cannot be accessed by other objects.
+<p>The Durable Object Storage API allows <span class="nb-glossary-tooltip" title="Durable Object">Durable Objects</span> to access transactional and strongly consistent storage. A Durable Object's attached storage is private to its unique instance and cannot be accessed by other objects.</p>
 <p>The Durable Object Storage API comes with several methods, including SQL, point-in-time recovery (PITR), key-value (KV), and alarm APIs. Available API methods depend on the storage backend for a Durable Objects class, either <a href="/durable-objects/best-practices/access-durable-objects-storage/#create-sqlite-backed-durable-object-class">SQLite</a> or <a href="/durable-objects/reference/durable-object-class-migrations-legacy/#create-durable-object-class-with-key-value-storage">KV</a>.</p>
 <table>
 <thead>
@@ -54,11 +63,7 @@
 <div class="nb-tabs" data-nb-tabs><div role="tablist" aria-label="Options" data-nb-tabs-list></div><div data-nb-tabs-panels>
 @input("content/.markup/bodies/8383.md")
 </div></div>
-<p>JavaScript is a single-threaded and event-driven programming language. This means that JavaScript runtimes, by default, allow requests to interleave with each other which can lead to concurrency bugs. The Durable Objects runtime uses a combination of <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/8384.md")
-</div> and <div class="nb-interactive-component" data-cf-component="GlossaryTooltip">
-@markup("md", "content/.markup/bodies/8385.md")
-</div> to avoid this type of concurrency bug when performing storage operations. Learn more in our [blog post](https://blog.cloudflare.com/durable-objects-easy-fast-correct-choose-three/).
+<p>JavaScript is a single-threaded and event-driven programming language. This means that JavaScript runtimes, by default, allow requests to interleave with each other which can lead to concurrency bugs. The Durable Objects runtime uses a combination of <span class="nb-glossary-tooltip" title="input gate">input gates</span> and <span class="nb-glossary-tooltip" title="output gate">output gates</span> to avoid this type of concurrency bug when performing storage operations. Learn more in our <a href="https://blog.cloudflare.com/durable-objects-easy-fast-correct-choose-three/">blog post</a>.</p>
 <h2 id="asynchronous-kv-api">Asynchronous KV API</h2>
 <p>KV-backed Durable Objects provide KV API methods which are asynchronous.</p>
 <h3 id="do-kv-async-get">get</h3>

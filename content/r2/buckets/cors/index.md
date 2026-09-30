@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/r2/buckets/cors/
+  description: Set up Cross-Origin Resource Sharing (CORS) policies on R2 buckets for browser access.
+  full_title: Configure CORS · Cloudflare R2 docs
+  head_html: <title>Configure CORS · Cloudflare R2 docs</title><meta name="generator" content="Nift"><meta name="description" content="Set up Cross-Origin Resource Sharing (CORS) policies on R2 buckets for browser access."><link rel="canonical" href="https://developers.cloudflare.com/r2/buckets/cors/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/r2/buckets/cors/index.md"><meta property="og:title" content="Configure CORS · Cloudflare R2 docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Set up Cross-Origin Resource Sharing (CORS) policies on R2 buckets for browser access."><meta property="og:url" content="https://developers.cloudflare.com/r2/buckets/cors/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="R2"><meta name="algolia_product_filter" content="R2"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="How to"><meta name="algolia_content_type" content="How to"><meta name="pcx_additional_products" content="R2"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/r2/buckets/cors/#page","headline":"Configure CORS \u00b7 Cloudflare R2 docs","description":"Set up Cross-Origin Resource Sharing (CORS) policies on R2 buckets for browser access.","url":"https://developers.cloudflare.com/r2/buckets/cors/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /r2/buckets/cors/
+  schema: 1
+---
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">Cross-Origin Resource Sharing (CORS)</a> is a standardized method that prevents domain X from accessing the resources of domain Y. It does so by using special headers in HTTP responses from domain Y, that allow your browser to verify that domain Y permits domain X to access these resources.</p>
 <p>While CORS can help protect your data from malicious websites, CORS is also used to interact with objects in your bucket and configure policies on your bucket.</p>
 <p>CORS is used when you interact with a bucket from a web browser, and you have two options:</p>
@@ -36,7 +47,7 @@
 </li>
 </ol>
 <p>The following example allows browser-based uploads from <code>https://example.com</code> with a <code>Content-Type</code> header:</p>
-<pre><code class="language-json">[&#10;  {&#10;    &quot;AllowedOrigins&quot;: [&quot;https://example.com&quot;],&#10;    &quot;AllowedMethods&quot;: [&quot;PUT&quot;],&#10;    &quot;AllowedHeaders&quot;: [&quot;Content-Type&quot;],&#10;    &quot;ExposeHeaders&quot;: [&quot;ETag&quot;],&#10;    &quot;MaxAgeSeconds&quot;: 3600&#10;  }&#10;]&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">[&#10;  {&#10;    &quot;AllowedOrigins&quot;: [&quot;https://example.com&quot;],&#10;    &quot;AllowedMethods&quot;: [&quot;PUT&quot;],&#10;    &quot;AllowedHeaders&quot;: [&quot;Content-Type&quot;],&#10;    &quot;ExposeHeaders&quot;: [&quot;ETag&quot;],&#10;    &quot;MaxAgeSeconds&quot;: 3600&#10;  }&#10;]&#10;</code></pre>
 <h2 id="use-cors-with-a-custom-domain">Use CORS with a custom domain</h2>
 <p><a href="/r2/buckets/public-buckets/#custom-domains">Custom domains</a> connected to an R2 bucket with a CORS policy automatically return CORS response headers for <a href="https://fetch.spec.whatwg.org/#http-cors-protocol">cross-origin requests</a>.</p>
 <p>Cross-origin requests must include a valid <code>Origin</code> request header, for example, <code>Origin: https://example.com</code>. If you are testing directly or using a command-line tool such as <code>curl</code>, you will not see CORS <code>Access-Control-*</code> response headers unless the <code>Origin</code> request header is included in the request.</p>
@@ -60,15 +71,15 @@
 <ol>
 <li>Create a JSON file with your CORS configuration:</li>
 </ol>
-<pre><code class="language-json">{&#10;  &quot;rules&quot;: [&#10;    {&#10;      &quot;allowed&quot;: {&#10;        &quot;origins&quot;: [&quot;https://example.com&quot;],&#10;        &quot;methods&quot;: [&quot;GET&quot;]&#10;      }&#10;    }&#10;  ]&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;  &quot;rules&quot;: [&#10;    {&#10;      &quot;allowed&quot;: {&#10;        &quot;origins&quot;: [&quot;https://example.com&quot;],&#10;        &quot;methods&quot;: [&quot;GET&quot;]&#10;      }&#10;    }&#10;  ]&#10;}&#10;</code></pre>
 <ol start="2">
 <li>Apply the CORS policy to your bucket:</li>
 </ol>
-<pre><code class="language-sh">npx wrangler r2 bucket cors set &lt;BUCKET_NAME&gt; --file cors.json&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler r2 bucket cors set &lt;BUCKET_NAME&gt; --file cors.json&#10;</code></pre>
 <ol start="3">
 <li>Verify the CORS policy was applied:</li>
 </ol>
-<pre><code class="language-sh">npx wrangler r2 bucket cors list &lt;BUCKET_NAME&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">npx wrangler r2 bucket cors list &lt;BUCKET_NAME&gt;&#10;</code></pre>
 <h2 id="response-headers">Response headers</h2>
 <p>The following fields in an R2 CORS policy map to HTTP response headers. These response headers are only returned when the incoming HTTP request is a valid CORS request.</p>
 <table>
@@ -110,7 +121,7 @@
 <h2 id="example">Example</h2>
 <p>This example shows a CORS policy added for a bucket that contains the <code>Roboto-Light.ttf</code> object, which is a font file.</p>
 <p>The <code>AllowedOrigins</code> specify the web server being used, and <code>localhost:3000</code> is the hostname where the web server is running. The <code>AllowedMethods</code> specify that only <code>GET</code> requests are allowed and can read objects in your bucket.</p>
-<pre><code class="language-json">[&#10;	{&#10;		&quot;AllowedOrigins&quot;: [&quot;http://localhost:3000&quot;],&#10;		&quot;AllowedMethods&quot;: [&quot;GET&quot;]&#10;	}&#10;]&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">[&#10;	{&#10;		&quot;AllowedOrigins&quot;: [&quot;http://localhost:3000&quot;],&#10;		&quot;AllowedMethods&quot;: [&quot;GET&quot;]&#10;	}&#10;]&#10;</code></pre>
 <p>In general, a good strategy for making sure you have set the correct CORS rules is to look at the network request that is being blocked by your browser.</p>
 <ul>
 <li>Make sure the rule's <code>AllowedOrigins</code> includes the origin where the request is being made from. (like <code>http://localhost:3000</code> or <code>https://yourdomain.com</code>)</li>

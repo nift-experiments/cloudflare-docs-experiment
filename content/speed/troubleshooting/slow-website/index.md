@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/speed/troubleshooting/slow-website/
+  description: Identify and resolve performance issues affecting your website.
+  full_title: Troubleshooting a slow website · Cloudflare Speed docs
+  head_html: <title>Troubleshooting a slow website · Cloudflare Speed docs</title><meta name="generator" content="Nift"><meta name="description" content="Identify and resolve performance issues affecting your website."><link rel="canonical" href="https://developers.cloudflare.com/speed/troubleshooting/slow-website/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/speed/troubleshooting/slow-website/index.md"><meta property="og:title" content="Troubleshooting a slow website · Cloudflare Speed docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Identify and resolve performance issues affecting your website."><meta property="og:url" content="https://developers.cloudflare.com/speed/troubleshooting/slow-website/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Speed"><meta name="algolia_product_filter" content="Speed"><meta name="pcx_content_group" content="Application performance"><meta name="pcx_content_type" content="Troubleshooting"><meta name="algolia_content_type" content="Troubleshooting"><meta name="pcx_additional_products" content="Speed"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/speed/troubleshooting/slow-website/#page","headline":"Troubleshooting a slow website \u00b7 Cloudflare Speed docs","description":"Identify and resolve performance issues affecting your website.","url":"https://developers.cloudflare.com/speed/troubleshooting/slow-website/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /speed/troubleshooting/slow-website/
+  schema: 1
+---
 <p>This guide helps you identify and resolve performance issues affecting your website. It starts with basic diagnostics and progresses to advanced troubleshooting techniques.</p>
 <h2 id="before-you-start-verify-traffic-goes-through-cloudflare">Before you start: Verify traffic goes through Cloudflare</h2>
 <p>Before troubleshooting performance, confirm that your traffic is actually going through Cloudflare. If requests bypass Cloudflare, the issue is not related to Cloudflare and this guide will not help.</p>
@@ -149,7 +160,7 @@
 @input("content/.markup/bodies/13891.md")
 </div></div>
 <p>Example output (bash):</p>
-<pre><code class="language-txt">DNS Lookup: 0.025s&#10;TCP Connect: 0.045s&#10;TLS Handshake: 0.120s&#10;Time to First Byte: 0.350s&#10;Total Time: 1.250s&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">DNS Lookup: 0.025s&#10;TCP Connect: 0.045s&#10;TLS Handshake: 0.120s&#10;Time to First Byte: 0.350s&#10;Total Time: 1.250s&#10;</code></pre>
 <h3 id="understand-the-metrics">Understand the metrics</h3>
 <p>The curl timing breakdown shows the following:</p>
 <table>
@@ -336,7 +347,7 @@
 <p>For more details, refer to <a href="https://www.cloudflare.com/learning/network-layer/what-is-mtr/">How to read MTR</a>.</p>
 <h3 id="run-mtr-from-your-origin-to-cloudflare">Run MTR from your origin to Cloudflare</h3>
 <p>If you have access to your origin server, run MTR from the origin to a <a href="https://www.cloudflare.com/ips/">Cloudflare IP address</a> to test the network path between your origin and Cloudflare.</p>
-<pre><code class="language-bash">mtr -rw 104.16.132.229&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">mtr -rw 104.16.132.229&#10;</code></pre>
 <p>High latency or packet loss on this path affects all requests that miss the cache.</p>
 <hr />
 <h2 id="step-7-understand-network-routing">Step 7: Understand network routing</h2>
@@ -350,12 +361,10 @@
 <h3 id="why-routing-matters">Why routing matters</h3>
 <p>When a request reaches Cloudflare:</p>
 <ol>
-<li>The request is routed to a nearby Cloudflare data center based on <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></li>
+<li>The request is routed to a nearby Cloudflare data center based on <span class="nb-glossary-tooltip" title="anycast">anycast</span> <a href="https://www.cloudflare.com/learning/cdn/glossary/anycast-network/">routing</a>.</li>
+<li>If the content is cached, it is served immediately.</li>
+<li>If not cached, Cloudflare fetches from your origin server.</li>
 </ol>
-@markup("md", "content/.markup/bodies/13901.md")
-</div> [routing](https://www.cloudflare.com/learning/cdn/glossary/anycast-network/).
-2. If the content is cached, it is served immediately.
-3. If not cached, Cloudflare fetches from your origin server.
 <p>If your origin server is geographically distant from the Cloudflare data center serving your users, uncached requests will be slow.</p>
 <h3 id="troubleshoot-unexpected-routing">Troubleshoot unexpected routing</h3>
 <p>If requests are being routed to a data center that seems far from the user, this may be due to Cloudflare's automated traffic engineering or a user’s ISP routing traffic.</p>

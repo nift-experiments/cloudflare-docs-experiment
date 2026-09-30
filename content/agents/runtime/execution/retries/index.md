@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/agents/runtime/execution/retries/
+  description: Retry failed operations with exponential backoff and jitter using the built-in retry system in the Agents SDK.
+  full_title: Retries · Cloudflare Agents docs
+  head_html: <title>Retries · Cloudflare Agents docs</title><meta name="generator" content="Nift"><meta name="description" content="Retry failed operations with exponential backoff and jitter using the built-in retry system in the Agents SDK."><link rel="canonical" href="https://developers.cloudflare.com/agents/runtime/execution/retries/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/agents/runtime/execution/retries/index.md"><meta property="og:title" content="Retries · Cloudflare Agents docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Retry failed operations with exponential backoff and jitter using the built-in retry system in the Agents SDK."><meta property="og:url" content="https://developers.cloudflare.com/agents/runtime/execution/retries/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Agents"><meta name="algolia_product_filter" content="Agents"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Agents"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/agents/runtime/execution/retries/#page","headline":"Retries \u00b7 Cloudflare Agents docs","description":"Retry failed operations with exponential backoff and jitter using the built-in retry system in the Agents SDK.","url":"https://developers.cloudflare.com/agents/runtime/execution/retries/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /agents/runtime/execution/retries/
+  schema: 1
+---
 <p>Retry failed operations with exponential backoff and jitter. The Agents SDK provides built-in retry support for scheduled tasks, queued tasks, and a general-purpose <code>this.retry()</code> method for your own code.</p>
 <h2 id="overview">Overview</h2>
 <p>Transient failures are common when calling external APIs, interacting with other services, or running background tasks. The retry system handles these automatically:</p>
@@ -15,7 +26,7 @@
 <p>By default, <code>this.retry()</code> retries up to three times with jittered exponential backoff.</p>
 <h2 id="this-retry"><code>this.retry()</code></h2>
 <p>The <code>retry()</code> method is available on every <code>Agent</code> instance. It retries the provided function on any thrown error by default.</p>
-<pre><code class="language-ts">async retry&lt;T&gt;(&#10;  fn: (attempt: number) =&gt; Promise&lt;T&gt;,&#10;  options?: RetryOptions &amp; {&#10;    shouldRetry?: (err: unknown, nextAttempt: number) =&gt; boolean;&#10;  }&#10;): Promise&lt;T&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">async retry&lt;T&gt;(&#10;  fn: (attempt: number) =&gt; Promise&lt;T&gt;,&#10;  options?: RetryOptions &amp; {&#10;    shouldRetry?: (err: unknown, nextAttempt: number) =&gt; boolean;&#10;  }&#10;): Promise&lt;T&gt;&#10;</code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>fn</code> — the async function to retry. Receives the current attempt number (1-indexed).</li>
@@ -103,9 +114,9 @@
 @markup("md", "content/.markup/bodies/2529.md")
 </div>
 <h2 id="retryoptions">RetryOptions</h2>
-<pre><code class="language-ts">interface RetryOptions {&#10;	/** Maximum number of attempts (including the first). Must be an integer &gt;= 1. Default: 3 */&#10;	maxAttempts?: number;&#10;	/** Base delay in milliseconds for exponential backoff. Must be &gt; 0 and &lt;= maxDelayMs. Default: 100 */&#10;	baseDelayMs?: number;&#10;	/** Maximum delay cap in milliseconds. Must be &gt; 0. Default: 3000 */&#10;	maxDelayMs?: number;&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">interface RetryOptions {&#10;	/** Maximum number of attempts (including the first). Must be an integer &gt;= 1. Default: 3 */&#10;	maxAttempts?: number;&#10;	/** Base delay in milliseconds for exponential backoff. Must be &gt; 0 and &lt;= maxDelayMs. Default: 100 */&#10;	baseDelayMs?: number;&#10;	/** Maximum delay cap in milliseconds. Must be &gt; 0. Default: 3000 */&#10;	maxDelayMs?: number;&#10;}&#10;</code></pre>
 <p>The delay between retries uses <strong>full jitter exponential backoff</strong>:</p>
-<pre><code>delay = random(0, min(2^attempt * baseDelayMs, maxDelayMs))&#10;</code></pre>
+<pre tabindex="0"><code>delay = random(0, min(2^attempt * baseDelayMs, maxDelayMs))&#10;</code></pre>
 <p>This means early retries are fast (often under 200ms), and later retries back off to avoid overwhelming a failing service. The randomization (jitter) prevents multiple agents from retrying at the exact same moment.</p>
 <h2 id="how-it-works">How it works</h2>
 <h3 id="backoff-strategy">Backoff strategy</h3>
@@ -207,6 +218,6 @@
 <li><strong><code>shouldRetry</code> is only available on <code>this.retry()</code>.</strong> The <code>shouldRetry</code> predicate cannot be used with <code>schedule()</code> or <code>queue()</code> because functions cannot be serialized to the database. For scheduled/queued tasks, handle non-retryable errors inside the callback itself.</li>
 </ul>
 <h2 id="next-steps">Next steps</h2>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/execution/schedule-tasks/"><h3 id="card-schedule-tasks-agents-runtime-execution-schedule-tasks">Schedule tasks</h3><p>Schedule tasks for future execution.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/execution/queue-tasks/"><h3 id="card-queue-tasks-agents-runtime-execution-queue-tasks">Queue tasks</h3><p>Background task queue for immediate processing.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/agents/runtime/execution/run-workflows/"><h3 id="card-run-workflows-agents-runtime-execution-run-workflows">Run Workflows</h3><p>Durable multi-step processing with automatic retries.</p></a></p>
+<div class="nb-card nb-link-card"><h3 id="card-schedule-tasks-agents-runtime-execution-schedule-tasks"><a href="/agents/runtime/execution/schedule-tasks/">Schedule tasks</a></h3><p>Schedule tasks for future execution.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-queue-tasks-agents-runtime-execution-queue-tasks"><a href="/agents/runtime/execution/queue-tasks/">Queue tasks</a></h3><p>Background task queue for immediate processing.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-run-workflows-agents-runtime-execution-run-workflows"><a href="/agents/runtime/execution/run-workflows/">Run Workflows</a></h3><p>Durable multi-step processing with automatic retries.</p></div>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/waf/rate-limiting-rules/best-practices/
+  description: Typical rate limiting configurations for login protection, API abuse, and more.
+  full_title: Rate limiting best practices · Cloudflare Web Application Firewall (WAF) docs
+  head_html: <title>Rate limiting best practices · Cloudflare Web Application Firewall (WAF) docs</title><meta name="generator" content="Nift"><meta name="description" content="Typical rate limiting configurations for login protection, API abuse, and more."><link rel="canonical" href="https://developers.cloudflare.com/waf/rate-limiting-rules/best-practices/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/waf/rate-limiting-rules/best-practices/index.md"><meta property="og:title" content="Rate limiting best practices · Cloudflare Web Application Firewall (WAF) docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Typical rate limiting configurations for login protection, API abuse, and more."><meta property="og:url" content="https://developers.cloudflare.com/waf/rate-limiting-rules/best-practices/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="WAF"><meta name="algolia_product_filter" content="WAF"><meta name="pcx_content_group" content="Application security"><meta name="pcx_content_type" content="Configuration"><meta name="algolia_content_type" content="Configuration"><meta name="pcx_additional_products" content="Rate limiting"><meta name="pcx_tags" content="GraphQL,Account takeover,Authentication,Scraping"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/waf/rate-limiting-rules/best-practices/#page","headline":"Rate limiting best practices \u00b7 Cloudflare Web Application Firewall (WAF) docs","description":"Typical rate limiting configurations for login protection, API abuse, and more.","url":"https://developers.cloudflare.com/waf/rate-limiting-rules/best-practices/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["GraphQL","Account takeover","Authentication","Scraping"]}</script>
+  markdown: true
+  noindex: false
+  route: /waf/rate-limiting-rules/best-practices/
+  schema: 1
+---
 <p>The following sections cover typical rate limiting configurations for common use cases. You can combine the provided example rules and adjust them to your own scenario.</p>
 <p>The main use cases for rate limiting are the following:</p>
 <ul>
@@ -388,7 +399,7 @@
 <p>You can use rate limiting to limit the number of operations performed by a client. The exact rule providing this protection will depend on your application. The following examples address <a href="https://www.cloudflare.com/learning/bots/what-is-content-scraping/">content scraping</a> via query string parameters or JSON body.</p>
 <h3 id="prevent-content-scraping-via-query-string">Prevent content scraping (via query string)</h3>
 <p>In this example, clients perform operations (such as looking up prices and adding to basket) on an ecommerce website using different query string parameters. For example, a typical request sent by a client could be similar to the following:</p>
-<pre><code class="language-txt">GET https://store.com/merchant?action=lookup_price&amp;product_id=215&#10;Cookie: session_id=12345&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">GET https://store.com/merchant?action=lookup_price&amp;product_id=215&#10;Cookie: session_id=12345&#10;</code></pre>
 <p>Your security team might want to consider setting up a limit on the number of times a client can lookup prices to prevent bots — which may have eluded Cloudflare Bot Management — from scraping the store's entire catalog.</p>
 <p><strong>Rule #1</strong></p>
 <table>
@@ -488,7 +499,7 @@
 <p>You could follow the same pattern of rate limiting rules to protect applications handling reservations and bookings.</p>
 <h3 id="prevent-content-scraping-via-body">Prevent content scraping (via body)</h3>
 <p>Consider an application that handles the operation and its parameters through the request body in JSON format. For example, the <code>lookup_price</code> operation could look like the following:</p>
-<pre><code class="language-txt">POST https://api.store.com/merchant&#10;Cookie: session_id=12345&#10;&#10;Body:&#10;{&#10;  &quot;action&quot;: &quot;lookup_price&quot;,&#10;  &quot;product_id&quot;: 215&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">POST https://api.store.com/merchant&#10;Cookie: session_id=12345&#10;&#10;Body:&#10;{&#10;  &quot;action&quot;: &quot;lookup_price&quot;,&#10;  &quot;product_id&quot;: 215&#10;}&#10;</code></pre>
 <p>In this scenario, you could write a rule to limit the number of actions from individual sessions:</p>
 <table>
 <thead>
@@ -738,7 +749,7 @@
 </ul>
 <h3 id="protect-resources">Protect resources</h3>
 <p><code>GET</code> requests can also create excessive strain on an application or have an impact on costly resources, such as bandwidth. For example, consider an application with a large amount of stored files (such as images) where clients can download a file by accessing their specific URL:</p>
-<pre><code class="language-txt">GET https://api.store.com/files/&lt;FILE_ID&gt;&#10;Header: x-api-key=9375&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">GET https://api.store.com/files/&lt;FILE_ID&gt;&#10;Header: x-api-key=9375&#10;</code></pre>
 <p>You probably wish to limit the number of downloads to avoid abuse, but you do not want to write individual rules for each file, given the size of the data storage. In this case, you could write a rule such as the following:</p>
 <table>
 <thead>
@@ -814,7 +825,7 @@
 <li>Limit any individual request's query complexity.</li>
 </ol>
 <p>The following examples are based on an application that accepts reviews for movies. A GraphQL request could look like the following:</p>
-<pre><code class="language-txt">POST https://moviereviews.example.com/graphql&#10;Cookie: session_id=12345&#10;&#10;Body:&#10;{&#10;  &quot;data&quot;: {&#10;    &quot;createReview&quot;: {&#10;      &quot;stars&quot;: 5,&#10;      &quot;commentary&quot;: &quot;This is a great movie!&quot;&#10;    }&#10;  }&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">POST https://moviereviews.example.com/graphql&#10;Cookie: session_id=12345&#10;&#10;Body:&#10;{&#10;  &quot;data&quot;: {&#10;    &quot;createReview&quot;: {&#10;      &quot;stars&quot;: 5,&#10;      &quot;commentary&quot;: &quot;This is a great movie!&quot;&#10;    }&#10;  }&#10;}&#10;</code></pre>
 <h3 id="limit-the-number-of-operations">Limit the number of operations</h3>
 <p>To limit the rate of actions, you could use the following rule:</p>
 <table>

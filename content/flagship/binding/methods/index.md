@@ -1,9 +1,20 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/flagship/binding/methods/
+  description: Reference for all Flagship binding evaluation methods, including typed value and details methods for booleans, strings, numbers, and objects.
+  full_title: Methods · Cloudflare Flagship docs
+  head_html: <title>Methods · Cloudflare Flagship docs</title><meta name="generator" content="Nift"><meta name="description" content="Reference for all Flagship binding evaluation methods, including typed value and details methods for booleans, strings, numbers, and objects."><link rel="canonical" href="https://developers.cloudflare.com/flagship/binding/methods/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/flagship/binding/methods/index.md"><meta property="og:title" content="Methods · Cloudflare Flagship docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Reference for all Flagship binding evaluation methods, including typed value and details methods for booleans, strings, numbers, and objects."><meta property="og:url" content="https://developers.cloudflare.com/flagship/binding/methods/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Flagship"><meta name="algolia_product_filter" content="Flagship"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Reference"><meta name="algolia_content_type" content="Reference"><meta name="pcx_additional_products" content="Flagship"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/flagship/binding/methods/#page","headline":"Methods \u00b7 Cloudflare Flagship docs","description":"Reference for all Flagship binding evaluation methods, including typed value and details methods for booleans, strings, numbers, and objects.","url":"https://developers.cloudflare.com/flagship/binding/methods/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /flagship/binding/methods/
+  schema: 1
+---
 <p>The Flagship binding provides the following methods for evaluating feature flags. All methods are asynchronous and return a <code>Promise</code>. For known evaluation failures, typed methods return the <code>defaultValue</code> you provide.</p>
 <p>Refer to the <a href="/flagship/binding/types/">types reference</a> for the definitions of <code>FlagshipEvaluationContext</code> and <code>FlagshipEvaluationDetails</code>.</p>
 <h2 id="get"><code>get()</code></h2>
 <p>Returns the raw flag value without type checking. Use this method when the flag type is not known at compile time.</p>
 <p>If you provide <code>defaultValue</code>, <code>get()</code> returns that value for known evaluation failures, such as a missing flag. If you omit <code>defaultValue</code>, known evaluation failures are thrown.</p>
-<pre><code class="language-ts">get(flagKey: string, defaultValue?: unknown, context?: FlagshipEvaluationContext): Promise&lt;unknown&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">get(flagKey: string, defaultValue?: unknown, context?: FlagshipEvaluationContext): Promise&lt;unknown&gt;&#10;</code></pre>
 <table>
 <thead>
 <tr>
@@ -34,10 +45,10 @@
 </tr>
 </tbody>
 </table>
-<pre><code class="language-ts">const value = await env.FLAGS.get(&quot;checkout-flow&quot;, &quot;v1&quot;, {&#10;	userId: &quot;user-42&quot;,&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const value = await env.FLAGS.get(&quot;checkout-flow&quot;, &quot;v1&quot;, {&#10;	userId: &quot;user-42&quot;,&#10;});&#10;</code></pre>
 <h2 id="getbooleanvalue"><code>getBooleanValue()</code></h2>
 <p>Returns the flag value as a <code>boolean</code>.</p>
-<pre><code class="language-ts">getBooleanValue(flagKey: string, defaultValue: boolean, context?: FlagshipEvaluationContext): Promise&lt;boolean&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">getBooleanValue(flagKey: string, defaultValue: boolean, context?: FlagshipEvaluationContext): Promise&lt;boolean&gt;&#10;</code></pre>
 <table>
 <thead>
 <tr>
@@ -68,10 +79,10 @@
 </tr>
 </tbody>
 </table>
-<pre><code class="language-ts">const enabled = await env.FLAGS.getBooleanValue(&quot;dark-mode&quot;, false, {&#10;	userId: &quot;user-42&quot;,&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const enabled = await env.FLAGS.getBooleanValue(&quot;dark-mode&quot;, false, {&#10;	userId: &quot;user-42&quot;,&#10;});&#10;</code></pre>
 <h2 id="getstringvalue"><code>getStringValue()</code></h2>
 <p>Returns the flag value as a <code>string</code>.</p>
-<pre><code class="language-ts">getStringValue(flagKey: string, defaultValue: string, context?: FlagshipEvaluationContext): Promise&lt;string&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">getStringValue(flagKey: string, defaultValue: string, context?: FlagshipEvaluationContext): Promise&lt;string&gt;&#10;</code></pre>
 <table>
 <thead>
 <tr>
@@ -102,10 +113,10 @@
 </tr>
 </tbody>
 </table>
-<pre><code class="language-ts">const variant = await env.FLAGS.getStringValue(&quot;checkout-flow&quot;, &quot;v1&quot;, {&#10;	userId: &quot;user-42&quot;,&#10;	country: &quot;US&quot;,&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const variant = await env.FLAGS.getStringValue(&quot;checkout-flow&quot;, &quot;v1&quot;, {&#10;	userId: &quot;user-42&quot;,&#10;	country: &quot;US&quot;,&#10;});&#10;</code></pre>
 <h2 id="getnumbervalue"><code>getNumberValue()</code></h2>
 <p>Returns the flag value as a <code>number</code>.</p>
-<pre><code class="language-ts">getNumberValue(flagKey: string, defaultValue: number, context?: FlagshipEvaluationContext): Promise&lt;number&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">getNumberValue(flagKey: string, defaultValue: number, context?: FlagshipEvaluationContext): Promise&lt;number&gt;&#10;</code></pre>
 <table>
 <thead>
 <tr>
@@ -136,10 +147,10 @@
 </tr>
 </tbody>
 </table>
-<pre><code class="language-ts">const maxRetries = await env.FLAGS.getNumberValue(&quot;max-retries&quot;, 3, {&#10;	plan: &quot;enterprise&quot;,&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const maxRetries = await env.FLAGS.getNumberValue(&quot;max-retries&quot;, 3, {&#10;	plan: &quot;enterprise&quot;,&#10;});&#10;</code></pre>
 <h2 id="getobjectvalue"><code>getObjectValue()</code></h2>
 <p>Returns the flag value as a typed object. Use the generic parameter <code>T</code> to specify the expected shape.</p>
-<pre><code class="language-ts">getObjectValue&lt;T extends object&gt;(flagKey: string, defaultValue: T, context?: FlagshipEvaluationContext): Promise&lt;T&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">getObjectValue&lt;T extends object&gt;(flagKey: string, defaultValue: T, context?: FlagshipEvaluationContext): Promise&lt;T&gt;&#10;</code></pre>
 <table>
 <thead>
 <tr>
@@ -170,10 +181,10 @@
 </tr>
 </tbody>
 </table>
-<pre><code class="language-ts">interface ThemeConfig {&#10;	primaryColor: string;&#10;	fontSize: number;&#10;}&#10;&#10;const theme = await env.FLAGS.getObjectValue&lt;ThemeConfig&gt;(&#10;	&quot;theme-config&quot;,&#10;	{ primaryColor: &quot;#000&quot;, fontSize: 14 },&#10;	{ userId: &quot;user-42&quot; },&#10;);&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">interface ThemeConfig {&#10;	primaryColor: string;&#10;	fontSize: number;&#10;}&#10;&#10;const theme = await env.FLAGS.getObjectValue&lt;ThemeConfig&gt;(&#10;	&quot;theme-config&quot;,&#10;	{ primaryColor: &quot;#000&quot;, fontSize: 14 },&#10;	{ userId: &quot;user-42&quot; },&#10;);&#10;</code></pre>
 <h2 id="getbooleandetails"><code>getBooleanDetails()</code></h2>
 <p>Returns the flag value as a <code>boolean</code> with evaluation metadata.</p>
-<pre><code class="language-ts">getBooleanDetails(flagKey: string, defaultValue: boolean, context?: FlagshipEvaluationContext): Promise&lt;FlagshipEvaluationDetails&lt;boolean&gt;&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">getBooleanDetails(flagKey: string, defaultValue: boolean, context?: FlagshipEvaluationContext): Promise&lt;FlagshipEvaluationDetails&lt;boolean&gt;&gt;&#10;</code></pre>
 <table>
 <thead>
 <tr>
@@ -204,10 +215,10 @@
 </tr>
 </tbody>
 </table>
-<pre><code class="language-ts">const details = await env.FLAGS.getBooleanDetails(&quot;dark-mode&quot;, false, {&#10;	userId: &quot;user-42&quot;,&#10;});&#10;console.log(details.value); // true&#10;console.log(details.reason); // &quot;TARGETING_MATCH&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const details = await env.FLAGS.getBooleanDetails(&quot;dark-mode&quot;, false, {&#10;	userId: &quot;user-42&quot;,&#10;});&#10;console.log(details.value); // true&#10;console.log(details.reason); // &quot;TARGETING_MATCH&quot;&#10;</code></pre>
 <h2 id="getstringdetails"><code>getStringDetails()</code></h2>
 <p>Returns the flag value as a <code>string</code> with evaluation metadata.</p>
-<pre><code class="language-ts">getStringDetails(flagKey: string, defaultValue: string, context?: FlagshipEvaluationContext): Promise&lt;FlagshipEvaluationDetails&lt;string&gt;&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">getStringDetails(flagKey: string, defaultValue: string, context?: FlagshipEvaluationContext): Promise&lt;FlagshipEvaluationDetails&lt;string&gt;&gt;&#10;</code></pre>
 <table>
 <thead>
 <tr>
@@ -238,10 +249,10 @@
 </tr>
 </tbody>
 </table>
-<pre><code class="language-ts">const details = await env.FLAGS.getStringDetails(&quot;checkout-flow&quot;, &quot;v1&quot;, {&#10;	userId: &quot;user-42&quot;,&#10;});&#10;console.log(details.value); // &quot;v2&quot;&#10;console.log(details.variant); // &quot;new&quot;&#10;console.log(details.reason); // &quot;TARGETING_MATCH&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const details = await env.FLAGS.getStringDetails(&quot;checkout-flow&quot;, &quot;v1&quot;, {&#10;	userId: &quot;user-42&quot;,&#10;});&#10;console.log(details.value); // &quot;v2&quot;&#10;console.log(details.variant); // &quot;new&quot;&#10;console.log(details.reason); // &quot;TARGETING_MATCH&quot;&#10;</code></pre>
 <h2 id="getnumberdetails"><code>getNumberDetails()</code></h2>
 <p>Returns the flag value as a <code>number</code> with evaluation metadata.</p>
-<pre><code class="language-ts">getNumberDetails(flagKey: string, defaultValue: number, context?: FlagshipEvaluationContext): Promise&lt;FlagshipEvaluationDetails&lt;number&gt;&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">getNumberDetails(flagKey: string, defaultValue: number, context?: FlagshipEvaluationContext): Promise&lt;FlagshipEvaluationDetails&lt;number&gt;&gt;&#10;</code></pre>
 <table>
 <thead>
 <tr>
@@ -272,10 +283,10 @@
 </tr>
 </tbody>
 </table>
-<pre><code class="language-ts">const details = await env.FLAGS.getNumberDetails(&quot;max-retries&quot;, 3, {&#10;	plan: &quot;enterprise&quot;,&#10;});&#10;console.log(details.value); // 5&#10;console.log(details.reason); // &quot;TARGETING_MATCH&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const details = await env.FLAGS.getNumberDetails(&quot;max-retries&quot;, 3, {&#10;	plan: &quot;enterprise&quot;,&#10;});&#10;console.log(details.value); // 5&#10;console.log(details.reason); // &quot;TARGETING_MATCH&quot;&#10;</code></pre>
 <h2 id="getobjectdetails"><code>getObjectDetails()</code></h2>
 <p>Returns the flag value as a typed object with evaluation metadata. Use the generic parameter <code>T</code> to specify the expected shape.</p>
-<pre><code class="language-ts">getObjectDetails&lt;T extends object&gt;(flagKey: string, defaultValue: T, context?: FlagshipEvaluationContext): Promise&lt;FlagshipEvaluationDetails&lt;T&gt;&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">getObjectDetails&lt;T extends object&gt;(flagKey: string, defaultValue: T, context?: FlagshipEvaluationContext): Promise&lt;FlagshipEvaluationDetails&lt;T&gt;&gt;&#10;</code></pre>
 <table>
 <thead>
 <tr>
@@ -306,15 +317,15 @@
 </tr>
 </tbody>
 </table>
-<pre><code class="language-ts">interface ThemeConfig {&#10;	primaryColor: string;&#10;	fontSize: number;&#10;}&#10;&#10;const details = await env.FLAGS.getObjectDetails&lt;ThemeConfig&gt;(&#10;	&quot;theme-config&quot;,&#10;	{ primaryColor: &quot;#000&quot;, fontSize: 14 },&#10;	{ userId: &quot;user-42&quot; },&#10;);&#10;console.log(details.value); // { primaryColor: &quot;#0051FF&quot;, fontSize: 16 }&#10;console.log(details.variant); // &quot;brand-refresh&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">interface ThemeConfig {&#10;	primaryColor: string;&#10;	fontSize: number;&#10;}&#10;&#10;const details = await env.FLAGS.getObjectDetails&lt;ThemeConfig&gt;(&#10;	&quot;theme-config&quot;,&#10;	{ primaryColor: &quot;#000&quot;, fontSize: 14 },&#10;	{ userId: &quot;user-42&quot; },&#10;);&#10;console.log(details.value); // { primaryColor: &quot;#0051FF&quot;, fontSize: 16 }&#10;console.log(details.variant); // &quot;brand-refresh&quot;&#10;</code></pre>
 <h2 id="error-handling">Error handling</h2>
 <p>Typed evaluation methods return the <code>defaultValue</code> you provided for known evaluation failures, such as a missing flag or type mismatch. Unexpected runtime failures can still throw. Use the <code>*Details</code> methods to inspect known evaluation failures.</p>
 <h3 id="type-mismatch">Type mismatch</h3>
 <p>If you call a typed method on a flag with a different type (for example, <code>getBooleanValue</code> on a string flag), the method returns the default value. The <code>*Details</code> methods set <code>errorCode</code> to <code>&quot;TYPE_MISMATCH&quot;</code>.</p>
-<pre><code class="language-ts">// Flag &quot;checkout-flow&quot; is a string flag, but you call getBooleanDetails.&#10;const details = await env.FLAGS.getBooleanDetails(&quot;checkout-flow&quot;, false);&#10;console.log(details.value); // false (the default value)&#10;console.log(details.errorCode); // &quot;TYPE_MISMATCH&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">// Flag &quot;checkout-flow&quot; is a string flag, but you call getBooleanDetails.&#10;const details = await env.FLAGS.getBooleanDetails(&quot;checkout-flow&quot;, false);&#10;console.log(details.value); // false (the default value)&#10;console.log(details.errorCode); // &quot;TYPE_MISMATCH&quot;&#10;</code></pre>
 <h3 id="evaluation-failure">Evaluation failure</h3>
 <p>If evaluation fails for another reason, the method returns the default value. The <code>*Details</code> methods include an <code>errorCode</code> such as <code>&quot;FLAG_NOT_FOUND&quot;</code>, <code>&quot;INVALID_CONTEXT&quot;</code>, <code>&quot;PARSE_ERROR&quot;</code>, or <code>&quot;GENERAL&quot;</code>.</p>
-<pre><code class="language-ts">const details = await env.FLAGS.getStringDetails(&#10;	&quot;nonexistent-flag&quot;,&#10;	&quot;fallback&quot;,&#10;);&#10;console.log(details.value); // &quot;fallback&quot;&#10;console.log(details.errorCode); // &quot;FLAG_NOT_FOUND&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">const details = await env.FLAGS.getStringDetails(&#10;	&quot;nonexistent-flag&quot;,&#10;	&quot;fallback&quot;,&#10;);&#10;console.log(details.value); // &quot;fallback&quot;&#10;console.log(details.errorCode); // &quot;FLAG_NOT_FOUND&quot;&#10;</code></pre>
 <h2 id="parameters-reference">Parameters reference</h2>
 <p>The following table summarizes the parameters shared across all evaluation methods.</p>
 <table>

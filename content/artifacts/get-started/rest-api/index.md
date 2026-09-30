@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/artifacts/get-started/rest-api/
+  description: Create an Artifacts repo over HTTP.
+  full_title: Get started - REST API · Cloudflare Artifacts docs
+  head_html: <title>Get started - REST API · Cloudflare Artifacts docs</title><meta name="generator" content="Nift"><meta name="description" content="Create an Artifacts repo over HTTP."><link rel="canonical" href="https://developers.cloudflare.com/artifacts/get-started/rest-api/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/artifacts/get-started/rest-api/index.md"><meta property="og:title" content="Get started - REST API · Cloudflare Artifacts docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Create an Artifacts repo over HTTP."><meta property="og:url" content="https://developers.cloudflare.com/artifacts/get-started/rest-api/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Artifacts"><meta name="algolia_product_filter" content="Artifacts"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Get started"><meta name="algolia_content_type" content="Get started"><meta name="pcx_additional_products" content="Artifacts"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/artifacts/get-started/rest-api/#page","headline":"Get started - REST API \u00b7 Cloudflare Artifacts docs","description":"Create an Artifacts repo over HTTP.","url":"https://developers.cloudflare.com/artifacts/get-started/rest-api/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /artifacts/get-started/rest-api/
+  schema: 1
+---
 <p>Create an Artifacts repo with the REST API, then use a regular Git client to push and pull content.</p>
 <p>By the end of this guide, you will create a repo inside a namespace, read back the repo remote URL, push a commit, and clone the same repo with a standard Git client.</p>
 <p>Start by reading <a href="/artifacts/concepts/namespaces/">Namespaces</a>, then choose the namespace name you will use. This guide uses <code>default</code> in the examples.</p>
@@ -15,10 +26,10 @@
 <li>Export your environment variables</li>
 </ol></h2>
 <p>Set the following variables using your Cloudflare account ID and Artifacts API token:</p>
-<pre><code class="language-sh">export ARTIFACTS_NAMESPACE=&quot;default&quot;&#10;export ARTIFACTS_REPO=&quot;starter-repo&quot;&#10;export ACCOUNT_ID=&quot;&lt;YOUR_ACCOUNT_ID&gt;&quot;&#10;export CLOUDFLARE_API_TOKEN=&quot;&lt;YOUR_API_TOKEN&gt;&quot;&#10;export ARTIFACTS_BASE_URL=&quot;https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/artifacts/namespaces/$ARTIFACTS_NAMESPACE&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">export ARTIFACTS_NAMESPACE=&quot;default&quot;&#10;export ARTIFACTS_REPO=&quot;starter-repo&quot;&#10;export ACCOUNT_ID=&quot;&lt;YOUR_ACCOUNT_ID&gt;&quot;&#10;export CLOUDFLARE_API_TOKEN=&quot;&lt;YOUR_API_TOKEN&gt;&quot;&#10;export ARTIFACTS_BASE_URL=&quot;https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/artifacts/namespaces/$ARTIFACTS_NAMESPACE&quot;&#10;</code></pre>
 <p>Use a unique repo name each time you run this guide.</p>
 <p>Artifacts uses Bearer authentication for API requests:</p>
-<pre><code class="language-txt">Authorization: Bearer $CLOUDFLARE_API_TOKEN&#10;</code></pre>
+<pre tabindex="0"><code class="language-txt">Authorization: Bearer $CLOUDFLARE_API_TOKEN&#10;</code></pre>
 <h2 id="2-create-a-repo"><ol start="2">
 <li>Create a repo</li>
 </ol></h2>
@@ -30,26 +41,26 @@
 <li>Get the repo URL again</li>
 </ol></h2>
 <p>Fetch the repo metadata when you need to recover the remote URL later:</p>
-<pre><code class="language-bash">curl &quot;$ARTIFACTS_BASE_URL/repos/$ARTIFACTS_REPO&quot; \&#10;  &#45;-header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot;&#10;</code></pre>
-<pre><code class="language-json">{&#10;	&quot;result&quot;: {&#10;		&quot;id&quot;: &quot;repo_123&quot;,&#10;		&quot;name&quot;: &quot;starter-repo&quot;,&#10;		&quot;description&quot;: null,&#10;		&quot;default_branch&quot;: &quot;main&quot;,&#10;		&quot;created_at&quot;: &quot;&lt;ISO_TIMESTAMP&gt;&quot;,&#10;		&quot;updated_at&quot;: &quot;&lt;ISO_TIMESTAMP&gt;&quot;,&#10;		&quot;last_push_at&quot;: null,&#10;		&quot;source&quot;: null,&#10;		&quot;read_only&quot;: false,&#10;		&quot;remote&quot;: &quot;https://&lt;ACCOUNT_ID&gt;.artifacts.cloudflare.net/git/default/starter-repo.git&quot;&#10;	},&#10;	&quot;success&quot;: true,&#10;	&quot;errors&quot;: [],&#10;	&quot;messages&quot;: []&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl &quot;$ARTIFACTS_BASE_URL/repos/$ARTIFACTS_REPO&quot; \&#10;  &#45;-header &quot;Authorization: Bearer $CLOUDFLARE_API_TOKEN&quot;&#10;</code></pre>
+<pre tabindex="0"><code class="language-json">{&#10;	&quot;result&quot;: {&#10;		&quot;id&quot;: &quot;repo_123&quot;,&#10;		&quot;name&quot;: &quot;starter-repo&quot;,&#10;		&quot;description&quot;: null,&#10;		&quot;default_branch&quot;: &quot;main&quot;,&#10;		&quot;created_at&quot;: &quot;&lt;ISO_TIMESTAMP&gt;&quot;,&#10;		&quot;updated_at&quot;: &quot;&lt;ISO_TIMESTAMP&gt;&quot;,&#10;		&quot;last_push_at&quot;: null,&#10;		&quot;source&quot;: null,&#10;		&quot;read_only&quot;: false,&#10;		&quot;remote&quot;: &quot;https://&lt;ACCOUNT_ID&gt;.artifacts.cloudflare.net/git/default/starter-repo.git&quot;&#10;	},&#10;	&quot;success&quot;: true,&#10;	&quot;errors&quot;: [],&#10;	&quot;messages&quot;: []&#10;}&#10;</code></pre>
 <p>This endpoint returns repo metadata only. If you need a new repo token, mint one with <code>POST /tokens</code>.</p>
 <h2 id="4-push-your-first-commit-with-git"><ol start="4">
 <li>Push your first commit with git</li>
 </ol></h2>
 <p>Create a local repository and push it to the Artifacts remote:</p>
-<pre><code class="language-sh">mkdir artifacts-demo&#10;cd artifacts-demo&#10;git init -b main&#10;printf &#x27;# Artifacts demo\n&#x27; &gt; README.md&#10;git add README.md&#10;git commit -m &quot;Initial commit&quot;&#10;git remote add origin &quot;$ARTIFACTS_REMOTE&quot;&#10;git -c http.extraHeader=&quot;Authorization: Bearer $ARTIFACTS_TOKEN&quot; push -u origin main&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">mkdir artifacts-demo&#10;cd artifacts-demo&#10;git init -b main&#10;printf &#x27;# Artifacts demo\n&#x27; &gt; README.md&#10;git add README.md&#10;git commit -m &quot;Initial commit&quot;&#10;git remote add origin &quot;$ARTIFACTS_REMOTE&quot;&#10;git -c http.extraHeader=&quot;Authorization: Bearer $ARTIFACTS_TOKEN&quot; push -u origin main&#10;</code></pre>
 <p>This uses the recommended header-based form and keeps the token out of the remote URL.</p>
 <p>If you need a self-contained remote URL for a short-lived command, build one from the token secret instead:</p>
-<pre><code class="language-sh">export ARTIFACTS_TOKEN_SECRET=&quot;${ARTIFACTS_TOKEN%%\?expires=*}&quot;&#10;export ARTIFACTS_AUTH_REMOTE=&quot;https://x:${ARTIFACTS_TOKEN_SECRET}@${ARTIFACTS_REMOTE#https://}&quot;&#10;git push &quot;$ARTIFACTS_AUTH_REMOTE&quot; HEAD:main&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">export ARTIFACTS_TOKEN_SECRET=&quot;${ARTIFACTS_TOKEN%%\?expires=*}&quot;&#10;export ARTIFACTS_AUTH_REMOTE=&quot;https://x:${ARTIFACTS_TOKEN_SECRET}@${ARTIFACTS_REMOTE#https://}&quot;&#10;git push &quot;$ARTIFACTS_AUTH_REMOTE&quot; HEAD:main&#10;</code></pre>
 <h2 id="5-pull-the-repo-with-a-regular-git-client"><ol start="5">
 <li>Pull the repo with a regular git client</li>
 </ol></h2>
 <p>Clone the same repo into a second directory:</p>
-<pre><code class="language-sh">cd ..&#10;git -c http.extraHeader=&quot;Authorization: Bearer $ARTIFACTS_TOKEN&quot; clone &quot;$ARTIFACTS_REMOTE&quot; artifacts-clone&#10;git -C artifacts-clone log --oneline -1&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">cd ..&#10;git -c http.extraHeader=&quot;Authorization: Bearer $ARTIFACTS_TOKEN&quot; clone &quot;$ARTIFACTS_REMOTE&quot; artifacts-clone&#10;git -C artifacts-clone log --oneline -1&#10;</code></pre>
 <p>You should see the commit you pushed in the previous step.</p>
 <p>You can also clone with a self-contained remote URL for a short-lived command:</p>
-<pre><code class="language-sh">git clone &quot;$ARTIFACTS_AUTH_REMOTE&quot; artifacts-clone&#10;</code></pre>
+<pre tabindex="0"><code class="language-sh">git clone &quot;$ARTIFACTS_AUTH_REMOTE&quot; artifacts-clone&#10;</code></pre>
 <h2 id="next-steps">Next steps</h2>
-<p><a class="nb-card nb-link-card" href="/artifacts/api/rest-api/"><h3 id="card-rest-api-reference-artifacts-api-rest-api">REST API reference</h3><p>Review every repo and token endpoint with request and response examples.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/artifacts/examples/git-client/"><h3 id="card-git-client-example-artifacts-examples-git-client">Git client example</h3><p>Use repo discovery and token minting with a standard Git client flow.</p></a></p>
-<p><a class="nb-card nb-link-card" href="/artifacts/concepts/best-practices/"><h3 id="card-best-practices-artifacts-concepts-best-practices">Best practices</h3><p>Use repo isolation, least-privilege tokens, and namespace separation effectively.</p></a></p>
+<div class="nb-card nb-link-card"><h3 id="card-rest-api-reference-artifacts-api-rest-api"><a href="/artifacts/api/rest-api/">REST API reference</a></h3><p>Review every repo and token endpoint with request and response examples.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-git-client-example-artifacts-examples-git-client"><a href="/artifacts/examples/git-client/">Git client example</a></h3><p>Use repo discovery and token minting with a standard Git client flow.</p></div>
+<div class="nb-card nb-link-card"><h3 id="card-best-practices-artifacts-concepts-best-practices"><a href="/artifacts/concepts/best-practices/">Best practices</a></h3><p>Use repo isolation, least-privilege tokens, and namespace separation effectively.</p></div>

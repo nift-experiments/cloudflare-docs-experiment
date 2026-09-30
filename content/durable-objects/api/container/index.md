@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/durable-objects/api/container/
+  description: Access and manage containers associated with a Durable Object, including start, stop, and interaction methods.
+  full_title: Durable Object Container · Cloudflare Durable Objects docs
+  head_html: <title>Durable Object Container · Cloudflare Durable Objects docs</title><meta name="generator" content="Nift"><meta name="description" content="Access and manage containers associated with a Durable Object, including start, stop, and interaction methods."><link rel="canonical" href="https://developers.cloudflare.com/durable-objects/api/container/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/durable-objects/api/container/index.md"><meta property="og:title" content="Durable Object Container · Cloudflare Durable Objects docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Access and manage containers associated with a Durable Object, including start, stop, and interaction methods."><meta property="og:url" content="https://developers.cloudflare.com/durable-objects/api/container/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Durable Objects"><meta name="algolia_product_filter" content="Durable Objects"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Concept"><meta name="algolia_content_type" content="Concept"><meta name="pcx_additional_products" content="Durable Objects"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/durable-objects/api/container/#page","headline":"Durable Object Container \u00b7 Cloudflare Durable Objects docs","description":"Access and manage containers associated with a Durable Object, including start, stop, and interaction methods.","url":"https://developers.cloudflare.com/durable-objects/api/container/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /durable-objects/api/container/
+  schema: 1
+---
 <h2 id="description">Description</h2>
 <p>Each <a href="/containers/">container</a> is managed by a Durable Object. The <a href="/containers/reference/container-class/"><code>Container</code> class</a> from <code>@cloudflare/containers</code> extends <code>DurableObject</code> and handles lifecycle management, port readiness, and sleep timeouts for you. The Durable Object manages routing, persistent state, and lifecycle hooks, while the container process runs your image inside a Linux VM.</p>
 <p>The low-level API documented on this page is available on <code>this.ctx.container</code> inside any Durable Object class that has a container binding. Use it when you need direct control over the container process or cannot use the <code>Container</code> class.</p>
@@ -8,12 +19,12 @@
 <h2 id="attributes">Attributes</h2>
 <h3 id="running"><code>running</code></h3>
 <p><code>running</code> returns <code>true</code> if the container is currently running. It does not ensure that the container has fully started and ready to accept requests.</p>
-<pre><code class="language-js">	this.ctx.container.running;&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">	this.ctx.container.running;&#10;</code></pre>
 <h2 id="methods">Methods</h2>
 <h3 id="start"><code>start</code></h3>
 <p><code>start</code> boots a container. This method does not block until the container is fully started.
 You may want to confirm the container is ready to accept requests before using it.</p>
-<pre><code class="language-js">this.ctx.container.start({&#10;	env: {&#10;		FOO: &quot;bar&quot;,&#10;	},&#10;	enableInternet: false,&#10;	entrypoint: [&quot;node&quot;, &quot;server.js&quot;],&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">this.ctx.container.start({&#10;	env: {&#10;		FOO: &quot;bar&quot;,&#10;	},&#10;	enableInternet: false,&#10;	entrypoint: [&quot;node&quot;, &quot;server.js&quot;],&#10;});&#10;</code></pre>
 <h4 id="parameters">Parameters</h4>
 <ul>
 <li><code>options</code> (optional): An object with the following properties:
@@ -31,7 +42,7 @@ You may want to confirm the container is ready to accept requests before using i
 <h3 id="exec"><code>exec</code></h3>
 <p><code>exec</code> starts another process inside an already-running Container. It does not start a stopped Container.</p>
 <p>The following example calls <code>this.ctx.container.exec()</code> inside a class extending <code>Container</code> from <code>@cloudflare/containers</code>. In RPC methods, check <code>this.ctx.container.running</code> and call <code>await this.start()</code> when needed. You can also use the <code>onStart()</code> hook to run any series of commands whenever the Container starts.</p>
-<pre><code class="language-ts">exec(&#10;  cmd: string[],&#10;  options?: ContainerExecOptions,&#10;): Promise&lt;ExecProcess&gt;&#10;</code></pre>
+<pre tabindex="0"><code class="language-ts">exec(&#10;  cmd: string[],&#10;  options?: ContainerExecOptions,&#10;): Promise&lt;ExecProcess&gt;&#10;</code></pre>
 <p>The <code>exec</code> operation starts the executable directly with the provided arguments. It does not start a shell or interpret pipes, redirects, expansion, or other shell syntax. Invoke Bash explicitly with <code>[&quot;bash&quot;, &quot;-lc&quot;, &quot;&lt;COMMAND&gt;&quot;]</code> when Bash exists in the image. Use <code>[&quot;sh&quot;, &quot;-c&quot;, &quot;&lt;COMMAND&gt;&quot;]</code> for images with only a Portable Operating System Interface (POSIX) shell.</p>
 <p>The following RPC method starts the Container before executing a command:</p>
 <div class="nb-type-script-example">
@@ -77,7 +88,7 @@ You may want to confirm the container is ready to accept requests before using i
 <p>For task-oriented examples, refer to <a href="/containers/guides/execute-commands/">Execute commands</a>.</p>
 <h3 id="destroy"><code>destroy</code></h3>
 <p><code>destroy</code> stops the container and optionally returns a custom error message to the <code>monitor()</code> error callback.</p>
-<pre><code class="language-js">this.ctx.container.destroy(&quot;Manually Destroyed&quot;);&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">this.ctx.container.destroy(&quot;Manually Destroyed&quot;);&#10;</code></pre>
 <h4 id="parameters-2">Parameters</h4>
 <ul>
 <li><code>error</code> (optional): A string that will be sent to the error handler of the <code>monitor</code> method. This is useful for logging or debugging purposes.</li>
@@ -88,7 +99,7 @@ You may want to confirm the container is ready to accept requests before using i
 </ul>
 <h3 id="signal"><code>signal</code></h3>
 <p><code>signal</code> sends an IPC signal to the container, such as SIGKILL or SIGTERM. This is useful for stopping the container gracefully or forcefully.</p>
-<pre><code class="language-js">const SIGTERM = 15;&#10;this.ctx.container.signal(SIGTERM);&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">const SIGTERM = 15;&#10;this.ctx.container.signal(SIGTERM);&#10;</code></pre>
 <h4 id="parameters-3">Parameters</h4>
 <ul>
 <li><code>signal</code>: a number representing the signal to send to the container. This is typically a POSIX signal number, such as SIGTERM (15) or SIGKILL (9).</li>
@@ -99,8 +110,8 @@ You may want to confirm the container is ready to accept requests before using i
 </ul>
 <h3 id="gettcpport"><code>getTcpPort</code></h3>
 <p><code>getTcpPort</code> returns a TCP port from the container. This can be used to communicate with the container over TCP and HTTP.</p>
-<pre><code class="language-js">const port = this.ctx.container.getTcpPort(8080);&#10;const res = await port.fetch(&quot;http://container/set-state&quot;, {&#10;	body: initialState,&#10;	method: &quot;POST&quot;,&#10;});&#10;</code></pre>
-<pre><code class="language-js">const conn = this.ctx.container.getTcpPort(8080).connect(&quot;10.0.0.1:8080&quot;);&#10;await conn.opened;&#10;&#10;try {&#10;	if (request.body) {&#10;		await request.body.pipeTo(conn.writable);&#10;	}&#10;	return new Response(conn.readable);&#10;} catch (err) {&#10;	console.error(&quot;Request body piping failed:&quot;, err);&#10;	return new Response(&quot;Failed to proxy request body&quot;, { status: 502 });&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">const port = this.ctx.container.getTcpPort(8080);&#10;const res = await port.fetch(&quot;http://container/set-state&quot;, {&#10;	body: initialState,&#10;	method: &quot;POST&quot;,&#10;});&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">const conn = this.ctx.container.getTcpPort(8080).connect(&quot;10.0.0.1:8080&quot;);&#10;await conn.opened;&#10;&#10;try {&#10;	if (request.body) {&#10;		await request.body.pipeTo(conn.writable);&#10;	}&#10;	return new Response(conn.readable);&#10;} catch (err) {&#10;	console.error(&quot;Request body piping failed:&quot;, err);&#10;	return new Response(&quot;Failed to proxy request body&quot;, { status: 502 });&#10;}&#10;</code></pre>
 <h4 id="parameters-4">Parameters</h4>
 <ul>
 <li><code>port</code> (number): a TCP port number to use for communication with the container.</li>
@@ -112,7 +123,7 @@ You may want to confirm the container is ready to accept requests before using i
 <h3 id="monitor"><code>monitor</code></h3>
 <p><code>monitor</code> returns a promise that resolves when a container exits and errors if a container errors. This is useful for setting up
 callbacks to handle container status changes in your Workers code.</p>
-<pre><code class="language-js">class MyContainer extends DurableObject {&#10;	constructor(ctx, env) {&#10;		super(ctx, env);&#10;		function onContainerExit() {&#10;			console.log(&quot;Container exited&quot;);&#10;		}&#10;&#10;		// the &quot;err&quot; value can be customized by the destroy() method&#10;		async function onContainerError(err) {&#10;			console.log(&quot;Container errored&quot;, err);&#10;		}&#10;&#10;		this.ctx.container.start();&#10;		this.ctx.container.monitor().then(onContainerExit).catch(onContainerError);&#10;	}&#10;}&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">class MyContainer extends DurableObject {&#10;	constructor(ctx, env) {&#10;		super(ctx, env);&#10;		function onContainerExit() {&#10;			console.log(&quot;Container exited&quot;);&#10;		}&#10;&#10;		// the &quot;err&quot; value can be customized by the destroy() method&#10;		async function onContainerError(err) {&#10;			console.log(&quot;Container errored&quot;, err);&#10;		}&#10;&#10;		this.ctx.container.start();&#10;		this.ctx.container.monitor().then(onContainerExit).catch(onContainerError);&#10;	}&#10;}&#10;</code></pre>
 <h4 id="parameters-5">Parameters</h4>
 <ul>
 <li>None</li>
@@ -123,7 +134,7 @@ callbacks to handle container status changes in your Workers code.</p>
 </ul>
 <h3 id="interceptoutboundhttp"><code>interceptOutboundHttp</code></h3>
 <p><code>interceptOutboundHttp</code> routes outbound HTTP requests matching a hostname, hostname glob, IP address, IP:port, or CIDR range through a <code>WorkerEntrypoint</code>. Can be called before or after starting the container. Open connections pick up the new handler without being dropped.</p>
-<pre><code class="language-js">const worker = this.ctx.exports.MyWorker({ props: { message: &quot;hello&quot; } });&#10;&#10;// Match a specific hostname&#10;this.ctx.container.interceptOutboundHttp(&quot;api.example.com&quot;, worker);&#10;&#10;// Match a hostname glob pattern&#10;this.ctx.container.interceptOutboundHttp(&quot;*.example.com&quot;, worker);&#10;&#10;// Match an IP:port&#10;await this.ctx.container.interceptOutboundHttp(&quot;15.0.0.1:80&quot;, worker);&#10;&#10;// Match a CIDR range (IPv4 and IPv6)&#10;await this.ctx.container.interceptOutboundHttp(&quot;123.123.123.123/23&quot;, worker);&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">const worker = this.ctx.exports.MyWorker({ props: { message: &quot;hello&quot; } });&#10;&#10;// Match a specific hostname&#10;this.ctx.container.interceptOutboundHttp(&quot;api.example.com&quot;, worker);&#10;&#10;// Match a hostname glob pattern&#10;this.ctx.container.interceptOutboundHttp(&quot;*.example.com&quot;, worker);&#10;&#10;// Match an IP:port&#10;await this.ctx.container.interceptOutboundHttp(&quot;15.0.0.1:80&quot;, worker);&#10;&#10;// Match a CIDR range (IPv4 and IPv6)&#10;await this.ctx.container.interceptOutboundHttp(&quot;123.123.123.123/23&quot;, worker);&#10;</code></pre>
 <h4 id="parameters-6">Parameters</h4>
 <ul>
 <li><code>target</code> (string): A hostname, hostname glob (for example, <code>*.example.com</code>), IP address, IP:port, or CIDR range to match.</li>
@@ -135,7 +146,7 @@ callbacks to handle container status changes in your Workers code.</p>
 </ul>
 <h3 id="interceptalloutboundhttp"><code>interceptAllOutboundHttp</code></h3>
 <p><code>interceptAllOutboundHttp</code> routes all outbound HTTP requests from the container through a <code>WorkerEntrypoint</code>, regardless of destination.</p>
-<pre><code class="language-js">await this.ctx.container.interceptAllOutboundHttp(worker);&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">await this.ctx.container.interceptAllOutboundHttp(worker);&#10;</code></pre>
 <h4 id="parameters-7">Parameters</h4>
 <ul>
 <li><code>worker</code> (WorkerEntrypoint): A <code>WorkerEntrypoint</code> instance to handle all outbound HTTP requests.</li>
@@ -147,7 +158,7 @@ callbacks to handle container status changes in your Workers code.</p>
 <h3 id="interceptoutboundhttps"><code>interceptOutboundHttps</code></h3>
 <p><code>interceptOutboundHttps</code> routes outbound HTTPS requests matching a hostname or hostname glob through a <code>WorkerEntrypoint</code>. Works the same way as <code>interceptOutboundHttp</code> but for HTTPS traffic. The container must trust the CA certificate at <code>/etc/cloudflare/certs/cloudflare-containers-ca.crt</code> for HTTPS interception to work.</p>
 <p>Supports glob patterns where <code>*</code> matches any sequence of characters.</p>
-<pre><code class="language-js">const worker = this.ctx.exports.MyWorker({ props: {} });&#10;&#10;// Match a specific hostname&#10;this.ctx.container.interceptOutboundHttps(&quot;api.example.com&quot;, worker);&#10;&#10;// Match a hostname glob pattern&#10;this.ctx.container.interceptOutboundHttps(&quot;*.example.com&quot;, worker);&#10;&#10;// Intercept all HTTPS traffic&#10;this.ctx.container.interceptOutboundHttps(&quot;*&quot;, worker);&#10;</code></pre>
+<pre tabindex="0"><code class="language-js">const worker = this.ctx.exports.MyWorker({ props: {} });&#10;&#10;// Match a specific hostname&#10;this.ctx.container.interceptOutboundHttps(&quot;api.example.com&quot;, worker);&#10;&#10;// Match a hostname glob pattern&#10;this.ctx.container.interceptOutboundHttps(&quot;*.example.com&quot;, worker);&#10;&#10;// Intercept all HTTPS traffic&#10;this.ctx.container.interceptOutboundHttps(&quot;*&quot;, worker);&#10;</code></pre>
 <h4 id="parameters-8">Parameters</h4>
 <ul>
 <li><code>target</code> (string): A hostname or hostname glob pattern to match. Use <code>*</code> to intercept all HTTPS traffic.</li>

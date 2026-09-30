@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/dns/private-origins/set-up-via-cloudflare-wan/
+  description: Proxy public hostnames to private origins through a Cloudflare WAN IPsec tunnel.
+  full_title: Set up a private origin via Cloudflare WAN · Cloudflare DNS docs
+  head_html: <title>Set up a private origin via Cloudflare WAN · Cloudflare DNS docs</title><meta name="generator" content="Nift"><meta name="description" content="Proxy public hostnames to private origins through a Cloudflare WAN IPsec tunnel."><link rel="canonical" href="https://developers.cloudflare.com/dns/private-origins/set-up-via-cloudflare-wan/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/dns/private-origins/set-up-via-cloudflare-wan/index.md"><meta property="og:title" content="Set up a private origin via Cloudflare WAN · Cloudflare DNS docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Proxy public hostnames to private origins through a Cloudflare WAN IPsec tunnel."><meta property="og:url" content="https://developers.cloudflare.com/dns/private-origins/set-up-via-cloudflare-wan/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="DNS"><meta name="algolia_product_filter" content="DNS"><meta name="pcx_content_group" content="Application performance"><meta name="pcx_content_type" content="Tutorial"><meta name="algolia_content_type" content="Tutorial"><meta name="pcx_additional_products" content="DNS"><meta name="pcx_tags" content="Private networks"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/dns/private-origins/set-up-via-cloudflare-wan/#page","headline":"Set up a private origin via Cloudflare WAN \u00b7 Cloudflare DNS docs","description":"Proxy public hostnames to private origins through a Cloudflare WAN IPsec tunnel.","url":"https://developers.cloudflare.com/dns/private-origins/set-up-via-cloudflare-wan/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"},"keywords":["Private networks"]}</script>
+  markdown: true
+  noindex: false
+  route: /dns/private-origins/set-up-via-cloudflare-wan/
+  schema: 1
+---
 <p>This guide walks you through proxying public hostnames to origins on a private network. The private network is reachable through a <a href="/cloudflare-wan/">Cloudflare WAN</a> (formerly Magic WAN) IPsec tunnel. The CDN, WAF, Cache, and other proxied features apply to this traffic the same way they apply to traffic destined for public origins.</p>
 <aside class="nb-aside note">
 <h3 class="nb-aside-title" id="closed-beta">Closed beta</h3>
@@ -35,11 +46,11 @@
 <p>In the Cloudflare dashboard, confirm that your IPsec tunnel is healthy. Refer to <a href="/cloudflare-wan/configuration/common-settings/check-tunnel-health-dashboard/">Check tunnel health on the dashboard</a>.</p>
 <h3 id="send-a-request-from-an-external-client">Send a request from an external client</h3>
 <p>From a machine outside your private network, send an HTTPS request to the proxied hostname:</p>
-<pre><code class="language-bash">curl -v https://&lt;YOUR_DOMAIN&gt;/&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">curl -v https://&lt;YOUR_DOMAIN&gt;/&#10;</code></pre>
 <p>A successful response confirms that Cloudflare accepted the request, applied your proxied features, and reached the origin through the tunnel.</p>
 <h3 id="confirm-traffic-on-the-origin">Confirm traffic on the origin</h3>
 <p>On the origin VM, verify that requests are arriving from the Cloudflare Source IP range. For example, to watch for incoming traffic from <code>100.64.0.0/12</code> on port <code>443</code>:</p>
-<pre><code class="language-bash">sudo tcpdump -n -i any &#x27;src net 100.64.0.0/12 and dst port 443&#x27;&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">sudo tcpdump -n -i any &#x27;src net 100.64.0.0/12 and dst port 443&#x27;&#10;</code></pre>
 <p>Replace <code>100.64.0.0/12</code> with the Source IP range configured for your account, and adjust the port to match the listener on your origin.</p>
 <h2 id="common-pitfalls">Common pitfalls</h2>
 <table>

@@ -1,3 +1,14 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/workers/versions-and-deployments/preview-urls/
+  description: Preview URLs allow you to preview new versions of your project without deploying it to production.
+  full_title: Preview URLs · Cloudflare Workers docs
+  head_html: <title>Preview URLs · Cloudflare Workers docs</title><meta name="generator" content="Nift"><meta name="description" content="Preview URLs allow you to preview new versions of your project without deploying it to production."><link rel="canonical" href="https://developers.cloudflare.com/workers/versions-and-deployments/preview-urls/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/workers/versions-and-deployments/preview-urls/index.md"><meta property="og:title" content="Preview URLs · Cloudflare Workers docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Preview URLs allow you to preview new versions of your project without deploying it to production."><meta property="og:url" content="https://developers.cloudflare.com/workers/versions-and-deployments/preview-urls/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Workers"><meta name="algolia_product_filter" content="Workers"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Configuration"><meta name="algolia_content_type" content="Configuration"><meta name="pcx_additional_products" content="Workers"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/workers/versions-and-deployments/preview-urls/#page","headline":"Preview URLs \u00b7 Cloudflare Workers docs","description":"Preview URLs allow you to preview new versions of your project without deploying it to production.","url":"https://developers.cloudflare.com/workers/versions-and-deployments/preview-urls/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /workers/versions-and-deployments/preview-urls/
+  schema: 1
+---
 <p>Preview URLs allow you to preview new versions of your Worker without deploying it to production.</p>
 <p>There are two types of preview URLs:</p>
 <ul>
@@ -47,7 +58,7 @@
 </aside>
 <h4 id="create-an-alias">Create an Alias</h4>
 <p>Aliases may be created during <code>versions upload</code>, by providing the <code>--preview-alias</code> flag with a valid alias name:</p>
-<pre><code class="language-bash">wrangler versions upload --preview-alias staging&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">wrangler versions upload --preview-alias staging&#10;</code></pre>
 <p>The resulting alias would be associated with this version, and immediately available at:
 <code>staging-&lt;WORKER_NAME&gt;.&lt;SUBDOMAIN&gt;.workers.dev</code></p>
 <h4 id="rules-and-limitations">Rules and limitations</h4>

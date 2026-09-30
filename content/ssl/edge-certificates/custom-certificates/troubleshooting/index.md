@@ -1,16 +1,27 @@
+---
+cp9:
+  canonical: https://developers.cloudflare.com/ssl/edge-certificates/custom-certificates/troubleshooting/
+  description: Troubleshoot issues with custom certificates.
+  full_title: Troubleshooting · Cloudflare SSL/TLS docs
+  head_html: <title>Troubleshooting · Cloudflare SSL/TLS docs</title><meta name="generator" content="Nift"><meta name="description" content="Troubleshoot issues with custom certificates."><link rel="canonical" href="https://developers.cloudflare.com/ssl/edge-certificates/custom-certificates/troubleshooting/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/ssl/edge-certificates/custom-certificates/troubleshooting/index.md"><meta property="og:title" content="Troubleshooting · Cloudflare SSL/TLS docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Troubleshoot issues with custom certificates."><meta property="og:url" content="https://developers.cloudflare.com/ssl/edge-certificates/custom-certificates/troubleshooting/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="SSL/TLS"><meta name="algolia_product_filter" content="SSL/TLS"><meta name="pcx_content_group" content="Application performance"><meta name="pcx_content_type" content="Troubleshooting"><meta name="algolia_content_type" content="Troubleshooting"><meta name="pcx_additional_products" content="SSL/TLS"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/ssl/edge-certificates/custom-certificates/troubleshooting/#page","headline":"Troubleshooting \u00b7 Cloudflare SSL/TLS docs","description":"Troubleshoot issues with custom certificates.","url":"https://developers.cloudflare.com/ssl/edge-certificates/custom-certificates/troubleshooting/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+  markdown: true
+  noindex: false
+  route: /ssl/edge-certificates/custom-certificates/troubleshooting/
+  schema: 1
+---
 <h2 id="generic-troubleshooting">Generic troubleshooting</h2>
 <h3 id="make-sure-your-key-and-certificate-match">Make sure your key and certificate match</h3>
 <p>You can use an external tool such as the <a href="https://www.sslshopper.com/certificate-key-matcher.html">SSLShopper Certificate Key Matcher</a> to check your certificate and make sure the key matches.</p>
 <p>Alternatively, use <code>openssl</code> to verify the match by comparing the public key hash of both files. This method works for both RSA and ECDSA certificates:</p>
-<pre><code class="language-bash">openssl x509 -noout -pubkey -in certificate.crt | openssl md5&#10;openssl pkey -pubout -in private.key | openssl md5&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">openssl x509 -noout -pubkey -in certificate.crt | openssl md5&#10;openssl pkey -pubout -in private.key | openssl md5&#10;</code></pre>
 <p>If the two outputs match, the certificate and key are a valid pair.</p>
 <h3 id="check-the-certificate-details">Check the certificate details</h3>
 <p>You can use <code>openssl</code> to check all the details of your certificate:</p>
-<pre><code class="language-bash">openssl x509 -in certificate.crt -noout -text&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">openssl x509 -in certificate.crt -noout -text&#10;</code></pre>
 <p>Then, make sure all the information is correct before uploading.</p>
 <h3 id="remove-password-from-private-key">Remove password from private key</h3>
 <p>Cloudflare does not accept password-protected private keys. If your private key requires a password, remove it before uploading. The following command works for both RSA and ECDSA keys:</p>
-<pre><code class="language-bash">openssl pkey -in protected.key -out unprotected.key&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">openssl pkey -in protected.key -out unprotected.key&#10;</code></pre>
 <p>Use the <code>unprotected.key</code> file when uploading to Cloudflare. For detailed instructions, refer to <a href="/ssl/edge-certificates/custom-certificates/remove-file-key-password/">Remove key file password</a>.</p>
 <h3 id="private-key-format-requirements">Private key format requirements</h3>
 <p>Private keys must be in one of the following unencrypted formats:</p>
@@ -36,7 +47,7 @@
 <p>In the case of an update with the <a href="/api/resources/custom_certificates/methods/edit/">PATCH API call</a>, it can mean the path parameter <code>{custom_certificate_id}</code> is invalid.</p>
 <p><strong>Solution</strong></p>
 <p>Carefully check the content of the certificate. You may use <code>openssl</code> to check all the details of your certificate:</p>
-<pre><code class="language-bash">openssl x509 -in certificate.crt -noout -text&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">openssl x509 -in certificate.crt -noout -text&#10;</code></pre>
 <p>When using the API, carefully check the <code>{custom_certificate_id}</code> path parameter. You can confirm the certificate ID by <a href="/api/resources/custom_certificates/methods/list/">listing the existing custom certificates</a> (<code>id</code> in the response).</p>
 <h3 id="you-have-reached-the-maximum-number-of-custom-certificates-code-1212">You have reached the maximum number of custom certificates. (Code: 1212)</h3>
 <p><strong>Root cause</strong></p>
@@ -94,7 +105,7 @@
 <p>Cloudflare verifies that uploaded custom certificates include a hostname for the associated zone. Moreover, this hostname must be included as a Subject Alternative Name (SAN). This is following the standard set by the <a href="https://cabforum.org/wp-content/uploads/BRv1.2.5.pdf#page=16">CA/Browser Forum</a>.</p>
 <p><strong>Solution</strong></p>
 <p>Make sure your certificate contains a Subject Alternative Name (SAN) specifying a hostname in your zone. You can use the <code>openssl</code> command below and look for <code>Subject Alternative Name</code> in the output.</p>
-<pre><code class="language-bash">openssl x509 -in certificateFile.pem -noout -text&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">openssl x509 -in certificateFile.pem -noout -text&#10;</code></pre>
 <p>If it does not exist, you will need to request a new certificate.</p>
 <h3 id="the-private-key-you-uploaded-is-invalid-please-check-your-input-and-try-again-code-2106">The private key you uploaded is invalid. Please check your input and try again. (Code: 2106)</h3>
 <p><strong>Root cause</strong></p>
@@ -108,7 +119,7 @@
 <p>The certificate and private key you uploaded do not form a valid pair. The private key does not correspond to the public key in the certificate. This can happen when the wrong key file is selected during upload.</p>
 <p><strong>Solution</strong></p>
 <p>Ensure the private key corresponds to the certificate you are uploading. You can verify this by comparing the public key hash of both files. This method works for both RSA and ECDSA certificates:</p>
-<pre><code class="language-bash">openssl x509 -noout -pubkey -in certificate.crt | openssl md5&#10;openssl pkey -pubout -in private.key | openssl md5&#10;</code></pre>
+<pre tabindex="0"><code class="language-bash">openssl x509 -noout -pubkey -in certificate.crt | openssl md5&#10;openssl pkey -pubout -in private.key | openssl md5&#10;</code></pre>
 <p>If the outputs do not match, you have mismatched the certificate and key.</p>
 <h3 id="an-unknown-error-has-occurred-code-2000">An unknown error has occurred. (Code: 2000)</h3>
 <p><strong>Root cause</strong></p>

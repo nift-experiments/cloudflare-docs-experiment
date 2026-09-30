@@ -1,6 +1,15 @@
-<p>When Email security detects a <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></p>
-@markup("md", "content/.markup/bodies/8568.md")
-</div> email, the metadata of the detection can be sent directly into your instance of Sumo Logic. This document outlines the steps required to integrate Email security with Sumo Logic.
+---
+cp9:
+  canonical: https://developers.cloudflare.com/email-security/reporting/siem-integration/sumo-logic-integration-guide/
+  description: Sumo Logic integration guide
+  full_title: Sumo Logic · Cloudflare Email security (formerly Area 1) docs
+  head_html: <title>Sumo Logic · Cloudflare Email security (formerly Area 1) docs</title><meta name="generator" content="Nift"><meta name="description" content="Sumo Logic integration guide"><meta name="robots" content="noindex"><link rel="canonical" href="https://developers.cloudflare.com/email-security/reporting/siem-integration/sumo-logic-integration-guide/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/email-security/reporting/siem-integration/sumo-logic-integration-guide/index.md"><meta property="og:title" content="Sumo Logic · Cloudflare Email security (formerly Area 1) docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Sumo Logic integration guide"><meta property="og:url" content="https://developers.cloudflare.com/email-security/reporting/siem-integration/sumo-logic-integration-guide/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Email security (formerly Area 1)"><meta name="algolia_product_filter" content="Email security (formerly Area 1)"><meta name="pcx_content_group" content="Cloudflare One"><meta name="pcx_content_type" content="Integration guide"><meta name="algolia_content_type" content="Integration guide"><meta name="pcx_additional_products" content="Email security (formerly Area 1)">
+  markdown: true
+  noindex: true
+  route: /email-security/reporting/siem-integration/sumo-logic-integration-guide/
+  schema: 1
+---
+<p>When Email security detects a <span class="nb-glossary-tooltip" title="phishing">phishing</span> email, the metadata of the detection can be sent directly into your instance of Sumo Logic. This document outlines the steps required to integrate Email security with Sumo Logic.</p>
 <p><img src="/assets/upstream/images/email-security/siem-integration/sumo-logic/opening-sumo-logic.png" alt="A diagram outlining what happens when Email security detects a phishing email and sends it to Sumo Logic." /></p>
 <h2 id="1-configure-the-sumologic-collector"><ol>
 <li>Configure the Sumologic Collector</li>
@@ -59,13 +68,11 @@
 <ul>
 <li><strong>App type</strong>: Select <strong>SIEM</strong> &gt; <strong>Splunk</strong>. In <strong>Auth code</strong>, enter <code>Sumologic</code>.</li>
 <li><strong>Target</strong>: Enter the HTTP endpoint you saved in the previous section.</li>
-<li>For the <div class="nb-interactive-component" data-cf-component="GlossaryTooltip"></li>
+<li>For the <span class="nb-glossary-tooltip" title="disposition">dispositions</span> (<code>MALICIOUS</code>, <code>SUSPICIOUS</code>, <code>SPOOF</code>, <code>SPAM</code>, <code>BULK</code>) choose which (if any) you want to send to the webhook. Sending <code>SPAM</code> and <code>BULK</code> dispositions will generate a high number of events.</li>
 </ul>
 </li>
+<li>Select <strong>Publish Webhook</strong>.</li>
 </ol>
-@markup("md", "content/.markup/bodies/8569.md")
-</div> (`MALICIOUS`, `SUSPICIOUS`, `SPOOF`, `SPAM`, `BULK`) choose which (if any) you want to send to the webhook. Sending `SPAM` and `BULK` dispositions will generate a high number of events.
-4. Select **Publish Webhook**.
 <p>Your Sumo Logic integration will now show up in the All Webhooks panel.</p>
 <p><img src="/assets/upstream/images/email-security/siem-integration/sumo-logic/all-webhooks.png" alt="Your Sumo Logic webhook will display in the All Webhooks panel." /></p>
 <p>It will take about ten minutes for the configuration to fully propagate through the infrastructure of Email security, and for events to start to appear in your searches. Once the configuration is propagated, events will start to appear in your instance of Sumo Logic.</p>
