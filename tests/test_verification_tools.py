@@ -68,6 +68,14 @@ class TestPageMetadata(unittest.TestCase):
         self.assertIn('http-equiv="refresh" content="0; url=/api/"', head['head_html'])
         self.assertNotIn('application/ld+json', head['head_html'])
 
+        custom = page_metadata.build_head('/models/', 'Models', {
+            'head': [{'tag': 'meta', 'attrs': {
+                'name': 'robots', 'content': 'noindex, nofollow'}}],
+        })
+        self.assertTrue(custom['noindex'])
+        self.assertEqual(1, custom['head_html'].count('name="robots"'))
+        self.assertNotIn('application/ld+json', custom['head_html'])
+
     def test_frontmatter_replacement_is_idempotent(self):
         first = page_metadata.add_frontmatter('<h1>Page</h1>\n', {'schema': 1, 'head_html': 'one'})
         second = page_metadata.add_frontmatter(first, {'schema': 1, 'head_html': 'two'})

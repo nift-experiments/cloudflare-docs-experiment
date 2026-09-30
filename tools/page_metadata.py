@@ -195,7 +195,16 @@ def build_head(route, title, metadata=None, body='', sections=None, products=Non
     if description:
         description = re.sub(r'\s+', ' ', str(description)).strip()
     external_link = metadata.get('external_link')
-    noindex = bool(metadata.get('noindex') or external_link or section in NOINDEX_SECTIONS)
+    head_items = metadata.get('head') or []
+    head_noindex = any(
+        isinstance(item, dict) and str(item.get('tag') or '').lower() == 'meta' and
+        str((item.get('attrs') or {}).get('name') or '').lower() == 'robots' and
+        'noindex' in {token.lower() for token in re.split(
+            r'[\s,]+', str((item.get('attrs') or {}).get('content') or '')) if token}
+        for item in head_items
+    )
+    noindex = bool(metadata.get('noindex') or external_link or head_noindex or
+                   section in NOINDEX_SECTIONS)
     canonical = _canonical(route, metadata.get('canonical'))
     page_url = urljoin(ORIGIN + '/', route)
     raw_content_type = str(metadata.get('pcx_content_type') or '')
@@ -274,11 +283,14 @@ def build_head(route, title, metadata=None, body='', sections=None, products=Non
         lines.append(f'<script type="application/ld+json">{structured}</script>')
     if external_link:
         lines.append(f'<meta http-equiv="refresh" content="0; url={esc(external_link)}">')
-    for item in metadata.get('head') or []:
+    for item in head_items:
         if not isinstance(item, dict) or item.get('tag') == 'title':
             continue
         tag = str(item.get('tag') or '').lower()
         if tag not in {'meta', 'link', 'script'}:
+            continue
+        if (tag == 'meta' and
+                str((item.get('attrs') or {}).get('name') or '').lower() == 'robots'):
             continue
         attrs = ''.join(f' {esc(key)}="{esc(value)}"'
                         for key, value in (item.get('attrs') or {}).items())
