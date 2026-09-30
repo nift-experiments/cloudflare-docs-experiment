@@ -2,7 +2,7 @@
 
 Status: **FROZEN BEFORE FORMAL RESULTS**
 
-Methodology version: 2
+Methodology version: 3
 
 Frozen: 2026-10-01
 
@@ -31,13 +31,14 @@ claims about either tool.
   `afb40cd4f348479246102bc20a4eee6607fd8aec407bf3f0abbb1e8a27c484ed`
 
 Benchmark work uses disposable clones or worktrees at these commits. The shell
-is an independently verified checkout inside `public`; the parent repository's
-gitlink alone is not accepted as proof of shell state. Both repositories' HEAD,
-tree, tracked-file diff, and tracked-file manifest are checked before and after
-phases. Shell cleanliness uses `git diff --quiet` and
-`git status --porcelain --untracked-files=no` because valid Nift output is
-untracked inside that checkout; complete output manifests govern those files.
-CP8/CP9 sources and evidence are not modified to prepare a run.
+is an independently verified checkout outside the Nift project's `public/`
+directory; the parent repository's historical gitlink alone is not accepted as
+proof of shell state. Only files in the shell commit's `git ls-files` manifest
+are copied into `public/`, with path/type/mode/size/SHA-256 verified after the
+copy. Both repositories' HEAD, tree, tracked-file diff, and tracked-file
+manifest are checked before and after phases. Generated Nift output is governed
+by complete output manifests. CP8/CP9 sources and evidence are not modified to
+prepare a run.
 
 ## Primary Machine
 
@@ -100,14 +101,16 @@ Preparation is reported separately from site builds:
    nanosecond mtime, and file SHA-256. Before each build, those paths are
    cleared, restored with archived modes/mtimes, and verified against the
    manifest. Network fetching is not included in site-build timing.
-4. Nift corpus conversion in a disposable experiment checkout, with the shell
-   checkout established first: `python3 tools/import_corpus.py
+4. Nift corpus conversion in a disposable experiment checkout, with tracked
+   files from the separately verified shell checkout copied into `public/`
+   first: `python3 tools/import_corpus.py
    /srv/cp10/upstream`, then `python3 tools/generate_families.py
    /srv/cp10/upstream`, then `git restore --source=HEAD --
-   content/index.html`, then `git -C public restore .`. Import and family
-   generation are timed separately. The machine manifest pins Python, PyYAML,
-   and cmarkgfm versions and records all cleanup commands. This is a setup cost,
-   not an ordinary Nift rebuild cost.
+   content/index.html`, then repeat the manifest-driven shell-file copy into
+   `public/` and verify it. Import and family generation are timed separately.
+   The machine manifest pins Python, PyYAML, and cmarkgfm versions and records
+   all cleanup commands. This is a setup cost, not an ordinary Nift rebuild
+   cost.
 
 Each of the three install repetitions starts from a fresh upstream clone with
 no `node_modules` and a new empty dedicated pnpm store; registry network access
@@ -131,7 +134,8 @@ working repository, and executes these states:
 
 - Nift clean: verify both repositories; delete exactly the generated output
   paths named by `.nift/tracked.json`; delete `.nift/public/`; preserve and
-  re-verify the nested shell/static assets; then run `nift build --all`.
+  re-verify copied shell/static assets against the external shell checkout's
+  tracked-file manifest; then run `nift build --all`.
 - Nift incremental baseline: complete a clean build, retain output and
   `.nift/public/` metadata, and verify no source change before an edit/no-change
   run.
@@ -156,8 +160,8 @@ runs are not chained on state mutated by earlier recorded runs.
 ## Run Discipline
 
 - Record HEAD, tree, and tracked-file status before and after every phase. Use
-  normal `git status --porcelain` for ordinary checkouts and the explicit
-  tracked-only shell checks defined above.
+  normal `git status --porcelain` for ordinary checkouts and verify the external
+  shell checkout independently.
 - Reject a phase if tracked benchmark source changed unexpectedly.
 - Disable unattended package activity and avoid concurrent benchmark jobs.
 - Run each timed command in its own cgroup v2. Record aggregate
@@ -321,9 +325,9 @@ Performance is invalid unless correctness passes:
 - Restore steps prove source hashes return exactly to baseline.
 - Targeted scenarios gate on content hashes and separately record mtimes;
   mtimes are never treated as correctness proof.
-- Final ordinary worktrees must be clean and at their original heads. The shell
-  must have its original HEAD/tree and no tracked changes; expected untracked
-  Nift output must match the complete output manifest.
+- Final worktrees must be clean and at their original heads. The external shell
+  must have its original HEAD/tree and no tracked changes; copied shell files
+  and expected Nift output must match their complete manifests.
 
 ## Independent Review And Publication
 
