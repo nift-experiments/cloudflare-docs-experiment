@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "captured_before_qualification": true,
+  "node": {
+    "version": "24.21.0",
+    "archive": "node-v24.21.0-linux-x64.tar.xz",
+    "archive_url": "https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-x64.tar.xz",
+    "archive_sha256": "fd8e59d5a511510f6a298afb548f18c7d2b1be404d8b4a27d94fbe49f56cb2d6",
+    "executable": "/usr/local/bin/node",
+    "executable_sha256": "7fde7b8afa198da66257f42ee2001d874c7355631e6d1579a5fb5ef1f246df4c",
+    "executable_bytes": 126595440
+  },
+  "pnpm": {
+    "version": "12.4.2",
+    "provisioner": "Corepack from Node 24.21.0",
+    "native_executable": "/root/.cache/node/corepack/v1/pnpm/12.4.2/pnpm-native",
+    "native_executable_sha256": "df602b81c2e2f75c72904664cf2ee2ce50e1394bef1cb2a153ed4c08d99bc6e4",
+    "native_executable_bytes": 48759304,
+    "launcher_sha256": "b6e13402c88a275f5b1ec4fb420df8763179bbe9f2b87a10911be44a3622d68d",
+    "package_json_sha256": "30f29c3e3589e4d804fd1aeff71d1297ff2ca11de7734effa9442e0add97c5e8"
+  },
+  "nift": {
+    "version": "4.5.0",
+    "archive": "nift-4.5.0-linux-x86_64.tar.gz",
+    "archive_url": "https://github.com/nift-dev/nift/releases/download/v4.5.0/nift-4.5.0-linux-x86_64.tar.gz",
+    "archive_sha256": "856fcc401333aced5c492b92050caf6252cfec3fb9d15a51b2676af363599694",
+    "executable": "/srv/cp10/tools/nift",
+    "executable_sha256": "4aca09ccf7244f30e99349e6043281cde694183ee436d55b7ac84e0a0b84240d",
+    "executable_bytes": 3497360
+  },
+  "astro": {
+    "version": "7.3.2",
+    "source": "frozen pnpm-lock.yaml"
+  },
+  "python": {
+    "version": "3.12.3",
+    "ubuntu_package": "python3-minimal=3.12.3-0ubuntu2.1",
+    "cmarkgfm": "0.8.0-3",
+    "pyyaml": "6.0.1-2build2"
+  },
+  "system_tools": {
+    "git": "2.43.0-1ubuntu7.3",
+    "gnu_time": "1.9-0.2build1",
+    "curl": "8.5.0-2ubuntu10.15",
+    "rsync": "3.2.7-1ubuntu1.5",
+    "sysstat": "12.6.1-2",
+    "jq": "1.7.1-3ubuntu0.24.04.2",
+    "libc": "2.39-0ubuntu8.7",
+    "openssl": "3.0.13-0ubuntu3.11"
+  }
+}

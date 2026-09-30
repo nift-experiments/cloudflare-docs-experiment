@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "captured_at_utc": "2026-09-30T18:20:35+00:00",
+  "formal_results_started": false,
+  "provider": {
+    "name": "Linode",
+    "id": 107157732,
+    "label": "cp10-benchmark-20261001",
+    "type": "g6-standard-6",
+    "region": "us-central",
+    "site_type": "core",
+    "image": "linode/ubuntu24.04",
+    "backups_enabled": false,
+    "disk_encryption": "enabled",
+    "hypervisor": "kvm",
+    "advertised_monthly_transfer_gb": 8000
+  },
+  "cpu": {
+    "architecture": "x86_64",
+    "vendor": "AuthenticAMD",
+    "model": "AMD EPYC 7642 48-Core Processor",
+    "vcpus": 6,
+    "sockets": 1,
+    "cores_per_socket": 6,
+    "threads_per_core": 1,
+    "numa_nodes": 1,
+    "governor_visible_to_guest": false
+  },
+  "memory": {
+    "physical_bytes": 16769368064,
+    "swap_bytes": 0,
+    "qualification_peak_limit_percent": 90
+  },
+  "storage": {
+    "device": "/dev/sda",
+    "advertised_mb": 327680,
+    "filesystem": "ext4",
+    "mount": "/",
+    "mount_options": "rw,relatime,errors=remount-ro"
+  },
+  "operating_system": {
+    "name": "Ubuntu 24.04.4 LTS",
+    "kernel": "6.8.0-134-generic",
+    "kernel_build": "#134-Ubuntu SMP PREEMPT_DYNAMIC Fri Jun 26 18:43:11 UTC 2026",
+    "cgroup_filesystem": "cgroup2fs",
+    "numa_balancing": 0,
+    "transparent_hugepage": "madvise",
+    "vm_overcommit_memory": 0,
+    "unattended_upgrades": "disabled",
+    "apt_daily_timer": "disabled",
+    "apt_daily_upgrade_timer": "disabled"
+  },
+  "network": {
+    "public_ipv4": "50.116.26.111",
+    "interface_generation": "legacy_config"
+  },
+  "source": {
+    "control_commit": "01643064",
+    "upstream_commit": "bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf",
+    "upstream_tree": "289e5331c2e6f257f37b40fa2910b434c906d3e9",
+    "nift_project_commit": "9df944a87c365220967cae4679f209b8ecc5544c",
+    "nift_project_tree": "242396895a6458512b7acd38fed8f26530f172e4",
+    "implementation_commit": "b83c5686c48849e9b82c3b3ac9de00e33d61a747",
+    "shell_commit": "b6a90044d8eb4874bb03da5e11373c8b4bb9978e",
+    "shell_tree": "5f43acda3212cdd10351af0e021365cfdfd0acd1"
+  },
+  "notes": [
+    "Swap is absent from the final fstab and no swap device is active.",
+    "The Linode image needed one post-provision reboot before SSH became available; no benchmark result had started.",
+    "The provider creation timestamp is 2026-09-30 UTC, corresponding to the 2026-10-01 campaign date in the operator's timezone."
+  ]
+}
