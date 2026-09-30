@@ -124,6 +124,17 @@
     if (!input) return;
     function filter() {
       var query = input.value.trim().toLowerCase();
+      sidebar.querySelectorAll(".sidebar-group").forEach(function (group) {
+        var toggle = group.querySelector(":scope > [data-sidebar-group]");
+        if (!toggle) return;
+        if (query && group.dataset.filterOpen === undefined) group.dataset.filterOpen = toggle.getAttribute("aria-expanded");
+        if (!query && group.dataset.filterOpen !== undefined) {
+          var list = group.querySelector(":scope > .sidebar-list");
+          toggle.setAttribute("aria-expanded", group.dataset.filterOpen);
+          if (list) list.hidden = group.dataset.filterOpen !== "true";
+          delete group.dataset.filterOpen;
+        }
+      });
       sidebar.querySelectorAll("[data-sidebar-node]").forEach(function (item) {
         item.hidden = query && item.dataset.searchText.indexOf(query) < 0;
       });
@@ -172,7 +183,9 @@
       sidebar.addEventListener("scroll", function () { state.scroll = sidebar.scrollTop; state.save(); }, { passive: true });
       bindSidebarFilter(sidebar);
       var active = sidebar.querySelector('[aria-current="page"]');
-      if (active && !state.scroll) active.scrollIntoView({ block: "center" });
+      if (active && !state.scroll) {
+        sidebar.scrollTop = Math.max(0, active.offsetTop - sidebar.clientHeight / 2);
+      }
     }
     renderBreadcrumbs(product, context);
     var pagination = document.querySelector("[data-pagination]");
@@ -239,7 +252,23 @@
 
   function initNavigation() {
     var product = normalizePath(location.pathname).split("/")[1];
-    if (!product) return;
+    if (!product) {
+      fetch("/assets/navigation.json", { credentials: "same-origin" })
+        .then(function (response) { if (!response.ok) throw new Error("navigation unavailable"); return response.json(); })
+        .then(function (data) {
+          var tree = document.querySelector("[data-sidebar-tree]");
+          var title = document.querySelector("[data-sidebar-product]");
+          if (!tree) return;
+          tree.textContent = "";
+          data.home.forEach(function (group) {
+            var heading = document.createElement("h3"); heading.textContent = group.label; tree.appendChild(heading);
+            group.links.forEach(function (item, index) { var link = document.createElement("a"); link.href = item.href; link.textContent = item.label; link.dataset.sidebarNode = "home:" + group.label + ":" + index; link.dataset.searchText = item.label.toLowerCase(); tree.appendChild(link); });
+          });
+          if (title) title.textContent = "Cloudflare products";
+          bindSidebarFilter(document.querySelector("[data-shared-sidebar-nav]"));
+        });
+      return;
+    }
     fetch("/assets/navigation/" + encodeURIComponent(product) + ".json", { credentials: "same-origin" })
       .then(function (response) { if (!response.ok) throw new Error("navigation unavailable"); return response.json(); })
       .then(applyNavigation)
@@ -247,6 +276,45 @@
         var tree = document.querySelector("[data-sidebar-tree]");
         if (tree) tree.setAttribute("data-navigation-fallback", "true");
       });
+  }
+
+  function initAgentCatalog() {
+    var buttons = Array.from(document.querySelectorAll("[data-agent-filter]"));
+    var cards = Array.from(document.querySelectorAll("[data-agent-card]"));
+    if (!buttons.length || !cards.length) return;
+    buttons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        var filter = button.dataset.agentFilter;
+        buttons.forEach(function (item) { item.setAttribute("aria-pressed", String(item === button)); });
+        cards.forEach(function (card) {
+          card.hidden = filter !== "all" && (card.dataset.match || "").split(/\s+/).indexOf(filter) < 0;
+        });
+      });
+    });
+  }
+
+  function initCatalogs() {
+    var search = document.querySelector("[data-catalog-search]");
+    var items = Array.from(document.querySelectorAll("[data-catalog-item]"));
+    var groups = Array.from(document.querySelectorAll("[data-directory-group]"));
+    if (!items.length || (!search && !groups.length)) return;
+    var more = document.querySelector("[data-catalog-more]");
+    var expanded = false;
+    function apply() {
+      var query = search ? search.value.trim().toLowerCase() : "";
+      var selected = groups.filter(function (input) { return input.checked; }).map(function (input) { return input.value; });
+      items.forEach(function (item, index) {
+        var textMatches = !query || (item.dataset.searchText || item.textContent.toLowerCase()).indexOf(query) >= 0;
+        var itemGroups = (item.dataset.groups || "").split("|");
+        var groupMatches = !selected.length || selected.some(function (group) { return itemGroups.indexOf(group) >= 0; });
+        var withinInitialGlossary = !more || expanded || query || index < 10;
+        item.hidden = !textMatches || !groupMatches || !withinInitialGlossary;
+      });
+      if (more) more.hidden = Boolean(query) || expanded;
+    }
+    if (search) search.addEventListener("input", apply);
+    groups.forEach(function (input) { input.addEventListener("change", apply); });
+    if (more) more.addEventListener("click", function () { expanded = true; apply(); });
   }
 
   function initMobileSidebar() {
@@ -340,7 +408,13 @@
   }
 
   function writeClipboard(text) {
-    if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(text);
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text).catch(function () { return legacyCopy(text); });
+    }
+    return legacyCopy(text);
+  }
+
+  function legacyCopy(text) {
     var area = document.createElement("textarea"); area.value = text; area.style.position = "fixed"; area.style.opacity = "0";
     document.body.appendChild(area); area.select(); document.execCommand("copy"); area.remove();
     return Promise.resolve();
@@ -411,6 +485,26 @@
     });
   }
 
+  function initArticleTools() {
+    var article = document.querySelector(".article-wrap");
+    var heading = article && article.querySelector("h1");
+    if (!article || !heading || article.querySelector("[data-article-tools]")) return;
+    var tools = document.createElement("div");
+    tools.className = "article-tools";
+    tools.dataset.articleTools = "";
+    tools.innerHTML = '<button type="button" data-copy-page>Copy as Markdown</button>' +
+      '<span aria-hidden="true">|</span><a href="index.md" data-view-markdown>View as Markdown</a>' +
+      '<span class="agent-setup-action" aria-hidden="true">|</span>' +
+      '<a class="agent-setup-action" href="/agent-setup/">Agent setup</a>' +
+      '<span class="sr-only" data-copy-page-status role="status" aria-live="polite"></span>';
+    var headingContainer = heading.closest(".article-header") || heading;
+    var summary = article.querySelector(".article-summary");
+    if (summary) headingContainer.insertAdjacentElement("afterend", summary);
+    (summary || headingContainer).insertAdjacentElement("afterend", tools);
+    var mobileToc = document.querySelector("[data-mobile-toc]");
+    if (mobileToc) tools.insertAdjacentElement("afterend", mobileToc);
+  }
+
   function initTOC() {
     var headings = Array.from(document.querySelectorAll(".docs-content h2[id], .docs-content h3[id], .docs-content h4[id]"));
     var list = document.querySelector("[data-nb-toc-list]");
@@ -418,6 +512,8 @@
     var select = document.querySelector("[data-mobile-toc-select]");
     if (!list || !select || !headings.length) return;
     list.textContent = ""; select.textContent = "";
+    var overview = document.createElement("option");
+    overview.value = "_top"; overview.textContent = "Overview"; select.appendChild(overview);
     headings.forEach(function (heading) {
       var item = document.createElement("li"); item.className = "toc-level-" + heading.tagName.slice(1);
       var link = document.createElement("a"); link.href = "#" + heading.id; link.textContent = heading.textContent; link.dataset.tocTarget = heading.id;
@@ -438,6 +534,15 @@
       }, { rootMargin: "-15% 0px -70% 0px" });
       headings.forEach(function (heading) { observer.observe(heading); });
     }
+  }
+
+  function initTables() {
+    document.querySelectorAll(".docs-content table").forEach(function (table) {
+      if (table.parentElement && table.parentElement.classList.contains("table-scroll")) return;
+      var wrapper = document.createElement("div"); wrapper.className = "table-scroll"; wrapper.tabIndex = 0;
+      wrapper.setAttribute("role", "region"); wrapper.setAttribute("aria-label", "Scrollable table");
+      table.parentNode.insertBefore(wrapper, table); wrapper.appendChild(table);
+    });
   }
 
   function initSearch() {
@@ -473,10 +578,14 @@
   document.addEventListener("DOMContentLoaded", function () {
     setThemeToggle();
     initNavigation();
+    initAgentCatalog();
+    initCatalogs();
     initMobileSidebar();
     initTabs();
     initPackageManagers();
+    initArticleTools();
     initCopy();
+    initTables();
     initTOC();
     initSearch();
   });
