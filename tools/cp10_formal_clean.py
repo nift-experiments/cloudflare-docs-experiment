@@ -28,7 +28,11 @@ def nift_clean(
     archive_if_present(metadata, evidence / f"nift-r{round_number:02d}-prestate")
     tracked = json.loads((project / ".nift/tracked.json").read_text())["tracked"]
     for item in tracked:
-        (project / "public" / item.get("output", "index.html")).unlink(missing_ok=True)
+        configured = item.get("output", "index.html")
+        relative = Path(configured.lstrip("/"))
+        if configured.endswith("/"):
+            relative /= "index.html"
+        (project / "public" / relative).unlink(missing_ok=True)
     identifier = f"formal-clean-nift-r{round_number:02d}"
     record = evidence / f"nift-r{round_number:02d}.json"
     run(

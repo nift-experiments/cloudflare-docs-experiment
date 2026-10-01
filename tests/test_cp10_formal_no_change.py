@@ -78,6 +78,21 @@ class CP10FormalNoChangeTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "unsafe Nift output path"):
                 clean_nift(project)
 
+    def test_nift_cleanup_maps_route_style_output_to_index(self):
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory)
+            (project / ".nift").mkdir()
+            output = project / "public/glossary/index.html"
+            output.parent.mkdir(parents=True)
+            output.write_text("generated")
+            (project / ".nift/tracked.json").write_text(
+                json.dumps({"tracked": [{"output": "/glossary/"}]})
+            )
+
+            clean_nift(project)
+
+            self.assertFalse(output.exists())
+
     def test_astro_normalizer_accepts_classified_variance_without_mutation(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

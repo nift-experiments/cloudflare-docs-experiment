@@ -161,7 +161,10 @@ def clean_nift(project: Path) -> None:
     tracked = json.loads((project / ".nift/tracked.json").read_text())["tracked"]
     output_root = (project / "public").resolve()
     for item in tracked:
-        relative = Path(item.get("output", "index.html"))
+        configured = item.get("output", "index.html")
+        relative = Path(configured.lstrip("/"))
+        if configured.endswith("/"):
+            relative /= "index.html"
         output = (output_root / relative).resolve()
         if output_root not in output.parents:
             raise ValueError(f"unsafe Nift output path: {relative}")
