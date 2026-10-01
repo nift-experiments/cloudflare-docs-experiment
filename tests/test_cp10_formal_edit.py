@@ -4,8 +4,10 @@ import tempfile
 import unittest
 from argparse import Namespace
 from pathlib import Path
+from unittest.mock import patch
 
 from tools.cp10_benchmark import atomic_json, manifest_payload
+from tools.cp10_formal_no_change import StatePath, snapshot_states
 from tools.cp10_formal_edit import (
     ASTRO_SOURCE,
     MARKER,
@@ -20,12 +22,17 @@ from tools.cp10_formal_edit import (
     capture_source,
     changed_path_classification,
     changed_files,
+    copy_file_exact,
     edited_bytes,
     freeze_changed_path_contract,
     marker_evidence,
+    manifest_payload_reusing,
+    parse_args,
     recorded_command,
     refuse_attempt_collision,
+    restore_targeted_nift_state,
     restore_source,
+    run_campaign,
     verify_target,
 )
 
@@ -241,6 +248,131 @@ class CP10FormalEditTests(unittest.TestCase):
                 ["dependent.txt", "workers/get-started/guide/index.html"],
             )
             self.assertTrue(contract["designated_output_marker"]["passed"])
+
+    def test_targeted_cli_does_not_require_any_astro_or_pnpm_argument(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            project = root / "nift"
+            project.mkdir()
+            harness = root / "harness.py"
+            harness.write_text("# harness\n")
+            executable = root / "nift-bin"
+            executable.write_text("#!/bin/sh\nexit 0\n")
+            executable.chmod(0o755)
+            expected_root = root / "expected"
+            expected_root.mkdir()
+            expected = root / "expected.json"
+            atomic_json(expected, manifest_payload(expected_root))
+
+            args = parse_args(
+                [
+                    "targeted",
+                    "--nift-project",
+                    str(project),
+                    "--harness",
+                    str(harness),
+                    "--evidence",
+                    str(root / "evidence"),
+                    "--nift-expected",
+                    str(expected),
+                    "--nift-bin",
+                    str(executable),
+                ]
+            )
+
+            self.assertIsNone(args.astro_project)
+            self.assertIsNone(args.astro_normalizer)
+
+    def test_targeted_campaign_never_dispatches_astro_setup(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            evidence = root / "evidence"
+            project = root / "nift"
+            project.mkdir()
+            args = Namespace(
+                mode="targeted",
+                evidence=evidence,
+                attempt=1,
+                nift_project=project,
+            )
+            git = {"head": "h", "tree": "t", "status": ""}
+            source = Namespace(data=b"source", mtime_ns=1)
+
+            def create_setup(*_args):
+                (evidence / "setup").mkdir()
+                (evidence / "setup/targeted-setup.json").write_text("{}")
+
+            with (
+                patch("tools.cp10_formal_edit.git_state", return_value=git),
+                patch("tools.cp10_formal_edit.capture_source", return_value=source),
+                patch(
+                    "tools.cp10_formal_edit.prepare_targeted_setup",
+                    side_effect=create_setup,
+                ) as targeted_setup,
+                patch(
+                    "tools.cp10_formal_edit.targeted_setup_ready",
+                    return_value=(git, source),
+                ) as targeted_ready,
+                patch("tools.cp10_formal_edit.run_targeted") as targeted_runs,
+                patch("tools.cp10_formal_edit.prepare_setup") as astro_setup,
+                patch("tools.cp10_formal_edit.prepare_remote_archive") as remote_setup,
+                patch("tools.cp10_formal_edit.restore_astro_remote_inputs") as remote_restore,
+            ):
+                self.assertEqual(run_campaign(args), 0)
+
+            targeted_setup.assert_called_once()
+            targeted_ready.assert_not_called()
+            targeted_runs.assert_called_once()
+            astro_setup.assert_not_called()
+            remote_setup.assert_not_called()
+            remote_restore.assert_not_called()
+
+    def test_targeted_restore_replaces_only_metadata_and_designated_output(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            project = root / "project"
+            metadata = project / ".nift/public"
+            metadata.mkdir(parents=True)
+            (metadata / "state.json").write_text("baseline metadata")
+            page = project / "public/workers/get-started/guide/index.html"
+            page.parent.mkdir(parents=True)
+            page.write_text("baseline page")
+            unrelated = project / "public/static/large.bin"
+            unrelated.parent.mkdir(parents=True)
+            unrelated.write_text("baseline static")
+            baseline = root / "baseline-minimal"
+            snapshot_states("nift", [StatePath("metadata", metadata)], baseline)
+            copy_file_exact(page, baseline / "nift-output/workers/get-started/guide/index.html")
+
+            (metadata / "state.json").write_text("mutated metadata")
+            page.write_text("mutated page")
+            unrelated.write_text("must remain untouched")
+            restore_targeted_nift_state(project, baseline)
+
+            self.assertEqual((metadata / "state.json").read_text(), "baseline metadata")
+            self.assertEqual(page.read_text(), "baseline page")
+            self.assertEqual(unrelated.read_text(), "must remain untouched")
+
+    def test_targeted_manifest_rehashes_only_metadata_changed_files(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            page = root / "workers/get-started/guide/index.html"
+            page.parent.mkdir(parents=True)
+            page.write_text("baseline")
+            static = root / "static/large.bin"
+            static.parent.mkdir()
+            static.write_bytes(b"x" * 1024)
+            baseline = manifest_payload(root)
+            page.write_text("edited")
+
+            observed = manifest_payload_reusing(root, baseline)
+
+            self.assertEqual(observed["hashing"]["files_hashed"], 1)
+            self.assertEqual(observed["hashing"]["certified_hashes_reused"], 1)
+            self.assertEqual(
+                {entry["path"] for entry in observed["entries"] if entry["type"] == "file"},
+                {"static/large.bin", "workers/get-started/guide/index.html"},
+            )
 
 
 if __name__ == "__main__":

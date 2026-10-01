@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import stat as stat_module
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -35,6 +36,7 @@ try:
         run,
         run_normalizer,
         snapshot_states,
+        StatePath,
         states_for,
     )
 except ImportError:
@@ -61,6 +63,7 @@ except ImportError:
         run,
         run_normalizer,
         snapshot_states,
+        StatePath,
         states_for,
     )
 
@@ -189,6 +192,114 @@ def expected_manifest(args: argparse.Namespace, tool: str) -> Path:
 
 def changed_path_contract_path(args: argparse.Namespace, tool: str) -> Path:
     return args.evidence / f"setup/references/{tool}-changed-path-contract.json"
+
+
+def copy_file_exact(source: Path, destination: Path) -> None:
+    if destination.exists() or destination.is_symlink():
+        raise FileExistsError(f"refusing to overwrite snapshot: {destination}")
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    run(["cp", "-a", "--reflink=auto", "--", str(source), str(destination)])
+
+
+def restore_file_exact(source: Path, destination: Path) -> None:
+    if destination.is_dir() and not destination.is_symlink():
+        raise RuntimeError(f"refusing to replace directory with file: {destination}")
+    destination.unlink(missing_ok=True)
+    copy_file_exact(source, destination)
+
+
+def file_identity(path: Path) -> dict[str, Any]:
+    stat = path.stat()
+    return {
+        "path": str(path),
+        "mode": f"{stat.st_mode & 0o7777:04o}",
+        "size": stat.st_size,
+        "mtime_ns": stat.st_mtime_ns,
+        "sha256": sha256_file(path, stat),
+    }
+
+
+def semantic_subset_digest(manifest: dict[str, Any], excluded: set[str]) -> str:
+    entries = [
+        {key: value for key, value in entry.items() if key not in {"mode", "mtime_ns"}}
+        for entry in manifest["entries"]
+        if entry["path"] not in excluded
+    ]
+    return sha256_bytes(
+        json.dumps(entries, sort_keys=True, separators=(",", ":")).encode()
+    )
+
+
+def manifest_payload_reusing(
+    root: Path,
+    trusted: dict[str, Any],
+    force_hash: set[str] | None = None,
+) -> dict[str, Any]:
+    """Build a complete manifest while rehashing only metadata-changed files."""
+    root = root.resolve()
+    if not root.is_dir():
+        raise ValueError(f"manifest root is not a directory: {root}")
+    previous = {entry["path"]: entry for entry in trusted["entries"]}
+    force_hash = force_hash or set()
+    entries: list[dict[str, Any]] = []
+    hashed = 0
+    reused = 0
+    for current, dirnames, filenames in os.walk(root, followlinks=False):
+        dirnames.sort()
+        filenames.sort()
+        current_path = Path(current)
+        for name in [*dirnames, *filenames]:
+            path = current_path / name
+            relative = path.relative_to(root).as_posix()
+            item_stat = path.lstat()
+            entry: dict[str, Any] = {
+                "path": relative,
+                "mode": f"{item_stat.st_mode & 0o7777:04o}",
+                "mtime_ns": item_stat.st_mtime_ns,
+            }
+            old = previous.get(relative)
+            if path.is_symlink():
+                entry.update(type="symlink", target=os.readlink(path))
+                if name in dirnames:
+                    dirnames.remove(name)
+            elif stat_module.S_ISDIR(item_stat.st_mode):
+                entry["type"] = "directory"
+            elif stat_module.S_ISREG(item_stat.st_mode):
+                entry.update(type="file", size=item_stat.st_size)
+                if (
+                    old
+                    and relative not in force_hash
+                    and old.get("type") == "file"
+                    and old.get("size") == item_stat.st_size
+                    and old.get("mtime_ns") == item_stat.st_mtime_ns
+                ):
+                    entry["sha256"] = old["sha256"]
+                    reused += 1
+                else:
+                    entry["sha256"] = sha256_file(path, item_stat)
+                    hashed += 1
+            else:
+                raise ValueError(f"unsupported filesystem object: {path}")
+            entries.append(entry)
+    entries.sort(key=lambda item: item["path"])
+    files = [entry for entry in entries if entry["type"] == "file"]
+    return {
+        "schema": "cp10-tree-manifest",
+        "schema_version": 1,
+        "root_label": root.name,
+        "entries_sha256": sha256_bytes(
+            json.dumps(
+                entries, sort_keys=True, separators=(",", ":"), ensure_ascii=True
+            ).encode()
+        ),
+        "summary": {
+            "entries": len(entries),
+            "files": len(files),
+            "bytes": sum(entry["size"] for entry in files),
+        },
+        "entries": entries,
+        "hashing": {"files_hashed": hashed, "certified_hashes_reused": reused},
+    }
 
 
 def diff_path_sets(difference: dict[str, Any]) -> dict[str, list[str]]:
@@ -361,6 +472,219 @@ def verify_target(project: Path) -> dict[str, str]:
     if len(matches) != 1 or matches[0].get("output") != OUTPUT.as_posix():
         raise ValueError(f"Nift target is not uniquely mapped to {OUTPUT}: {NIFT_TARGET}")
     return {"name": NIFT_TARGET, "output": OUTPUT.as_posix()}
+
+
+def prepare_targeted_setup(
+    args: argparse.Namespace,
+    initial_git: dict[str, str],
+    source_state: SourceState,
+) -> None:
+    setup = args.evidence / "setup"
+    if setup.exists():
+        raise FileExistsError(f"refusing existing setup evidence: {setup}")
+    references = setup / "references"
+    baseline = setup / "baseline-minimal"
+    references.mkdir(parents=True)
+    baseline.mkdir()
+    target = verify_target(args.nift_project)
+    source = source_path(args, "nift")
+    output_root = args.nift_project / "public"
+    output_page = output_root / OUTPUT
+    reference_manifest_path = expected_manifest(args, "nift")
+
+    try:
+        edit_evidence = apply_edit(source, source_state)
+        clean_nift(args.nift_project)
+        command, environment = clean_reference_command(args, "nift")
+        untimed_command(
+            "setup/references/nift-clean-edited-build",
+            command,
+            args.nift_project,
+            environment,
+            args.evidence,
+        )
+        edited_manifest = manifest_payload(output_root)
+        atomic_json(reference_manifest_path, edited_manifest)
+        designated_root = references / "nift-edited-designated-output"
+        copy_file_exact(output_page, designated_root / OUTPUT)
+        contract = freeze_changed_path_contract(args, "nift", designated_root)
+    finally:
+        restored = restore_source(source, source_state)
+        if not restored["bytes_equal"] or not restored["mtime_equal"]:
+            raise RuntimeError("failed to restore Nift source after targeted reference")
+    if git_state(args.nift_project) != initial_git:
+        raise RuntimeError("Nift Git state changed while building targeted reference")
+
+    clean_nift(args.nift_project)
+    baseline_command = [str(args.nift_bin), "build", "--all"]
+    _, baseline_environment = recorded_command(args, "nift")
+    untimed_command(
+        "setup/baseline-minimal/nift-unedited-build",
+        baseline_command,
+        args.nift_project,
+        baseline_environment,
+        args.evidence,
+    )
+    baseline_manifest = manifest_payload(output_root)
+    baseline_manifest_path = baseline / "nift-output-manifest.json"
+    atomic_json(baseline_manifest_path, baseline_manifest)
+    certified = load_manifest(args.nift_expected)
+    baseline_comparison = compare_manifests(certified, baseline_manifest)
+    atomic_json(baseline / "nift-certified-comparison.json", baseline_comparison)
+    if not baseline_comparison["equal_content"]:
+        raise RuntimeError("targeted Nift baseline differs from certified manifest")
+
+    metadata_state = StatePath("metadata", args.nift_project / ".nift/public")
+    archived_metadata = snapshot_states("nift", [metadata_state], baseline)
+    baseline_page = baseline / "nift-output" / OUTPUT
+    copy_file_exact(output_page, baseline_page)
+    if git_state(args.nift_project) != initial_git:
+        raise RuntimeError("Nift Git state changed while building targeted baseline")
+
+    unaffected_digest = semantic_subset_digest(baseline_manifest, {OUTPUT.as_posix()})
+    certified_unaffected_digest = semantic_subset_digest(certified, {OUTPUT.as_posix()})
+    if unaffected_digest != certified_unaffected_digest:
+        raise RuntimeError("targeted Nift unaffected output differs from certification")
+    setup_payload = {
+        "schema": "cp10-formal-targeted-edit-setup",
+        "schema_version": 1,
+        "methodology_version": 6,
+        "marker": MARKER.decode(),
+        "harness": {"path": str(args.harness), "sha256": sha256_file(args.harness)},
+        "project": {
+            "path": str(args.nift_project),
+            "git": initial_git,
+            "source": str(source),
+            "source_sha256": sha256_bytes(source_state.data),
+            "source_mtime_ns": source_state.mtime_ns,
+        },
+        "commands": {
+            "edited_reference": command,
+            "baseline": baseline_command,
+            "targeted": recorded_command(args, "nift", targeted=True)[0],
+        },
+        "environment": relevant_environment(
+            recorded_command(args, "nift", targeted=True)[1]
+        ),
+        "nift_target": target,
+        "certified_manifest": {
+            "path": str(args.nift_expected),
+            "entries_sha256": certified["entries_sha256"],
+        },
+        "edited_reference": {
+            "manifest": str(reference_manifest_path),
+            "entries_sha256": edited_manifest["entries_sha256"],
+            "designated_output_root": str(designated_root),
+            "changed_path_contract": str(changed_path_contract_path(args, "nift")),
+            "changed_path_contract_sha256": sha256_file(
+                changed_path_contract_path(args, "nift")
+            ),
+            "expected_changed_paths": contract["expected_changed_paths"],
+            "source_edit": edit_evidence,
+        },
+        "baseline": {
+            "manifest": str(baseline_manifest_path),
+            "entries_sha256": baseline_manifest["entries_sha256"],
+            "metadata": archived_metadata["metadata"],
+            "designated_output": file_identity(baseline_page),
+        },
+        "unaffected_output": {
+            "verified_once": True,
+            "excluded": [OUTPUT.as_posix()],
+            "semantic_sha256": unaffected_digest,
+            "entries": len(baseline_manifest["entries"]) - 1,
+        },
+        "git_after": git_state(args.nift_project),
+    }
+    atomic_json(setup / "targeted-setup.json", setup_payload)
+
+
+def targeted_setup_ready(
+    args: argparse.Namespace,
+) -> tuple[dict[str, str], SourceState]:
+    marker = args.evidence / "setup/targeted-setup.json"
+    payload = json.loads(marker.read_text())
+    if (
+        payload.get("schema") != "cp10-formal-targeted-edit-setup"
+        or payload.get("schema_version") != 1
+        or payload.get("methodology_version") != 6
+        or payload.get("marker") != MARKER.decode()
+    ):
+        raise ValueError(f"invalid targeted setup marker: {marker}")
+    if payload["harness"] != {
+        "path": str(args.harness),
+        "sha256": sha256_file(args.harness),
+    }:
+        raise ValueError("targeted harness binding differs")
+    project_binding = payload["project"]
+    current_git = git_state(args.nift_project)
+    source_state = capture_source(source_path(args, "nift"))
+    if (
+        project_binding["path"] != str(args.nift_project)
+        or current_git != project_binding["git"]
+        or current_git != payload["git_after"]
+        or project_binding["source"] != str(source_path(args, "nift"))
+        or project_binding["source_sha256"] != sha256_bytes(source_state.data)
+        or project_binding["source_mtime_ns"] != source_state.mtime_ns
+    ):
+        raise ValueError("targeted Nift project or source binding differs")
+    commands = {
+        "edited_reference": clean_reference_command(args, "nift")[0],
+        "baseline": [str(args.nift_bin), "build", "--all"],
+        "targeted": recorded_command(args, "nift", targeted=True)[0],
+    }
+    if payload["commands"] != commands or payload["environment"] != relevant_environment(
+        recorded_command(args, "nift", targeted=True)[1]
+    ):
+        raise ValueError("targeted command binding differs")
+    if payload["nift_target"] != verify_target(args.nift_project):
+        raise ValueError("targeted Nift route binding differs")
+    certified = load_manifest(args.nift_expected)
+    if payload["certified_manifest"] != {
+        "path": str(args.nift_expected),
+        "entries_sha256": certified["entries_sha256"],
+    }:
+        raise ValueError("targeted certified manifest binding differs")
+
+    reference = payload["edited_reference"]
+    reference_manifest = load_manifest(Path(reference["manifest"]))
+    contract_path = changed_path_contract_path(args, "nift")
+    contract = json.loads(contract_path.read_text())
+    validate_changed_path_contract(contract, "nift")
+    if (
+        reference["entries_sha256"] != reference_manifest["entries_sha256"]
+        or reference["changed_path_contract"] != str(contract_path)
+        or reference["changed_path_contract_sha256"] != sha256_file(contract_path)
+        or reference["expected_changed_paths"] != contract["expected_changed_paths"]
+        or contract["designated_output_marker"]
+        != marker_evidence(Path(reference["designated_output_root"]))
+    ):
+        raise ValueError("targeted edited reference binding differs")
+
+    baseline = args.evidence / "setup/baseline-minimal"
+    baseline_manifest = load_manifest(Path(payload["baseline"]["manifest"]))
+    observed = manifest_payload(args.nift_project / "public")
+    if (
+        baseline_manifest["entries_sha256"] != payload["baseline"]["entries_sha256"]
+        or not compare_manifests(certified, baseline_manifest)["equal_content"]
+        or not compare_manifests(baseline_manifest, observed)["equal_content"]
+        or semantic_subset_digest(observed, {OUTPUT.as_posix()})
+        != payload["unaffected_output"]["semantic_sha256"]
+    ):
+        raise ValueError("targeted baseline or unaffected output binding differs")
+    metadata_manifest = baseline / "nift-metadata-manifest.json"
+    metadata_snapshot = baseline / "snapshots/nift-metadata"
+    if (
+        manifest_payload(metadata_snapshot)["entries_sha256"]
+        != load_manifest(metadata_manifest)["entries_sha256"]
+        or payload["baseline"]["metadata"]["entries_sha256"]
+        != load_manifest(metadata_manifest)["entries_sha256"]
+    ):
+        raise ValueError("targeted Nift metadata snapshot differs")
+    baseline_page = baseline / "nift-output" / OUTPUT
+    if file_identity(baseline_page) != payload["baseline"]["designated_output"]:
+        raise ValueError("targeted Nift output snapshot differs")
+    return current_git, source_state
 
 
 def prepare_setup(
@@ -751,6 +1075,16 @@ def baseline_states_equal(tool: str, states: list[Any], baseline: Path) -> bool:
     return True
 
 
+def restore_targeted_nift_state(project: Path, baseline: Path) -> None:
+    restore_states(
+        "nift", [StatePath("metadata", project / ".nift/public")], baseline
+    )
+    restore_file_exact(
+        baseline / "nift-output" / OUTPUT,
+        project / "public" / OUTPUT,
+    )
+
+
 def run_attempt(
     args: argparse.Namespace,
     *,
@@ -1083,6 +1417,245 @@ def run_attempt(
     return formal_valid
 
 
+def run_targeted_attempt(
+    args: argparse.Namespace,
+    *,
+    label: str,
+    run_number: int,
+    git_before: dict[str, str],
+    original: SourceState,
+    measured: bool,
+) -> bool:
+    directory = args.evidence / "targeted"
+    stem = directory / label
+    refuse_attempt_collision(directory, label)
+    project = args.nift_project
+    source = source_path(args, "nift")
+    output_root = project / "public"
+    output_page = output_root / OUTPUT
+    baseline = args.evidence / "setup/baseline-minimal"
+    metadata_state = StatePath("metadata", project / ".nift/public")
+    setup = json.loads((args.evidence / "setup/targeted-setup.json").read_text())
+    contract_path = changed_path_contract_path(args, "nift")
+    contract = json.loads(contract_path.read_text())
+    command, environment = recorded_command(args, "nift", targeted=True)
+    errors: list[str] = []
+    record: dict[str, Any] | None = None
+    pre_output: dict[str, Any] | None = None
+    post_output: dict[str, Any] | None = None
+    output_diff: dict[str, Any] | None = None
+    expected_comparison: dict[str, Any] | None = None
+    path_classification: dict[str, Any] | None = None
+    marker_check: dict[str, Any] | None = None
+    source_edit: dict[str, Any] | None = None
+    source_restoration: dict[str, Any] | None = None
+    metadata_diff: dict[str, Any] | None = None
+    minimal_state_restored = False
+    source_marker = False
+
+    try:
+        assert_no_stale_benchmark_processes((project,))
+        restore_targeted_nift_state(project, baseline)
+        if git_state(project) != git_before:
+            raise RuntimeError(f"Nift Git state differs before {label}")
+        validate_changed_path_contract(contract, "nift")
+        baseline_manifest = load_manifest(Path(setup["baseline"]["manifest"]))
+        expected_paths = {
+            path
+            for values in contract["expected_changed_paths"].values()
+            for path in values
+        }
+        pre_output = manifest_payload_reusing(
+            output_root, baseline_manifest, expected_paths
+        )
+        atomic_json(Path(f"{stem}-pre-output-manifest.json"), pre_output)
+        if not compare_manifests(baseline_manifest, pre_output)["equal_content"]:
+            raise RuntimeError("minimal targeted restore did not reconstruct baseline output")
+        metadata_before = manifest_payload(metadata_state.live)
+        atomic_json(Path(f"{stem}-pre-metadata-manifest.json"), metadata_before)
+
+        source_edit = apply_edit(source, original)
+        source_marker = source.read_bytes().count(MARKER) == 1
+        if measured:
+            identifier = f"formal-targeted-nift-{label}"
+            completed = run(
+                [
+                    sys.executable,
+                    str(args.harness),
+                    "run",
+                    "--id",
+                    identifier,
+                    "--series",
+                    "formal-targeted-edit",
+                    "--scenario",
+                    "one-page-explicit-target",
+                    "--tool",
+                    "nift",
+                    "--round",
+                    str(run_number),
+                    "--warmth",
+                    "warm",
+                    "--output",
+                    str(stem.with_suffix(".json")),
+                    "--cwd",
+                    str(project),
+                    "--",
+                    *command,
+                ],
+                env=environment,
+                check=False,
+            )
+            record_path = stem.with_suffix(".json")
+            record = json.loads(record_path.read_text()) if record_path.exists() else None
+            if completed.returncode != 0:
+                errors.append(f"harness exit code {completed.returncode}")
+        else:
+            try:
+                untimed_command(label, command, project, environment, directory)
+            except Exception as error:
+                errors.append(f"command failed: {error}")
+
+        source_marker = source.read_bytes().count(MARKER) == 1
+        post_output = manifest_payload_reusing(output_root, pre_output, expected_paths)
+        atomic_json(Path(f"{stem}-post-output-manifest.json"), post_output)
+        output_diff = compare_manifests(pre_output, post_output)
+        atomic_json(Path(f"{stem}-output-diff.json"), output_diff)
+        marker_check = marker_evidence(output_root)
+        expected_comparison = compare_manifests(
+            load_manifest(expected_manifest(args, "nift")), post_output
+        )
+        atomic_json(Path(f"{stem}-expected-comparison.json"), expected_comparison)
+        classification = changed_path_classification(
+            contract["expected_changed_paths"], diff_path_sets(output_diff)
+        )
+        path_classification = {
+            "schema": "cp10-edit-run-changed-path-classification",
+            "schema_version": 1,
+            "tool": "nift",
+            "contract": str(contract_path),
+            "contract_sha256": sha256_file(contract_path),
+            "basis": contract["basis"],
+            **classification,
+            "expected_dependents": contract["expected_dependents"],
+            "classified_expected_edit_paths": sorted(
+                path
+                for values in classification["observed"].values()
+                for path in values
+                if path
+                not in {
+                    item
+                    for extras in classification["unexpected_unclassified"].values()
+                    for item in extras
+                }
+            ),
+            "normalizer_classification": None,
+            "designated_output_marker": marker_check,
+        }
+        atomic_json(
+            Path(f"{stem}-changed-path-classification.json"), path_classification
+        )
+        metadata_after = manifest_payload(metadata_state.live)
+        atomic_json(Path(f"{stem}-post-metadata-manifest.json"), metadata_after)
+        metadata_diff = compare_manifests(metadata_before, metadata_after)
+        atomic_json(Path(f"{stem}-metadata-diff.json"), metadata_diff)
+    except Exception as error:
+        errors.append(f"attempt processing failed: {error}")
+    finally:
+        try:
+            source_restoration = restore_source(source, original)
+        except Exception as error:
+            errors.append(f"source restoration failed: {error}")
+        try:
+            assert_no_stale_benchmark_processes((project,))
+            restore_targeted_nift_state(project, baseline)
+            minimal_state_restored = bool(
+                manifest_payload(metadata_state.live)["entries_sha256"]
+                == load_manifest(baseline / "nift-metadata-manifest.json")[
+                    "entries_sha256"
+                ]
+                and file_identity(output_page)["sha256"]
+                == setup["baseline"]["designated_output"]["sha256"]
+                and file_identity(output_page)["mtime_ns"]
+                == setup["baseline"]["designated_output"]["mtime_ns"]
+            )
+        except Exception as error:
+            errors.append(f"minimal baseline restoration failed: {error}")
+
+    infrastructure_valid = bool(
+        not measured
+        or record
+        and record.get("validity", {}).get("infrastructure_valid") is True
+    )
+    output_correct = bool(expected_comparison and expected_comparison["equal_content"])
+    paths_valid = bool(path_classification and path_classification["matches"])
+    source_restored = bool(
+        source_restoration
+        and source_restoration["bytes_equal"]
+        and source_restoration["mtime_equal"]
+        and git_state(project) == git_before
+    )
+    formal_valid = bool(
+        not errors
+        and infrastructure_valid
+        and source_marker
+        and marker_check
+        and marker_check["passed"]
+        and output_correct
+        and paths_valid
+        and source_restored
+        and minimal_state_restored
+    )
+    file_changes = (
+        changed_files(output_diff, post_output)
+        if output_diff and post_output
+        else {"content_changed": [], "touched": []}
+    )
+    atomic_json(
+        Path(f"{stem}-validation.json"),
+        {
+            "schema": "cp10-formal-edit-run-validation",
+            "schema_version": SCHEMA_VERSION,
+            "label": label,
+            "tool": "nift",
+            "targeted": True,
+            "measured": measured,
+            "round": run_number,
+            "command": command,
+            "infrastructure_valid": infrastructure_valid,
+            "formal_valid": formal_valid,
+            "errors": errors,
+            "source_edit": source_edit,
+            "source_marker_present": source_marker,
+            "designated_output_marker": marker_check,
+            "source_restoration": source_restoration,
+            "source_and_git_restored": source_restored,
+            "minimal_nift_state_restored": minimal_state_restored,
+            "restored_states": [".nift/public", OUTPUT.as_posix()],
+            "unaffected_output_recopied": False,
+            "output_correct": output_correct,
+            "changed_paths_valid": paths_valid,
+            "changed_path_classification": (
+                Path(f"{stem}-changed-path-classification.json").name
+                if path_classification
+                else None
+            ),
+            "content_changed_paths": (
+                diff_path_sets(output_diff) if output_diff else None
+            ),
+            "mtime_only_paths": output_diff["mtime_only"] if output_diff else [],
+            "regenerated_files": file_changes["content_changed"],
+            "touched_files": file_changes["touched"],
+            "metadata_diff": (
+                Path(f"{stem}-metadata-diff.json").name if metadata_diff else None
+            ),
+            "aggregate_peak_memory_bytes": (
+                record.get("cgroup", {}).get("memory_peak_bytes") if record else None
+            ),
+        },
+    )
+    return formal_valid
+
+
 def ensure_warmups(
     args: argparse.Namespace,
     mode: str,
@@ -1101,18 +1674,30 @@ def ensure_warmups(
     results = []
     for index, tool in enumerate(tools, 1):
         label = f"warmup-{tool}-{index:02d}-a{args.attempt:02d}"
-        results.append(
-            run_attempt(
-                args,
-                tool=tool,
-                label=label,
-                round_number=index,
-                git_before=git_before[tool],
-                original=sources[tool],
-                targeted=mode == "targeted",
-                measured=False,
+        if mode == "targeted":
+            results.append(
+                run_targeted_attempt(
+                    args,
+                    label=label,
+                    run_number=index,
+                    git_before=git_before["nift"],
+                    original=sources["nift"],
+                    measured=False,
+                )
             )
-        )
+        else:
+            results.append(
+                run_attempt(
+                    args,
+                    tool=tool,
+                    label=label,
+                    round_number=index,
+                    git_before=git_before[tool],
+                    original=sources[tool],
+                    targeted=False,
+                    measured=False,
+                )
+            )
     if all(results):
         atomic_json(complete, {"tools": tools, "passed": True})
     else:
@@ -1172,14 +1757,12 @@ def run_targeted(
     invalid: list[str] = []
     for run_number in range(args.start, args.end + 1):
         label = f"nift-run{run_number:02d}-a{args.attempt:02d}"
-        if not run_attempt(
+        if not run_targeted_attempt(
             args,
-            tool="nift",
             label=label,
-            round_number=run_number,
+            run_number=run_number,
             git_before=git_before["nift"],
             original=sources["nift"],
-            targeted=True,
             measured=True,
         ):
             invalid.append(label)
@@ -1193,15 +1776,15 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("mode", choices=("normal", "targeted"))
     parser.add_argument("--nift-project", required=True, type=Path)
-    parser.add_argument("--astro-project", required=True, type=Path)
+    parser.add_argument("--astro-project", type=Path)
     parser.add_argument("--harness", required=True, type=Path)
     parser.add_argument("--evidence", required=True, type=Path)
     parser.add_argument("--nift-expected", required=True, type=Path)
-    parser.add_argument("--astro-clean-reference", required=True, type=Path)
-    parser.add_argument("--astro-clean-reference-manifest", required=True, type=Path)
-    parser.add_argument("--astro-normalizer", required=True, type=Path)
-    parser.add_argument("--astro-remote-input-archive", required=True, type=Path)
-    parser.add_argument("--astro-remote-input-manifest", required=True, type=Path)
+    parser.add_argument("--astro-clean-reference", type=Path)
+    parser.add_argument("--astro-clean-reference-manifest", type=Path)
+    parser.add_argument("--astro-normalizer", type=Path)
+    parser.add_argument("--astro-remote-input-archive", type=Path)
+    parser.add_argument("--astro-remote-input-manifest", type=Path)
     parser.add_argument("--nift-bin", default=Path("/usr/local/bin/nift"), type=Path)
     parser.add_argument(
         "--pnpm-bin",
@@ -1218,49 +1801,66 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         parser.error(f"run range must be within 1..{maximum} for {args.mode}")
     if args.attempt < 1:
         parser.error("--attempt must be positive")
-    for name in (
+    required_paths = [
         "nift_project",
-        "astro_project",
         "harness",
         "nift_expected",
+        "nift_bin",
+    ]
+    astro_paths = [
+        "astro_project",
         "astro_clean_reference",
         "astro_clean_reference_manifest",
         "astro_normalizer",
         "astro_remote_input_archive",
         "astro_remote_input_manifest",
-        "nift_bin",
-        "pnpm_bin",
-    ):
+    ]
+    if args.mode == "normal":
+        missing = [name for name in astro_paths if getattr(args, name) is None]
+        if missing:
+            parser.error(
+                f"normal mode requires --{missing[0].replace('_', '-')}"
+            )
+        required_paths.extend(astro_paths)
+        required_paths.append("pnpm_bin")
+    for name in required_paths:
         value = getattr(args, name).resolve()
         if not value.exists():
             parser.error(f"--{name.replace('_', '-')} does not exist: {value}")
         setattr(args, name, value)
-    for name in (
-        "harness",
-        "nift_expected",
-        "astro_clean_reference_manifest",
-        "astro_normalizer",
-        "astro_remote_input_manifest",
-    ):
+    required_files = ["harness", "nift_expected"]
+    if args.mode == "normal":
+        required_files.extend(
+            (
+                "astro_clean_reference_manifest",
+                "astro_normalizer",
+                "astro_remote_input_manifest",
+            )
+        )
+    for name in required_files:
         if not getattr(args, name).is_file():
             parser.error(f"--{name.replace('_', '-')} must be a file")
-    if not args.astro_clean_reference.is_dir():
-        parser.error("--astro-clean-reference must be a directory")
-    if (
-        args.astro_clean_reference == args.astro_project
-        or args.astro_project in args.astro_clean_reference.parents
-        or args.astro_clean_reference in args.astro_project.parents
-    ):
-        parser.error("--astro-clean-reference must be retained outside the Astro project")
-    if args.astro_remote_input_archive.is_dir() and (
-        args.astro_remote_input_archive == args.astro_project
-        or args.astro_project in args.astro_remote_input_archive.parents
-        or args.astro_remote_input_archive in args.astro_project.parents
-    ):
-        parser.error(
-            "--astro-remote-input-archive directory must be outside the Astro project"
-        )
-    for name in ("nift_bin", "pnpm_bin"):
+    if args.mode == "normal":
+        if not args.astro_clean_reference.is_dir():
+            parser.error("--astro-clean-reference must be a directory")
+        if (
+            args.astro_clean_reference == args.astro_project
+            or args.astro_project in args.astro_clean_reference.parents
+            or args.astro_clean_reference in args.astro_project.parents
+        ):
+            parser.error(
+                "--astro-clean-reference must be retained outside the Astro project"
+            )
+        if args.astro_remote_input_archive.is_dir() and (
+            args.astro_remote_input_archive == args.astro_project
+            or args.astro_project in args.astro_remote_input_archive.parents
+            or args.astro_remote_input_archive in args.astro_project.parents
+        ):
+            parser.error(
+                "--astro-remote-input-archive directory must be outside the Astro project"
+            )
+    executables = ["nift_bin"] + (["pnpm_bin"] if args.mode == "normal" else [])
+    for name in executables:
         if not getattr(args, name).is_file() or not os.access(getattr(args, name), os.X_OK):
             parser.error(f"--{name.replace('_', '-')} is not executable")
     args.evidence = args.evidence.resolve()
@@ -1271,6 +1871,31 @@ def run_campaign(args: argparse.Namespace) -> int:
     if args.evidence.exists() and not args.evidence.is_dir():
         raise ValueError(f"evidence path is not a directory: {args.evidence}")
     args.evidence.mkdir(parents=True, exist_ok=True)
+    if args.mode == "targeted":
+        marker = args.evidence / "setup/targeted-setup.json"
+        if marker.exists():
+            git_state_before, source_state = targeted_setup_ready(args)
+        else:
+            if any(args.evidence.iterdir()):
+                raise FileExistsError(
+                    "refusing non-empty evidence directory without complete targeted setup: "
+                    f"{args.evidence}"
+                )
+            if args.attempt != 1:
+                raise ValueError("replacement attempts require existing targeted setup")
+            git_state_before = git_state(args.nift_project)
+            if git_state_before["status"]:
+                raise RuntimeError("benchmark Nift worktree is not clean")
+            source_state = capture_source(source_path(args, "nift"))
+            prepare_targeted_setup(args, git_state_before, source_state)
+        (args.evidence / "targeted").mkdir(exist_ok=True)
+        run_targeted(
+            args,
+            {"nift": git_state_before},
+            {"nift": source_state},
+        )
+        return 0
+
     args.astro_remote_input_archive_sha256 = (
         sha256_file(args.astro_remote_input_archive)
         if args.astro_remote_input_archive.is_file()
@@ -1312,9 +1937,12 @@ def run_campaign(args: argparse.Namespace) -> int:
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     with campaign_lock():
-        assert_no_stale_benchmark_processes(
+        projects = (
             (args.nift_project, args.astro_project)
+            if args.mode == "normal"
+            else (args.nift_project,)
         )
+        assert_no_stale_benchmark_processes(projects)
         return run_campaign(args)
 
 
