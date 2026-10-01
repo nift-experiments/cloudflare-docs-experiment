@@ -10,6 +10,7 @@ from tools.cp10_astro_normalize import (
     lz_decompress_uri,
     normalize_content,
     normalize_playground_links,
+    normalize_svg_dot_pattern_ids,
 )
 
 
@@ -67,6 +68,64 @@ class CP10AstroNormalizeTests(unittest.TestCase):
         self.assertEqual(normalized.count(b"pm-cp10-000001"), 1)
         self.assertIn(b"pm-not-a-uuid", normalized)
         self.assertEqual(categories, ["package-manager-uuid"])
+
+    def test_svg_dot_pattern_ids_normalize_by_definition_order(self):
+        def page(first: bytes, second: bytes) -> bytes:
+            return b"".join(
+                (
+                    b'<svg><pattern id="',
+                    first,
+                    b'"><circle/></pattern><rect fill="url(#',
+                    first,
+                    b')"/><rect fill="url(#',
+                    first,
+                    b')"/></svg><svg><pattern id="',
+                    second,
+                    b'"></pattern><rect fill="url(#',
+                    second,
+                    b')"/></svg>',
+                )
+            )
+
+        baseline, categories = normalize_content(
+            "index.html", page(b"nb-dots-1nd", b"nb-dots-1ne"), {}
+        )
+        warmup, _ = normalize_content(
+            "index.html", page(b"nb-dots-f", b"nb-dots-g"), {}
+        )
+        self.assertEqual(baseline, warmup)
+        self.assertEqual(categories, ["svg-dot-pattern-id"])
+        self.assertIn(b'id="nb-dots-cp10000000"', baseline)
+        self.assertEqual(baseline.count(b"url(#nb-dots-cp10000000)"), 2)
+        self.assertEqual(normalize_svg_dot_pattern_ids(baseline), baseline)
+
+    def test_svg_dot_pattern_ids_reject_malformed_unpaired_and_colliding(self):
+        cases = {
+            "malformed": b'<pattern id="nb-dots-UPPER"></pattern>',
+            "definition only": b'<pattern id="nb-dots-a"></pattern>',
+            "reference only": b'<rect fill="url(#nb-dots-a)"/>',
+            "arbitrary id": (
+                b'<pattern id="nb-dots-a"></pattern>'
+                b'<rect fill="url(#nb-dots-a)"/><div data-id="nb-dots-a"></div>'
+            ),
+            "duplicate definition": (
+                b'<pattern id="nb-dots-a"></pattern>'
+                b'<pattern id="nb-dots-a"></pattern><rect fill="url(#nb-dots-a)"/>'
+            ),
+            "canonical collision": (
+                b'<pattern id="nb-dots-a"></pattern>'
+                b'<rect fill="url(#nb-dots-a)"/>'
+                b'<pattern id="nb-dots-cp10000000"></pattern>'
+                b'<rect fill="url(#nb-dots-cp10000000)"/>'
+            ),
+        }
+        for name, value in cases.items():
+            with self.subTest(name=name), self.assertRaises(NormalizationError):
+                normalize_svg_dot_pattern_ids(value)
+
+    def test_svg_dot_normalizer_does_not_touch_other_ids(self):
+        data = b'<svg><pattern id="dots-a"></pattern></svg><div id="nb-card-a"></div>'
+        self.assertEqual(normalize_svg_dot_pattern_ids(data), data)
 
     def test_prompt_normalization_is_route_and_allowlist_limited(self):
         prompt = (

@@ -23,6 +23,13 @@ UUID_RE = re.compile(
 )
 COMBOBOX_RE = re.compile(rb"nb-combobox-[0-9a-f]{8}")
 CHECKBOX_RE = re.compile(rb"cb-[a-z0-9]{8}")
+SVG_DOT_ID_RE = re.compile(rb"nb-dots-[a-z0-9]+")
+SVG_DOT_CANDIDATE_RE = re.compile(rb"nb-dots-[^\"'\s<>()#]*")
+SVG_DOT_DEFINITION_RE = re.compile(
+    rb'<pattern(?=[\s>])[^>]*\bid="(nb-dots-[a-z0-9]+)"[^>]*>'
+)
+SVG_DOT_REFERENCE_RE = re.compile(rb"url\(#(nb-dots-[a-z0-9]+)\)")
+HTML_ID_RE = re.compile(rb'\bid="([^"]+)"')
 PLAYGROUND_RE = re.compile(
     rb"https://workers\.cloudflare\.com/playground#([A-Za-z0-9+\-$]+)"
 )
@@ -193,6 +200,53 @@ def sequential_tokens(data: bytes, pattern: re.Pattern[bytes], prefix: bytes) ->
     return pattern.sub(replacement, data)
 
 
+def normalize_svg_dot_pattern_ids(data: bytes) -> bytes:
+    if b"nb-dots-" not in data:
+        return data
+    candidates = SVG_DOT_CANDIDATE_RE.findall(data)
+    if not candidates or any(
+        SVG_DOT_ID_RE.fullmatch(item) is None for item in candidates
+    ):
+        raise NormalizationError("malformed nb-dots SVG pattern id")
+
+    definitions = list(SVG_DOT_DEFINITION_RE.finditer(data))
+    references = list(SVG_DOT_REFERENCE_RE.finditer(data))
+    accepted_spans = sorted(
+        [match.span(1) for match in definitions]
+        + [match.span(1) for match in references]
+    )
+    token_spans = [match.span() for match in SVG_DOT_ID_RE.finditer(data)]
+    if accepted_spans != token_spans:
+        raise NormalizationError(
+            "nb-dots id occurs outside a pattern definition or url reference"
+        )
+
+    definition_counts = Counter(match.group(1) for match in definitions)
+    reference_counts = Counter(match.group(1) for match in references)
+    if not definition_counts or any(
+        count != 1 for count in definition_counts.values()
+    ):
+        raise NormalizationError("nb-dots id must have exactly one pattern definition")
+    if set(definition_counts) != set(reference_counts) or any(
+        count < 1 for count in reference_counts.values()
+    ):
+        raise NormalizationError(
+            "nb-dots pattern definitions and url references are not paired"
+        )
+
+    ordered = [match.group(1) for match in definitions]
+    replacements = {
+        token: b"nb-dots-cp10%06d" % index for index, token in enumerate(ordered)
+    }
+    existing_ids = Counter(HTML_ID_RE.findall(data))
+    for token, replacement in replacements.items():
+        if replacement in existing_ids and replacement != token:
+            raise NormalizationError(
+                "normalized nb-dots id collides with an existing id"
+            )
+    return SVG_DOT_ID_RE.sub(lambda match: replacements[match.group()], data)
+
+
 def _read_lz_bits(
     count: int, state: list[int], reset_value: int, get_value: Callable[[int], int]
 ) -> int:
@@ -349,6 +403,7 @@ def normalize_content(
             "checkbox-random-id",
             lambda value: sequential_tokens(value, CHECKBOX_RE, b"cb-cp10"),
         ),
+        ("svg-dot-pattern-id", normalize_svg_dot_pattern_ids),
         ("playground-multipart-boundary", normalize_playground_links),
     )
     for category, transform in transforms:
@@ -602,6 +657,10 @@ def analyze(roots: list[tuple[str, Path]]) -> dict[str, Any]:
             "checkbox-random-id": "src/components/ui/checkbox/Checkbox.astro:48",
             "playground-multipart-boundary": "src/components/cf/TypeScriptExample.astro:65-82 (Undici FormData boundary)",
             "sampled-agent-prompts": "src/components/agent-setup/{ExamplePrompts,RandomPrompt}.astro and prompts.ts",
+            "svg-dot-pattern-id": (
+                "Nimbus decorative grid SVG pattern ids (nb-dots-*); "
+                "exact component source is absent locally"
+            ),
             "shiki-rule-order": "@cloudflare/nimbus-docs 0.14.1 code-style-registry and normalizeShikiCSS insertion order",
             "sitemap-build-time-fallback": "sitemap.serializer.ts:95-122",
             "content-identical-svg-alias": "cross-run identical SHA-256 plus mutually exclusive Vite hashed SVG paths",
