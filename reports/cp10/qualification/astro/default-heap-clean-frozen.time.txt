@@ -1,0 +1,14 @@
+Command exited with non-zero status 1
+user_seconds=607.55
+system_seconds=49.56
+cpu_percent=139%
+wall_seconds=470.02
+maximum_rss_kib=8171468
+major_page_faults=890
+minor_page_faults=4250035
+voluntary_context_switches=2131690
+involuntary_context_switches=14128
+filesystem_inputs=1336496
+filesystem_outputs=4559720
+swaps=0
+exit_status=1

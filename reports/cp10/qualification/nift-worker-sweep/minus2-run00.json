@@ -1,0 +1,724 @@
+{
+  "artifacts": {
+    "gnu_time": {
+      "bytes": 278,
+      "name": "minus2-run00.time.txt",
+      "sha256": "f1f2f5e041b19636c62b7999ebc142adb730f2b14f87769f7f02231a71637f92"
+    },
+    "stderr": {
+      "bytes": 0,
+      "name": "minus2-run00.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout": {
+      "bytes": 64,
+      "name": "minus2-run00.stdout.log",
+      "sha256": "503e8040fba9681cb3ae414b5fd89dd00299ce6fc749a000f18f8aa5b3822f95"
+    }
+  },
+  "cgroup": {
+    "cgroup_events": {
+      "frozen": 0,
+      "populated": 0
+    },
+    "memory_current_bytes": 332210176,
+    "memory_events": {
+      "high": 0,
+      "low": 0,
+      "max": 0,
+      "oom": 0,
+      "oom_group_kill": 0,
+      "oom_kill": 0
+    },
+    "memory_peak_bytes": 552890368,
+    "memory_pressure": {
+      "full": {
+        "avg10": 0.0,
+        "avg300": 0.0,
+        "avg60": 0.0,
+        "total": 0
+      },
+      "some": {
+        "avg10": 0.0,
+        "avg300": 0.0,
+        "avg60": 0.0,
+        "total": 31
+      }
+    },
+    "memory_swap_current_bytes": 0,
+    "memory_swap_events": {
+      "fail": 0,
+      "high": 0,
+      "max": 0
+    },
+    "memory_swap_max": "0",
+    "memory_swap_peak_bytes": 0,
+    "remaining_direct_processes": []
+  },
+  "command": [
+    "/usr/local/bin/nift",
+    "build",
+    "--all"
+  ],
+  "exit_code": 0,
+  "fork_to_reap_seconds": 5.517896851000842,
+  "host_after": {
+    "active_swap_devices": [],
+    "cpu_frequency_khz": {},
+    "cpu_pressure": {
+      "full": {
+        "avg10": 0.0,
+        "avg300": 0.0,
+        "avg60": 0.0,
+        "total": 0
+      },
+      "some": {
+        "avg10": 18.77,
+        "avg300": 0.8,
+        "avg60": 3.8,
+        "total": 11591930
+      }
+    },
+    "diskstats": {
+      "sda": [
+        12965,
+        9366,
+        560428,
+        6082,
+        280757,
+        809876,
+        21580712,
+        192944,
+        0,
+        513834,
+        199380,
+        0,
+        0,
+        0,
+        0,
+        2482,
+        353
+      ]
+    },
+    "io_pressure": {
+      "full": {
+        "avg10": 1.31,
+        "avg300": 0.05,
+        "avg60": 0.25,
+        "total": 4140657
+      },
+      "some": {
+        "avg10": 1.31,
+        "avg300": 0.05,
+        "avg60": 0.25,
+        "total": 4433463
+      }
+    },
+    "load_average": [
+      0.6474609375,
+      0.19189453125,
+      0.16162109375
+    ],
+    "memory_available_bytes": 16054312960,
+    "memory_pressure": {
+      "full": {
+        "avg10": 0.0,
+        "avg300": 0.0,
+        "avg60": 0.0,
+        "total": 173
+      },
+      "some": {
+        "avg10": 0.0,
+        "avg300": 0.0,
+        "avg60": 0.0,
+        "total": 203
+      }
+    },
+    "monotonic_seconds": 23007.58542789,
+    "pswpin": 0,
+    "pswpout": 0,
+    "swap_free_bytes": 0,
+    "swap_total_bytes": 0
+  },
+  "host_before": {
+    "active_swap_devices": [],
+    "cpu_frequency_khz": {},
+    "cpu_pressure": {
+      "full": {
+        "avg10": 0.0,
+        "avg300": 0.0,
+        "avg60": 0.0,
+        "total": 0
+      },
+      "some": {
+        "avg10": 0.0,
+        "avg300": 0.0,
+        "avg60": 0.0,
+        "total": 8659986
+      }
+    },
+    "diskstats": {
+      "sda": [
+        12918,
+        8912,
+        556420,
+        5963,
+        262352,
+        772044,
+        20794840,
+        179087,
+        0,
+        512549,
+        185402,
+        0,
+        0,
+        0,
+        0,
+        2467,
+        351
+      ]
+    },
+    "io_pressure": {
+      "full": {
+        "avg10": 0.0,
+        "avg300": 0.0,
+        "avg60": 0.0,
+        "total": 3922447
+      },
+      "some": {
+        "avg10": 0.0,
+        "avg300": 0.0,
+        "avg60": 0.0,
+        "total": 4193376
+      }
+    },
+    "load_average": [
+      0.09423828125,
+      0.07666015625,
+      0.12451171875
+    ],
+    "memory_available_bytes": 16101093376,
+    "memory_pressure": {
+      "full": {
+        "avg10": 0.0,
+        "avg300": 0.0,
+        "avg60": 0.0,
+        "total": 172
+      },
+      "some": {
+        "avg10": 0.0,
+        "avg300": 0.0,
+        "avg60": 0.0,
+        "total": 172
+      }
+    },
+    "monotonic_seconds": 23002.065941428,
+    "pswpin": 0,
+    "pswpout": 0,
+    "swap_free_bytes": 0,
+    "swap_total_bytes": 0
+  },
+  "host_samples": [
+    {
+      "active_swap_devices": [],
+      "cpu_frequency_khz": {},
+      "cpu_pressure": {
+        "full": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 0
+        },
+        "some": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 8660014
+        }
+      },
+      "diskstats": {
+        "sda": [
+          12918,
+          8912,
+          556420,
+          5963,
+          262352,
+          772044,
+          20794840,
+          179087,
+          0,
+          512549,
+          185402,
+          0,
+          0,
+          0,
+          0,
+          2467,
+          351
+        ]
+      },
+      "io_pressure": {
+        "full": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 3922447
+        },
+        "some": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 4193376
+        }
+      },
+      "load_average": [
+        0.09423828125,
+        0.07666015625,
+        0.12451171875
+      ],
+      "memory_available_bytes": 16100835328,
+      "memory_pressure": {
+        "full": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 172
+        },
+        "some": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 172
+        }
+      },
+      "monotonic_seconds": 23002.069485161,
+      "pswpin": 0,
+      "pswpout": 0,
+      "swap_free_bytes": 0,
+      "swap_total_bytes": 0
+    },
+    {
+      "active_swap_devices": [],
+      "cpu_frequency_khz": {},
+      "cpu_pressure": {
+        "full": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 0
+        },
+        "some": {
+          "avg10": 2.17,
+          "avg300": 0.08,
+          "avg60": 0.39,
+          "total": 9286425
+        }
+      },
+      "diskstats": {
+        "sda": [
+          12930,
+          9030,
+          557460,
+          5969,
+          264179,
+          776938,
+          20848592,
+          180998,
+          0,
+          512610,
+          187319,
+          0,
+          0,
+          0,
+          0,
+          2471,
+          352
+        ]
+      },
+      "io_pressure": {
+        "full": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 3943841
+        },
+        "some": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 4215902
+        }
+      },
+      "load_average": [
+        0.09423828125,
+        0.07666015625,
+        0.12451171875
+      ],
+      "memory_available_bytes": 16081440768,
+      "memory_pressure": {
+        "full": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 172
+        },
+        "some": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 172
+        }
+      },
+      "monotonic_seconds": 23003.073071598,
+      "pswpin": 0,
+      "pswpout": 0,
+      "swap_free_bytes": 0,
+      "swap_total_bytes": 0
+    },
+    {
+      "active_swap_devices": [],
+      "cpu_frequency_khz": {},
+      "cpu_pressure": {
+        "full": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 0
+        },
+        "some": {
+          "avg10": 2.17,
+          "avg300": 0.08,
+          "avg60": 0.39,
+          "total": 9911405
+        }
+      },
+      "diskstats": {
+        "sda": [
+          12940,
+          9113,
+          558204,
+          6063,
+          267654,
+          781250,
+          20910880,
+          183017,
+          0,
+          512748,
+          189433,
+          0,
+          0,
+          0,
+          0,
+          2473,
+          352
+        ]
+      },
+      "io_pressure": {
+        "full": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 4014688
+        },
+        "some": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 4287960
+        }
+      },
+      "load_average": [
+        0.09423828125,
+        0.07666015625,
+        0.12451171875
+      ],
+      "memory_available_bytes": 16035348480,
+      "memory_pressure": {
+        "full": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 172
+        },
+        "some": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 172
+        }
+      },
+      "monotonic_seconds": 23004.089619819,
+      "pswpin": 0,
+      "pswpout": 0,
+      "swap_free_bytes": 0,
+      "swap_total_bytes": 0
+    },
+    {
+      "active_swap_devices": [],
+      "cpu_frequency_khz": {},
+      "cpu_pressure": {
+        "full": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 0
+        },
+        "some": {
+          "avg10": 13.19,
+          "avg300": 0.51,
+          "avg60": 2.44,
+          "total": 10289500
+        }
+      },
+      "diskstats": {
+        "sda": [
+          12950,
+          9236,
+          559268,
+          6072,
+          268370,
+          785341,
+          20949328,
+          184001,
+          0,
+          513271,
+          190427,
+          0,
+          0,
+          0,
+          0,
+          2475,
+          352
+        ]
+      },
+      "io_pressure": {
+        "full": {
+          "avg10": 0.72,
+          "avg300": 0.02,
+          "avg60": 0.13,
+          "total": 4067749
+        },
+        "some": {
+          "avg10": 0.72,
+          "avg300": 0.02,
+          "avg60": 0.13,
+          "total": 4342013
+        }
+      },
+      "load_average": [
+        0.6474609375,
+        0.19189453125,
+        0.16162109375
+      ],
+      "memory_available_bytes": 15978946560,
+      "memory_pressure": {
+        "full": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 172
+        },
+        "some": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 172
+        }
+      },
+      "monotonic_seconds": 23005.090977737,
+      "pswpin": 0,
+      "pswpout": 0,
+      "swap_free_bytes": 0,
+      "swap_total_bytes": 0
+    },
+    {
+      "active_swap_devices": [],
+      "cpu_frequency_khz": {},
+      "cpu_pressure": {
+        "full": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 0
+        },
+        "some": {
+          "avg10": 13.19,
+          "avg300": 0.51,
+          "avg60": 2.44,
+          "total": 10800395
+        }
+      },
+      "diskstats": {
+        "sda": [
+          12961,
+          9331,
+          560116,
+          6079,
+          271767,
+          789635,
+          21012088,
+          186551,
+          0,
+          513323,
+          192984,
+          0,
+          0,
+          0,
+          0,
+          2477,
+          352
+        ]
+      },
+      "io_pressure": {
+        "full": {
+          "avg10": 0.72,
+          "avg300": 0.02,
+          "avg60": 0.13,
+          "total": 4098395
+        },
+        "some": {
+          "avg10": 0.72,
+          "avg300": 0.02,
+          "avg60": 0.13,
+          "total": 4374021
+        }
+      },
+      "load_average": [
+        0.6474609375,
+        0.19189453125,
+        0.16162109375
+      ],
+      "memory_available_bytes": 15948054528,
+      "memory_pressure": {
+        "full": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 173
+        },
+        "some": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 203
+        }
+      },
+      "monotonic_seconds": 23006.092338175,
+      "pswpin": 0,
+      "pswpout": 0,
+      "swap_free_bytes": 0,
+      "swap_total_bytes": 0
+    },
+    {
+      "active_swap_devices": [],
+      "cpu_frequency_khz": {},
+      "cpu_pressure": {
+        "full": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 0
+        },
+        "some": {
+          "avg10": 18.77,
+          "avg300": 0.8,
+          "avg60": 3.8,
+          "total": 11333826
+        }
+      },
+      "diskstats": {
+        "sda": [
+          12965,
+          9366,
+          560428,
+          6082,
+          276791,
+          793538,
+          21172792,
+          190124,
+          1,
+          513574,
+          196560,
+          0,
+          0,
+          0,
+          0,
+          2479,
+          353
+        ]
+      },
+      "io_pressure": {
+        "full": {
+          "avg10": 1.31,
+          "avg300": 0.05,
+          "avg60": 0.25,
+          "total": 4109315
+        },
+        "some": {
+          "avg10": 1.31,
+          "avg300": 0.05,
+          "avg60": 0.25,
+          "total": 4399612
+        }
+      },
+      "load_average": [
+        0.6474609375,
+        0.19189453125,
+        0.16162109375
+      ],
+      "memory_available_bytes": 15903465472,
+      "memory_pressure": {
+        "full": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 173
+        },
+        "some": {
+          "avg10": 0.0,
+          "avg300": 0.0,
+          "avg60": 0.0,
+          "total": 203
+        }
+      },
+      "monotonic_seconds": 23007.093554439,
+      "pswpin": 0,
+      "pswpout": 0,
+      "swap_free_bytes": 0,
+      "swap_total_bytes": 0
+    }
+  ],
+  "id": "nift-workers-minus2-run00",
+  "round": 0,
+  "scenario": "full-build-all",
+  "schema": "cp10-run",
+  "schema_version": 1,
+  "series": "nift-worker-sweep",
+  "started_at_utc": "2026-10-01T00:33:54.332954+00:00",
+  "time": {
+    "cpu_percent": 485.0,
+    "exit_status": 0,
+    "filesystem_inputs": 4008,
+    "filesystem_outputs": 477064,
+    "involuntary_context_switches": 7644,
+    "major_page_faults": 0,
+    "maximum_rss_kib": 219856,
+    "minor_page_faults": 62532,
+    "swaps": 0,
+    "system_seconds": 5.63,
+    "user_seconds": 21.06,
+    "voluntary_context_switches": 4998,
+    "wall_seconds": 5.5
+  },
+  "tool": "nift",
+  "validity": {
+    "correctness_verified": false,
+    "execution_error": null,
+    "formal_valid": false,
+    "infrastructure_valid": true,
+    "invalid_reasons": [],
+    "monitor_errors": []
+  },
+  "warmth": "warm",
+  "working_directory": "/srv/cp10/nift-project"
+}

@@ -1,0 +1,13 @@
+user_seconds=735.60
+system_seconds=56.16
+cpu_percent=138%
+wall_seconds=570.23
+maximum_rss_kib=8172860
+major_page_faults=0
+minor_page_faults=4537964
+voluntary_context_switches=2238749
+involuntary_context_switches=25100
+filesystem_inputs=1191728
+filesystem_outputs=5081056
+swaps=0
+exit_status=0

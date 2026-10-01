@@ -1,0 +1,10 @@
+[Shiki] The language "conf" doesn't exist, falling back to "plaintext".
+[Shiki] The language "conf" doesn't exist, falling back to "plaintext".
+00:48:41 [ERROR] Error: [APIRequest] Operation GET /zones/{zone_identifier}/custom_pages/{identifier} not found in schema.
+    at file:///srv/cp10/upstream/dist/.prerender/chunks/APIRequest_B_zk-fuG.mjs:3224:24
+00:48:41 [ERROR] [build] Caught error rendering /rules/custom-errors/api-calls: Error: [APIRequest] Operation GET /zones/{zone_identifier}/custom_pages/{identifier} not found in schema.
+[APIRequest] Operation GET /zones/{zone_identifier}/custom_pages/{identifier} not found in schema.
+  Hint:
+    This issue often occurs when your MDX component encounters runtime errors.
+  Stack trace:
+    at file:///srv/cp10/upstream/dist/.prerender/chunks/APIRequest_B_zk-fuG.mjs:3224:24

@@ -1,0 +1,4137 @@
+{
+  "entries": [
+    {
+      "mode": "0775",
+      "mtime_ns": 1790543732930022239,
+      "path": ".tmp",
+      "type": "directory"
+    },
+    {
+      "mode": "0664",
+      "mtime_ns": 1790538155574852713,
+      "path": ".tmp/.gitignore",
+      "sha256": "240a3e0d37d2e86b614063f5347eb02d4f99ca6c254de6b82871ff8d95532a7d",
+      "size": 14,
+      "type": "file"
+    },
+    {
+      "mode": "0775",
+      "mtime_ns": 1790543732936022307,
+      "path": ".tmp/logpush-datasets-extracted",
+      "type": "directory"
+    },
+    {
+      "mode": "0775",
+      "mtime_ns": 1790543732936022307,
+      "path": ".tmp/logpush-datasets-extracted/account",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/access_requests.md",
+      "sha256": "b332ef8ccb4080c6c468c2e68cdac97d671cfb50cd29a0c4398bbbb6cb407ebd",
+      "size": 1398,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/account_abuse_protection_events.md",
+      "sha256": "80705691149b9ef3a393163085792bb40bcaa9c4cd01275b6fba6efd529e160e",
+      "size": 2906,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/audit_logs.md",
+      "sha256": "92de9b3648e70bfd757f7c37214a8b04b832dfbd35410e231f1a829d42a75241",
+      "size": 1432,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/audit_logs_v2.md",
+      "sha256": "f05f010da3ea19cf1471ddccb9dc3cddb04c3da07e7b81cfc6ac99f875d5326c",
+      "size": 1637,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/biso_user_actions.md",
+      "sha256": "5b86b2f885c02e13143b1fabee853a00b640f63f23e787289b2550bca54b6486",
+      "size": 812,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/casb_findings.md",
+      "sha256": "9e6eca59505b2607f788f156d033228a7a90d24c660996553397111499ed9e92",
+      "size": 1511,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/device_posture_results.md",
+      "sha256": "e9efceeed52dd216daebcc13f942638e5f8a312f372bf4248c3bd674e69080b3",
+      "size": 2202,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/dex_application_tests.md",
+      "sha256": "9f0ba780bde41e3d474790334feab7d1afaab2342fcfc128f725f9dd4ebb7a37",
+      "size": 10545,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/dex_device_state_events.md",
+      "sha256": "0821a3cbb26821f2af97da7a6c9ae0a89706ffe50075a3a4a692f08007c76dc7",
+      "size": 6787,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/dlp_forensic_copies.md",
+      "sha256": "6c0c6d5bfcb36833c24bd509379e7b919d1b686f63ff584ca15114d47d229ae3",
+      "size": 952,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/dns_firewall_logs.md",
+      "sha256": "4fa44e1bfc02e4e42551a06ba06c139e0be9fc12e86cba87642e44a54ff95182",
+      "size": 2638,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/email_security_alerts.md",
+      "sha256": "44daec0410bf73448ee420c12f47c0d9532349fc17ac8552f768f87c6168da09",
+      "size": 5280,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/email_security_post_delivery_events.md",
+      "sha256": "a3b45e587dbf9ed697a2d2b90c5c7b354bd7f4cae12755ae7805188449e9a41f",
+      "size": 2792,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/firewall_events.md",
+      "sha256": "8ddd9086d7a10317704d7f70a8fe86265bf36cb84863b3e8539b508a492851b4",
+      "size": 7402,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/gateway_dns.md",
+      "sha256": "1badff686cd003507f2f241ca88a041393ccd9dd30348cdf45f397a043025694",
+      "size": 10433,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/gateway_http.md",
+      "sha256": "ae974ebfc0583b6bd11602f467f2c0f5507ce8c04759c562981acf17372fa72d",
+      "size": 6591,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/gateway_network.md",
+      "sha256": "cbbb97ce1a5a9aa80949fd4a31ea98aeef4ed2bb04416794a2c873949987acd1",
+      "size": 3901,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/ipsec_logs.md",
+      "sha256": "a072360114e878937f66eef442b11e37e8a99cfbacf14f16be28229c5f04b05f",
+      "size": 698,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/magic_bgp_logs.md",
+      "sha256": "2990f6a225544e98bc486a931c3b1b1d94832c0e781faf97bbf0c2a0c95221ec",
+      "size": 1916,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/magic_ids_detections.md",
+      "sha256": "271c6d6abd093351f3fa829f9239b19d864412f308cb082dcec4563573ada80c",
+      "size": 1573,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/mcp_portal_logs.md",
+      "sha256": "2bf4878f27d863ba40cc5912eb39bd53aafbe34340f8f1cb2679714cff75013f",
+      "size": 1873,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/mnm_flow_logs.md",
+      "sha256": "206cae3261705cc649e534c6f06ace4cce55d80a59a93e5a2995b218e4965ab8",
+      "size": 2294,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/network_analytics_logs.md",
+      "sha256": "7da7b9c9c863e68563a38f58113f12e138687b48a19ea25b147c49a9036c623f",
+      "size": 10013,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/sinkhole_http_logs.md",
+      "sha256": "dbc901f3fcac3ba862a3c1e566ee1f18f1371da78808aa06b5562874d969219b",
+      "size": 1485,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/ssh_logs.md",
+      "sha256": "bd08f3f868eefa7e68c604060ff4bd0bdfd80b5727adfc81efa3f3513d936c26",
+      "size": 2086,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/turnstile_events.md",
+      "sha256": "4932f4727700ed94488f7beb00f762ac162fcfcd544a212e3e2c369bad145137",
+      "size": 1711,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/warp_config_changes.md",
+      "sha256": "889a971fdf7a40fb091fdc472ce31586805a5acc68eece4cde30a346a47596f3",
+      "size": 1041,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/warp_toggle_changes.md",
+      "sha256": "5d4c5c46091b84c5c097ebd706f213f915edac6004d195e69191f678c5bf06f8",
+      "size": 782,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/websocket_analytics.md",
+      "sha256": "cd275933ff59de6fb7ad508553b0c691ef0f654918e9ebb5024e24a3e72eb8f0",
+      "size": 2881,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/workers_trace_events.md",
+      "sha256": "e9f857429cd79e4cda55bba65cdf676ac95dddd24943e8e6716299e7a1525fcc",
+      "size": 2206,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/account/zero_trust_network_sessions.md",
+      "sha256": "60fc2319f59d533e3c76599267eb02036e6686bb583af6c1c201f2dcb4dda34d",
+      "size": 6981,
+      "type": "file"
+    },
+    {
+      "mode": "0775",
+      "mtime_ns": 1790543732937022318,
+      "path": ".tmp/logpush-datasets-extracted/zone",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/zone/account_abuse_protection_events.md",
+      "sha256": "80705691149b9ef3a393163085792bb40bcaa9c4cd01275b6fba6efd529e160e",
+      "size": 2906,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/zone/dns_logs.md",
+      "sha256": "37a3faa802b5bf351da8bec664e1636505918fa649570939ca2fff96515a2646",
+      "size": 1363,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/zone/firewall_events.md",
+      "sha256": "8ddd9086d7a10317704d7f70a8fe86265bf36cb84863b3e8539b508a492851b4",
+      "size": 7402,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/zone/http_requests.md",
+      "sha256": "4ed993eb2e20aec099240d79d846718f9c110338b51ffcb2be3013a6efdf00e4",
+      "size": 20777,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/zone/nel_reports.md",
+      "sha256": "8fe8e31ffe7f2b9463e85a3c7a12d0bc4b51edf8e38f0ca934690a4327100df8",
+      "size": 715,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/zone/page_shield_events.md",
+      "sha256": "a922356cd965f71a3931a9c75ad208c76312f3f7fabfe510bdfa96d24028f418",
+      "size": 1073,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/zone/spectrum_events.md",
+      "sha256": "700e3d36d15d271f8e31397b85a7f9831556d00606d1529e0a0667afd452ddb4",
+      "size": 4147,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/zone/websocket_analytics.md",
+      "sha256": "cd275933ff59de6fb7ad508553b0c691ef0f654918e9ebb5024e24a3e72eb8f0",
+      "size": 2881,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 0,
+      "path": ".tmp/logpush-datasets-extracted/zone/zaraz_events.md",
+      "sha256": "a3c8e64cabe63ddf831fb2044834a153ddc098059969928911bb261c30726b62",
+      "size": 609,
+      "type": "file"
+    },
+    {
+      "mode": "0775",
+      "mtime_ns": 1790538221832016733,
+      "path": ".tmp/middlecache",
+      "type": "directory"
+    },
+    {
+      "mode": "0775",
+      "mtime_ns": 1790543731509006148,
+      "path": ".tmp/middlecache/v1",
+      "type": "directory"
+    },
+    {
+      "mode": "0775",
+      "mtime_ns": 1790538223576036257,
+      "path": ".tmp/middlecache/v1/application-controls",
+      "type": "directory"
+    },
+    {
+      "mode": "0664",
+      "mtime_ns": 1790538223569036179,
+      "path": ".tmp/middlecache/v1/application-controls/applications-with-controls.json",
+      "sha256": "c53b70c7d221e5517ac9b0a68a843876ad7db8a33c15d7ccbbc8c14855c4afa8",
+      "size": 454602,
+      "type": "file"
+    },
+    {
+      "mode": "0775",
+      "mtime_ns": 1790543731024000657,
+      "path": ".tmp/middlecache/v1/cloudflare-api-schemas",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790440449000000000,
+      "path": ".tmp/middlecache/v1/cloudflare-api-schemas/openapi.json",
+      "sha256": "a7b894f05bf367e808ffb5243aa76c51b4950b72827f94578c85829d66f9d6e2",
+      "size": 26195362,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790440449000000000,
+      "path": ".tmp/middlecache/v1/cloudflare-api-schemas/openapi.yaml",
+      "sha256": "85bcdd40f89094b19ea78580251f775e3e18703834a9115bc936f8aaec532373",
+      "size": 19341074,
+      "type": "file"
+    },
+    {
+      "mode": "0775",
+      "mtime_ns": 1790538223315033336,
+      "path": ".tmp/middlecache/v1/cloudflare-mcps",
+      "type": "directory"
+    },
+    {
+      "mode": "0664",
+      "mtime_ns": 1790538223310033279,
+      "path": ".tmp/middlecache/v1/cloudflare-mcps/mcps-manifest.json",
+      "sha256": "cebeea0ecb2faf9292056646d8a0fa251bef6207bbfa3be71f6a626eab068d8b",
+      "size": 3416,
+      "type": "file"
+    },
+    {
+      "mode": "0775",
+      "mtime_ns": 1790543729347236078,
+      "path": ".tmp/middlecache/v1/cloudflare-skills",
+      "type": "directory"
+    },
+    {
+      "mode": "0664",
+      "mtime_ns": 1790538223314033324,
+      "path": ".tmp/middlecache/v1/cloudflare-skills/skills-manifest.json",
+      "sha256": "7acd3420caee1cca7477a7560237f42b55d066086ec57d736192f5b0d231d175",
+      "size": 18272,
+      "type": "file"
+    },
+    {
+      "mode": "0664",
+      "mtime_ns": 1790543729346636610,
+      "path": ".tmp/middlecache/v1/cloudflare-skills/skills.tar.gz",
+      "sha256": "ec512882f19e37b7ea16c5456d0847e0d7d45ed7ab34218824b7494dcafb34c8",
+      "size": 367199,
+      "type": "file"
+    },
+    {
+      "mode": "0775",
+      "mtime_ns": 1790543732922022148,
+      "path": ".tmp/middlecache/v1/logpush-datasets",
+      "type": "directory"
+    },
+    {
+      "mode": "0664",
+      "mtime_ns": 1790543732921022137,
+      "path": ".tmp/middlecache/v1/logpush-datasets/datasets.tar.gz",
+      "sha256": "6b191d669e08e11d3b9c3c01a675d24ec030d7e46192148ff190e588df93fe1d",
+      "size": 32279,
+      "type": "file"
+    },
+    {
+      "mode": "0775",
+      "mtime_ns": 1790538223316033347,
+      "path": ".tmp/middlecache/v1/products",
+      "type": "directory"
+    },
+    {
+      "mode": "0664",
+      "mtime_ns": 1790538223310033279,
+      "path": ".tmp/middlecache/v1/products/reconciled-availability-certification.json",
+      "sha256": "c3e12f50d1299824f37051d9a52a99112329cd3600a4b5d2b1f4f253c67652fe",
+      "size": 17600,
+      "type": "file"
+    },
+    {
+      "mode": "0775",
+      "mtime_ns": 1790543729387982133,
+      "path": "skills",
+      "type": "directory"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/agents-sdk",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/agents-sdk/SKILL.md",
+      "sha256": "59332861a1dabef069b0cb9a0fb1e34505501f43bec3bd0247a4914b577a0680",
+      "size": 11784,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/agents-sdk/references",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/agents-sdk/references/browse-the-web.md",
+      "sha256": "e35b6627eee0bcd0f86e264ad0973aa5c364a5bd3ec14838ad36217faf47c841",
+      "size": 1634,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/agents-sdk/references/callable.md",
+      "sha256": "4c116204cd68ff53908c49100a110d5fb773f9a3bc486a2be57afb09a4ead248",
+      "size": 2115,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/agents-sdk/references/client-sdk.md",
+      "sha256": "83afccf162137ee06bf84d108962ba840cdb29fc9d483cb6fca928c2b2852eb4",
+      "size": 1192,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/agents-sdk/references/codemode.md",
+      "sha256": "35d9639fe1db69400479c34670a71090031608276ebf9bc1c5e7fa32f77d487b",
+      "size": 2902,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/agents-sdk/references/configuration.md",
+      "sha256": "91842e59fb17eff0d40df1cf16905aca8abd3ad9a939f8d15bfd6c5b84175354",
+      "size": 1837,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/agents-sdk/references/durable-execution.md",
+      "sha256": "7cea752aa3423745be812cc97df38b6beeea97900b97b21f171fc3ad1a5e281b",
+      "size": 1705,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/agents-sdk/references/email.md",
+      "sha256": "0a156971806f83f2f93450d731a57d6cb315cab387e3adeb33ad6ff50fe49ecc",
+      "size": 3539,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/agents-sdk/references/human-in-the-loop.md",
+      "sha256": "b132c228b4bc5d4a3c9ca03d1ca6661ddfb6dc4dd93cd96a237b11b60e3d342b",
+      "size": 913,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/agents-sdk/references/mcp.md",
+      "sha256": "dae15220a63900bf6f32ed45d115c4f9459bb19ee38513759a9d12968c6ba021",
+      "size": 1285,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/agents-sdk/references/observability.md",
+      "sha256": "4563c0b9856b0f2ce9728470473caab565442cb2eb40044434d771805b9aa7f1",
+      "size": 1339,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/agents-sdk/references/queue-retries.md",
+      "sha256": "6ad2ae61c9a9c64f8632096f7db7ec01b77fec2b5474fa80a96a5626e01dcd3d",
+      "size": 1439,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/agents-sdk/references/routing.md",
+      "sha256": "55c9c94b02f827cbd90bc00ca798197b4cdee0e87e0b2fe15b8f77d7725d66a6",
+      "size": 1828,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/agents-sdk/references/server-driven-messages.md",
+      "sha256": "32309668c47605813c3f22ae992b267850a95dd3b4ead4a1657ebf1803c2333b",
+      "size": 860,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/agents-sdk/references/state-scheduling.md",
+      "sha256": "ab4983e123a4a2e1a2569143dbadb58178ae68c21f04be932148407151b05fad",
+      "size": 1502,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/agents-sdk/references/streaming-chat.md",
+      "sha256": "cdd9ac6d8b5233a455d92756be83b369b379cbe395691d75dc60138b22417fda",
+      "size": 1440,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/agents-sdk/references/think.md",
+      "sha256": "1c507f9a22414290cf1c45821deb1d83ae3b008098ead751af380559789547e5",
+      "size": 2929,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/agents-sdk/references/voice.md",
+      "sha256": "b6254f2afa76a9530c43741bc9ea4dfcc9bcef2c7819dfba026825811943b06a",
+      "size": 1901,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/agents-sdk/references/webhooks-push.md",
+      "sha256": "c92e9f4566a71271eb4ffdcc219ed89fefc5294ecda47b43fc8863fb2b3e03f4",
+      "size": 2450,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/agents-sdk/references/workflows.md",
+      "sha256": "da59e9c265f91cca1011cbb9d9956f52371ec9a60be7f6201dbac7fb84879b8e",
+      "size": 2298,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare",
+      "type": "directory"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare-email-service",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare-email-service/SKILL.md",
+      "sha256": "5b4c4317a51dbb65afb4bd599d73ffe542d471ed9dc09c61d033f3a5a689ef40",
+      "size": 6586,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare-email-service/references",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare-email-service/references/cli-and-mcp.md",
+      "sha256": "906aa333331e080a275a4ba3d4c342281b655afcef25a2081d197a396a3da913",
+      "size": 4039,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare-email-service/references/deliverability.md",
+      "sha256": "174ff9cafe8e87c98faf2e25b30acb8889cd108caabe55b71c0db2bcb23077a7",
+      "size": 9145,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare-email-service/references/rest-api.md",
+      "sha256": "5c1be3bef5e781e83c7beafb982284d68ac2f212e1e5dd241c291ad0c5956fa8",
+      "size": 1812,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare-email-service/references/routing.md",
+      "sha256": "db54ef436d72bfa1454a6da95be6a33b29b94266a1e8d1bffe86ffe0e007565c",
+      "size": 7462,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare-email-service/references/sending.md",
+      "sha256": "997a657ec72a1033a10eb9aabdfc5344569f6aec5668644fc2a20fc852559a77",
+      "size": 2541,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare-one",
+      "type": "directory"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare-one-migrations",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare-one-migrations/SKILL.md",
+      "sha256": "be0c7d370c4061f3a8e51a812c4570fb181880eab87f15a96cd369fe657450b8",
+      "size": 12315,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare-one/SKILL.md",
+      "sha256": "86e48146f0984904051742cd524ea687e07ac87bf3c3a4a399e254bd2985bf0c",
+      "size": 22857,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/SKILL.md",
+      "sha256": "4db2993fc6bc248f29485e11b7ba3b135a4b1ccf68c561864c5b749944875ab8",
+      "size": 23912,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references",
+      "type": "directory"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/ai-gateway",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/ai-gateway/README.md",
+      "sha256": "cb3fea6f3f595bce283e0501276777e0fb0744569cf8503da7d5138b1a3bd679",
+      "size": 1949,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/ai-gateway/configuration.md",
+      "sha256": "536a476cdbe25de19b3608b315833a63cabd6002171a2c8e22f9bfe71435ad19",
+      "size": 2194,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/ai-gateway/dynamic-routing.md",
+      "sha256": "fc20a95d4a88a4211c6d5d0daa59e4ad52eee14d27038e3b78f7e28f4a348285",
+      "size": 1829,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/ai-gateway/features.md",
+      "sha256": "0ed86a0d73761425b6191896ff92b5f698d1be147e1651e08d2e3a09ed8f199f",
+      "size": 2513,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/ai-gateway/sdk-integration.md",
+      "sha256": "abff86d63fdd50a26f8bf702db9533fcbc11500d10fe8261f2661fd6a780fd93",
+      "size": 2213,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/ai-gateway/troubleshooting.md",
+      "sha256": "67494a2dcd806e65da1486807e0339e7e691dfa5bb6f6dc2f0a35d9cdeacc36f",
+      "size": 2393,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/ai-search",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/ai-search/README.md",
+      "sha256": "364c0e15ae3f13065f2bf65c3d653ae68f7e5be973583434a4eca10d171c3966",
+      "size": 1829,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/ai-search/api.md",
+      "sha256": "6e854266f653273c92ed15b2d35ab87eba48694938e0bfb11ddca995836bf28a",
+      "size": 1247,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/ai-search/configuration.md",
+      "sha256": "7c12497a72dac9cc6cd01066fcfd46424882d9cc52d499e067a8d019a273efac",
+      "size": 1767,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/ai-search/gotchas.md",
+      "sha256": "4072fd2eeca3dcd346d29e0c8d911e0f5a91081c5acb3c69219a941e7ba1c306",
+      "size": 1592,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/ai-search/patterns.md",
+      "sha256": "588ca72415984e430b8cce3360dd6232b8827861c15338d455bfecc074158102",
+      "size": 1684,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/analytics-engine",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/analytics-engine/README.md",
+      "sha256": "d60bb6b6bb29c836886637ee584485ba9145ca1b326ee8ea55d86a4f62bb2c6f",
+      "size": 3418,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/analytics-engine/api.md",
+      "sha256": "647f4d5a50690af27e6ea5117623795fb9c4e1c348c39c07ce7f73ac9b7c222e",
+      "size": 3143,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/analytics-engine/configuration.md",
+      "sha256": "86112c2385fe4e44b4825f9962cfe3429e6681de9f051a50a1c70514f1b85131",
+      "size": 2361,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/analytics-engine/gotchas.md",
+      "sha256": "08d11a06bc1cc955bdf4ade8d1a523b0e78157434d559169c4bc2d36f886667b",
+      "size": 2018,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/analytics-engine/patterns.md",
+      "sha256": "d294a7ee3ce2d58fbb8413eb6e58faf7af8f699cecc7480b955ceb31e87204b2",
+      "size": 2312,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/api",
+      "type": "directory"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/api-shield",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/api-shield/README.md",
+      "sha256": "a032c7160b70c9a200e982bc457acd746760c2960e25b7554dfb315da98f71dc",
+      "size": 1796,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/api-shield/api.md",
+      "sha256": "2ac3f5be499c1047575dddae5fe10fd9ab93e153eec3bd3fae3e2add82275aaa",
+      "size": 3900,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/api-shield/configuration.md",
+      "sha256": "79acd0a84bdeca4f45ef92d3772e9f403d15266210205700a7fccc313a084418",
+      "size": 5020,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/api-shield/gotchas.md",
+      "sha256": "6941ecb164f0cd23432029e319cdfd7c999365eca6aa1a1df76b52bb59d565dd",
+      "size": 4946,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/api-shield/patterns.md",
+      "sha256": "66f0e9bc0d7440d76368f3863b8009cfe80de3a61e91c76727a249e2eb192574",
+      "size": 5844,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/api/README.md",
+      "sha256": "749188cb7756cda8025be2cebbcdfef015142313ffacae721196f9ecb9a16396",
+      "size": 2583,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/api/api.md",
+      "sha256": "847c33ce18c1a4ff210ce5db75db0694113fe5367bdba983b0e6f0d7dd2742b1",
+      "size": 4308,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/api/configuration.md",
+      "sha256": "aeb5b23e32ef6408b4abbb263ed1837fc6d07e17b7f480856f8ca4083844c8c7",
+      "size": 3787,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/api/gotchas.md",
+      "sha256": "b721d8e28866f376ca8ac91d8f7f9fa35726f6378f83796baed13687f6eca6e2",
+      "size": 5390,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/api/patterns.md",
+      "sha256": "7ea6b294371bc04ffbf0a1fdc71a2e138f3303bfcdd85b91b1e29d0d53f80bc2",
+      "size": 4639,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/argo-smart-routing",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/argo-smart-routing/README.md",
+      "sha256": "405ab3a8878c32c95e12fb1c769f6cf79a597def8898b5e291d347a04c3e9052",
+      "size": 4060,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/argo-smart-routing/api.md",
+      "sha256": "8c3266518ed0f9f98aefd6702eaf7400c40b0de0f49cc4daa7ff6f763f7e7ede",
+      "size": 6579,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/argo-smart-routing/configuration.md",
+      "sha256": "9cc0c9f4ce01828e0153baded0393f0569e9aceff2601c16aad71e12e2fa8a39",
+      "size": 4457,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/argo-smart-routing/gotchas.md",
+      "sha256": "fc890c1e98c117ac8b6eb5ef39a62059732d9df2642700a8ad9fd2c877107fc7",
+      "size": 4327,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/argo-smart-routing/patterns.md",
+      "sha256": "8f0e0d9abdc17971afc802c23a04bf8780365031e5c4241cf084b0ad97c3707e",
+      "size": 3053,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/artifacts",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/artifacts/README.md",
+      "sha256": "af5823411495c376f8626a4979b15b213aadb40ec014dd35bdf9638e0a928b4e",
+      "size": 3776,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/artifacts/api.md",
+      "sha256": "5a6fd7bcacbbaf2c2ea83a5a899480a667f504a15cb973256260d1b476bef3e9",
+      "size": 5096,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/artifacts/configuration.md",
+      "sha256": "04648f76ad4d32a2265bbc6696c37229db2f67ed1ced99be6783ee61000c2d14",
+      "size": 3154,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/bindings",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/bindings/README.md",
+      "sha256": "e8e5cf958c6b29eef73c54d58c7e21f4548147a372908d645b480473e5fa4393",
+      "size": 1336,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/bindings/api.md",
+      "sha256": "b21906b1d7552be7676166a173eb5f1d9ea3b8bd8815ccd84aee482b722b5bbb",
+      "size": 2327,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/bindings/configuration.md",
+      "sha256": "1db3a8a1d71dd6dedad497fb7d1f97cced0615f1d1d7de22dec13597b797a4b6",
+      "size": 2458,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/bindings/gotchas.md",
+      "sha256": "f38bcdbfc58d812c2580779c1bbca8c6d5f49fab96a1b6630772595e7097219d",
+      "size": 2919,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/bindings/patterns.md",
+      "sha256": "df3e73101159471ba282b6c6dfe8f8d11b5d776e67e8af2610098f992def5ebb",
+      "size": 2362,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/bot-management",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/bot-management/README.md",
+      "sha256": "648b34470dfd132985d372f54c817683c4b3a078bd732d851ef9d950d9106036",
+      "size": 3793,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/bot-management/api.md",
+      "sha256": "a00ceaea1f51f7536829b2f93323d0df5c8f6b7742bfbcf9fcbd489eb910c4e9",
+      "size": 5803,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/bot-management/configuration.md",
+      "sha256": "361f709d6561c916b6082afa689ad3e69aa05f2cb4f9ed7bcbdfa62605b95c47",
+      "size": 5744,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/bot-management/gotchas.md",
+      "sha256": "d26a1b2dee0b92e6e2f4046067e0ba3f9e14f0b548b1d06537232d265e4cbb56",
+      "size": 5657,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/bot-management/patterns.md",
+      "sha256": "daeb6aa87d2c1fe00e7d3ba3ebcb5e782725a6a3e22edde56c03527d1eb1ba63",
+      "size": 4970,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/browser-rendering",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/browser-rendering/README.md",
+      "sha256": "9f02f2fedbbda127bba359e43cd07cdc52583164ef813b2ea93a1d476acec09b",
+      "size": 1270,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/browser-rendering/api.md",
+      "sha256": "a37dbb25695480792fb91abfe46648512f2635b6d0e74fd76478b66233db1a18",
+      "size": 1176,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/browser-rendering/configuration.md",
+      "sha256": "64d9afeb057f874c025faf7611e33617a7e08f9cf589780fd42751c7bebae6e7",
+      "size": 1285,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/browser-rendering/gotchas.md",
+      "sha256": "64a88e509478dc88fd27d87e64abd9f91f1bfb25fe142c3c51d9954f1a0c24cd",
+      "size": 1886,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/browser-rendering/patterns.md",
+      "sha256": "e76a43637737592479d9c3af75dabbc469f015c962cb4a8201258d2fe27ffffa",
+      "size": 1488,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/c3",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/c3/README.md",
+      "sha256": "75075930de3e0e9b07d7f1bb2b75b1ded57654fafdc0cd7756ed451f9c1b4c5d",
+      "size": 3672,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/c3/api.md",
+      "sha256": "cdcd1cc8c9d981f68871097806489f83fd2d4b5a72346057dd8e8dd336627fae",
+      "size": 2239,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/c3/configuration.md",
+      "sha256": "01e7f90dfbfce4d20a86a41b3ca882dab74d0b540ea07952da2f4ff1c6b6626c",
+      "size": 1637,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/c3/gotchas.md",
+      "sha256": "4acfbc2572326cd0be2bdd76bc7c7fb629a68dabb7c98b3fc6bed234d13e72b0",
+      "size": 2307,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/c3/patterns.md",
+      "sha256": "5a48a578008dfb60716d2ac417984ae91d9b81ab48aa331b53d33a800ea8c0c8",
+      "size": 2117,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/cache-reserve",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/cache-reserve/README.md",
+      "sha256": "ddf6bde13d1479612dedd66b8ca551452d2007fa99e7bef1931a131ee56785f0",
+      "size": 5640,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/cache-reserve/api.md",
+      "sha256": "21b1448498e35b32fea54786ffa8dec6fff4ff597a3acfa10904ff459082207f",
+      "size": 6018,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/cache-reserve/configuration.md",
+      "sha256": "7a033bcbe69e1617d6df25d202c8ecf58fe40a1a06b91c7b71d9ac1964886869",
+      "size": 3660,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/cache-reserve/gotchas.md",
+      "sha256": "3642800cd57f39fa3841021057a0ab6fb8bbcd8270b45b4acf33d6f1345e0f92",
+      "size": 5797,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/cache-reserve/patterns.md",
+      "sha256": "94b4739cfaa9aa8d805b5d820c5cfe2259ee9a108a574bf5fff8837655647dcb",
+      "size": 6265,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/containers",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/containers/README.md",
+      "sha256": "6ff33e2009901397704b0d1dab15da43004297a4674d4e5efaaa4f03fb0dc314",
+      "size": 1883,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/containers/api.md",
+      "sha256": "ba5f38ad83869f8d52ef6cab512c2f1c7a8c5fdda8751fe4795cec0f6a53b6b2",
+      "size": 1538,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/containers/configuration.md",
+      "sha256": "a8e0c8e8dcc34b337e2c1f9ac63df9a65f99f7ae38a6b403a5990b535f0122bc",
+      "size": 1782,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/containers/gotchas.md",
+      "sha256": "f8443ab7a09c347f266f3eba1863a28c639a78c3ec0ced48ea899d9bdbc1869d",
+      "size": 2366,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/containers/patterns.md",
+      "sha256": "0304d545b988d9497ed525e4969da93cc5a1e56cd40c7f9a119d9a46fcc91b66",
+      "size": 2505,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/cron-triggers",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/cron-triggers/README.md",
+      "sha256": "7a1ef9f2f2312631427e997913eb00e8c0ee42c8d1fd1e8baf29c75e2841023f",
+      "size": 1514,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/cron-triggers/api.md",
+      "sha256": "64f725e531d3faaf11629815e0b23c61b2565e02da10a641a7bc9af032ba36dc",
+      "size": 1670,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/cron-triggers/configuration.md",
+      "sha256": "9323cf720d03c096ff797f4b008a2dfaac23b1c6fb942a1d5f32b7b51a5d0a22",
+      "size": 1657,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/cron-triggers/gotchas.md",
+      "sha256": "f7a9beba9bd292d275e648b0fa0eaffe292ecd99819960abb2db0a865b2b7918",
+      "size": 2327,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/cron-triggers/patterns.md",
+      "sha256": "a611fa0a8dff1bb381d001a8999f0cc6b53626a699702be44139aa8ecdcb9ef6",
+      "size": 1946,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/d1",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/d1/README.md",
+      "sha256": "99610db575425e06316f6a3f08c71d608338f2fe976ee9b08ae54e3cd60a2f7d",
+      "size": 1393,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/d1/api.md",
+      "sha256": "43c482967d4ee83b7491a15214a480e4714be86f5d299c1f1b861cae97044c47",
+      "size": 1914,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/d1/configuration.md",
+      "sha256": "cf9cdd7dbd6c84f693ef1c449135b461b98e0d5ae70f08e1e1750813b67afebe",
+      "size": 1906,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/d1/gotchas.md",
+      "sha256": "a74c5c114d23880102cdc40c49ef5ecb6fc4f4c72c3ccf455906d19fd1de462b",
+      "size": 2168,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/d1/patterns.md",
+      "sha256": "5372d2108d96007ea94239ae6c5459941b427f9c634f5252e40a0dbb4b94513f",
+      "size": 2169,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/ddos",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/ddos/README.md",
+      "sha256": "63018c3c2d25ce26a0f1b80dd60bd2d3c5193a26bf96979ef624030ab766c4a8",
+      "size": 2054,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/ddos/api.md",
+      "sha256": "eba158f9cca3ce70a07e5050a5586e3c1acd60f69e22069d9d02c8c91ad60cf5",
+      "size": 4170,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/ddos/configuration.md",
+      "sha256": "0d0fae2b22edba2d40fddbbcec3f0c63651a25a0115e708edfc8b4e4c584c925",
+      "size": 3005,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/ddos/gotchas.md",
+      "sha256": "320f6d383fe22756ae19e3a79fb1c1a5d147d74a493b73eed6dd6644fb9fd1a0",
+      "size": 3912,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/ddos/patterns.md",
+      "sha256": "546d722c64d8b1c14bc0a924b38eec24bcd3e639c25bbf424bb8cf73933ac306",
+      "size": 5680,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/do-storage",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/do-storage/README.md",
+      "sha256": "76a9a33bfbc6308779d4aa911d4a9e3d72ecfb32048c780c3a3cdd34a40166fa",
+      "size": 1121,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/do-storage/api.md",
+      "sha256": "4bb0280e586966349e6193887fa3f941136e6cc05c3f1de248dab6af922ea0d4",
+      "size": 1281,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/do-storage/configuration.md",
+      "sha256": "a40bc86d56df8428be18f4014c3f3883835e170fd53d38df014be9acbbe9feb5",
+      "size": 1571,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/do-storage/gotchas.md",
+      "sha256": "d0c3ef1630b02778aa99c39c8fbd538a3872b250df7e6d5bca5b5a4e79d7c4ae",
+      "size": 1811,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/do-storage/patterns.md",
+      "sha256": "96a90c38908844707b3e26dac334ce657d55eecbc3dc727ee57c85912f470877",
+      "size": 1680,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/do-storage/testing.md",
+      "sha256": "32ffdf6ad179ebd1120a0da8a9f47837a13229b41fefe5c4a8a03a2ee4bedaf2",
+      "size": 1150,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/email-routing",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/email-routing/README.md",
+      "sha256": "c0bb58b37a3376d05a8e2a22467846b4f1fb1d89580c06e9bf160a4c60b5db3d",
+      "size": 1336,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/email-routing/api.md",
+      "sha256": "29f38a8eca7d75a1801f139b182e201859803aa49f0da466e22cf75093e5bcc2",
+      "size": 1351,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/email-routing/configuration.md",
+      "sha256": "d67cde78022a6ef52e783dcb1ffa7ad6594cbbe6d9b480f7b78cf3f3cfdab00c",
+      "size": 1360,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/email-routing/gotchas.md",
+      "sha256": "e7518dcb66d577447fc7a828347008f6149271a51b08f4c8655b4a9cb6ce588d",
+      "size": 1397,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/email-routing/patterns.md",
+      "sha256": "9547736b70b3280f38012d46b7882555a44cedc228b4cd1101162f45ae309a09",
+      "size": 1190,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/email-workers",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/email-workers/README.md",
+      "sha256": "06ab21e8630b667950dcccf1bd097b8105ab6ec80ec4aa43bd5396b64d63b017",
+      "size": 1395,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/email-workers/api.md",
+      "sha256": "e2621f769855f88b0c87b1fa8088d9cf8f730980142fef03c651700deb709f45",
+      "size": 1495,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/email-workers/configuration.md",
+      "sha256": "ca7bc22fb0fdabc8e6a6c92ed64c6556958eb9d22635298a9762982a0f28681a",
+      "size": 1570,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/email-workers/gotchas.md",
+      "sha256": "6f5250cf171c95c15a8327a29a622722ffae35430b55dcd4e4805bffb654a982",
+      "size": 2193,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/email-workers/patterns.md",
+      "sha256": "b87b6ea5a3c52f6d76b889a317614c824514bf738fc318296f2b72ed8f507014",
+      "size": 1839,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/flagship",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/flagship/README.md",
+      "sha256": "bd012f29ec5e4a0b8c45c2524cb198334379907b0bfd09150ab3712fb4d34998",
+      "size": 3735,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/flagship/api.md",
+      "sha256": "c7b8eb86ed852a3f37709f000988aeb89860c24aedee58527379e475f0996894",
+      "size": 11749,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/flagship/configuration.md",
+      "sha256": "a067854b48b4f6cbbb7fac4ca886ef6a14ddd1fc108650ec2f096ca730d55c02",
+      "size": 4863,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/flagship/gotchas.md",
+      "sha256": "5daaa2c1895e625b06f9dd413f7548603aa0159fb4781145b0cdbcb0a6f07c44",
+      "size": 6353,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/flagship/patterns.md",
+      "sha256": "e89e1f39fadfb9aad0c01fd6ac84b8c8f36716e88f26df1fd79c53aaf2eee8e7",
+      "size": 14059,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/graphql-api",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/graphql-api/README.md",
+      "sha256": "324df669a01caceff7f0dbdb25e3b35dcaa40a5c20700605628c4bcb66b0d093",
+      "size": 7769,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/graphql-api/api.md",
+      "sha256": "0c0250cdf31adfbf2c7f96bf3ec257c32d14709160a8552b3238a861b3540de5",
+      "size": 5782,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/graphql-api/configuration.md",
+      "sha256": "765e696dfd11bfa87d231c011b10fb2c10a2e33d704d7c6d04f1f125585c5b92",
+      "size": 4675,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/graphql-api/gotchas.md",
+      "sha256": "59dbb9a541db17cdac52665fd6883d2eb660ec6fea4b45cc87c291d2e2b4a50f",
+      "size": 4857,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/graphql-api/patterns.md",
+      "sha256": "902d188040a60c5d130790222442158ff12879232357ee34ab410e0d7b9b5e76",
+      "size": 6539,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/hyperdrive",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/hyperdrive/README.md",
+      "sha256": "afb1eb6287bfcfc8a97b52b09ac8fd9d0829fadd14dd6115484dae6bb3a0dadb",
+      "size": 2125,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/hyperdrive/api.md",
+      "sha256": "041f2d99246449dbe12660a67a998248f3c4bc1c9c7e154d1a66a8d00d1c1931",
+      "size": 3099,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/hyperdrive/configuration.md",
+      "sha256": "5331c92ac557fd03f0662a5eadd6767ed3322ac4ded19efdf65dca9f83cbeb1e",
+      "size": 3205,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/hyperdrive/gotchas.md",
+      "sha256": "d22336a37367fb7ca647b482c146339312d0fec1f677308326f8f215b3b97654",
+      "size": 3346,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/hyperdrive/patterns.md",
+      "sha256": "b650cd76dae4885891e7b658a1063029292a8c31fac5417a9a38c9f7ef28bc05",
+      "size": 2690,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/images",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/images/README.md",
+      "sha256": "d53622e2cb9dcc2c2ffadf57a030ea17a6f4d89e910f987d82b05c364be137cf",
+      "size": 983,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/images/api.md",
+      "sha256": "e912302424458db3686be42d56e205c824a3fc9a33feb67832968863df0987c4",
+      "size": 1571,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/images/configuration.md",
+      "sha256": "a1d1a00f948cd04318f4f54ac14257d790c0f9bec69159cf8b5a3a68c9e5a11d",
+      "size": 2071,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/images/gotchas.md",
+      "sha256": "2493ba91d4e04d5d69a415b6b3f0d71bd552f694a8f3c2b4d205490b045cd82d",
+      "size": 2208,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/images/patterns.md",
+      "sha256": "06d06f0794c9d73343111c5028f2cd5ef69f4949164e21c357ea30805bbbd372",
+      "size": 1821,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/kv",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/kv/README.md",
+      "sha256": "92da2cc18853196a1d4b70e46608d8636bf67f6d95784391c28b0c90b2562151",
+      "size": 1504,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/kv/api.md",
+      "sha256": "6efcf95ad700940da232c68091fca87267e88235652064056b3a19cd8dc434f4",
+      "size": 1736,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/kv/configuration.md",
+      "sha256": "c523bddf0bc25477df0719cb1a0184612b63295e9dedcfc8905c94a66fd396fe",
+      "size": 1668,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/kv/gotchas.md",
+      "sha256": "64a46ff3f96848218f8a4f05ed8b838a1ddb9ac65f9ad0bd09f1f0592e163d11",
+      "size": 2409,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/kv/patterns.md",
+      "sha256": "614634507be4ec2e44466e34c5e1d703cd47c9f6fbca7a0941c15731f640ce58",
+      "size": 2852,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/miniflare",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/miniflare/README.md",
+      "sha256": "76a74634a7acb37e1ac261b8fd5cec76f2a1b22d24579bc8d1b32e27d68f285e",
+      "size": 1575,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/miniflare/api.md",
+      "sha256": "a71a38048879738732403c455db7bda6233c7bd8dab4e42356a9e497a17cad1e",
+      "size": 1776,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/miniflare/configuration.md",
+      "sha256": "91a3407176ea62566fd63c25f30c8db805e2a53ae9092f574663d3e0ca3dbaac",
+      "size": 2085,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/miniflare/gotchas.md",
+      "sha256": "ca6b02589e1392f907f155871b3c89d215872153dbe71df38fd4f81c254f9a8b",
+      "size": 2305,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/miniflare/patterns.md",
+      "sha256": "952225ad1774feda0344d080f633df68b8ea2c3228dcba60a9864fa7d0d694b5",
+      "size": 2217,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/network-interconnect",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/network-interconnect/README.md",
+      "sha256": "bc01923dae656639f772e66a2ae8e22445723af747bdc3011ba6105e09e88c1d",
+      "size": 3234,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/network-interconnect/api.md",
+      "sha256": "a4785017781a4b469b1c3e5c94f520a50b89412092b65963dee44bcb6e00b868",
+      "size": 5626,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/network-interconnect/configuration.md",
+      "sha256": "3edfa1d1642a0aed71121156acd7e4f76258b027b8f3758cbca68ab0ea5a1956",
+      "size": 4257,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/network-interconnect/gotchas.md",
+      "sha256": "e94f01476facd20cfef32de991a66c72adba32a4a63e646b9f3845af5d9ad8df",
+      "size": 5558,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/network-interconnect/patterns.md",
+      "sha256": "8405ce0cc66798eb8b264c7034f381a4b0aa8bc1ddace8b2e902fcba3bfd4f86",
+      "size": 4055,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/observability",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/observability/README.md",
+      "sha256": "0df1c7b9091849a5393554d4794282c9f51a2b388acf083bfb5b80d709b5d7f1",
+      "size": 2417,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/observability/api.md",
+      "sha256": "a7c1d3c0d321071eb6ec91e2c9b61c94c56612243dacd0526223223960d48674",
+      "size": 2200,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/observability/configuration.md",
+      "sha256": "8a4ee7bc53cfdb260468c10e9f4752e72e1e246e2009b6a4e14d70708f06f555",
+      "size": 2271,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/observability/gotchas.md",
+      "sha256": "9e91288dbab5908d1e6da5d1520c3b345df1763cc2f949479719ba6f4626b221",
+      "size": 3552,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/observability/patterns.md",
+      "sha256": "c8b043fb7c99ac83685a656fd069aafd839861609cfe56ed73fe1be96ce53f72",
+      "size": 3020,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pages",
+      "type": "directory"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pages-functions",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pages-functions/README.md",
+      "sha256": "57d3ef8fb786927aa342da4e8dafa7824a501a6c607d97f28c9de51b68233e49",
+      "size": 1287,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pages-functions/api.md",
+      "sha256": "cc7f88291745e5426d409f62d3acf8c05aa0a3449fcb80789da91000ff9fbc78",
+      "size": 1114,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pages-functions/configuration.md",
+      "sha256": "8e5eb8713ce303883d7ed94c057cb5e4a92f168226602ca867501f5701f07b6e",
+      "size": 1238,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pages-functions/gotchas.md",
+      "sha256": "6d216a2ca9975e6fe1caca9aaab24f38be3f38f2354fb63dfd5fa2f7e2740435",
+      "size": 1605,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pages-functions/patterns.md",
+      "sha256": "bab690285720caddd0960369e459457b32b09d0c13088f428fd184ae9d35c0d0",
+      "size": 1372,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pages/README.md",
+      "sha256": "53f7abd51014eb8873a1782f8adde99a72e9a382784b268aad695a02ca17a998",
+      "size": 1486,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pages/api.md",
+      "sha256": "496475d44c5eaf80277bfd191d9768ec5d31c8fcc22de84376a35a34e4fcbd6c",
+      "size": 1064,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pages/configuration.md",
+      "sha256": "7302804ed200e4b074e0788087ad668eaffa20c884904dfca227555b7904191a",
+      "size": 1506,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pages/gotchas.md",
+      "sha256": "cf1b53cc1aed8cf49e619630927e773d4f41bbea1fbe88ffa3891d452544603b",
+      "size": 1650,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pages/patterns.md",
+      "sha256": "b2aeb4f1cbfeaab713b78f25b65dac6818893be3d29f6d551980b338682f3d3d",
+      "size": 1207,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pipelines",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pipelines/README.md",
+      "sha256": "121f663e8fa0ffab1ed1f50f0fb65aa49cebae0ecd7d868e19b8baef2fcc5af3",
+      "size": 4281,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pipelines/api.md",
+      "sha256": "6dfced39253c563560c990fe062e3de2de9254cbde159771f488842ca2882597",
+      "size": 5058,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pipelines/configuration.md",
+      "sha256": "c10e1eb1066da113b54c33e4b06034c7e359912a344ede6ed7752ab29768bd52",
+      "size": 6099,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pipelines/gotchas.md",
+      "sha256": "b0d85c6a6519bac88f9d08d5fd9449515c2ca6750cb220ffc1c2e1394e87e2f3",
+      "size": 3029,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pipelines/patterns.md",
+      "sha256": "2790aa7ad664b4ba467d39f8fe8952b663876b56ba4d229bb7d4b15251823f4c",
+      "size": 4674,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pulumi",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pulumi/README.md",
+      "sha256": "1dabea92532ca86a7ca8ea24e677e5761f9a56e5354f785702246889ebd05589",
+      "size": 3301,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pulumi/api.md",
+      "sha256": "5e6459dbe3bcd802965fbc8467c54744671d5a9b3c600fececb2db314295797d",
+      "size": 5761,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pulumi/configuration.md",
+      "sha256": "5c102d4eb4d16a1647b451af42599d6123f6f4f31e4390edd698ba6ad8154eb6",
+      "size": 5657,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pulumi/gotchas.md",
+      "sha256": "f05c3e92c94f3fe24aab6072aa2a10a050a1df9d2ef56059d568150f6e6bb0a4",
+      "size": 6555,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/pulumi/patterns.md",
+      "sha256": "975cd37cd6735d790624d042982a683f05f96dd6509f9da8ada7e78f8e645f2e",
+      "size": 6974,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/queues",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/queues/README.md",
+      "sha256": "2251eec1cca8429bc1ca37ced7d70e760759925844390080e72ded2f27b01ebc",
+      "size": 1822,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/queues/api.md",
+      "sha256": "a3dd922e81c7013e5b10b7c17f31b570cb78926405ba1080786ebf9502d739a2",
+      "size": 1769,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/queues/configuration.md",
+      "sha256": "49cdf0be4128639031a5b3efa4ce3dfb0f86b66e5f76584c9a43992d0b363c96",
+      "size": 2308,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/queues/gotchas.md",
+      "sha256": "d56c92fe1951f4d7b33f2c2282bb88f71d1f6a88d3f0fa5fb5369b8f9ffcc087",
+      "size": 2736,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/queues/patterns.md",
+      "sha256": "ab2af2ee61433c38673b3b3b2d36c515897302a8beea5675213ca884de934ab7",
+      "size": 2599,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/r2",
+      "type": "directory"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/r2-data-catalog",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/r2-data-catalog/README.md",
+      "sha256": "41f463bca2b6817f2246da749ab048d877246867106314edaf27a6e8a6235181",
+      "size": 1192,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/r2-data-catalog/api.md",
+      "sha256": "9b8734bf0c8012d5b254e51f86335c845999504031c46cdd2ce7eeaf8babf1f3",
+      "size": 3337,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/r2-data-catalog/configuration.md",
+      "sha256": "1d383eeb822fd48b6dd904b54f20f04e38bf7abc843befa0ca060b5b6b78d8d6",
+      "size": 2124,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/r2-data-catalog/gotchas.md",
+      "sha256": "de888ca8498bad47edc6d2483bae16d465e3b71932d3ed242c75370700363ccb",
+      "size": 2175,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/r2-data-catalog/patterns.md",
+      "sha256": "05b07c195e7224dfe09abb7162e48572eb26c3e564c07cb0cd6c0c03d45a4382",
+      "size": 1724,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/r2-sql",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/r2-sql/README.md",
+      "sha256": "8dded8c81c71d90e8167069759b2ff7d9924047bed361907498187be9808af8e",
+      "size": 3253,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/r2-sql/api.md",
+      "sha256": "4d5601b6c29df2a54eb68786e69aa2f1bc0d86409515394ea46edb762bb32d66",
+      "size": 4898,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/r2-sql/configuration.md",
+      "sha256": "742a0b853a519bbc02085c4c71b22dc5a82516a0a6fefd2e0696b371e04cb052",
+      "size": 1679,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/r2-sql/gotchas.md",
+      "sha256": "0776a81ba0ffeb1b0fba4067f23efc5cf9d1437f675ce0b113f57c301203b6ed",
+      "size": 1969,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/r2-sql/patterns.md",
+      "sha256": "55141805996052be7b8dbfeaae1472808c1085ca364cf92fcbccfb5015393a35",
+      "size": 4357,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/r2/README.md",
+      "sha256": "536ce14e055029dcacc4376082bea1e9c07c62e476a025b17c6f68c52fa504af",
+      "size": 1673,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/r2/api.md",
+      "sha256": "f9e07f175b1b6d08327772ea2384c617c0b2603ee6a0f5e1353e786201fcf4cb",
+      "size": 1676,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/r2/configuration.md",
+      "sha256": "8e0b074c17a71f11d7bac2fa2aeebeeeb0ff8ed8cc6112d158154e793033725b",
+      "size": 2143,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/r2/gotchas.md",
+      "sha256": "a144850505e3339fa1f753dc2ca61741e601bc07989ed1ac8c3cf3d2fdf1c952",
+      "size": 3238,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/r2/patterns.md",
+      "sha256": "5f5a350fbae5e682e287af4e7e427e9bb08466227c82372ea386cc324cdd9117",
+      "size": 2198,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/realtime-sfu",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/realtime-sfu/README.md",
+      "sha256": "f2eea72b7d9d98c3ca2625c999404ec806ce07f68bb1bdd9b709d3030b1c7a32",
+      "size": 3076,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/realtime-sfu/api.md",
+      "sha256": "7c6c3d15d77976a87abcba5a8358c29c81e7dbeb15713cf5ccf71374e6017bfb",
+      "size": 3768,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/realtime-sfu/configuration.md",
+      "sha256": "6cee79842fdf8fc68b75951a8fa015cbd9276c7babe6e8753f654d3b112c3fb1",
+      "size": 3509,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/realtime-sfu/gotchas.md",
+      "sha256": "9717fbbf38ea4a8adc51631fd093eefacd6d6c7c30a961e54a5d404fa206b259",
+      "size": 4902,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/realtime-sfu/patterns.md",
+      "sha256": "51a2b40afd609346a367dcf8a626e905dfe895b3309fcb53432290c3da93cf0e",
+      "size": 5403,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/realtimekit",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/realtimekit/README.md",
+      "sha256": "4824b4edf9bc7dd15d745fd91f70aa94e7451595e568fdb62ac201444caa40e5",
+      "size": 4078,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/realtimekit/api.md",
+      "sha256": "37020e6102c6f4f080f430f3de20c83532930e59cdcaaee52752d1fe62190152",
+      "size": 8352,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/realtimekit/configuration.md",
+      "sha256": "4d4ccf99fa72d8923df1eb3910eade99021cb77c5d9b4aa95310a01aeade0aaf",
+      "size": 5192,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/realtimekit/gotchas.md",
+      "sha256": "83cecda63bad4c55c4b375f0b83fd90bcdc9a15a257fc95809ab08fa4c102618",
+      "size": 6883,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/realtimekit/patterns.md",
+      "sha256": "2e02421351f5a7ad19887c38ccae65f14c8118956c6763c029072847036ebcd8",
+      "size": 7660,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/secrets-store",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/secrets-store/README.md",
+      "sha256": "37b530418430ec8320f30b99b117bb703c5c9e4f0c8e48fd10dd46968645896b",
+      "size": 1819,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/secrets-store/api.md",
+      "sha256": "f8a4952b5c12349867e9484cf2d276cf6a1a2567ff48c5cb79d87f5ed775245c",
+      "size": 1867,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/secrets-store/configuration.md",
+      "sha256": "e5968928dc294eb8d54972fb3cd2324f97dfd455c673b1d720b53ccdd01ce574",
+      "size": 2396,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/secrets-store/gotchas.md",
+      "sha256": "cfdcc275fb51c16f40363c80b40e350025cc37fbeb7890029ef7d236492cb7eb",
+      "size": 2762,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/secrets-store/patterns.md",
+      "sha256": "03b4c940c3626d2c3283072ab477f31b01fefd4178b101fec8a537709870cc4a",
+      "size": 3005,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/smart-placement",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/smart-placement/README.md",
+      "sha256": "e2e2b2c205c0208933d3cde12f46156daadf01d0f068f42da15ace79e73af10d",
+      "size": 5086,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/smart-placement/api.md",
+      "sha256": "d3d8b440a7e362799d7b02dfc3ce348d7bbe51a760f4c6945f2d93bd82785774",
+      "size": 5559,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/smart-placement/configuration.md",
+      "sha256": "7d29937845c26f42ec568f4a98262bdbfe2e983c45e94c7c6376dda0ea67e856",
+      "size": 6119,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/smart-placement/gotchas.md",
+      "sha256": "8e56c052e6b513b9ab565f0eaf0e7f84bca236dfc30bb77ec6715b70821a5b92",
+      "size": 5637,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/smart-placement/patterns.md",
+      "sha256": "693558fe87218c6ee1adca94ca3362eb9cce923e369559f7ff87dca1b9bc5047",
+      "size": 5784,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/snippets",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/snippets/README.md",
+      "sha256": "4f66291949e5fb2a66e49a98b392c2d18057ff36ba74906feae3aeef94f9701f",
+      "size": 3132,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/snippets/api.md",
+      "sha256": "e76a59c5005ad537ea4ad83fab71365995717fb51938797a4dc29af324285755",
+      "size": 5133,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/snippets/configuration.md",
+      "sha256": "836c6765b1ca807f46f1a13ca0d8f383fc6f6c4f8fc857a366156cde96ff74ef",
+      "size": 6311,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/snippets/gotchas.md",
+      "sha256": "301c7167f03075505498f1f6b5fe1c72a393065a8228f42c435fde9f1b694150",
+      "size": 2220,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/snippets/patterns.md",
+      "sha256": "2b06454df89a837e16ae554769ad055e8de90d2c6bc19a81b4aeee0fc423029d",
+      "size": 3346,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/spectrum",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/spectrum/README.md",
+      "sha256": "6dfd516d6e54696accbe6bb499f4e70686061abd0afa192897b32d7fd0c3f32e",
+      "size": 2355,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/spectrum/api.md",
+      "sha256": "bef098862434f4c8e253d718d3437091813e45c3bfaa5004e8e86d6ceb83beb2",
+      "size": 4924,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/spectrum/configuration.md",
+      "sha256": "2079f33dfe2ef2ed715927c95c2ba5389f5f426745597aef94e5885da5eec403",
+      "size": 4332,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/spectrum/gotchas.md",
+      "sha256": "cb07bb56c6c5e2b2f88380772cbaa25143d7f32cce69c8f5bbbb1e77d4fdd216",
+      "size": 3739,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/spectrum/patterns.md",
+      "sha256": "087e7d9a1a1a308eb13614332df217137296501cf57082077f05bb3a1f2bf7b0",
+      "size": 4778,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/static-assets",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/static-assets/README.md",
+      "sha256": "c703792e94cf051f34422b4078a96b1c84727ee8a1e338389cd38acaee034225",
+      "size": 1681,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/static-assets/api.md",
+      "sha256": "0e78bb20b92ec7feb060917e639cf38cc6c52f032e7c48c8db660d43fc352aaf",
+      "size": 1685,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/static-assets/configuration.md",
+      "sha256": "4521ba2f28addab6b8719095b5d8136229d33e1bcbd815c1a3cbb744d745ec60",
+      "size": 2112,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/static-assets/gotchas.md",
+      "sha256": "5f4518480190b1879168d8e727599276600adc6d91aa8ef6ce52e46dce10e89e",
+      "size": 2669,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/static-assets/patterns.md",
+      "sha256": "cf6e0595f1f2a46ee38e735083d9793559cb3c7ef741a3b043611e33d97c20ff",
+      "size": 2179,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/stream",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/stream/README.md",
+      "sha256": "eddbd7ff3f6bd475f1cb65c31fa4726237b19a2f3923bf06e59853ba50860145",
+      "size": 1754,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/stream/api-live.md",
+      "sha256": "60eca854561ade7ecc6cc72a417dcf00a2589709903ac2d0220c8d6e56847ffc",
+      "size": 2078,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/stream/api.md",
+      "sha256": "4185d65547220fbe307deee174d2a19f310950f224b1f7d8e6ad9f8c5090f988",
+      "size": 2369,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/stream/configuration.md",
+      "sha256": "a0468ef4597cd08514e23aaa08cb78ff85a868cabdeff755b4d6ca2c9560a449",
+      "size": 1968,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/stream/gotchas.md",
+      "sha256": "5d9b23cead86822d4d2566dc6aaefcb37216343ff6b4da12083cfc55c341bd10",
+      "size": 2250,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/stream/patterns.md",
+      "sha256": "426645ab09e95c4ed0ea482be6ad6fba9a9dd28e00b2b5c53a89db9b2fee1566",
+      "size": 2259,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/tail-workers",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/tail-workers/README.md",
+      "sha256": "c6d560b0c39741220c01aa1c6381ed290f36e395133ef9cc3bbf12a05a6f4775",
+      "size": 1458,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/tail-workers/api.md",
+      "sha256": "acbe5f818044b7c1128290f7f7cd26c2d4d18f0b1bf192ba0632a601a6755d17",
+      "size": 1348,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/tail-workers/configuration.md",
+      "sha256": "57c8f038846520b18cde76b0627425d59a75b167a207a12f5e6dfa4c8777f546",
+      "size": 1437,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/tail-workers/gotchas.md",
+      "sha256": "a70c0e99d6f3f3076799830bf95a9900bd8ef2d314baa743be4d625065663524",
+      "size": 1577,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/tail-workers/patterns.md",
+      "sha256": "bd672b44773674399cc2a90f9d522290a22d8717eb2652eae832dc2d44bae7c1",
+      "size": 1548,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/terraform",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/terraform/README.md",
+      "sha256": "3311a16ec2b13cde94e0e75315b5901f1d977cc542ed1f39c2d52a1f4b980968",
+      "size": 3750,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/terraform/api.md",
+      "sha256": "5dc812c078d06454d801b0e126d50c48031c1a7b0ffef7ebf77a97cf7b41e768",
+      "size": 4020,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/terraform/configuration.md",
+      "sha256": "4d12cad256eaf2b021c1c19e7be29ef79e2d76183e387eefce2d4eb50b8d483e",
+      "size": 7577,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/terraform/gotchas.md",
+      "sha256": "ede039589518cceb96d40c12b7e22aaf0fbb1a5ec4d806af57940dfcaf9da672",
+      "size": 5268,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/terraform/patterns.md",
+      "sha256": "1c5d35e79bdfbb2bfce92b095dbdb4fb08923b651a8f8e40e6e70e2956e6ffef",
+      "size": 6640,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/tunnel",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/tunnel/README.md",
+      "sha256": "25289bcb62a66c85a9acb0f8454f947d224620455c7ba449258c6b3c18183dee",
+      "size": 1493,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/tunnel/api.md",
+      "sha256": "c11e9b0ef0ec933e013fa96926b97d1721fcdc6257b42bf2d906b546857f3554",
+      "size": 1289,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/tunnel/configuration.md",
+      "sha256": "81fcdb823006c07b5beb902b98f22f07c7bfa2ba9925db708d933a2ae65fec12",
+      "size": 1296,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/tunnel/gotchas.md",
+      "sha256": "750c9b7342ed4d63f65eec22db36f20abbf07151ea9311050e02669a7cac3ebe",
+      "size": 1508,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/tunnel/networking.md",
+      "sha256": "b40967dd12d0138a1192bd8acc7c4f3e9ecfc6784d003731ed2d861dda09d485",
+      "size": 1443,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/tunnel/patterns.md",
+      "sha256": "df5dbdc3882c18db22e66239040d8e11754c00f60c1656ac2c813eac8c1dc6ca",
+      "size": 1467,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/turn",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/turn/README.md",
+      "sha256": "9b1e36931f40b1faf3c8f24f89acb12c4f4223de0afc83e6b8de636f4730d542",
+      "size": 3693,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/turn/api.md",
+      "sha256": "912ec9aa734843078db5ceb9c6732f3aa62778aa7ffb836b9798b46152f377ff",
+      "size": 5220,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/turn/configuration.md",
+      "sha256": "8df0cf402a41dd2a8205b9fc94f868df48273ef9e85cf1ad690732ac1e2469b7",
+      "size": 4178,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/turn/gotchas.md",
+      "sha256": "7135e3e6e0351bf85fcfd5a914fd499979e7e15540d155810be5bc710e5841d7",
+      "size": 7020,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/turn/patterns.md",
+      "sha256": "de0a2e64a0fe6456028cbd0cd8f29195cc8d4da0e8935746357587d5937aa636",
+      "size": 6189,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/vectorize",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/vectorize/README.md",
+      "sha256": "204b50c1d66b069ecadae19199e2a0c7949a839d338a2d4cd8ccb6a0df37c278",
+      "size": 2069,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/vectorize/api.md",
+      "sha256": "c82aba90cb7af4129c70fef68a2d4f83c7ef84a7a46bdda0e9d98fe60764bf9d",
+      "size": 2091,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/vectorize/configuration.md",
+      "sha256": "5bf234fb96cb9aecfdd082f471287a45b30b6bc052a85cad2d771a0566a12dd8",
+      "size": 2034,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/vectorize/gotchas.md",
+      "sha256": "b051870e2601371935dd4f9245d472916e365185bbf8c8121e190f3379485ea9",
+      "size": 2374,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/vectorize/patterns.md",
+      "sha256": "eac487cf093d93814d65d6fd163dba48d29fcbb0982b3b240ecf96da95af02f4",
+      "size": 2619,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/waf",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/waf/README.md",
+      "sha256": "d4cc1b4c5594e44d0c6b423837286e8c742c0947615208d97a01e97b3d77be7e",
+      "size": 1577,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/waf/api.md",
+      "sha256": "a608cf645fe8d88c782eacf1ce26d120e7c6d1069f8b01c6ea6879e5865d5ed7",
+      "size": 1942,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/waf/configuration.md",
+      "sha256": "c38904de3e5831a41d706c0f9b8e632ddfce0090888224b3daa972242f74f15b",
+      "size": 1902,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/waf/gotchas.md",
+      "sha256": "8cd4038bb2b4e2f4973b1a19fd4dcdb304155189ec92c6e1ff82f229c1e2beaa",
+      "size": 2299,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/waf/patterns.md",
+      "sha256": "031b4a06067264839a61035eeb00432600c310a7587868645095fe29dcc1ac85",
+      "size": 1872,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/web-analytics",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/web-analytics/README.md",
+      "sha256": "f284cbfd425e0d2c53f79c79187287d7c0c74e6d84259294f2ca5b996834857c",
+      "size": 5368,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/web-analytics/configuration.md",
+      "sha256": "82a7c2312b3d8d9852d14547ef7771616f0da3cdecaa146afbf6272b77976017",
+      "size": 2003,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/web-analytics/gotchas.md",
+      "sha256": "e81a0ac61dce03a4890b9950ba06662c16e4b9ddb4eecdff204221501cd8d6d5",
+      "size": 1999,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/web-analytics/integration.md",
+      "sha256": "a0dbfd1a658252e25d7ffa86180c691c6976265526b36ab14ce9e4b469d95cba",
+      "size": 1772,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/web-analytics/patterns.md",
+      "sha256": "6ccd1e334d260b968731f5f613ad28882bc199b72883e3254a52ded8d859f5a8",
+      "size": 2237,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workerd",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workerd/README.md",
+      "sha256": "5a1dcd4ee54c2f277ebb4292bb64827dd9e8540194ad9c91e081f103c9a6fe24",
+      "size": 2859,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workerd/api.md",
+      "sha256": "7a6652e76e27424b0ce0d7393e1a04595460290d44e5ca937e3b0090a3b61166",
+      "size": 4959,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workerd/configuration.md",
+      "sha256": "656371e6aa55e315ea02e4304228f5c1151023f68af8058ad60984b90e00a9ad",
+      "size": 5263,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workerd/gotchas.md",
+      "sha256": "ed3107537e54d440445408131b89db5f81f869902bade11cda7978f31234f74a",
+      "size": 4781,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workerd/patterns.md",
+      "sha256": "dc293c43c732adf6e3edfeaf72510904c7e8d097ca26c8b168748dd3d57e4408",
+      "size": 4938,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-ai",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-ai/README.md",
+      "sha256": "42cc2c7f730f9b89239df00d34fcefebb042911b3649de0e48b5ea7dd9281688",
+      "size": 1859,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-ai/api.md",
+      "sha256": "b759f6f918d3b02033966bd2792a1ba980a0e2563026c5448a8cbea3ad196947",
+      "size": 1260,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-ai/configuration.md",
+      "sha256": "f1717c8bcebc7e3b7481e1c2075e6583e7cd337c5c9570f3397dba0a69291d70",
+      "size": 1576,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-ai/gotchas.md",
+      "sha256": "3e94a1a70385e5c070df714db310bca45fad2a367fc461d86af592149aa691d4",
+      "size": 1869,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-ai/patterns.md",
+      "sha256": "24d70114d9969c9392298f23bef4d5f246e142f015c7fac2d744e77c6b45f7a7",
+      "size": 1676,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-for-platforms",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-for-platforms/README.md",
+      "sha256": "3bc494123a6f795643a22d1c0d10b9fd8243e47a19182fb5f0cedd1e399e9eee",
+      "size": 4006,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-for-platforms/api.md",
+      "sha256": "6bc581bf87e21dd9764b88e7658b8cce841491943bd67b0ab8c37e1fcb2b9835",
+      "size": 5515,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-for-platforms/configuration.md",
+      "sha256": "21e9034f5b014589e05e98eb5fa368e1c4fe4f287215c4b8f38ce12b95fd588a",
+      "size": 3892,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-for-platforms/gotchas.md",
+      "sha256": "98904178ec81e30e0503ae512cedf76e0d8bdcc517009984b474a6008243e18f",
+      "size": 5440,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-for-platforms/patterns.md",
+      "sha256": "08ea9e56309bf663fca61a9bb6e5115d23758fcde7112d482944ac510ae43643",
+      "size": 5587,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-playground",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-playground/README.md",
+      "sha256": "88428c57b687c3c6ca23ce95559d0217dcc218a806172ddd70d0c86db0ed5231",
+      "size": 4033,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-playground/api.md",
+      "sha256": "10ca3f561c09227408451ead3809331429e5deb29d3eb2af48ce984dae8959fd",
+      "size": 2265,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-playground/configuration.md",
+      "sha256": "ce0183c32a0df67ae263f8fbbe459b0dfb6247adff5e869c0b1b4d06ae1f6300",
+      "size": 4479,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-playground/gotchas.md",
+      "sha256": "478b65b6a1827a2c95789dfe6038c16837a7dd463b6b943c630afea63a7454bd",
+      "size": 2060,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-playground/patterns.md",
+      "sha256": "c95d27741ecccbad12386ff4fa9dae6c8ff21438bf83f3edfd177ec156a8da69",
+      "size": 3303,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-vpc",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-vpc/README.md",
+      "sha256": "02e92507af633e16389ca1e8eb0e54a4ae75c5dbe0eb4c59978b2bda73607c3d",
+      "size": 5473,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-vpc/api.md",
+      "sha256": "60bae66d5674a5e54a0077168adfbc5c44a9c87050149381b119941bb4c45f41",
+      "size": 5321,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-vpc/configuration.md",
+      "sha256": "0a3f90caf7b17158687c6f4ce5a6e2f292c19255eb2bf766d7eec96de926104b",
+      "size": 3898,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-vpc/gotchas.md",
+      "sha256": "70e2d004800e75ccdbbdcc37623b97d9f5b4592183aae1421e21bad19e111d80",
+      "size": 4477,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workers-vpc/patterns.md",
+      "sha256": "87dc009bc45b057408dfbeaace374ff169295bba7d9d4d40fa973945848c9ecc",
+      "size": 6011,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workflows",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workflows/README.md",
+      "sha256": "e9c34138ef8941ebab9ef04ed423d552746703c74bdd2475963234527981f9c3",
+      "size": 1817,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workflows/api.md",
+      "sha256": "d1e2c1aadc4459d585e12a9cfaf745c8a421addf970674edbe7451676ec2f2d7",
+      "size": 1793,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workflows/configuration.md",
+      "sha256": "4133e66d5cd3952f92a92a751755625de4b999eb37d23a18641056006ba94171",
+      "size": 1961,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workflows/gotchas.md",
+      "sha256": "e1f6b1677b204a0503e40391b7b03a3cb2aa5bac39f6d4995a48f9d2d2d14672",
+      "size": 2790,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/workflows/patterns.md",
+      "sha256": "a9c26ca3c395fae9dca4f69b9f4d5e23c088c1d0c3f82e6d730c90f9b10cd719",
+      "size": 2648,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/zaraz",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/zaraz/IMPLEMENTATION_SUMMARY.md",
+      "sha256": "eba1671fc4ba17fae19d1ff2d1b312d5042b5821e7a4dbc2f6367a4fa8bd5506",
+      "size": 3494,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/zaraz/README.md",
+      "sha256": "929bee8e3efffad15b1a2ee2e20ff87b5d89cc724b4f450f07f6ef15caf4b2f9",
+      "size": 3909,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/zaraz/api.md",
+      "sha256": "6b28a3e1525d46aad707b1bf4edd2739df9f48ae880f71a705448270b42f8b9e",
+      "size": 3197,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/zaraz/configuration.md",
+      "sha256": "6f3666ac64d1b36b4a708b3dea9d3b1d9679b34c58a00e3ca8e254edd602418a",
+      "size": 1811,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/zaraz/gotchas.md",
+      "sha256": "30378f48fde6e866780466228a3e698005a9ce23a24188c8ed520195b03eac3e",
+      "size": 2001,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/cloudflare/references/zaraz/patterns.md",
+      "sha256": "2ea1d00fe81b1e881c00090fd18c96d8c78ebb41fcc55f540b68150320d90d17",
+      "size": 2133,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/durable-objects",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/durable-objects/SKILL.md",
+      "sha256": "2f9d7b37273eef195173e0f97ab6a8f3745fc66492a722102984fe6165ae3126",
+      "size": 5992,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/durable-objects/references",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/durable-objects/references/rules.md",
+      "sha256": "a656c41eb3bfa57b9b836de880e4fdf79368f1db4e0b63b2fc7a7c75d05ae651",
+      "size": 2731,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/durable-objects/references/testing.md",
+      "sha256": "9859a9fa5bba915290ab671c1a9af7c067e52d126a8b18e2a869557b369e184c",
+      "size": 2473,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/durable-objects/references/workers.md",
+      "sha256": "3149c3ee371b5dbf3a84dac7d5bb42c4c6553762480741f6d2808e4ca20fd932",
+      "size": 7543,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/nextjs-on-cloudflare",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/nextjs-on-cloudflare/SKILL.md",
+      "sha256": "c50143ab00aeb8ab388b32f0e9c84b7b3e9cad1b5b39d364e1e4573d68ec8d32",
+      "size": 2703,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/sandbox-migrate-to-next",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/sandbox-migrate-to-next/SKILL.md",
+      "sha256": "10ceb97d57656e03a91b78e5bd65782f5a781aa5fe23f228459ee8abf12c41a1",
+      "size": 8010,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/sandbox-next",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/sandbox-next/SKILL.md",
+      "sha256": "43041846f203c4ef3d2b04b2892539b449b5e298f20ed8ef3f619e556044642e",
+      "size": 6816,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/sandbox-next/references",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/sandbox-next/references/api-quick-ref.md",
+      "sha256": "b015d714492a66ead24109de4c9b614d8950e7ab03b14596474e6d3db25f87ce",
+      "size": 2456,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/sandbox-next/references/examples.md",
+      "sha256": "08d1e6776e16931dec2bb637b82a425679ff217081ac1d50182ab94de40f4fc6",
+      "size": 526,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/sandbox-stable",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/sandbox-stable/SKILL.md",
+      "sha256": "4083e3bd6d1345a19c42037930750a84ef92af2a440dbac939efd9c2c9a41b3f",
+      "size": 8836,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/turnstile-spin",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/turnstile-spin/README.md",
+      "sha256": "e5c50413b3db0fc2e1bf5ae0147b093f36ed9a66567c5e39f6bd93b2c972f440",
+      "size": 3757,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/turnstile-spin/SKILL.md",
+      "sha256": "7d48437fa6bf484ece9aa2bf675e6a4bdbecf186ccb165dd838095fe5b0c3d5b",
+      "size": 28665,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/turnstile-spin/references",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/turnstile-spin/references/astro.md",
+      "sha256": "6e2faeba9bf9ad24c062c6a723dc37c74644e5843dd7a06164999240e83d7a96",
+      "size": 5929,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/turnstile-spin/references/hugo.md",
+      "sha256": "5bc91dca7264de9bcb163d4c8e21a20d64afcad7becdd69926f9c7a09d1bb05c",
+      "size": 3852,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/turnstile-spin/references/nextjs-app.md",
+      "sha256": "a8e10a569937efd076c3f32f37b48a8083c8c52918c9aa309b770d35d5a03273",
+      "size": 7643,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/turnstile-spin/references/nextjs-pages.md",
+      "sha256": "f6fa729155fa682f6c77b157cbb75492caf172f7451bcc889bc417441a3f02a5",
+      "size": 2737,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/turnstile-spin/references/sveltekit.md",
+      "sha256": "da8dbe10014a0a94d25c51e80010ffd4fb5f0719caa7226c42b9dacb3ae8933a",
+      "size": 5513,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/turnstile-spin/references/vanilla-html.md",
+      "sha256": "bb01ca94b0e942c0e329c2fcaf50d0c5ff846f1ae166aa6d654d4c962d48fa9d",
+      "size": 5756,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/turnstile-spin/scripts",
+      "type": "directory"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/turnstile-spin/scripts/auth-probe.sh",
+      "sha256": "a54d7ab1f6e6ac98a6aeb45498d7bb3568d173669d2d3a7c6a08b56ed2c20182",
+      "size": 11270,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/turnstile-spin/scripts/persist-skill.sh",
+      "sha256": "4fea0bcda9fded16dd63f77dad196474d3c15c1fe93ac4718b50517fa834330c",
+      "size": 3576,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/turnstile-spin/scripts/validate.sh",
+      "sha256": "45af59068104650ac8b247cf2059d985fa17960d9c2f3d867287fc296771de81",
+      "size": 4438,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/turnstile-spin/scripts/widget-create.sh",
+      "sha256": "ebc3ef13ef99f4f6f93400ce66ffc3848c1913aac0cb0876470c6378cf1d9fed",
+      "size": 4149,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/turnstile-spin/tests",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/turnstile-spin/tests/validation.md",
+      "sha256": "e92fedb23a709b104877733365162bddb2d2be7c8a25c1dec9483bbedddae46f",
+      "size": 2916,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/web-perf",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/web-perf/SKILL.md",
+      "sha256": "79c531e95ca4d96a7de920c28c127c2c09ec55cd452a92222267d2954580be23",
+      "size": 8259,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/workers-best-practices",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/workers-best-practices/SKILL.md",
+      "sha256": "8406eabf6375a3e79c77b951d00f3996f4c703c1a852579c38b171188bd19f1f",
+      "size": 5507,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/workers-best-practices/references",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/workers-best-practices/references/configuration.md",
+      "sha256": "a9ae6018d514324159aabd25004e7f80b69df694c850bce97f7b68e30a72a73e",
+      "size": 5641,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/workers-best-practices/references/platform-apis.md",
+      "sha256": "85b9d24b2870767f9875fb148dbeb153ef61f89030bc55043c279fe584501240",
+      "size": 3826,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/workers-best-practices/references/runtime-patterns.md",
+      "sha256": "152cb5456359755ebaf0ff5343e60daed8e8fdc056453c430a1e9120e37da870",
+      "size": 13636,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/wrangler",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790492599000000000,
+      "path": "skills/wrangler/SKILL.md",
+      "sha256": "40a6802d3bf62c6cab203278eeb0b4d547b2e6f6bf281155aba5fc22b8aaee98",
+      "size": 10693,
+      "type": "file"
+    },
+    {
+      "mode": "0775",
+      "mtime_ns": 1790538157723715479,
+      "path": "src",
+      "type": "directory"
+    },
+    {
+      "mode": "0775",
+      "mtime_ns": 1790538157713398873,
+      "path": "src/content",
+      "type": "directory"
+    },
+    {
+      "mode": "0775",
+      "mtime_ns": 1790538157679791159,
+      "path": "src/content/docs",
+      "type": "directory"
+    },
+    {
+      "mode": "0775",
+      "mtime_ns": 1790538157580763768,
+      "path": "src/content/docs/logs",
+      "type": "directory"
+    },
+    {
+      "mode": "0775",
+      "mtime_ns": 1790538157580763768,
+      "path": "src/content/docs/logs/logpush",
+      "type": "directory"
+    },
+    {
+      "mode": "0775",
+      "mtime_ns": 1790538157580763768,
+      "path": "src/content/docs/logs/logpush/logpush-job",
+      "type": "directory"
+    },
+    {
+      "mode": "0775",
+      "mtime_ns": 1790538157579977793,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets",
+      "type": "directory"
+    },
+    {
+      "mode": "0775",
+      "mtime_ns": 1790543732949458780,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732948022443,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/access_requests.md",
+      "sha256": "b332ef8ccb4080c6c468c2e68cdac97d671cfb50cd29a0c4398bbbb6cb407ebd",
+      "size": 1398,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732948796088,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/account_abuse_protection_events.md",
+      "sha256": "80705691149b9ef3a393163085792bb40bcaa9c4cd01275b6fba6efd529e160e",
+      "size": 2906,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732948821458,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/audit_logs.md",
+      "sha256": "92de9b3648e70bfd757f7c37214a8b04b832dfbd35410e231f1a829d42a75241",
+      "size": 1432,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732948849355,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/audit_logs_v2.md",
+      "sha256": "f05f010da3ea19cf1471ddccb9dc3cddb04c3da07e7b81cfc6ac99f875d5326c",
+      "size": 1637,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732948868838,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/biso_user_actions.md",
+      "sha256": "5b86b2f885c02e13143b1fabee853a00b640f63f23e787289b2550bca54b6486",
+      "size": 812,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732948888429,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/casb_findings.md",
+      "sha256": "9e6eca59505b2607f788f156d033228a7a90d24c660996553397111499ed9e92",
+      "size": 1511,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732948928205,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/device_posture_results.md",
+      "sha256": "e9efceeed52dd216daebcc13f942638e5f8a312f372bf4248c3bd674e69080b3",
+      "size": 2202,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732948960071,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/dex_application_tests.md",
+      "sha256": "9f0ba780bde41e3d474790334feab7d1afaab2342fcfc128f725f9dd4ebb7a37",
+      "size": 10545,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732948995089,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/dex_device_state_events.md",
+      "sha256": "0821a3cbb26821f2af97da7a6c9ae0a89706ffe50075a3a4a692f08007c76dc7",
+      "size": 6787,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949024542,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/dlp_forensic_copies.md",
+      "sha256": "6c0c6d5bfcb36833c24bd509379e7b919d1b686f63ff584ca15114d47d229ae3",
+      "size": 952,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949045728,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/dns_firewall_logs.md",
+      "sha256": "4fa44e1bfc02e4e42551a06ba06c139e0be9fc12e86cba87642e44a54ff95182",
+      "size": 2638,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949065909,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/email_security_alerts.md",
+      "sha256": "44daec0410bf73448ee420c12f47c0d9532349fc17ac8552f768f87c6168da09",
+      "size": 5280,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949090356,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/email_security_post_delivery_events.md",
+      "sha256": "a3b45e587dbf9ed697a2d2b90c5c7b354bd7f4cae12755ae7805188449e9a41f",
+      "size": 2792,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949111109,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/firewall_events.md",
+      "sha256": "8ddd9086d7a10317704d7f70a8fe86265bf36cb84863b3e8539b508a492851b4",
+      "size": 7402,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949139862,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/gateway_dns.md",
+      "sha256": "1badff686cd003507f2f241ca88a041393ccd9dd30348cdf45f397a043025694",
+      "size": 10433,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949165847,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/gateway_http.md",
+      "sha256": "ae974ebfc0583b6bd11602f467f2c0f5507ce8c04759c562981acf17372fa72d",
+      "size": 6591,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949193199,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/gateway_network.md",
+      "sha256": "cbbb97ce1a5a9aa80949fd4a31ea98aeef4ed2bb04416794a2c873949987acd1",
+      "size": 3901,
+      "type": "file"
+    },
+    {
+      "mode": "0664",
+      "mtime_ns": 1790538157579977793,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/index.mdx",
+      "sha256": "0981522a99d5bb86edc5a12b0f7a6877b6453ef58dd068b7878390a1ca8034b6",
+      "size": 270,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949212170,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/ipsec_logs.md",
+      "sha256": "a072360114e878937f66eef442b11e37e8a99cfbacf14f16be28229c5f04b05f",
+      "size": 698,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949231258,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/magic_bgp_logs.md",
+      "sha256": "2990f6a225544e98bc486a931c3b1b1d94832c0e781faf97bbf0c2a0c95221ec",
+      "size": 1916,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949251263,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/magic_ids_detections.md",
+      "sha256": "271c6d6abd093351f3fa829f9239b19d864412f308cb082dcec4563573ada80c",
+      "size": 1573,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949270482,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/mcp_portal_logs.md",
+      "sha256": "2bf4878f27d863ba40cc5912eb39bd53aafbe34340f8f1cb2679714cff75013f",
+      "size": 1873,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949289260,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/mnm_flow_logs.md",
+      "sha256": "206cae3261705cc649e534c6f06ace4cce55d80a59a93e5a2995b218e4965ab8",
+      "size": 2294,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949310733,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/network_analytics_logs.md",
+      "sha256": "7da7b9c9c863e68563a38f58113f12e138687b48a19ea25b147c49a9036c623f",
+      "size": 10013,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949340613,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/sinkhole_http_logs.md",
+      "sha256": "dbc901f3fcac3ba862a3c1e566ee1f18f1371da78808aa06b5562874d969219b",
+      "size": 1485,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949359889,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/ssh_logs.md",
+      "sha256": "bd08f3f868eefa7e68c604060ff4bd0bdfd80b5727adfc81efa3f3513d936c26",
+      "size": 2086,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949379963,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/turnstile_events.md",
+      "sha256": "4932f4727700ed94488f7beb00f762ac162fcfcd544a212e3e2c369bad145137",
+      "size": 1711,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949401899,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/warp_config_changes.md",
+      "sha256": "889a971fdf7a40fb091fdc472ce31586805a5acc68eece4cde30a346a47596f3",
+      "size": 1041,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949421147,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/warp_toggle_changes.md",
+      "sha256": "5d4c5c46091b84c5c097ebd706f213f915edac6004d195e69191f678c5bf06f8",
+      "size": 782,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949440748,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/websocket_analytics.md",
+      "sha256": "cd275933ff59de6fb7ad508553b0c691ef0f654918e9ebb5024e24a3e72eb8f0",
+      "size": 2881,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949458780,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/workers_trace_events.md",
+      "sha256": "e9f857429cd79e4cda55bba65cdf676ac95dddd24943e8e6716299e7a1525fcc",
+      "size": 2206,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949479167,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/account/zero_trust_network_sessions.md",
+      "sha256": "60fc2319f59d533e3c76599267eb02036e6686bb583af6c1c201f2dcb4dda34d",
+      "size": 6981,
+      "type": "file"
+    },
+    {
+      "mode": "0664",
+      "mtime_ns": 1790538157579977793,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/cmb.mdx",
+      "sha256": "1608a61fc166c6c1803c7a70b14db4ea99c2c91574abf25a85d05966c96c0aad",
+      "size": 227,
+      "type": "file"
+    },
+    {
+      "mode": "0664",
+      "mtime_ns": 1790538157579977793,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/index.mdx",
+      "sha256": "a0e48432eac3b23502ca04408e881431aab6abb43551575798172c397874a390",
+      "size": 1740,
+      "type": "file"
+    },
+    {
+      "mode": "0775",
+      "mtime_ns": 1790543732949707696,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/zone",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949531684,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/zone/account_abuse_protection_events.md",
+      "sha256": "80705691149b9ef3a393163085792bb40bcaa9c4cd01275b6fba6efd529e160e",
+      "size": 2906,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949552641,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/zone/dns_logs.md",
+      "sha256": "37a3faa802b5bf351da8bec664e1636505918fa649570939ca2fff96515a2646",
+      "size": 1363,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949571079,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/zone/firewall_events.md",
+      "sha256": "8ddd9086d7a10317704d7f70a8fe86265bf36cb84863b3e8539b508a492851b4",
+      "size": 7402,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949600899,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/zone/http_requests.md",
+      "sha256": "4ed993eb2e20aec099240d79d846718f9c110338b51ffcb2be3013a6efdf00e4",
+      "size": 20777,
+      "type": "file"
+    },
+    {
+      "mode": "0664",
+      "mtime_ns": 1790538157579977793,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/zone/index.mdx",
+      "sha256": "9915bcdd00c3555748c7b25ede8053d90ef376e1c3b1ce4cb67d36f52ace95b9",
+      "size": 264,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949632890,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/zone/nel_reports.md",
+      "sha256": "8fe8e31ffe7f2b9463e85a3c7a12d0bc4b51edf8e38f0ca934690a4327100df8",
+      "size": 715,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949652163,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/zone/page_shield_events.md",
+      "sha256": "a922356cd965f71a3931a9c75ad208c76312f3f7fabfe510bdfa96d24028f418",
+      "size": 1073,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949675177,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/zone/spectrum_events.md",
+      "sha256": "700e3d36d15d271f8e31397b85a7f9831556d00606d1529e0a0667afd452ddb4",
+      "size": 4147,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949707696,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/zone/websocket_analytics.md",
+      "sha256": "cd275933ff59de6fb7ad508553b0c691ef0f654918e9ebb5024e24a3e72eb8f0",
+      "size": 2881,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790543732949730123,
+      "path": "src/content/docs/logs/logpush/logpush-job/datasets/zone/zaraz_events.md",
+      "sha256": "a3c8e64cabe63ddf831fb2044834a153ddc098059969928911bb261c30726b62",
+      "size": 609,
+      "type": "file"
+    }
+  ],
+  "entries_sha256": "33f1a6f01cf8c8a1410b60bba5552928d14575e966d26dca2f121f9d92783f5b",
+  "root_label": "astro-remote-inputs",
+  "schema": "cp10-tree-manifest",
+  "schema_version": 1,
+  "summary": {
+    "bytes": 47966962,
+    "entries": 541,
+    "files": 439
+  }
+}
