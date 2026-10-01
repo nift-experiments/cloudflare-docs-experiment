@@ -11,6 +11,7 @@ import re
 import stat
 import subprocess
 import sys
+import tempfile
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, Callable
@@ -32,6 +33,29 @@ SITEMAP_ROOT_RE = re.compile(
     rb"<lastmod>([^<]+)</lastmod></url>"
 )
 FORMDATA_BOUNDARY_RE = re.compile(rb"----formdata-undici-[0-9]{12}")
+
+
+def atomic_output(path: Path, payload: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if path.exists():
+        raise FileExistsError(f"refusing to overwrite evidence: {path}")
+    with tempfile.NamedTemporaryFile(
+        mode="w", encoding="utf-8", dir=path.parent, delete=False
+    ) as handle:
+        json.dump(payload, handle, indent=2, sort_keys=True)
+        handle.write("\n")
+        handle.flush()
+        os.fsync(handle.fileno())
+        temporary = Path(handle.name)
+    try:
+        os.link(temporary, path)
+    finally:
+        temporary.unlink(missing_ok=True)
+    directory_fd = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY)
+    try:
+        os.fsync(directory_fd)
+    finally:
+        os.close(directory_fd)
 
 # Frozen source: src/components/agent-setup/prompts.ts. Normalization is limited
 # to these exact strings and the nine agent-setup output routes.
@@ -638,11 +662,10 @@ def main() -> int:
     report = run_remote(args) if args.ssh else analyze(args.root)
     if args.manifest:
         validate_manifests(report, args.manifest)
-    rendered = json.dumps(report, indent=2, sort_keys=True) + "\n"
     if args.output:
-        args.output.write_text(rendered)
+        atomic_output(args.output, report)
     else:
-        sys.stdout.write(rendered)
+        sys.stdout.write(json.dumps(report, indent=2, sort_keys=True) + "\n")
     return 0 if report["normalized_equivalent"] else 1
 
 

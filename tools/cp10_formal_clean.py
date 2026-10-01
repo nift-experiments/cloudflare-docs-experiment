@@ -5,15 +5,27 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 from pathlib import Path
+
+try:
+    from .cp10_benchmark import CAMPAIGN_LOCK_FD_ENV, campaign_lock
+except ImportError:
+    from cp10_benchmark import CAMPAIGN_LOCK_FD_ENV, campaign_lock
 
 
 ORDER = ("nift", "astro", "astro", "nift", "nift", "astro")
 
 
 def run(command: list[str], cwd: Path | None = None) -> None:
-    subprocess.run(command, cwd=cwd, check=True)
+    inherited = os.environ.get(CAMPAIGN_LOCK_FD_ENV)
+    subprocess.run(
+        command,
+        cwd=cwd,
+        check=True,
+        pass_fds=(int(inherited),) if inherited is not None else (),
+    )
 
 
 def archive_if_present(path: Path, destination: Path) -> None:
@@ -128,7 +140,7 @@ def astro_clean(project: Path, harness: Path, evidence: Path, round_number: int)
     )
 
 
-def main() -> int:
+def run_campaign() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--nift-project", required=True, type=Path)
     parser.add_argument("--astro-project", required=True, type=Path)
@@ -142,23 +154,28 @@ def main() -> int:
         parser.error("round range must be within 1..6")
     args.evidence.mkdir(parents=True, exist_ok=True)
 
-    for round_number in range(args.start_round, args.end_round + 1):
-        first = ORDER[round_number - 1]
-        second = "astro" if first == "nift" else "nift"
-        for tool in (first, second):
-            if tool == "nift":
-                nift_clean(
-                    args.nift_project,
-                    args.harness,
-                    args.evidence,
-                    args.nift_expected,
-                    round_number,
-                )
-            else:
-                astro_clean(
-                    args.astro_project, args.harness, args.evidence, round_number
-                )
+    with campaign_lock():
+        for round_number in range(args.start_round, args.end_round + 1):
+            first = ORDER[round_number - 1]
+            second = "astro" if first == "nift" else "nift"
+            for tool in (first, second):
+                if tool == "nift":
+                    nift_clean(
+                        args.nift_project,
+                        args.harness,
+                        args.evidence,
+                        args.nift_expected,
+                        round_number,
+                    )
+                else:
+                    astro_clean(
+                        args.astro_project, args.harness, args.evidence, round_number
+                    )
     return 0
+
+
+def main() -> int:
+    return run_campaign()
 
 
 if __name__ == "__main__":

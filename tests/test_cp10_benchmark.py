@@ -6,6 +6,9 @@ from argparse import Namespace
 from pathlib import Path
 
 from tools.cp10_benchmark import (
+    CAMPAIGN_LOCK_FD_ENV,
+    acquire_run_lock,
+    campaign_lock,
     compare_manifests,
     execute_run,
     manifest_payload,
@@ -16,6 +19,20 @@ from tools.cp10_benchmark import (
 
 
 class CP10BenchmarkTests(unittest.TestCase):
+    def test_campaign_lock_is_inherited_but_excludes_standalone_runs(self):
+        with tempfile.TemporaryDirectory() as directory:
+            lock_path = Path(directory) / "benchmark.lock"
+            with campaign_lock(lock_path) as descriptor:
+                inherited, is_inherited = acquire_run_lock(lock_path)
+                self.assertEqual(inherited, descriptor)
+                self.assertTrue(is_inherited)
+                saved = os.environ.pop(CAMPAIGN_LOCK_FD_ENV)
+                try:
+                    with self.assertRaises(BlockingIOError):
+                        acquire_run_lock(lock_path)
+                finally:
+                    os.environ[CAMPAIGN_LOCK_FD_ENV] = saved
+
     def test_manifest_comparison_ignores_mtime_only_changes(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

@@ -1,3 +1,5 @@
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -12,6 +14,35 @@ from tools.cp10_astro_normalize import (
 
 
 class CP10AstroNormalizeTests(unittest.TestCase):
+    def test_cli_refuses_to_overwrite_output(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            before = root / "before"
+            after = root / "after"
+            before.mkdir()
+            after.mkdir()
+            (before / "index.html").write_text("same")
+            (after / "index.html").write_text("same")
+            output = root / "report.json"
+            output.write_text("preserve")
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    str(Path(__file__).parents[1] / "tools/cp10_astro_normalize.py"),
+                    "--root",
+                    f"before={before}",
+                    "--root",
+                    f"after={after}",
+                    "--output",
+                    str(output),
+                ],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+            self.assertEqual(completed.returncode, 2)
+            self.assertEqual(output.read_text(), "preserve")
+
     def test_lz_uri_decoder_and_boundary_normalization(self):
         self.assertEqual(
             lz_decompress_uri(b"BYUwNmD2AEDukCcwBMg"), b"hello world"

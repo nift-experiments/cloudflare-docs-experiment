@@ -9,6 +9,7 @@ import os
 import shutil
 import subprocess
 import sys
+import tarfile
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -16,18 +17,24 @@ from typing import Any
 try:
     from .cp10_benchmark import (
         atomic_json,
+        campaign_lock,
+        CAMPAIGN_LOCK_FD_ENV,
         compare_manifests,
         load_manifest,
         manifest_payload,
         sha256_file,
+        tree_entries,
     )
 except ImportError:
     from cp10_benchmark import (  # type: ignore[no-redef]
         atomic_json,
+        campaign_lock,
+        CAMPAIGN_LOCK_FD_ENV,
         compare_manifests,
         load_manifest,
         manifest_payload,
         sha256_file,
+        tree_entries,
     )
 
 
@@ -51,6 +58,10 @@ def run(
     stderr: Any = None,
     check: bool = True,
 ) -> subprocess.CompletedProcess[Any]:
+    pass_fds: tuple[int, ...] = ()
+    inherited_lock = (env or os.environ).get(CAMPAIGN_LOCK_FD_ENV)
+    if inherited_lock is not None:
+        pass_fds = (int(inherited_lock),)
     return subprocess.run(
         command,
         cwd=cwd,
@@ -58,6 +69,7 @@ def run(
         stdout=stdout,
         stderr=stderr,
         check=check,
+        pass_fds=pass_fds,
     )
 
 
@@ -200,6 +212,175 @@ def preserve_expected(source: Path, destination: Path) -> dict[str, Any]:
     return payload
 
 
+REMOTE_DATASETS = Path(
+    "src/content/docs/logs/logpush/logpush-job/datasets"
+)
+
+
+def remote_selected_entries(entries: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    selected = []
+    for entry in entries:
+        path = Path(entry["path"])
+        if path.parts and path.parts[0] in {"skills", ".tmp"}:
+            selected.append(entry)
+            continue
+        try:
+            relative = path.relative_to(REMOTE_DATASETS)
+        except ValueError:
+            continue
+        if len(relative.parts) == 2 and relative.suffix == ".md":
+            selected.append(entry)
+    return sorted(selected, key=lambda item: item["path"])
+
+
+def prefixed_tree_entries(project: Path, relative: Path) -> list[dict[str, Any]]:
+    root = project / relative
+    if not root.is_dir():
+        raise RuntimeError(f"restored remote-input directory is absent: {root}")
+    item_stat = root.lstat()
+    entries = [
+        {
+            "path": relative.as_posix(),
+            "mode": f"{item_stat.st_mode & 0o7777:04o}",
+            "mtime_ns": item_stat.st_mtime_ns,
+            "type": "directory",
+        }
+    ]
+    for entry in tree_entries(root):
+        entry = entry.copy()
+        entry["path"] = (relative / entry["path"]).as_posix()
+        entries.append(entry)
+    return entries
+
+
+def actual_remote_selected_entries(
+    project: Path, expected: list[dict[str, Any]]
+) -> list[dict[str, Any]]:
+    entries = [
+        *prefixed_tree_entries(project, Path("skills")),
+        *prefixed_tree_entries(project, Path(".tmp")),
+    ]
+    expected_generated = {
+        entry["path"] for entry in expected if entry["path"].startswith(f"{REMOTE_DATASETS}/")
+    }
+    for relative in sorted(expected_generated):
+        path = project / relative
+        if not path.is_file() or path.is_symlink():
+            raise RuntimeError(f"restored generated markdown is absent or invalid: {path}")
+        item_stat = path.stat()
+        entries.append(
+            {
+                "path": relative,
+                "mode": f"{item_stat.st_mode & 0o7777:04o}",
+                "mtime_ns": item_stat.st_mtime_ns,
+                "type": "file",
+                "size": item_stat.st_size,
+                "sha256": sha256_file(path, item_stat),
+            }
+        )
+    return sorted(entries, key=lambda item: item["path"])
+
+
+def prepare_remote_archive(args: argparse.Namespace) -> Path:
+    if args.astro_remote_input_archive.is_dir():
+        return args.astro_remote_input_archive
+    destination = args.evidence / "astro-remote-input-archive"
+    if destination.exists():
+        raise FileExistsError(f"refusing existing extracted archive: {destination}")
+    destination.mkdir()
+    with tarfile.open(args.astro_remote_input_archive, "r:*") as archive:
+        archive.extractall(destination, filter="data")
+    return destination
+
+
+def verify_remote_archive(args: argparse.Namespace, archive_root: Path) -> dict[str, Any]:
+    if args.astro_remote_input_archive.is_file() and sha256_file(
+        args.astro_remote_input_archive
+    ) != args.astro_remote_input_archive_sha256:
+        raise RuntimeError("frozen Astro remote-input archive file changed")
+    expected = load_manifest(args.astro_remote_input_manifest)
+    for entry in expected["entries"]:
+        path = Path(entry["path"])
+        try:
+            relative = path.relative_to(REMOTE_DATASETS)
+        except ValueError:
+            continue
+        if path.suffix == ".md" and len(relative.parts) != 2:
+            raise RuntimeError(
+                f"canonical manifest has unexpected generated markdown: {path}"
+            )
+    observed = manifest_payload(archive_root)
+    if observed["entries_sha256"] != expected["entries_sha256"]:
+        raise RuntimeError("frozen Astro remote-input archive differs from its manifest")
+    return expected
+
+
+def restore_astro_remote_inputs(args: argparse.Namespace, archive_root: Path) -> None:
+    manifest = verify_remote_archive(args, archive_root)
+    expected = remote_selected_entries(manifest["entries"])
+    expected_generated = {
+        entry["path"] for entry in expected if entry["path"].startswith(f"{REMOTE_DATASETS}/")
+    }
+    datasets = args.astro_project / REMOTE_DATASETS
+    actual_generated = {
+        path.relative_to(args.astro_project).as_posix()
+        for path in datasets.rglob("*.md")
+    } if datasets.is_dir() else set()
+    unexpected = sorted(actual_generated - expected_generated)
+    if unexpected:
+        raise RuntimeError(f"unexpected generated markdown: {unexpected[0]}")
+    remove_path(args.astro_project / "skills")
+    remove_path(args.astro_project / ".tmp")
+    for relative in sorted(actual_generated):
+        (args.astro_project / relative).unlink()
+    copy_tree(archive_root / "skills", args.astro_project / "skills")
+    copy_tree(archive_root / ".tmp", args.astro_project / ".tmp")
+    for relative in sorted(expected_generated):
+        source = archive_root / relative
+        destination = args.astro_project / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, destination, follow_symlinks=False)
+    actual = actual_remote_selected_entries(args.astro_project, expected)
+    if actual != expected:
+        raise RuntimeError("restored Astro remote-input selected state differs from manifest")
+
+
+def assert_no_stale_benchmark_processes(projects: tuple[Path, ...]) -> None:
+    cgroup_root = Path("/sys/fs/cgroup")
+    if cgroup_root.is_dir():
+        for cgroup in cgroup_root.glob("cp10-*"):
+            events = cgroup / "cgroup.events"
+            if events.is_file() and "populated 1" in events.read_text().splitlines():
+                raise RuntimeError(f"stale populated benchmark cgroup: {cgroup}")
+    for process in Path("/proc").glob("[0-9]*"):
+        try:
+            pid = int(process.name)
+            if pid == os.getpid():
+                continue
+            cwd = (process / "cwd").resolve(strict=True)
+            command = (process / "cmdline").read_bytes().split(b"\0")
+        except (FileNotFoundError, PermissionError, ProcessLookupError, ValueError):
+            continue
+        if not any(cwd == project or project in cwd.parents for project in projects):
+            continue
+        arguments = [item.decode(errors="replace") for item in command if item]
+        stale = any(
+            Path(argument).name == "nift"
+            and index + 1 < len(arguments)
+            and arguments[index + 1] == "build"
+            for index, argument in enumerate(arguments)
+        ) or ("astro" in arguments and "build" in arguments) or any(
+            Path(argument).name == "cp10_benchmark.py"
+            and index + 1 < len(arguments)
+            and arguments[index + 1] == "run"
+            for index, argument in enumerate(arguments)
+        )
+        if stale:
+            raise RuntimeError(
+                f"stale benchmark build process pid={pid}: {' '.join(arguments)}"
+            )
+
+
 def normalization_passed(report: dict[str, Any] | None) -> bool:
     return bool(
         report
@@ -260,9 +441,12 @@ def prepare_baselines(args: argparse.Namespace, initial_git: dict[str, dict[str,
         raise RuntimeError("retained Astro clean reference differs from its raw manifest")
     setup: dict[str, Any] = {
         "schema": "cp10-no-change-baseline",
-        "schema_version": 2,
+        "schema_version": 3,
         "snapshot_strategy": "cp -a --reflink=auto (CoW when supported, full-copy fallback)",
-        "harness": str(args.harness),
+        "harness": {
+            "path": str(args.harness),
+            "sha256": sha256_file(args.harness),
+        },
         "projects": {
             "nift": str(args.nift_project),
             "astro": str(args.astro_project),
@@ -279,11 +463,27 @@ def prepare_baselines(args: argparse.Namespace, initial_git: dict[str, dict[str,
                 "entries_sha256"
             ],
         },
+        "astro_remote_inputs": {
+            "archive": str(args.astro_remote_input_archive),
+            "archive_sha256": (
+                sha256_file(args.astro_remote_input_archive)
+                if args.astro_remote_input_archive.is_file()
+                else None
+            ),
+            "archive_root": str(args.astro_remote_archive_root),
+            "manifest": str(args.astro_remote_input_manifest),
+            "entries_sha256": load_manifest(args.astro_remote_input_manifest)[
+                "entries_sha256"
+            ],
+        },
         "git_before": initial_git,
         "tools": {},
     }
 
     for tool, project in (("nift", args.nift_project), ("astro", args.astro_project)):
+        assert_no_stale_benchmark_processes(
+            (args.nift_project, args.astro_project)
+        )
         command, environment = command_for(tool, args.nift_bin, args.pnpm_bin)
         if tool == "nift":
             clean_nift(project)
@@ -291,6 +491,7 @@ def prepare_baselines(args: argparse.Namespace, initial_git: dict[str, dict[str,
             baseline_environment = environment
         else:
             clean_astro(project)
+            restore_astro_remote_inputs(args, args.astro_remote_archive_root)
             baseline_command = command
             baseline_environment = environment
         untimed(
@@ -343,8 +544,13 @@ def prepare_baselines(args: argparse.Namespace, initial_git: dict[str, dict[str,
         }
 
     for tool, project in (("nift", args.nift_project), ("astro", args.astro_project)):
+        assert_no_stale_benchmark_processes(
+            (args.nift_project, args.astro_project)
+        )
         states = states_for(tool, args.nift_project, args.astro_project)
         restore_states(tool, states, baseline)
+        if tool == "astro":
+            restore_astro_remote_inputs(args, args.astro_remote_archive_root)
         command, environment = command_for(tool, args.nift_bin, args.pnpm_bin)
         untimed(f"baseline/{tool}-warmup", command, project, environment, args.evidence)
         warmup_manifest = manifest_payload(states[0].live)
@@ -386,7 +592,7 @@ def prepare_baselines(args: argparse.Namespace, initial_git: dict[str, dict[str,
 def baseline_ready(args: argparse.Namespace) -> dict[str, dict[str, str]]:
     marker = args.evidence / "baseline/baseline.json"
     payload = json.loads(marker.read_text())
-    if payload.get("schema") != "cp10-no-change-baseline" or payload.get("schema_version") != 2:
+    if payload.get("schema") != "cp10-no-change-baseline" or payload.get("schema_version") != 3:
         raise ValueError(f"invalid baseline marker: {marker}")
     expected_commands = {
         tool: command_for(tool, args.nift_bin, args.pnpm_bin)[0]
@@ -421,11 +627,30 @@ def baseline_ready(args: argparse.Namespace) -> dict[str, dict[str, str]]:
     observed_reference = manifest_payload(args.astro_clean_reference)
     if observed_reference["entries_sha256"] != astro_reference_manifest["entries_sha256"]:
         raise ValueError("retained Astro clean reference differs from its raw manifest")
-    if payload["harness"] != str(args.harness) or payload["projects"] != {
+    if payload["harness"] != {
+        "path": str(args.harness),
+        "sha256": sha256_file(args.harness),
+    } or payload["projects"] != {
         "nift": str(args.nift_project),
         "astro": str(args.astro_project),
     }:
         raise ValueError("project or harness path differs from archived baseline")
+    remote = payload["astro_remote_inputs"]
+    if (
+        remote["archive"] != str(args.astro_remote_input_archive)
+        or remote["archive_sha256"]
+        != (
+            sha256_file(args.astro_remote_input_archive)
+            if args.astro_remote_input_archive.is_file()
+            else None
+        )
+        or remote["archive_root"] != str(args.astro_remote_archive_root)
+        or remote["manifest"] != str(args.astro_remote_input_manifest)
+        or remote["entries_sha256"]
+        != load_manifest(args.astro_remote_input_manifest)["entries_sha256"]
+    ):
+        raise ValueError("Astro remote-input binding differs")
+    verify_remote_archive(args, args.astro_remote_archive_root)
     if payload["git_before"] != payload["git_after"]:
         raise ValueError("baseline setup changed tracked Git state")
     return payload["git_before"]
@@ -472,7 +697,10 @@ def record_run(args: argparse.Namespace, tool: str, round_number: int, git_befor
     project = args.nift_project if tool == "nift" else args.astro_project
     baseline = args.evidence / "baseline"
     states = states_for(tool, args.nift_project, args.astro_project)
+    assert_no_stale_benchmark_processes((args.nift_project, args.astro_project))
     restore_states(tool, states, baseline)
+    if tool == "astro":
+        restore_astro_remote_inputs(args, args.astro_remote_archive_root)
     if git_state(project) != git_before:
         raise RuntimeError(f"{tool} tracked Git state differs before recorded run")
 
@@ -613,6 +841,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         "--astro-clean-reference-manifest", required=True, type=Path
     )
     parser.add_argument("--astro-normalizer", required=True, type=Path)
+    parser.add_argument("--astro-remote-input-archive", required=True, type=Path)
+    parser.add_argument("--astro-remote-input-manifest", required=True, type=Path)
     parser.add_argument("--nift-bin", default=Path("/usr/local/bin/nift"), type=Path)
     parser.add_argument(
         "--pnpm-bin",
@@ -635,6 +865,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         "astro_clean_reference",
         "astro_clean_reference_manifest",
         "astro_normalizer",
+        "astro_remote_input_archive",
+        "astro_remote_input_manifest",
     ):
         value = getattr(args, name).resolve()
         if not value.exists():
@@ -648,7 +880,21 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         or args.astro_clean_reference in args.astro_project.parents
     ):
         parser.error("--astro-clean-reference must be retained outside the Astro project")
-    for name in ("harness", "nift_expected", "astro_clean_reference_manifest", "astro_normalizer"):
+    if args.astro_remote_input_archive.is_dir() and (
+        args.astro_remote_input_archive == args.astro_project
+        or args.astro_project in args.astro_remote_input_archive.parents
+        or args.astro_remote_input_archive in args.astro_project.parents
+    ):
+        parser.error(
+            "--astro-remote-input-archive directory must be outside the Astro project"
+        )
+    for name in (
+        "harness",
+        "nift_expected",
+        "astro_clean_reference_manifest",
+        "astro_normalizer",
+        "astro_remote_input_manifest",
+    ):
         if not getattr(args, name).is_file():
             parser.error(f"--{name.replace('_', '-')} must be a file")
     args.nift_bin = args.nift_bin.resolve()
@@ -661,13 +907,22 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     return args
 
 
-def main(argv: list[str] | None = None) -> int:
-    args = parse_args(argv)
+def run_campaign(args: argparse.Namespace) -> int:
     if args.evidence.exists() and not args.evidence.is_dir():
         raise ValueError(f"evidence path is not a directory: {args.evidence}")
     args.evidence.mkdir(parents=True, exist_ok=True)
+    args.astro_remote_input_archive_sha256 = (
+        sha256_file(args.astro_remote_input_archive)
+        if args.astro_remote_input_archive.is_file()
+        else None
+    )
     marker = args.evidence / "baseline/baseline.json"
     if marker.exists():
+        args.astro_remote_archive_root = (
+            args.astro_remote_input_archive
+            if args.astro_remote_input_archive.is_dir()
+            else args.evidence / "astro-remote-input-archive"
+        )
         initial_git = baseline_ready(args)
     else:
         if any(args.evidence.iterdir()):
@@ -676,6 +931,7 @@ def main(argv: list[str] | None = None) -> int:
             )
         if args.attempt != 1:
             raise ValueError("replacement attempts require an existing archived baseline")
+        args.astro_remote_archive_root = prepare_remote_archive(args)
         initial_git = {
             "nift": git_state(args.nift_project),
             "astro": git_state(args.astro_project),
@@ -693,6 +949,15 @@ def main(argv: list[str] | None = None) -> int:
         for tool in (first, second):
             record_run(args, tool, round_number, initial_git[tool])
     return 0
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = parse_args(argv)
+    with campaign_lock():
+        assert_no_stale_benchmark_processes(
+            (args.nift_project, args.astro_project)
+        )
+        return run_campaign(args)
 
 
 if __name__ == "__main__":

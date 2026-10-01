@@ -1,6 +1,8 @@
 import json
 import os
+import subprocess
 import tempfile
+import time
 import unittest
 from argparse import Namespace
 from pathlib import Path
@@ -9,14 +11,18 @@ from tools.cp10_benchmark import atomic_json, manifest_payload, sha256_file
 from tools.cp10_formal_no_change import (
     ORDER,
     StatePath,
+    assert_no_stale_benchmark_processes,
     baseline_ready,
     clean_nift,
     command_for,
     normalization_passed,
     preflight_attempt,
+    remote_selected_entries,
+    restore_astro_remote_inputs,
     restore_states,
     run_normalizer,
     snapshot_states,
+    actual_remote_selected_entries,
 )
 
 
@@ -66,6 +72,28 @@ class CP10FormalNoChangeTests(unittest.TestCase):
             )
             with self.assertRaisesRegex(FileExistsError, "refusing to overwrite"):
                 preflight_attempt(args)
+
+    def test_stale_build_process_is_rejected_before_restore(self):
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory)
+            executable = project / "nift"
+            executable.write_text(
+                "#!/usr/bin/env python3\nimport time\ntime.sleep(30)\n"
+            )
+            executable.chmod(0o755)
+            process = subprocess.Popen([str(executable), "build"], cwd=project)
+            try:
+                for _ in range(50):
+                    try:
+                        assert_no_stale_benchmark_processes((project,))
+                    except RuntimeError:
+                        break
+                    time.sleep(0.01)
+                else:
+                    self.fail("stale benchmark process was not detected")
+            finally:
+                process.terminate()
+                process.wait(timeout=5)
 
     def test_nift_cleanup_rejects_output_path_escape(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -121,6 +149,54 @@ class CP10FormalNoChangeTests(unittest.TestCase):
             self.assertEqual((before / "index.html").read_bytes(), before_bytes)
             self.assertEqual((after / "index.html").read_bytes(), after_bytes)
 
+    def test_remote_inputs_restore_exact_selected_state_and_reject_extra_markdown(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            archive = root / "archive"
+            project = root / "project"
+            (archive / "skills").mkdir(parents=True)
+            (archive / ".tmp").mkdir()
+            generated = archive / (
+                "src/content/docs/logs/logpush/logpush-job/datasets/account/generated.md"
+            )
+            generated.parent.mkdir(parents=True)
+            generated.write_text("frozen")
+            generated.chmod(0o640)
+            os.utime(generated, ns=(1_700_000_000_000_000_000,) * 2)
+            (archive / "skills/SKILL.md").write_text("skill")
+            (archive / ".tmp/cache").write_text("cache")
+            manifest_path = root / "remote.json"
+            manifest = manifest_payload(archive)
+            atomic_json(manifest_path, manifest)
+            datasets = project / (
+                "src/content/docs/logs/logpush/logpush-job/datasets/account"
+            )
+            datasets.mkdir(parents=True)
+            (datasets / "index.mdx").write_text("tracked")
+            (datasets / "generated.md").write_text("stale")
+            (project / "skills").mkdir()
+            (project / ".tmp").mkdir()
+            args = Namespace(
+                astro_project=project,
+                astro_remote_input_archive=archive,
+                astro_remote_input_archive_sha256=None,
+                astro_remote_input_manifest=manifest_path,
+            )
+
+            restore_astro_remote_inputs(args, archive)
+
+            expected = remote_selected_entries(manifest["entries"])
+            self.assertEqual(
+                actual_remote_selected_entries(project, expected), expected
+            )
+            self.assertEqual((datasets / "index.mdx").read_text(), "tracked")
+            self.assertEqual((datasets / "generated.md").stat().st_mode & 0o777, 0o640)
+            extra = datasets / "unexpected.md"
+            extra.write_text("unexpected")
+            with self.assertRaisesRegex(RuntimeError, "unexpected generated markdown"):
+                restore_astro_remote_inputs(args, archive)
+            self.assertTrue(extra.exists())
+
     def test_astro_normalizer_preserves_and_rejects_unclassified_difference(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -165,6 +241,20 @@ class CP10FormalNoChangeTests(unittest.TestCase):
             atomic_json(nift_manifest, manifest_payload(nift_output))
             normalizer = root / "normalizer.py"
             normalizer.write_text("# frozen normalizer\n")
+            harness = root / "harness.py"
+            harness.write_text("# frozen harness\n")
+            remote_archive = root / "remote-inputs"
+            (remote_archive / "skills").mkdir(parents=True)
+            (remote_archive / ".tmp").mkdir()
+            generated = remote_archive / (
+                "src/content/docs/logs/logpush/logpush-job/datasets/account/generated.md"
+            )
+            generated.parent.mkdir(parents=True)
+            generated.write_text("generated")
+            (remote_archive / "skills/SKILL.md").write_text("skill")
+            (remote_archive / ".tmp/cache").write_text("cache")
+            remote_manifest = root / "remote.json"
+            atomic_json(remote_manifest, manifest_payload(remote_archive))
             args = Namespace(
                 evidence=evidence,
                 nift_bin=Path("/opt/nift"),
@@ -173,9 +263,12 @@ class CP10FormalNoChangeTests(unittest.TestCase):
                 astro_clean_reference_manifest=reference_manifest,
                 astro_normalizer=normalizer,
                 astro_clean_reference=reference,
-                harness=root / "harness.py",
+                harness=harness,
                 nift_project=root / "nift-project",
                 astro_project=root / "astro-project",
+                astro_remote_input_archive=remote_archive,
+                astro_remote_archive_root=remote_archive,
+                astro_remote_input_manifest=remote_manifest,
             )
             tools = {}
             for tool in ("nift", "astro"):
@@ -195,8 +288,11 @@ class CP10FormalNoChangeTests(unittest.TestCase):
             git_state = {"nift": {"head": "n"}, "astro": {"head": "a"}}
             marker = {
                 "schema": "cp10-no-change-baseline",
-                "schema_version": 2,
-                "harness": str(args.harness),
+                "schema_version": 3,
+                "harness": {
+                    "path": str(args.harness),
+                    "sha256": sha256_file(args.harness),
+                },
                 "projects": {
                     "nift": str(args.nift_project),
                     "astro": str(args.astro_project),
@@ -213,6 +309,15 @@ class CP10FormalNoChangeTests(unittest.TestCase):
                         reference
                     )["entries_sha256"],
                 },
+                "astro_remote_inputs": {
+                    "archive": str(remote_archive),
+                    "archive_sha256": None,
+                    "archive_root": str(remote_archive),
+                    "manifest": str(remote_manifest),
+                    "entries_sha256": manifest_payload(remote_archive)[
+                        "entries_sha256"
+                    ],
+                },
                 "git_before": git_state,
                 "git_after": git_state,
                 "tools": tools,
@@ -220,6 +325,10 @@ class CP10FormalNoChangeTests(unittest.TestCase):
             (evidence / "baseline/baseline.json").write_text(json.dumps(marker))
 
             self.assertEqual(baseline_ready(args), git_state)
+            harness.write_text("# changed harness\n")
+            with self.assertRaisesRegex(ValueError, "project or harness"):
+                baseline_ready(args)
+            harness.write_text("# frozen harness\n")
             normalizer.write_text("# changed normalizer\n")
             with self.assertRaisesRegex(ValueError, "normalizer or clean reference"):
                 baseline_ready(args)

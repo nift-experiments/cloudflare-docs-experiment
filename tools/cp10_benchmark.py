@@ -23,6 +23,7 @@ import tempfile
 import threading
 import time
 import traceback
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -30,6 +31,60 @@ from typing import Any
 
 SCHEMA_VERSION = 1
 CHUNK_SIZE = 1024 * 1024
+BENCHMARK_LOCK_PATH = Path("/run/lock/cp10-benchmark.lock")
+CAMPAIGN_LOCK_FD_ENV = "CP10_CAMPAIGN_LOCK_FD"
+
+
+@contextmanager
+def campaign_lock(path: Path = BENCHMARK_LOCK_PATH):
+    """Exclude all other CP10 setup and timed work for a formal campaign."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    handle = path.open("a+")
+    previous = os.environ.get(CAMPAIGN_LOCK_FD_ENV)
+    locked = False
+    try:
+        fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        locked = True
+        handle.seek(0)
+        handle.truncate()
+        handle.write(f"campaign_pid={os.getpid()}\n")
+        handle.flush()
+        os.fsync(handle.fileno())
+        os.environ[CAMPAIGN_LOCK_FD_ENV] = str(handle.fileno())
+        yield handle.fileno()
+    finally:
+        if previous is None:
+            os.environ.pop(CAMPAIGN_LOCK_FD_ENV, None)
+        else:
+            os.environ[CAMPAIGN_LOCK_FD_ENV] = previous
+        if locked:
+            fcntl.flock(handle, fcntl.LOCK_UN)
+        handle.close()
+
+
+def acquire_run_lock(path: Path = BENCHMARK_LOCK_PATH) -> tuple[Any, bool]:
+    inherited = os.environ.get(CAMPAIGN_LOCK_FD_ENV)
+    if inherited is None:
+        handle = path.open("a+")
+        try:
+            fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BaseException:
+            handle.close()
+            raise
+        return handle, False
+    try:
+        descriptor = int(inherited)
+        descriptor_stat = os.fstat(descriptor)
+        path_stat = path.stat()
+    except (OSError, ValueError) as error:
+        raise RuntimeError("invalid inherited CP10 campaign lock") from error
+    if (descriptor_stat.st_dev, descriptor_stat.st_ino) != (
+        path_stat.st_dev,
+        path_stat.st_ino,
+    ):
+        raise RuntimeError("inherited CP10 campaign lock has the wrong identity")
+    fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    return descriptor, True
 
 
 def sha256_file(path: Path, expected: os.stat_result | None = None) -> str:
@@ -355,13 +410,13 @@ def execute_run(args: argparse.Namespace) -> int:
         descriptor = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o644)
         os.close(descriptor)
     cgroup = cgroup_root / f"cp10-{identifier}-{os.getpid()}"
-    lock_path = Path("/run/lock/cp10-benchmark.lock")
     start_utc = datetime.now(timezone.utc).isoformat()
     samples: list[dict[str, Any]] = []
     monitor_errors: list[str] = []
     stop_sampling = threading.Event()
     sampling_thread: threading.Thread | None = None
     lock = None
+    lock_inherited = False
     pid: int | None = None
     reaped = False
     exit_code = 125
@@ -387,8 +442,7 @@ def execute_run(args: argparse.Namespace) -> int:
             stop_sampling.wait(1.0)
 
     try:
-        lock = lock_path.open("w")
-        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        lock, lock_inherited = acquire_run_lock()
         cgroup.mkdir()
         if (cgroup / "memory.swap.max").exists():
             (cgroup / "memory.swap.max").write_text("0")
@@ -567,6 +621,7 @@ def execute_run(args: argparse.Namespace) -> int:
             if command_started is not None and command_reaped is not None
             else None
         ),
+        "campaign_lock_inherited": lock_inherited,
         "time": time_evidence,
         "cgroup": cgroup_evidence,
         "host_before": before,
@@ -594,7 +649,7 @@ def execute_run(args: argparse.Namespace) -> int:
                 cgroup.rmdir()
             except OSError:
                 pass
-        if lock:
+        if lock and not lock_inherited:
             fcntl.flock(lock, fcntl.LOCK_UN)
             lock.close()
     return exit_code
