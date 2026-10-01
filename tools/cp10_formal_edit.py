@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Collect CP10 scenario C normal-edit and scenario D targeted-edit runs."""
+"""Collect CP10 methodology-v6 edit scenarios C through F."""
 
 from __future__ import annotations
 
@@ -78,6 +78,52 @@ NORMAL_RUNS = 3
 TARGET_WARMUPS = 3
 TARGET_RUNS = 30
 SCHEMA_VERSION = 3
+SHARED_MARKER = b"<!-- CP10 shared-template edit -->"
+BATCH_TARGETS = (
+    "workers/get-started/",
+    "workers/get-started/guide/",
+    "workers/get-started/dashboard/",
+    "workers/get-started/prompting/",
+    "workers/get-started/quickstarts/",
+)
+BATCH_OUTPUTS = tuple(Path(target) / "index.html" for target in BATCH_TARGETS)
+BATCH_NIFT_SOURCES = tuple(Path("content") / target / "index.md" for target in BATCH_TARGETS)
+BATCH_ASTRO_SOURCES = tuple(
+    Path("src/content/docs/workers/get-started") / name
+    for name in ("index.mdx", "guide.mdx", "dashboard.mdx", "prompting.mdx", "quickstarts.mdx")
+)
+
+
+@dataclass(frozen=True)
+class SeriesSpec:
+    mode: str
+    scenario: str
+    paired: bool
+    warmups: int
+    runs: int
+    marker: bytes
+    nift_sources: tuple[Path, ...]
+    astro_sources: tuple[Path, ...]
+    outputs: tuple[Path, ...]
+    nift_targets: tuple[str, ...] = ()
+    paragraph: bool = True
+
+
+SERIES_SPECS = {
+    "batch-normal": SeriesSpec(
+        "batch-normal", "five-page-normal-incremental", True, 1, 3, MARKER,
+        BATCH_NIFT_SOURCES, BATCH_ASTRO_SOURCES, BATCH_OUTPUTS,
+    ),
+    "batch-targeted": SeriesSpec(
+        "batch-targeted", "five-page-explicit-target", False, 2, 20, MARKER,
+        BATCH_NIFT_SOURCES, (), BATCH_OUTPUTS, BATCH_TARGETS,
+    ),
+    "shared-normal": SeriesSpec(
+        "shared-normal", "shared-template-normal-incremental", True, 1, 3,
+        SHARED_MARKER, (Path("templates/head.html"),),
+        (Path("src/layouts/BaseLayout.astro"),), (OUTPUT,), paragraph=False,
+    ),
+}
 
 
 @dataclass(frozen=True)
@@ -101,6 +147,72 @@ def capture_source(path: Path) -> SourceState:
 def edited_bytes(original: bytes) -> bytes:
     separator = b"\n" if original.endswith(b"\n") else b"\n\n"
     return original + separator + MARKER + b"\n"
+
+
+def series_edited_bytes(original: bytes, spec: SeriesSpec, tool: str) -> bytes:
+    if spec.paragraph:
+        separator = b"\n" if original.endswith(b"\n") else b"\n\n"
+        return original + separator + spec.marker + b"\n"
+    if tool == "astro" and not original.rstrip().endswith(b"</html>"):
+        raise ValueError("Astro shared-template source does not end with </html>")
+    separator = b"" if original.endswith(b"\n") else b"\n"
+    return original + separator + spec.marker + b"\n"
+
+
+def series_source_paths(args: argparse.Namespace, spec: SeriesSpec, tool: str) -> tuple[Path, ...]:
+    project = args.nift_project if tool == "nift" else args.astro_project
+    relative = spec.nift_sources if tool == "nift" else spec.astro_sources
+    return tuple(project / path for path in relative)
+
+
+def apply_series_edits(
+    paths: tuple[Path, ...], states: dict[str, SourceState], spec: SeriesSpec, tool: str
+) -> list[dict[str, Any]]:
+    evidence = []
+    for path in paths:
+        original = states[str(path)]
+        if path.read_bytes() != original.data:
+            raise RuntimeError(f"source differs before edit: {path}")
+        path.write_bytes(series_edited_bytes(original.data, spec, tool))
+        os.chmod(path, original.mode)
+        count = path.read_bytes().count(spec.marker)
+        if count != 1:
+            raise RuntimeError(f"source marker was not applied exactly once: {path}")
+        evidence.append({"path": str(path), "marker_count": count, "sha256": sha256_file(path)})
+    return evidence
+
+
+def restore_series_sources(
+    paths: tuple[Path, ...], states: dict[str, SourceState]
+) -> bool:
+    restored = [restore_source(path, states[str(path)]) for path in paths]
+    return all(item["bytes_equal"] and item["mtime_equal"] for item in restored)
+
+
+def series_marker_evidence(root: Path, spec: SeriesSpec) -> list[dict[str, Any]]:
+    evidence = []
+    for relative in spec.outputs:
+        path = root / relative
+        count = path.read_bytes().count(spec.marker) if path.is_file() else 0
+        evidence.append(
+            {
+                "designated_path": relative.as_posix(),
+                "path": str(path),
+                "regular_file": path.is_file() and not path.is_symlink(),
+                "marker_count": count,
+                "passed": path.is_file() and not path.is_symlink() and count == 1,
+            }
+        )
+    return evidence
+
+
+def series_command(
+    args: argparse.Namespace, spec: SeriesSpec, tool: str
+) -> tuple[list[str], dict[str, str]]:
+    command, environment = command_for(tool, args.nift_bin, args.pnpm_bin)
+    if spec.mode == "batch-targeted":
+        command = [str(args.nift_bin), "build", *spec.nift_targets]
+    return command, environment
 
 
 def apply_edit(path: Path, original: SourceState) -> dict[str, Any]:
@@ -465,6 +577,74 @@ def freeze_changed_path_contract(
     return contract
 
 
+def series_contract_path(args: argparse.Namespace, tool: str) -> Path:
+    return args.evidence / f"setup/references/{tool}-series-changed-path-contract.json"
+
+
+def freeze_series_contract(
+    args: argparse.Namespace,
+    spec: SeriesSpec,
+    tool: str,
+    reference_root: Path,
+    edited_manifest_path: Path,
+) -> dict[str, Any]:
+    markers = series_marker_evidence(reference_root, spec)
+    if not all(item["passed"] for item in markers):
+        raise RuntimeError(f"{tool} {spec.mode} designated marker check failed")
+    normalizer = None
+    if tool == "nift":
+        paths = diff_path_sets(
+            compare_manifests(load_manifest(args.nift_expected), load_manifest(edited_manifest_path))
+        )
+        basis = "raw-content-manifest-diff"
+    else:
+        report_path = args.evidence / "setup/references/astro-series-clean-to-edited-normalization.json"
+        report, returncode = run_normalizer(
+            args.astro_normalizer,
+            [("clean-unedited-reference", args.astro_clean_reference), ("clean-edited-reference", reference_root)],
+            [("clean-unedited-reference", args.astro_clean_reference_manifest), ("clean-edited-reference", edited_manifest_path)],
+            report_path,
+        )
+        if returncode != 1:
+            raise RuntimeError("Astro series reference did not contain a declared edit")
+        normalizer = astro_normalized_change_set(report, "clean-unedited-reference", "clean-edited-reference")
+        normalizer["report"] = {"path": str(report_path), "sha256": sha256_file(report_path)}
+        paths = normalizer["paths"]
+        basis = "strict-normalized-content-diff"
+    expected = {path for values in paths.values() for path in values}
+    missing_designated = sorted(path.as_posix() for path in spec.outputs if path.as_posix() not in expected)
+    if missing_designated:
+        raise RuntimeError(f"{tool} reference did not change designated output: {missing_designated[0]}")
+    contract = {
+        "schema": "cp10-series-changed-path-contract",
+        "schema_version": 1,
+        "mode": spec.mode,
+        "tool": tool,
+        "basis": basis,
+        "expected_changed_paths": paths,
+        "expected_dependents": sorted(expected),
+        "designated_output_markers": markers,
+        "normalizer_classification": normalizer,
+    }
+    atomic_json(series_contract_path(args, tool), contract)
+    return contract
+
+
+def validate_series_contract(contract: dict[str, Any], spec: SeriesSpec, tool: str) -> None:
+    expected = contract.get("expected_changed_paths", {})
+    all_paths = {path for values in expected.values() for path in values} if isinstance(expected, dict) else set()
+    if (
+        contract.get("schema") != "cp10-series-changed-path-contract"
+        or contract.get("schema_version") != 1
+        or contract.get("mode") != spec.mode
+        or contract.get("tool") != tool
+        or set(expected) != {"added", "removed", "changed"}
+        or any(path.as_posix() not in all_paths for path in spec.outputs)
+        or not all(item.get("passed") for item in contract.get("designated_output_markers", []))
+    ):
+        raise ValueError(f"invalid {spec.mode} {tool} changed-path contract")
+
+
 def verify_target(project: Path) -> dict[str, str]:
     tracked_path = project / ".nift/tracked.json"
     tracked = json.loads(tracked_path.read_text()).get("tracked", [])
@@ -685,6 +865,371 @@ def targeted_setup_ready(
     if file_identity(baseline_page) != payload["baseline"]["designated_output"]:
         raise ValueError("targeted Nift output snapshot differs")
     return current_git, source_state
+
+
+def verify_series_targets(project: Path, spec: SeriesSpec) -> None:
+    if not spec.nift_targets:
+        return
+    tracked = json.loads((project / ".nift/tracked.json").read_text())["tracked"]
+    mapping = {item.get("name"): item.get("output") for item in tracked}
+    for target, output in zip(spec.nift_targets, spec.outputs):
+        if mapping.get(target) != output.as_posix():
+            raise ValueError(f"Nift target mapping differs: {target}")
+
+
+def prepare_paired_series_setup(
+    args: argparse.Namespace,
+    spec: SeriesSpec,
+    initial_git: dict[str, dict[str, str]],
+    source_states: dict[str, dict[str, SourceState]],
+) -> None:
+    setup = args.evidence / "setup"
+    references = setup / "references"
+    baseline = setup / "baseline"
+    if setup.exists():
+        raise FileExistsError(f"refusing existing setup evidence: {setup}")
+    references.mkdir(parents=True)
+    baseline.mkdir()
+    bindings: dict[str, Any] = {
+        "schema": "cp10-formal-paired-edit-series-setup",
+        "schema_version": 1,
+        "methodology_version": 6,
+        "mode": spec.mode,
+        "harness": {"path": str(args.harness), "sha256": sha256_file(args.harness)},
+        "normalizer": {"path": str(args.astro_normalizer), "sha256": sha256_file(args.astro_normalizer)},
+        "projects": {},
+        "references": {},
+        "baselines": {},
+        "commands": {tool: series_command(args, spec, tool)[0] for tool in ("nift", "astro")},
+        "environments": {
+            tool: relevant_environment(series_command(args, spec, tool)[1])
+            for tool in ("nift", "astro")
+        },
+        "external_references": {
+            "nift_manifest": str(args.nift_expected),
+            "nift_entries_sha256": load_manifest(args.nift_expected)["entries_sha256"],
+            "astro_root": str(args.astro_clean_reference),
+            "astro_manifest": str(args.astro_clean_reference_manifest),
+            "astro_entries_sha256": load_manifest(args.astro_clean_reference_manifest)["entries_sha256"],
+        },
+        "astro_remote_inputs": {
+            "archive": str(args.astro_remote_input_archive),
+            "archive_sha256": (
+                sha256_file(args.astro_remote_input_archive)
+                if args.astro_remote_input_archive.is_file()
+                else None
+            ),
+            "archive_root": str(args.astro_remote_archive_root),
+            "manifest": str(args.astro_remote_input_manifest),
+            "entries_sha256": load_manifest(args.astro_remote_input_manifest)["entries_sha256"],
+        },
+    }
+    for tool in ("nift", "astro"):
+        assert_no_stale_benchmark_processes((args.nift_project, args.astro_project))
+        project = project_for(args, tool)
+        paths = series_source_paths(args, spec, tool)
+        bindings["projects"][tool] = {
+            "path": str(project),
+            "git": initial_git[tool],
+            "sources": {
+                str(path): {
+                    "sha256": sha256_bytes(source_states[tool][str(path)].data),
+                    "mtime_ns": source_states[tool][str(path)].mtime_ns,
+                }
+                for path in paths
+            },
+        }
+        try:
+            edits = apply_series_edits(paths, source_states[tool], spec, tool)
+            if tool == "nift":
+                clean_nift(project)
+            else:
+                clean_astro(project)
+                restore_astro_remote_inputs(args, args.astro_remote_archive_root)
+            command, environment = clean_reference_command(args, tool)
+            untimed_command(f"setup/references/{tool}-clean-edited-build", command, project, environment, args.evidence)
+            output_root = states_for(tool, args.nift_project, args.astro_project)[0].live
+            reference_root = references / f"{tool}-edited-output"
+            copy_tree(output_root, reference_root)
+            edited_manifest_path = references / f"{tool}-edited-manifest.json"
+            edited_manifest = manifest_payload(reference_root)
+            atomic_json(edited_manifest_path, edited_manifest)
+            contract = freeze_series_contract(args, spec, tool, reference_root, edited_manifest_path)
+            bindings["references"][tool] = {
+                "root": str(reference_root),
+                "manifest": str(edited_manifest_path),
+                "entries_sha256": edited_manifest["entries_sha256"],
+                "contract": str(series_contract_path(args, tool)),
+                "contract_sha256": sha256_file(series_contract_path(args, tool)),
+                "expected_changed_paths": contract["expected_changed_paths"],
+                "edits": edits,
+            }
+        finally:
+            if not restore_series_sources(paths, source_states[tool]):
+                raise RuntimeError(f"failed to restore {tool} series sources")
+        if git_state(project) != initial_git[tool]:
+            raise RuntimeError(f"{tool} Git state changed during edited reference")
+
+        if tool == "nift":
+            clean_nift(project)
+            baseline_command = [str(args.nift_bin), "build", "--all"]
+            _, environment = series_command(args, spec, tool)
+        else:
+            clean_astro(project)
+            restore_astro_remote_inputs(args, args.astro_remote_archive_root)
+            baseline_command, environment = series_command(args, spec, tool)
+        untimed_command(f"setup/baseline/{tool}-unedited-build", baseline_command, project, environment, args.evidence)
+        states = states_for(tool, args.nift_project, args.astro_project)
+        output_manifest = manifest_payload(states[0].live)
+        archived = snapshot_states(tool, states, baseline)
+        if tool == "nift":
+            valid = compare_manifests(load_manifest(args.nift_expected), output_manifest)["equal_content"]
+        else:
+            report, code = run_normalizer(
+                args.astro_normalizer,
+                [("clean-reference", args.astro_clean_reference), ("incremental-baseline", states[0].live)],
+                [("clean-reference", args.astro_clean_reference_manifest), ("incremental-baseline", baseline / "astro-output-manifest.json")],
+                baseline / "astro-clean-normalization.json",
+            )
+            valid = code == 0 and normalization_passed(report)
+        if not valid or git_state(project) != initial_git[tool]:
+            raise RuntimeError(f"{tool} series baseline failed correctness")
+        bindings["baselines"][tool] = {
+            "command": baseline_command,
+            "states": archived,
+            "output_entries_sha256": output_manifest["entries_sha256"],
+        }
+    bindings["git_after"] = {tool: git_state(project_for(args, tool)) for tool in ("nift", "astro")}
+    atomic_json(setup / "series-setup.json", bindings)
+
+
+def paired_series_setup_ready(
+    args: argparse.Namespace, spec: SeriesSpec
+) -> tuple[dict[str, dict[str, str]], dict[str, dict[str, SourceState]]]:
+    marker = args.evidence / "setup/series-setup.json"
+    payload = json.loads(marker.read_text())
+    if (
+        payload.get("schema") != "cp10-formal-paired-edit-series-setup"
+        or payload.get("schema_version") != 1
+        or payload.get("mode") != spec.mode
+        or payload.get("methodology_version") != 6
+    ):
+        raise ValueError(f"invalid paired series setup: {marker}")
+    if payload["harness"] != {"path": str(args.harness), "sha256": sha256_file(args.harness)}:
+        raise ValueError("series harness binding differs")
+    if payload["normalizer"] != {"path": str(args.astro_normalizer), "sha256": sha256_file(args.astro_normalizer)}:
+        raise ValueError("series normalizer binding differs")
+    if payload["commands"] != {tool: series_command(args, spec, tool)[0] for tool in ("nift", "astro")}:
+        raise ValueError("series command binding differs")
+    if payload["environments"] != {
+        tool: relevant_environment(series_command(args, spec, tool)[1])
+        for tool in ("nift", "astro")
+    }:
+        raise ValueError("series command environment differs")
+    external = payload["external_references"]
+    if (
+        external["nift_manifest"] != str(args.nift_expected)
+        or external["nift_entries_sha256"] != load_manifest(args.nift_expected)["entries_sha256"]
+        or external["astro_root"] != str(args.astro_clean_reference)
+        or external["astro_manifest"] != str(args.astro_clean_reference_manifest)
+        or external["astro_entries_sha256"] != load_manifest(args.astro_clean_reference_manifest)["entries_sha256"]
+        or manifest_payload(args.astro_clean_reference)["entries_sha256"] != external["astro_entries_sha256"]
+    ):
+        raise ValueError("series external reference binding differs")
+    remote = payload["astro_remote_inputs"]
+    if (
+        remote["archive"] != str(args.astro_remote_input_archive)
+        or remote["archive_sha256"] != (
+            sha256_file(args.astro_remote_input_archive)
+            if args.astro_remote_input_archive.is_file()
+            else None
+        )
+        or remote["archive_root"] != str(args.astro_remote_archive_root)
+        or remote["manifest"] != str(args.astro_remote_input_manifest)
+        or remote["entries_sha256"] != load_manifest(args.astro_remote_input_manifest)["entries_sha256"]
+    ):
+        raise ValueError("series Astro remote-input binding differs")
+    source_states: dict[str, dict[str, SourceState]] = {}
+    for tool in ("nift", "astro"):
+        project = project_for(args, tool)
+        if (
+            payload["projects"][tool]["path"] != str(project)
+            or git_state(project) != payload["projects"][tool]["git"]
+            or git_state(project) != payload["git_after"][tool]
+        ):
+            raise ValueError(f"{tool} series Git binding differs")
+        source_states[tool] = {}
+        for path in series_source_paths(args, spec, tool):
+            state = capture_source(path)
+            source_states[tool][str(path)] = state
+            if payload["projects"][tool]["sources"][str(path)] != {
+                "sha256": sha256_bytes(state.data), "mtime_ns": state.mtime_ns
+            }:
+                raise ValueError(f"{tool} series source binding differs")
+        reference = payload["references"][tool]
+        if manifest_payload(Path(reference["root"]))["entries_sha256"] != load_manifest(Path(reference["manifest"]))["entries_sha256"]:
+            raise ValueError(f"{tool} series reference differs")
+        contract = json.loads(Path(reference["contract"]).read_text())
+        validate_series_contract(contract, spec, tool)
+        if reference["contract_sha256"] != sha256_file(Path(reference["contract"])):
+            raise ValueError(f"{tool} series contract differs")
+    restore_astro_remote_inputs(args, args.astro_remote_archive_root)
+    return {tool: payload["projects"][tool]["git"] for tool in ("nift", "astro")}, source_states
+
+
+def prepare_batch_targeted_setup(
+    args: argparse.Namespace,
+    spec: SeriesSpec,
+    initial_git: dict[str, str],
+    source_states: dict[str, SourceState],
+) -> None:
+    setup = args.evidence / "setup"
+    references = setup / "references"
+    baseline = setup / "baseline-minimal"
+    if setup.exists():
+        raise FileExistsError(f"refusing existing setup evidence: {setup}")
+    references.mkdir(parents=True)
+    baseline.mkdir()
+    verify_series_targets(args.nift_project, spec)
+    paths = series_source_paths(args, spec, "nift")
+    output_root = args.nift_project / "public"
+    try:
+        edits = apply_series_edits(paths, source_states, spec, "nift")
+        clean_nift(args.nift_project)
+        command, environment = clean_reference_command(args, "nift")
+        untimed_command("setup/references/nift-clean-edited-build", command, args.nift_project, environment, args.evidence)
+        edited_manifest = manifest_payload(output_root)
+        edited_manifest_path = references / "nift-edited-manifest.json"
+        atomic_json(edited_manifest_path, edited_manifest)
+        designated_root = references / "nift-edited-designated-outputs"
+        for output in spec.outputs:
+            copy_file_exact(output_root / output, designated_root / output)
+        contract = freeze_series_contract(args, spec, "nift", designated_root, edited_manifest_path)
+    finally:
+        if not restore_series_sources(paths, source_states):
+            raise RuntimeError("failed to restore batch-targeted sources")
+    if git_state(args.nift_project) != initial_git:
+        raise RuntimeError("Nift Git state changed during batch-targeted reference")
+    clean_nift(args.nift_project)
+    baseline_command = [str(args.nift_bin), "build", "--all"]
+    _, environment = series_command(args, spec, "nift")
+    untimed_command("setup/baseline-minimal/nift-unedited-build", baseline_command, args.nift_project, environment, args.evidence)
+    baseline_manifest = manifest_payload(output_root)
+    baseline_manifest_path = baseline / "nift-output-manifest.json"
+    atomic_json(baseline_manifest_path, baseline_manifest)
+    certified = load_manifest(args.nift_expected)
+    if not compare_manifests(certified, baseline_manifest)["equal_content"]:
+        raise RuntimeError("batch-targeted baseline differs from certification")
+    metadata = snapshot_states("nift", [StatePath("metadata", args.nift_project / ".nift/public")], baseline)["metadata"]
+    output_snapshots = {}
+    for output in spec.outputs:
+        snapshot = baseline / "nift-output" / output
+        copy_file_exact(output_root / output, snapshot)
+        output_snapshots[output.as_posix()] = file_identity(snapshot)
+    excluded = {path.as_posix() for path in spec.outputs}
+    unaffected = semantic_subset_digest(baseline_manifest, excluded)
+    if unaffected != semantic_subset_digest(certified, excluded):
+        raise RuntimeError("batch-targeted unaffected output differs from certification")
+    atomic_json(
+        setup / "series-setup.json",
+        {
+            "schema": "cp10-formal-lean-targeted-series-setup", "schema_version": 1,
+            "methodology_version": 6, "mode": spec.mode,
+            "harness": {"path": str(args.harness), "sha256": sha256_file(args.harness)},
+            "project": {"path": str(args.nift_project), "git": initial_git, "sources": {
+                str(path): {"sha256": sha256_bytes(source_states[str(path)].data), "mtime_ns": source_states[str(path)].mtime_ns}
+                for path in paths
+            }},
+            "commands": {"reference": command, "baseline": baseline_command, "targeted": series_command(args, spec, "nift")[0]},
+            "environment": relevant_environment(series_command(args, spec, "nift")[1]),
+            "targets": list(spec.nift_targets),
+            "reference": {"manifest": str(edited_manifest_path), "entries_sha256": edited_manifest["entries_sha256"],
+                          "designated_root": str(designated_root), "contract": str(series_contract_path(args, "nift")),
+                          "contract_sha256": sha256_file(series_contract_path(args, "nift")), "edits": edits},
+            "baseline": {"manifest": str(baseline_manifest_path), "entries_sha256": baseline_manifest["entries_sha256"],
+                         "metadata": metadata, "outputs": output_snapshots},
+            "certified": {"path": str(args.nift_expected), "entries_sha256": certified["entries_sha256"]},
+            "unaffected_output": {"verified_once": True, "semantic_sha256": unaffected, "excluded": sorted(excluded)},
+            "git_after": git_state(args.nift_project),
+        },
+    )
+
+
+def batch_targeted_setup_ready(
+    args: argparse.Namespace, spec: SeriesSpec
+) -> tuple[dict[str, str], dict[str, SourceState]]:
+    payload = json.loads((args.evidence / "setup/series-setup.json").read_text())
+    if payload.get("schema") != "cp10-formal-lean-targeted-series-setup" or payload.get("mode") != spec.mode:
+        raise ValueError("invalid batch-targeted setup")
+    if payload["harness"] != {"path": str(args.harness), "sha256": sha256_file(args.harness)}:
+        raise ValueError("batch-targeted harness differs")
+    verify_series_targets(args.nift_project, spec)
+    current_git = git_state(args.nift_project)
+    if (
+        payload["project"]["path"] != str(args.nift_project)
+        or current_git != payload["project"]["git"]
+        or current_git != payload["git_after"]
+        or payload["targets"] != list(spec.nift_targets)
+    ):
+        raise ValueError("batch-targeted Git binding differs")
+    states = {}
+    for path in series_source_paths(args, spec, "nift"):
+        state = capture_source(path)
+        states[str(path)] = state
+        if payload["project"]["sources"][str(path)] != {"sha256": sha256_bytes(state.data), "mtime_ns": state.mtime_ns}:
+            raise ValueError("batch-targeted source binding differs")
+    if payload["commands"] != {
+        "reference": clean_reference_command(args, "nift")[0],
+        "baseline": [str(args.nift_bin), "build", "--all"],
+        "targeted": series_command(args, spec, "nift")[0],
+    } or payload["environment"] != relevant_environment(
+        series_command(args, spec, "nift")[1]
+    ):
+        raise ValueError("batch-targeted command binding differs")
+    certified = load_manifest(args.nift_expected)
+    if payload["certified"] != {
+        "path": str(args.nift_expected), "entries_sha256": certified["entries_sha256"]
+    }:
+        raise ValueError("batch-targeted certified manifest differs")
+    contract = json.loads(Path(payload["reference"]["contract"]).read_text())
+    validate_series_contract(contract, spec, "nift")
+    if payload["reference"]["contract_sha256"] != sha256_file(Path(payload["reference"]["contract"])):
+        raise ValueError("batch-targeted contract differs")
+    reference_manifest = load_manifest(Path(payload["reference"]["manifest"]))
+    if (
+        reference_manifest["entries_sha256"] != payload["reference"]["entries_sha256"]
+        or series_marker_evidence(Path(payload["reference"]["designated_root"]), spec)
+        != contract["designated_output_markers"]
+    ):
+        raise ValueError("batch-targeted edited reference differs")
+    baseline_manifest = load_manifest(Path(payload["baseline"]["manifest"]))
+    observed = manifest_payload(args.nift_project / "public")
+    if (
+        baseline_manifest["entries_sha256"] != payload["baseline"]["entries_sha256"]
+        or not compare_manifests(certified, baseline_manifest)["equal_content"]
+        or not compare_manifests(baseline_manifest, observed)["equal_content"]
+        or semantic_subset_digest(observed, set(payload["unaffected_output"]["excluded"])) != payload["unaffected_output"]["semantic_sha256"]
+    ):
+        raise ValueError("batch-targeted baseline differs")
+    metadata_manifest = args.evidence / "setup/baseline-minimal/nift-metadata-manifest.json"
+    metadata_snapshot = args.evidence / "setup/baseline-minimal/snapshots/nift-metadata"
+    if (
+        manifest_payload(metadata_snapshot)["entries_sha256"]
+        != load_manifest(metadata_manifest)["entries_sha256"]
+        or payload["baseline"]["metadata"]["entries_sha256"]
+        != load_manifest(metadata_manifest)["entries_sha256"]
+    ):
+        raise ValueError("batch-targeted metadata snapshot differs")
+    for output in spec.outputs:
+        if file_identity(args.evidence / "setup/baseline-minimal/nift-output" / output) != payload["baseline"]["outputs"][output.as_posix()]:
+            raise ValueError("batch-targeted output snapshot differs")
+    return current_git, states
+
+
+def restore_batch_targeted_state(project: Path, baseline: Path, spec: SeriesSpec) -> None:
+    restore_states("nift", [StatePath("metadata", project / ".nift/public")], baseline)
+    for output in spec.outputs:
+        restore_file_exact(baseline / "nift-output" / output, project / "public" / output)
 
 
 def prepare_setup(
@@ -1656,6 +2201,285 @@ def run_targeted_attempt(
     return formal_valid
 
 
+def run_paired_series_attempt(
+    args: argparse.Namespace,
+    spec: SeriesSpec,
+    tool: str,
+    label: str,
+    round_number: int,
+    git_before: dict[str, str],
+    source_states: dict[str, SourceState],
+    measured: bool,
+) -> bool:
+    directory = args.evidence / spec.mode
+    stem = directory / label
+    refuse_attempt_collision(directory, label)
+    project = project_for(args, tool)
+    paths = series_source_paths(args, spec, tool)
+    states = states_for(tool, args.nift_project, args.astro_project)
+    baseline = args.evidence / "setup/baseline"
+    command, environment = series_command(args, spec, tool)
+    errors: list[str] = []
+    record: dict[str, Any] | None = None
+    pre: dict[str, Any] | None = None
+    post: dict[str, Any] | None = None
+    difference: dict[str, Any] | None = None
+    classification: dict[str, Any] | None = None
+    markers: list[dict[str, Any]] = []
+    output_correct = False
+    metadata_diffs: dict[str, Any] = {}
+    source_restored = False
+    baseline_restored = False
+    try:
+        assert_no_stale_benchmark_processes((args.nift_project, args.astro_project))
+        restore_states(tool, states, baseline)
+        if tool == "astro":
+            restore_astro_remote_inputs(args, args.astro_remote_archive_root)
+        if git_state(project) != git_before:
+            raise RuntimeError(f"{tool} Git state differs before {label}")
+        pre = manifest_payload(states[0].live)
+        atomic_json(Path(f"{stem}-pre-output-manifest.json"), pre)
+        metadata_before = {}
+        for state in states[1:]:
+            if state.live.is_dir():
+                metadata_before[state.name] = manifest_payload(state.live)
+                atomic_json(
+                    Path(f"{stem}-pre-{state.name}-manifest.json"),
+                    metadata_before[state.name],
+                )
+        apply_series_edits(paths, source_states, spec, tool)
+        if tool == "astro":
+            restore_astro_remote_inputs(args, args.astro_remote_archive_root)
+        if measured:
+            completed = run(
+                [
+                    sys.executable, str(args.harness), "run", "--id", f"formal-{spec.mode}-{tool}-{label}",
+                    "--series", f"formal-{spec.mode}", "--scenario", spec.scenario,
+                    "--tool", tool, "--round", str(round_number), "--warmth", "warm",
+                    "--output", str(stem.with_suffix(".json")), "--cwd", str(project), "--", *command,
+                ],
+                env=environment,
+                check=False,
+            )
+            record_path = stem.with_suffix(".json")
+            record = json.loads(record_path.read_text()) if record_path.exists() else None
+            if completed.returncode:
+                errors.append(f"harness exit code {completed.returncode}")
+        else:
+            try:
+                untimed_command(label, command, project, environment, directory)
+            except Exception as error:
+                errors.append(f"command failed: {error}")
+        post = manifest_payload(states[0].live)
+        atomic_json(Path(f"{stem}-post-output-manifest.json"), post)
+        difference = compare_manifests(pre, post)
+        atomic_json(Path(f"{stem}-output-diff.json"), difference)
+        markers = series_marker_evidence(states[0].live, spec)
+        reference = args.evidence / f"setup/references/{tool}-edited-manifest.json"
+        if tool == "nift":
+            expected_comparison = compare_manifests(load_manifest(reference), post)
+            atomic_json(Path(f"{stem}-expected-comparison.json"), expected_comparison)
+            output_correct = expected_comparison["equal_content"]
+            observed_paths = diff_path_sets(difference)
+            normalizer_classification = None
+        else:
+            report, code = run_normalizer(
+                args.astro_normalizer,
+                [("clean-edited-reference", args.evidence / "setup/references/astro-edited-output"), ("recorded-edited-output", states[0].live)],
+                [("clean-edited-reference", reference), ("recorded-edited-output", Path(f"{stem}-post-output-manifest.json"))],
+                Path(f"{stem}-astro-normalization.json"),
+            )
+            output_correct = code == 0 and normalization_passed(report)
+            change_report, change_code = run_normalizer(
+                args.astro_normalizer,
+                [("reconstructed-unedited-baseline", baseline / "snapshots/astro-output"), ("recorded-edited-output", states[0].live)],
+                [("reconstructed-unedited-baseline", baseline / "astro-output-manifest.json"), ("recorded-edited-output", Path(f"{stem}-post-output-manifest.json"))],
+                Path(f"{stem}-astro-change-normalization.json"),
+            )
+            if change_code != 1:
+                raise RuntimeError("Astro series changed-path normalization failed")
+            normalizer_classification = astro_normalized_change_set(
+                change_report, "reconstructed-unedited-baseline", "recorded-edited-output"
+            )
+            observed_paths = normalizer_classification["paths"]
+        contract_path = series_contract_path(args, tool)
+        contract = json.loads(contract_path.read_text())
+        validate_series_contract(contract, spec, tool)
+        classified = changed_path_classification(contract["expected_changed_paths"], observed_paths)
+        classification = {
+            "schema": "cp10-series-run-changed-path-classification", "schema_version": 1,
+            "mode": spec.mode, "tool": tool, "contract": str(contract_path),
+            "contract_sha256": sha256_file(contract_path), **classified,
+            "expected_dependents": contract["expected_dependents"],
+            "normalizer_classification": normalizer_classification,
+            "designated_output_markers": markers,
+        }
+        atomic_json(Path(f"{stem}-changed-path-classification.json"), classification)
+        for state in states[1:]:
+            after = manifest_payload(state.live) if state.live.is_dir() else None
+            before = metadata_before.get(state.name)
+            if after:
+                atomic_json(Path(f"{stem}-post-{state.name}-manifest.json"), after)
+            if before and after:
+                metadata_diffs[state.name] = compare_manifests(before, after)
+                atomic_json(Path(f"{stem}-{state.name}-diff.json"), metadata_diffs[state.name])
+    except Exception as error:
+        errors.append(f"attempt processing failed: {error}")
+    finally:
+        try:
+            source_restored = restore_series_sources(paths, source_states) and git_state(project) == git_before
+        except Exception as error:
+            errors.append(f"source restoration failed: {error}")
+        try:
+            assert_no_stale_benchmark_processes((args.nift_project, args.astro_project))
+            restore_states(tool, states, baseline)
+            if tool == "astro":
+                restore_astro_remote_inputs(args, args.astro_remote_archive_root)
+            baseline_restored = baseline_states_equal(tool, states, baseline)
+        except Exception as error:
+            errors.append(f"baseline restoration failed: {error}")
+    infrastructure_valid = bool(not measured or record and record.get("validity", {}).get("infrastructure_valid") is True)
+    paths_valid = bool(classification and classification["matches"])
+    formal_valid = bool(
+        not errors and infrastructure_valid and output_correct and paths_valid
+        and markers and all(item["passed"] for item in markers) and source_restored and baseline_restored
+    )
+    files = changed_files(difference, post) if difference and post else {"content_changed": [], "touched": []}
+    atomic_json(
+        Path(f"{stem}-validation.json"),
+        {
+            "schema": "cp10-formal-series-run-validation", "schema_version": 1,
+            "mode": spec.mode, "scenario": spec.scenario, "tool": tool,
+            "round": round_number, "measured": measured, "command": command,
+            "infrastructure_valid": infrastructure_valid, "formal_valid": formal_valid,
+            "errors": errors, "output_correct": output_correct, "changed_paths_valid": paths_valid,
+            "source_and_git_restored": source_restored, "baseline_restored": baseline_restored,
+            "designated_output_markers": markers,
+            "content_changed_paths": diff_path_sets(difference) if difference else None,
+            "content_changed_count": len(files["content_changed"]),
+            "mtime_only_paths": difference["mtime_only"] if difference else [],
+            "mtime_only_count": len(difference["mtime_only"]) if difference else 0,
+            "regenerated_files": files["content_changed"], "regenerated_file_count": len(files["content_changed"]),
+            "touched_files": files["touched"], "touched_file_count": len(files["touched"]),
+            "metadata_diffs": {key: value["counts"] for key, value in metadata_diffs.items()},
+            "aggregate_peak_memory_bytes": record.get("cgroup", {}).get("memory_peak_bytes") if record else None,
+        },
+    )
+    return formal_valid
+
+
+def run_batch_targeted_attempt(
+    args: argparse.Namespace,
+    spec: SeriesSpec,
+    label: str,
+    run_number: int,
+    git_before: dict[str, str],
+    source_states: dict[str, SourceState],
+    measured: bool,
+) -> bool:
+    directory = args.evidence / spec.mode
+    stem = directory / label
+    refuse_attempt_collision(directory, label)
+    project = args.nift_project
+    paths = series_source_paths(args, spec, "nift")
+    output_root = project / "public"
+    baseline = args.evidence / "setup/baseline-minimal"
+    setup = json.loads((args.evidence / "setup/series-setup.json").read_text())
+    contract_path = series_contract_path(args, "nift")
+    contract = json.loads(contract_path.read_text())
+    command, environment = series_command(args, spec, "nift")
+    errors: list[str] = []
+    record: dict[str, Any] | None = None
+    pre = post = difference = classification = None
+    markers: list[dict[str, Any]] = []
+    source_restored = minimal_restored = False
+    output_correct = False
+    try:
+        assert_no_stale_benchmark_processes((project,))
+        restore_batch_targeted_state(project, baseline, spec)
+        baseline_manifest = load_manifest(Path(setup["baseline"]["manifest"]))
+        force = {path for values in contract["expected_changed_paths"].values() for path in values}
+        pre = manifest_payload_reusing(output_root, baseline_manifest, force)
+        atomic_json(Path(f"{stem}-pre-output-manifest.json"), pre)
+        if not compare_manifests(baseline_manifest, pre)["equal_content"]:
+            raise RuntimeError("batch-targeted minimal restore differs from baseline")
+        metadata_before = manifest_payload(project / ".nift/public")
+        apply_series_edits(paths, source_states, spec, "nift")
+        if measured:
+            completed = run(
+                [sys.executable, str(args.harness), "run", "--id", f"formal-{spec.mode}-{label}",
+                 "--series", f"formal-{spec.mode}", "--scenario", spec.scenario, "--tool", "nift",
+                 "--round", str(run_number), "--warmth", "warm", "--output", str(stem.with_suffix(".json")),
+                 "--cwd", str(project), "--", *command],
+                env=environment, check=False,
+            )
+            record_path = stem.with_suffix(".json")
+            record = json.loads(record_path.read_text()) if record_path.exists() else None
+            if completed.returncode:
+                errors.append(f"harness exit code {completed.returncode}")
+        else:
+            try:
+                untimed_command(label, command, project, environment, directory)
+            except Exception as error:
+                errors.append(f"command failed: {error}")
+        post = manifest_payload_reusing(output_root, pre, force)
+        atomic_json(Path(f"{stem}-post-output-manifest.json"), post)
+        difference = compare_manifests(pre, post)
+        atomic_json(Path(f"{stem}-output-diff.json"), difference)
+        expected = compare_manifests(load_manifest(Path(setup["reference"]["manifest"])), post)
+        atomic_json(Path(f"{stem}-expected-comparison.json"), expected)
+        output_correct = expected["equal_content"]
+        markers = series_marker_evidence(output_root, spec)
+        classified = changed_path_classification(contract["expected_changed_paths"], diff_path_sets(difference))
+        classification = {"schema": "cp10-series-run-changed-path-classification", "schema_version": 1,
+                          "mode": spec.mode, "tool": "nift", "contract": str(contract_path), **classified,
+                          "expected_dependents": contract["expected_dependents"], "designated_output_markers": markers}
+        atomic_json(Path(f"{stem}-changed-path-classification.json"), classification)
+        metadata_after = manifest_payload(project / ".nift/public")
+        atomic_json(Path(f"{stem}-metadata-diff.json"), compare_manifests(metadata_before, metadata_after))
+    except Exception as error:
+        errors.append(f"attempt processing failed: {error}")
+    finally:
+        try:
+            source_restored = restore_series_sources(paths, source_states) and git_state(project) == git_before
+        except Exception as error:
+            errors.append(f"source restoration failed: {error}")
+        try:
+            assert_no_stale_benchmark_processes((project,))
+            restore_batch_targeted_state(project, baseline, spec)
+            minimal_restored = all(
+                file_identity(project / "public" / output)["sha256"]
+                == setup["baseline"]["outputs"][output.as_posix()]["sha256"]
+                for output in spec.outputs
+            ) and manifest_payload(project / ".nift/public")["entries_sha256"] == load_manifest(
+                baseline / "nift-metadata-manifest.json"
+            )["entries_sha256"]
+        except Exception as error:
+            errors.append(f"minimal restoration failed: {error}")
+    infrastructure_valid = bool(not measured or record and record.get("validity", {}).get("infrastructure_valid") is True)
+    paths_valid = bool(classification and classification["matches"])
+    formal_valid = bool(not errors and infrastructure_valid and output_correct and paths_valid and markers
+                        and all(item["passed"] for item in markers) and source_restored and minimal_restored)
+    files = changed_files(difference, post) if difference and post else {"content_changed": [], "touched": []}
+    atomic_json(Path(f"{stem}-validation.json"), {
+        "schema": "cp10-formal-series-run-validation", "schema_version": 1, "mode": spec.mode,
+        "scenario": spec.scenario, "tool": "nift", "round": run_number, "measured": measured,
+        "command": command, "infrastructure_valid": infrastructure_valid, "formal_valid": formal_valid,
+        "errors": errors, "output_correct": output_correct, "changed_paths_valid": paths_valid,
+        "source_and_git_restored": source_restored, "minimal_nift_state_restored": minimal_restored,
+        "restored_states": [".nift/public", *[path.as_posix() for path in spec.outputs]],
+        "unaffected_output_recopied": False, "designated_output_markers": markers,
+        "content_changed_paths": diff_path_sets(difference) if difference else None,
+        "content_changed_count": len(files["content_changed"]),
+        "mtime_only_paths": difference["mtime_only"] if difference else [],
+        "mtime_only_count": len(difference["mtime_only"]) if difference else 0,
+        "regenerated_files": files["content_changed"], "regenerated_file_count": len(files["content_changed"]),
+        "touched_files": files["touched"], "touched_file_count": len(files["touched"]),
+        "aggregate_peak_memory_bytes": record.get("cgroup", {}).get("memory_peak_bytes") if record else None,
+    })
+    return formal_valid
+
+
 def ensure_warmups(
     args: argparse.Namespace,
     mode: str,
@@ -1772,9 +2596,74 @@ def run_targeted(
         )
 
 
+def run_paired_series(
+    args: argparse.Namespace,
+    spec: SeriesSpec,
+    git_before: dict[str, dict[str, str]],
+    source_states: dict[str, dict[str, SourceState]],
+) -> None:
+    directory = args.evidence / spec.mode
+    warmup_marker = directory / "warmups-complete.json"
+    if not warmup_marker.exists():
+        warmup_results = []
+        for index, tool in enumerate(("nift", "astro"), 1):
+            warmup_results.append(run_paired_series_attempt(
+                args, spec, tool, f"warmup-{tool}-{index:02d}-a{args.attempt:02d}", index,
+                git_before[tool], source_states[tool], False,
+            ))
+        if not all(warmup_results):
+            raise RuntimeError(f"{spec.mode} warmup failed")
+        atomic_json(warmup_marker, {"passed": True, "tools": ["nift", "astro"]})
+    invalid = []
+    for round_number in range(args.start, args.end + 1):
+        first = NORMAL_ORDER[round_number - 1]
+        second = "astro" if first == "nift" else "nift"
+        for tool in (first, second):
+            label = f"{tool}-r{round_number:02d}-a{args.attempt:02d}"
+            if not run_paired_series_attempt(
+                args, spec, tool, label, round_number, git_before[tool], source_states[tool], True
+            ):
+                invalid.append(label)
+    if invalid:
+        raise RuntimeError(f"invalid {spec.mode} attempts preserved: {', '.join(invalid)}")
+
+
+def run_batch_targeted_series(
+    args: argparse.Namespace,
+    spec: SeriesSpec,
+    git_before: dict[str, str],
+    source_states: dict[str, SourceState],
+) -> None:
+    directory = args.evidence / spec.mode
+    warmup_marker = directory / "warmups-complete.json"
+    if not warmup_marker.exists():
+        results = [
+            run_batch_targeted_attempt(
+                args, spec, f"warmup-nift-{index:02d}-a{args.attempt:02d}", index,
+                git_before, source_states, False,
+            )
+            for index in range(1, spec.warmups + 1)
+        ]
+        if not all(results):
+            raise RuntimeError("batch-targeted warmup failed")
+        atomic_json(warmup_marker, {"passed": True, "count": spec.warmups})
+    invalid = []
+    for run_number in range(args.start, args.end + 1):
+        label = f"nift-run{run_number:02d}-a{args.attempt:02d}"
+        if not run_batch_targeted_attempt(
+            args, spec, label, run_number, git_before, source_states, True
+        ):
+            invalid.append(label)
+    if invalid:
+        raise RuntimeError(f"invalid batch-targeted attempts preserved: {', '.join(invalid)}")
+
+
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("mode", choices=("normal", "targeted"))
+    parser.add_argument(
+        "mode",
+        choices=("normal", "targeted", "batch-normal", "batch-targeted", "shared-normal"),
+    )
     parser.add_argument("--nift-project", required=True, type=Path)
     parser.add_argument("--astro-project", type=Path)
     parser.add_argument("--harness", required=True, type=Path)
@@ -1795,7 +2684,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--end", type=int)
     parser.add_argument("--attempt", default=1, type=int)
     args = parser.parse_args(argv)
-    maximum = NORMAL_RUNS if args.mode == "normal" else TARGET_RUNS
+    maximum = (
+        SERIES_SPECS[args.mode].runs
+        if args.mode in SERIES_SPECS
+        else NORMAL_RUNS if args.mode == "normal" else TARGET_RUNS
+    )
     args.end = maximum if args.end is None else args.end
     if not 1 <= args.start <= args.end <= maximum:
         parser.error(f"run range must be within 1..{maximum} for {args.mode}")
@@ -1815,7 +2708,10 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         "astro_remote_input_archive",
         "astro_remote_input_manifest",
     ]
-    if args.mode == "normal":
+    paired_mode = args.mode == "normal" or (
+        args.mode in SERIES_SPECS and SERIES_SPECS[args.mode].paired
+    )
+    if paired_mode:
         missing = [name for name in astro_paths if getattr(args, name) is None]
         if missing:
             parser.error(
@@ -1829,7 +2725,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
             parser.error(f"--{name.replace('_', '-')} does not exist: {value}")
         setattr(args, name, value)
     required_files = ["harness", "nift_expected"]
-    if args.mode == "normal":
+    if paired_mode:
         required_files.extend(
             (
                 "astro_clean_reference_manifest",
@@ -1840,7 +2736,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     for name in required_files:
         if not getattr(args, name).is_file():
             parser.error(f"--{name.replace('_', '-')} must be a file")
-    if args.mode == "normal":
+    if paired_mode:
         if not args.astro_clean_reference.is_dir():
             parser.error("--astro-clean-reference must be a directory")
         if (
@@ -1859,7 +2755,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
             parser.error(
                 "--astro-remote-input-archive directory must be outside the Astro project"
             )
-    executables = ["nift_bin"] + (["pnpm_bin"] if args.mode == "normal" else [])
+    executables = ["nift_bin"] + (["pnpm_bin"] if paired_mode else [])
     for name in executables:
         if not getattr(args, name).is_file() or not os.access(getattr(args, name), os.X_OK):
             parser.error(f"--{name.replace('_', '-')} is not executable")
@@ -1871,6 +2767,27 @@ def run_campaign(args: argparse.Namespace) -> int:
     if args.evidence.exists() and not args.evidence.is_dir():
         raise ValueError(f"evidence path is not a directory: {args.evidence}")
     args.evidence.mkdir(parents=True, exist_ok=True)
+    if args.mode == "batch-targeted":
+        spec = SERIES_SPECS[args.mode]
+        marker = args.evidence / "setup/series-setup.json"
+        if marker.exists():
+            git_before, source_states = batch_targeted_setup_ready(args, spec)
+        else:
+            if any(args.evidence.iterdir()):
+                raise FileExistsError("refusing non-empty batch-targeted evidence directory")
+            if args.attempt != 1:
+                raise ValueError("replacement attempts require existing batch-targeted setup")
+            git_before = git_state(args.nift_project)
+            if git_before["status"]:
+                raise RuntimeError("benchmark Nift worktree is not clean")
+            source_states = {
+                str(path): capture_source(path)
+                for path in series_source_paths(args, spec, "nift")
+            }
+            prepare_batch_targeted_setup(args, spec, git_before, source_states)
+        (args.evidence / spec.mode).mkdir(exist_ok=True)
+        run_batch_targeted_series(args, spec, git_before, source_states)
+        return 0
     if args.mode == "targeted":
         marker = args.evidence / "setup/targeted-setup.json"
         if marker.exists():
@@ -1894,6 +2811,42 @@ def run_campaign(args: argparse.Namespace) -> int:
             {"nift": git_state_before},
             {"nift": source_state},
         )
+        return 0
+
+    if args.mode in ("batch-normal", "shared-normal"):
+        spec = SERIES_SPECS[args.mode]
+        args.astro_remote_input_archive_sha256 = (
+            sha256_file(args.astro_remote_input_archive)
+            if args.astro_remote_input_archive.is_file()
+            else None
+        )
+        marker = args.evidence / "setup/series-setup.json"
+        if marker.exists():
+            args.astro_remote_archive_root = (
+                args.astro_remote_input_archive
+                if args.astro_remote_input_archive.is_dir()
+                else args.evidence / "astro-remote-input-archive"
+            )
+            git_before, source_states = paired_series_setup_ready(args, spec)
+        else:
+            if any(args.evidence.iterdir()):
+                raise FileExistsError(f"refusing non-empty {spec.mode} evidence directory")
+            if args.attempt != 1:
+                raise ValueError("replacement attempts require existing series setup")
+            args.astro_remote_archive_root = prepare_remote_archive(args)
+            git_before = {tool: git_state(project_for(args, tool)) for tool in ("nift", "astro")}
+            if any(state["status"] for state in git_before.values()):
+                raise RuntimeError("benchmark worktree is not clean")
+            source_states = {
+                tool: {
+                    str(path): capture_source(path)
+                    for path in series_source_paths(args, spec, tool)
+                }
+                for tool in ("nift", "astro")
+            }
+            prepare_paired_series_setup(args, spec, git_before, source_states)
+        (args.evidence / spec.mode).mkdir(exist_ok=True)
+        run_paired_series(args, spec, git_before, source_states)
         return 0
 
     args.astro_remote_input_archive_sha256 = (
@@ -1939,7 +2892,7 @@ def main(argv: list[str] | None = None) -> int:
     with campaign_lock():
         projects = (
             (args.nift_project, args.astro_project)
-            if args.mode == "normal"
+            if args.mode == "normal" or (args.mode in SERIES_SPECS and SERIES_SPECS[args.mode].paired)
             else (args.nift_project,)
         )
         assert_no_stale_benchmark_processes(projects)

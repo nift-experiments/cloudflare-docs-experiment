@@ -10,12 +10,18 @@ from tools.cp10_benchmark import atomic_json, manifest_payload
 from tools.cp10_formal_no_change import StatePath, snapshot_states
 from tools.cp10_formal_edit import (
     ASTRO_SOURCE,
+    BATCH_ASTRO_SOURCES,
+    BATCH_NIFT_SOURCES,
+    BATCH_OUTPUTS,
+    BATCH_TARGETS,
     MARKER,
     NIFT_SOURCE,
     NIFT_TARGET,
     NORMAL_ORDER,
     TARGET_RUNS,
     TARGET_WARMUPS,
+    SERIES_SPECS,
+    SHARED_MARKER,
     apply_edit,
     astro_normalized_change_set,
     baseline_states_equal,
@@ -31,8 +37,11 @@ from tools.cp10_formal_edit import (
     recorded_command,
     refuse_attempt_collision,
     restore_targeted_nift_state,
+    restore_series_sources,
     restore_source,
     run_campaign,
+    series_command,
+    series_edited_bytes,
     verify_target,
 )
 
@@ -373,6 +382,102 @@ class CP10FormalEditTests(unittest.TestCase):
                 {entry["path"] for entry in observed["entries"] if entry["type"] == "file"},
                 {"static/large.bin", "workers/get-started/guide/index.html"},
             )
+
+    def test_scenario_e_exact_routes_sources_commands_and_counts(self):
+        self.assertEqual(
+            BATCH_TARGETS,
+            (
+                "workers/get-started/",
+                "workers/get-started/guide/",
+                "workers/get-started/dashboard/",
+                "workers/get-started/prompting/",
+                "workers/get-started/quickstarts/",
+            ),
+        )
+        self.assertEqual(
+            tuple(path.as_posix() for path in BATCH_NIFT_SOURCES),
+            tuple(f"content/{target}index.md" for target in BATCH_TARGETS),
+        )
+        self.assertEqual(
+            tuple(path.as_posix() for path in BATCH_ASTRO_SOURCES),
+            (
+                "src/content/docs/workers/get-started/index.mdx",
+                "src/content/docs/workers/get-started/guide.mdx",
+                "src/content/docs/workers/get-started/dashboard.mdx",
+                "src/content/docs/workers/get-started/prompting.mdx",
+                "src/content/docs/workers/get-started/quickstarts.mdx",
+            ),
+        )
+        self.assertEqual(
+            tuple(path.as_posix() for path in BATCH_OUTPUTS),
+            tuple(f"{target}index.html" for target in BATCH_TARGETS),
+        )
+        normal = SERIES_SPECS["batch-normal"]
+        targeted = SERIES_SPECS["batch-targeted"]
+        self.assertEqual((normal.runs, NORMAL_ORDER), (3, ("nift", "astro", "astro")))
+        self.assertEqual((targeted.warmups, targeted.runs), (2, 20))
+        args = Namespace(nift_bin=Path("/opt/nift"), pnpm_bin=Path("/opt/pnpm"))
+        command, _ = series_command(args, targeted, "nift")
+        self.assertEqual(command, ["/opt/nift", "build", *BATCH_TARGETS])
+
+    def test_scenario_f_exact_sources_command_order_and_comment_placement(self):
+        shared = SERIES_SPECS["shared-normal"]
+        self.assertEqual(shared.nift_sources, (Path("templates/head.html"),))
+        self.assertEqual(shared.astro_sources, (Path("src/layouts/BaseLayout.astro"),))
+        self.assertEqual((shared.runs, NORMAL_ORDER), (3, ("nift", "astro", "astro")))
+        self.assertEqual(
+            series_edited_bytes(b"<html>\n</html>\n", shared, "astro"),
+            b"<html>\n</html>\n<!-- CP10 shared-template edit -->\n",
+        )
+        self.assertEqual(SHARED_MARKER, b"<!-- CP10 shared-template edit -->")
+
+    def test_series_paragraph_edit_and_multi_source_restoration(self):
+        batch = SERIES_SPECS["batch-normal"]
+        self.assertEqual(
+            series_edited_bytes(b"body\n", batch, "nift"),
+            b"body\n\nCP10 benchmark edit.\n",
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            paths = (root / "one.md", root / "two.md")
+            for path in paths:
+                path.write_text("original\n")
+            states = {str(path): capture_source(path) for path in paths}
+            for path in paths:
+                path.write_text("edited")
+            self.assertTrue(restore_series_sources(paths, states))
+            self.assertTrue(all(path.read_text() == "original\n" for path in paths))
+
+    def test_batch_targeted_campaign_never_dispatches_astro(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            evidence = root / "evidence"
+            project = root / "nift"
+            project.mkdir()
+            args = Namespace(mode="batch-targeted", evidence=evidence, attempt=1, nift_project=project)
+            git = {"head": "h", "tree": "t", "status": ""}
+            states = {"source": Namespace(data=b"source", mtime_ns=1)}
+
+            def create_setup(*_args):
+                (evidence / "setup").mkdir()
+                (evidence / "setup/series-setup.json").write_text("{}")
+
+            with (
+                patch("tools.cp10_formal_edit.git_state", return_value=git),
+                patch("tools.cp10_formal_edit.series_source_paths", return_value=(Path("source"),)),
+                patch("tools.cp10_formal_edit.capture_source", return_value=states["source"]),
+                patch("tools.cp10_formal_edit.prepare_batch_targeted_setup", side_effect=create_setup) as setup,
+                patch("tools.cp10_formal_edit.run_batch_targeted_series") as runs,
+                patch("tools.cp10_formal_edit.prepare_paired_series_setup") as paired,
+                patch("tools.cp10_formal_edit.prepare_remote_archive") as remote,
+                patch("tools.cp10_formal_edit.restore_astro_remote_inputs") as restore_remote,
+            ):
+                self.assertEqual(run_campaign(args), 0)
+            setup.assert_called_once()
+            runs.assert_called_once()
+            paired.assert_not_called()
+            remote.assert_not_called()
+            restore_remote.assert_not_called()
 
 
 if __name__ == "__main__":
