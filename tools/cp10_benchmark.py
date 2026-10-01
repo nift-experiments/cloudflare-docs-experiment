@@ -171,7 +171,9 @@ def load_manifest(path: Path) -> dict[str, Any]:
 
 
 def semantic_entry(entry: dict[str, Any]) -> dict[str, Any]:
-    return {key: value for key, value in entry.items() if key != "mtime_ns"}
+    return {
+        key: value for key, value in entry.items() if key not in {"mode", "mtime_ns"}
+    }
 
 
 def compare_manifests(before: dict[str, Any], after: dict[str, Any]) -> dict[str, Any]:

@@ -2,7 +2,7 @@
 
 Status: **FROZEN BEFORE FORMAL RESULTS**
 
-Methodology version: 4
+Methodology version: 5
 
 Frozen: 2026-10-01
 
@@ -315,7 +315,10 @@ Performance is invalid unless correctness passes:
   the immutable anchors, including the independent shell checkout.
 - Nift reports all 8,803 tracked pages up to date after complete builds.
 - A complete path/type/mode/size/SHA-256 manifest is frozen for each clean
-  baseline tree. Every full/no-change output must match its tool's manifest;
+  baseline tree. Output correctness compares path, type, size, and SHA-256;
+  POSIX modes and mtimes are retained as metadata but are not content failures
+  because a fresh host can legitimately create readable output as 0644 rather
+  than 0664. Every full/no-change output must match its tool's content manifest;
   Nift certified-tree scenarios also require 8,803 HTML routes and 18,843
   certified public files.
 - Astro and Nift use separate frozen references; their output byte counts are
