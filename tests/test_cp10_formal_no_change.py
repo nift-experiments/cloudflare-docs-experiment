@@ -5,7 +5,9 @@ import tempfile
 import time
 import unittest
 from argparse import Namespace
+from contextlib import nullcontext
 from pathlib import Path
+from unittest import mock
 
 from tools.cp10_benchmark import atomic_json, manifest_payload, sha256_file
 from tools.cp10_formal_no_change import (
@@ -23,10 +25,55 @@ from tools.cp10_formal_no_change import (
     run_normalizer,
     snapshot_states,
     actual_remote_selected_entries,
+    compare_output_stats,
+    main,
+    nift_only_bindings,
+    output_stat_payload,
+    record_nift_only_run,
+    verify_nift_only_prestate,
 )
 
 
 class CP10FormalNoChangeTests(unittest.TestCase):
+    def test_nift_only_dispatch_requires_no_astro_arguments_or_actions(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            project = root / "nift"
+            project.mkdir()
+            harness = root / "harness.py"
+            expected = root / "expected.json"
+            harness.write_text("harness")
+            expected.write_text("expected")
+            argv = [
+                "--nift-only",
+                "--nift-project",
+                str(project),
+                "--harness",
+                str(harness),
+                "--evidence",
+                str(root / "evidence"),
+                "--nift-expected",
+                str(expected),
+                "--nift-bin",
+                "/bin/true",
+            ]
+            with mock.patch(
+                "tools.cp10_formal_no_change.campaign_lock",
+                return_value=nullcontext(),
+            ), mock.patch(
+                "tools.cp10_formal_no_change.assert_no_stale_benchmark_processes"
+            ), mock.patch(
+                "tools.cp10_formal_no_change.run_campaign",
+                side_effect=AssertionError("paired campaign invoked"),
+            ), mock.patch(
+                "tools.cp10_formal_no_change.run_nift_only", return_value=0
+            ) as nift_only:
+                self.assertEqual(main(argv), 0)
+            args = nift_only.call_args.args[0]
+            self.assertTrue(args.nift_only)
+            self.assertIsNone(args.astro_project)
+            self.assertIsNone(args.astro_normalizer)
+
     def test_fixed_order_and_exact_recorded_commands(self):
         self.assertEqual(ORDER, ("nift", "astro", "astro"))
         nift, nift_environment = command_for(
@@ -59,6 +106,132 @@ class CP10FormalNoChangeTests(unittest.TestCase):
             self.assertEqual(target.read_text(), "baseline")
             self.assertFalse((live / "extra").exists())
             self.assertEqual(manifest_payload(live)["entries_sha256"], expected_digest)
+
+    def test_nift_only_reconstructs_metadata_and_public_output_metadata(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            project = root / "project"
+            output = project / "public"
+            metadata = project / ".nift/public"
+            output.mkdir(parents=True)
+            metadata.mkdir(parents=True)
+            page = output / "index.html"
+            page.write_text("certified")
+            (metadata / "state.json").write_text("baseline")
+            evidence = root / "evidence"
+            baseline = evidence / "baseline"
+            baseline.mkdir(parents=True)
+            snapshot_states(
+                "nift", [StatePath("metadata", metadata)], baseline
+            )
+            baseline_stat = output_stat_payload(output)
+            baseline_manifest = manifest_payload(output)
+            original_mode = page.stat().st_mode & 0o777
+            (metadata / "state.json").write_text("mutated")
+            original_mtime = page.stat().st_mtime_ns
+            page.chmod(0o600)
+            os.utime(page, ns=(original_mtime + 1_000_000_000,) * 2)
+            args = Namespace(nift_project=project, evidence=evidence)
+
+            reconstructed, restoration_diff = verify_nift_only_prestate(
+                args, baseline_stat, baseline_manifest
+            )
+
+            self.assertEqual((metadata / "state.json").read_text(), "baseline")
+            self.assertEqual(page.stat().st_mtime_ns, original_mtime)
+            self.assertEqual(page.stat().st_mode & 0o777, original_mode)
+            self.assertEqual(restoration_diff["touched"], ["index.html"])
+            self.assertTrue(restoration_diff["content_unchanged"])
+            changed_time = page.stat().st_mtime_ns + 1_000_000_000
+            os.utime(page, ns=(changed_time, changed_time))
+            difference = compare_output_stats(
+                baseline_stat,
+                output_stat_payload(output),
+                output,
+                baseline_manifest,
+            )
+            self.assertEqual(difference["touched"], ["index.html"])
+            self.assertEqual(difference["mtime_only"], ["index.html"])
+            self.assertEqual(difference["content_changed"], [])
+            self.assertEqual(difference["counts"]["selectively_hashed_files"], 1)
+
+    def test_nift_only_changed_output_is_preserved_and_fails_closed(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            project = root / "project"
+            output = project / "public"
+            metadata = project / ".nift/public"
+            output.mkdir(parents=True)
+            metadata.mkdir(parents=True)
+            page = output / "index.html"
+            page.write_text("baseline")
+            (metadata / "state.json").write_text("baseline")
+            evidence = root / "evidence"
+            baseline = evidence / "baseline"
+            baseline.mkdir(parents=True)
+            snapshot_states("nift", [StatePath("metadata", metadata)], baseline)
+            baseline_stat = output_stat_payload(output)
+            baseline_manifest = manifest_payload(output)
+            harness = root / "harness.py"
+            harness.write_text("# harness\n")
+            nift = root / "nift"
+            nift.write_text("#!/bin/sh\nexit 0\n")
+            nift.chmod(0o755)
+            expected = root / "expected.json"
+            atomic_json(expected, baseline_manifest)
+            args = Namespace(
+                nift_project=project,
+                evidence=evidence,
+                harness=harness,
+                nift_bin=nift,
+                nift_expected=expected,
+            )
+            bindings = nift_only_bindings(args)
+            git = {"head": "h", "tree": "t", "status": ""}
+
+            def fake_run(command, *_args, **_kwargs):
+                if command[0] == "cp":
+                    return subprocess.run(command, check=True)
+                record_path = Path(command[command.index("--output") + 1])
+                page.write_text("changed!")
+                atomic_json(
+                    record_path,
+                    {
+                        "campaign_lock_inherited": True,
+                        "validity": {"infrastructure_valid": True},
+                        "time": {"wall_seconds": 0.1},
+                        "cgroup": {"memory_peak_bytes": 1024},
+                    },
+                )
+                return Namespace(returncode=0)
+
+            with mock.patch(
+                "tools.cp10_formal_no_change.assert_no_stale_benchmark_processes"
+            ), mock.patch(
+                "tools.cp10_formal_no_change.git_state", return_value=git
+            ), mock.patch(
+                "tools.cp10_formal_no_change.run", side_effect=fake_run
+            ):
+                with self.assertRaisesRegex(RuntimeError, "invalid Nift-only run preserved"):
+                    record_nift_only_run(
+                        args,
+                        1,
+                        git,
+                        baseline_stat,
+                        baseline_manifest,
+                        bindings,
+                    )
+
+            difference = json.loads(
+                (evidence / "nift-run01-output-diff.json").read_text()
+            )
+            validation = json.loads(
+                (evidence / "nift-run01-validation.json").read_text()
+            )
+            self.assertEqual(difference["content_changed"], ["index.html"])
+            self.assertFalse(validation["output_content_unchanged"])
+            self.assertFalse(validation["formal_valid"])
+            self.assertEqual(page.read_text(), "changed!")
 
     def test_attempt_preflight_refuses_any_artifact_collision(self):
         with tempfile.TemporaryDirectory() as directory:

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import shutil
@@ -40,6 +41,7 @@ except ImportError:
 
 ORDER = ("nift", "astro", "astro")
 SERIES = "formal-no-change-warm"
+NIFT_ONLY_SERIES = "formal-no-change-nift-only-unpaired"
 
 
 @dataclass(frozen=True)
@@ -379,6 +381,181 @@ def assert_no_stale_benchmark_processes(projects: tuple[Path, ...]) -> None:
             raise RuntimeError(
                 f"stale benchmark build process pid={pid}: {' '.join(arguments)}"
             )
+
+
+def output_stat_entries(root: Path) -> list[dict[str, Any]]:
+    root = root.resolve()
+    if not root.is_dir():
+        raise ValueError(f"output root is not a directory: {root}")
+    entries: list[dict[str, Any]] = []
+    for current, dirnames, filenames in os.walk(root, followlinks=False):
+        dirnames.sort()
+        filenames.sort()
+        current_path = Path(current)
+        for name in [*dirnames, *filenames]:
+            path = current_path / name
+            item_stat = path.lstat()
+            entry: dict[str, Any] = {
+                "path": path.relative_to(root).as_posix(),
+                "mode": f"{item_stat.st_mode & 0o7777:04o}",
+                "mtime_ns": item_stat.st_mtime_ns,
+                "ctime_ns": item_stat.st_ctime_ns,
+                "inode": item_stat.st_ino,
+            }
+            if path.is_symlink():
+                entry.update(type="symlink", target=os.readlink(path))
+                if name in dirnames:
+                    dirnames.remove(name)
+            elif path.is_dir():
+                entry["type"] = "directory"
+            elif path.is_file():
+                entry.update(type="file", size=item_stat.st_size)
+            else:
+                raise ValueError(f"unsupported output object: {path}")
+            entries.append(entry)
+    entries.sort(key=lambda item: item["path"])
+    return entries
+
+
+def output_stat_payload(root: Path) -> dict[str, Any]:
+    entries = output_stat_entries(root)
+    canonical = json.dumps(
+        entries, sort_keys=True, separators=(",", ":"), ensure_ascii=True
+    ).encode()
+    return {
+        "schema": "cp10-output-stat-index",
+        "schema_version": 1,
+        "entries_sha256": hashlib.sha256(canonical).hexdigest(),
+        "entries": entries,
+    }
+
+
+def reconstructable_output_entries(payload: dict[str, Any]) -> list[dict[str, Any]]:
+    return [
+        {
+            key: value
+            for key, value in entry.items()
+            if key not in {"ctime_ns", "inode"}
+        }
+        for entry in payload["entries"]
+    ]
+
+
+def reconstructable_output_digest(payload: dict[str, Any]) -> str:
+    canonical = json.dumps(
+        reconstructable_output_entries(payload),
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=True,
+    ).encode()
+    return hashlib.sha256(canonical).hexdigest()
+
+
+def compare_output_stats(
+    baseline: dict[str, Any],
+    current: dict[str, Any],
+    root: Path,
+    baseline_manifest: dict[str, Any],
+) -> dict[str, Any]:
+    before = {entry["path"]: entry for entry in baseline["entries"]}
+    after = {entry["path"]: entry for entry in current["entries"]}
+    certified = {entry["path"]: entry for entry in baseline_manifest["entries"]}
+    added = sorted(after.keys() - before.keys())
+    removed = sorted(before.keys() - after.keys())
+    touched = sorted(
+        {*added, *removed}
+        | {
+            path
+            for path in before.keys() & after.keys()
+            if before[path] != after[path]
+        }
+    )
+    content_changed = set(added) | set(removed)
+    observed_hashes: dict[str, str] = {}
+    mtime_only: list[str] = []
+    regenerated: list[str] = []
+    for path in sorted(set(touched) - set(added) - set(removed)):
+        old = before[path]
+        new = after[path]
+        if old["type"] != new["type"]:
+            content_changed.add(path)
+            continue
+        content_equal = True
+        if new["type"] == "file":
+            observed_hashes[path] = sha256_file(root / path)
+            expected = certified.get(path, {})
+            content_equal = (
+                new.get("size") == expected.get("size")
+                and observed_hashes[path] == expected.get("sha256")
+            )
+            if old.get("inode") != new.get("inode"):
+                regenerated.append(path)
+        elif new["type"] == "symlink":
+            content_equal = new.get("target") == certified.get(path, {}).get("target")
+        if not content_equal:
+            content_changed.add(path)
+        elif old.get("mode") == new.get("mode") and old.get("mtime_ns") != new.get(
+            "mtime_ns"
+        ):
+            mtime_only.append(path)
+    return {
+        "schema": "cp10-output-stat-diff",
+        "schema_version": 1,
+        "content_unchanged": not content_changed,
+        "untouched": not touched,
+        "added": added,
+        "removed": removed,
+        "content_changed": sorted(content_changed),
+        "touched": touched,
+        "mtime_only": sorted(mtime_only),
+        "regenerated": sorted(regenerated),
+        "observed_sha256_for_touched_files": observed_hashes,
+        "counts": {
+            "added": len(added),
+            "removed": len(removed),
+            "content_changed": len(content_changed),
+            "touched": len(touched),
+            "mtime_only": len(mtime_only),
+            "regenerated": len(regenerated),
+            "selectively_hashed_files": len(observed_hashes),
+        },
+    }
+
+
+def restore_output_metadata(
+    root: Path, baseline_stat: dict[str, Any], baseline_manifest: dict[str, Any]
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Restore mode/mtime after proving every touched output retains certified bytes."""
+    current = output_stat_payload(root)
+    difference = compare_output_stats(
+        baseline_stat, current, root, baseline_manifest
+    )
+    if not difference["content_unchanged"]:
+        raise RuntimeError("Nift public output content differs from the certified baseline")
+    current_entries = {entry["path"]: entry for entry in current["entries"]}
+    for entry in sorted(
+        baseline_stat["entries"],
+        key=lambda item: (len(Path(item["path"]).parts), item["path"]),
+        reverse=True,
+    ):
+        path = root / entry["path"]
+        observed = current_entries[entry["path"]]
+        if observed["type"] != entry["type"]:
+            raise RuntimeError(f"Nift output type changed: {entry['path']}")
+        if entry["type"] != "symlink" and observed["mode"] != entry["mode"]:
+            os.chmod(path, int(entry["mode"], 8), follow_symlinks=False)
+        if observed["mtime_ns"] != entry["mtime_ns"]:
+            os.utime(
+                path,
+                ns=(path.lstat().st_atime_ns, entry["mtime_ns"]),
+                follow_symlinks=False,
+            )
+    restored = output_stat_payload(root)
+    if reconstructable_output_entries(restored) != reconstructable_output_entries(
+        baseline_stat
+    ):
+        raise RuntimeError("Nift public output metadata was not exactly reconstructed")
+    return restored, difference
 
 
 def normalization_passed(report: dict[str, Any] | None) -> bool:
@@ -829,20 +1006,356 @@ def record_run(args: argparse.Namespace, tool: str, round_number: int, git_befor
         )
 
 
+def nift_only_metadata_state(args: argparse.Namespace) -> list[StatePath]:
+    return [StatePath("metadata", args.nift_project / ".nift/public")]
+
+
+def nift_only_bindings(args: argparse.Namespace) -> dict[str, Any]:
+    expected = load_manifest(args.nift_expected)
+    return {
+        "harness": {
+            "path": str(args.harness),
+            "sha256": sha256_file(args.harness),
+        },
+        "nift": {
+            "path": str(args.nift_bin),
+            "sha256": sha256_file(args.nift_bin),
+            "command": [str(args.nift_bin), "build"],
+        },
+        "certified_expected": {
+            "path": str(args.nift_expected),
+            "file_sha256": sha256_file(args.nift_expected),
+            "entries_sha256": expected["entries_sha256"],
+        },
+    }
+
+
+def validate_nift_only_bindings(
+    args: argparse.Namespace, expected: dict[str, Any]
+) -> None:
+    if nift_only_bindings(args) != expected:
+        raise RuntimeError("Nift-only tool, harness, or certified manifest binding changed")
+
+
+def verify_nift_only_prestate(
+    args: argparse.Namespace,
+    baseline_stat: dict[str, Any],
+    baseline_manifest: dict[str, Any],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    assert_no_stale_benchmark_processes((args.nift_project,))
+    restore_states(
+        "nift", nift_only_metadata_state(args), args.evidence / "baseline"
+    )
+    metadata = manifest_payload(args.nift_project / ".nift/public")
+    expected_metadata = load_manifest(
+        args.evidence / "baseline/nift-metadata-manifest.json"
+    )
+    if metadata["entries_sha256"] != expected_metadata["entries_sha256"]:
+        raise RuntimeError("Nift metadata was not exactly reconstructed")
+    return restore_output_metadata(
+        args.nift_project / "public", baseline_stat, baseline_manifest
+    )
+
+
+def prepare_nift_only(
+    args: argparse.Namespace,
+    git_before: dict[str, str],
+    bindings: dict[str, Any],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    baseline = args.evidence / "baseline"
+    baseline.mkdir()
+    expected = preserve_expected(
+        args.nift_expected, baseline / "nift-certified-expected.json"
+    )
+    validate_nift_only_bindings(args, bindings)
+    assert_no_stale_benchmark_processes((args.nift_project,))
+    clean_nift(args.nift_project)
+    _, environment = command_for("nift", args.nift_bin, Path("/unused-pnpm"))
+    untimed(
+        "baseline/nift-clean-build",
+        [str(args.nift_bin), "build", "--all"],
+        args.nift_project,
+        environment,
+        args.evidence,
+    )
+    if git_state(args.nift_project) != git_before:
+        raise RuntimeError("Nift Git state changed during Nift-only baseline setup")
+    validate_nift_only_bindings(args, bindings)
+    output_manifest = manifest_payload(args.nift_project / "public")
+    atomic_json(baseline / "nift-output-manifest.json", output_manifest)
+    comparison = compare_manifests(expected, output_manifest)
+    atomic_json(baseline / "nift-certified-comparison.json", comparison)
+    if not comparison["equal_content"]:
+        raise RuntimeError("Nift-only baseline differs from the certified manifest")
+    snapshot_states(
+        "nift", nift_only_metadata_state(args), baseline
+    )
+    baseline_stat = output_stat_payload(args.nift_project / "public")
+    atomic_json(baseline / "nift-output-stat-index.json", baseline_stat)
+
+    verify_nift_only_prestate(args, baseline_stat, output_manifest)
+    untimed(
+        "baseline/nift-warmup",
+        [str(args.nift_bin), "build"],
+        args.nift_project,
+        environment,
+        args.evidence,
+    )
+    warmup_stat = output_stat_payload(args.nift_project / "public")
+    atomic_json(baseline / "nift-warmup-output-stat-index.json", warmup_stat)
+    warmup_diff = compare_output_stats(
+        baseline_stat,
+        warmup_stat,
+        args.nift_project / "public",
+        output_manifest,
+    )
+    atomic_json(baseline / "nift-warmup-output-diff.json", warmup_diff)
+    if (
+        not warmup_diff["content_unchanged"]
+        or git_state(args.nift_project) != git_before
+    ):
+        raise RuntimeError("Nift-only warmup changed output content or Git state")
+    validate_nift_only_bindings(args, bindings)
+
+    marker = {
+        "schema": "cp10-nift-only-no-change-campaign",
+        "schema_version": 1,
+        "series": NIFT_ONLY_SERIES,
+        "paired": False,
+        "methodology_version": 6,
+        "project": str(args.nift_project),
+        "git": git_before,
+        "statistics_scope": "unpaired-nift-only; exclude from paired statistics",
+        "eligible_for_paired_statistics": False,
+        **bindings,
+        "baseline": {
+            "output_manifest": "nift-output-manifest.json",
+            "output_entries_sha256": output_manifest["entries_sha256"],
+            "output_stat_index": "nift-output-stat-index.json",
+            "output_stat_entries_sha256": baseline_stat["entries_sha256"],
+            "reconstructable_output_sha256": reconstructable_output_digest(
+                baseline_stat
+            ),
+            "metadata_manifest": "nift-metadata-manifest.json",
+            "snapshot_scope": [".nift/public"],
+            "public_strategy": (
+                "certify full content once; restore path/type/size/mode/mtime; detect "
+                "touches with ctime/inode and selectively hash every touched file"
+            ),
+        },
+        "warmup_output_diff": "nift-warmup-output-diff.json",
+    }
+    atomic_json(baseline / "campaign.json", marker)
+    return baseline_stat, output_manifest
+
+
+def record_nift_only_run(
+    args: argparse.Namespace,
+    run_number: int,
+    git_before: dict[str, str],
+    baseline_stat: dict[str, Any],
+    baseline_manifest: dict[str, Any],
+    bindings: dict[str, Any],
+) -> dict[str, Any]:
+    stem = f"nift-run{run_number:02d}"
+    validate_nift_only_bindings(args, bindings)
+    reconstructed, reconstruction_diff = verify_nift_only_prestate(
+        args, baseline_stat, baseline_manifest
+    )
+    if git_state(args.nift_project) != git_before:
+        raise RuntimeError(f"Nift Git state differs before {stem}")
+    metadata_before = manifest_payload(args.nift_project / ".nift/public")
+    atomic_json(
+        args.evidence / f"{stem}-pre-metadata-manifest.json", metadata_before
+    )
+    atomic_json(
+        args.evidence / f"{stem}-prestate.json",
+        {
+            "baseline_output_stat_entries_sha256": baseline_stat[
+                "entries_sha256"
+            ],
+            "reconstructed_output_stat_entries_sha256": reconstructed[
+                "entries_sha256"
+            ],
+            "reconstructable_output_sha256": reconstructable_output_digest(
+                reconstructed
+            ),
+            "restoration_input_counts": reconstruction_diff["counts"],
+            "output_exactly_reconstructed": True,
+            "metadata_exactly_reconstructed": True,
+        },
+    )
+    identifier = f"formal-no-change-nift-only-run{run_number:02d}"
+    command, environment = command_for(
+        "nift", args.nift_bin, Path("/unused-pnpm")
+    )
+    completed = run(
+        [
+            sys.executable,
+            str(args.harness),
+            "run",
+            "--id",
+            identifier,
+            "--series",
+            NIFT_ONLY_SERIES,
+            "--scenario",
+            "no-change-nift-only-unpaired",
+            "--tool",
+            "nift",
+            "--round",
+            str(run_number),
+            "--warmth",
+            "warm",
+            "--output",
+            str(args.evidence / f"{stem}.json"),
+            "--cwd",
+            str(args.nift_project),
+            "--",
+            *command,
+        ],
+        env=environment,
+        check=False,
+    )
+    record_path = args.evidence / f"{stem}.json"
+    record = json.loads(record_path.read_text()) if record_path.exists() else None
+    infrastructure_valid = bool(
+        completed.returncode == 0
+        and record
+        and record.get("campaign_lock_inherited") is True
+        and record.get("validity", {}).get("infrastructure_valid") is True
+    )
+    bindings_valid = nift_only_bindings(args) == bindings
+    after_stat = output_stat_payload(args.nift_project / "public")
+    atomic_json(args.evidence / f"{stem}-post-output-stat-index.json", after_stat)
+    output_diff = compare_output_stats(
+        baseline_stat,
+        after_stat,
+        args.nift_project / "public",
+        baseline_manifest,
+    )
+    atomic_json(args.evidence / f"{stem}-output-diff.json", output_diff)
+    metadata_after = manifest_payload(args.nift_project / ".nift/public")
+    atomic_json(
+        args.evidence / f"{stem}-post-metadata-manifest.json", metadata_after
+    )
+    metadata_diff = compare_manifests(metadata_before, metadata_after)
+    atomic_json(args.evidence / f"{stem}-metadata-diff.json", metadata_diff)
+    source_valid = git_state(args.nift_project) == git_before
+    wall_seconds = record.get("time", {}).get("wall_seconds") if record else None
+    aggregate_memory = (
+        record.get("cgroup", {}).get("memory_peak_bytes") if record else None
+    )
+    timing_valid = (
+        isinstance(wall_seconds, (int, float))
+        and wall_seconds >= 0
+        and isinstance(aggregate_memory, int)
+        and aggregate_memory >= 0
+    )
+    formal_valid = bool(
+        infrastructure_valid
+        and bindings_valid
+        and timing_valid
+        and output_diff["content_unchanged"]
+        and source_valid
+    )
+    validation = {
+        "schema": "cp10-nift-only-no-change-run-validation",
+        "schema_version": 1,
+        "series": NIFT_ONLY_SERIES,
+        "paired": False,
+        "eligible_for_paired_statistics": False,
+        "run_id": identifier,
+        "run": run_number,
+        "command": command,
+        "infrastructure_valid": infrastructure_valid,
+        "tool_harness_and_manifest_bindings_unchanged": bindings_valid,
+        "output_content_unchanged": output_diff["content_unchanged"],
+        "output_untouched": output_diff["untouched"],
+        "source_unchanged": source_valid,
+        "timing_and_aggregate_memory_present": timing_valid,
+        "formal_valid": formal_valid,
+        "wall_seconds": wall_seconds,
+        "aggregate_peak_memory_bytes": aggregate_memory,
+        "output_counts": output_diff["counts"],
+        "output_diff": f"{stem}-output-diff.json",
+        "metadata_diff": f"{stem}-metadata-diff.json",
+        "certified_baseline_manifest": "baseline/nift-output-manifest.json",
+        "certified_baseline_comparison": "baseline/nift-certified-comparison.json",
+    }
+    atomic_json(args.evidence / f"{stem}-validation.json", validation)
+    if not formal_valid:
+        raise RuntimeError(
+            f"invalid Nift-only run preserved: {stem}; start a fresh Nift-only evidence directory"
+        )
+    return validation
+
+
+def run_nift_only(args: argparse.Namespace) -> int:
+    if args.evidence.exists() and not args.evidence.is_dir():
+        raise ValueError(f"evidence path is not a directory: {args.evidence}")
+    args.evidence.mkdir(parents=True, exist_ok=True)
+    if any(args.evidence.iterdir()):
+        raise FileExistsError(
+            f"Nift-only mode requires a fresh empty evidence directory: {args.evidence}"
+        )
+    git_before = git_state(args.nift_project)
+    if git_before["status"]:
+        raise RuntimeError("Nift benchmark worktree is not clean")
+    bindings = nift_only_bindings(args)
+    baseline_stat, baseline_manifest = prepare_nift_only(
+        args, git_before, bindings
+    )
+    validations = [
+        record_nift_only_run(
+            args,
+            run_number,
+            git_before,
+            baseline_stat,
+            baseline_manifest,
+            bindings,
+        )
+        for run_number in range(1, 4)
+    ]
+    atomic_json(
+        args.evidence / "nift-only-summary.json",
+        {
+            "schema": "cp10-nift-only-no-change-summary",
+            "schema_version": 1,
+            "series": NIFT_ONLY_SERIES,
+            "paired": False,
+            "statistics_scope": "unpaired-nift-only; exclude from paired statistics",
+            "eligible_for_paired_statistics": False,
+            "count": 3,
+            "runs": [item["run_id"] for item in validations],
+            "wall_seconds": [item["wall_seconds"] for item in validations],
+            "aggregate_peak_memory_bytes": [
+                item["aggregate_peak_memory_bytes"] for item in validations
+            ],
+            "output_counts": [item["output_counts"] for item in validations],
+        },
+    )
+    return 0
+
+
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--nift-only",
+        action="store_true",
+        help="run the separate unpaired three-run Nift-only series",
+    )
     parser.add_argument("--nift-project", required=True, type=Path)
-    parser.add_argument("--astro-project", required=True, type=Path)
+    parser.add_argument("--astro-project", type=Path)
     parser.add_argument("--harness", required=True, type=Path)
     parser.add_argument("--evidence", required=True, type=Path)
     parser.add_argument("--nift-expected", required=True, type=Path)
-    parser.add_argument("--astro-clean-reference", required=True, type=Path)
+    parser.add_argument("--astro-clean-reference", type=Path)
     parser.add_argument(
-        "--astro-clean-reference-manifest", required=True, type=Path
+        "--astro-clean-reference-manifest", type=Path
     )
-    parser.add_argument("--astro-normalizer", required=True, type=Path)
-    parser.add_argument("--astro-remote-input-archive", required=True, type=Path)
-    parser.add_argument("--astro-remote-input-manifest", required=True, type=Path)
+    parser.add_argument("--astro-normalizer", type=Path)
+    parser.add_argument("--astro-remote-input-archive", type=Path)
+    parser.add_argument("--astro-remote-input-manifest", type=Path)
     parser.add_argument("--nift-bin", default=Path("/usr/local/bin/nift"), type=Path)
     parser.add_argument(
         "--pnpm-bin",
@@ -859,15 +1372,43 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         parser.error("attempt must be positive")
     for name in (
         "nift_project",
-        "astro_project",
         "harness",
         "nift_expected",
+        "nift_bin",
+    ):
+        value = getattr(args, name).resolve()
+        if not value.exists():
+            parser.error(f"--{name.replace('_', '-')} does not exist: {value}")
+        setattr(args, name, value)
+    if not args.nift_project.is_dir():
+        parser.error("--nift-project must be a directory")
+    for name in ("harness", "nift_expected"):
+        if not getattr(args, name).is_file():
+            parser.error(f"--{name.replace('_', '-')} must be a file")
+    if not args.nift_bin.is_file() or not os.access(args.nift_bin, os.X_OK):
+        parser.error("--nift-bin is not executable")
+    if args.nift_only:
+        if args.start_round != 1 or args.end_round != 3 or args.attempt != 1:
+            parser.error(
+                "--nift-only always runs fresh rounds 1..3 and does not accept replacement attempts"
+            )
+        args.evidence = args.evidence.resolve()
+        return args
+    paired_required = (
+        "astro_project",
         "astro_clean_reference",
         "astro_clean_reference_manifest",
         "astro_normalizer",
         "astro_remote_input_archive",
         "astro_remote_input_manifest",
-    ):
+    )
+    missing = [name for name in paired_required if getattr(args, name) is None]
+    if missing:
+        parser.error(
+            "paired mode requires "
+            + ", ".join(f"--{name.replace('_', '-')}" for name in missing)
+        )
+    for name in paired_required:
         value = getattr(args, name).resolve()
         if not value.exists():
             parser.error(f"--{name.replace('_', '-')} does not exist: {value}")
@@ -897,12 +1438,9 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     ):
         if not getattr(args, name).is_file():
             parser.error(f"--{name.replace('_', '-')} must be a file")
-    args.nift_bin = args.nift_bin.resolve()
     args.pnpm_bin = args.pnpm_bin.resolve()
-    for name in ("nift_bin", "pnpm_bin"):
-        value = getattr(args, name)
-        if not value.is_file() or not os.access(value, os.X_OK):
-            parser.error(f"--{name.replace('_', '-')} is not executable: {value}")
+    if not args.pnpm_bin.is_file() or not os.access(args.pnpm_bin, os.X_OK):
+        parser.error(f"--pnpm-bin is not executable: {args.pnpm_bin}")
     args.evidence = args.evidence.resolve()
     return args
 
@@ -954,6 +1492,9 @@ def run_campaign(args: argparse.Namespace) -> int:
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     with campaign_lock():
+        if args.nift_only:
+            assert_no_stale_benchmark_processes((args.nift_project,))
+            return run_nift_only(args)
         assert_no_stale_benchmark_processes(
             (args.nift_project, args.astro_project)
         )
