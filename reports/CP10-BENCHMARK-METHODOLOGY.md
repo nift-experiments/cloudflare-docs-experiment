@@ -2,7 +2,7 @@
 
 Status: **FROZEN BEFORE FORMAL RESULTS**
 
-Methodology version: 5
+Methodology version: 6
 
 Frozen: 2026-10-01
 
@@ -174,10 +174,15 @@ runs are not chained on state mutated by earlier recorded runs.
   failure, or overlapping CP10 benchmark process. No load or timing threshold
   invalidates a slow run. If a machine-level condition affects a paired round,
   rerun the whole pair. Original invalid and replacement runs remain published.
-- Paired series use six rounds in fixed `ABBAAB` first-tool order, where A is
-  Nift and B is Astro. Scenario order is fixed as A through F below.
+- Paired series use three valid rounds in fixed `ABB` first-tool order, where A
+  is Nift and B is Astro. Three rounds are disclosed as a small sample and no
+  valid run is discarded. Extend a series to six `ABBAAB` rounds only if either
+  tool's first-three wall-time coefficient of variation exceeds 15%, a paired
+  run has documented noisy-neighbour contamination, or correctness/infrastructure
+  invalidates a run. Scenario order is fixed as A through F below.
 - Each ordinary series gets one unrecorded warmup per tool after setup.
-- Primary series use warm filesystem caches and six recorded runs.
+- Primary paired series use warm filesystem caches and three recorded runs,
+  subject to the extension rule above.
 - Clean full builds also get four recorded guest-page-cache-dropped runs per
   tool, ordered `ABBA`. Root runs `sync` and writes `3` to
   `/proc/sys/vm/drop_caches` immediately before each run. This does not claim to
@@ -187,7 +192,7 @@ runs are not chained on state mutated by earlier recorded runs.
   the same reconstructed baseline. Small-batch Nift explicit-target gets two
   warmups and 20 similarly reconstructed unpaired runs so launch/timer noise
   does not dominate. Small-batch Nift-normal versus Astro-automatic is a
-  separate six-round `ABBAAB` paired series.
+  separate three-round `ABB` paired series.
 - Setup/install and corpus-conversion series use three recorded runs because
   they are expensive preparation measurements rather than headline rebuilds.
 
@@ -275,7 +280,7 @@ same visible sentence is added to all five.
 - Astro: `INCREMENTAL_BUILD=true pnpm exec astro build`, reported as automatic
   incremental rather than explicit target selection.
 
-Nift normal and Astro automatic use the balanced six-round paired schedule.
+Nift normal and Astro automatic use the three-round paired schedule.
 Nift explicit-target is a separately labelled 20-run series and is not used to
 compute a paired speedup against Astro.
 

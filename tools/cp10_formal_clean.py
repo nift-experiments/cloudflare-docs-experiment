@@ -131,10 +131,15 @@ def main() -> int:
     parser.add_argument("--harness", required=True, type=Path)
     parser.add_argument("--evidence", required=True, type=Path)
     parser.add_argument("--nift-expected", required=True, type=Path)
+    parser.add_argument("--start-round", default=1, type=int)
+    parser.add_argument("--end-round", default=3, type=int)
     args = parser.parse_args()
-    args.evidence.mkdir(parents=True, exist_ok=False)
+    if not 1 <= args.start_round <= args.end_round <= len(ORDER):
+        parser.error("round range must be within 1..6")
+    args.evidence.mkdir(parents=True, exist_ok=True)
 
-    for round_number, first in enumerate(ORDER, start=1):
+    for round_number in range(args.start_round, args.end_round + 1):
+        first = ORDER[round_number - 1]
         second = "astro" if first == "nift" else "nift"
         for tool in (first, second):
             if tool == "nift":
