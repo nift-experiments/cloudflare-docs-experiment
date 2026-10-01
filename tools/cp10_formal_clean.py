@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Collect the six predeclared paired CP10 clean-build rounds."""
+"""Collect the predeclared CP10 clean-build paired rounds."""
 
 from __future__ import annotations
 
