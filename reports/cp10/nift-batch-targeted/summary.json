@@ -1,0 +1,22 @@
+{
+  "schema": "cp10-nift-batch-targeted-summary",
+  "schema_version": 1,
+  "count": 20,
+  "all_formal_valid": true,
+  "wall_seconds": {
+    "raw": [0.16, 0.15, 0.16, 0.19, 0.17, 0.21, 0.15, 0.16, 0.16, 0.16, 0.16, 0.16, 0.15, 0.16, 0.15, 0.16, 0.15, 0.16, 0.16, 0.16],
+    "median": 0.16,
+    "mean": 0.162,
+    "minimum": 0.15,
+    "maximum": 0.21,
+    "population_standard_deviation": 0.014
+  },
+  "aggregate_peak_memory_bytes": {
+    "raw": [8589312, 8675328, 8593408, 8794112, 8925184, 8691712, 8974336, 8527872, 8957952, 8511488, 8859648, 8687616, 8683520, 8658944, 8679424, 8695808, 8429568, 8572928, 8712192, 8507392],
+    "median": 8681472,
+    "minimum": 8429568,
+    "maximum": 8974336
+  },
+  "changed_output_count_each_run": 5,
+  "touched_output_count_each_run": 5
+}

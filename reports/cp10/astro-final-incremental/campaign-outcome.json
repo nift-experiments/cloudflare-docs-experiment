@@ -1,0 +1,70 @@
+{
+  "all_formal_valid": false,
+  "all_infrastructure_valid": true,
+  "count": 3,
+  "formal_invalid_rounds": [
+    3
+  ],
+  "formal_valid_count": 2,
+  "observations": [
+    {
+      "cgroup_peak_memory_bytes": 13067665408,
+      "formal_valid": true,
+      "infrastructure_valid": true,
+      "normalized_output_valid": true,
+      "record": "astro-run01.json",
+      "round": 1,
+      "run_id": "final-astro-scenario-b-no-change-incremental-run01",
+      "validation": "astro-run01-validation.json",
+      "wall_seconds": 680.27
+    },
+    {
+      "cgroup_peak_memory_bytes": 11542552576,
+      "formal_valid": true,
+      "infrastructure_valid": true,
+      "normalized_output_valid": true,
+      "record": "astro-run02.json",
+      "round": 2,
+      "run_id": "final-astro-scenario-b-no-change-incremental-run02",
+      "validation": "astro-run02-validation.json",
+      "wall_seconds": 688.26
+    },
+    {
+      "cgroup_peak_memory_bytes": 13632647168,
+      "formal_valid": false,
+      "infrastructure_valid": true,
+      "normalized_output_valid": false,
+      "record": "astro-run03.json",
+      "round": 3,
+      "run_id": "final-astro-scenario-b-no-change-incremental-run03",
+      "validation": "astro-run03-validation.json",
+      "wall_seconds": 688.1
+    }
+  ],
+  "observed_metrics_all_invocations": {
+    "cgroup_peak_memory_bytes": {
+      "maximum": 13632647168.0,
+      "mean": 12747621717.333334,
+      "median": 13067665408.0,
+      "minimum": 11542552576.0,
+      "population_standard_deviation": 882777746.2187438
+    },
+    "wall_seconds": {
+      "maximum": 688.26,
+      "mean": 685.5433333333334,
+      "median": 688.1,
+      "minimum": 680.27,
+      "population_standard_deviation": 3.7293818373678196
+    }
+  },
+  "rounds": [
+    1,
+    2,
+    3
+  ],
+  "scenario": "scenario-b-no-change-incremental",
+  "schema": "cp10-astro-final-incremental-outcome",
+  "schema_version": 1,
+  "series": "final-astro-scenario-b-no-change-incremental",
+  "tool": "astro"
+}

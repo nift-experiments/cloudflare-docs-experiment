@@ -1,0 +1,56 @@
+{
+  "count": 3,
+  "metrics": {
+    "aggregate_peak_memory_bytes": {
+      "maximum": 10158080,
+      "mean": 10072064.0,
+      "median": 10129408,
+      "minimum": 9928704,
+      "population_standard_deviation": 102044.39588074725,
+      "range": 229376
+    },
+    "gnu_peak_rss_kib": {
+      "maximum": 13792,
+      "mean": 13701.333333333334,
+      "median": 13656,
+      "minimum": 13656,
+      "population_standard_deviation": 64.1110148275803,
+      "range": 136
+    },
+    "wall_seconds": {
+      "maximum": 0.95,
+      "mean": 0.9266666666666666,
+      "median": 0.94,
+      "minimum": 0.89,
+      "population_standard_deviation": 0.026246692913372675,
+      "range": 0.05999999999999994
+    }
+  },
+  "mode": "one-normal",
+  "reported_counts": [
+    {
+      "built": 1,
+      "up_to_date": 0
+    },
+    {
+      "built": 1,
+      "up_to_date": 0
+    },
+    {
+      "built": 1,
+      "up_to_date": 0
+    }
+  ],
+  "runs": [
+    "run01",
+    "run02",
+    "run03"
+  ],
+  "scenario": "one-page-normal-incremental-nift-only",
+  "schema": "cp10-nift-edit-summary",
+  "schema_version": 1,
+  "series": "cp10-nift-only-normal-edit",
+  "shared_fanout_limitation": null,
+  "validation_scope": "intended outputs only; no output-tree walk",
+  "whole_site_manifests_or_per_run_scans": false
+}

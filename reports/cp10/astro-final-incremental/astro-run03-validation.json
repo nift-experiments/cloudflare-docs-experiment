@@ -1,0 +1,56 @@
+{
+  "bindings_unchanged": true,
+  "command": [
+    "/usr/local/lib/node_modules/corepack/dist/pnpm.js",
+    "exec",
+    "astro",
+    "build"
+  ],
+  "environment": {
+    "required": {
+      "INCREMENTAL_BUILD": "true",
+      "LC_ALL": "C",
+      "NODE_OPTIONS": null
+    },
+    "sha256": "64540e0e654ebed504d316e056db072fac5bf7519c3a8cdad73858a01e876318",
+    "variable_names": [
+      "CP10_CAMPAIGN_LOCK_FD",
+      "DBUS_SESSION_BUS_ADDRESS",
+      "HOME",
+      "INCREMENTAL_BUILD",
+      "LANG",
+      "LC_ALL",
+      "LOGNAME",
+      "PATH",
+      "PWD",
+      "PYTHONPATH",
+      "SHELL",
+      "SHLVL",
+      "SSH_CLIENT",
+      "SSH_CONNECTION",
+      "USER",
+      "XDG_RUNTIME_DIR",
+      "XDG_SESSION_CLASS",
+      "XDG_SESSION_ID",
+      "XDG_SESSION_TYPE",
+      "_"
+    ]
+  },
+  "failures": [],
+  "formal_valid": false,
+  "harness_record": "astro-run03.json",
+  "infrastructure_valid": true,
+  "normalization_report": "astro-run03-normalization.json",
+  "normalization_returncode": 1,
+  "normalized_output_valid": false,
+  "post_output_manifest": "astro-run03-post-output-manifest.json",
+  "pre_output_manifest": "astro-run03-pre-output-manifest.json",
+  "remote_inputs_unchanged": true,
+  "round": 3,
+  "run_id": "final-astro-scenario-b-no-change-incremental-run03",
+  "scenario": "scenario-b-no-change-incremental",
+  "schema": "cp10-astro-final-incremental-run-validation",
+  "schema_version": 1,
+  "series": "final-astro-scenario-b-no-change-incremental",
+  "source_unchanged": true
+}

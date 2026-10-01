@@ -1,0 +1,51 @@
+{
+  "baseline_output_sha256": {
+    "d1/index.html": "fef9c94cb4f3de0cb52a63e0f06e79dd5b403745ddae485c5ec68ba6ebb508a3",
+    "pages/index.html": "75cab07c01463288eef12caa671a039a650f386cf6dc24e1327c0a8c196c1130",
+    "radar/index.html": "a5c42611b4a3c95d4df383e80b7d85b594988c4ed025110da1cc459509187455",
+    "ssl/index.html": "8837aeed2a7d789f53bc562c7cb29b0a953cf01e8efc464d73c29cc3f17decb0",
+    "workers/get-started/guide/index.html": "a3375951c42dd0c10ba85fe9713731fad5e1c4f67f3a50725bbeeb9d3b9c47ff"
+  },
+  "baseline_restore": "one-time reflink snapshot of .nift/public and public",
+  "command": [
+    "/srv/cp10/tools/nift",
+    "build"
+  ],
+  "designated_outputs": [
+    "workers/get-started/guide/index.html",
+    "d1/index.html",
+    "ssl/index.html",
+    "pages/index.html",
+    "radar/index.html"
+  ],
+  "git": {
+    "head": "9df944a87c365220967cae4679f209b8ecc5544c",
+    "status": "",
+    "tree": "242396895a6458512b7acd38fed8f26530f172e4"
+  },
+  "harness": {
+    "path": "/srv/cp10/harness-v5/tools/cp10_benchmark.py",
+    "sha256": "1b64ca2e7bf69a7119ee9313a05fa28c244489b78a6cf969ecb5144bbe8c5a82"
+  },
+  "mode": "shared-normal",
+  "scenario": "shared-template-normal-incremental-nift-only",
+  "schema": "cp10-nift-edit-setup",
+  "schema_version": 1,
+  "series": "cp10-nift-only-normal-edit",
+  "source_byte_snapshots": [
+    "baseline/sources/templates/head.html"
+  ],
+  "sources": [
+    {
+      "atime_ns": 1790841312120174054,
+      "bytes": 428,
+      "mode": "0644",
+      "mtime_ns": 1790792160954027432,
+      "path": "/srv/cp10/nift-project/templates/head.html",
+      "sha256": "dffc6db86903f78502e5dd470c2a4ac1b66ca15ea03ca6f085a80f9a0e37ab29"
+    }
+  ],
+  "tracked_count": 8803,
+  "validation_scope": "Shared fan-out is inferred from Nift's reported regenerated count and marker/hash checks on the frozen representative set; outputs outside that set are not hashed.",
+  "whole_site_manifests_or_per_run_scans": false
+}

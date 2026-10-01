@@ -1,3 +1,4 @@
+import re
 import subprocess
 import sys
 import tempfile
@@ -11,6 +12,7 @@ from tools.cp10_astro_normalize import (
     normalize_content,
     normalize_playground_links,
     normalize_svg_dot_pattern_ids,
+    validate_playground_multipart,
 )
 
 
@@ -57,6 +59,51 @@ class CP10AstroNormalizeTests(unittest.TestCase):
         with self.assertRaises(NormalizationError):
             normalize_playground_links(
                 b"https://workers.cloudflare.com/playground#BYUwNmD2AEDukCcwBMg"
+            )
+
+    def test_authored_legacy_playground_links_validate_and_remain_unchanged(self):
+        root = Path(__file__).parents[1]
+        fixtures = (
+            (
+                root
+                / "content/cloudflare-wan/configuration/third-party/oracle/index.md",
+                b"webkit-authored",
+            ),
+            (
+                root / "content/workers/runtime-apis/headers/index.md",
+                b"legacy-dash-authored",
+            ),
+        )
+        for path, expected_format in fixtures:
+            with self.subTest(path=path):
+                link = re.search(
+                    rb"https://workers\.cloudflare\.com/playground#[A-Za-z0-9+\-$]+",
+                    path.read_bytes(),
+                ).group()
+                payload = lz_decompress_uri(link.split(b"#", 1)[1])
+                _, payload_format = validate_playground_multipart(payload)
+                self.assertEqual(payload_format.encode(), expected_format)
+                self.assertEqual(normalize_playground_links(link), link)
+        self.assertIn("😺".encode(), payload)
+
+    def test_playground_multipart_rejects_unknown_or_mismatched_boundaries(self):
+        unknown = b"custom-boundary"
+        with self.assertRaisesRegex(NormalizationError, "unsupported boundary"):
+            validate_playground_multipart(
+                b"multipart/form-data; boundary="
+                + unknown
+                + b":--"
+                + unknown
+                + b"\r\nbody\r\n--"
+                + unknown
+                + b"--"
+            )
+        boundary = b"----WebKitFormBoundary0123456789abcdef"
+        with self.assertRaisesRegex(NormalizationError, "framing"):
+            validate_playground_multipart(
+                b"multipart/form-data; boundary="
+                + boundary
+                + b":--different\r\nbody\r\n--different--"
             )
 
     def test_generated_ids_are_bijective_and_lookalikes_are_preserved(self):

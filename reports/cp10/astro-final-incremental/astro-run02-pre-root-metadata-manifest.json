@@ -1,0 +1,247 @@
+{
+  "entries": [
+    {
+      "mode": "0755",
+      "mtime_ns": 1790837089524661779,
+      "path": "collections",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837089505661365,
+      "path": "collections/catalog-models.schema.json",
+      "sha256": "bba7babc0fa05d28940c744083c31e2e7c27904c552d125493fc09480de879d2",
+      "size": 2971,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837089507661409,
+      "path": "collections/changelog.schema.json",
+      "sha256": "4dddedc3299bdb83cfb948c7485b658f1a329252232955c3e6e1e7520d60d943",
+      "size": 1432,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837089508661431,
+      "path": "collections/compatibility-flags.schema.json",
+      "sha256": "c7eedc16646f5484e1ebce2e4466e44774ec4294db31481e0d908f561c8a5796",
+      "size": 622,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837089509661452,
+      "path": "collections/directory.schema.json",
+      "sha256": "01fb0095fab6e3f3152e021b39bb2a7657d5abecf10528d4117dfc58ff308424",
+      "size": 905,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837089513661539,
+      "path": "collections/docs.schema.json",
+      "sha256": "ac8871b82c09b4050229beca077fdef8a1606d48c0b2441dd1dbcdd768344d65",
+      "size": 8445,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837089514661561,
+      "path": "collections/fields.schema.json",
+      "sha256": "5c50b4481e0095caf611f9c62888a7dc1cd2a537f5252b803efef19de733ff27",
+      "size": 1160,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837089515661583,
+      "path": "collections/glossary.schema.json",
+      "sha256": "c1718f489ad74f7c742aaef6c073117223774a51c91b29ffefa5497fa9d8641b",
+      "size": 753,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837089516661605,
+      "path": "collections/granular-control-applications.schema.json",
+      "sha256": "df80fa2e3713aeb28da934a296cef527c95dab6796d73df6cbe790e2522b13a8",
+      "size": 2511,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837089516661605,
+      "path": "collections/learning-paths.schema.json",
+      "sha256": "1d757ff890e63ae81c22182a08ea01b2aad691b4ab1ea7e14b06c6f95b119f52",
+      "size": 1578,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837089517661626,
+      "path": "collections/mcp-servers.schema.json",
+      "sha256": "190a7103dfe46492106ce3f1fac6bba7c76140eeb619e8be35fd8e6a7ae9d572",
+      "size": 352,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837089518661648,
+      "path": "collections/notifications.schema.json",
+      "sha256": "98c79bc3382e2a10c8ed1ac13ee6ab055c5e49eeb5b8c36e21a4a3dc77eda110",
+      "size": 252,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837089518661648,
+      "path": "collections/pages-build-environment.schema.json",
+      "sha256": "417a11dff39c6feba95b29c7c659fb4ecf3f6bb7dd4af5fce1c58770a19b1a6d",
+      "size": 653,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837089519661670,
+      "path": "collections/pages-framework-presets.schema.json",
+      "sha256": "2531aab0357eb14ea8d1b0c53a0bef93deaf2eb58a96f60ab0ade91b0df22940",
+      "size": 339,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837089520661692,
+      "path": "collections/partials.schema.json",
+      "sha256": "9f25236baf039b8e87e30e5ea5dbe4b4322f614cee4b46f2cd4e91393d6e0c50",
+      "size": 303,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837089520661692,
+      "path": "collections/product-availability.schema.json",
+      "sha256": "4048ddfa64761844b6a6deee310d6ec98ab0ff1a75084f1a1aec93d22594f395",
+      "size": 278,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837089521661714,
+      "path": "collections/release-notes.schema.json",
+      "sha256": "10e18395eecbf00b91533e50c33d5ea01363b66819805a7813beb8bb88600b8b",
+      "size": 1050,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837089522661735,
+      "path": "collections/skills-manifest.schema.json",
+      "sha256": "38a8b72c6b4b2728ab3d8ca3bb9969f9e88f79fefcf7295e0bcaf1366c603914",
+      "size": 298,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837089521661714,
+      "path": "collections/skills.schema.json",
+      "sha256": "470cb4b30511fdd9eb88d5b646a9d9da070a9109729c5a9d212424b134238dfc",
+      "size": 662,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837089523661757,
+      "path": "collections/stream.schema.json",
+      "sha256": "5aa6de312f2f0a05902c31bbcf01775502cd717189a6d89b9cc285e95a45655c",
+      "size": 1107,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837089523661757,
+      "path": "collections/warp-releases.schema.json",
+      "sha256": "3b44fcbe90e2d5b744dd8291a713cf04386aaf9e9897f5a2315aadca2f247430",
+      "size": 852,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837089524661779,
+      "path": "collections/workers-ai-models.schema.json",
+      "sha256": "ccc5c837c8d6b34da1fb4358ba70f511e8efc836f650df7759a3b30204d9c094",
+      "size": 1255,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837151042000070,
+      "path": "content-assets.mjs",
+      "sha256": "1ae2a5698a66d66594930ac273e7110bef294add73f56d191032beedd592a797",
+      "size": 32,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837151103001396,
+      "path": "content-modules.mjs",
+      "sha256": "9a296cc0e56beb84ac65a659cf861db24d84c0c08d60aabaa2809abb8d459d8b",
+      "size": 2653378,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837152888040205,
+      "path": "content.d.ts",
+      "sha256": "1192c40f8a99ec4b5aebf95d20a217f13b7bab2a83151edf5185fdbcfc9cc7e6",
+      "size": 10481,
+      "type": "file"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790837152887040183,
+      "path": "integrations",
+      "type": "directory"
+    },
+    {
+      "mode": "0755",
+      "mtime_ns": 1790837152887040183,
+      "path": "integrations/_cloudflare_nimbus-docs",
+      "type": "directory"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837152887040183,
+      "path": "integrations/_cloudflare_nimbus-docs/virtual-config.d.ts",
+      "sha256": "6245f1979600f4725264c952908663186e7eea82c14f79b583fdf2d90b99f3a7",
+      "size": 894,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837152887040183,
+      "path": "integrations/_cloudflare_nimbus-docs/virtual-icons.d.ts",
+      "sha256": "43b1b1496e906bf6bfb330f0cc3b71b9a1b0e3e134d86383969bb921e5f8c012",
+      "size": 254,
+      "type": "file"
+    },
+    {
+      "mode": "0644",
+      "mtime_ns": 1790837152888040205,
+      "path": "types.d.ts",
+      "sha256": "b4be59f27a487cbae858bf537d7b468107769a464007374398d8957ac428cfe0",
+      "size": 239,
+      "type": "file"
+    }
+  ],
+  "entries_sha256": "a3d3e9015a0dd50f79eec1967972db29d54cae3eda42cff2b107779e5d838e88",
+  "root_label": ".astro",
+  "schema": "cp10-tree-manifest",
+  "schema_version": 1,
+  "summary": {
+    "bytes": 2693056,
+    "entries": 30,
+    "files": 27
+  }
+}

@@ -286,9 +286,10 @@ compute a paired speedup against Astro.
 
 ### F. Shared Dependency/Template Edit
 
-- Nift source: append `<!-- CP10 shared-template edit -->` to
+- Nift source: append
+  `<meta name="cp10-benchmark" content="shared-template-edit">` to
   `templates/head.html`, a declared dependency of all page templates.
-- Astro source: append the same inert HTML comment after `</html>` in
+- Astro source: append the same inert metadata marker after `</html>` in
   `src/layouts/BaseLayout.astro`.
 - Commands: each tool's normal incremental workflow.
 

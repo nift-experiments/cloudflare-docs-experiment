@@ -1,0 +1,103 @@
+{
+  "bindings": {
+    "baseline": {
+      "path": "/srv/cp10/evidence/formal-no-change/baseline",
+      "states": {
+        "metadata": {
+          "entries_sha256": "7a0152e7c0580e8d34fdec0faab2b759687131f29173b6ba92163c6e9bb9ebb5",
+          "manifest": "/srv/cp10/evidence/formal-no-change/baseline/astro-metadata-manifest.json",
+          "manifest_file_sha256": "d948527e3016fae077fc2139bc2114fdc2fa35e697fef2dd2da553889fa2c9d7",
+          "present": true,
+          "snapshot": "/srv/cp10/evidence/formal-no-change/baseline/snapshots/astro-metadata"
+        },
+        "output": {
+          "entries_sha256": "29a52c9adb031a6becebeb33d2fcedb5b0dc7e4f4775274f17b67020407cdf51",
+          "manifest": "/srv/cp10/evidence/formal-no-change/baseline/astro-output-manifest.json",
+          "manifest_file_sha256": "8c686ca29f1998410327af02182fe0c3745301afed2c58ac5991e1dd1bcf36c2",
+          "present": true,
+          "snapshot": "/srv/cp10/evidence/formal-no-change/baseline/snapshots/astro-output"
+        },
+        "root-metadata": {
+          "entries_sha256": "a3d3e9015a0dd50f79eec1967972db29d54cae3eda42cff2b107779e5d838e88",
+          "manifest": "/srv/cp10/evidence/formal-no-change/baseline/astro-root-metadata-manifest.json",
+          "manifest_file_sha256": "3104f1b785fa6c592194064b68ba8e16064057713aec05a0f4e5ca547c82d18f",
+          "present": true,
+          "snapshot": "/srv/cp10/evidence/formal-no-change/baseline/snapshots/astro-root-metadata"
+        }
+      }
+    },
+    "command": [
+      "/usr/local/lib/node_modules/corepack/dist/pnpm.js",
+      "exec",
+      "astro",
+      "build"
+    ],
+    "environment": {
+      "required": {
+        "INCREMENTAL_BUILD": "true",
+        "LC_ALL": "C",
+        "NODE_OPTIONS": null
+      },
+      "sha256": "64540e0e654ebed504d316e056db072fac5bf7519c3a8cdad73858a01e876318",
+      "variable_names": [
+        "CP10_CAMPAIGN_LOCK_FD",
+        "DBUS_SESSION_BUS_ADDRESS",
+        "HOME",
+        "INCREMENTAL_BUILD",
+        "LANG",
+        "LC_ALL",
+        "LOGNAME",
+        "PATH",
+        "PWD",
+        "PYTHONPATH",
+        "SHELL",
+        "SHLVL",
+        "SSH_CLIENT",
+        "SSH_CONNECTION",
+        "USER",
+        "XDG_RUNTIME_DIR",
+        "XDG_SESSION_CLASS",
+        "XDG_SESSION_ID",
+        "XDG_SESSION_TYPE",
+        "_"
+      ]
+    },
+    "harness": {
+      "path": "/srv/cp10/harness-v5/tools/cp10_benchmark.py",
+      "sha256": "1b64ca2e7bf69a7119ee9313a05fa28c244489b78a6cf969ecb5144bbe8c5a82"
+    },
+    "normalizer": {
+      "path": "/srv/cp10/harness-v5/tools/cp10_astro_normalize.py",
+      "sha256": "edc1f639c396d6e08da51d2671caad37a15a8243ff26fd6512d2631a519c90e2"
+    },
+    "pnpm": {
+      "path": "/usr/local/lib/node_modules/corepack/dist/pnpm.js",
+      "sha256": "7c2a67995976b5b592b611d8b236e3b0633bd654fb49aedd96c6eb7ce04c9cbb"
+    },
+    "remote_inputs": {
+      "archive": "/srv/cp10/astro-remote-inputs",
+      "archive_file_sha256": null,
+      "archive_tree_entries_sha256": "0e7f14abf16eda044235bd55e3204fd9f135b92c51e4430bda2e13f60321551b",
+      "manifest": "/srv/cp10/harness-v5/reports/cp10/qualification/astro-remote-inputs-sep18-schema-manifest.json",
+      "manifest_entries_sha256": "0e7f14abf16eda044235bd55e3204fd9f135b92c51e4430bda2e13f60321551b",
+      "manifest_file_sha256": "54b28adf721e0063066ed7b69e9220b240576c278644fad8428379a46039ddea"
+    }
+  },
+  "fixed_rounds": [
+    1,
+    2,
+    3
+  ],
+  "git": {
+    "head": "bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf",
+    "status": "",
+    "tree": "289e5331c2e6f257f37b40fa2910b434c906d3e9"
+  },
+  "no_clean_build": true,
+  "no_warmup": true,
+  "project": "/srv/cp10/upstream",
+  "scenario": "scenario-b-no-change-incremental",
+  "schema": "cp10-astro-final-incremental-campaign",
+  "schema_version": 1,
+  "series": "final-astro-scenario-b-no-change-incremental"
+}

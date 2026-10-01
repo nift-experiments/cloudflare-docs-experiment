@@ -1,0 +1,5 @@
+rebuild causes:
+  ↳ dependency changed: templates/head.html → 8803 files
+affected files: /, zaraz/pricing-info/, zaraz/, zaraz/http-events-api/, zaraz/get-started/  +8798 more
+📦 8803 files rebuilt successfully
+time taken: 4.872884 seconds

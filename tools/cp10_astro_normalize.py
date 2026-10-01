@@ -40,6 +40,9 @@ SITEMAP_ROOT_RE = re.compile(
     rb"<lastmod>([^<]+)</lastmod></url>"
 )
 FORMDATA_BOUNDARY_RE = re.compile(rb"----formdata-undici-[0-9]{12}")
+WEBKIT_BOUNDARY_RE = re.compile(rb"----WebKitFormBoundary[A-Za-z0-9]{16}")
+LEGACY_DASH_BOUNDARY_RE = re.compile(rb"-{27}[0-9]{30}")
+MULTIPART_PREFIX_RE = re.compile(rb"\Amultipart/form-data; boundary=([^:\r\n]+):")
 
 
 def atomic_output(path: Path, payload: dict[str, Any]) -> None:
@@ -308,10 +311,16 @@ def lz_decompress_uri(value: bytes) -> bytes:
             dictionary_size += 1
             enlarge_in -= 1
         elif code == 2:
+            text = "".join(result)
             try:
-                return "".join(result).encode("utf-8")
-            except UnicodeEncodeError as error:
-                raise NormalizationError("playground payload is not UTF-8 text") from error
+                # lz-string operates on JavaScript UTF-16 code units. Recombine
+                # valid surrogate pairs before producing bytes for validation.
+                text = text.encode("utf-16-le", "surrogatepass").decode("utf-16-le")
+                return text.encode("utf-8")
+            except UnicodeError as error:
+                raise NormalizationError(
+                    "playground payload contains invalid UTF-16"
+                ) from error
         if enlarge_in == 0:
             enlarge_in = 1 << number_bits
             number_bits += 1
@@ -331,21 +340,42 @@ def lz_decompress_uri(value: bytes) -> bytes:
             number_bits += 1
 
 
+def validate_playground_multipart(decoded: bytes) -> tuple[bytes, str]:
+    match = MULTIPART_PREFIX_RE.match(decoded)
+    if match is None:
+        raise NormalizationError("playground payload is not multipart form data")
+    boundary = match.group(1)
+    formats = (
+        (FORMDATA_BOUNDARY_RE, "undici"),
+        (WEBKIT_BOUNDARY_RE, "webkit-authored"),
+        (LEGACY_DASH_BOUNDARY_RE, "legacy-dash-authored"),
+    )
+    kinds = [name for pattern, name in formats if pattern.fullmatch(boundary)]
+    if len(kinds) != 1:
+        raise NormalizationError("playground payload has an unsupported boundary format")
+
+    delimiter = b"--" + boundary
+    body = decoded[match.end() :]
+    parts = body.split(delimiter)
+    if (
+        len(parts) < 3
+        or parts[0] != b""
+        or parts[-1] not in (b"--", b"--\r\n")
+        or any(
+            not part.startswith(b"\r\n") or not part.endswith(b"\r\n")
+            for part in parts[1:-1]
+        )
+    ):
+        raise NormalizationError("playground multipart framing is malformed")
+    return boundary, kinds[0]
+
+
 def normalize_playground_links(data: bytes) -> bytes:
     def replacement(match: re.Match[bytes]) -> bytes:
         decoded = lz_decompress_uri(match.group(1))
-        boundaries = set(FORMDATA_BOUNDARY_RE.findall(decoded))
-        if len(boundaries) != 1:
-            raise NormalizationError(
-                "playground multipart payload does not have one Undici boundary"
-            )
-        boundary = next(iter(boundaries))
-        expected_prefix = b"multipart/form-data; boundary=" + boundary + b":"
-        closing = b"--" + boundary + b"--"
-        if not decoded.startswith(expected_prefix) or not decoded.rstrip(b"\r\n").endswith(
-            closing
-        ):
-            raise NormalizationError("playground multipart framing is malformed")
+        boundary, payload_format = validate_playground_multipart(decoded)
+        if payload_format != "undici":
+            return match.group()
         canonical = decoded.replace(boundary, b"<UNDICI-MULTIPART-BOUNDARY>")
         return (
             b"https://workers.cloudflare.com/playground#cp10-sha256-"
@@ -655,7 +685,11 @@ def analyze(roots: list[tuple[str, Path]]) -> dict[str, Any]:
             "package-manager-uuid": "src/components/ui/package-managers/PackageManagers.astro:22",
             "combobox-random-id": "src/components/ui/combobox/Combobox.astro:79",
             "checkbox-random-id": "src/components/ui/checkbox/Checkbox.astro:48",
-            "playground-multipart-boundary": "src/components/cf/TypeScriptExample.astro:65-82 (Undici FormData boundary)",
+            "playground-multipart-boundary": (
+                "src/components/cf/TypeScriptExample.astro:65-82; only Undici "
+                "FormData boundaries vary, while validated legacy WebKit and "
+                "27-dash links are authored literals"
+            ),
             "sampled-agent-prompts": "src/components/agent-setup/{ExamplePrompts,RandomPrompt}.astro and prompts.ts",
             "svg-dot-pattern-id": (
                 "Nimbus decorative grid SVG pattern ids (nb-dots-*); "

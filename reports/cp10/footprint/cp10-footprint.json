@@ -1,0 +1,181 @@
+{
+  "definitions": {
+    "absence": "absent footprints have present=false and zero byte and object counts",
+    "allocated_bytes": "sum of lstat st_blocks multiplied by 512 for unique filesystem object identities",
+    "counts": "counts of unique (st_dev, st_ino) identities by lstat type; other_count covers non-file, non-directory, non-symlink objects",
+    "exclusions": "root-relative paths omitted with their complete subtrees; each footprint lists its exact exclusions",
+    "hardlinks": "an identity is counted once per footprint; duplicate_hardlink_count records later directory entries",
+    "logical_bytes": "sum of lstat st_size for unique filesystem object identities",
+    "traversal": "sorted recursive lstat; roots are included; symlinks are counted but never followed"
+  },
+  "footprints": {
+    "astro_dist": {
+      "allocated_bytes": 2042683392,
+      "directory_count": 9164,
+      "duplicate_hardlink_count": 0,
+      "exclusions": [],
+      "logical_bytes": 2015635192,
+      "other_count": 0,
+      "path": "/srv/cp10/upstream/dist",
+      "present": true,
+      "regular_file_count": 12447,
+      "symlink_count": 0,
+      "unique_inode_count": 21611
+    },
+    "astro_node_modules_dot_astro": {
+      "allocated_bytes": 1550495744,
+      "directory_count": 9096,
+      "duplicate_hardlink_count": 0,
+      "exclusions": [],
+      "logical_bytes": 1528202322,
+      "other_count": 0,
+      "path": "/srv/cp10/upstream/node_modules/.astro",
+      "present": true,
+      "regular_file_count": 10213,
+      "symlink_count": 0,
+      "unique_inode_count": 19309
+    },
+    "astro_node_modules_excluding_dot_astro": {
+      "allocated_bytes": 1366536192,
+      "directory_count": 8713,
+      "duplicate_hardlink_count": 11272,
+      "exclusions": [
+        ".astro"
+      ],
+      "logical_bytes": 1194890090,
+      "other_count": 0,
+      "path": "/srv/cp10/upstream/node_modules",
+      "present": true,
+      "regular_file_count": 55232,
+      "symlink_count": 3443,
+      "unique_inode_count": 67388
+    },
+    "astro_source_checkout": {
+      "allocated_bytes": 702885888,
+      "directory_count": 2231,
+      "duplicate_hardlink_count": 0,
+      "exclusions": [
+        ".astro",
+        ".git",
+        "dist",
+        "node_modules"
+      ],
+      "logical_bytes": 668325864,
+      "other_count": 0,
+      "path": "/srv/cp10/upstream",
+      "present": true,
+      "regular_file_count": 13787,
+      "symlink_count": 6,
+      "unique_inode_count": 16024
+    },
+    "nift_dot_nift_metadata": {
+      "allocated_bytes": 74518528,
+      "directory_count": 8853,
+      "duplicate_hardlink_count": 0,
+      "exclusions": [],
+      "logical_bytes": 49979498,
+      "other_count": 0,
+      "path": "/srv/cp10/nift-project/.nift",
+      "present": true,
+      "regular_file_count": 8806,
+      "symlink_count": 0,
+      "unique_inode_count": 17659
+    },
+    "nift_public": {
+      "allocated_bytes": 914210816,
+      "directory_count": 9269,
+      "duplicate_hardlink_count": 0,
+      "exclusions": [],
+      "logical_bytes": 870706566,
+      "other_count": 0,
+      "path": "/srv/cp10/nift-project/public",
+      "present": true,
+      "regular_file_count": 18843,
+      "symlink_count": 0,
+      "unique_inode_count": 28112
+    },
+    "nift_source_checkout": {
+      "allocated_bytes": 339886080,
+      "directory_count": 8872,
+      "duplicate_hardlink_count": 0,
+      "exclusions": [
+        ".git",
+        ".nift",
+        "node_modules",
+        "public"
+      ],
+      "logical_bytes": 255100730,
+      "other_count": 0,
+      "path": "/srv/cp10/nift-project",
+      "present": true,
+      "regular_file_count": 27404,
+      "symlink_count": 0,
+      "unique_inode_count": 36276
+    }
+  },
+  "lockfile_package_snapshots": {
+    "count": 1327,
+    "definition": "direct mapping entries in the top-level 'snapshots' section",
+    "path": "/srv/cp10/upstream/pnpm-lock.yaml",
+    "source_section": "snapshots"
+  },
+  "nift_binary": {
+    "invocation_path": "/srv/cp10/tools/nift",
+    "invocation_path_lstat": {
+      "allocated_bytes": 3497984,
+      "directory_count": 0,
+      "duplicate_hardlink_count": 0,
+      "exclusions": [],
+      "logical_bytes": 3497360,
+      "other_count": 0,
+      "path": "/srv/cp10/tools/nift",
+      "present": true,
+      "regular_file_count": 1,
+      "symlink_count": 0,
+      "unique_inode_count": 1
+    },
+    "resolved_file_stat": {
+      "allocated_bytes": 3497984,
+      "logical_bytes": 3497360,
+      "sha256": "4aca09ccf7244f30e99349e6043281cde694183ee436d55b7ac84e0a0b84240d"
+    },
+    "resolved_path": "/srv/cp10/tools/nift"
+  },
+  "nift_node_modules": {
+    "path": "/srv/cp10/nift-project/node_modules",
+    "present": false
+  },
+  "package_json": {
+    "declared_versions": {
+      "astro": "7.3.2",
+      "package_manager": null
+    },
+    "dependencies": {
+      "count": 0,
+      "definition": "number of direct keys in package.json dependencies"
+    },
+    "devDependencies": {
+      "count": 105,
+      "definition": "number of direct keys in package.json devDependencies"
+    },
+    "path": "/srv/cp10/upstream/package.json"
+  },
+  "pnpm_resolved_store_entries": {
+    "count": 1120,
+    "definition": "immediate real directories except the pnpm linking directory named node_modules",
+    "path": "/srv/cp10/upstream/node_modules/.pnpm",
+    "present": true
+  },
+  "schema": "cp10-footprint",
+  "schema_version": 1,
+  "source_heads": {
+    "astro": "bc2bdaee16098ec1b0bb782b80cf3a73f9557ddf",
+    "nift": "9df944a87c365220967cae4679f209b8ecc5544c"
+  },
+  "versions": {
+    "nift": "Nift v4.5.0",
+    "node": "v24.21.0",
+    "pnpm": "12.4.2",
+    "python": "3.12.3"
+  }
+}

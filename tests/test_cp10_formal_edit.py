@@ -420,16 +420,19 @@ class CP10FormalEditTests(unittest.TestCase):
         command, _ = series_command(args, targeted, "nift")
         self.assertEqual(command, ["/opt/nift", "build", *BATCH_TARGETS])
 
-    def test_scenario_f_exact_sources_command_order_and_comment_placement(self):
+    def test_scenario_f_exact_sources_command_order_and_marker_placement(self):
         shared = SERIES_SPECS["shared-normal"]
         self.assertEqual(shared.nift_sources, (Path("templates/head.html"),))
         self.assertEqual(shared.astro_sources, (Path("src/layouts/BaseLayout.astro"),))
         self.assertEqual((shared.runs, NORMAL_ORDER), (3, ("nift", "astro", "astro")))
         self.assertEqual(
             series_edited_bytes(b"<html>\n</html>\n", shared, "astro"),
-            b"<html>\n</html>\n<!-- CP10 shared-template edit -->\n",
+            b'<html>\n</html>\n<meta name="cp10-benchmark" content="shared-template-edit">\n',
         )
-        self.assertEqual(SHARED_MARKER, b"<!-- CP10 shared-template edit -->")
+        self.assertEqual(
+            SHARED_MARKER,
+            b'<meta name="cp10-benchmark" content="shared-template-edit">',
+        )
 
     def test_series_paragraph_edit_and_multi_source_restoration(self):
         batch = SERIES_SPECS["batch-normal"]

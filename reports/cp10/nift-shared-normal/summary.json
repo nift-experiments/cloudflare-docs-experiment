@@ -1,0 +1,56 @@
+{
+  "count": 3,
+  "metrics": {
+    "aggregate_peak_memory_bytes": {
+      "maximum": 445517824,
+      "mean": 444978517.3333333,
+      "median": 444751872,
+      "minimum": 444665856,
+      "population_standard_deviation": 382960.7887650582,
+      "range": 851968
+    },
+    "gnu_peak_rss_kib": {
+      "maximum": 187672,
+      "mean": 187304.0,
+      "median": 187332,
+      "minimum": 186908,
+      "population_standard_deviation": 312.52946527754256,
+      "range": 764
+    },
+    "wall_seconds": {
+      "maximum": 4.96,
+      "mean": 4.86,
+      "median": 4.89,
+      "minimum": 4.73,
+      "population_standard_deviation": 0.09626352718795744,
+      "range": 0.22999999999999954
+    }
+  },
+  "mode": "shared-normal",
+  "reported_counts": [
+    {
+      "built": 8803,
+      "up_to_date": 0
+    },
+    {
+      "built": 8803,
+      "up_to_date": 0
+    },
+    {
+      "built": 8803,
+      "up_to_date": 0
+    }
+  ],
+  "runs": [
+    "run01",
+    "run02",
+    "run03"
+  ],
+  "scenario": "shared-template-normal-incremental-nift-only",
+  "schema": "cp10-nift-edit-summary",
+  "schema_version": 1,
+  "series": "cp10-nift-only-normal-edit",
+  "shared_fanout_limitation": "Regeneration outside the representative set is supported by Nift stdout only; those pages were not individually hashed or marker-checked.",
+  "validation_scope": "frozen representative set; no all-page hashes",
+  "whole_site_manifests_or_per_run_scans": false
+}

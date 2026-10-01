@@ -78,7 +78,7 @@ NORMAL_RUNS = 3
 TARGET_WARMUPS = 3
 TARGET_RUNS = 30
 SCHEMA_VERSION = 3
-SHARED_MARKER = b"<!-- CP10 shared-template edit -->"
+SHARED_MARKER = b'<meta name="cp10-benchmark" content="shared-template-edit">'
 BATCH_TARGETS = (
     "workers/get-started/",
     "workers/get-started/guide/",

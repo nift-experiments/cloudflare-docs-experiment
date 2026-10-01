@@ -1,0 +1,42 @@
+{
+  "added": [],
+  "changed": [],
+  "counts": {
+    "added": 0,
+    "changed": 0,
+    "mtime_only": 26,
+    "removed": 0
+  },
+  "equal_content": true,
+  "mtime_only": [
+    "collections/catalog-models.schema.json",
+    "collections/changelog.schema.json",
+    "collections/compatibility-flags.schema.json",
+    "collections/directory.schema.json",
+    "collections/docs.schema.json",
+    "collections/fields.schema.json",
+    "collections/glossary.schema.json",
+    "collections/granular-control-applications.schema.json",
+    "collections/learning-paths.schema.json",
+    "collections/mcp-servers.schema.json",
+    "collections/notifications.schema.json",
+    "collections/pages-build-environment.schema.json",
+    "collections/pages-framework-presets.schema.json",
+    "collections/partials.schema.json",
+    "collections/product-availability.schema.json",
+    "collections/release-notes.schema.json",
+    "collections/skills-manifest.schema.json",
+    "collections/skills.schema.json",
+    "collections/stream.schema.json",
+    "collections/warp-releases.schema.json",
+    "collections/workers-ai-models.schema.json",
+    "content-assets.mjs",
+    "content.d.ts",
+    "integrations/_cloudflare_nimbus-docs/virtual-config.d.ts",
+    "integrations/_cloudflare_nimbus-docs/virtual-icons.d.ts",
+    "types.d.ts"
+  ],
+  "removed": [],
+  "schema": "cp10-manifest-diff",
+  "schema_version": 1
+}

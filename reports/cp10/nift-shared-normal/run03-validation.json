@@ -1,0 +1,75 @@
+{
+  "aggregate_peak_memory_bytes": 444751872,
+  "baseline_restored": true,
+  "designated_outputs": [
+    {
+      "baseline_sha256": "a3375951c42dd0c10ba85fe9713731fad5e1c4f67f3a50725bbeeb9d3b9c47ff",
+      "hash_changed": true,
+      "marker_count": 1,
+      "observed_sha256": "c68b92cd56f7f0c162d55920f0926f0668807e390cf27f1617ec62d914d93b92",
+      "passed": true,
+      "path": "workers/get-started/guide/index.html",
+      "regular_file": true
+    },
+    {
+      "baseline_sha256": "fef9c94cb4f3de0cb52a63e0f06e79dd5b403745ddae485c5ec68ba6ebb508a3",
+      "hash_changed": true,
+      "marker_count": 1,
+      "observed_sha256": "0cdc5897d636f8c60353a5f17087accace6d6b59b1b9d4769fcf77262eb1ad11",
+      "passed": true,
+      "path": "d1/index.html",
+      "regular_file": true
+    },
+    {
+      "baseline_sha256": "8837aeed2a7d789f53bc562c7cb29b0a953cf01e8efc464d73c29cc3f17decb0",
+      "hash_changed": true,
+      "marker_count": 1,
+      "observed_sha256": "e6bf5dfc98278879c96c95116ce12b506e4f3fe9066472f4a92ee7ec8e138e65",
+      "passed": true,
+      "path": "ssl/index.html",
+      "regular_file": true
+    },
+    {
+      "baseline_sha256": "75cab07c01463288eef12caa671a039a650f386cf6dc24e1327c0a8c196c1130",
+      "hash_changed": true,
+      "marker_count": 1,
+      "observed_sha256": "00f5286290c636efdc6509faaac83c64339709a765f8730dad5415ebf47dfd72",
+      "passed": true,
+      "path": "pages/index.html",
+      "regular_file": true
+    },
+    {
+      "baseline_sha256": "a5c42611b4a3c95d4df383e80b7d85b594988c4ed025110da1cc459509187455",
+      "hash_changed": true,
+      "marker_count": 1,
+      "observed_sha256": "fe5aec9fdf5d4d5a5521018111d1233eba15da1cb33ecf7f0b68ae32740c30cd",
+      "passed": true,
+      "path": "radar/index.html",
+      "regular_file": true
+    }
+  ],
+  "errors": [],
+  "formal_valid": true,
+  "gnu_peak_rss_kib": 187332,
+  "infrastructure_valid": true,
+  "label": "run03",
+  "measured": true,
+  "mode": "shared-normal",
+  "reported_counts": {
+    "built": 8803,
+    "up_to_date": 0
+  },
+  "round": 3,
+  "schema": "cp10-nift-edit-run-validation",
+  "schema_version": 1,
+  "source_edits": [
+    {
+      "marker_count": 1,
+      "path": "templates/head.html",
+      "sha256": "a4a62ce6aedf52aa7b7215aa5b81baee10f4990cfe2783eef195e0d8753b3185"
+    }
+  ],
+  "source_restored_exactly": true,
+  "validation_scope": "frozen representative set; no all-page hashes",
+  "wall_seconds": 4.89
+}

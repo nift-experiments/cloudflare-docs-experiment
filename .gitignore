@@ -1,6 +1,7 @@
 .nift/.lock
 .nift/public/*/
 reports/cp8/
+reports/cp10/nift-shared-normal/baseline/
 
 __pycache__/
 *.pyc
