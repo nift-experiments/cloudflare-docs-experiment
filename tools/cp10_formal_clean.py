@@ -1,0 +1,156 @@
+#!/usr/bin/env python3
+"""Collect the six predeclared paired CP10 clean-build rounds."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import subprocess
+from pathlib import Path
+
+
+ORDER = ("nift", "astro", "astro", "nift", "nift", "astro")
+
+
+def run(command: list[str], cwd: Path | None = None) -> None:
+    subprocess.run(command, cwd=cwd, check=True)
+
+
+def archive_if_present(path: Path, destination: Path) -> None:
+    if path.exists():
+        path.rename(destination)
+
+
+def nift_clean(
+    project: Path, harness: Path, evidence: Path, expected: Path, round_number: int
+) -> None:
+    metadata = project / ".nift/public"
+    archive_if_present(metadata, evidence / f"nift-r{round_number:02d}-prestate")
+    tracked = json.loads((project / ".nift/tracked.json").read_text())["tracked"]
+    for item in tracked:
+        (project / "public" / item.get("output", "index.html")).unlink(missing_ok=True)
+    identifier = f"formal-clean-nift-r{round_number:02d}"
+    record = evidence / f"nift-r{round_number:02d}.json"
+    run(
+        [
+            "python3",
+            str(harness),
+            "run",
+            "--id",
+            identifier,
+            "--series",
+            "formal-clean-warm",
+            "--scenario",
+            "clean-full",
+            "--tool",
+            "nift",
+            "--round",
+            str(round_number),
+            "--warmth",
+            "warm",
+            "--output",
+            str(record),
+            "--cwd",
+            str(project),
+            "--",
+            "/usr/local/bin/nift",
+            "build",
+            "--all",
+        ]
+    )
+    if not json.loads(record.read_text())["validity"]["infrastructure_valid"]:
+        raise RuntimeError(f"invalid Nift run: {identifier}")
+    manifest = evidence / f"nift-r{round_number:02d}-manifest.json"
+    run(["python3", str(harness), "manifest", str(project / "public"), str(manifest)])
+    run(
+        [
+            "python3",
+            str(harness),
+            "compare",
+            str(expected),
+            str(manifest),
+            str(evidence / f"nift-r{round_number:02d}-comparison.json"),
+        ]
+    )
+
+
+def astro_clean(project: Path, harness: Path, evidence: Path, round_number: int) -> None:
+    archive_if_present(project / "dist", evidence / f"astro-r{round_number:02d}-pre-dist")
+    archive_if_present(project / ".astro", evidence / f"astro-r{round_number:02d}-pre-dot-astro")
+    archive_if_present(
+        project / "node_modules/.astro",
+        evidence / f"astro-r{round_number:02d}-pre-node-modules-astro",
+    )
+    identifier = f"formal-clean-astro-r{round_number:02d}"
+    record = evidence / f"astro-r{round_number:02d}.json"
+    run(
+        [
+            "python3",
+            str(harness),
+            "run",
+            "--id",
+            identifier,
+            "--series",
+            "formal-clean-warm",
+            "--scenario",
+            "clean-full",
+            "--tool",
+            "astro",
+            "--round",
+            str(round_number),
+            "--warmth",
+            "warm",
+            "--output",
+            str(record),
+            "--cwd",
+            str(project),
+            "--",
+            "/root/.cache/node/corepack/v1/pnpm/12.4.2/pnpm-native",
+            "exec",
+            "astro",
+            "build",
+        ]
+    )
+    if not json.loads(record.read_text())["validity"]["infrastructure_valid"]:
+        raise RuntimeError(f"invalid Astro run: {identifier}")
+    run(
+        [
+            "python3",
+            str(harness),
+            "manifest",
+            str(project / "dist"),
+            str(evidence / f"astro-r{round_number:02d}-manifest.json"),
+        ]
+    )
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--nift-project", required=True, type=Path)
+    parser.add_argument("--astro-project", required=True, type=Path)
+    parser.add_argument("--harness", required=True, type=Path)
+    parser.add_argument("--evidence", required=True, type=Path)
+    parser.add_argument("--nift-expected", required=True, type=Path)
+    args = parser.parse_args()
+    args.evidence.mkdir(parents=True, exist_ok=False)
+
+    for round_number, first in enumerate(ORDER, start=1):
+        second = "astro" if first == "nift" else "nift"
+        for tool in (first, second):
+            if tool == "nift":
+                nift_clean(
+                    args.nift_project,
+                    args.harness,
+                    args.evidence,
+                    args.nift_expected,
+                    round_number,
+                )
+            else:
+                astro_clean(
+                    args.astro_project, args.harness, args.evidence, round_number
+                )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
