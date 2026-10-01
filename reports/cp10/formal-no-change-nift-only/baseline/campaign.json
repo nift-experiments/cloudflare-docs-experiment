@@ -1,0 +1,45 @@
+{
+  "baseline": {
+    "metadata_manifest": "nift-metadata-manifest.json",
+    "output_entries_sha256": "f9c10f247206a2808ec0c78789a75e08fd19d710839ce2051b10d249151db7be",
+    "output_manifest": "nift-output-manifest.json",
+    "output_stat_entries_sha256": "56287dbd3a50c991d39fb273956d44bf5911ade90347d32ebbe0be409236957e",
+    "output_stat_index": "nift-output-stat-index.json",
+    "public_strategy": "certify full content once; restore path/type/size/mode/mtime; detect touches with ctime/inode and selectively hash every touched file",
+    "reconstructable_output_sha256": "6f28f0b69accd42d0ed9d69fcbb6d935ed04b1952a6125f3b67f651edf9eeab3",
+    "snapshot_scope": [
+      ".nift/public"
+    ]
+  },
+  "certified_expected": {
+    "entries_sha256": "e97e21ebbf172447aa25c0308dfc0a6c5d3cf6f1dde2d031626cf1a15403d99b",
+    "file_sha256": "a8fac8ac645f72e5ce07f9bcb5e567e446a76227db572fc3e1ff850d07487b14",
+    "path": "/srv/cp10/evidence/nift-worker-sweep/cp9-expected-public-manifest.json"
+  },
+  "eligible_for_paired_statistics": false,
+  "git": {
+    "head": "9df944a87c365220967cae4679f209b8ecc5544c",
+    "status": "",
+    "tree": "242396895a6458512b7acd38fed8f26530f172e4"
+  },
+  "harness": {
+    "path": "/srv/cp10/harness-v5/tools/cp10_benchmark.py",
+    "sha256": "1b64ca2e7bf69a7119ee9313a05fa28c244489b78a6cf969ecb5144bbe8c5a82"
+  },
+  "methodology_version": 6,
+  "nift": {
+    "command": [
+      "/srv/cp10/tools/nift",
+      "build"
+    ],
+    "path": "/srv/cp10/tools/nift",
+    "sha256": "4aca09ccf7244f30e99349e6043281cde694183ee436d55b7ac84e0a0b84240d"
+  },
+  "paired": false,
+  "project": "/srv/cp10/nift-project",
+  "schema": "cp10-nift-only-no-change-campaign",
+  "schema_version": 1,
+  "series": "formal-no-change-nift-only-unpaired",
+  "statistics_scope": "unpaired-nift-only; exclude from paired statistics",
+  "warmup_output_diff": "nift-warmup-output-diff.json"
+}

@@ -1,0 +1,28 @@
+{
+  "basis": "raw-content-manifest-diff",
+  "clean_manifest": "/srv/cp10/evidence/nift-worker-sweep/cp9-expected-public-manifest.json",
+  "designated_output_marker": {
+    "designated_path": "workers/get-started/guide/index.html",
+    "marker_count": 1,
+    "passed": true,
+    "path": "/srv/cp10/evidence/formal-targeted-edit/setup/references/nift-edited-designated-output/workers/get-started/guide/index.html",
+    "regular_file": true,
+    "sha256": "fac3f7e7168967b0f65b46e1ee9b3fdba59730391743669bba91f30e36c77db3"
+  },
+  "edited_manifest": "/srv/cp10/evidence/formal-targeted-edit/setup/references/nift-edited-manifest.json",
+  "expected_changed_paths": {
+    "added": [],
+    "changed": [
+      "workers/get-started/guide/index.html"
+    ],
+    "removed": []
+  },
+  "expected_dependents": [
+    "workers/get-started/guide/index.html"
+  ],
+  "normalizer_classification": null,
+  "normalizer_report": null,
+  "schema": "cp10-edit-changed-path-contract",
+  "schema_version": 1,
+  "tool": "nift"
+}

@@ -1,0 +1,16 @@
+{
+  "baseline_output_stat_entries_sha256": "56287dbd3a50c991d39fb273956d44bf5911ade90347d32ebbe0be409236957e",
+  "metadata_exactly_reconstructed": true,
+  "output_exactly_reconstructed": true,
+  "reconstructable_output_sha256": "6f28f0b69accd42d0ed9d69fcbb6d935ed04b1952a6125f3b67f651edf9eeab3",
+  "reconstructed_output_stat_entries_sha256": "56287dbd3a50c991d39fb273956d44bf5911ade90347d32ebbe0be409236957e",
+  "restoration_input_counts": {
+    "added": 0,
+    "content_changed": 0,
+    "mtime_only": 0,
+    "regenerated": 0,
+    "removed": 0,
+    "selectively_hashed_files": 0,
+    "touched": 0
+  }
+}

@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+                      <meta name="viewport" content="width=device-width, initial-scale=1">
+                      <title>Get started - CLI · Cloudflare Workers docs</title><meta name="generator" content="Nift"><meta name="description" content="Set up and deploy your first Cloudflare Worker using Wrangler, the command-line interface."><link rel="canonical" href="https://developers.cloudflare.com/workers/get-started/guide/"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="text/markdown" href="https://developers.cloudflare.com/workers/get-started/guide/index.md"><meta property="og:title" content="Get started - CLI · Cloudflare Workers docs"><meta property="og:type" content="article"><meta property="og:site_name" content="Cloudflare Docs"><meta property="og:locale" content="en"><meta property="og:description" content="Set up and deploy your first Cloudflare Worker using Wrangler, the command-line interface."><meta property="og:url" content="https://developers.cloudflare.com/workers/get-started/guide/"><meta property="image" content="https://developers.cloudflare.com/og-docs.png"><meta property="og:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@cloudflare"><meta property="twitter:image" content="https://developers.cloudflare.com/og-docs.png"><meta name="pcx_product" content="Workers"><meta name="algolia_product_filter" content="Workers"><meta name="pcx_content_group" content="Developer platform"><meta name="pcx_content_type" content="Get started"><meta name="algolia_content_type" content="Get started"><meta name="pcx_additional_products" content="Workers"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","@id":"https://developers.cloudflare.com/workers/get-started/guide/#page","headline":"Get started - CLI \u00b7 Cloudflare Workers docs","description":"Set up and deploy your first Cloudflare Worker using Wrangler, the command-line interface.","url":"https://developers.cloudflare.com/workers/get-started/guide/","inLanguage":"en","image":"https://developers.cloudflare.com/og-docs.png","publisher":{"@type":"Organization","name":"Cloudflare","description":"One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure","url":"https://www.cloudflare.com/","sameAs":["https://github.com/cloudflare","https://www.linkedin.com/company/cloudflare","https://x.com/cloudflare"],"logo":{"@type":"ImageObject","url":"https://developers.cloudflare.com/logo.svg"},"address":{"@type":"PostalAddress","streetAddress":"101 Townsend St","addressLocality":"San Francisco","addressRegion":"CA","postalCode":"94107","addressCountry":"US"},"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://support.cloudflare.com/","availableLanguage":["English"]},{"@type":"ContactPoint","contactType":"Sales","url":"https://www.cloudflare.com/contact/","availableLanguage":["English"]}]},"isPartOf":{"@type":"WebSite","@id":"https://developers.cloudflare.com/#website","name":"Cloudflare Docs","url":"https://developers.cloudflare.com/"}}</script>
+                      <link rel="icon" href="../../../favicon.png">
+                      <link rel="preload" href="../../../assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+                      <link rel="stylesheet" href="../../../assets/cf-design.css">
+                      <script src="../../../assets/cf-shell.js"></script></head><body><div id="_top"></div>
+<a class="skip" href="#main-content">Skip to content</a>
+<header class="nb-header"><div class="header-left"><a class="brand" href="../../../"><img src="../../../assets/cloudflare-logo.svg" alt=""><b>CLOUDFLARE</b><span>Docs</span></a><nav class="top-nav" aria-label="Primary"><a href="../../../directory/">Directory</a><a href="/api/" target="_blank" rel="noopener">API</a><a href="/fundamentals/api/reference/sdks/">SDKs</a><a href="../../../changelog/">Changelog</a></nav></div><div class="header-actions"><button type="button" class="search-btn" data-search-trigger aria-haspopup="dialog" aria-controls="site-search-dialog" aria-label="Search documentation">Search <kbd>Ctrl K</kbd></button><a class="icon-btn" href="https://github.com/cloudflare/cloudflare-docs" aria-label="Cloudflare Docs on GitHub">GH</a><button type="button" class="icon-btn" data-theme-toggle aria-label="Theme">Theme</button><a class="login" href="https://dash.cloudflare.com/">Log in</a><button type="button" class="icon-btn mobile-menu" data-menu-btn aria-controls="mobile-sidebar" aria-expanded="false" aria-label="Open navigation">Menu</button></div><dialog id="site-search-dialog" class="search-dialog" data-search-dialog aria-label="Search"><div class="search-panel"><header><strong>Search documentation</strong><button type="button" class="icon-btn" data-search-close aria-label="Close search">Close</button></header><form role="search" data-search-form><input type="search" data-search-input aria-label="Search documentation" autocomplete="off" placeholder="Search Cloudflare Docs"><button type="submit">Search</button></form><p data-search-status role="status" aria-live="polite">Search uses Cloudflare's hosted documentation index.</p><ol data-search-results></ol></div></dialog></header>
+<div class="page-row">
+<div data-sidebar-home><aside class="sidebar" data-shared-sidebar-nav aria-label="Documentation navigation"><label class="sidebar-filter-label" for="sidebar-filter">Filter navigation</label><input id="sidebar-filter" type="search" data-sidebar-filter placeholder="Filter sidebar" autocomplete="off"><p class="sidebar-product" data-sidebar-product>Documentation</p><nav data-sidebar-tree aria-live="polite"><a href="../../../">Overview</a><a href="../../../directory/">Directory</a><a href="../../../changelog/">Changelog</a></nav></aside></div>
+<div class="body-column"><div class="content-row">
+<main id="main-content" class="main" tabindex="-1"><div class="article-wrap">
+<nav class="breadcrumbs" data-breadcrumbs aria-label="Breadcrumb"><a href="../../../">Docs</a><span aria-hidden="true">/</span><span aria-current="page">CLI</span></nav>
+<header class="article-header"><h1>CLI</h1></header>
+<article class="docs-content"><p>Set up and deploy your first Worker with Wrangler, the Cloudflare Developer Platform CLI.</p>
+                              <p>This guide will instruct you through setting up and deploying your first Worker.</p>
+                              <h2 id="prerequisites">Prerequisites</h2>
+                              <ol>
+                              <li>Sign up for a <a href="https://dash.cloudflare.com/sign-up/workers-and-pages">Cloudflare account</a>.</li>
+                              <li>Install <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm"><code>Node.js</code></a>.</li>
+                              </ol>
+                              <details class="nb-details"><summary>Node.js version manager</summary><div class="nb-details-body">
+                              <p>Use a Node version manager like <a href="https://volta.sh/">Volta</a> or <a href="https://github.com/nvm-sh/nvm">nvm</a> to avoid permission issues and change Node.js versions. <a href="/workers/wrangler/install-and-update/">Wrangler</a>, discussed later in this guide, requires a Node version of <code>16.17.0</code> or later.</p>
+                              </div></details>
+                              <h2 id="1-create-a-new-worker-project"><ol>
+                              <li>Create a new Worker project</li>
+                              </ol></h2>
+                              <p>Open a terminal window and run C3 to create your Worker project. <a href="https://github.com/cloudflare/workers-sdk/tree/main/packages/create-cloudflare">C3 (<code>create-cloudflare-cli</code>)</a> is a command-line tool designed to help you set up and deploy new applications to Cloudflare.</p>
+                              <div class="nb-package-managers" data-nb-pm><div role="tablist" aria-label="Package manager"><button type="button" role="tab" data-nb-pm-tab aria-selected="true" tabindex="0">npm</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">yarn</button><button type="button" role="tab" data-nb-pm-tab aria-selected="false" tabindex="-1">pnpm</button></div><div role="tabpanel" data-nb-pm-panel><pre tabindex="0"><code data-nb-pm-code>npm create cloudflare@latest -- my-first-worker</code></pre><button type="button" data-nb-pm-copy data-nb-command="npm create cloudflare@latest -- my-first-worker" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>yarn create cloudflare my-first-worker</code></pre><button type="button" data-nb-pm-copy data-nb-command="yarn create cloudflare my-first-worker" aria-label="Copy to clipboard">Copy</button></div><div role="tabpanel" data-nb-pm-panel hidden><pre tabindex="0"><code data-nb-pm-code>pnpm create cloudflare@latest my-first-worker</code></pre><button type="button" data-nb-pm-copy data-nb-command="pnpm create cloudflare@latest my-first-worker" aria-label="Copy to clipboard">Copy</button></div></div>
+                              <p>For setup, select the following options:</p>
+                              <ul>
+                              <li>For <em>What would you like to start with?</em>, choose <code>Hello World example</code>.</li>
+                              <li>For <em>Which template would you like to use?</em>, choose <code>Worker only</code>.</li>
+                              <li>For <em>Which language do you want to use?</em>, choose <code>JavaScript</code>.</li>
+                              <li>For <em>Do you want to use git for version control?</em>, choose <code>Yes</code>.</li>
+                              <li>For <em>Do you want to deploy your application?</em>, choose <code>No</code> (we will be making some changes before deploying).</li>
+                              </ul>
+                              <p>Now, you have a new project set up. Move into that project folder.</p>
+                              <pre tabindex="0"><code class="language-sh">cd my-first-worker&#10;</code></pre>
+                              <details class="nb-details"><summary>What files did C3 create?</summary><div class="nb-details-body">
+                              <p>In your project directory, C3 will have generated the following:</p>
+                              <ul>
+                              <li><code>wrangler.jsonc</code>: Your <a href="/workers/wrangler/configuration/#sample-wrangler-configuration">Wrangler</a> configuration file.</li>
+                              <li><code>index.js</code> (in <code>/src</code>): A minimal <code>'Hello World!'</code> Worker written in <a href="/workers/reference/migrate-to-module-workers/">ES module</a> syntax.</li>
+                              <li><code>package.json</code>: A minimal Node dependencies configuration file.</li>
+                              <li><code>package-lock.json</code>: Refer to <a href="https://docs.npmjs.com/cli/v9/configuring-npm/package-lock-json"><code>npm</code> documentation on <code>package-lock.json</code></a>.</li>
+                              <li><code>node_modules</code>: Refer to <a href="https://docs.npmjs.com/cli/v7/configuring-npm/folders#node-modules"><code>npm</code> documentation <code>node_modules</code></a>.</li>
+                              </ul>
+                              </div></details>
+                              <details class="nb-details"><summary>What if I already have a project in a git repository?</summary><div class="nb-details-body">
+                              <p>In addition to creating new projects from C3 templates, C3 also supports creating new projects from existing Git repositories. To create a new project from an existing Git repository, open your terminal and run:</p>
+                              <pre><code class="language-sh">npm create cloudflare@latest -- --template &lt;SOURCE&gt;
+</code></pre>
+                              <p><code>&lt;SOURCE&gt;</code> may be any of the following:</p>
+                              <ul>
+                              <li><code>user/repo</code> (GitHub)</li>
+                              <li><code>git@github.com:user/repo</code></li>
+                              <li><code>https://github.com/user/repo</code></li>
+                              <li><code>user/repo/some-template</code> (subdirectories)</li>
+                              <li><code>user/repo#canary</code> (branches)</li>
+                              <li><code>user/repo#1234abcd</code> (commit hash)</li>
+                              <li><code>bitbucket:user/repo</code> (Bitbucket)</li>
+                              <li><code>gitlab:user/repo</code> (GitLab)</li>
+                              </ul>
+                              <p>Your existing template folder must contain the following files, at a minimum, to meet the requirements for Cloudflare Workers:</p>
+                              <ul>
+                              <li><code>package.json</code></li>
+                              <li><code>wrangler.jsonc</code> <a href="/workers/wrangler/configuration/#sample-wrangler-configuration">See sample Wrangler configuration</a></li>
+                              <li><code>src/</code> containing a worker script referenced from <code>wrangler.jsonc</code></li>
+                              </ul>
+                              </div></details>
+                              <h2 id="2-develop-with-wrangler-cli"><ol start="2">
+                              <li>Develop with Wrangler CLI</li>
+                              </ol></h2>
+                              <p>C3 installs <a href="/workers/wrangler/install-and-update/">Wrangler</a>, the Workers command-line interface, in Workers projects by default. Wrangler lets you to <a href="/workers/wrangler/commands/general/#init">create</a>, <a href="/workers/wrangler/commands/general/#dev">test</a>, and <a href="/workers/wrangler/commands/general/#deploy">deploy</a> your Workers projects.</p>
+                              <p>After you have created your first Worker, run the <a href="/workers/wrangler/commands/general/#dev"><code>wrangler dev</code></a> command in the project directory to start a local server for developing your Worker. This will allow you to preview your Worker locally during development.</p>
+                              <pre tabindex="0"><code class="language-sh">npx wrangler dev&#10;</code></pre>
+                              <p>If you have never used Wrangler before, it will open your web browser so you can login to your Cloudflare account.</p>
+                              <p>Go to <a href="http://localhost:8787">http://localhost:8787</a> to view your Worker.</p>
+                              <details class="nb-details"><summary>Browser issues?</summary><div class="nb-details-body">
+                              <p>If you have issues with this step or you do not have access to a browser interface, refer to the <a href="/workers/wrangler/commands/general/#login"><code>wrangler login</code></a> documentation.</p>
+                              </div></details>
+                              <h2 id="3-write-code"><ol start="3">
+                              <li>Write code</li>
+                              </ol></h2>
+                              <p>With your new project generated and running, you can begin to write and edit your code.</p>
+                              <p>Find the <code>src/index.js</code> file. <code>index.js</code> will be populated with the code below:</p>
+                              <pre tabindex="0"><code class="language-js">export default {&#10;	async fetch(request, env, ctx) {&#10;		return new Response(&quot;Hello World!&quot;);&#10;	},&#10;};&#10;</code></pre>
+                              <details class="nb-details"><summary>Code explanation</summary><div class="nb-details-body">
+                              <p>This code block consists of a few different parts.</p>
+                              <pre><code class="language-js">export default {
+	async fetch(request, env, ctx) {
+		return new Response(&quot;Hello World!&quot;);
+	},
+};
+</code></pre>
+                              <p><code>export default</code> is JavaScript syntax required for defining <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#default_exports_versus_named_exports">JavaScript modules</a>. Your Worker has to have a default export of an object, with properties corresponding to the events your Worker should handle.</p>
+                              <pre><code class="language-js">export default {
+	async fetch(request, env, ctx) {
+		return new Response(&quot;Hello World!&quot;);
+	},
+};
+</code></pre>
+                              <p>This <a href="/workers/runtime-apis/handlers/fetch/"><code>fetch()</code> handler</a> will be called when your Worker receives an HTTP request. You can define additional event handlers in the exported object to respond to different types of events. For example, add a <a href="/workers/runtime-apis/handlers/scheduled/"><code>scheduled()</code> handler</a> to respond to Worker invocations via a <a href="/workers/configuration/cron-triggers/">Cron Trigger</a>.</p>
+                              <p>Additionally, the <code>fetch</code> handler will always be passed three parameters: <a href="/workers/runtime-apis/handlers/fetch/"><code>request</code>, <code>env</code> and <code>context</code></a>.</p>
+                              <pre><code class="language-js">export default {
+	async fetch(request, env, ctx) {
+		return new Response(&quot;Hello World!&quot;);
+	},
+};
+</code></pre>
+                              <p>The Workers runtime expects <code>fetch</code> handlers to return a <code>Response</code> object or a Promise which resolves with a <code>Response</code> object. In this example, you will return a new <code>Response</code> with the string <code>&quot;Hello World!&quot;</code>.</p>
+                              </div></details>
+                              <p>Replace the content in your current <code>index.js</code> file with the content below, which changes the text output.</p>
+                              <pre tabindex="0"><code class="language-js">export default {&#10;	async fetch(request, env, ctx) {&#10;		return new Response(&quot;Hello Worker!&quot;);&#10;	},&#10;};&#10;</code></pre>
+                              <p>Then, save the file and reload the page. Your Worker's output will have changed to the new text.</p>
+                              <details class="nb-details"><summary>No visible changes?</summary><div class="nb-details-body">
+                              <p>If the output for your Worker does not change, make sure that:</p>
+                              <ol>
+                              <li>You saved the changes to <code>index.js</code>.</li>
+                              <li>You have <code>wrangler dev</code> running.</li>
+                              <li>You reloaded your browser.</li>
+                              </ol>
+                              </div></details>
+                              <h2 id="4-deploy-your-project"><ol start="4">
+                              <li>Deploy your project</li>
+                              </ol></h2>
+                              <p>Deploy your Worker via Wrangler to a <code>*.workers.dev</code> subdomain or a <a href="/workers/configuration/routing/custom-domains/">Custom Domain</a>.</p>
+                              <pre tabindex="0"><code class="language-sh">npx wrangler deploy&#10;</code></pre>
+                              <p>If you have not configured any subdomain or domain, Wrangler will prompt you during the publish process to set one up.</p>
+                              <p>Preview your Worker at <code>&lt;YOUR_WORKER&gt;.&lt;YOUR_SUBDOMAIN&gt;.workers.dev</code>.</p>
+                              <details class="nb-details"><summary>Seeing 523 errors?</summary><div class="nb-details-body">
+                              <p>If you see <a href="/support/troubleshooting/http-status-codes/cloudflare-5xx-errors/error-523/"><code>523</code> errors</a> when pushing your <code>*.workers.dev</code> subdomain for the first time, wait a minute or so and the errors will resolve themselves.</p>
+                              </div></details>
+                              <h2 id="next-steps">Next steps</h2>
+                              <p>To do more:</p>
+                              <ul>
+                              <li>Push your project to a GitHub or GitLab repository then <a href="/workers/ci-cd/builds/#get-started">connect to builds</a> to enable automatic builds and deployments.</li>
+                              <li>Visit the <a href="https://dash.cloudflare.com/">Cloudflare dashboard</a> for simpler editing.</li>
+                              <li>Review our <a href="/workers/examples/">Examples</a> and <a href="/workers/tutorials/">Tutorials</a> for inspiration.</li>
+                              <li>Set up <a href="/workers/runtime-apis/bindings/">bindings</a> to allow your Worker to interact with other resources and unlock new functionality.</li>
+                              <li>Learn how to <a href="/workers/testing/">test and debug</a> your Workers.</li>
+                              <li>Read about <a href="/workers/platform/">Workers limits and pricing</a>.</li>
+                              </ul>
+                              
+                              CP10 benchmark edit.</article>
+<nav class="pagination" aria-label="Pagination" data-pagination></nav>
+<div class="page-actions" data-page-actions><button type="button" data-copy-page>Copy page as Markdown</button><a href="index.md" data-view-markdown>View as Markdown</a><span data-copy-page-status role="status" aria-live="polite"></span><a href="#_top">Back to top</a></div>
+</div></main>
+<nav class="mobile-toc" data-mobile-toc aria-label="On this page" hidden><label for="mobile-toc-select">On this page</label><select id="mobile-toc-select" data-mobile-toc-select aria-label="Jump to section"></select></nav><aside class="toc" data-nb-toc><h2 id="toc-heading">On this page</h2><nav aria-labelledby="toc-heading"><ul data-nb-toc-list></ul></nav></aside>
+</div><footer class="footer"><div class="footer-grid"><div><strong class="footer-wordmark">CLOUDFLARE</strong><p>Connect, protect, and build everywhere.</p></div><nav aria-label="Cloudflare resources"><strong>Resources</strong><a href="../../../directory/">Documentation directory</a><a href="../../../changelog/">Changelog</a><a href="https://community.cloudflare.com/">Community</a></nav><nav aria-label="Cloudflare support"><strong>Support</strong><a href="https://support.cloudflare.com/">Help center</a><a href="https://www.cloudflarestatus.com/">Cloudflare status</a><a href="https://dash.cloudflare.com/">Log in</a></nav></div><div class="footer-legal"><span>Copyright 2026 Cloudflare, Inc.</span><nav aria-label="Legal"><a href="https://www.cloudflare.com/privacypolicy/">Privacy policy</a><a href="https://www.cloudflare.com/website-terms/">Terms of use</a><a href="https://www.cloudflare.com/trademark/">Trademark</a></nav></div></footer></div></div>
+<dialog id="mobile-sidebar" class="mobile-dialog" data-mobile-sidebar data-state="closed" aria-label="Site navigation"><div class="mobile-dialog-panel" data-mobile-sidebar-panel><header><a class="brand" href="../../../"><img src="../../../assets/cloudflare-logo.svg" alt=""><b>CLOUDFLARE</b><span>Docs</span></a><button type="button" class="icon-btn" data-close-sidebar aria-label="Close navigation">Close</button></header><div data-mobile-sidebar-slot></div></div></dialog>
+</body></html>

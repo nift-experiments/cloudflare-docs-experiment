@@ -1,0 +1,22 @@
+{
+  "added": [],
+  "content_changed": [],
+  "content_unchanged": true,
+  "counts": {
+    "added": 0,
+    "content_changed": 0,
+    "mtime_only": 0,
+    "regenerated": 0,
+    "removed": 0,
+    "selectively_hashed_files": 0,
+    "touched": 0
+  },
+  "mtime_only": [],
+  "observed_sha256_for_touched_files": {},
+  "regenerated": [],
+  "removed": [],
+  "schema": "cp10-output-stat-diff",
+  "schema_version": 1,
+  "touched": [],
+  "untouched": true
+}

@@ -1,0 +1,17 @@
+{
+  "added": [],
+  "changed": [
+    "workers/get-started/guide/index.html"
+  ],
+  "counts": {
+    "added": 0,
+    "changed": 1,
+    "mtime_only": 0,
+    "removed": 0
+  },
+  "equal_content": false,
+  "mtime_only": [],
+  "removed": [],
+  "schema": "cp10-manifest-diff",
+  "schema_version": 1
+}

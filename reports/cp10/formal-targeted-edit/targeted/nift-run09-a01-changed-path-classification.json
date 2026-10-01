@@ -1,0 +1,50 @@
+{
+  "all_expected_dependents_changed": true,
+  "basis": "raw-content-manifest-diff",
+  "classified_expected_edit_paths": [
+    "workers/get-started/guide/index.html"
+  ],
+  "contract": "/srv/cp10/evidence/formal-targeted-edit/setup/references/nift-changed-path-contract.json",
+  "contract_sha256": "e3b28499b31faf1ad39b494a5e361107e312852e3773afee5f37dc62086346d4",
+  "designated_output_marker": {
+    "designated_path": "workers/get-started/guide/index.html",
+    "marker_count": 1,
+    "passed": true,
+    "path": "/srv/cp10/nift-project/public/workers/get-started/guide/index.html",
+    "regular_file": true,
+    "sha256": "fac3f7e7168967b0f65b46e1ee9b3fdba59730391743669bba91f30e36c77db3"
+  },
+  "expected": {
+    "added": [],
+    "changed": [
+      "workers/get-started/guide/index.html"
+    ],
+    "removed": []
+  },
+  "expected_dependents": [
+    "workers/get-started/guide/index.html"
+  ],
+  "matches": true,
+  "missing_expected": {
+    "added": [],
+    "changed": [],
+    "removed": []
+  },
+  "no_unclassified_output_changed": true,
+  "normalizer_classification": null,
+  "observed": {
+    "added": [],
+    "changed": [
+      "workers/get-started/guide/index.html"
+    ],
+    "removed": []
+  },
+  "schema": "cp10-edit-run-changed-path-classification",
+  "schema_version": 1,
+  "tool": "nift",
+  "unexpected_unclassified": {
+    "added": [],
+    "changed": [],
+    "removed": []
+  }
+}

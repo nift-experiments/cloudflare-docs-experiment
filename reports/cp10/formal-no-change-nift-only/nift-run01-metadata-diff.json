@@ -1,0 +1,15 @@
+{
+  "added": [],
+  "changed": [],
+  "counts": {
+    "added": 0,
+    "changed": 0,
+    "mtime_only": 0,
+    "removed": 0
+  },
+  "equal_content": true,
+  "mtime_only": [],
+  "removed": [],
+  "schema": "cp10-manifest-diff",
+  "schema_version": 1
+}

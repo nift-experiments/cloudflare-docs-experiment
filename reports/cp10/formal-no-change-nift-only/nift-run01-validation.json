@@ -1,0 +1,35 @@
+{
+  "aggregate_peak_memory_bytes": 9650176,
+  "certified_baseline_comparison": "baseline/nift-certified-comparison.json",
+  "certified_baseline_manifest": "baseline/nift-output-manifest.json",
+  "command": [
+    "/srv/cp10/tools/nift",
+    "build"
+  ],
+  "eligible_for_paired_statistics": false,
+  "formal_valid": true,
+  "infrastructure_valid": true,
+  "metadata_diff": "nift-run01-metadata-diff.json",
+  "output_content_unchanged": true,
+  "output_counts": {
+    "added": 0,
+    "content_changed": 0,
+    "mtime_only": 0,
+    "regenerated": 0,
+    "removed": 0,
+    "selectively_hashed_files": 0,
+    "touched": 0
+  },
+  "output_diff": "nift-run01-output-diff.json",
+  "output_untouched": true,
+  "paired": false,
+  "run": 1,
+  "run_id": "formal-no-change-nift-only-run01",
+  "schema": "cp10-nift-only-no-change-run-validation",
+  "schema_version": 1,
+  "series": "formal-no-change-nift-only-unpaired",
+  "source_unchanged": true,
+  "timing_and_aggregate_memory_present": true,
+  "tool_harness_and_manifest_bindings_unchanged": true,
+  "wall_seconds": 0.98
+}

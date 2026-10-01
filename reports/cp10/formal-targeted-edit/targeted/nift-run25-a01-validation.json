@@ -1,0 +1,66 @@
+{
+  "aggregate_peak_memory_bytes": 7282688,
+  "changed_path_classification": "nift-run25-a01-changed-path-classification.json",
+  "changed_paths_valid": true,
+  "command": [
+    "/srv/cp10/tools/nift",
+    "build",
+    "workers/get-started/guide/"
+  ],
+  "content_changed_paths": {
+    "added": [],
+    "changed": [
+      "workers/get-started/guide/index.html"
+    ],
+    "removed": []
+  },
+  "designated_output_marker": {
+    "designated_path": "workers/get-started/guide/index.html",
+    "marker_count": 1,
+    "passed": true,
+    "path": "/srv/cp10/nift-project/public/workers/get-started/guide/index.html",
+    "regular_file": true,
+    "sha256": "fac3f7e7168967b0f65b46e1ee9b3fdba59730391743669bba91f30e36c77db3"
+  },
+  "errors": [],
+  "formal_valid": true,
+  "infrastructure_valid": true,
+  "label": "nift-run25-a01",
+  "measured": true,
+  "metadata_diff": "nift-run25-a01-metadata-diff.json",
+  "minimal_nift_state_restored": true,
+  "mtime_only_paths": [],
+  "output_correct": true,
+  "regenerated_files": [
+    "workers/get-started/guide/index.html"
+  ],
+  "restored_states": [
+    ".nift/public",
+    "workers/get-started/guide/index.html"
+  ],
+  "round": 25,
+  "schema": "cp10-formal-edit-run-validation",
+  "schema_version": 3,
+  "source_and_git_restored": true,
+  "source_edit": {
+    "baseline_mtime_ns": 1790792159013085380,
+    "baseline_sha256": "f8f64231fb4ab360553d3555f3993a4e6d934ccc365a9b2fe53b9492c7f73272",
+    "edited_mtime_ns": 1790830763568687179,
+    "edited_sha256": "915ede9f036267b78a8fe747545255bb98d6c3e9b6470089e3a914ed71cd729d",
+    "marker_count": 1,
+    "path": "/srv/cp10/nift-project/content/workers/get-started/guide/index.md"
+  },
+  "source_marker_present": true,
+  "source_restoration": {
+    "bytes_equal": true,
+    "mtime_equal": true,
+    "mtime_ns": 1790792159013085380,
+    "sha256": "f8f64231fb4ab360553d3555f3993a4e6d934ccc365a9b2fe53b9492c7f73272"
+  },
+  "targeted": true,
+  "tool": "nift",
+  "touched_files": [
+    "workers/get-started/guide/index.html"
+  ],
+  "unaffected_output_recopied": false
+}

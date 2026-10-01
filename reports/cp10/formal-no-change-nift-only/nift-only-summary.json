@@ -1,0 +1,53 @@
+{
+  "aggregate_peak_memory_bytes": [
+    9650176,
+    9908224,
+    9691136
+  ],
+  "count": 3,
+  "eligible_for_paired_statistics": false,
+  "output_counts": [
+    {
+      "added": 0,
+      "content_changed": 0,
+      "mtime_only": 0,
+      "regenerated": 0,
+      "removed": 0,
+      "selectively_hashed_files": 0,
+      "touched": 0
+    },
+    {
+      "added": 0,
+      "content_changed": 0,
+      "mtime_only": 0,
+      "regenerated": 0,
+      "removed": 0,
+      "selectively_hashed_files": 0,
+      "touched": 0
+    },
+    {
+      "added": 0,
+      "content_changed": 0,
+      "mtime_only": 0,
+      "regenerated": 0,
+      "removed": 0,
+      "selectively_hashed_files": 0,
+      "touched": 0
+    }
+  ],
+  "paired": false,
+  "runs": [
+    "formal-no-change-nift-only-run01",
+    "formal-no-change-nift-only-run02",
+    "formal-no-change-nift-only-run03"
+  ],
+  "schema": "cp10-nift-only-no-change-summary",
+  "schema_version": 1,
+  "series": "formal-no-change-nift-only-unpaired",
+  "statistics_scope": "unpaired-nift-only; exclude from paired statistics",
+  "wall_seconds": [
+    0.98,
+    0.9,
+    0.87
+  ]
+}
